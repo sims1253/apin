@@ -1,0 +1,173 @@
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[compile] eight_schools_noncentered/clang_native: cached
+[compile] blr/clang_native: cached
+[compile] kidscore_momiq/clang_native: cached
+[compile] lsat_model/clang_native: cached
+[compile] logmesquite_logvash/clang_native: cached
+[compile] wells_dist100_model/clang_native: cached
+[compile] diamonds/clang_native: cached
+[compile] radon_partially_pooled_noncentered/clang_native: cached
+[compile] radon_variable_intercept_slope_noncentered/clang_native: cached
+[compile] dogs_hierarchical/clang_native: cached
+[compile] pilots/clang_native: cached
+[compile] hier_2pl/clang_native: cached
+[compile] gp_regr/clang_native: cached
+[compile] kronecker_gp/clang_native: cached
+[compile] accel_gp/clang_native: cached
+[compile] bym2_offset_only/clang_native: cached
+[compile] eight_schools_centered/clang_native: cached
+[compile] garch11/clang_native: cached
+[compile] lotka_volterra/clang_native: cached
+[compile] low_dim_gauss_mix/clang_native: cached
+[compile] arma11/clang_native: cached
+[run] clang_native/eight_schools_noncentered/rep0: wall=0.0s warm=0.0 samp=0.0 div=1 lf=38198
+[run] clang_native/blr/rep0: wall=0.1s warm=0.1 samp=0.0 div=0 lf=56922
+[run] clang_native/kidscore_momiq/rep0: wall=0.7s warm=0.4 samp=0.3 div=0 lf=100556
+[run] clang_native/lsat_model/rep0: wall=11.0s warm=7.3 samp=4.7 div=0 lf=60000
+[run] clang_native/logmesquite_logvash/rep0: wall=0.4s warm=0.2 samp=0.2 div=0 lf=198084
+[run] clang_native/wells_dist100_model/rep0: wall=0.8s warm=0.4 samp=0.4 div=0 lf=23460
+[run] clang_native/diamonds/rep0: wall=63.3s warm=24.6 samp=36.3 div=0 lf=3735648
+[run] clang_native/radon_partially_pooled_noncentered/rep0: wall=53.6s warm=42.0 samp=11.7 div=0 lf=60064
+[run] clang_native/radon_variable_intercept_slope_noncentered/rep0: wall=5.3s warm=2.6 samp=1.4 div=0 lf=108384
+[run] clang_native/dogs_hierarchical/rep0: wall=1.1s warm=0.5 samp=0.7 div=0 lf=18036
+[run] clang_native/pilots/rep0: wall=1.8s warm=0.7 samp=1.1 div=1336 lf=942605
+[run] clang_native/hier_2pl/rep0: wall=99.1s warm=47.6 samp=48.1 div=0 lf=114208
+[run] clang_native/gp_regr/rep0: wall=0.1s warm=0.0 samp=0.1 div=0 lf=19306
+[run] clang_native/kronecker_gp/rep0: wall=756.2s warm=400.4 samp=352.3 div=22 lf=4080760
+[run] clang_native/accel_gp/rep0: wall=24.4s warm=9.9 samp=15.3 div=61 lf=3514436
+[run] clang_native/bym2_offset_only/rep0: wall=37.4s warm=23.0 samp=14.7 div=0 lf=252000
+[run] clang_native/eight_schools_centered/rep0: wall=0.1s warm=0.0 samp=0.0 div=593 lf=61920
+[run] clang_native/garch11/rep0: wall=0.3s warm=0.2 samp=0.2 div=0 lf=45804
+[run] clang_native/lotka_volterra/rep0: wall=6.7s warm=3.7 samp=3.9 div=0 lf=147140
+[run] clang_native/low_dim_gauss_mix/rep0: wall=3.7s warm=1.8 samp=1.5 div=0 lf=24968
+[run] clang_native/arma11/rep0: wall=0.3s warm=0.2 samp=0.1 div=0 lf=21434
+[run] clang_native/eight_schools_noncentered/rep1: wall=0.1s warm=0.0 samp=0.0 div=1 lf=44126
+[run] clang_native/blr/rep1: wall=0.1s warm=0.0 samp=0.0 div=0 lf=58190
+[run] clang_native/kidscore_momiq/rep1: wall=0.5s warm=0.3 samp=0.2 div=0 lf=98458
+[run] clang_native/lsat_model/rep1: wall=8.8s warm=5.0 samp=3.1 div=0 lf=60032
+[run] clang_native/logmesquite_logvash/rep1: wall=0.4s warm=0.2 samp=0.2 div=0 lf=194000
+[run] clang_native/wells_dist100_model/rep1: wall=0.7s warm=0.3 samp=0.3 div=0 lf=23946
+[run] clang_native/diamonds/rep1: wall=47.5s warm=18.5 samp=29.9 div=0 lf=3976800
+[run] clang_native/radon_partially_pooled_noncentered/rep1: wall=38.2s warm=27.7 samp=8.3 div=0 lf=60224
+[run] clang_native/radon_variable_intercept_slope_noncentered/rep1: wall=4.4s warm=2.5 samp=1.5 div=0 lf=102224
+[run] clang_native/dogs_hierarchical/rep1: wall=0.9s warm=0.4 samp=0.5 div=0 lf=17842
+[run] clang_native/pilots/rep1: wall=1.3s warm=0.3 samp=0.5 div=507 lf=1172782
+[run] clang_native/hier_2pl/rep1: wall=68.7s warm=32.6 samp=23.1 div=0 lf=112400
+[run] clang_native/gp_regr/rep1: wall=0.1s warm=0.0 samp=0.0 div=0 lf=18762
+[run] clang_native/kronecker_gp/rep1: wall=648.2s warm=335.8 samp=333.6 div=19 lf=4083722
+[run] clang_native/accel_gp/rep1: wall=22.5s warm=9.2 samp=11.0 div=117 lf=3302670
+[run] clang_native/bym2_offset_only/rep1: wall=38.1s warm=24.1 samp=15.0 div=0 lf=252000
+[run] clang_native/eight_schools_centered/rep1: wall=0.1s warm=0.0 samp=0.0 div=54 lf=63023
+[run] clang_native/garch11/rep1: wall=0.3s warm=0.2 samp=0.2 div=0 lf=46044
+[run] clang_native/lotka_volterra/rep1: wall=6.6s warm=3.1 samp=3.3 div=0 lf=138292
+[run] clang_native/low_dim_gauss_mix/rep1: wall=2.5s warm=2.0 samp=1.5 div=0 lf=25350
+[run] clang_native/arma11/rep1: wall=0.2s warm=0.1 samp=0.1 div=0 lf=22078
+[run] clang_native/eight_schools_noncentered/rep2: wall=0.0s warm=0.0 samp=0.0 div=0 lf=31242
+[run] clang_native/blr/rep2: wall=0.1s warm=0.0 samp=0.0 div=0 lf=57248
+[run] clang_native/kidscore_momiq/rep2: wall=0.6s warm=0.4 samp=0.2 div=0 lf=103840
+[run] clang_native/lsat_model/rep2: wall=8.5s warm=5.1 samp=3.4 div=0 lf=60000
+[run] clang_native/logmesquite_logvash/rep2: wall=0.3s warm=0.2 samp=0.2 div=0 lf=212528
+[run] clang_native/wells_dist100_model/rep2: wall=0.6s warm=0.3 samp=0.2 div=0 lf=23460
+[run] clang_native/diamonds/rep2: wall=46.4s warm=19.3 samp=27.8 div=0 lf=3787872
+[run] clang_native/radon_partially_pooled_noncentered/rep2: wall=35.4s warm=26.4 samp=8.3 div=0 lf=61936
+[run] clang_native/radon_variable_intercept_slope_noncentered/rep2: wall=4.2s warm=2.3 samp=1.0 div=0 lf=76960
+[run] clang_native/dogs_hierarchical/rep2: wall=0.9s warm=0.3 samp=0.5 div=0 lf=18906
+[run] clang_native/pilots/rep2: wall=1.5s warm=0.5 samp=1.0 div=402 lf=1544773
+[run] clang_native/hier_2pl/rep2: wall=67.3s warm=32.0 samp=36.0 div=0 lf=123440
+[run] clang_native/gp_regr/rep2: wall=0.1s warm=0.0 samp=0.1 div=0 lf=18630
+[run] clang_native/kronecker_gp/rep2: wall=676.1s warm=335.9 samp=349.4 div=24 lf=4082053
+[run] clang_native/accel_gp/rep2: wall=25.6s warm=10.0 samp=14.3 div=40 lf=3794731
+[run] clang_native/bym2_offset_only/rep2: wall=37.6s warm=22.4 samp=15.0 div=0 lf=252000
+[run] clang_native/eight_schools_centered/rep2: wall=0.2s warm=0.0 samp=0.0 div=83 lf=167619
+[run] clang_native/garch11/rep2: wall=0.4s warm=0.1 samp=0.2 div=0 lf=46844
+[run] clang_native/lotka_volterra/rep2: wall=7.8s warm=3.6 samp=3.2 div=0 lf=152744
+[run] clang_native/low_dim_gauss_mix/rep2: wall=3.7s warm=1.8 samp=1.6 div=0 lf=24752
+[run] clang_native/arma11/rep2: wall=0.2s warm=0.1 samp=0.1 div=0 lf=21400
+GRID DONE
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+63 ESS jobs
+ess_bulk min=1609 geomean=4617 rhat_max=1.0052 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__accel_gp__rep0.json
+ess_bulk min=442 geomean=2777 rhat_max=1.0098 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__accel_gp__rep1.json
+ess_bulk min=1974 geomean=5446 rhat_max=1.0037 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__accel_gp__rep2.json
+ess_bulk min=3800 geomean=4009 rhat_max=1.0016 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__arma11__rep0.json
+ess_bulk min=4342 geomean=4642 rhat_max=1.0016 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__arma11__rep1.json
+ess_bulk min=3754 geomean=4169 rhat_max=1.0038 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__arma11__rep2.json
+ess_bulk min=1014 geomean=1455 rhat_max=1.0046 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__blr__rep0.json
+ess_bulk min=698 geomean=1538 rhat_max=1.0048 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__blr__rep1.json
+ess_bulk min=944 geomean=1572 rhat_max=1.0028 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__blr__rep2.json
+ess_bulk min=386 geomean=4759 rhat_max=1.0068 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__bym2_offset_only__rep0.json
+ess_bulk min=405 geomean=4796 rhat_max=1.0069 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__bym2_offset_only__rep1.json
+ess_bulk min=340 geomean=4613 rhat_max=1.0092 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__bym2_offset_only__rep2.json
+ess_bulk min=1525 geomean=3434 rhat_max=1.0033 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__diamonds__rep0.json
+ess_bulk min=1365 geomean=3347 rhat_max=1.0025 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__diamonds__rep1.json
+ess_bulk min=1418 geomean=3220 rhat_max=1.0030 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__diamonds__rep2.json
+ess_bulk min=1714 geomean=3925 rhat_max=1.0027 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__dogs_hierarchical__rep0.json
+ess_bulk min=1468 geomean=3927 rhat_max=1.0028 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__dogs_hierarchical__rep1.json
+ess_bulk min=1325 geomean=3918 rhat_max=1.0034 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__dogs_hierarchical__rep2.json
+ess_bulk min=8 geomean=15 rhat_max=1.4500 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__eight_schools_centered__rep0.json
+ess_bulk min=130 geomean=624 rhat_max=1.0310 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__eight_schools_centered__rep1.json
+ess_bulk min=128 geomean=420 rhat_max=1.0393 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__eight_schools_centered__rep2.json
+ess_bulk min=2479 geomean=4290 rhat_max=1.0028 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__eight_schools_noncentered__rep0.json
+ess_bulk min=2302 geomean=4477 rhat_max=1.0034 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__eight_schools_noncentered__rep1.json
+ess_bulk min=2365 geomean=4344 rhat_max=1.0038 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__eight_schools_noncentered__rep2.json
+ess_bulk min=1844 geomean=2176 rhat_max=1.0031 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__garch11__rep0.json
+ess_bulk min=1819 geomean=2223 rhat_max=1.0015 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__garch11__rep1.json
+ess_bulk min=1836 geomean=2090 rhat_max=1.0017 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__garch11__rep2.json
+ess_bulk min=3319 geomean=3488 rhat_max=1.0018 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__gp_regr__rep0.json
+ess_bulk min=3474 geomean=3679 rhat_max=1.0016 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__gp_regr__rep1.json
+ess_bulk min=3621 geomean=3753 rhat_max=1.0021 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__gp_regr__rep2.json
+ess_bulk min=1818 geomean=5736 rhat_max=1.0060 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__hier_2pl__rep0.json
+ess_bulk min=1578 geomean=5455 rhat_max=1.0066 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__hier_2pl__rep1.json
+ess_bulk min=2218 geomean=6977 rhat_max=1.0083 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__hier_2pl__rep2.json
+ess_bulk min=1352 geomean=1430 rhat_max=1.0032 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__kidscore_momiq__rep0.json
+ess_bulk min=1340 geomean=1424 rhat_max=1.0049 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__kidscore_momiq__rep1.json
+ess_bulk min=1300 geomean=1412 rhat_max=1.0050 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__kidscore_momiq__rep2.json
+ess_bulk min=736 geomean=1510 rhat_max=1.0073 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__kronecker_gp__rep0.json
+ess_bulk min=810 geomean=1925 rhat_max=1.0096 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__kronecker_gp__rep1.json
+ess_bulk min=781 geomean=1604 rhat_max=1.0082 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__kronecker_gp__rep2.json
+ess_bulk min=1151 geomean=1629 rhat_max=1.0049 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__logmesquite_logvash__rep0.json
+ess_bulk min=1333 geomean=1779 rhat_max=1.0031 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__logmesquite_logvash__rep1.json
+ess_bulk min=1622 geomean=2041 rhat_max=1.0025 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__logmesquite_logvash__rep2.json
+ess_bulk min=863 geomean=2895 rhat_max=1.0050 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__lotka_volterra__rep0.json
+ess_bulk min=747 geomean=2922 rhat_max=1.0028 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__lotka_volterra__rep1.json
+ess_bulk min=1187 geomean=3163 rhat_max=1.0041 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__lotka_volterra__rep2.json
+ess_bulk min=3452 geomean=4275 rhat_max=1.0030 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__low_dim_gauss_mix__rep0.json
+ess_bulk min=3874 geomean=4667 rhat_max=1.0023 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__low_dim_gauss_mix__rep1.json
+ess_bulk min=4376 geomean=4734 rhat_max=1.0022 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__low_dim_gauss_mix__rep2.json
+ess_bulk min=973 geomean=5097 rhat_max=1.0061 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__lsat_model__rep0.json
+ess_bulk min=964 geomean=4778 rhat_max=1.0063 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__lsat_model__rep1.json
+ess_bulk min=1080 geomean=5577 rhat_max=1.0074 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__lsat_model__rep2.json
+ess_bulk min=6 geomean=85 rhat_max=1.6666 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__pilots__rep0.json
+ess_bulk min=87 geomean=1246 rhat_max=1.0351 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__pilots__rep1.json
+ess_bulk min=44 geomean=634 rhat_max=1.0729 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__pilots__rep2.json
+ess_bulk min=332 geomean=4704 rhat_max=1.0064 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__radon_partially_pooled_noncentered__rep0.json
+ess_bulk min=344 geomean=4832 rhat_max=1.0107 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__radon_partially_pooled_noncentered__rep1.json
+ess_bulk min=348 geomean=4873 rhat_max=1.0108 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__radon_partially_pooled_noncentered__rep2.json
+ess_bulk min=841 geomean=5601 rhat_max=1.0067 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__radon_variable_intercept_slope_noncentered__rep0.json
+ess_bulk min=720 geomean=5299 rhat_max=1.0070 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__radon_variable_intercept_slope_noncentered__rep1.json
+ess_bulk min=749 geomean=4270 rhat_max=1.0074 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__radon_variable_intercept_slope_noncentered__rep2.json
+ess_bulk min=1197 geomean=1218 rhat_max=1.0021 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__wells_dist100_model__rep0.json
+ess_bulk min=1098 geomean=1210 rhat_max=1.0015 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__wells_dist100_model__rep1.json
+ess_bulk min=1141 geomean=1154 rhat_max=1.0059 -> /home/m0hawk/Documents/apin/stan/results/ess/clang_native__wells_dist100_model__rep2.json
+ESS DONE
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+     variant  n_models  geo_ess_per_sec  geo_wall  geo_ess_per_grad  total_div_rate  total_td_rate  n_configs_rhat_bad
+clang_native        21       423.061616  2.253736          0.007819        0.008024       0.121083                   3
+     default        21       481.278007  1.995224          0.008109        0.007714       0.113619                   4
+      nutpie        21       473.277717  1.653804          0.003074        0.019381       0.001524                   4
+        oexp        17       456.340801  1.874413          0.007969        0.008603       0.116544                   3
+     pf_full        10        22.056315 21.952823          0.001274        0.024325       0.260275                   3
+     pf_w200        10        23.926098 16.034789          0.001048        0.023200       0.179250                   4
+      walnut        21        52.106239  1.156098          0.000461       -0.001000      -0.001000                  17
+wrote /home/m0hawk/Documents/apin/stan/dashboard.html (19 KB)
+upload response: {
+  "ok": true,
+  "draftId": "gbcfyftfncsi",
+  "versionId": "335tHVsaEEOjGgoPCz6o",
+  "versionNumber": 9,
+  "title": "nindan \u2014 Stan wall-clock \u2192 ESS",
+  "requestId": "vulLaGtmSpGCm2dw9I3ezw",
+  "publicUrl": "https://gbcfyftfncsi.postplan.dev",
+  "rawUrl": "https://postplan.dev/d/gbcfyftfncsi/raw",
+  "warnings": []
+}

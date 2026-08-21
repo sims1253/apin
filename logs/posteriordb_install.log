@@ -1,0 +1,33 @@
+Installing package into ‘/home/m0hawk/R/x86_64-pc-linux-gnu-library/4.6’
+(as ‘lib’ is unspecified)
+trying URL 'https://cloud.r-project.org/src/contrib/remotes_2.5.0.tar.gz'
+Content type 'application/x-gzip' length 164496 bytes (160 KB)
+==================================================
+downloaded 160 KB
+
+* installing *source* package ‘remotes’ ...
+** this is package ‘remotes’ version ‘2.5.0’
+** package ‘remotes’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (remotes)
+
+The downloaded source packages are in
+	‘/tmp/RtmpRZU29k/downloaded_packages’
+Using GitHub PAT from the git credential store.
+Error: Failed to install 'unknown package' from GitHub:
+  HTTP error 404.
+  Not Found
+
+  Did you spell the repo owner (`stan-dev`) and repo name (`posteriordb`) correctly?
+  - If spelling is correct, check that you have the required permissions to access the repo.
+Execution halted

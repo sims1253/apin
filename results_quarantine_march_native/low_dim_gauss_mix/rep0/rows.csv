@@ -1,0 +1,5 @@
+warmup_s,sampling_s,n_draws,n_leapfrog_total,n_leapfrog_sampling,divergences,treedepth_hits,stepsize_final,accept_mean,lp_mean,model,variant,rep,chain,wall_batch_s,seed
+1.683,1.52,1000,6506,3270,0,0,0.56750452,0.9251417821700001,-2106.9405411999996,low_dim_gauss_mix,march_native,0,0,3.312,20260819
+1.668,1.493,1000,6260,3156,0,0,0.61633198,0.9152310421700001,-2106.7926214,low_dim_gauss_mix,march_native,0,1,3.312,20260819
+1.736,1.568,1000,6798,3416,0,0,0.52947872,0.93759715622,-2106.8750339000003,low_dim_gauss_mix,march_native,0,2,3.312,20260819
+1.825,1.432,1000,6160,3058,0,0,0.60623147,0.9020243112299999,-2106.9667697,low_dim_gauss_mix,march_native,0,3,3.312,20260819

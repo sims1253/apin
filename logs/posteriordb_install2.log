@@ -1,0 +1,25 @@
+Installing package into ‘/home/m0hawk/R/x86_64-pc-linux-gnu-library/4.6’
+(as ‘lib’ is unspecified)
+trying URL 'https://stan-dev.r-universe.dev/src/contrib/posteriordb_0.3.6.tar.gz?sha256=ebca439b03dee95c6c6318027dc6d70bdf8fb6661647d7169b13e9332dbdbbba&file=/posteriordb_0.3.6.tar.gz'
+Content type 'application/gzip' length 201587 bytes (196 KB)
+==================================================
+downloaded 196 KB
+
+* installing *source* package ‘posteriordb’ ...
+** this is package ‘posteriordb’ version ‘0.3.6’
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (posteriordb)
+
+The downloaded source packages are in
+	‘/tmp/RtmppMRIcf/downloaded_packages’
+POSTERIORDB_INSTALL_DONE

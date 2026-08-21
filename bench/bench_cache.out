@@ -1,0 +1,3 @@
+contiguous stream   :     0.8 ns/M  (s=20979282)
+pointer chase       :    67.9 ns/M  (s=20979282)
+L1-hot 4k loop      :     0.0 ns/M

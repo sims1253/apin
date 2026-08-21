@@ -1,0 +1,193 @@
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[compile] eight_schools_noncentered/default: cached
+[compile] eight_schools_noncentered/oexp: FAILED make failed: n_math/lib/eigen_3.4.0 -I stan/lib/stan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -Wno-ignored-attributes   -x c++ -o /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__oexp/model.o /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__oexp/model.hpp
+ ts, 3 provided
+  199 |       stan::model::assign(lcm_sym9__, stan::math::fma(theta_trans, tau, mu),
+      |       ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  200 |         "assigning variable lcm_sym9__");
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__oexp/model.o] Error 1
+
+[compile] blr/default: cached
+[compile] blr/oexp: cached
+[compile] kidscore_momiq/default: cached
+[compile] kidscore_momiq/oexp: cached
+[compile] lsat_model/default: cached
+[compile] lsat_model/oexp: cached
+[compile] logmesquite_logvash/default: cached
+[compile] logmesquite_logvash/oexp: cached
+[compile] wells_dist100_model/default: cached
+[compile] wells_dist100_model/oexp: cached
+[compile] diamonds/default: cached
+[compile] diamonds/oexp: cached
+[compile] radon_partially_pooled_noncentered/default: cached
+[compile] radon_partially_pooled_noncentered/oexp: cached
+[compile] radon_variable_intercept_slope_noncentered/default: cached
+[compile] radon_variable_intercept_slope_noncentered/oexp: cached
+[compile] dogs_hierarchical/default: cached
+[compile] dogs_hierarchical/oexp: cached
+[compile] pilots/default: cached
+[compile] pilots/oexp: cached
+[compile] hier_2pl/default: cached
+[compile] hier_2pl/oexp: cached
+[compile] gp_regr/default: cached
+[compile] gp_regr/oexp: cached
+[compile] kronecker_gp/default: cached
+[compile] kronecker_gp/oexp: cached
+[compile] accel_gp/default: cached
+[compile] accel_gp/oexp: FAILED make failed: tan/lib/stan_math/ -I stan/lib/stan_math/lib/eigen_3.4.0 -I stan/lib/stan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -Wno-ignored-attributes   -x c++ -o /home/m0hawk/Documents/apin/stan/build/accel_gp__oexp/model.o /home/m0hawk/Documents/apin/stan/build/accel_gp__oexp/model.hpp
+         stan::math::rep_vector(static_cast<double>(0), N)),
+      |               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 1688 |             inline_gpa_return_sym19__), "assigning variable lcm_sym118__");
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/accel_gp__oexp/model.o] Error 1
+
+[compile] bym2_offset_only/default: cached
+[compile] bym2_offset_only/oexp: FAILED make failed: h/ -I stan/lib/stan_math/lib/eigen_3.4.0 -I stan/lib/stan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -Wno-ignored-attributes   -x c++ -o /home/m0hawk/Documents/apin/stan/build/bym2_offset_only__oexp/model.o /home/m0hawk/Documents/apin/stan/build/bym2_offset_only__oexp/model.hpp
+ ~~~~~~~~~~~~~~~
+  347 |           stan::math::multiply(stan::math::sqrt((rho / scaling_factor)), phi)),
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  348 |         "assigning variable lcm_sym16__");
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/bym2_offset_only__oexp/model.o] Error 1
+
+[compile] eight_schools_centered/default: cached
+[compile] eight_schools_centered/oexp: cached
+[compile] garch11/default: cached
+[compile] garch11/oexp: cached
+[compile] lotka_volterra/default: cached
+[compile] lotka_volterra/oexp: cached
+[compile] low_dim_gauss_mix/default: cached
+[compile] low_dim_gauss_mix/oexp: cached
+[compile] arma11/default: cached
+[compile] arma11/oexp: cached
+[run] default/eight_schools_noncentered/rep0: FAILED Unknown format code 'f' for object of type 'str'
+[run] default/blr/rep0: wall=0.1s warm=0.0 samp=0.0 div=0 lf=54954
+[run] default/kidscore_momiq/rep0: wall=0.4s warm=0.2 samp=0.2 div=0 lf=101540
+[run] default/lsat_model/rep0: wall=7.5s warm=4.6 samp=2.9 div=0 lf=60000
+[run] default/logmesquite_logvash/rep0: wall=0.2s warm=0.1 samp=0.1 div=0 lf=195420
+[run] default/wells_dist100_model/rep0: wall=0.7s warm=0.3 samp=0.4 div=0 lf=23464
+[run] default/diamonds/rep0: wall=64.8s warm=23.3 samp=37.7 div=0 lf=4016736
+[run] default/radon_partially_pooled_noncentered/rep0: wall=30.7s warm=21.8 samp=6.3 div=0 lf=61776
+[run] default/radon_variable_intercept_slope_noncentered/rep0: wall=3.1s warm=1.5 samp=1.2 div=0 lf=84944
+[run] default/dogs_hierarchical/rep0: wall=1.0s warm=0.3 samp=0.5 div=0 lf=18056
+[run] default/pilots/rep0: wall=1.7s warm=0.4 samp=1.3 div=455 lf=1360854
+[run] default/hier_2pl/rep0: wall=74.9s warm=34.0 samp=27.4 div=0 lf=116768
+[run] default/gp_regr/rep0: wall=0.1s warm=0.0 samp=0.0 div=0 lf=17786
+[run] default/kronecker_gp/rep0: wall=767.9s warm=360.8 samp=383.1 div=16 lf=4084270
+[run] default/accel_gp/rep0: wall=26.3s warm=9.7 samp=12.8 div=54 lf=3199035
+[run] default/bym2_offset_only/rep0: wall=36.4s warm=20.3 samp=14.5 div=0 lf=252000
+[run] default/eight_schools_centered/rep0: wall=0.1s warm=0.0 samp=0.0 div=118 lf=61427
+[run] default/garch11/rep0: wall=0.4s warm=0.2 samp=0.2 div=0 lf=42744
+[run] default/lotka_volterra/rep0: wall=7.3s warm=2.8 samp=2.9 div=147 lf=119716
+[run] default/low_dim_gauss_mix/rep0: wall=3.6s warm=1.8 samp=1.6 div=0 lf=25706
+[run] default/arma11/rep0: wall=0.2s warm=0.1 samp=0.0 div=0 lf=21110
+[run] default/eight_schools_noncentered/rep1: wall=0.1s warm=0.0 samp=0.0 div=2 lf=29774
+[run] default/blr/rep1: wall=0.1s warm=0.0 samp=0.0 div=0 lf=56550
+[run] default/kidscore_momiq/rep1: wall=0.4s warm=0.2 samp=0.2 div=0 lf=103274
+[run] default/lsat_model/rep1: wall=8.4s warm=4.8 samp=3.1 div=0 lf=60000
+[run] default/logmesquite_logvash/rep1: wall=0.3s warm=0.1 samp=0.1 div=0 lf=188812
+[run] default/wells_dist100_model/rep1: wall=0.8s warm=0.4 samp=0.4 div=0 lf=22856
+[run] default/diamonds/rep1: wall=66.8s warm=25.9 samp=39.1 div=0 lf=3954784
+[run] default/radon_partially_pooled_noncentered/rep1: wall=29.2s warm=21.7 samp=6.0 div=0 lf=60000
+[run] default/radon_variable_intercept_slope_noncentered/rep1: wall=3.1s warm=1.8 samp=0.8 div=0 lf=70976
+[run] default/dogs_hierarchical/rep1: wall=0.8s warm=0.4 samp=0.5 div=0 lf=17932
+[run] default/pilots/rep1: wall=1.3s warm=0.4 samp=0.3 div=430 lf=1177575
+[run] default/hier_2pl/rep1: wall=70.1s warm=32.7 samp=35.6 div=0 lf=119792
+[run] default/gp_regr/rep1: wall=0.1s warm=0.0 samp=0.0 div=0 lf=17874
+[run] default/kronecker_gp/rep1: wall=731.3s warm=343.0 samp=355.0 div=19 lf=4083179
+[run] default/accel_gp/rep1: wall=25.3s warm=9.6 samp=13.6 div=34 lf=3730238
+[run] default/bym2_offset_only/rep1: wall=34.0s warm=20.5 samp=12.4 div=0 lf=252000
+[run] default/eight_schools_centered/rep1: wall=0.1s warm=0.0 samp=0.0 div=81 lf=64958
+[run] default/garch11/rep1: wall=0.4s warm=0.2 samp=0.2 div=0 lf=45810
+[run] default/lotka_volterra/rep1: wall=5.5s warm=2.9 samp=2.6 div=0 lf=130644
+[run] default/low_dim_gauss_mix/rep1: wall=2.9s warm=1.6 samp=1.3 div=0 lf=25596
+[run] default/arma11/rep1: wall=0.1s warm=0.1 samp=0.0 div=0 lf=21866
+[run] default/eight_schools_noncentered/rep2: wall=0.0s warm=0.0 samp=0.0 div=0 lf=38274
+[run] default/blr/rep2: wall=0.1s warm=0.0 samp=0.0 div=0 lf=57358
+[run] default/kidscore_momiq/rep2: wall=0.4s warm=0.2 samp=0.1 div=0 lf=96878
+[run] default/lsat_model/rep2: wall=9.0s warm=4.3 samp=3.0 div=0 lf=60000
+[run] default/logmesquite_logvash/rep2: wall=0.2s warm=0.1 samp=0.1 div=0 lf=193586
+[run] default/wells_dist100_model/rep2: wall=0.7s warm=0.4 samp=0.3 div=0 lf=23228
+[run] default/diamonds/rep2: wall=63.7s warm=21.9 samp=35.0 div=0 lf=3891552
+[run] default/radon_partially_pooled_noncentered/rep2: wall=29.6s warm=19.4 samp=6.0 div=0 lf=61920
+[run] default/radon_variable_intercept_slope_noncentered/rep2: wall=3.1s warm=1.8 samp=1.4 div=0 lf=90976
+[run] default/dogs_hierarchical/rep2: wall=0.8s warm=0.3 samp=0.5 div=0 lf=19356
+[run] default/pilots/rep2: wall=1.0s warm=0.4 samp=0.5 div=697 lf=1064182
+[run] default/hier_2pl/rep2: wall=67.7s warm=29.8 samp=33.6 div=0 lf=123408
+[run] default/gp_regr/rep2: wall=0.1s warm=0.0 samp=0.0 div=0 lf=17720
+[run] default/kronecker_gp/rep2: wall=715.7s warm=331.2 samp=352.9 div=19 lf=4084302
+[run] default/accel_gp/rep2: wall=24.4s warm=8.9 samp=11.4 div=59 lf=3055555
+[run] default/bym2_offset_only/rep2: wall=34.0s warm=18.5 samp=12.6 div=0 lf=252000
+[run] default/eight_schools_centered/rep2: wall=0.1s warm=0.0 samp=0.0 div=294 lf=58689
+[run] default/garch11/rep2: wall=0.3s warm=0.1 samp=0.2 div=0 lf=48830
+[run] default/lotka_volterra/rep2: wall=5.5s warm=2.3 samp=2.8 div=0 lf=153144
+[run] default/low_dim_gauss_mix/rep2: wall=3.0s warm=1.5 samp=1.4 div=0 lf=24288
+[run] default/arma11/rep2: wall=0.1s warm=0.0 samp=0.0 div=0 lf=21376
+[run] oexp/eight_schools_noncentered/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__oexp/model
+[run] oexp/blr/rep0: wall=0.0s warm=0.0 samp=0.0 div=0 lf=58498
+[run] oexp/kidscore_momiq/rep0: wall=0.3s warm=0.1 samp=0.1 div=0 lf=101540
+[run] oexp/lsat_model/rep0: wall=6.5s warm=4.0 samp=2.5 div=0 lf=60000
+[run] oexp/logmesquite_logvash/rep0: wall=0.5s warm=0.2 samp=0.2 div=0 lf=194318
+[run] oexp/wells_dist100_model/rep0: FAILED chain 0 rc=-6: model: stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/DenseBase.h:261: void Eigen::DenseBase<Derived>::resize(Eigen::Index, Eigen::Index) [with Derived = Eigen::Map<Eigen::Matrix<double, -1, 1>, 0, Eigen::Stride<0, 0> >; Eigen::Index = long int]: Assertion `rows == this->rows() && cols == this->cols() && "DenseBase::resize() does not actually allow to resize."' failed.
+
+[run] oexp/diamonds/rep0: wall=64.7s warm=23.4 samp=38.8 div=0 lf=4016736
+[run] oexp/radon_partially_pooled_noncentered/rep0: wall=28.2s warm=20.9 samp=6.0 div=0 lf=61424
+[run] oexp/radon_variable_intercept_slope_noncentered/rep0: wall=2.6s warm=1.4 samp=0.8 div=0 lf=90976
+[run] oexp/dogs_hierarchical/rep0: wall=0.9s warm=0.3 samp=0.6 div=0 lf=18056
+[run] oexp/pilots/rep0: wall=1.5s warm=0.4 samp=1.1 div=455 lf=1360854
+[run] oexp/hier_2pl/rep0: wall=54.0s warm=22.8 samp=20.9 div=0 lf=116768
+[run] oexp/gp_regr/rep0: wall=0.2s warm=0.0 samp=0.0 div=0 lf=17786
+[run] oexp/kronecker_gp/rep0: wall=734.9s warm=353.0 samp=350.0 div=12 lf=4086319
+[run] oexp/accel_gp/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/accel_gp__oexp/model
+[run] oexp/bym2_offset_only/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/bym2_offset_only__oexp/model
+[run] oexp/eight_schools_centered/rep0: wall=0.1s warm=0.0 samp=0.0 div=118 lf=61427
+[run] oexp/garch11/rep0: wall=0.4s warm=0.2 samp=0.2 div=0 lf=42586
+[run] oexp/lotka_volterra/rep0: wall=5.1s warm=2.3 samp=2.3 div=0 lf=133712
+[run] oexp/low_dim_gauss_mix/rep0: wall=2.9s warm=1.5 samp=1.3 div=0 lf=25706
+[run] oexp/arma11/rep0: wall=0.2s warm=0.2 samp=0.0 div=0 lf=21370
+[run] oexp/eight_schools_noncentered/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__oexp/model
+[run] oexp/blr/rep1: wall=0.0s warm=0.0 samp=0.0 div=0 lf=56240
+[run] oexp/kidscore_momiq/rep1: wall=0.3s warm=0.1 samp=0.1 div=0 lf=103274
+[run] oexp/lsat_model/rep1: wall=6.5s warm=3.7 samp=2.5 div=0 lf=60000
+[run] oexp/logmesquite_logvash/rep1: wall=0.5s warm=0.2 samp=0.2 div=0 lf=206418
+[run] oexp/wells_dist100_model/rep1: FAILED chain 0 rc=-6: model: stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/DenseBase.h:261: void Eigen::DenseBase<Derived>::resize(Eigen::Index, Eigen::Index) [with Derived = Eigen::Map<Eigen::Matrix<double, -1, 1>, 0, Eigen::Stride<0, 0> >; Eigen::Index = long int]: Assertion `rows == this->rows() && cols == this->cols() && "DenseBase::resize() does not actually allow to resize."' failed.
+
+[run] oexp/diamonds/rep1: wall=67.1s warm=24.2 samp=37.9 div=0 lf=3954784
+[run] oexp/radon_partially_pooled_noncentered/rep1: wall=27.7s warm=20.5 samp=5.7 div=0 lf=60176
+[run] oexp/radon_variable_intercept_slope_noncentered/rep1: wall=2.7s warm=1.3 samp=0.7 div=0 lf=94544
+[run] oexp/dogs_hierarchical/rep1: wall=0.8s warm=0.3 samp=0.5 div=0 lf=17932
+[run] oexp/pilots/rep1: wall=1.2s warm=0.4 samp=0.3 div=430 lf=1177575
+[run] oexp/hier_2pl/rep1: wall=50.1s warm=22.2 samp=24.6 div=0 lf=119792
+[run] oexp/gp_regr/rep1: wall=0.1s warm=0.0 samp=0.0 div=0 lf=17874
+[run] oexp/kronecker_gp/rep1: wall=754.0s warm=344.7 samp=371.9 div=11 lf=4087118
+[run] oexp/accel_gp/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/accel_gp__oexp/model
+[run] oexp/bym2_offset_only/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/bym2_offset_only__oexp/model
+[run] oexp/eight_schools_centered/rep1: wall=0.1s warm=0.0 samp=0.0 div=81 lf=64958
+[run] oexp/garch11/rep1: wall=0.3s warm=0.2 samp=0.2 div=0 lf=43172
+[run] oexp/lotka_volterra/rep1: wall=5.6s warm=2.6 samp=2.4 div=0 lf=144116
+[run] oexp/low_dim_gauss_mix/rep1: wall=3.2s warm=1.7 samp=1.4 div=0 lf=25596
+[run] oexp/arma11/rep1: wall=0.1s warm=0.1 samp=0.0 div=0 lf=22144
+[run] oexp/eight_schools_noncentered/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__oexp/model
+[run] oexp/blr/rep2: wall=0.1s warm=0.0 samp=0.0 div=0 lf=57704
+[run] oexp/kidscore_momiq/rep2: wall=0.3s warm=0.2 samp=0.1 div=0 lf=96878
+[run] oexp/lsat_model/rep2: wall=6.6s warm=3.7 samp=2.6 div=0 lf=60000
+[run] oexp/logmesquite_logvash/rep2: wall=0.5s warm=0.2 samp=0.3 div=0 lf=191918
+[run] oexp/wells_dist100_model/rep2: FAILED chain 0 rc=-6: model: stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/DenseBase.h:261: void Eigen::DenseBase<Derived>::resize(Eigen::Index, Eigen::Index) [with Derived = Eigen::Map<Eigen::Matrix<double, -1, 1>, 0, Eigen::Stride<0, 0> >; Eigen::Index = long int]: Assertion `rows == this->rows() && cols == this->cols() && "DenseBase::resize() does not actually allow to resize."' failed.
+
+[run] oexp/diamonds/rep2: wall=69.8s warm=23.9 samp=40.2 div=0 lf=3891552
+[run] oexp/radon_partially_pooled_noncentered/rep2: wall=32.0s warm=21.8 samp=6.8 div=0 lf=62752
+[run] oexp/radon_variable_intercept_slope_noncentered/rep2: wall=3.0s warm=1.6 samp=1.4 div=0 lf=107632
+[run] oexp/dogs_hierarchical/rep2: wall=0.9s warm=0.4 samp=0.5 div=0 lf=19356
+[run] oexp/pilots/rep2: wall=2.5s warm=0.5 samp=0.5 div=697 lf=1064182
+[run] oexp/hier_2pl/rep2: wall=54.4s warm=24.2 samp=26.9 div=0 lf=123408
+[run] oexp/gp_regr/rep2: wall=0.1s warm=0.0 samp=0.0 div=0 lf=17720
+[run] oexp/kronecker_gp/rep2: wall=705.8s warm=331.6 samp=341.4 div=12 lf=4085415
+[run] oexp/accel_gp/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/accel_gp__oexp/model
+[run] oexp/bym2_offset_only/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/bym2_offset_only__oexp/model
+[run] oexp/eight_schools_centered/rep2: wall=0.0s warm=0.0 samp=0.0 div=294 lf=58689
+[run] oexp/garch11/rep2: wall=0.4s warm=0.2 samp=0.2 div=0 lf=44542
+[run] oexp/lotka_volterra/rep2: wall=5.2s warm=2.3 samp=2.2 div=0 lf=137400
+[run] oexp/low_dim_gauss_mix/rep2: wall=3.0s warm=1.5 samp=1.4 div=0 lf=24288
+[run] oexp/arma11/rep2: wall=0.1s warm=0.0 samp=0.1 div=0 lf=22154
+GRID DONE

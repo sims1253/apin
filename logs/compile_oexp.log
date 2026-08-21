@@ -1,0 +1,29 @@
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[compile] eight_schools_noncentered/oexp: FAILED make failed: n_math/lib/eigen_3.4.0 -I stan/lib/stan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -Wno-ignored-attributes   -x c++ -o /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__oexp/model.o /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__oexp/model.hpp
+ ts, 3 provided
+  199 |       stan::model::assign(lcm_sym9__, stan::math::fma(theta_trans, tau, mu),
+      |       ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  200 |         "assigning variable lcm_sym9__");
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__oexp/model.o] Error 1
+
+[compile] blr/oexp: cached
+[compile] kidscore_momiq/oexp: cached
+[compile] lsat_model/oexp: cached
+[compile] logmesquite_logvash/oexp: cached
+[compile] wells_dist100_model/oexp: cached
+[compile] diamonds/oexp: cached
+[compile] radon_partially_pooled_noncentered/oexp: cached
+[compile] radon_variable_intercept_slope_noncentered/oexp: cached
+[compile] dogs_hierarchical/oexp: cached
+[compile] pilots/oexp: cached
+[compile] hier_2pl/oexp: cached
+[compile] gp_regr/oexp: cached
+[compile] kronecker_gp/oexp: cached
+[compile] accel_gp/oexp: cached
+[compile] bym2_offset_only/oexp: cached
+[compile] eight_schools_centered/oexp: cached
+[compile] garch11/oexp: cached
+[compile] lotka_volterra/oexp: cached
+[compile] low_dim_gauss_mix/oexp: cached
+[compile] arma11/oexp: cached

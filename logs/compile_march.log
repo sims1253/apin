@@ -1,0 +1,22 @@
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[compile] eight_schools_noncentered/march_native: 23.2s
+[compile] blr/march_native: 18.5s
+[compile] kidscore_momiq/march_native: 19.5s
+[compile] lsat_model/march_native: 20.2s
+[compile] logmesquite_logvash/march_native: 20.5s
+[compile] wells_dist100_model/march_native: 20.1s
+[compile] diamonds/march_native: 20.0s
+[compile] radon_partially_pooled_noncentered/march_native: 19.4s
+[compile] radon_variable_intercept_slope_noncentered/march_native: 20.3s
+[compile] dogs_hierarchical/march_native: 17.4s
+[compile] pilots/march_native: 21.0s
+[compile] hier_2pl/march_native: 31.5s
+[compile] gp_regr/march_native: 28.7s
+[compile] kronecker_gp/march_native: 43.8s
+[compile] accel_gp/march_native: 27.4s
+[compile] bym2_offset_only/march_native: 22.2s
+[compile] eight_schools_centered/march_native: 18.5s
+[compile] garch11/march_native: 17.5s
+[compile] lotka_volterra/march_native: 23.6s
+[compile] low_dim_gauss_mix/march_native: 17.4s
+[compile] arma11/march_native: 16.8s

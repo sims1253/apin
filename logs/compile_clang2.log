@@ -1,0 +1,127 @@
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[compile] eight_schools_noncentered/clang_native: FAILED make failed: lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__clang_native/model.hpp
+ e precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__clang_native/model.o] Error 1
+
+[compile] blr/clang_native: FAILED make failed: stan/lib/stan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/blr__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/blr__clang_native/model.hpp
+ been modified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/blr__clang_native/model.o] Error 1
+
+[compile] kidscore_momiq/clang_native: FAILED make failed: /boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/kidscore_momiq__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/kidscore_momiq__clang_native/model.hpp
+ ed since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/kidscore_momiq__clang_native/model.o] Error 1
+
+[compile] lsat_model/clang_native: FAILED make failed: math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/lsat_model__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/lsat_model__clang_native/model.hpp
+ dified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/lsat_model__clang_native/model.o] Error 1
+
+[compile] logmesquite_logvash/clang_native: FAILED make failed: 7.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/logmesquite_logvash__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/logmesquite_logvash__clang_native/model.hpp
+ nce the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/logmesquite_logvash__clang_native/model.o] Error 1
+
+[compile] wells_dist100_model/clang_native: FAILED make failed: 7.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/wells_dist100_model__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/wells_dist100_model__clang_native/model.hpp
+ nce the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/wells_dist100_model__clang_native/model.o] Error 1
+
+[compile] diamonds/clang_native: FAILED make failed: tan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/diamonds__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/diamonds__clang_native/model.hpp
+ modified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/diamonds__clang_native/model.o] Error 1
+
+[compile] radon_partially_pooled_noncentered/clang_native: FAILED make failed: sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__clang_native/model.hpp
+ iled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__clang_native/model.o] Error 1
+
+[compile] radon_variable_intercept_slope_noncentered/clang_native: FAILED make failed: nclude -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/radon_variable_intercept_slope_noncentered__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/radon_variable_intercept_slope_noncentered__clang_native/model.hpp
+ der 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/radon_variable_intercept_slope_noncentered__clang_native/model.o] Error 1
+
+[compile] dogs_hierarchical/clang_native: FAILED make failed: _1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/dogs_hierarchical__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/dogs_hierarchical__clang_native/model.hpp
+ since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/dogs_hierarchical__clang_native/model.o] Error 1
+
+[compile] pilots/clang_native: FAILED make failed: ib/stan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/pilots__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/pilots__clang_native/model.hpp
+ n modified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/pilots__clang_native/model.o] Error 1
+
+[compile] hier_2pl/clang_native: FAILED make failed: tan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/hier_2pl__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/hier_2pl__clang_native/model.hpp
+ modified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/hier_2pl__clang_native/model.o] Error 1
+
+[compile] gp_regr/clang_native: FAILED make failed: /stan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/gp_regr__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/gp_regr__clang_native/model.hpp
+  modified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/gp_regr__clang_native/model.o] Error 1
+
+[compile] kronecker_gp/clang_native: FAILED make failed: /lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/kronecker_gp__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/kronecker_gp__clang_native/model.hpp
+ fied since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/kronecker_gp__clang_native/model.o] Error 1
+
+[compile] accel_gp/clang_native: FAILED make failed: tan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/accel_gp__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/accel_gp__clang_native/model.hpp
+ modified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/accel_gp__clang_native/model.o] Error 1
+
+[compile] bym2_offset_only/clang_native: FAILED make failed: st_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/bym2_offset_only__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/bym2_offset_only__clang_native/model.hpp
+  since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/bym2_offset_only__clang_native/model.o] Error 1
+
+[compile] eight_schools_centered/clang_native: FAILED make failed:  stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/eight_schools_centered__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/eight_schools_centered__clang_native/model.hpp
+  the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/eight_schools_centered__clang_native/model.o] Error 1
+
+[compile] garch11/clang_native: FAILED make failed: /stan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/garch11__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/garch11__clang_native/model.hpp
+  modified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/garch11__clang_native/model.o] Error 1
+
+[compile] lotka_volterra/clang_native: FAILED make failed: /boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/lotka_volterra__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/lotka_volterra__clang_native/model.hpp
+ ed since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/lotka_volterra__clang_native/model.o] Error 1
+
+[compile] low_dim_gauss_mix/clang_native: FAILED make failed: _1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/low_dim_gauss_mix__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/low_dim_gauss_mix__clang_native/model.hpp
+ since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/low_dim_gauss_mix__clang_native/model.o] Error 1
+
+[compile] arma11/clang_native: FAILED make failed: ib/stan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/arma11__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/arma11__clang_native/model.hpp
+ n modified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/arma11__clang_native/model.o] Error 1
+

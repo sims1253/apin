@@ -1,0 +1,180 @@
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[run] w8_lr10/eight_schools_noncentered/rep0: wall=0.0s warm=0.0 samp=0.0 lg=72469 logp_frac=0.626133
+[run] w8_lr10/blr/rep0: wall=0.2s warm=0.0 samp=0.0 lg=357363 logp_frac=0.778647
+[run] w8_lr10/kidscore_momiq/rep0: wall=0.2s warm=0.1 samp=0.1 lg=110642 logp_frac=0.927629
+[run] w8_lr10/lsat_model/rep0: wall=25.0s warm=14.6 samp=9.7 lg=621370 logp_frac=0.980366
+[run] w8_lr10/logmesquite_logvash/rep0: wall=0.1s warm=0.0 samp=0.1 lg=172630 logp_frac=0.826806
+[run] w8_lr10/wells_dist100_model/rep0: wall=0.9s warm=0.4 samp=0.4 lg=61533 logp_frac=0.989742
+[run] w8_lr10/diamonds/rep0: wall=6.8s warm=3.4 samp=3.0 lg=658935 logp_frac=0.990758
+[run] w8_lr10/radon_partially_pooled_noncentered/rep0: wall=79.3s warm=43.3 samp=35.4 lg=827649 logp_frac=0.995973
+[run] w8_lr10/radon_variable_intercept_slope_noncentered/rep0: wall=9.7s warm=4.1 samp=2.9 lg=666423 logp_frac=0.978345
+[run] w8_lr10/dogs_hierarchical/rep0: wall=0.9s warm=0.4 samp=0.4 lg=50331 logp_frac=0.928939
+[run] w8_lr10/pilots/rep0: wall=0.3s warm=0.0 samp=0.0 lg=360612 logp_frac=0.766574
+[run] w8_lr10/hier_2pl/rep0: wall=177.2s warm=89.0 samp=88.0 lg=999060 logp_frac=0.996437
+[run] w8_lr10/gp_regr/rep0: wall=0.1s warm=0.0 samp=0.0 lg=56412 logp_frac=0.918954
+[run] w8_lr10/kronecker_gp/rep0: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/w8_lr10/kronecker_gp/rep0/chain_1.log
+[run] w8_lr10/accel_gp/rep0: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/w8_lr10/accel_gp/rep0/chain_1.log
+[run] w8_lr10/bym2_offset_only/rep0: wall=42.7s warm=20.4 samp=20.0 lg=885994 logp_frac=0.959094
+[run] w8_lr10/eight_schools_centered/rep0: wall=0.1s warm=0.0 samp=0.0 lg=213078 logp_frac=0.778496
+[run] w8_lr10/garch11/rep0: wall=0.4s warm=0.2 samp=0.2 lg=113989 logp_frac=0.9691
+[run] w8_lr10/lotka_volterra/rep0: wall=4.0s warm=1.1 samp=1.4 lg=164928 logp_frac=0.979176
+[run] w8_lr10/low_dim_gauss_mix/rep0: wall=5.2s warm=2.4 samp=2.7 lg=109321 logp_frac=0.99584
+[run] w8_lr10/arma11/rep0: wall=0.1s warm=0.1 samp=0.1 lg=61212 logp_frac=0.93784
+[run] w8_lr10/eight_schools_noncentered/rep1: wall=0.0s warm=0.0 samp=0.0 lg=95925 logp_frac=0.651852
+[run] w8_lr10/blr/rep1: wall=0.3s warm=0.1 samp=0.0 lg=438929 logp_frac=0.85676
+[run] w8_lr10/kidscore_momiq/rep1: wall=0.2s warm=0.1 samp=0.1 lg=112880 logp_frac=0.927247
+[run] w8_lr10/lsat_model/rep1: wall=24.9s warm=14.6 samp=9.8 lg=621682 logp_frac=0.980173
+[run] w8_lr10/logmesquite_logvash/rep1: wall=0.2s warm=0.1 samp=0.1 lg=196148 logp_frac=0.885518
+[run] w8_lr10/wells_dist100_model/rep1: wall=1.8s warm=0.4 samp=0.4 lg=82664 logp_frac=0.990103
+[run] w8_lr10/diamonds/rep1: wall=6.8s warm=2.7 samp=2.1 lg=602565 logp_frac=0.986978
+[run] w8_lr10/radon_partially_pooled_noncentered/rep1: wall=78.5s warm=42.8 samp=35.2 lg=765340 logp_frac=0.995962
+[run] w8_lr10/radon_variable_intercept_slope_noncentered/rep1: wall=7.4s warm=4.1 samp=2.6 lg=476958 logp_frac=0.97944
+[run] w8_lr10/dogs_hierarchical/rep1: wall=0.9s warm=0.3 samp=0.4 lg=50447 logp_frac=0.917011
+[run] w8_lr10/pilots/rep1: wall=0.1s warm=0.0 samp=0.0 lg=166171 logp_frac=0.763425
+[run] w8_lr10/hier_2pl/rep1: wall=173.5s warm=80.7 samp=65.9 lg=866296 logp_frac=0.996014
+[run] w8_lr10/gp_regr/rep1: wall=0.2s warm=0.0 samp=0.0 lg=97201 logp_frac=0.915976
+[run] w8_lr10/kronecker_gp/rep1: wall=81.8s warm=35.2 samp=27.8 lg=770465 logp_frac=0.989852
+[run] w8_lr10/accel_gp/rep1: FAILED chain 2 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/w8_lr10/accel_gp/rep1/chain_2.log
+[run] w8_lr10/bym2_offset_only/rep1: wall=41.7s warm=20.1 samp=19.2 lg=961925 logp_frac=0.955842
+[run] w8_lr10/eight_schools_centered/rep1: wall=0.0s warm=0.0 samp=0.0 lg=149947 logp_frac=0.754835
+[run] w8_lr10/garch11/rep1: wall=0.4s warm=0.2 samp=0.2 lg=110892 logp_frac=0.964084
+[run] w8_lr10/lotka_volterra/rep1: wall=2.5s warm=1.1 samp=1.4 lg=137850 logp_frac=0.976944
+[run] w8_lr10/low_dim_gauss_mix/rep1: wall=14.9s warm=2.3 samp=2.3 lg=157964 logp_frac=0.995617
+[run] w8_lr10/arma11/rep1: wall=0.1s warm=0.1 samp=0.1 lg=62185 logp_frac=0.943186
+[run] w8_lr10/eight_schools_noncentered/rep2: wall=0.1s warm=0.0 samp=0.0 lg=103502 logp_frac=0.620805
+[run] w8_lr10/blr/rep2: wall=0.2s warm=0.1 samp=0.1 lg=380868 logp_frac=0.850507
+[run] w8_lr10/kidscore_momiq/rep2: wall=0.2s warm=0.1 samp=0.1 lg=111614 logp_frac=0.923546
+[run] w8_lr10/lsat_model/rep2: wall=24.9s warm=14.7 samp=9.7 lg=622415 logp_frac=0.980242
+[run] w8_lr10/logmesquite_logvash/rep2: wall=0.1s warm=0.0 samp=0.1 lg=167337 logp_frac=0.83269
+[run] w8_lr10/wells_dist100_model/rep2: wall=1.0s warm=0.5 samp=0.4 lg=66573 logp_frac=0.990451
+[run] w8_lr10/diamonds/rep2: wall=7.0s warm=3.3 samp=2.1 lg=653701 logp_frac=0.985516
+[run] w8_lr10/radon_partially_pooled_noncentered/rep2: wall=80.6s warm=33.2 samp=24.0 lg=766182 logp_frac=0.994701
+[run] w8_lr10/radon_variable_intercept_slope_noncentered/rep2: wall=7.1s warm=4.1 samp=2.9 lg=408662 logp_frac=0.978087
+[run] w8_lr10/dogs_hierarchical/rep2: wall=2.1s warm=0.3 samp=0.3 lg=70381 logp_frac=0.919427
+[run] w8_lr10/pilots/rep2: wall=0.1s warm=0.0 samp=0.0 lg=183514 logp_frac=0.817696
+[run] w8_lr10/hier_2pl/rep2: wall=174.1s warm=80.8 samp=66.1 lg=911120 logp_frac=0.995896
+[run] w8_lr10/gp_regr/rep2: wall=0.1s warm=0.0 samp=0.0 lg=76864 logp_frac=0.920676
+[run] w8_lr10/kronecker_gp/rep2: wall=82.0s warm=24.5 samp=16.5 lg=634767 logp_frac=0.984727
+[run] w8_lr10/accel_gp/rep2: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/w8_lr10/accel_gp/rep2/chain_0.log
+[run] w8_lr10/bym2_offset_only/rep2: wall=41.8s warm=19.3 samp=14.4 lg=884840 logp_frac=0.950335
+[run] w8_lr10/eight_schools_centered/rep2: wall=0.1s warm=0.0 samp=0.0 lg=216287 logp_frac=0.696695
+[run] w8_lr10/garch11/rep2: wall=0.4s warm=0.2 samp=0.2 lg=113674 logp_frac=0.96477
+[run] w8_lr10/lotka_volterra/rep2: wall=2.6s warm=1.1 samp=1.2 lg=134225 logp_frac=0.977777
+[run] w8_lr10/low_dim_gauss_mix/rep2: wall=5.6s warm=2.3 samp=2.6 lg=110522 logp_frac=0.995445
+[run] w8_lr10/arma11/rep2: wall=0.1s warm=0.1 samp=0.1 lg=63288 logp_frac=0.93045
+W8_LR10 GRID DONE
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+59 ESS jobs
+ess_bulk min=1070 geomean=2035 rhat_max=1.0034 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__arma11__rep0.json
+ess_bulk min=998 geomean=1838 rhat_max=1.0037 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__arma11__rep1.json
+ess_bulk min=928 geomean=2138 rhat_max=1.0050 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__arma11__rep2.json
+ess_bulk min=798 geomean=2341 rhat_max=1.0048 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__blr__rep0.json
+ess_bulk min=615 geomean=2796 rhat_max=1.0031 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__blr__rep1.json
+ess_bulk min=704 geomean=2995 rhat_max=1.0013 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__blr__rep2.json
+ess_bulk min=133 geomean=3620 rhat_max=1.0490 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__bym2_offset_only__rep0.json
+ess_bulk min=85 geomean=3138 rhat_max=1.0366 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__bym2_offset_only__rep1.json
+ess_bulk min=16 geomean=1847 rhat_max=1.1872 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__bym2_offset_only__rep2.json
+ess_bulk min=8 geomean=550 rhat_max=1.5002 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__diamonds__rep0.json
+ess_bulk min=7 geomean=399 rhat_max=1.6226 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__diamonds__rep1.json
+ess_bulk min=9 geomean=469 rhat_max=1.3912 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__diamonds__rep2.json
+ess_bulk min=1330 geomean=3918 rhat_max=1.0021 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__dogs_hierarchical__rep0.json
+ess_bulk min=1479 geomean=3923 rhat_max=1.0024 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__dogs_hierarchical__rep1.json
+ess_bulk min=1424 geomean=3909 rhat_max=1.0039 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__dogs_hierarchical__rep2.json
+ess_bulk min=12 geomean=89 rhat_max=1.2711 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__eight_schools_centered__rep0.json
+ess_bulk min=67 geomean=328 rhat_max=1.0491 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__eight_schools_centered__rep1.json
+ess_bulk min=13 geomean=41 rhat_max=1.2367 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__eight_schools_centered__rep2.json
+ess_bulk min=1720 geomean=3412 rhat_max=1.0049 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__eight_schools_noncentered__rep0.json
+ess_bulk min=1594 geomean=3172 rhat_max=1.0027 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__eight_schools_noncentered__rep1.json
+ess_bulk min=1568 geomean=3559 rhat_max=1.0075 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__eight_schools_noncentered__rep2.json
+ess_bulk min=1055 geomean=1661 rhat_max=1.0054 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__garch11__rep0.json
+ess_bulk min=1035 geomean=1653 rhat_max=1.0056 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__garch11__rep1.json
+ess_bulk min=593 geomean=1322 rhat_max=1.0089 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__garch11__rep2.json
+ess_bulk min=2401 geomean=2966 rhat_max=1.0012 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__gp_regr__rep0.json
+ess_bulk min=2004 geomean=2665 rhat_max=1.0034 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__gp_regr__rep1.json
+ess_bulk min=2307 geomean=3041 rhat_max=1.0023 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__gp_regr__rep2.json
+ess_bulk min=83 geomean=602 rhat_max=1.0488 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__hier_2pl__rep0.json
+ess_bulk min=37 geomean=732 rhat_max=1.0766 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__hier_2pl__rep1.json
+ess_bulk min=249 geomean=1847 rhat_max=1.0242 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__hier_2pl__rep2.json
+ess_bulk min=520 geomean=961 rhat_max=1.0160 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__kidscore_momiq__rep0.json
+ess_bulk min=583 geomean=1041 rhat_max=1.0067 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__kidscore_momiq__rep1.json
+ess_bulk min=430 geomean=800 rhat_max=1.0105 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__kidscore_momiq__rep2.json
+ess_bulk min=64 geomean=639 rhat_max=1.0617 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__kronecker_gp__rep1.json
+ess_bulk min=118 geomean=815 rhat_max=1.0491 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__kronecker_gp__rep2.json
+ess_bulk min=151 geomean=404 rhat_max=1.0137 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__logmesquite_logvash__rep0.json
+ess_bulk min=122 geomean=457 rhat_max=1.0369 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__logmesquite_logvash__rep1.json
+ess_bulk min=116 geomean=415 rhat_max=1.0195 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__logmesquite_logvash__rep2.json
+ess_bulk min=82 geomean=1306 rhat_max=1.0527 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__lotka_volterra__rep0.json
+ess_bulk min=95 geomean=1454 rhat_max=1.0256 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__lotka_volterra__rep1.json
+ess_bulk min=97 geomean=1370 rhat_max=1.0478 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__lotka_volterra__rep2.json
+ess_bulk min=1041 geomean=2073 rhat_max=1.0043 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__low_dim_gauss_mix__rep0.json
+ess_bulk min=451 geomean=1612 rhat_max=1.0030 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__low_dim_gauss_mix__rep1.json
+ess_bulk min=1008 geomean=2023 rhat_max=1.0073 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__low_dim_gauss_mix__rep2.json
+ess_bulk min=1394 geomean=10091 rhat_max=1.0087 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__lsat_model__rep0.json
+ess_bulk min=1505 geomean=10367 rhat_max=1.0095 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__lsat_model__rep1.json
+ess_bulk min=1227 geomean=10797 rhat_max=1.0083 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__lsat_model__rep2.json
+ess_bulk min=5 geomean=75 rhat_max=4.1422 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__pilots__rep0.json
+ess_bulk min=5 geomean=236 rhat_max=1.9945 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__pilots__rep1.json
+ess_bulk min=5 geomean=252 rhat_max=3.1472 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__pilots__rep2.json
+ess_bulk min=710 geomean=8033 rhat_max=1.0077 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__radon_partially_pooled_noncentered__rep0.json
+ess_bulk min=744 geomean=7914 rhat_max=1.0137 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__radon_partially_pooled_noncentered__rep1.json
+ess_bulk min=659 geomean=7841 rhat_max=1.0061 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__radon_partially_pooled_noncentered__rep2.json
+ess_bulk min=603 geomean=7143 rhat_max=1.0089 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__radon_variable_intercept_slope_noncentered__rep0.json
+ess_bulk min=577 geomean=6134 rhat_max=1.0187 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__radon_variable_intercept_slope_noncentered__rep1.json
+ess_bulk min=620 geomean=5934 rhat_max=1.0081 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__radon_variable_intercept_slope_noncentered__rep2.json
+ess_bulk min=1098 geomean=1176 rhat_max=1.0040 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__wells_dist100_model__rep0.json
+ess_bulk min=883 geomean=964 rhat_max=1.0056 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__wells_dist100_model__rep1.json
+ess_bulk min=860 geomean=895 rhat_max=1.0041 -> /home/m0hawk/Documents/apin/stan/results/ess/w8_lr10__wells_dist100_model__rep2.json
+ESS DONE
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+           variant  n_models  geo_ess_per_sec  geo_wall  geo_ess_per_grad  total_div_rate  total_td_rate  n_configs_rhat_bad
+      clang_native        21       423.061616  2.253736          0.007819        0.008024       0.121083                   3
+           default        21       481.278007  1.995224          0.008109        0.007714       0.113619                   4
+            nutpie        21       473.277717  1.653804          0.003074        0.019381       0.001524                   4
+              oexp        17       456.340801  1.874413          0.007969        0.008603       0.116544                   3
+           pf_full        10        22.056315 21.952823          0.001274        0.024325       0.260275                   3
+           pf_w200        10        23.926098 16.034789          0.001048        0.023200       0.179250                   4
+   w2_adam_b50_shr        20        25.303786  1.350972          0.000206       -0.001000      -0.001000                   9
+w2_adam_b50_shr_c3        20        22.673251  1.382730          0.000181       -0.001000      -0.001000                   9
+ w2_da_b50_shr_avg        20        82.942639  1.090712          0.000683       -0.001000      -0.001000                  13
+           w3_mdt7        21        19.712374  1.416709          0.000175       -0.001000      -0.001000                   9
+          w3_mst31        21        17.629232  1.475697          0.000160       -0.001000      -0.001000                   9
+          w3_mst63        21        15.804496  1.645044          0.000160       -0.001000      -0.001000                   9
+       w4_init_fix        20        38.628065  1.803051          0.000340       -0.001000      -0.001000                  13
+        w5_pf_init        21       177.103112  1.583882          0.001309       -0.001000      -0.001000                  11
+      w6_pf_chop50        20       189.996878  1.510347          0.001373       -0.001000      -0.001000                   8
+     w7_batch_1000        21        21.877412  1.172891          0.000157       -0.001000      -0.001000                   9
+     w7_batch_2000        21        25.225462  1.624863          0.000175       -0.001000      -0.001000                  10
+      w7_batch_250        21        23.934360  0.893100          0.000188       -0.001000      -0.001000                   9
+     w7_batch_4000        21        17.637504  2.570306          0.000121       -0.001000      -0.001000                  10
+      w7_batch_500        21        23.032938  0.961885          0.000169       -0.001000      -0.001000                   9
+      w7_full_1000        20       190.489674  1.588912          0.001464       -0.001000      -0.001000                   8
+      w7_full_2000        20       193.457605  2.021671          0.001370       -0.001000      -0.001000                   8
+       w7_full_250        21        83.874724  1.543713          0.000700       -0.001000      -0.001000                  13
+      w7_full_4000        20       127.174768  2.770992          0.000897       -0.001000      -0.001000                   9
+       w7_full_500        20        78.137514  1.897709          0.000688       -0.001000      -0.001000                  10
+     w7_stock_1000        21        60.891307  0.963513          0.000453       -0.001000      -0.001000                  17
+     w7_stock_2000        21        66.086390  1.316769          0.000456       -0.001000      -0.001000                  14
+      w7_stock_250        21        60.102087  0.654446          0.000432       -0.001000      -0.001000                  11
+     w7_stock_4000        21        44.992842  2.097722          0.000305       -0.001000      -0.001000                  15
+      w7_stock_500        21        66.298647  0.744647          0.000497       -0.001000      -0.001000                  14
+           w8_lr10        20       173.144849  1.555526          0.001199       -0.001000      -0.001000                   9
+            walnut        21        52.106239  1.156098          0.000461       -0.001000      -0.001000                  17
+   walnut_adam_b50        21        21.662804  1.200283          0.000160       -0.001000      -0.001000                   9
+walnut_adam_b50_c3        21        22.818416  1.229800          0.000171       -0.001000      -0.001000                  10
+     walnut_belief        21        98.663366  0.867254          0.000693       -0.001000      -0.001000                  15
+         walnut_da        11        36.885925  1.652690          0.000420       -0.001000      -0.001000                   8
+     walnut_da_avg        14        37.356967  1.654864          0.000418       -0.001000      -0.001000                  10
+     walnut_da_b50        21        77.192783  0.943601          0.000573       -0.001000      -0.001000                  16
+        walnut_dem        19         9.863699  2.071826          0.000093       -0.001000      -0.001000                  15
+wrote /home/m0hawk/Documents/apin/stan/dashboard.html (23 KB)
+upload response: {
+  "ok": true,
+  "draftId": "gbcfyftfncsi",
+  "versionId": "Py0G80scaRQX5fTmonzR",
+  "versionNumber": 25,
+  "title": "nindan \u2014 Stan wall-clock \u2192 ESS",
+  "requestId": "F6XywpgLTmKK5DxhCYBc-A",
+  "publicUrl": "https://gbcfyftfncsi.postplan.dev",
+  "rawUrl": "https://postplan.dev/d/gbcfyftfncsi/raw",
+  "warnings": []
+}

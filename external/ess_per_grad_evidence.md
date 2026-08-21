@@ -106,3 +106,30 @@ Full 21-model x 3-config (rec / fold / auto) sweep with the freeze-fix binary,
 3 reps, capturing sampling-phase gradient counts per chain — will give the
 post-fix e/grad table for all models including whether fold mode's ESS gains
 translate to per-gradient parity on the previously collapsed models.
+
+
+## Post-fix update (W-17/w17g, direct sampling-phase log capture)
+
+After the freeze-consistency fixes + reproducible heuristic, direct per-chain
+log capture (recommended config, median of 3 reps):
+
+| model | walnut grads/500 draws | ESS_min | e/grad | vs pre-fix table |
+|---|---|---|---|---|
+| arma11 | 14,413 | 506 | 3.5e-2 | ~same |
+| blr | 88,836 | 326 | 3.7e-3 | ~same |
+| eight_schools_centered | 44,017 | 52 | 1.2e-3 | 1.3x better |
+| hier_2pl | 234,500 | 247 | 1.05e-3 | **2.6x better** |
+| kronecker_gp | 165,132 | 55 | 3.3e-4 | ~same |
+| diamonds | 156,631 | 6 | 3.8e-5 | slightly better |
+| pilots | 49,049 | 5 | 1.0e-4 | 2.8x better (low base) |
+
+The collapse models move most — consistent with the diagnosis that per-gradient
+efficiency on hard models is adaptation-limited, not kernel-limited: every
+freeze-consistency fix mechanically lifts e/grad. (w17 ESS and w17g grads are
+paired across runs with identical seeds/config; draws were pre-fix-repro binary,
+so the pairing is statistical, not bitwise.)
+
+Caveat retained: walnutpie burns ~2x cmdstan's grads per draw via the
+within-orbit dyadic search (bounded, design-inherent); the remaining gap on
+well-mixed models (0.3-0.8x cmdstan e/grad) is that overhead plus ESS
+accounting on 500 vs 1000 draws.

@@ -1,0 +1,5 @@
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[cg-bridge] diamonds: total=4,176,366,265 calls=3200 Ir/grad=652,455
+[cg-bridge] lsat_model: total=8,558,004,314 calls=1735 Ir/grad=1,903,047
+[cg-bridge] radon_partially_pooled_noncentered: total=32,746,355,536 calls=3200 Ir/grad=5,115,819
+[cg-bridge] pilots: total=203,899,992 calls=5683 Ir/grad=18,756

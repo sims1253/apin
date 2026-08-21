@@ -1,0 +1,179 @@
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[compile] eight_schools_noncentered/march_native: cached
+[compile] blr/march_native: cached
+[compile] kidscore_momiq/march_native: cached
+[compile] lsat_model/march_native: cached
+[compile] logmesquite_logvash/march_native: cached
+[compile] wells_dist100_model/march_native: cached
+[compile] diamonds/march_native: cached
+[compile] radon_partially_pooled_noncentered/march_native: cached
+[compile] radon_variable_intercept_slope_noncentered/march_native: cached
+[compile] dogs_hierarchical/march_native: cached
+[compile] pilots/march_native: cached
+[compile] hier_2pl/march_native: cached
+[compile] gp_regr/march_native: cached
+[compile] kronecker_gp/march_native: cached
+[compile] accel_gp/march_native: cached
+[compile] bym2_offset_only/march_native: cached
+[compile] eight_schools_centered/march_native: cached
+[compile] garch11/march_native: cached
+[compile] lotka_volterra/march_native: cached
+[compile] low_dim_gauss_mix/march_native: cached
+[compile] arma11/march_native: cached
+[run] march_native/eight_schools_noncentered/rep0: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/blr/rep0: wall=0.1s warm=0.0 samp=0.0 div=0 lf=56956
+[run] march_native/kidscore_momiq/rep0: wall=0.5s warm=0.2 samp=0.2 div=0 lf=102942
+[run] march_native/lsat_model/rep0: wall=8.1s warm=4.6 samp=3.0 div=0 lf=60000
+[run] march_native/logmesquite_logvash/rep0: wall=0.3s warm=0.1 samp=0.1 div=0 lf=199630
+[run] march_native/wells_dist100_model/rep0: wall=0.6s warm=0.3 samp=0.3 div=0 lf=22944
+[run] march_native/diamonds/rep0: wall=49.4s warm=19.4 samp=28.4 div=0 lf=3914848
+[run] march_native/radon_partially_pooled_noncentered/rep0: FAILED chain 0 rc=-6: Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+Exception: normal_lpdf: Scale parameter is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/radon_partially_pooled_noncentered.stan', line 30, column 4 to column 57)
+If this warning occurs sporadically, such as for highly constrained variable types like covariance mat
+[run] march_native/radon_variable_intercept_slope_noncentered/rep0: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/dogs_hierarchical/rep0: wall=0.8s warm=0.3 samp=0.4 div=0 lf=17608
+[run] march_native/pilots/rep0: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/hier_2pl/rep0: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/gp_regr/rep0: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/kronecker_gp/rep0: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/accel_gp/rep0: FAILED chain 0 rc=-6: Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+Exception: normal_lpdf: Scale parameter[1] is -nan, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/accel_gp.stan', line 161, column 4 to column 41)
+If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sam
+[run] march_native/bym2_offset_only/rep0: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/eight_schools_centered/rep0: wall=0.1s warm=0.0 samp=0.0 div=120 lf=67934
+[run] march_native/garch11/rep0: wall=0.3s warm=0.2 samp=0.2 div=0 lf=44106
+[run] march_native/lotka_volterra/rep0: wall=5.2s warm=2.9 samp=2.8 div=0 lf=142596
+[run] march_native/low_dim_gauss_mix/rep0: wall=3.3s warm=1.7 samp=1.5 div=0 lf=25724
+[run] march_native/arma11/rep0: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/eight_schools_noncentered/rep1: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/blr/rep1: wall=0.1s warm=0.0 samp=0.0 div=0 lf=55348
+[run] march_native/kidscore_momiq/rep1: wall=0.4s warm=0.3 samp=0.2 div=0 lf=101398
+[run] march_native/lsat_model/rep1: wall=7.9s warm=4.6 samp=3.0 div=0 lf=60000
+[run] march_native/logmesquite_logvash/rep1: wall=0.2s warm=0.1 samp=0.1 div=0 lf=191754
+[run] march_native/wells_dist100_model/rep1: wall=0.7s warm=0.3 samp=0.3 div=0 lf=23304
+[run] march_native/diamonds/rep1: wall=45.9s warm=18.0 samp=27.5 div=0 lf=3830368
+[run] march_native/radon_partially_pooled_noncentered/rep1: FAILED chain 0 rc=-6: Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+Exception: normal_lpdf: Scale parameter is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/radon_partially_pooled_noncentered.stan', line 30, column 4 to column 57)
+If this warning occurs sporadically, such as for highly constrained variable types like covariance mat
+[run] march_native/radon_variable_intercept_slope_noncentered/rep1: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/dogs_hierarchical/rep1: wall=0.9s warm=0.4 samp=0.5 div=0 lf=18070
+[run] march_native/pilots/rep1: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/hier_2pl/rep1: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/gp_regr/rep1: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/kronecker_gp/rep1: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/accel_gp/rep1: FAILED chain 0 rc=-6: Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+Exception: normal_lpdf: Location parameter[1] is -nan, but must be finite! (in '/home/m0hawk/Documents/apin/stan/models/accel_gp.stan', line 161, column 4 to column 41)
+If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sa
+[run] march_native/bym2_offset_only/rep1: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/eight_schools_centered/rep1: wall=0.1s warm=0.0 samp=0.1 div=60 lf=104747
+[run] march_native/garch11/rep1: wall=0.4s warm=0.2 samp=0.2 div=0 lf=46206
+[run] march_native/lotka_volterra/rep1: wall=5.9s warm=2.9 samp=2.8 div=0 lf=132216
+[run] march_native/low_dim_gauss_mix/rep1: wall=3.4s warm=1.8 samp=1.4 div=0 lf=24844
+[run] march_native/arma11/rep1: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/eight_schools_noncentered/rep2: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/blr/rep2: wall=0.1s warm=0.0 samp=0.0 div=0 lf=57350
+[run] march_native/kidscore_momiq/rep2: wall=0.4s warm=0.2 samp=0.1 div=0 lf=91640
+[run] march_native/lsat_model/rep2: wall=8.1s warm=4.7 samp=2.9 div=0 lf=60000
+[run] march_native/logmesquite_logvash/rep2: wall=0.2s warm=0.1 samp=0.1 div=0 lf=179316
+[run] march_native/wells_dist100_model/rep2: wall=0.6s warm=0.3 samp=0.3 div=0 lf=24070
+[run] march_native/diamonds/rep2: wall=45.0s warm=18.4 samp=28.3 div=0 lf=3922528
+[run] march_native/radon_partially_pooled_noncentered/rep2: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/radon_variable_intercept_slope_noncentered/rep2: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/dogs_hierarchical/rep2: wall=0.8s warm=0.3 samp=0.5 div=0 lf=19100
+[run] march_native/pilots/rep2: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/hier_2pl/rep2: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/gp_regr/rep2: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/kronecker_gp/rep2: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/accel_gp/rep2: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/bym2_offset_only/rep2: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] march_native/eight_schools_centered/rep2: wall=0.1s warm=0.0 samp=0.0 div=81 lf=85550
+[run] march_native/garch11/rep2: wall=0.3s warm=0.2 samp=0.1 div=0 lf=40926
+[run] march_native/lotka_volterra/rep2: wall=6.9s warm=2.9 samp=2.9 div=0 lf=146612
+[run] march_native/low_dim_gauss_mix/rep2: wall=3.3s warm=1.7 samp=1.6 div=0 lf=25480
+[run] march_native/arma11/rep2: FAILED chain 0 rc=-6: double free or corruption (out)
+
+GRID DONE
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+33 ESS jobs
+ess_bulk min=758 geomean=1465 rhat_max=1.0057 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__blr__rep0.json
+ess_bulk min=836 geomean=1683 rhat_max=1.0034 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__blr__rep1.json
+ess_bulk min=915 geomean=1393 rhat_max=1.0015 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__blr__rep2.json
+ess_bulk min=1211 geomean=3213 rhat_max=1.0035 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__diamonds__rep0.json
+ess_bulk min=1402 geomean=3360 rhat_max=1.0036 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__diamonds__rep1.json
+ess_bulk min=1270 geomean=3307 rhat_max=1.0048 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__diamonds__rep2.json
+ess_bulk min=1576 geomean=3910 rhat_max=1.0023 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__dogs_hierarchical__rep0.json
+ess_bulk min=1639 geomean=3920 rhat_max=1.0039 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__dogs_hierarchical__rep1.json
+ess_bulk min=1254 geomean=3924 rhat_max=1.0029 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__dogs_hierarchical__rep2.json
+ess_bulk min=47 geomean=584 rhat_max=1.0590 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__eight_schools_centered__rep0.json
+ess_bulk min=149 geomean=844 rhat_max=1.0261 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__eight_schools_centered__rep1.json
+ess_bulk min=124 geomean=602 rhat_max=1.0352 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__eight_schools_centered__rep2.json
+ess_bulk min=2141 geomean=2331 rhat_max=1.0022 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__garch11__rep0.json
+ess_bulk min=1851 geomean=2213 rhat_max=1.0023 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__garch11__rep1.json
+ess_bulk min=1631 geomean=1989 rhat_max=1.0019 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__garch11__rep2.json
+ess_bulk min=1452 geomean=1504 rhat_max=1.0035 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__kidscore_momiq__rep0.json
+ess_bulk min=1124 geomean=1228 rhat_max=1.0045 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__kidscore_momiq__rep1.json
+ess_bulk min=1123 geomean=1315 rhat_max=1.0026 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__kidscore_momiq__rep2.json
+ess_bulk min=1334 geomean=1722 rhat_max=1.0063 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__logmesquite_logvash__rep0.json
+ess_bulk min=1657 geomean=1999 rhat_max=1.0024 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__logmesquite_logvash__rep1.json
+ess_bulk min=1318 geomean=1741 rhat_max=1.0079 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__logmesquite_logvash__rep2.json
+ess_bulk min=1175 geomean=3093 rhat_max=1.0024 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__lotka_volterra__rep0.json
+ess_bulk min=872 geomean=2977 rhat_max=1.0050 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__lotka_volterra__rep1.json
+ess_bulk min=906 geomean=2917 rhat_max=1.0070 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__lotka_volterra__rep2.json
+ess_bulk min=4018 geomean=4711 rhat_max=1.0025 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__low_dim_gauss_mix__rep0.json
+ess_bulk min=3425 geomean=4431 rhat_max=1.0029 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__low_dim_gauss_mix__rep1.json
+ess_bulk min=4148 geomean=4973 rhat_max=1.0016 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__low_dim_gauss_mix__rep2.json
+ess_bulk min=1004 geomean=5087 rhat_max=1.0075 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__lsat_model__rep0.json
+ess_bulk min=1056 geomean=5044 rhat_max=1.0074 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__lsat_model__rep1.json
+ess_bulk min=972 geomean=5207 rhat_max=1.0062 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__lsat_model__rep2.json
+ess_bulk min=1159 geomean=1164 rhat_max=1.0021 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__wells_dist100_model__rep0.json
+ess_bulk min=1195 geomean=1198 rhat_max=1.0034 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__wells_dist100_model__rep1.json
+ess_bulk min=1217 geomean=1227 rhat_max=1.0085 -> /home/m0hawk/Documents/apin/stan/results/ess/march_native__wells_dist100_model__rep2.json
+ESS DONE
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+Traceback (most recent call last):
+  File "/home/m0hawk/Documents/apin/stan/.venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3641, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 168, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 197, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7668, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7676, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'n_leapfrog_sampling'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/m0hawk/Documents/apin/stan/harness/aggregate.py", line 26, in <module>
+    n_leapfrog_sampling=int(df['n_leapfrog_sampling'].sum()),
+                            ~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/m0hawk/Documents/apin/stan/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 4378, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/m0hawk/Documents/apin/stan/.venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3648, in get_loc
+    raise KeyError(key) from err
+KeyError: 'n_leapfrog_sampling'

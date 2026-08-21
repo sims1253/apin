@@ -1,0 +1,28 @@
+{
+  "model": "pilots",
+  "wall_s": 0.059797048568725586,
+  "warmup_s": 0.02,
+  "sampling_s": 0.035,
+  "total_sampler_s": 0.05500000000000001,
+  "profile_blocks": {
+    "model": {
+      "total_time": 0.016478954,
+      "forward_time": 0.014692837,
+      "reverse_time": 0.001786117,
+      "chain_stack": 414069.0,
+      "no_chain_stack": 121785.0,
+      "autodiff_calls": 24357.0,
+      "no_autodiff_calls": 1.0
+    },
+    "tp": {
+      "total_time": 0.009083243,
+      "forward_time": 0.006323328,
+      "reverse_time": 0.002759915,
+      "chain_stack": 974280.0,
+      "no_chain_stack": 0.0,
+      "autodiff_calls": 24357.0,
+      "no_autodiff_calls": 201.0
+    }
+  },
+  "profile_total_s": 0.025562197000000002
+}

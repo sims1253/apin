@@ -1,0 +1,402 @@
+=== variant walnut_da: --optimizer da
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[run] walnut_da/eight_schools_noncentered/rep0: wall=0.0s warm=0.0 samp=0.0 lg=78066 logp_frac=0.769195
+[run] walnut_da/blr/rep0: wall=0.1s warm=0.0 samp=0.0 lg=121361 logp_frac=0.821265
+[run] walnut_da/kidscore_momiq/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/kidscore_momiq/rep0/chain_0.log
+[run] walnut_da/lsat_model/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/lsat_model/rep0/chain_0.log
+[run] walnut_da/logmesquite_logvash/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/logmesquite_logvash/rep0/chain_0.log
+[run] walnut_da/wells_dist100_model/rep0: wall=1.0s warm=0.5 samp=0.4 lg=65169 logp_frac=0.991477
+[run] walnut_da/diamonds/rep0: wall=10.9s warm=2.8 samp=2.8 lg=833096 logp_frac=0.987794
+[run] walnut_da/radon_partially_pooled_noncentered/rep0: wall=18.1s warm=11.2 samp=6.7 lg=148612 logp_frac=0.991199
+[run] walnut_da/radon_variable_intercept_slope_noncentered/rep0: FAILED chain 2 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/radon_variable_intercept_slope_noncentered/rep0/chain_2.log
+[run] walnut_da/dogs_hierarchical/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/dogs_hierarchical/rep0/chain_0.log
+[run] walnut_da/pilots/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/pilots/rep0/chain_0.log
+[run] walnut_da/hier_2pl/rep0: wall=47.7s warm=26.6 samp=20.9 lg=159734 logp_frac=0.993378
+[run] walnut_da/gp_regr/rep0: FAILED chain 2 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/gp_regr/rep0/chain_2.log
+[run] walnut_da/kronecker_gp/rep0: wall=16.9s warm=7.4 samp=6.2 lg=147151 logp_frac=0.96218
+[run] walnut_da/accel_gp/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/accel_gp/rep0/chain_0.log
+[run] walnut_da/bym2_offset_only/rep0: FAILED chain 2 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/bym2_offset_only/rep0/chain_2.log
+[run] walnut_da/eight_schools_centered/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/eight_schools_centered/rep0/chain_0.log
+[run] walnut_da/garch11/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/garch11/rep0/chain_0.log
+[run] walnut_da/lotka_volterra/rep0: wall=4.4s warm=2.3 samp=1.4 lg=159788 logp_frac=0.979223
+[run] walnut_da/low_dim_gauss_mix/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/low_dim_gauss_mix/rep0/chain_0.log
+[run] walnut_da/arma11/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/arma11/rep0/chain_0.log
+[run] walnut_da/eight_schools_noncentered/rep1: wall=0.0s warm=0.0 samp=0.0 lg=77755 logp_frac=0.701145
+[run] walnut_da/blr/rep1: wall=0.1s warm=0.0 samp=0.0 lg=117155 logp_frac=0.804584
+[run] walnut_da/kidscore_momiq/rep1: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/kidscore_momiq/rep1/chain_0.log
+[run] walnut_da/lsat_model/rep1: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/lsat_model/rep1/chain_0.log
+[run] walnut_da/logmesquite_logvash/rep1: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/logmesquite_logvash/rep1/chain_0.log
+[run] walnut_da/wells_dist100_model/rep1: wall=1.0s warm=0.5 samp=0.4 lg=62701 logp_frac=0.992706
+[run] walnut_da/diamonds/rep1: wall=8.6s warm=1.0 samp=0.9 lg=590948 logp_frac=0.983387
+[run] walnut_da/radon_partially_pooled_noncentered/rep1: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/radon_partially_pooled_noncentered/rep1/chain_1.log
+[run] walnut_da/radon_variable_intercept_slope_noncentered/rep1: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/radon_variable_intercept_slope_noncentered/rep1/chain_0.log
+[run] walnut_da/dogs_hierarchical/rep1: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/dogs_hierarchical/rep1/chain_0.log
+[run] walnut_da/pilots/rep1: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/pilots/rep1/chain_1.log
+[run] walnut_da/hier_2pl/rep1: FAILED chain 2 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/hier_2pl/rep1/chain_2.log
+[run] walnut_da/gp_regr/rep1: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/gp_regr/rep1/chain_1.log
+[run] walnut_da/kronecker_gp/rep1: wall=16.8s warm=7.5 samp=8.4 lg=159765 logp_frac=0.9699
+[run] walnut_da/accel_gp/rep1: FAILED chain 2 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/accel_gp/rep1/chain_2.log
+[run] walnut_da/bym2_offset_only/rep1: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/bym2_offset_only/rep1/chain_0.log
+[run] walnut_da/eight_schools_centered/rep1: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/eight_schools_centered/rep1/chain_0.log
+[run] walnut_da/garch11/rep1: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/garch11/rep1/chain_0.log
+[run] walnut_da/lotka_volterra/rep1: wall=39.5s warm=2.0 samp=1.2 lg=169381 logp_frac=0.975658
+[run] walnut_da/low_dim_gauss_mix/rep1: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/low_dim_gauss_mix/rep1/chain_0.log
+[run] walnut_da/arma11/rep1: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/arma11/rep1/chain_1.log
+[run] walnut_da/eight_schools_noncentered/rep2: wall=0.0s warm=0.0 samp=0.0 lg=76596 logp_frac=0.731966
+[run] walnut_da/blr/rep2: wall=0.1s warm=0.0 samp=0.1 lg=182975 logp_frac=0.946583
+[run] walnut_da/kidscore_momiq/rep2: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/kidscore_momiq/rep2/chain_1.log
+[run] walnut_da/lsat_model/rep2: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/lsat_model/rep2/chain_0.log
+[run] walnut_da/logmesquite_logvash/rep2: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/logmesquite_logvash/rep2/chain_0.log
+[run] walnut_da/wells_dist100_model/rep2: wall=1.0s warm=0.5 samp=0.5 lg=65126 logp_frac=0.994312
+[run] walnut_da/diamonds/rep2: wall=9.1s warm=4.5 samp=2.7 lg=753829 logp_frac=0.992588
+[run] walnut_da/radon_partially_pooled_noncentered/rep2: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/radon_partially_pooled_noncentered/rep2/chain_0.log
+[run] walnut_da/radon_variable_intercept_slope_noncentered/rep2: wall=1.0s warm=1.0 samp=0.6 lg=126154 logp_frac=0.967253
+[run] walnut_da/dogs_hierarchical/rep2: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/dogs_hierarchical/rep2/chain_0.log
+[run] walnut_da/pilots/rep2: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/pilots/rep2/chain_0.log
+[run] walnut_da/hier_2pl/rep2: FAILED chain 3 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/hier_2pl/rep2/chain_3.log
+[run] walnut_da/gp_regr/rep2: wall=0.1s warm=0.1 samp=0.0 lg=54634 logp_frac=0.942884
+[run] walnut_da/kronecker_gp/rep2: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/kronecker_gp/rep2/chain_1.log
+[run] walnut_da/accel_gp/rep2: wall=1.8s warm=0.4 samp=0.4 lg=347427 logp_frac=0.954142
+[run] walnut_da/bym2_offset_only/rep2: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/bym2_offset_only/rep2/chain_1.log
+[run] walnut_da/eight_schools_centered/rep2: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/eight_schools_centered/rep2/chain_0.log
+[run] walnut_da/garch11/rep2: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/garch11/rep2/chain_0.log
+[run] walnut_da/lotka_volterra/rep2: wall=3.7s warm=1.7 samp=1.2 lg=148080 logp_frac=0.977675
+[run] walnut_da/low_dim_gauss_mix/rep2: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/low_dim_gauss_mix/rep2/chain_0.log
+[run] walnut_da/arma11/rep2: FAILED chain 3 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da/arma11/rep2/chain_3.log
+WALNUT_DA GRID DONE
+=== variant walnut_da_avg: --optimizer da --da-freeze-average
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[run] walnut_da_avg/eight_schools_noncentered/rep0: wall=0.0s warm=0.0 samp=0.0 lg=79799 logp_frac=0.696437
+[run] walnut_da_avg/blr/rep0: wall=0.1s warm=0.0 samp=0.0 lg=135241 logp_frac=0.823662
+[run] walnut_da_avg/kidscore_momiq/rep0: FAILED chain 2 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/kidscore_momiq/rep0/chain_2.log
+[run] walnut_da_avg/lsat_model/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/lsat_model/rep0/chain_0.log
+[run] walnut_da_avg/logmesquite_logvash/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/logmesquite_logvash/rep0/chain_0.log
+[run] walnut_da_avg/wells_dist100_model/rep0: wall=1.0s warm=0.4 samp=0.4 lg=64289 logp_frac=0.992367
+[run] walnut_da_avg/diamonds/rep0: wall=8.2s warm=2.6 samp=2.6 lg=656842 logp_frac=0.993431
+[run] walnut_da_avg/radon_partially_pooled_noncentered/rep0: wall=15.7s warm=8.5 samp=7.0 lg=143383 logp_frac=0.991722
+[run] walnut_da_avg/radon_variable_intercept_slope_noncentered/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/radon_variable_intercept_slope_noncentered/rep0/chain_0.log
+[run] walnut_da_avg/dogs_hierarchical/rep0: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/dogs_hierarchical/rep0/chain_1.log
+[run] walnut_da_avg/pilots/rep0: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/pilots/rep0/chain_1.log
+[run] walnut_da_avg/hier_2pl/rep0: wall=45.4s warm=24.3 samp=18.0 lg=155479 logp_frac=0.993355
+[run] walnut_da_avg/gp_regr/rep0: wall=0.1s warm=0.0 samp=0.0 lg=52518 logp_frac=0.952056
+[run] walnut_da_avg/kronecker_gp/rep0: wall=20.0s warm=7.9 samp=5.7 lg=174310 logp_frac=0.963235
+[run] walnut_da_avg/accel_gp/rep0: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/accel_gp/rep0/chain_1.log
+[run] walnut_da_avg/bym2_offset_only/rep0: wall=17.9s warm=9.0 samp=6.4 lg=359368 logp_frac=0.934358
+[run] walnut_da_avg/eight_schools_centered/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/eight_schools_centered/rep0/chain_0.log
+[run] walnut_da_avg/garch11/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/garch11/rep0/chain_0.log
+[run] walnut_da_avg/lotka_volterra/rep0: wall=4.5s warm=2.3 samp=2.1 lg=186441 logp_frac=0.986195
+[run] walnut_da_avg/low_dim_gauss_mix/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/low_dim_gauss_mix/rep0/chain_0.log
+[run] walnut_da_avg/arma11/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/arma11/rep0/chain_0.log
+[run] walnut_da_avg/eight_schools_noncentered/rep1: wall=0.0s warm=0.0 samp=0.0 lg=78788 logp_frac=0.701868
+[run] walnut_da_avg/blr/rep1: wall=0.1s warm=0.0 samp=0.0 lg=142843 logp_frac=0.81585
+[run] walnut_da_avg/kidscore_momiq/rep1: wall=0.2s warm=0.1 samp=0.1 lg=122801 logp_frac=0.96279
+[run] walnut_da_avg/lsat_model/rep1: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/lsat_model/rep1/chain_1.log
+[run] walnut_da_avg/logmesquite_logvash/rep1: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/logmesquite_logvash/rep1/chain_1.log
+[run] walnut_da_avg/wells_dist100_model/rep1: wall=1.0s warm=0.5 samp=0.5 lg=68171 logp_frac=0.991178
+[run] walnut_da_avg/diamonds/rep1: wall=7.2s warm=1.5 samp=2.5 lg=569518 logp_frac=0.988602
+[run] walnut_da_avg/radon_partially_pooled_noncentered/rep1: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/radon_partially_pooled_noncentered/rep1/chain_0.log
+[run] walnut_da_avg/radon_variable_intercept_slope_noncentered/rep1: wall=2.5s warm=1.0 samp=0.6 lg=142427 logp_frac=0.974752
+[run] walnut_da_avg/dogs_hierarchical/rep1: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/dogs_hierarchical/rep1/chain_1.log
+[run] walnut_da_avg/pilots/rep1: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/pilots/rep1/chain_1.log
+[run] walnut_da_avg/hier_2pl/rep1: wall=45.0s warm=25.4 samp=19.4 lg=159051 logp_frac=0.99426
+[run] walnut_da_avg/gp_regr/rep1: wall=0.1s warm=0.0 samp=0.0 lg=55614 logp_frac=0.966754
+[run] walnut_da_avg/kronecker_gp/rep1: wall=19.2s warm=6.5 samp=6.7 lg=164276 logp_frac=0.965794
+[run] walnut_da_avg/accel_gp/rep1: FAILED chain 2 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/accel_gp/rep1/chain_2.log
+[run] walnut_da_avg/bym2_offset_only/rep1: wall=46.4s warm=10.9 samp=8.6 lg=810106 logp_frac=0.918122
+[run] walnut_da_avg/eight_schools_centered/rep1: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/eight_schools_centered/rep1/chain_0.log
+[run] walnut_da_avg/garch11/rep1: FAILED chain 2 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/garch11/rep1/chain_2.log
+[run] walnut_da_avg/lotka_volterra/rep1: wall=39.5s warm=1.8 samp=1.0 lg=184102 logp_frac=0.977275
+[run] walnut_da_avg/low_dim_gauss_mix/rep1: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/low_dim_gauss_mix/rep1/chain_0.log
+[run] walnut_da_avg/arma11/rep1: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/arma11/rep1/chain_1.log
+[run] walnut_da_avg/eight_schools_noncentered/rep2: wall=0.0s warm=0.0 samp=0.0 lg=82918 logp_frac=0.76955
+[run] walnut_da_avg/blr/rep2: wall=0.1s warm=0.0 samp=0.0 lg=131094 logp_frac=0.860238
+[run] walnut_da_avg/kidscore_momiq/rep2: wall=0.2s warm=0.1 samp=0.1 lg=109762 logp_frac=0.96121
+[run] walnut_da_avg/lsat_model/rep2: FAILED chain 2 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/lsat_model/rep2/chain_2.log
+[run] walnut_da_avg/logmesquite_logvash/rep2: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/logmesquite_logvash/rep2/chain_1.log
+[run] walnut_da_avg/wells_dist100_model/rep2: wall=1.0s warm=0.5 samp=0.4 lg=64220 logp_frac=0.992282
+[run] walnut_da_avg/diamonds/rep2: wall=7.0s warm=2.7 samp=3.6 lg=689289 logp_frac=0.991112
+[run] walnut_da_avg/radon_partially_pooled_noncentered/rep2: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/radon_partially_pooled_noncentered/rep2/chain_1.log
+[run] walnut_da_avg/radon_variable_intercept_slope_noncentered/rep2: wall=1.8s warm=1.0 samp=0.8 lg=132519 logp_frac=0.970151
+[run] walnut_da_avg/dogs_hierarchical/rep2: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/dogs_hierarchical/rep2/chain_0.log
+[run] walnut_da_avg/pilots/rep2: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/pilots/rep2/chain_0.log
+[run] walnut_da_avg/hier_2pl/rep2: wall=44.8s warm=24.8 samp=13.7 lg=149786 logp_frac=0.994845
+[run] walnut_da_avg/gp_regr/rep2: wall=0.1s warm=0.0 samp=0.0 lg=57811 logp_frac=0.963996
+[run] walnut_da_avg/kronecker_gp/rep2: wall=18.5s warm=6.7 samp=7.2 lg=171039 logp_frac=0.967855
+[run] walnut_da_avg/accel_gp/rep2: wall=1.6s warm=0.3 samp=0.2 lg=218362 logp_frac=0.967865
+[run] walnut_da_avg/bym2_offset_only/rep2: wall=41.3s warm=9.2 samp=4.3 lg=500296 logp_frac=0.92952
+[run] walnut_da_avg/eight_schools_centered/rep2: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/eight_schools_centered/rep2/chain_0.log
+[run] walnut_da_avg/garch11/rep2: wall=0.4s warm=0.2 samp=0.1 lg=91082 logp_frac=0.969581
+[run] walnut_da_avg/lotka_volterra/rep2: wall=5.2s warm=1.7 samp=1.3 lg=172055 logp_frac=0.979049
+[run] walnut_da_avg/low_dim_gauss_mix/rep2: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/low_dim_gauss_mix/rep2/chain_1.log
+[run] walnut_da_avg/arma11/rep2: FAILED chain 3 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_avg/arma11/rep2/chain_3.log
+WALNUT_DA_AVG GRID DONE
+=== variant walnut_da_b50: --optimizer da --batch-stride 50
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[run] walnut_da_b50/eight_schools_noncentered/rep0: wall=0.0s warm=0.0 samp=0.0 lg=73822 logp_frac=0.736556
+[run] walnut_da_b50/blr/rep0: wall=0.0s warm=0.0 samp=0.0 lg=88768 logp_frac=0.818667
+[run] walnut_da_b50/kidscore_momiq/rep0: wall=0.2s warm=0.1 samp=0.1 lg=117720 logp_frac=0.963053
+[run] walnut_da_b50/lsat_model/rep0: wall=6.6s warm=3.1 samp=2.9 lg=145428 logp_frac=0.960988
+[run] walnut_da_b50/logmesquite_logvash/rep0: wall=0.1s warm=0.0 samp=0.0 lg=162732 logp_frac=0.888127
+[run] walnut_da_b50/wells_dist100_model/rep0: wall=0.9s warm=0.4 samp=0.3 lg=58032 logp_frac=0.993583
+[run] walnut_da_b50/diamonds/rep0: wall=4.2s warm=0.8 samp=1.0 lg=313242 logp_frac=0.98241
+[run] walnut_da_b50/radon_partially_pooled_noncentered/rep0: wall=16.3s warm=9.6 samp=6.5 lg=153603 logp_frac=0.992197
+[run] walnut_da_b50/radon_variable_intercept_slope_noncentered/rep0: wall=1.8s warm=0.9 samp=0.8 lg=132052 logp_frac=0.970078
+[run] walnut_da_b50/dogs_hierarchical/rep0: wall=0.9s warm=0.4 samp=0.4 lg=52537 logp_frac=0.91947
+[run] walnut_da_b50/pilots/rep0: wall=0.1s warm=0.0 samp=0.0 lg=173094 logp_frac=0.820957
+[run] walnut_da_b50/hier_2pl/rep0: wall=44.5s warm=23.2 samp=19.5 lg=151301 logp_frac=0.993656
+[run] walnut_da_b50/gp_regr/rep0: wall=0.1s warm=0.0 samp=0.0 lg=47839 logp_frac=0.954989
+[run] walnut_da_b50/kronecker_gp/rep0: wall=14.6s warm=7.2 samp=6.6 lg=143201 logp_frac=0.955831
+[run] walnut_da_b50/accel_gp/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_b50/accel_gp/rep0/chain_0.log
+[run] walnut_da_b50/bym2_offset_only/rep0: wall=21.7s warm=8.5 samp=10.2 lg=425962 logp_frac=0.912942
+[run] walnut_da_b50/eight_schools_centered/rep0: wall=0.0s warm=0.0 samp=0.0 lg=146049 logp_frac=0.69696
+[run] walnut_da_b50/garch11/rep0: wall=0.3s warm=0.1 samp=0.1 lg=78527 logp_frac=0.97138
+[run] walnut_da_b50/lotka_volterra/rep0: wall=5.1s warm=2.0 samp=2.6 lg=149482 logp_frac=0.988706
+[run] walnut_da_b50/low_dim_gauss_mix/rep0: wall=3.2s warm=2.1 samp=0.9 lg=75627 logp_frac=0.99372
+[run] walnut_da_b50/arma11/rep0: wall=0.5s warm=0.1 samp=0.1 lg=178520 logp_frac=0.971123
+[run] walnut_da_b50/eight_schools_noncentered/rep1: wall=0.0s warm=0.0 samp=0.0 lg=72178 logp_frac=0.715791
+[run] walnut_da_b50/blr/rep1: wall=0.0s warm=0.0 samp=0.0 lg=93125 logp_frac=0.829659
+[run] walnut_da_b50/kidscore_momiq/rep1: wall=0.2s warm=0.1 samp=0.1 lg=104570 logp_frac=0.949409
+[run] walnut_da_b50/lsat_model/rep1: wall=7.0s warm=3.5 samp=3.2 lg=147461 logp_frac=0.964511
+[run] walnut_da_b50/logmesquite_logvash/rep1: wall=0.1s warm=0.0 samp=0.1 lg=164855 logp_frac=0.86962
+[run] walnut_da_b50/wells_dist100_model/rep1: wall=1.0s warm=0.4 samp=0.3 lg=61066 logp_frac=0.993761
+[run] walnut_da_b50/diamonds/rep1: wall=3.7s warm=0.7 samp=0.6 lg=236158 logp_frac=0.986246
+[run] walnut_da_b50/radon_partially_pooled_noncentered/rep1: wall=15.5s warm=7.7 samp=6.9 lg=147585 logp_frac=0.992217
+[run] walnut_da_b50/radon_variable_intercept_slope_noncentered/rep1: wall=1.9s warm=0.8 samp=0.6 lg=128471 logp_frac=0.966739
+[run] walnut_da_b50/dogs_hierarchical/rep1: wall=1.0s warm=0.4 samp=0.4 lg=50482 logp_frac=0.918165
+[run] walnut_da_b50/pilots/rep1: wall=0.1s warm=0.0 samp=0.0 lg=181038 logp_frac=0.891117
+[run] walnut_da_b50/hier_2pl/rep1: wall=44.4s warm=24.1 samp=20.1 lg=151966 logp_frac=0.993675
+[run] walnut_da_b50/gp_regr/rep1: wall=0.1s warm=0.0 samp=0.0 lg=48659 logp_frac=0.955068
+[run] walnut_da_b50/kronecker_gp/rep1: wall=15.8s warm=7.4 samp=6.2 lg=140484 logp_frac=0.949852
+[run] walnut_da_b50/accel_gp/rep1: FAILED chain 3 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_b50/accel_gp/rep1/chain_3.log
+[run] walnut_da_b50/bym2_offset_only/rep1: wall=34.1s warm=8.2 samp=10.3 lg=624631 logp_frac=0.932351
+[run] walnut_da_b50/eight_schools_centered/rep1: wall=0.0s warm=0.0 samp=0.0 lg=137465 logp_frac=0.740908
+[run] walnut_da_b50/garch11/rep1: wall=0.3s warm=0.1 samp=0.1 lg=77386 logp_frac=0.980299
+[run] walnut_da_b50/lotka_volterra/rep1: wall=39.0s warm=1.4 samp=1.1 lg=168392 logp_frac=0.971961
+[run] walnut_da_b50/low_dim_gauss_mix/rep1: wall=4.1s warm=1.8 samp=1.2 lg=69560 logp_frac=0.997102
+[run] walnut_da_b50/arma11/rep1: wall=0.5s warm=0.2 samp=0.3 lg=225259 logp_frac=0.987675
+[run] walnut_da_b50/eight_schools_noncentered/rep2: wall=0.0s warm=0.0 samp=0.0 lg=73988 logp_frac=0.710343
+[run] walnut_da_b50/blr/rep2: wall=0.0s warm=0.0 samp=0.0 lg=93477 logp_frac=0.867333
+[run] walnut_da_b50/kidscore_momiq/rep2: wall=0.2s warm=0.1 samp=0.0 lg=100178 logp_frac=0.941088
+[run] walnut_da_b50/lsat_model/rep2: wall=7.0s warm=3.4 samp=3.2 lg=149027 logp_frac=0.960153
+[run] walnut_da_b50/logmesquite_logvash/rep2: wall=0.1s warm=0.0 samp=0.0 lg=157959 logp_frac=0.884933
+[run] walnut_da_b50/wells_dist100_model/rep2: wall=0.8s warm=0.5 samp=0.3 lg=59440 logp_frac=0.994383
+[run] walnut_da_b50/diamonds/rep2: wall=4.2s warm=1.1 samp=3.1 lg=305295 logp_frac=0.993256
+[run] walnut_da_b50/radon_partially_pooled_noncentered/rep2: wall=13.7s warm=7.2 samp=5.9 lg=143847 logp_frac=0.991768
+[run] walnut_da_b50/radon_variable_intercept_slope_noncentered/rep2: wall=1.7s warm=0.8 samp=0.7 lg=116526 logp_frac=0.972384
+[run] walnut_da_b50/dogs_hierarchical/rep2: wall=1.0s warm=0.4 samp=0.3 lg=54186 logp_frac=0.920252
+[run] walnut_da_b50/pilots/rep2: wall=0.1s warm=0.0 samp=0.0 lg=260979 logp_frac=0.855829
+[run] walnut_da_b50/hier_2pl/rep2: wall=44.0s warm=21.7 samp=20.7 lg=149348 logp_frac=0.994234
+[run] walnut_da_b50/gp_regr/rep2: wall=0.1s warm=0.1 samp=0.0 lg=49758 logp_frac=0.948986
+[run] walnut_da_b50/kronecker_gp/rep2: wall=15.4s warm=6.1 samp=7.4 lg=142347 logp_frac=0.960149
+[run] walnut_da_b50/accel_gp/rep2: wall=0.9s warm=0.4 samp=0.2 lg=167846 logp_frac=0.956409
+[run] walnut_da_b50/bym2_offset_only/rep2: wall=30.1s warm=9.1 samp=7.8 lg=494236 logp_frac=0.940082
+[run] walnut_da_b50/eight_schools_centered/rep2: wall=0.0s warm=0.0 samp=0.0 lg=146334 logp_frac=0.793439
+[run] walnut_da_b50/garch11/rep2: wall=0.3s warm=0.1 samp=0.1 lg=76276 logp_frac=0.977233
+[run] walnut_da_b50/lotka_volterra/rep2: wall=4.2s warm=1.7 samp=1.1 lg=139899 logp_frac=0.973716
+[run] walnut_da_b50/low_dim_gauss_mix/rep2: wall=4.6s warm=1.7 samp=1.1 lg=76629 logp_frac=0.996676
+[run] walnut_da_b50/arma11/rep2: FAILED chain 3 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_da_b50/arma11/rep2/chain_3.log
+WALNUT_DA_B50 GRID DONE
+=== variant walnut_dem: --optimizer dem
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[run] walnut_dem/eight_schools_noncentered/rep0: wall=0.0s warm=0.0 samp=0.0 lg=102545 logp_frac=0.798309
+[run] walnut_dem/blr/rep0: wall=0.2s warm=0.1 samp=0.1 lg=244958 logp_frac=0.954317
+[run] walnut_dem/kidscore_momiq/rep0: wall=0.5s warm=0.2 samp=0.2 lg=299354 logp_frac=0.991545
+[run] walnut_dem/lsat_model/rep0: wall=13.7s warm=6.6 samp=4.1 lg=282107 logp_frac=0.983694
+[run] walnut_dem/logmesquite_logvash/rep0: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_dem/logmesquite_logvash/rep0/chain_1.log
+[run] walnut_dem/wells_dist100_model/rep0: wall=2.0s warm=0.5 samp=0.8 lg=114074 logp_frac=0.997092
+[run] walnut_dem/diamonds/rep0: wall=2.6s warm=1.3 samp=0.7 lg=276571 logp_frac=0.994824
+[run] walnut_dem/radon_partially_pooled_noncentered/rep0: wall=26.7s warm=14.1 samp=11.5 lg=274513 logp_frac=0.996574
+[run] walnut_dem/radon_variable_intercept_slope_noncentered/rep0: wall=3.6s warm=1.7 samp=1.8 lg=273335 logp_frac=0.989829
+[run] walnut_dem/dogs_hierarchical/rep0: wall=1.4s warm=0.4 samp=0.4 lg=68936 logp_frac=0.923972
+[run] walnut_dem/pilots/rep0: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_dem/pilots/rep0/chain_1.log
+[run] walnut_dem/hier_2pl/rep0: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_dem/hier_2pl/rep0/chain_0.log
+[run] walnut_dem/gp_regr/rep0: wall=0.1s warm=0.0 samp=0.0 lg=63720 logp_frac=0.943777
+[run] walnut_dem/kronecker_gp/rep0: wall=27.0s warm=12.8 samp=8.5 lg=284418 logp_frac=0.967302
+[run] walnut_dem/accel_gp/rep0: FAILED chain 2 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_dem/accel_gp/rep0/chain_2.log
+[run] walnut_dem/bym2_offset_only/rep0: wall=14.6s warm=5.2 samp=5.5 lg=273969 logp_frac=0.927799
+[run] walnut_dem/eight_schools_centered/rep0: wall=0.1s warm=0.1 samp=0.0 lg=282396 logp_frac=0.643877
+[run] walnut_dem/garch11/rep0: wall=0.9s warm=0.3 samp=0.3 lg=193411 logp_frac=0.991737
+[run] walnut_dem/lotka_volterra/rep0: wall=19.1s warm=5.8 samp=13.3 lg=386407 logp_frac=0.997285
+[run] walnut_dem/low_dim_gauss_mix/rep0: wall=11.9s warm=5.4 samp=5.6 lg=190539 logp_frac=0.999012
+[run] walnut_dem/arma11/rep0: wall=0.6s warm=0.3 samp=0.4 lg=278267 logp_frac=0.989809
+[run] walnut_dem/eight_schools_noncentered/rep1: wall=0.0s warm=0.0 samp=0.0 lg=122107 logp_frac=0.873891
+[run] walnut_dem/blr/rep1: wall=0.5s warm=0.0 samp=0.0 lg=288572 logp_frac=0.961284
+[run] walnut_dem/kidscore_momiq/rep1: wall=0.5s warm=0.3 samp=0.1 lg=260466 logp_frac=0.949667
+[run] walnut_dem/lsat_model/rep1: wall=16.5s warm=7.3 samp=8.9 lg=320270 logp_frac=0.988192
+[run] walnut_dem/logmesquite_logvash/rep1: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_dem/logmesquite_logvash/rep1/chain_1.log
+[run] walnut_dem/wells_dist100_model/rep1: wall=2.3s warm=0.5 samp=1.6 lg=121940 logp_frac=0.991531
+[run] walnut_dem/diamonds/rep1: wall=3.0s warm=2.0 samp=1.0 lg=318283 logp_frac=0.995953
+[run] walnut_dem/radon_partially_pooled_noncentered/rep1: wall=27.7s warm=13.2 samp=13.0 lg=278682 logp_frac=0.991762
+[run] walnut_dem/radon_variable_intercept_slope_noncentered/rep1: wall=5.5s warm=1.5 samp=1.2 lg=312940 logp_frac=0.986826
+[run] walnut_dem/dogs_hierarchical/rep1: wall=1.1s warm=0.4 samp=0.4 lg=59200 logp_frac=0.930956
+[run] walnut_dem/pilots/rep1: wall=0.2s warm=0.1 samp=0.0 lg=335984 logp_frac=0.942662
+[run] walnut_dem/hier_2pl/rep1: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_dem/hier_2pl/rep1/chain_1.log
+[run] walnut_dem/gp_regr/rep1: wall=0.1s warm=0.0 samp=0.1 lg=69442 logp_frac=0.974479
+[run] walnut_dem/kronecker_gp/rep1: wall=26.0s warm=13.2 samp=11.4 lg=273986 logp_frac=0.975174
+[run] walnut_dem/accel_gp/rep1: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_dem/accel_gp/rep1/chain_1.log
+[run] walnut_dem/bym2_offset_only/rep1: wall=13.9s warm=5.4 samp=5.3 lg=271020 logp_frac=0.948056
+[run] walnut_dem/eight_schools_centered/rep1: wall=0.1s warm=0.1 samp=0.0 lg=291251 logp_frac=0.872474
+[run] walnut_dem/garch11/rep1: wall=0.7s warm=0.2 samp=0.1 lg=145246 logp_frac=0.977401
+[run] walnut_dem/lotka_volterra/rep1: wall=18.5s warm=5.5 samp=8.0 lg=335228 logp_frac=0.996408
+[run] walnut_dem/low_dim_gauss_mix/rep1: wall=9.3s warm=2.7 samp=2.0 lg=119369 logp_frac=0.9984
+[run] walnut_dem/arma11/rep1: wall=0.5s warm=0.2 samp=0.2 lg=247264 logp_frac=0.957833
+[run] walnut_dem/eight_schools_noncentered/rep2: wall=0.1s warm=0.0 samp=0.0 lg=142385 logp_frac=0.692285
+[run] walnut_dem/blr/rep2: wall=0.6s warm=0.2 samp=0.3 lg=267538 logp_frac=0.994353
+[run] walnut_dem/kidscore_momiq/rep2: FAILED chain 2 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_dem/kidscore_momiq/rep2/chain_2.log
+[run] walnut_dem/lsat_model/rep2: wall=10.8s warm=6.2 samp=4.4 lg=281136 logp_frac=0.984342
+[run] walnut_dem/logmesquite_logvash/rep2: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_dem/logmesquite_logvash/rep2/chain_1.log
+[run] walnut_dem/wells_dist100_model/rep2: wall=2.1s warm=0.5 samp=0.4 lg=101101 logp_frac=0.996605
+[run] walnut_dem/diamonds/rep2: wall=2.8s warm=1.3 samp=0.7 lg=282404 logp_frac=0.994914
+[run] walnut_dem/radon_partially_pooled_noncentered/rep2: wall=29.4s warm=15.2 samp=10.1 lg=294021 logp_frac=0.996311
+[run] walnut_dem/radon_variable_intercept_slope_noncentered/rep2: wall=5.4s warm=1.5 samp=1.5 lg=321274 logp_frac=0.96963
+[run] walnut_dem/dogs_hierarchical/rep2: wall=1.3s warm=0.5 samp=0.5 lg=73587 logp_frac=0.940976
+[run] walnut_dem/pilots/rep2: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_dem/pilots/rep2/chain_0.log
+[run] walnut_dem/hier_2pl/rep2: wall=81.1s warm=31.0 samp=25.5 lg=291819 logp_frac=0.997287
+[run] walnut_dem/gp_regr/rep2: wall=0.1s warm=0.0 samp=0.0 lg=58246 logp_frac=0.968545
+[run] walnut_dem/kronecker_gp/rep2: wall=28.5s warm=16.2 samp=10.9 lg=293930 logp_frac=0.981892
+[run] walnut_dem/accel_gp/rep2: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_dem/accel_gp/rep2/chain_0.log
+[run] walnut_dem/bym2_offset_only/rep2: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_dem/bym2_offset_only/rep2/chain_1.log
+[run] walnut_dem/eight_schools_centered/rep2: FAILED chain 2 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_dem/eight_schools_centered/rep2/chain_2.log
+[run] walnut_dem/garch11/rep2: wall=0.7s warm=0.2 samp=0.3 lg=162927 logp_frac=0.992483
+[run] walnut_dem/lotka_volterra/rep2: wall=34.8s warm=7.7 samp=9.6 lg=345036 logp_frac=0.997278
+[run] walnut_dem/low_dim_gauss_mix/rep2: wall=7.6s warm=3.4 samp=3.4 lg=152305 logp_frac=0.998779
+[run] walnut_dem/arma11/rep2: wall=0.7s warm=0.2 samp=0.4 lg=224314 logp_frac=0.977197
+WALNUT_DEM GRID DONE
+=== variant walnut_belief: --optimizer belief
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[run] walnut_belief/eight_schools_noncentered/rep0: wall=0.0s warm=0.0 samp=0.0 lg=69833 logp_frac=0.720729
+[run] walnut_belief/blr/rep0: wall=0.1s warm=0.0 samp=0.0 lg=95373 logp_frac=0.817536
+[run] walnut_belief/kidscore_momiq/rep0: wall=0.2s warm=0.1 samp=0.1 lg=103185 logp_frac=0.963318
+[run] walnut_belief/lsat_model/rep0: wall=5.7s warm=2.9 samp=2.8 lg=141316 logp_frac=0.967117
+[run] walnut_belief/logmesquite_logvash/rep0: wall=0.1s warm=0.0 samp=0.0 lg=150652 logp_frac=0.907776
+[run] walnut_belief/wells_dist100_model/rep0: wall=0.7s warm=0.3 samp=0.3 lg=53799 logp_frac=0.994289
+[run] walnut_belief/diamonds/rep0: wall=4.6s warm=1.0 samp=1.2 lg=310126 logp_frac=0.989246
+[run] walnut_belief/radon_partially_pooled_noncentered/rep0: wall=15.8s warm=8.6 samp=7.0 lg=149981 logp_frac=0.992409
+[run] walnut_belief/radon_variable_intercept_slope_noncentered/rep0: wall=1.7s warm=0.8 samp=0.7 lg=124210 logp_frac=0.971921
+[run] walnut_belief/dogs_hierarchical/rep0: wall=1.0s warm=0.3 samp=0.3 lg=48512 logp_frac=0.923091
+[run] walnut_belief/pilots/rep0: wall=0.1s warm=0.0 samp=0.0 lg=190377 logp_frac=0.882103
+[run] walnut_belief/hier_2pl/rep0: wall=41.9s warm=20.7 samp=19.5 lg=145738 logp_frac=0.993663
+[run] walnut_belief/gp_regr/rep0: wall=0.1s warm=0.0 samp=0.0 lg=45496 logp_frac=0.953835
+[run] walnut_belief/kronecker_gp/rep0: wall=15.0s warm=6.2 samp=6.3 lg=137990 logp_frac=0.966399
+[run] walnut_belief/accel_gp/rep0: FAILED chain 2 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_belief/accel_gp/rep0/chain_2.log
+[run] walnut_belief/bym2_offset_only/rep0: wall=27.9s warm=11.6 samp=13.7 lg=546423 logp_frac=0.946255
+[run] walnut_belief/eight_schools_centered/rep0: wall=0.0s warm=0.0 samp=0.0 lg=138754 logp_frac=0.733114
+[run] walnut_belief/garch11/rep0: wall=0.3s warm=0.1 samp=0.1 lg=73056 logp_frac=0.974423
+[run] walnut_belief/lotka_volterra/rep0: wall=2.6s warm=1.3 samp=1.1 lg=121887 logp_frac=0.978479
+[run] walnut_belief/low_dim_gauss_mix/rep0: wall=4.7s warm=1.8 samp=1.6 lg=86450 logp_frac=0.997423
+[run] walnut_belief/arma11/rep0: wall=0.6s warm=0.1 samp=0.1 lg=181158 logp_frac=0.967225
+[run] walnut_belief/eight_schools_noncentered/rep1: wall=0.0s warm=0.0 samp=0.0 lg=68862 logp_frac=0.733934
+[run] walnut_belief/blr/rep1: wall=0.0s warm=0.0 samp=0.0 lg=94715 logp_frac=0.844356
+[run] walnut_belief/kidscore_momiq/rep1: wall=0.1s warm=0.1 samp=0.1 lg=86611 logp_frac=0.95932
+[run] walnut_belief/lsat_model/rep1: wall=6.2s warm=3.0 samp=2.8 lg=140049 logp_frac=0.959256
+[run] walnut_belief/logmesquite_logvash/rep1: wall=0.1s warm=0.0 samp=0.0 lg=149352 logp_frac=0.900416
+[run] walnut_belief/wells_dist100_model/rep1: wall=0.7s warm=0.4 samp=0.3 lg=54274 logp_frac=0.994445
+[run] walnut_belief/diamonds/rep1: wall=2.1s warm=-0.1 samp=0.9 lg=219817 logp_frac=0.988172
+[run] walnut_belief/radon_partially_pooled_noncentered/rep1: wall=15.1s warm=7.3 samp=6.8 lg=146294 logp_frac=0.992479
+[run] walnut_belief/radon_variable_intercept_slope_noncentered/rep1: wall=1.7s warm=0.7 samp=0.8 lg=130913 logp_frac=0.971372
+[run] walnut_belief/dogs_hierarchical/rep1: wall=0.9s warm=0.4 samp=0.4 lg=48439 logp_frac=0.919923
+[run] walnut_belief/pilots/rep1: wall=0.1s warm=0.0 samp=0.0 lg=156809 logp_frac=0.824232
+[run] walnut_belief/hier_2pl/rep1: wall=41.1s warm=21.1 samp=19.7 lg=145815 logp_frac=0.99415
+[run] walnut_belief/gp_regr/rep1: wall=0.1s warm=0.0 samp=0.0 lg=45066 logp_frac=0.95343
+[run] walnut_belief/kronecker_gp/rep1: wall=15.0s warm=5.8 samp=7.6 lg=149734 logp_frac=0.969231
+[run] walnut_belief/accel_gp/rep1: wall=0.7s warm=0.2 samp=0.1 lg=142293 logp_frac=0.950336
+[run] walnut_belief/bym2_offset_only/rep1: wall=43.0s warm=13.2 samp=9.5 lg=765811 logp_frac=0.944225
+[run] walnut_belief/eight_schools_centered/rep1: wall=0.0s warm=0.0 samp=0.0 lg=129277 logp_frac=0.728236
+[run] walnut_belief/garch11/rep1: wall=0.3s warm=0.1 samp=0.1 lg=72437 logp_frac=0.981111
+[run] walnut_belief/lotka_volterra/rep1: wall=3.5s warm=1.4 samp=1.1 lg=123036 logp_frac=0.976948
+[run] walnut_belief/low_dim_gauss_mix/rep1: wall=3.0s warm=0.6 samp=1.4 lg=66248 logp_frac=0.997062
+[run] walnut_belief/arma11/rep1: wall=0.6s warm=0.3 samp=0.3 lg=229070 logp_frac=0.988303
+[run] walnut_belief/eight_schools_noncentered/rep2: wall=0.0s warm=0.0 samp=0.0 lg=68948 logp_frac=0.727603
+[run] walnut_belief/blr/rep2: wall=0.1s warm=0.0 samp=0.0 lg=105293 logp_frac=0.88944
+[run] walnut_belief/kidscore_momiq/rep2: wall=0.3s warm=0.1 samp=0.2 lg=113446 logp_frac=0.938524
+[run] walnut_belief/lsat_model/rep2: wall=6.5s warm=2.9 samp=2.9 lg=142302 logp_frac=0.964795
+[run] walnut_belief/logmesquite_logvash/rep2: wall=0.1s warm=0.0 samp=0.0 lg=147309 logp_frac=0.893028
+[run] walnut_belief/wells_dist100_model/rep2: wall=0.8s warm=0.4 samp=0.3 lg=53718 logp_frac=0.994474
+[run] walnut_belief/diamonds/rep2: wall=3.1s warm=1.3 samp=1.8 lg=267125 logp_frac=0.990951
+[run] walnut_belief/radon_partially_pooled_noncentered/rep2: wall=14.7s warm=7.6 samp=6.8 lg=143973 logp_frac=0.992623
+[run] walnut_belief/radon_variable_intercept_slope_noncentered/rep2: wall=1.8s warm=0.8 samp=0.8 lg=113942 logp_frac=0.970052
+[run] walnut_belief/dogs_hierarchical/rep2: wall=0.9s warm=0.3 samp=0.4 lg=49134 logp_frac=0.917664
+[run] walnut_belief/pilots/rep2: wall=0.1s warm=0.0 samp=0.0 lg=174190 logp_frac=0.839818
+[run] walnut_belief/hier_2pl/rep2: wall=41.1s warm=21.0 samp=19.9 lg=144086 logp_frac=0.994156
+[run] walnut_belief/gp_regr/rep2: wall=0.1s warm=0.0 samp=0.0 lg=45562 logp_frac=0.954037
+[run] walnut_belief/kronecker_gp/rep2: wall=15.2s warm=6.6 samp=7.1 lg=141993 logp_frac=0.967077
+[run] walnut_belief/accel_gp/rep2: FAILED chain 0 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_belief/accel_gp/rep2/chain_0.log
+[run] walnut_belief/bym2_offset_only/rep2: FAILED chain 3 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_belief/bym2_offset_only/rep2/chain_3.log
+[run] walnut_belief/eight_schools_centered/rep2: wall=0.0s warm=0.0 samp=0.0 lg=145505 logp_frac=0.725098
+[run] walnut_belief/garch11/rep2: wall=0.3s warm=0.1 samp=0.1 lg=73537 logp_frac=0.981755
+[run] walnut_belief/lotka_volterra/rep2: wall=3.5s warm=1.1 samp=1.0 lg=128966 logp_frac=0.977975
+[run] walnut_belief/low_dim_gauss_mix/rep2: wall=3.9s warm=1.5 samp=1.1 lg=66595 logp_frac=0.99734
+[run] walnut_belief/arma11/rep2: wall=0.5s warm=0.3 samp=0.3 lg=224002 logp_frac=0.988155
+WALNUT_BELIEF GRID DONE
+=== variant walnut_adam_b50: --optimizer adam --batch-stride 50
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[run] walnut_adam_b50/eight_schools_noncentered/rep0: wall=0.0s warm=0.0 samp=0.0 lg=70770 logp_frac=0.722784
+[run] walnut_adam_b50/blr/rep0: wall=0.1s warm=0.1 samp=0.0 lg=256004 logp_frac=0.961975
+[run] walnut_adam_b50/kidscore_momiq/rep0: wall=0.4s warm=0.2 samp=0.2 lg=256004 logp_frac=0.989585
+[run] walnut_adam_b50/lsat_model/rep0: wall=10.2s warm=3.5 samp=1.8 lg=169152 logp_frac=0.971116
+[run] walnut_adam_b50/logmesquite_logvash/rep0: wall=0.1s warm=0.1 samp=0.1 lg=204498 logp_frac=0.967012
+[run] walnut_adam_b50/wells_dist100_model/rep0: wall=0.8s warm=0.4 samp=0.3 lg=53478 logp_frac=0.993848
+[run] walnut_adam_b50/diamonds/rep0: wall=2.5s warm=1.2 samp=1.3 lg=256004 logp_frac=0.996443
+[run] walnut_adam_b50/radon_partially_pooled_noncentered/rep0: wall=24.5s warm=12.7 samp=11.5 lg=255992 logp_frac=0.996901
+[run] walnut_adam_b50/radon_variable_intercept_slope_noncentered/rep0: wall=3.0s warm=0.8 samp=0.6 lg=145762 logp_frac=0.970675
+[run] walnut_adam_b50/dogs_hierarchical/rep0: wall=0.9s warm=0.4 samp=0.4 lg=48877 logp_frac=0.91757
+[run] walnut_adam_b50/pilots/rep0: wall=0.2s warm=0.1 samp=0.0 lg=332053 logp_frac=0.904011
+[run] walnut_adam_b50/hier_2pl/rep0: wall=91.7s warm=36.3 samp=36.5 lg=274982 logp_frac=0.998058
+[run] walnut_adam_b50/gp_regr/rep0: wall=0.1s warm=0.0 samp=0.0 lg=47356 logp_frac=0.952051
+[run] walnut_adam_b50/kronecker_gp/rep0: wall=39.1s warm=19.7 samp=17.0 lg=365439 logp_frac=0.987085
+[run] walnut_adam_b50/accel_gp/rep0: wall=1.5s warm=0.7 samp=0.8 lg=256004 logp_frac=0.989525
+[run] walnut_adam_b50/bym2_offset_only/rep0: wall=13.2s warm=5.0 samp=5.1 lg=256004 logp_frac=0.946876
+[run] walnut_adam_b50/eight_schools_centered/rep0: wall=-0.9s warm=-0.9 samp=0.0 lg=157255 logp_frac=0.767852
+[run] walnut_adam_b50/garch11/rep0: wall=0.3s warm=0.1 samp=0.1 lg=74983 logp_frac=0.971977
+[run] walnut_adam_b50/lotka_volterra/rep0: wall=7.0s warm=2.1 samp=2.6 lg=202035 logp_frac=0.988867
+[run] walnut_adam_b50/low_dim_gauss_mix/rep0: wall=8.8s warm=5.8 samp=2.9 lg=103690 logp_frac=0.998225
+[run] walnut_adam_b50/arma11/rep0: wall=0.6s warm=0.2 samp=0.2 lg=256004 logp_frac=0.993087
+[run] walnut_adam_b50/eight_schools_noncentered/rep1: wall=0.0s warm=0.0 samp=0.0 lg=69206 logp_frac=0.716839
+[run] walnut_adam_b50/blr/rep1: wall=0.1s warm=0.0 samp=0.0 lg=256004 logp_frac=0.965767
+[run] walnut_adam_b50/kidscore_momiq/rep1: wall=0.4s warm=0.2 samp=0.2 lg=256004 logp_frac=0.990025
+[run] walnut_adam_b50/lsat_model/rep1: wall=6.0s warm=3.3 samp=1.9 lg=130430 logp_frac=0.967616
+[run] walnut_adam_b50/logmesquite_logvash/rep1: wall=0.1s warm=0.0 samp=0.0 lg=174173 logp_frac=0.911337
+[run] walnut_adam_b50/wells_dist100_model/rep1: wall=0.9s warm=0.4 samp=0.3 lg=56319 logp_frac=0.993901
+[run] walnut_adam_b50/diamonds/rep1: wall=2.5s warm=1.3 samp=1.2 lg=256232 logp_frac=0.996653
+[run] walnut_adam_b50/radon_partially_pooled_noncentered/rep1: wall=24.5s warm=11.3 samp=12.3 lg=223528 logp_frac=0.997091
+[run] walnut_adam_b50/radon_variable_intercept_slope_noncentered/rep1: wall=3.3s warm=1.5 samp=1.5 lg=187168 logp_frac=0.989699
+[run] walnut_adam_b50/dogs_hierarchical/rep1: wall=0.9s warm=0.3 samp=0.3 lg=47312 logp_frac=0.919527
+[run] walnut_adam_b50/pilots/rep1: wall=0.1s warm=0.1 samp=0.0 lg=278248 logp_frac=0.89777
+[run] walnut_adam_b50/hier_2pl/rep1: wall=109.4s warm=36.7 samp=35.1 lg=301052 logp_frac=0.997964
+[run] walnut_adam_b50/gp_regr/rep1: wall=0.1s warm=0.0 samp=0.0 lg=45956 logp_frac=0.95407
+[run] walnut_adam_b50/kronecker_gp/rep1: FAILED chain 2 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_adam_b50/kronecker_gp/rep1/chain_2.log
+[run] walnut_adam_b50/accel_gp/rep1: wall=5.5s warm=0.5 samp=0.5 lg=546043 logp_frac=0.985994
+[run] walnut_adam_b50/bym2_offset_only/rep1: wall=12.8s warm=5.2 samp=5.1 lg=256004 logp_frac=0.94781
+[run] walnut_adam_b50/eight_schools_centered/rep1: wall=0.0s warm=0.0 samp=0.0 lg=142972 logp_frac=0.739198
+[run] walnut_adam_b50/garch11/rep1: wall=0.3s warm=0.1 samp=0.1 lg=73569 logp_frac=0.978628
+[run] walnut_adam_b50/lotka_volterra/rep1: wall=9.5s warm=2.3 samp=2.6 lg=194086 logp_frac=0.987376
+[run] walnut_adam_b50/low_dim_gauss_mix/rep1: wall=11.1s warm=5.0 samp=5.8 lg=175031 logp_frac=0.99937
+[run] walnut_adam_b50/arma11/rep1: wall=0.5s warm=0.3 samp=0.3 lg=256004 logp_frac=0.993063
+[run] walnut_adam_b50/eight_schools_noncentered/rep2: wall=0.0s warm=0.0 samp=0.0 lg=69309 logp_frac=0.688565
+[run] walnut_adam_b50/blr/rep2: wall=0.1s warm=0.0 samp=0.0 lg=256004 logp_frac=0.964614
+[run] walnut_adam_b50/kidscore_momiq/rep2: wall=0.4s warm=0.2 samp=0.2 lg=256004 logp_frac=0.990248
+[run] walnut_adam_b50/lsat_model/rep2: wall=11.6s warm=3.9 samp=1.9 lg=196287 logp_frac=0.965913
+[run] walnut_adam_b50/logmesquite_logvash/rep2: wall=0.1s warm=0.1 samp=0.0 lg=177671 logp_frac=0.914686
+[run] walnut_adam_b50/wells_dist100_model/rep2: wall=0.8s warm=0.4 samp=0.4 lg=54744 logp_frac=0.99206
+[run] walnut_adam_b50/diamonds/rep2: wall=3.0s warm=1.2 samp=1.3 lg=271247 logp_frac=0.995897
+[run] walnut_adam_b50/radon_partially_pooled_noncentered/rep2: wall=24.7s warm=11.7 samp=12.3 lg=256050 logp_frac=0.996945
+[run] walnut_adam_b50/radon_variable_intercept_slope_noncentered/rep2: wall=3.1s warm=0.8 samp=0.5 lg=185387 logp_frac=0.970385
+[run] walnut_adam_b50/dogs_hierarchical/rep2: wall=1.0s warm=0.4 samp=0.3 lg=50732 logp_frac=0.923495
+[run] walnut_adam_b50/pilots/rep2: wall=0.2s warm=0.1 samp=0.0 lg=306694 logp_frac=0.918378
+[run] walnut_adam_b50/hier_2pl/rep2: wall=75.2s warm=35.9 samp=31.7 lg=237490 logp_frac=0.996883
+[run] walnut_adam_b50/gp_regr/rep2: wall=0.1s warm=0.0 samp=0.0 lg=47130 logp_frac=0.943216
+[run] walnut_adam_b50/kronecker_gp/rep2: wall=37.2s warm=14.4 samp=21.2 lg=360246 logp_frac=0.989213
+[run] walnut_adam_b50/accel_gp/rep2: wall=1.0s warm=0.4 samp=0.5 lg=256004 logp_frac=0.984932
+[run] walnut_adam_b50/bym2_offset_only/rep2: wall=13.0s warm=4.9 samp=4.9 lg=256004 logp_frac=0.948034
+[run] walnut_adam_b50/eight_schools_centered/rep2: wall=0.0s warm=0.0 samp=0.0 lg=141762 logp_frac=0.712398
+[run] walnut_adam_b50/garch11/rep2: wall=0.3s warm=0.1 samp=0.1 lg=73538 logp_frac=0.973494
+[run] walnut_adam_b50/lotka_volterra/rep2: wall=4.9s warm=1.6 samp=1.0 lg=140319 logp_frac=0.977263
+[run] walnut_adam_b50/low_dim_gauss_mix/rep2: wall=11.5s warm=5.2 samp=6.3 lg=143795 logp_frac=0.999201
+[run] walnut_adam_b50/arma11/rep2: FAILED chain 3 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/walnut_adam_b50/arma11/rep2/chain_3.log
+WALNUT_ADAM_B50 GRID DONE
+=== variant walnut_adam_b50_c3: --optimizer adam --batch-stride 50 --step-grad-clip 0.3
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+usage: run_walnutpie.py [-h] [--reps REPS] [--models MODELS] [--tag TAG]
+                        [--optimizer OPTIMIZER] [--batch-stride BATCH_STRIDE]
+                        [--grad-clip GRAD_CLIP] [--da-freeze-average]
+run_walnutpie.py: error: unrecognized arguments: --step-grad-clip 0.3

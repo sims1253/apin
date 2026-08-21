@@ -1,0 +1,4 @@
+ps_point copy n=  18          :    30.8 ns/copy
+ps_point copy n= 100          :    40.4 ns/copy
+ps_point copy n=1000          :   335.3 ns/copy
+ps_point copy n=7000          : 30495.8 ns/copy

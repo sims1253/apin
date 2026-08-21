@@ -1,0 +1,166 @@
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[run] w5_pf_init/eight_schools_noncentered/rep0: wall=0.0s warm=0.0 samp=0.0 lg=70494 logp_frac=0.640781
+[run] w5_pf_init/blr/rep0: wall=0.1s warm=0.1 samp=0.1 lg=359956 logp_frac=0.849314
+[run] w5_pf_init/kidscore_momiq/rep0: wall=0.1s warm=0.1 samp=0.0 lg=73125 logp_frac=0.934477
+[run] w5_pf_init/lsat_model/rep0: wall=24.9s warm=15.2 samp=9.4 lg=640385 logp_frac=0.976758
+[run] w5_pf_init/logmesquite_logvash/rep0: wall=0.1s warm=0.0 samp=0.0 lg=191348 logp_frac=0.868556
+[run] w5_pf_init/wells_dist100_model/rep0: wall=0.8s warm=0.4 samp=0.4 lg=57329 logp_frac=0.991505
+[run] w5_pf_init/diamonds/rep0: wall=7.3s warm=3.5 samp=2.5 lg=694754 logp_frac=0.991089
+[run] w5_pf_init/radon_partially_pooled_noncentered/rep0: wall=80.7s warm=45.9 samp=34.7 lg=865783 logp_frac=0.995068
+[run] w5_pf_init/radon_variable_intercept_slope_noncentered/rep0: wall=7.2s warm=2.8 samp=1.4 lg=445035 logp_frac=0.976552
+[run] w5_pf_init/dogs_hierarchical/rep0: wall=1.1s warm=0.5 samp=0.4 lg=53497 logp_frac=0.932688
+[run] w5_pf_init/pilots/rep0: wall=0.3s warm=0.0 samp=0.0 lg=335495 logp_frac=0.72394
+[run] w5_pf_init/hier_2pl/rep0: wall=269.7s warm=134.5 samp=135.1 lg=999059 logp_frac=0.996681
+[run] w5_pf_init/gp_regr/rep0: wall=0.1s warm=0.0 samp=0.0 lg=50002 logp_frac=0.931895
+[run] w5_pf_init/kronecker_gp/rep0: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/w5_pf_init/kronecker_gp/rep0/chain_1.log
+[run] w5_pf_init/accel_gp/rep0: wall=2.9s warm=1.5 samp=1.3 lg=726447 logp_frac=0.979689
+[run] w5_pf_init/bym2_offset_only/rep0: wall=40.5s warm=19.3 samp=14.4 lg=967776 logp_frac=0.949689
+[run] w5_pf_init/eight_schools_centered/rep0: wall=0.0s warm=0.0 samp=0.0 lg=177217 logp_frac=0.603474
+[run] w5_pf_init/garch11/rep0: wall=0.3s warm=0.1 samp=0.1 lg=76918 logp_frac=0.970666
+[run] w5_pf_init/lotka_volterra/rep0: wall=5.8s warm=1.1 samp=1.0 lg=176527 logp_frac=0.976552
+[run] w5_pf_init/low_dim_gauss_mix/rep0: wall=4.7s warm=1.9 samp=1.6 lg=92340 logp_frac=0.995468
+[run] w5_pf_init/arma11/rep0: wall=0.2s warm=0.1 samp=0.1 lg=73363 logp_frac=0.942766
+[run] w5_pf_init/eight_schools_noncentered/rep1: wall=0.1s warm=0.0 samp=0.0 lg=105588 logp_frac=0.650768
+[run] w5_pf_init/blr/rep1: wall=0.3s warm=0.1 samp=0.1 lg=515936 logp_frac=0.848742
+[run] w5_pf_init/kidscore_momiq/rep1: wall=0.1s warm=0.1 samp=0.0 lg=74619 logp_frac=0.932104
+[run] w5_pf_init/lsat_model/rep1: wall=25.2s warm=14.9 samp=10.0 lg=639691 logp_frac=0.976587
+[run] w5_pf_init/logmesquite_logvash/rep1: wall=0.2s warm=0.1 samp=0.1 lg=223861 logp_frac=0.882772
+[run] w5_pf_init/wells_dist100_model/rep1: wall=1.7s warm=0.4 samp=0.4 lg=95180 logp_frac=0.992454
+[run] w5_pf_init/diamonds/rep1: wall=6.3s warm=3.5 samp=2.6 lg=646022 logp_frac=0.990804
+[run] w5_pf_init/radon_partially_pooled_noncentered/rep1: wall=80.3s warm=36.0 samp=23.2 lg=752231 logp_frac=0.993889
+[run] w5_pf_init/radon_variable_intercept_slope_noncentered/rep1: wall=7.4s warm=4.3 samp=2.8 lg=638332 logp_frac=0.97969
+[run] w5_pf_init/dogs_hierarchical/rep1: wall=1.2s warm=0.3 samp=0.4 lg=55021 logp_frac=0.9132
+[run] w5_pf_init/pilots/rep1: wall=-0.4s warm=-0.5 samp=0.0 lg=164485 logp_frac=0.741666
+[run] w5_pf_init/hier_2pl/rep1: wall=275.2s warm=134.3 samp=135.1 lg=965730 logp_frac=0.996826
+[run] w5_pf_init/gp_regr/rep1: wall=0.4s warm=0.0 samp=0.0 lg=114269 logp_frac=0.932327
+[run] w5_pf_init/kronecker_gp/rep1: wall=68.5s warm=29.3 samp=21.0 lg=591587 logp_frac=0.986369
+[run] w5_pf_init/accel_gp/rep1: wall=2.6s warm=0.8 samp=0.9 lg=564134 logp_frac=0.972431
+[run] w5_pf_init/bym2_offset_only/rep1: wall=42.6s warm=19.4 samp=19.4 lg=999053 logp_frac=0.956622
+[run] w5_pf_init/eight_schools_centered/rep1: wall=0.1s warm=0.0 samp=0.0 lg=147902 logp_frac=0.691856
+[run] w5_pf_init/garch11/rep1: wall=0.3s warm=0.1 samp=0.1 lg=71632 logp_frac=0.973588
+[run] w5_pf_init/lotka_volterra/rep1: wall=2.3s warm=1.1 samp=1.0 lg=123235 logp_frac=0.973125
+[run] w5_pf_init/low_dim_gauss_mix/rep1: wall=43.4s warm=2.3 samp=1.6 lg=306530 logp_frac=0.995653
+[run] w5_pf_init/arma11/rep1: wall=0.2s warm=0.1 samp=0.1 lg=71332 logp_frac=0.937891
+[run] w5_pf_init/eight_schools_noncentered/rep2: wall=0.1s warm=0.0 samp=0.0 lg=119653 logp_frac=0.626349
+[run] w5_pf_init/blr/rep2: wall=0.2s warm=0.1 samp=0.1 lg=372365 logp_frac=0.855959
+[run] w5_pf_init/kidscore_momiq/rep2: wall=0.1s warm=0.1 samp=0.0 lg=76422 logp_frac=0.933997
+[run] w5_pf_init/lsat_model/rep2: wall=24.6s warm=14.3 samp=9.9 lg=640137 logp_frac=0.976747
+[run] w5_pf_init/logmesquite_logvash/rep2: wall=0.2s warm=0.1 samp=0.1 lg=191331 logp_frac=0.890612
+[run] w5_pf_init/wells_dist100_model/rep2: wall=1.0s warm=0.6 samp=0.4 lg=66508 logp_frac=0.990064
+[run] w5_pf_init/diamonds/rep2: wall=6.3s warm=3.5 samp=2.6 lg=655533 logp_frac=0.991314
+[run] w5_pf_init/radon_partially_pooled_noncentered/rep2: wall=81.6s warm=45.5 samp=35.0 lg=864605 logp_frac=0.995296
+[run] w5_pf_init/radon_variable_intercept_slope_noncentered/rep2: wall=7.2s warm=4.3 samp=2.8 lg=574670 logp_frac=0.978605
+[run] w5_pf_init/dogs_hierarchical/rep2: wall=3.6s warm=0.3 samp=0.3 lg=104880 logp_frac=0.91689
+[run] w5_pf_init/pilots/rep2: wall=0.1s warm=0.0 samp=0.0 lg=169939 logp_frac=0.748101
+[run] w5_pf_init/hier_2pl/rep2: wall=270.7s warm=135.5 samp=135.0 lg=966166 logp_frac=0.996795
+[run] w5_pf_init/gp_regr/rep2: wall=0.1s warm=0.0 samp=0.0 lg=68735 logp_frac=0.921235
+[run] w5_pf_init/kronecker_gp/rep2: wall=80.3s warm=41.8 samp=37.2 lg=780729 logp_frac=0.991705
+[run] w5_pf_init/accel_gp/rep2: wall=3.5s warm=1.0 samp=0.8 lg=763340 logp_frac=0.971534
+[run] w5_pf_init/bym2_offset_only/rep2: wall=40.9s warm=19.2 samp=19.2 lg=967959 logp_frac=0.946137
+[run] w5_pf_init/eight_schools_centered/rep2: wall=0.1s warm=0.0 samp=0.0 lg=223641 logp_frac=0.704807
+[run] w5_pf_init/garch11/rep2: wall=0.3s warm=0.1 samp=0.1 lg=73222 logp_frac=0.972199
+[run] w5_pf_init/lotka_volterra/rep2: wall=2.3s warm=1.2 samp=1.0 lg=124580 logp_frac=0.975877
+[run] w5_pf_init/low_dim_gauss_mix/rep2: wall=5.2s warm=2.3 samp=1.6 lg=91926 logp_frac=0.995555
+[run] w5_pf_init/arma11/rep2: wall=0.1s warm=0.1 samp=0.1 lg=73380 logp_frac=0.936827
+W5_PF_INIT GRID DONE
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+62 ESS jobs
+ess_bulk min=33 geomean=208 rhat_max=1.1027 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__accel_gp__rep0.json
+ess_bulk min=20 geomean=145 rhat_max=1.1489 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__accel_gp__rep1.json
+ess_bulk min=22 geomean=199 rhat_max=1.1324 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__accel_gp__rep2.json
+ess_bulk min=2611 geomean=3141 rhat_max=1.0014 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__arma11__rep0.json
+ess_bulk min=2403 geomean=3091 rhat_max=1.0021 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__arma11__rep1.json
+ess_bulk min=2887 geomean=3381 rhat_max=1.0016 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__arma11__rep2.json
+ess_bulk min=345 geomean=433 rhat_max=1.0133 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__blr__rep0.json
+ess_bulk min=439 geomean=519 rhat_max=1.0082 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__blr__rep1.json
+ess_bulk min=528 geomean=568 rhat_max=1.0146 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__blr__rep2.json
+ess_bulk min=92 geomean=2818 rhat_max=1.0329 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__bym2_offset_only__rep0.json
+ess_bulk min=92 geomean=3525 rhat_max=1.0492 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__bym2_offset_only__rep1.json
+ess_bulk min=303 geomean=4338 rhat_max=1.0138 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__bym2_offset_only__rep2.json
+ess_bulk min=8 geomean=351 rhat_max=1.4150 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__diamonds__rep0.json
+ess_bulk min=10 geomean=455 rhat_max=1.3681 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__diamonds__rep1.json
+ess_bulk min=11 geomean=431 rhat_max=1.2891 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__diamonds__rep2.json
+ess_bulk min=1668 geomean=3919 rhat_max=1.0026 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__dogs_hierarchical__rep0.json
+ess_bulk min=1638 geomean=3921 rhat_max=1.0020 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__dogs_hierarchical__rep1.json
+ess_bulk min=1501 geomean=3908 rhat_max=1.0026 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__dogs_hierarchical__rep2.json
+ess_bulk min=118 geomean=465 rhat_max=1.0364 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__eight_schools_centered__rep0.json
+ess_bulk min=95 geomean=313 rhat_max=1.0459 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__eight_schools_centered__rep1.json
+ess_bulk min=97 geomean=463 rhat_max=1.0386 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__eight_schools_centered__rep2.json
+ess_bulk min=1577 geomean=3037 rhat_max=1.0034 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__eight_schools_noncentered__rep0.json
+ess_bulk min=1330 geomean=3068 rhat_max=1.0033 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__eight_schools_noncentered__rep1.json
+ess_bulk min=1407 geomean=3269 rhat_max=1.0030 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__eight_schools_noncentered__rep2.json
+ess_bulk min=886 geomean=1194 rhat_max=1.0053 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__garch11__rep0.json
+ess_bulk min=726 geomean=1187 rhat_max=1.0031 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__garch11__rep1.json
+ess_bulk min=920 geomean=1179 rhat_max=1.0030 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__garch11__rep2.json
+ess_bulk min=3882 geomean=4089 rhat_max=1.0007 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__gp_regr__rep0.json
+ess_bulk min=3137 geomean=3438 rhat_max=1.0026 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__gp_regr__rep1.json
+ess_bulk min=3063 geomean=3272 rhat_max=1.0037 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__gp_regr__rep2.json
+ess_bulk min=23 geomean=296 rhat_max=1.1183 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__hier_2pl__rep0.json
+ess_bulk min=464 geomean=2279 rhat_max=1.0131 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__hier_2pl__rep1.json
+ess_bulk min=183 geomean=781 rhat_max=1.0255 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__hier_2pl__rep2.json
+ess_bulk min=265 geomean=403 rhat_max=1.0125 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__kidscore_momiq__rep0.json
+ess_bulk min=334 geomean=444 rhat_max=1.0088 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__kidscore_momiq__rep1.json
+ess_bulk min=293 geomean=400 rhat_max=1.0133 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__kidscore_momiq__rep2.json
+ess_bulk min=60 geomean=573 rhat_max=1.0700 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__kronecker_gp__rep1.json
+ess_bulk min=61 geomean=686 rhat_max=1.0586 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__kronecker_gp__rep2.json
+ess_bulk min=265 geomean=563 rhat_max=1.0072 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__logmesquite_logvash__rep0.json
+ess_bulk min=297 geomean=609 rhat_max=1.0171 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__logmesquite_logvash__rep1.json
+ess_bulk min=301 geomean=586 rhat_max=1.0074 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__logmesquite_logvash__rep2.json
+ess_bulk min=128 geomean=1482 rhat_max=1.0286 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__lotka_volterra__rep0.json
+ess_bulk min=188 geomean=1449 rhat_max=1.0177 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__lotka_volterra__rep1.json
+ess_bulk min=224 geomean=1584 rhat_max=1.0136 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__lotka_volterra__rep2.json
+ess_bulk min=2304 geomean=3610 rhat_max=1.0018 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__low_dim_gauss_mix__rep0.json
+ess_bulk min=2025 geomean=3189 rhat_max=1.0025 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__low_dim_gauss_mix__rep1.json
+ess_bulk min=2616 geomean=3476 rhat_max=1.0013 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__low_dim_gauss_mix__rep2.json
+ess_bulk min=1385 geomean=10789 rhat_max=1.0080 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__lsat_model__rep0.json
+ess_bulk min=1384 geomean=11183 rhat_max=1.0127 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__lsat_model__rep1.json
+ess_bulk min=1293 geomean=11172 rhat_max=1.0084 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__lsat_model__rep2.json
+ess_bulk min=4 geomean=294 rhat_max=3.4521 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__pilots__rep0.json
+ess_bulk min=9 geomean=284 rhat_max=1.5164 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__pilots__rep1.json
+ess_bulk min=5 geomean=201 rhat_max=3.0348 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__pilots__rep2.json
+ess_bulk min=341 geomean=6514 rhat_max=1.0123 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__radon_partially_pooled_noncentered__rep0.json
+ess_bulk min=374 geomean=7223 rhat_max=1.0134 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__radon_partially_pooled_noncentered__rep1.json
+ess_bulk min=373 geomean=6667 rhat_max=1.0163 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__radon_partially_pooled_noncentered__rep2.json
+ess_bulk min=565 geomean=6306 rhat_max=1.0074 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__radon_variable_intercept_slope_noncentered__rep0.json
+ess_bulk min=516 geomean=7502 rhat_max=1.0059 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__radon_variable_intercept_slope_noncentered__rep1.json
+ess_bulk min=572 geomean=7225 rhat_max=1.0083 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__radon_variable_intercept_slope_noncentered__rep2.json
+ess_bulk min=908 geomean=929 rhat_max=1.0041 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__wells_dist100_model__rep0.json
+ess_bulk min=1035 geomean=1035 rhat_max=1.0013 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__wells_dist100_model__rep1.json
+ess_bulk min=1095 geomean=1098 rhat_max=1.0037 -> /home/m0hawk/Documents/apin/stan/results/ess/w5_pf_init__wells_dist100_model__rep2.json
+ESS DONE
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+           variant  n_models  geo_ess_per_sec  geo_wall  geo_ess_per_grad  total_div_rate  total_td_rate  n_configs_rhat_bad
+      clang_native        21       423.061616  2.253736          0.007819        0.008024       0.121083                   3
+           default        21       481.278007  1.995224          0.008109        0.007714       0.113619                   4
+            nutpie        21       473.277717  1.653804          0.003074        0.019381       0.001524                   4
+              oexp        17       456.340801  1.874413          0.007969        0.008603       0.116544                   3
+           pf_full        10        22.056315 21.952823          0.001274        0.024325       0.260275                   3
+           pf_w200        10        23.926098 16.034789          0.001048        0.023200       0.179250                   4
+   w2_adam_b50_shr        20        25.303786  1.350972          0.000206       -0.001000      -0.001000                   9
+w2_adam_b50_shr_c3        20        22.673251  1.382730          0.000181       -0.001000      -0.001000                   9
+ w2_da_b50_shr_avg        20        82.942639  1.090712          0.000683       -0.001000      -0.001000                  13
+           w3_mdt7        21        19.712374  1.416709          0.000175       -0.001000      -0.001000                   9
+          w3_mst31        21        17.629232  1.475697          0.000160       -0.001000      -0.001000                   9
+          w3_mst63        21        15.804496  1.645044          0.000160       -0.001000      -0.001000                   9
+       w4_init_fix        20        38.628065  1.803051          0.000340       -0.001000      -0.001000                  13
+        w5_pf_init        21       177.103112  1.583882          0.001309       -0.001000      -0.001000                  11
+            walnut        21        52.106239  1.156098          0.000461       -0.001000      -0.001000                  17
+   walnut_adam_b50        21        21.662804  1.200283          0.000160       -0.001000      -0.001000                   9
+walnut_adam_b50_c3        21        22.818416  1.229800          0.000171       -0.001000      -0.001000                  10
+     walnut_belief        21        98.663366  0.867254          0.000693       -0.001000      -0.001000                  15
+         walnut_da        11        36.885925  1.652690          0.000420       -0.001000      -0.001000                   8
+     walnut_da_avg        14        37.356967  1.654864          0.000418       -0.001000      -0.001000                  10
+     walnut_da_b50        21        77.192783  0.943601          0.000573       -0.001000      -0.001000                  16
+        walnut_dem        19         9.863699  2.071826          0.000093       -0.001000      -0.001000                  15
+wrote /home/m0hawk/Documents/apin/stan/dashboard.html (20 KB)
+upload response: {
+  "ok": true,
+  "draftId": "gbcfyftfncsi",
+  "versionId": "8lPCaV4L2ZEXxgSsjDkg",
+  "versionNumber": 19,
+  "title": "nindan \u2014 Stan wall-clock \u2192 ESS",
+  "requestId": "HjbUA-riRXyG3co5wUFZXw",
+  "publicUrl": "https://gbcfyftfncsi.postplan.dev",
+  "rawUrl": "https://postplan.dev/d/gbcfyftfncsi/raw",
+  "warnings": []
+}

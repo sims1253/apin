@@ -1,0 +1,171 @@
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[run] w9_diag/hier_2pl/rep0: wall=299.7s warm=147.7 samp=146.7 lg=998864 logp_frac=0.996688
+[run] w9_diag/kronecker_gp/rep0: wall=65.9s warm=27.3 samp=17.4 lg=502460 logp_frac=0.983806
+[run] w9_diag/lsat_model/rep0: wall=27.9s warm=16.0 samp=11.2 lg=621596 logp_frac=0.97409
+[run] w9_diag/bym2_offset_only/rep0: wall=46.5s warm=21.2 samp=16.4 lg=887427 logp_frac=0.947026
+[run] w9_diag/radon_partially_pooled_noncentered/rep0: wall=88.2s warm=48.9 samp=37.8 lg=827353 logp_frac=0.995388
+[run] w9_diag/garch11/rep0: wall=0.3s warm=0.2 samp=0.2 lg=96994 logp_frac=0.966839
+[run] w9_diag/hier_2pl/rep1: wall=289.4s warm=144.7 samp=144.6 lg=998801 logp_frac=0.996895
+[run] w9_diag/kronecker_gp/rep1: wall=67.1s warm=35.2 samp=24.9 lg=606332 logp_frac=0.988749
+[run] w9_diag/lsat_model/rep1: wall=25.6s warm=14.8 samp=10.1 lg=621819 logp_frac=0.975829
+[run] w9_diag/bym2_offset_only/rep1: wall=44.0s warm=19.5 samp=15.7 lg=838903 logp_frac=0.938077
+[run] w9_diag/radon_partially_pooled_noncentered/rep1: wall=81.7s warm=44.8 samp=36.1 lg=765174 logp_frac=0.99561
+[run] w9_diag/garch11/rep1: wall=0.4s warm=0.2 samp=0.1 lg=99731 logp_frac=0.970053
+[run] w9_diag/hier_2pl/rep2: wall=284.0s warm=98.0 samp=73.2 lg=794747 logp_frac=0.995047
+[run] w9_diag/kronecker_gp/rep2: wall=67.6s warm=35.6 samp=28.6 lg=659156 logp_frac=0.989473
+[run] w9_diag/lsat_model/rep2: wall=25.6s warm=14.5 samp=10.3 lg=621723 logp_frac=0.974758
+[run] w9_diag/bym2_offset_only/rep2: wall=41.4s warm=18.9 samp=14.8 lg=887773 logp_frac=0.951232
+[run] w9_diag/radon_partially_pooled_noncentered/rep2: wall=80.8s warm=44.2 samp=36.4 lg=824658 logp_frac=0.995789
+[run] w9_diag/garch11/rep2: wall=0.4s warm=0.1 samp=0.1 lg=101500 logp_frac=0.97017
+W9_DIAG GRID DONE
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[run] w9_fold/hier_2pl/rep0: wall=175.9s warm=62.6 samp=44.7 lg=692495 logp_frac=0.994354
+[run] w9_fold/kronecker_gp/rep0: FAILED chain 1 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/w9_fold/kronecker_gp/rep0/chain_1.log
+[run] w9_fold/lsat_model/rep0: wall=25.8s warm=14.9 samp=10.0 lg=621370 logp_frac=0.980649
+[run] w9_fold/bym2_offset_only/rep0: wall=41.8s warm=19.9 samp=14.7 lg=885576 logp_frac=0.951106
+[run] w9_fold/radon_partially_pooled_noncentered/rep0: wall=80.1s warm=33.0 samp=23.8 lg=769108 logp_frac=0.994744
+[run] w9_fold/garch11/rep0: wall=0.4s warm=0.2 samp=0.2 lg=115947 logp_frac=0.968803
+[run] w9_fold/hier_2pl/rep1: wall=179.2s warm=90.9 samp=87.7 lg=954277 logp_frac=0.996432
+[run] w9_fold/kronecker_gp/rep1: wall=83.4s warm=41.5 samp=40.0 lg=763165 logp_frac=0.992136
+[run] w9_fold/lsat_model/rep1: wall=25.2s warm=15.0 samp=10.0 lg=621682 logp_frac=0.980723
+[run] w9_fold/bym2_offset_only/rep1: wall=36.9s warm=19.5 samp=14.7 lg=849475 logp_frac=0.950106
+[run] w9_fold/radon_partially_pooled_noncentered/rep1: wall=80.1s warm=42.9 samp=35.4 lg=824547 logp_frac=0.996086
+[run] w9_fold/garch11/rep1: wall=0.4s warm=0.2 samp=0.2 lg=114327 logp_frac=0.964383
+[run] w9_fold/hier_2pl/rep2: wall=177.6s warm=89.6 samp=85.1 lg=795097 logp_frac=0.996617
+[run] w9_fold/kronecker_gp/rep2: wall=63.8s warm=34.7 samp=25.1 lg=637763 logp_frac=0.989257
+[run] w9_fold/lsat_model/rep2: wall=25.5s warm=14.7 samp=10.0 lg=622415 logp_frac=0.980608
+[run] w9_fold/bym2_offset_only/rep2: wall=42.5s warm=19.3 samp=14.4 lg=834582 logp_frac=0.950598
+[run] w9_fold/radon_partially_pooled_noncentered/rep2: wall=79.5s warm=43.3 samp=35.5 lg=824410 logp_frac=0.99593
+[run] w9_fold/garch11/rep2: wall=0.4s warm=0.2 samp=0.2 lg=115573 logp_frac=0.963164
+W9_FOLD GRID DONE
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[run] w9_full/hier_2pl/rep0: wall=180.5s warm=88.9 samp=66.7 lg=933551 logp_frac=0.987366
+[run] w9_full/kronecker_gp/rep0: FAILED chain 3 rc=-6, see /home/m0hawk/Documents/apin/stan/runs/w9_full/kronecker_gp/rep0/chain_3.log
+[run] w9_full/lsat_model/rep0: wall=27.1s warm=16.4 samp=10.4 lg=624061 logp_frac=0.93144
+[run] w9_full/bym2_offset_only/rep0: wall=48.4s warm=23.2 samp=17.2 lg=876726 logp_frac=0.814646
+[run] w9_full/radon_partially_pooled_noncentered/rep0: wall=85.2s warm=47.7 samp=35.7 lg=808806 logp_frac=0.987201
+[run] w9_full/garch11/rep0: wall=0.3s warm=0.1 samp=0.1 lg=77976 logp_frac=0.942694
+[run] w9_full/hier_2pl/rep1: wall=178.4s warm=89.3 samp=88.8 lg=932716 logp_frac=0.988822
+[run] w9_full/kronecker_gp/rep1: wall=88.0s warm=40.6 samp=28.4 lg=733390 logp_frac=0.979509
+[run] w9_full/lsat_model/rep1: wall=27.0s warm=16.4 samp=10.4 lg=622501 logp_frac=0.930983
+[run] w9_full/bym2_offset_only/rep1: wall=48.1s warm=23.3 samp=22.2 lg=999054 logp_frac=0.828981
+[run] w9_full/radon_partially_pooled_noncentered/rep1: wall=84.2s warm=48.3 samp=35.7 lg=865194 logp_frac=0.987282
+[run] w9_full/garch11/rep1: wall=0.3s warm=0.1 samp=0.1 lg=73131 logp_frac=0.947716
+[run] w9_full/hier_2pl/rep2: wall=179.8s warm=89.5 samp=88.6 lg=999057 logp_frac=0.988654
+[run] w9_full/kronecker_gp/rep2: wall=85.6s warm=30.7 samp=21.9 lg=697354 logp_frac=0.978832
+[run] w9_full/lsat_model/rep2: wall=27.8s warm=16.7 samp=10.8 lg=640373 logp_frac=0.931869
+[run] w9_full/bym2_offset_only/rep2: wall=48.3s warm=19.6 samp=8.9 lg=872117 logp_frac=0.8123
+[run] w9_full/radon_partially_pooled_noncentered/rep2: wall=83.7s warm=47.2 samp=36.3 lg=864605 logp_frac=0.98743
+[run] w9_full/garch11/rep2: wall=0.3s warm=0.1 samp=0.1 lg=74831 logp_frac=0.946766
+W9_FULL GRID DONE
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+52 ESS jobs
+ess_bulk min=183 geomean=3620 rhat_max=1.0192 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__bym2_offset_only__rep0.json
+ess_bulk min=141 geomean=3353 rhat_max=1.0230 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__bym2_offset_only__rep1.json
+ess_bulk min=147 geomean=3678 rhat_max=1.0326 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__bym2_offset_only__rep2.json
+ess_bulk min=891 geomean=1517 rhat_max=1.0029 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__garch11__rep0.json
+ess_bulk min=739 geomean=1318 rhat_max=1.0036 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__garch11__rep1.json
+ess_bulk min=962 geomean=1463 rhat_max=1.0038 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__garch11__rep2.json
+ess_bulk min=521 geomean=2892 rhat_max=1.0124 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__hier_2pl__rep0.json
+ess_bulk min=166 geomean=1472 rhat_max=1.0265 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__hier_2pl__rep1.json
+ess_bulk min=49 geomean=617 rhat_max=1.0645 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__hier_2pl__rep2.json
+ess_bulk min=81 geomean=715 rhat_max=1.0478 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__kronecker_gp__rep0.json
+ess_bulk min=94 geomean=678 rhat_max=1.0484 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__kronecker_gp__rep1.json
+ess_bulk min=103 geomean=925 rhat_max=1.0469 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__kronecker_gp__rep2.json
+ess_bulk min=1191 geomean=10104 rhat_max=1.0096 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__lsat_model__rep0.json
+ess_bulk min=1467 geomean=10161 rhat_max=1.0087 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__lsat_model__rep1.json
+ess_bulk min=1477 geomean=11114 rhat_max=1.0081 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__lsat_model__rep2.json
+ess_bulk min=615 geomean=7915 rhat_max=1.0082 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__radon_partially_pooled_noncentered__rep0.json
+ess_bulk min=665 geomean=7406 rhat_max=1.0069 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__radon_partially_pooled_noncentered__rep1.json
+ess_bulk min=531 geomean=7913 rhat_max=1.0094 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_diag__radon_partially_pooled_noncentered__rep2.json
+ess_bulk min=115 geomean=3571 rhat_max=1.0271 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_fold__bym2_offset_only__rep0.json
+ess_bulk min=115 geomean=3967 rhat_max=1.0422 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_fold__bym2_offset_only__rep1.json
+ess_bulk min=170 geomean=3377 rhat_max=1.0372 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_fold__bym2_offset_only__rep2.json
+ess_bulk min=960 geomean=1599 rhat_max=1.0053 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_fold__garch11__rep0.json
+ess_bulk min=938 geomean=1538 rhat_max=1.0046 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_fold__garch11__rep1.json
+ess_bulk min=730 geomean=1487 rhat_max=1.0028 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_fold__garch11__rep2.json
+ess_bulk min=979 geomean=4975 rhat_max=1.0073 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_fold__hier_2pl__rep0.json
+ess_bulk min=38 geomean=687 rhat_max=1.0756 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_fold__hier_2pl__rep1.json
+ess_bulk min=43 geomean=498 rhat_max=1.0704 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_fold__hier_2pl__rep2.json
+ess_bulk min=28 geomean=472 rhat_max=1.1210 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_fold__kronecker_gp__rep1.json
+ess_bulk min=37 geomean=583 rhat_max=1.1026 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_fold__kronecker_gp__rep2.json
+ess_bulk min=1394 geomean=10091 rhat_max=1.0087 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_fold__lsat_model__rep0.json
+ess_bulk min=1505 geomean=10367 rhat_max=1.0095 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_fold__lsat_model__rep1.json
+ess_bulk min=1227 geomean=10797 rhat_max=1.0083 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_fold__lsat_model__rep2.json
+ess_bulk min=735 geomean=8106 rhat_max=1.0063 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_fold__radon_partially_pooled_noncentered__rep0.json
+ess_bulk min=713 geomean=8021 rhat_max=1.0093 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_fold__radon_partially_pooled_noncentered__rep1.json
+ess_bulk min=629 geomean=7801 rhat_max=1.0067 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_fold__radon_partially_pooled_noncentered__rep2.json
+ess_bulk min=200 geomean=4116 rhat_max=1.0188 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_full__bym2_offset_only__rep0.json
+ess_bulk min=56 geomean=3059 rhat_max=1.0689 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_full__bym2_offset_only__rep1.json
+ess_bulk min=23 geomean=1748 rhat_max=1.1318 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_full__bym2_offset_only__rep2.json
+ess_bulk min=826 geomean=1502 rhat_max=1.0027 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_full__garch11__rep0.json
+ess_bulk min=932 geomean=1281 rhat_max=1.0022 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_full__garch11__rep1.json
+ess_bulk min=921 geomean=1355 rhat_max=1.0051 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_full__garch11__rep2.json
+ess_bulk min=566 geomean=2793 rhat_max=1.0106 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_full__hier_2pl__rep0.json
+ess_bulk min=98 geomean=824 rhat_max=1.0386 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_full__hier_2pl__rep1.json
+ess_bulk min=205 geomean=1072 rhat_max=1.0241 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_full__hier_2pl__rep2.json
+ess_bulk min=96 geomean=704 rhat_max=1.0217 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_full__kronecker_gp__rep1.json
+ess_bulk min=85 geomean=660 rhat_max=1.0156 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_full__kronecker_gp__rep2.json
+ess_bulk min=1297 geomean=9268 rhat_max=1.0106 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_full__lsat_model__rep0.json
+ess_bulk min=1298 geomean=9056 rhat_max=1.0075 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_full__lsat_model__rep1.json
+ess_bulk min=1320 geomean=10397 rhat_max=1.0073 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_full__lsat_model__rep2.json
+ess_bulk min=319 geomean=7058 rhat_max=1.0092 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_full__radon_partially_pooled_noncentered__rep0.json
+ess_bulk min=367 geomean=6382 rhat_max=1.0233 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_full__radon_partially_pooled_noncentered__rep1.json
+ess_bulk min=389 geomean=6642 rhat_max=1.0156 -> /home/m0hawk/Documents/apin/stan/results/ess/w9_full__radon_partially_pooled_noncentered__rep2.json
+ESS DONE
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+           variant  n_models  geo_ess_per_sec  geo_wall  geo_ess_per_grad  total_div_rate  total_td_rate  n_configs_rhat_bad
+      clang_native        21       423.061616  2.253736          0.007819        0.008024       0.121083                   3
+           default        21       481.278007  1.995224          0.008109        0.007714       0.113619                   4
+            nutpie        21       473.277717  1.653804          0.003074        0.019381       0.001524                   4
+              oexp        17       456.340801  1.874413          0.007969        0.008603       0.116544                   3
+           pf_full        10        22.056315 21.952823          0.001274        0.024325       0.260275                   3
+           pf_w200        10        23.926098 16.034789          0.001048        0.023200       0.179250                   4
+   w2_adam_b50_shr        20        25.303786  1.350972          0.000206       -0.001000      -0.001000                   9
+w2_adam_b50_shr_c3        20        22.673251  1.382730          0.000181       -0.001000      -0.001000                   9
+ w2_da_b50_shr_avg        20        82.942639  1.090712          0.000683       -0.001000      -0.001000                  13
+           w3_mdt7        21        19.712374  1.416709          0.000175       -0.001000      -0.001000                   9
+          w3_mst31        21        17.629232  1.475697          0.000160       -0.001000      -0.001000                   9
+          w3_mst63        21        15.804496  1.645044          0.000160       -0.001000      -0.001000                   9
+       w4_init_fix        20        38.628065  1.803051          0.000340       -0.001000      -0.001000                  13
+        w5_pf_init        21       177.103112  1.583882          0.001309       -0.001000      -0.001000                  11
+      w6_pf_chop50        20       189.996878  1.510347          0.001373       -0.001000      -0.001000                   8
+     w7_batch_1000        21        21.877412  1.172891          0.000157       -0.001000      -0.001000                   9
+     w7_batch_2000        21        25.225462  1.624863          0.000175       -0.001000      -0.001000                  10
+      w7_batch_250        21        23.934360  0.893100          0.000188       -0.001000      -0.001000                   9
+     w7_batch_4000        21        17.637504  2.570306          0.000121       -0.001000      -0.001000                  10
+      w7_batch_500        21        23.032938  0.961885          0.000169       -0.001000      -0.001000                   9
+      w7_full_1000        20       190.489674  1.588912          0.001464       -0.001000      -0.001000                   8
+      w7_full_2000        20       193.457605  2.021671          0.001370       -0.001000      -0.001000                   8
+       w7_full_250        21        83.874724  1.543713          0.000700       -0.001000      -0.001000                  13
+      w7_full_4000        20       127.174768  2.770992          0.000897       -0.001000      -0.001000                   9
+       w7_full_500        20        78.137514  1.897709          0.000688       -0.001000      -0.001000                  10
+     w7_stock_1000        21        60.891307  0.963513          0.000453       -0.001000      -0.001000                  17
+     w7_stock_2000        21        66.086390  1.316769          0.000456       -0.001000      -0.001000                  14
+      w7_stock_250        21        60.102087  0.654446          0.000432       -0.001000      -0.001000                  11
+     w7_stock_4000        21        44.992842  2.097722          0.000305       -0.001000      -0.001000                  15
+      w7_stock_500        21        66.298647  0.744647          0.000497       -0.001000      -0.001000                  14
+           w8_lr10        20       173.144849  1.555526          0.001199       -0.001000      -0.001000                   9
+           w9_diag         6        12.028743 29.287522          0.000643       -0.001000      -0.001000                   3
+           w9_fold         6         8.484773 27.800146          0.000420       -0.001000      -0.001000                   3
+           w9_full         6         9.977035 27.897339          0.000501       -0.001000      -0.001000                   4
+            walnut        21        52.106239  1.156098          0.000461       -0.001000      -0.001000                  17
+   walnut_adam_b50        21        21.662804  1.200283          0.000160       -0.001000      -0.001000                   9
+walnut_adam_b50_c3        21        22.818416  1.229800          0.000171       -0.001000      -0.001000                  10
+     walnut_belief        21        98.663366  0.867254          0.000693       -0.001000      -0.001000                  15
+         walnut_da        11        36.885925  1.652690          0.000420       -0.001000      -0.001000                   8
+     walnut_da_avg        14        37.356967  1.654864          0.000418       -0.001000      -0.001000                  10
+     walnut_da_b50        21        77.192783  0.943601          0.000573       -0.001000      -0.001000                  16
+        walnut_dem        19         9.863699  2.071826          0.000093       -0.001000      -0.001000                  15
+wrote /home/m0hawk/Documents/apin/stan/dashboard.html (24 KB)
+upload response: {
+  "ok": true,
+  "draftId": "gbcfyftfncsi",
+  "versionId": "pvvHqfdW1qdt3ydFC3eY",
+  "versionNumber": 29,
+  "title": "nindan \u2014 Stan wall-clock \u2192 ESS",
+  "requestId": "bV2Y7hK7TEyqdjcI2prcFg",
+  "publicUrl": "https://gbcfyftfncsi.postplan.dev",
+  "rawUrl": "https://postplan.dev/d/gbcfyftfncsi/raw",
+  "warnings": []
+}

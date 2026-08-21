@@ -1,0 +1,207 @@
+{
+  "model": "accel_gp",
+  "iters": "40+40",
+  "total_instructions": 5505015777,
+  "one_time_io_instructions": 56717225,
+  "steady_state_instructions": 5448298552,
+  "cache_totals": {
+    "Ir": 5505015777,
+    "Dr": 1651778806,
+    "Dw": 884933084,
+    "I1mr": 29903049,
+    "D1mr": 110840246,
+    "D1mw": 42598755,
+    "ILmr": 8807,
+    "DLmr": 11896,
+    "DLmw": 8587
+  },
+  "d1_mr": 0.0671,
+  "dl_mr": 0.0,
+  "buckets": {
+    "model_log_prob": 585339503,
+    "autodiff_reverse": 637677965,
+    "checks": 0,
+    "eigen_linalg": 2443123326,
+    "memcpy_alloc": 667646832,
+    "rng": 32844908,
+    "io": 232550049
+  },
+  "bucket_share": {
+    "model_log_prob": 0.1074,
+    "autodiff_reverse": 0.117,
+    "checks": 0.0,
+    "eigen_linalg": 0.4484,
+    "memcpy_alloc": 0.1225,
+    "rng": 0.006,
+    "io": 0.0427
+  },
+  "top_funcs": [
+    [
+      "???:Eigen::internal::general_matrix_vector_product<long, double, Eigen::internal::const_blas_data_mapper<double, long, 0>, 0, false, double, Eigen::internal::const_blas_data_mapper<double, long, 1>, false, 0>::run(long, long, Eigen::internal::const_blas_data_mapper<double, long, 0> const&, Eigen::internal::const_blas_data_mapper<double, long, 1> const&, double*, long, double) [clone .isra.0] [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      496970088,
+      0.0903
+    ],
+    [
+      "???:Eigen::internal::general_matrix_vector_product<long, double, Eigen::internal::const_blas_data_mapper<double, long, 1>, 1, false, double, Eigen::internal::const_blas_data_mapper<double, long, 0>, false, 0>::run(long, long, Eigen::internal::const_blas_data_mapper<double, long, 1> const&, Eigen::internal::const_blas_data_mapper<double, long, 0> const&, double*, long, double) [clone .constprop.0] [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      456270134,
+      0.0829
+    ],
+    [
+      "???:stan::math::stack_alloc::alloc(unsigned long) [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      283630967,
+      0.0515
+    ],
+    [
+      "???:stan::return_type<Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&>::type stan::math::normal_lpdf<false, Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, (void*)0>(Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&) [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      261284474,
+      0.0475
+    ],
+    [
+      "???:Eigen::Matrix<stan::return_type<stan::base_type<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> >, void>::type, stan::math::var_value<double, void>, stan::base_type<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::type, stan::base_type<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >, void>::type, stan::base_type<std::vector<Eigen::Matrix<double, -1, 1, 0, -1, 1>, std::allocator<Eigen::Matrix<double, -1, 1, 0, -1, 1> > >, void>::type>::type, -1, 1, 0, -1, 1> model_model_namespace::gpa<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> >, stan::math::var_value<double, void>, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >, std::vector<Eigen::Matrix<double, -1, 1, 0, -1, 1>, std::allocator<Eigen::Matrix<double, -1, 1, 0, -1, 1> > >, (void*)0>(Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, stan::math::var_value<double, void> const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const&, std::vector<Eigen::Matrix<double, -1, 1, 0, -1, 1>, std::allocator<Eigen::Matrix<double, -1, 1, 0, -1, 1> > > const&, std::ostream*) [clone .isra.0] [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      258858394,
+      0.047
+    ],
+    [
+      "???:auto stan::math::add<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, (void*)0>(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>&&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&&) [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      230003805,
+      0.0418
+    ],
+    [
+      "./malloc/./malloc/malloc.c:_int_free [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      205494806,
+      0.0373
+    ],
+    [
+      "./malloc/./malloc/malloc.c:_int_malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      203315625,
+      0.0369
+    ],
+    [
+      "???:auto stan::math::multiply<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, (void*)0, (void*)0, (void*)0>(Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&&) [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      196211214,
+      0.0356
+    ],
+    [
+      "./math/../sysdeps/ieee754/dbl-64/e_exp.c:__ieee754_exp_fma [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      195313469,
+      0.0355
+    ],
+    [
+      "???:stan::scalar_type<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::type model_model_namespace::model_model::log_prob_impl<true, true, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::Matrix<int, -1, 1, 0, -1, 1>, (void*)0, (void*)0, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, Eigen::Matrix<int, -1, 1, 0, -1, 1>&, std::ostream*) const [clone .isra.0] [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      191713186,
+      0.0348
+    ],
+    [
+      "???:stan::math::vari_base*& std::vector<stan::math::vari_base*, std::allocator<stan::math::vari_base*> >::emplace_back<stan::math::vari_base*>(stan::math::vari_base*&&) [clone .isra.0] [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      190618111,
+      0.0346
+    ],
+    [
+      "???:double __vector(2) Eigen::internal::plog_impl_double<double __vector(2), false>(double __vector(2)) [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      190389078,
+      0.0346
+    ],
+    [
+      "???:auto stan::math::add<stan::math::var_value<double, void>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, 1, 0, -1, 1> >, (void*)0, (void*)0>(stan::math::var_value<double, void> const&, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&) [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      186573190,
+      0.0339
+    ],
+    [
+      "???:void stan::math::gradient<stan::model::model_functional<stan::model::model_base> >(stan::model::model_functional<stan::model::model_base> const&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, double&, Eigen::Matrix<double, -1, 1, 0, -1, 1>&) [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      177663634,
+      0.0323
+    ],
+    [
+      "./malloc/./malloc/malloc.c:malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      107857876,
+      0.0196
+    ],
+    [
+      "???:stan::math::internal::reverse_pass_callback_vari<stan::math::add<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, (void*)0>(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>&&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&&)::{lambda()#1}>::chain() [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      95518456,
+      0.0174
+    ],
+    [
+      "./math/./w_exp_template.c:exp@@GLIBC_2.29 [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      95447714,
+      0.0173
+    ],
+    [
+      "???:void stan::math::internal::update_adjoints<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, stan::math::arena_matrix<Eigen::Matrix<double, -1, 1, 0, -1, 1>, void>, (void*)0, (void*)0>(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>&, stan::math::arena_matrix<Eigen::Matrix<double, -1, 1, 0, -1, 1>, void> const&, stan::math::var_value<double, void> const&) [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      82790592,
+      0.015
+    ],
+    [
+      "???:auto stan::math::elt_multiply<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >, (void*)0, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const&) [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      79246008,
+      0.0144
+    ],
+    [
+      "???:stan::return_type<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double, double>::type stan::math::normal_lpdf<false, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double, double, (void*)0>(Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double&&, double&&) [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      62855411,
+      0.0114
+    ],
+    [
+      "./malloc/./malloc/malloc.c:free [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      61949105,
+      0.0113
+    ],
+    [
+      "???:void stan::model::internal::assign_impl<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, stan::math::Holder<Eigen::CwiseUnaryOp<stan::math::apply_scalar_unary<stan::math::sqrt_fun, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::apply<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> >(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&&)::{lambda(auto:1&&)#1}::operator()<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&&) const::{lambda(auto:1&&)#1}, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const>, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> >, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&&, stan::math::Holder<Eigen::CwiseUnaryOp<stan::math::apply_scalar_unary<stan::math::sqrt_fun, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::apply<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> >(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&&)::{lambda(auto:1&&)#1}::operator()<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&&) const::{lambda(auto:1&&)#1}, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const>, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> >&&, char const*) [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      59434514,
+      0.0108
+    ],
+    [
+      "???:void Eigen::internal::gemv_dense_selector<2, 1, true>::run<Eigen::Transpose<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >, Eigen::CwiseUnaryOp<Eigen::MatrixBase<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > >::adj_Op, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > >, Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::Transpose<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > > const&, Eigen::CwiseUnaryOp<Eigen::MatrixBase<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > >::adj_Op, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > > const&, Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1>::Scalar const&) [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      51863072,
+      0.0094
+    ],
+    [
+      "???:void stan::model::internal::assign_impl<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>&&, char const*) [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      46643296,
+      0.0085
+    ]
+  ],
+  "top_leftover": [
+    [
+      "???:stan::math::stack_alloc::alloc(unsigned long) [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      283630967
+    ],
+    [
+      "./math/../sysdeps/ieee754/dbl-64/e_exp.c:__ieee754_exp_fma [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      195313469
+    ],
+    [
+      "./math/./w_exp_template.c:exp@@GLIBC_2.29 [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      95447714
+    ],
+    [
+      "./math/../sysdeps/ieee754/dbl-64/e_lgamma_r.c:__lgamma_r_finite@GLIBC_2.15 [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      33198144
+    ],
+    [
+      "./math/../sysdeps/ieee754/dbl-64/e_log.c:__ieee754_log_fma [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      24035039
+    ],
+    [
+      "./math/../sysdeps/ieee754/dbl-64/math_config.h:__ieee754_exp_fma",
+      17730623
+    ],
+    [
+      "./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:__memset_avx2_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      17501241
+    ],
+    [
+      "???:stan::return_type<double, double, double, double>::type stan::math::student_t_lccdf<double, double, double, double>(double const&, double const&, double const&, double const&) [clone .constprop.0] [/home/m0hawk/Documents/apin/stan/build/accel_gp__default/model]",
+      14338536
+    ],
+    [
+      "???:0x0000000000121b80 [???]",
+      11877268
+    ],
+    [
+      "???:0x0000000004adc380 [???]",
+      11877268
+    ]
+  ]
+}

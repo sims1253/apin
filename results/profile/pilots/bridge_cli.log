@@ -1,0 +1,40 @@
+    total time: 0.00850792s
+logp_grad time: 0.00788199s
+logp_grad fraction: 0.92643
+        logp_grad calls: 5188
+        time per call: 1.51927e-06s
+
+Adaptation completed.
+Macro time = 0.166126
+Mass matrix diagonal = [  0.0584762
+  0.0362847
+  0.0470089
+  0.0275932
+  0.0413904
+   0.230139
+   0.121418
+    0.16761
+   0.150347
+    0.60499
+   0.179815
+   0.293236
+    0.12538
+0.000170931
+ 0.00159549
+   0.426558
+   0.211749
+  0.0688395]
+    total time: 0.00935574s
+logp_grad time: 0.00847548s
+logp_grad fraction: 0.905912
+        logp_grad calls: 5683
+        time per call: 1.49137e-06s
+
+a.1: mean = 5.77464, stddev = 0.09834
+a.2: mean = 5.77725, stddev = 0.0953692
+a.3: mean = 5.77694, stddev = 0.0876025
+a.4: mean = 5.77432, stddev = 0.0900207
+... elided 52 rows ...
+y_hat.38: mean = 0.935197, stddev = 0.0942154
+y_hat.39: mean = 0.161323, stddev = 0.0897488
+y_hat.40: mean = 0.905858, stddev = 0.100635

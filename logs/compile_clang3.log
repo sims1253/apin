@@ -1,0 +1,22 @@
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[compile] eight_schools_noncentered/clang_native: 32.2s
+[compile] blr/clang_native: 25.2s
+[compile] kidscore_momiq/clang_native: 27.0s
+[compile] lsat_model/clang_native: 29.0s
+[compile] logmesquite_logvash/clang_native: 22.1s
+[compile] wells_dist100_model/clang_native: 23.2s
+[compile] diamonds/clang_native: 24.9s
+[compile] radon_partially_pooled_noncentered/clang_native: 32.3s
+[compile] radon_variable_intercept_slope_noncentered/clang_native: 35.1s
+[compile] dogs_hierarchical/clang_native: 22.6s
+[compile] pilots/clang_native: 32.8s
+[compile] hier_2pl/clang_native: 53.7s
+[compile] gp_regr/clang_native: 43.5s
+[compile] kronecker_gp/clang_native: 53.1s
+[compile] accel_gp/clang_native: 50.8s
+[compile] bym2_offset_only/clang_native: 29.1s
+[compile] eight_schools_centered/clang_native: 27.1s
+[compile] garch11/clang_native: 24.0s
+[compile] lotka_volterra/clang_native: 37.1s
+[compile] low_dim_gauss_mix/clang_native: 25.6s
+[compile] arma11/clang_native: 24.0s

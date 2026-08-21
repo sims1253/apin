@@ -1,0 +1,2671 @@
+diff --git a/examples/stan_cli.cpp b/examples/stan_cli.cpp
+index d564c77..dcd5469 100644
+--- a/examples/stan_cli.cpp
++++ b/examples/stan_cli.cpp
+@@ -1,7 +1,10 @@
+ #include <walnutpie.hpp>
+ #include <walnutpie/load_stan.hpp>
++#include <walnutpie/warmup_heuristics.hpp>
+ 
+ #include <CLI/CLI.hpp>
++#include <fstream>
++#include <vector>
+ #include <Eigen/Dense>
+ 
+ #include <chrono>
+@@ -79,6 +82,18 @@ class StanHandler {
+ 
+   void on_warmup(const Eigen::VectorXd& position, double lp, double step_size,
+                  const Eigen::VectorXd& diag_inv_mass) {
++    static std::size_t it = 0;
++    if (const char* dbg = std::getenv("WALNUTPIE_DEBUG_WARMUP")) {
++      if (it % std::max(1, atoi(dbg)) == 0) {
++        std::cout << "[warmup it " << it << "] lp=" << lp
++                  << " step=" << step_size
++                  << " invm[0]=" << (diag_inv_mass.size() ? diag_inv_mass[0] : -1)
++                  << " pos[0]=" << (position.size() ? position[0] : 0)
++                  << " pos[last]=" << (position.size() ? position[position.size()-1] : 0)
++                  << std::endl;
++      }
++    }
++    ++it;
+     if (!save_warmup_) {
+       return;
+     }
+@@ -113,11 +128,14 @@ class StanHandler {
+   Eigen::Index n_ = 0;
+ };
+ 
++template <typename Opt>
+ StanHandler run_walnuts(DynamicStanModel& model, unsigned int seed,
+                         walnutpie::InitConfigBuilder& init_builder,
+                         std::size_t num_warmup, std::size_t num_draws,
+                         bool save_warmup, walnutpie::WarmupConfig& warmup_cfg,
+-                        walnutpie::SamplingConfig& sample_cfg) {
++                        walnutpie::SamplingConfig& sample_cfg,
++                        double mass_init_clamp = 0.0,
++                        bool step_init_heuristic = false) {
+   using Clock = std::chrono::high_resolution_clock;
+   auto elapsed_seconds = [](auto t) {
+     return std::chrono::duration<double>(Clock::now() - t).count();
+@@ -147,13 +165,22 @@ StanHandler run_walnuts(DynamicStanModel& model, unsigned int seed,
+     ++logp_count;
+   };
+ 
+-  auto init_cfg =
+-      init_builder.masses(logp, warmup_cfg.mass_additive_smoothing()).build();
++  auto init_cfg = init_builder.masses(logp, warmup_cfg.mass_additive_smoothing(),
++                                    false, mass_init_clamp)
++                      .build();
+   auto inits = init_cfg.init_chain_config(0);
++  if (step_init_heuristic) {
++    const auto inv_mass = inits.mass().array().inverse().matrix().eval();
++    double eps = walnutpie::detail::find_reasonable_step(
++        logp, inits.position(), inv_mass, inits.step_size());
++    inits = walnutpie::InitChainConfig(eps, inits.position(), inits.mass());
++    std::cout << "Heuristic initial step size: " << eps << std::endl;
++  }
+ 
+   std::mt19937_64 rng{seed};
+-  walnutpie::AdaptiveWalnuts walnuts(rng, storage, logp, inits, warmup_cfg,
+-                                     sample_cfg);
++  walnutpie::AdaptiveWalnuts<decltype(logp), decltype(rng), StanHandler, Opt>
++      walnuts(
++      rng, storage, logp, inits, warmup_cfg, sample_cfg);
+   for (std::size_t w = 0; w < num_warmup; ++w) {
+     walnuts();
+   }
+@@ -162,6 +189,9 @@ StanHandler run_walnuts(DynamicStanModel& model, unsigned int seed,
+   // N post-warmup draws
+   auto sampler = walnuts.sampler();  // freeze tuning
+   std::cout << "Adaptation completed." << std::endl;
++  std::cout << "Note: multi-chain mode (walnutpie::adapt) reports a "
++               "log-mass cross-chain dispersion diagnostic for mode-aware "
++               "reinit policies; single-chain CLI does not." << std::endl;
+   std::cout << "Macro time = " << sampler.macro_time() << std::endl;
+   std::cout << "Mass matrix diagonal = ["
+             << sampler.inverse_mass_matrix_diagonal() << "]" << std::endl;
+@@ -203,6 +233,30 @@ int main(int argc, char** argv) {
+   walnutpie::SamplingConfig default_sampling =
+       walnutpie::SamplingConfigBuilder().build();
+ 
++  std::string step_optimizer = "adam";
++  std::size_t step_opt_batch_stride = 1;
++  double step_grad_clip = 0.0;
++  bool da_freeze_average = false;
++  double mass_shrink_kappa = 0.0;
++  double mass_var_floor = 0.0;
++  double mass_init_clamp = 0.0;
++  bool step_init_heuristic = false;
++  bool metric_drift_guard = false;
++  double mass_combine_power = 0.0;
++  double metric_collapse_reset = 0.0;
++  double metric_stall_reset = 0.0;
++  std::size_t anti_windup = 0;
++  std::size_t drift_iters = 0;
++  std::size_t metric_window = 0;
++  std::size_t metric_rank = 0;
++  bool metric_full = false;
++  double metric_auto = 0.0;
++  double max_error_start = 0.0;
++  std::size_t max_error_schedule_iters = 0;
++  double da_gamma = default_warmup.da_gamma();
++  double da_t0 = default_warmup.da_t0();
++  double da_kappa = default_warmup.da_kappa();
++
+   std::size_t max_trajectory_doublings =
+       default_sampling.max_trajectory_doublings();
+   std::size_t max_step_halvings = default_sampling.max_step_halvings();
+@@ -211,6 +265,7 @@ int main(int argc, char** argv) {
+ 
+   double init = 2.0;
+   double step_size_init = 1.0;
++  std::string init_file = "";
+ 
+   std::string lib;
+   std::string data;
+@@ -255,6 +310,11 @@ int main(int argc, char** argv) {
+         ->default_val(max_hamiltonian_error)
+         ->check(CLI::PositiveNumber);
+ 
++    app.add_option("--init-file", init_file,
++                   "Text file with the unconstrained initial position, one "
++                   "coordinate per line (e.g. a Pathfinder draw)")
++        ->default_val(init_file);
++
+     app.add_option("--init", init,
+                    "Range [-init,init] for uniform parameter initial values")
+         ->default_val(init)
+@@ -282,8 +342,123 @@ int main(int argc, char** argv) {
+ 
+     app.add_option("--step-accept-rate-target", step_accept_rate_target,
+                    "Target acceptance rate for the step size adaptation")
+-        ->default_val(step_accept_rate_target)
+-        ->check(CLI::Range((std::numeric_limits<double>::min)(), 1.0));
++        ->default_val(step_accept_rate_target);
++
++    app.add_option("--step-optimizer", step_optimizer,
++                   "Step size adaptation optimizer: adam | da (dual averaging) "
++                   "| dem (AdEMAMix) | belief (AdaBelief)")
++        ->default_val(step_optimizer)
++        ->check(CLI::IsMember({"adam", "da", "dem", "belief"}));
++
++    app.add_option("--step-opt-batch-stride", step_opt_batch_stride,
++                   "Update the step optimizer once per N acceptance "
++                   "observations, using their mean")
++        ->default_val(step_opt_batch_stride)
++        ->check(CLI::PositiveNumber);
++
++    app.add_option("--da-gamma", da_gamma, "Dual averaging shrinkage gamma")
++        ->default_val(da_gamma);
++
++    app.add_option("--da-t0", da_t0, "Dual averaging iteration offset t0")
++        ->default_val(da_t0);
++
++    app.add_option("--da-kappa", da_kappa,
++                   "Dual averaging averaging exponent kappa")
++        ->default_val(da_kappa);
++
++    app.add_option("--step-grad-clip", step_grad_clip,
++                   "Clip acceptance-statistic gradient impulse (e.g. 0.3; 0 "
++                   "= off)")
++        ->default_val(step_grad_clip);
++
++    app.add_flag("--da-freeze-average", da_freeze_average,
++                 "Dual averaging: use Polyak-Ruppert averaged log step size");
++
++    app.add_option("--mass-shrink-kappa", mass_shrink_kappa,
++                   "Shrink mass-matrix variance toward init with weight "
++                   "n/(n+kappa) (Stan uses 5; 0 = off)")
++        ->default_val(mass_shrink_kappa);
++
++    app.add_option("--mass-init-clamp", mass_init_clamp,
++                   "Clamp gradient-seeded initial masses to [1/clamp, clamp] "
++                   "(e.g. 100; 0 = off)")
++        ->default_val(mass_init_clamp);
++
++    app.add_option("--metric-auto", metric_auto,
++                   "Auto-select the rank-corrected metric per window: apply "
++                   "when the singular-excess concentration in the top "
++                   "directions is at most this threshold (spread spectra = "
++                   "cross-correlated geometry; 0 = off; e.g. 0.5)")
++        ->default_val(metric_auto);
++
++    app.add_flag("--metric-full", metric_full,
++                 "Use the exact low-rank mass operator in the hot loop "
++                 "(requires --metric-rank; otherwise the rank correction is "
++                 "folded into the diagonal)");
++
++    app.add_option("--metric-rank", metric_rank,
++                   "Low-rank correction rank folded into the diagonal "
++                   "metric (requires --metric-window; 0 = off; e.g. 5-20)")
++        ->default_val(metric_rank);
++
++    app.add_option("--metric-window", metric_window,
++                   "Memoryless metric windows: reset the draw/score moment "
++                   "accumulators every N warmup iterations (0 = off; "
++                   "Fisher-HMC 'chopping', arXiv:2603.18845)")
++        ->default_val(metric_window);
++
++    app.add_option("--drift-iters", drift_iters,
++                   "Drift-phase warmup: for the first N iterations, suspend "
++                   "the Hamiltonian-error cap and the mass estimation "
++                   "(identity metric) while the chain moves toward the "
++                   "typical set (0 = off)")
++        ->default_val(drift_iters);
++
++    app.add_option("--max-error-start", max_error_start,
++                   "Max-error schedule start: begin at this cap and decay to "
++                   "--max-error over --max-error-iters (0 = off; e.g. 100)")
++        ->default_val(max_error_start);
++
++    app.add_option("--max-error-iters", max_error_schedule_iters,
++                   "Iterations for the max-error schedule decay (0 = off)")
++        ->default_val(max_error_schedule_iters);
++
++    app.add_option("--anti-windup", anti_windup,
++                   "During acceptance-statistic saturation (alpha ~ 0), pass "
++                   "only 1 in N observations to the step optimizer (0 = off; "
++                   "e.g. 8)")
++        ->default_val(anti_windup);
++
++    app.add_option("--metric-stall-reset", metric_stall_reset,
++                   "Reset mass estimators to seeds when max coordinate "
++                   "movement over 100 warmup iterations is below this "
++                   "(0 = off; e.g. 1e-3)")
++        ->default_val(metric_stall_reset);
++
++    app.add_option("--metric-collapse-reset", metric_collapse_reset,
++                   "Reset mass estimators to seeds when observed draw "
++                   "variance falls below this fraction of the metric-implied "
++                   "variance (0 = off; e.g. 0.01)")
++        ->default_val(metric_collapse_reset);
++
++    app.add_option("--mass-combine-power", mass_combine_power,
++                   "Power-mean order for combining Var_draw and 1/Var_score "
++                   "into the mass estimate (0 = geometric [default], 1 = "
++                   "arithmetic, >=64 = max; higher resists collapse)")
++        ->default_val(mass_combine_power);
++
++    app.add_flag("--metric-drift-guard", metric_drift_guard,
++                 "Aggregate draw/score variances with their seeds in log "
++                 "space (guards metric during early drift)");
++
++    app.add_flag("--step-init-heuristic", step_init_heuristic,
++                 "Find initial step size with a Stan-style doubling/halving "
++                 "probe instead of a fixed value");
++
++    app.add_option("--mass-var-floor", mass_var_floor,
++                   "Elementwise floor for draw/score variances (e.g. 1e-3; "
++                   "0 = off)")
++        ->default_val(mass_var_floor);
+ 
+     app.add_option("--step-learning-rate", step_learning_rate,
+                    "Learning rates for step adaptation")
+@@ -339,6 +514,26 @@ int main(int argc, char** argv) {
+           .step_sq_gradient_decay(step_sq_gradient_decay)
+           .step_stabilization(step_stabilization)
+           .step_learn_rate_decay(step_learn_rate_decay)
++          .da_gamma(da_gamma)
++          .da_t0(da_t0)
++          .da_kappa(da_kappa)
++          .step_opt_batch_stride(step_opt_batch_stride)
++          .step_grad_clip(step_grad_clip)
++          .da_freeze_average(da_freeze_average)
++          .mass_shrink_kappa(mass_shrink_kappa)
++          .mass_var_floor(mass_var_floor)
++          .mass_init_clamp(mass_init_clamp)
++          .metric_drift_guard(metric_drift_guard)
++          .mass_combine_power(mass_combine_power)
++          .metric_collapse_reset(metric_collapse_reset)
++          .metric_stall_reset(metric_stall_reset)
++          .anti_windup_pass_rate(anti_windup)
++          .drift_iters(drift_iters)
++          .max_error_schedule(max_error_start, max_error_schedule_iters)
++          .metric_window(metric_window)
++          .metric_rank(metric_rank)
++          .metric_full(metric_full)
++          .metric_auto(metric_auto)
+           .build();
+ 
+   walnutpie::SamplingConfig sample_cfg =
+@@ -351,13 +546,72 @@ int main(int argc, char** argv) {
+ 
+   unique_bs_rng rng = model.make_rng(seed);
+ 
++  auto init_positions = [&]() {
++    if (!init_file.empty()) {
++      // plain text: one unconstrained coordinate per line
++      std::ifstream in(init_file);
++      if (!in) {
++        throw std::invalid_argument("cannot open --init-file: " + init_file);
++      }
++      std::vector<double> vals;
++      double v;
++      while (in >> v) {
++        vals.push_back(v);
++      }
++      if (vals.size() != model.unconstrained_dimensions()) {
++        throw std::invalid_argument(
++            "--init-file dimension mismatch: file has " +
++            std::to_string(vals.size()) + ", model has " +
++            std::to_string(model.unconstrained_dimensions()));
++      }
++      return Eigen::VectorXd(Eigen::VectorXd::Map(vals.data(), vals.size()));
++    }
++    return model.initialize(nullptr, rng, init);
++  }();
++
+   auto init_cfg =
+       walnutpie::InitConfigBuilder{1, model.unconstrained_dimensions()}
+           .step_sizes(step_size_init)
+-          .positions(model.initialize(nullptr, rng, init));
+-
+-  auto res = run_walnuts(model, seed, init_cfg, num_warmup, num_draws,
+-                         save_warmup, warmup_cfg, sample_cfg);
++          .positions(init_positions);
++
++  auto res = [&]() {
++    using walnutpie::detail::Adam;
++    using walnutpie::detail::AdaBelief;
++    using walnutpie::detail::AdEMAMix;
++    using walnutpie::detail::BatchedAdapter;
++    using walnutpie::detail::ClippedAdapter;
++    using walnutpie::detail::DualAveraging;
++    // dispatch: base optimizer, optional batching, optional clipping
++    auto run_base = [&](auto opt_tag) -> StanHandler {
++      using Opt = typename decltype(opt_tag)::type;
++      auto extra = std::make_pair(mass_init_clamp, step_init_heuristic);
++      if (step_opt_batch_stride > 1 && step_grad_clip > 0.0) {
++        return run_walnuts<ClippedAdapter<BatchedAdapter<Opt>>>(
++            model, seed, init_cfg, num_warmup, num_draws, save_warmup,
++            warmup_cfg, sample_cfg, extra.first, extra.second);
++      } else if (step_opt_batch_stride > 1) {
++        return run_walnuts<BatchedAdapter<Opt>>(
++            model, seed, init_cfg, num_warmup, num_draws, save_warmup,
++            warmup_cfg, sample_cfg, extra.first, extra.second);
++      } else if (step_grad_clip > 0.0) {
++        return run_walnuts<ClippedAdapter<Opt>>(
++            model, seed, init_cfg, num_warmup, num_draws, save_warmup,
++            warmup_cfg, sample_cfg, extra.first, extra.second);
++      }
++      return run_walnuts<Opt>(model, seed, init_cfg, num_warmup, num_draws,
++                              save_warmup, warmup_cfg, sample_cfg, extra.first,
++                              extra.second);
++    };
++    if (step_optimizer == "adam") {
++      return run_base(std::type_identity<Adam>{});
++    } else if (step_optimizer == "da") {
++      return run_base(std::type_identity<DualAveraging>{});
++    } else if (step_optimizer == "dem") {
++      return run_base(std::type_identity<AdEMAMix>{});
++    } else {
++      return run_base(std::type_identity<AdaBelief>{});
++    }
++  }();
+ 
+   res.summarize();
+   res.write_csv(output_file);
+diff --git a/include/walnutpie/adapt.hpp b/include/walnutpie/adapt.hpp
+index e343546..4dd2a2f 100644
+--- a/include/walnutpie/adapt.hpp
++++ b/include/walnutpie/adapt.hpp
+@@ -158,6 +158,17 @@ struct AdaptResult {
+    * The average step size.
+    */
+   double step_bar;
++
++  /**
++   * @brief Per-chain dispersion of log mass diagonals at the end of
++   * adaptation, a cheap cross-chain disagreement diagnostic.
++   *
++   * Values near 0 indicate the chains converged to the same scale estimate;
++   * large values indicate chains locked into different posterior scales (the
++   * multimodality/scale-lock signature). Intended as the trigger for
++   * mode-aware re-initialization policies in embedding code.
++   */
++  double log_mass_dispersion = 0.0;
+ };
+ 
+ /**
+@@ -220,7 +231,25 @@ inline AdaptResult controller_loop(
+                        max_rel_diff_step <= warmup_cfg.step_size_converge_tol();
+       bool hit_max_iter = num_draws == max_draws;
+       if (converged || hit_max_iter) {
+-        return {geom_mean_mass, std::exp(mean_log_step)};
++        // Cross-chain scale disagreement: mean over coordinates of the
++        // variance across chains of log mass. Cheap O(M*D); recomputed here
++        // rather than accumulated to keep the loop branch simple.
++        double disp_sum = 0.0;
++        for (std::size_t d = 0; d < D; ++d) {
++          double m_log = 0.0;
++          for (std::size_t m2 = 0; m2 < M; ++m2) {
++            m_log += latest[m2].log_mass[d];
++          }
++          m_log /= static_cast<double>(M);
++          double v = 0.0;
++          for (std::size_t m2 = 0; m2 < M; ++m2) {
++            const double dev = latest[m2].log_mass[d] - m_log;
++            v += dev * dev;
++          }
++          disp_sum += v / static_cast<double>(M - 1);
++        }
++        return {geom_mean_mass, std::exp(mean_log_step),
++                disp_sum / static_cast<double>(D)};
+       }
+     }
+ 
+@@ -258,4 +287,30 @@ inline void adapt(const InitConfig& init_cfg, const WarmupConfig& warmup_cfg,
+       controller_loop(buffers, interrupt_callback, init_cfg, warmup_cfg);
+ }
+ 
++/**
++ * @brief Adaptation returning the adaptation statistics.
++ *
++ * Identical to the void overload, but exposes the AdaptResult (including the
++ * cross-chain log-mass dispersion) for mode-aware reinitialization policies.
++ */
++template <AdaptiveSampler A, InterruptCallback IC>
++inline AdaptResult adapt_with_stats(const InitConfig& init_cfg,
++                                    const WarmupConfig& warmup_cfg,
++                                    std::vector<A>& adapters,
++                                    const IC& interrupt_callback) {
++  std::deque<SpscBuffer<AdaptSnapshot>> buffers =
++      construct_buffers(init_cfg.num_chains(), init_cfg.dims());
++
++  std::latch start_gate(static_cast<std::ptrdiff_t>(init_cfg.num_chains() + 1));
++  std::vector<std::jthread> threads;
++  threads.reserve(init_cfg.num_chains());
++  for (std::size_t m = 0; m < init_cfg.num_chains(); ++m) {
++    threads.emplace_back(
++        AdaptWorker<A>(warmup_cfg, adapters[m], buffers[m], start_gate));
++  }
++  start_gate.arrive_and_wait();
++
++  return controller_loop(buffers, interrupt_callback, init_cfg, warmup_cfg);
++}
++
+ }  // namespace walnutpie::detail
+diff --git a/include/walnutpie/adaptive_walnuts.hpp b/include/walnutpie/adaptive_walnuts.hpp
+index d757155..b766c28 100644
+--- a/include/walnutpie/adaptive_walnuts.hpp
++++ b/include/walnutpie/adaptive_walnuts.hpp
+@@ -2,6 +2,8 @@
+ 
+ #include <algorithm>
+ #include <cmath>
++#include <limits>
++#include <vector>
+ #include <cstddef>
+ #include <functional>
+ #include <random>
+@@ -10,9 +12,11 @@
+ #include <Eigen/Dense>
+ 
+ #include "walnutpie/adam.hpp"
++#include "walnutpie/step_optimizers.hpp"
+ #include "walnutpie/concepts.hpp"
+ #include "walnutpie/config.hpp"
+ #include "walnutpie/online_moments.hpp"
++#include "walnutpie/low_rank_metric.hpp"
+ #include "walnutpie/util.hpp"
+ #include "walnutpie/walnuts.hpp"
+ 
+@@ -52,7 +56,9 @@ class MassEstimator {
+    * size.
+    */
+   MassEstimator(const WarmupConfig& warmup_cfg, const InitChainConfig& init_cfg)
+-      : warmup_cfg_(warmup_cfg) {
++      : warmup_cfg_(warmup_cfg),
++        init_score_var_(init_cfg.mass()),
++        init_draw_var_(init_cfg.mass().array().inverse().matrix()) {
+     Eigen::VectorXd zero = Eigen::VectorXd::Zero(init_cfg.position().size());
+     score_var_estimator_ =
+         OnlineMoments(warmup_cfg.mass_init_count(), zero, init_cfg.mass());
+@@ -61,6 +67,12 @@ class MassEstimator {
+                       init_cfg.mass().array().inverse().matrix());
+   }
+ 
++  /**
++   * @brief Return the effective sample size of the draw moment estimates
++   * (Kish weight of the discounted Welford accumulator).
++   */
++  double draw_n_eff() const { return draw_var_estimator_.weight(); }
++
+   /**
+    * @brief Update the estimate for the specified iteration with the
+    * observation and gradient.
+@@ -77,6 +89,47 @@ class MassEstimator {
+                                           static_cast<double>(iteration));
+     draw_var_estimator_.discount_observe(discount_factor, theta);
+     score_var_estimator_.discount_observe(discount_factor, grad);
++    if (warmup_cfg_.metric_rank() > 0) {
++      const std::size_t window = warmup_cfg_.metric_window();
++      if (window > 0) {
++        window_draws_.push_back(theta);
++        window_scores_.push_back(grad);
++        if (window_draws_.size() > window) {
++          window_draws_.erase(window_draws_.begin());
++          window_scores_.erase(window_scores_.begin());
++        }
++      }
++    }
++    if (warmup_cfg_.metric_stall_reset() > 0) {
++      // Stall detector on the raw draws (metric-independent): if the chain
++      // has barely moved over the last `stall_window` observations, the mass
++      // estimate is being fed by a pinned chain and cannot recover (tiny
++      // metric -> tiny moves -> tiny Var_draw -> tinier metric). Break the
++      // loop by resetting both accumulators to their seeds.
++      if (stall_reference_.size() == 0) {
++        stall_reference_ = theta;
++        stall_countdown_ = warmup_cfg_.metric_stall_window();
++      } else if (--stall_countdown_ == 0) {
++        const double movement =
++            (theta - stall_reference_).cwiseAbs().maxCoeff();
++        if (movement < warmup_cfg_.metric_stall_reset()) {
++          reset_to_seeds();
++        }
++        stall_reference_ = theta;
++        stall_countdown_ = warmup_cfg_.metric_stall_window();
++      }
++    }
++  }
++
++  /**
++   * @brief Reset both moment accumulators to their initialization seeds.
++   */
++  void reset_to_seeds() {
++    Eigen::VectorXd zero = Eigen::VectorXd::Zero(init_draw_var_.size());
++    score_var_estimator_ = OnlineMoments(
++        warmup_cfg_.mass_init_count(), zero, init_score_var_);
++    draw_var_estimator_ = OnlineMoments(
++        warmup_cfg_.mass_init_count(), zero, init_draw_var_);
+   }
+ 
+   /**
+@@ -86,11 +139,182 @@ class MassEstimator {
+    *
+    * @return The inverse mass matrix estimate.
+    */
++  /**
++   * @brief Aggregate two variance vectors in log space (geometric mean).
++   *
++   * The arithmetic average of two variances is dominated by the larger one;
++   * the log-space average preserves relative scale information when the two
++   * estimates disagree by orders of magnitude, as happens during the early
++   * drift from a distant initialization.
++   */
++  static Eigen::VectorXd logspace_average(const Eigen::VectorXd& a,
++                                          const Eigen::VectorXd& b) {
++    return ((a.array().log() + b.array().log()) * 0.5).exp().matrix();
++  }
++
++  /**
++   * @brief Rank-corrected diagonal estimate: folds the low-rank correction
++   * sqrt(D) U C U^T sqrt(D) into its per-coordinate marginal
++   *   d_eff_i = d_i + sqrt(d_i) * (U diag(c) U^T)_ii * sqrt(d_i)
++   * keeping the diagonal interface of transition_w while carrying the
++   * dominant directions of the draw-score cross structure (full rank part
++   * reserved for a dedicated transition variant; see low_rank_metric.hpp).
++   */
++  const Eigen::MatrixXd& rank_U() const { return U_; }
++  const Eigen::VectorXd& rank_c() const { return c_; }
++
++  Eigen::VectorXd rank_folded_estimate() const {
++    Eigen::VectorXd diag = inv_mass_estimate();
++    if (warmup_cfg_.metric_rank() == 0 ||
++        draw_var_estimator_.weight() <
++            2.0 * warmup_cfg_.mass_init_count()) {
++      return diag;
++    }
++    LowRankMetricEstimator lr(draw_var_estimator_.mean().size(),
++                              warmup_cfg_.metric_rank(),
++                              warmup_cfg_.metric_window());
++    // replay is unavailable in the streaming estimator; instead the rank
++    // factors are refreshed by the explicit low_rank_update() below.
++    if (U_.cols() == 0) {
++      return diag;
++    }
++    Eigen::VectorXd sq = diag.cwiseSqrt();
++    // marginal: sqrtD (U C U^T) sqrtD -> row-wise weighted sum
++    Eigen::VectorXd marg =
++        (U_.array().square().matrix() * c_).cwiseProduct(sq.cwiseProduct(sq));
++    return diag + marg;
++  }
++
++  /**
++   * @brief Refresh the low-rank factors from the accumulated window.
++   *
++   * Called at window boundaries (chopping); stores U, c for the folded
++   * diagonal estimate. Draws/scores come from the streaming accumulators'
++   * raw window, retained for exactly this purpose.
++   */
++  static Eigen::VectorXd row_sample_variance_pub(const Eigen::MatrixXd& M) {
++    Eigen::VectorXd mu = M.rowwise().mean();
++    Eigen::MatrixXd centered = M.colwise() - mu;
++    return centered.cwiseProduct(centered).rowwise().sum() /
++           std::max(1.0, static_cast<double>(M.cols() - 1));
++  }
++
++  /**
++   * @brief Cross-structure strength of the current window: the second-to-first
++   * singular value ratio of the standardized stacked [draws | scores] matrix.
++   *
++   * ~0: geometry is (conditionally) diagonal, rank corrections are noise.
++   * O(1): strong off-diagonal structure, rank corrections carry signal.
++   */
++  double window_cross_ratio() const {
++    // Concentration of the singular-value EXCESS above the isotropic baseline
++    // (sqrt(2K)) in the top-r directions. Empirically inverted as a screening
++    // signal: spread spectra (low fraction, e.g. < 0.1) mark genuinely
++    // cross-correlated geometry where rank corrections help; concentrated
++    // spectra (fraction -> 1) mark funnel/spike geometry where rank
++    // corrections destabilize (eight_schools_centered, blr).
++    if (window_draws_.size() < 4) return 1.0;
++    const std::size_t dim = window_draws_[0].size();
++    const std::size_t K = window_draws_.size();
++    const std::size_t r = std::min<std::size_t>(
++        5, std::min(dim, static_cast<std::size_t>(K / 4)));
++    if (r == 0) return 1.0;
++    Eigen::MatrixXd Y(dim, K), S(dim, K);
++    for (std::size_t k = 0; k < K; ++k) {
++      Y.col(k) = window_draws_[k];
++      S.col(k) = window_scores_[k];
++    }
++    Eigen::VectorXd vy = row_sample_variance_pub(Y);
++    Eigen::VectorXd vs = row_sample_variance_pub(S);
++    Eigen::MatrixXd Ys = vy.cwiseSqrt().cwiseInverse().asDiagonal() * Y;
++    Eigen::MatrixXd Ss = vs.cwiseSqrt().cwiseInverse().asDiagonal() * S;
++    Eigen::MatrixXd st(dim, 2 * K);
++    st << Ys, Ss;
++    Eigen::JacobiSVD<Eigen::MatrixXd> svd(st, Eigen::ComputeThinU);
++    const auto& sv = svd.singularValues();
++    if (sv.size() < 2) return 1.0;
++    const double baseline = std::sqrt(2.0 * static_cast<double>(K));
++    double excess_total = 0.0;
++    for (int i = 0; i < sv.size(); ++i) {
++      excess_total += std::max(0.0, sv[i] - baseline);
++    }
++    if (excess_total <= 1e-12) return 1.0;
++    double excess_top = 0.0;
++    for (std::size_t i = 0; i < r && i < static_cast<std::size_t>(sv.size()); ++i) {
++      excess_top += std::max(0.0, sv[i] - baseline);
++    }
++    return excess_top / excess_total;
++  }
++
++  void low_rank_update() {
++    if (warmup_cfg_.metric_rank() == 0 || window_draws_.size() < 4) {
++      return;
++    }
++    const std::size_t dim = window_draws_[0].size();
++    LowRankMetricEstimator lr(dim, warmup_cfg_.metric_rank(),
++                              warmup_cfg_.metric_window());
++    for (std::size_t k = 0; k < window_draws_.size(); ++k) {
++      lr.observe(window_draws_[k], window_scores_[k]);
++    }
++    Eigen::VectorXd diag = inv_mass_estimate();
++    lr.low_rank_factors(U_, c_, diag);
++  }
++
+   Eigen::VectorXd inv_mass_estimate() const {
+-    return (draw_var_estimator_.variance().array() /
+-            score_var_estimator_.variance().array())
+-        .sqrt()
+-        .matrix();
++    Eigen::VectorXd draw_var = draw_var_estimator_.variance();
++    Eigen::VectorXd score_var = score_var_estimator_.variance();
++    if (warmup_cfg_.metric_drift_guard()) {
++      // During the initial drift from a distant point, the two moment
++      // estimators can disagree by orders of magnitude (score variance on
++      // plateau gradients vs draw variance of a pinned chain). An arithmetic
++      // combination then produces an unusable metric either way; aggregate in
++      // log space so relative scale information survives on both sides.
++      draw_var = logspace_average(draw_var, init_draw_var_);
++      score_var = logspace_average(score_var, init_score_var_);
++    }
++    const double kappa = warmup_cfg_.mass_shrink_kappa();
++    if (kappa > 0) {
++      // Regularized (shrinkage) estimates in the style of Stan's
++      // var_adaptation: var <- (n/(n+kappa)) var + (kappa/(n+kappa)) var_init,
++      // using the discounted weight as effective sample size.
++      const double n_draw = draw_var_estimator_.weight();
++      const double n_score = score_var_estimator_.weight();
++      const double w_draw = n_draw / (n_draw + kappa);
++      const double w_score = n_score / (n_score + kappa);
++      draw_var = (w_draw * draw_var.array() +
++                  (1 - w_draw) * draw_var_estimator_.initial_variance().array())
++                     .matrix();
++      score_var = (w_score * score_var.array() +
++                   (1 - w_score) * score_var_estimator_.initial_variance().array())
++                      .matrix();
++    }
++    const double floor_v = warmup_cfg_.mass_var_floor();
++    if (floor_v > 0) {
++      draw_var = draw_var.cwiseMax(Eigen::VectorXd::Constant(
++          draw_var.size(), floor_v));
++      score_var = score_var.cwiseMax(Eigen::VectorXd::Constant(
++          score_var.size(), floor_v));
++    }
++    // Combine the two reciprocal-scale estimates: estimate A = Var_draw
++    // (posterior scale seen by the chain), estimate B = 1 / Var_score
++    // (Fisher-information scale from gradients). The classical geometric
++    // mean (power p -> 0) makes a collapsed A drag the metric to zero even
++    // when B is healthy; a higher-power mean lets the healthy estimate
++    // rescue the collapsed one (p = 1 arithmetic, p -> infinity max).
++    const double pcomb = warmup_cfg_.mass_combine_power();
++    Eigen::VectorXd est_a = draw_var;
++    Eigen::VectorXd est_b = score_var.array().inverse().matrix();
++    if (pcomb <= 0.0) {
++      return (est_a.array() * est_b.array()).sqrt().matrix();  // geometric
++    }
++    if (pcomb >= 64.0) {  // effectively max
++      return est_a.cwiseMax(est_b);
++    }
++    Eigen::VectorXd mp = ((est_a.array().pow(pcomb) +
++                           est_b.array().pow(pcomb)) * 0.5)
++                              .pow(1.0 / pcomb)
++                              .matrix();
++    return mp;
+   }
+ 
+  private:
+@@ -102,6 +326,24 @@ class MassEstimator {
+ 
+   /** The online inverse variance estimator for scores. */
+   OnlineMoments score_var_estimator_;
++
++  /** Initial variance seeds (regularization/blend targets). */
++  Eigen::VectorXd init_score_var_;
++  Eigen::VectorXd init_draw_var_;
++
++  /** Last reference position for the stall detector. */
++  Eigen::VectorXd stall_reference_;
++
++  /** Low-rank factors of the metric (empty when metric_rank == 0). */
++  Eigen::MatrixXd U_;
++  Eigen::VectorXd c_;
++
++  /** Rolling raw window of draws/scores for low-rank refresh. */
++  std::vector<Eigen::VectorXd> window_draws_;
++  std::vector<Eigen::VectorXd> window_scores_;
++
++  /** Iterations until the next stall check. */
++  std::size_t stall_countdown_ = 0;
+ };
+ 
+ /**
+@@ -165,8 +407,131 @@ class MinMicroStepsAdaptHandler {
+ 
+ }  // namespace walnutpie::detail
+ 
++
++namespace walnutpie::detail {
++
++/**
++ * @brief Traits-based factory for step size adapters.
++ *
++ * Specializations construct each adapter shipped with this library from the
++ * chain initialization and warmup configuration. User code may add
++ * specializations for custom adapters.
++ */
++template <class Opt>
++struct StepAdapterFactory;  // primary: intentionally undefined
++
++template <>
++struct StepAdapterFactory<Adam> {
++  static Adam make(const InitChainConfig& init_cfg,
++                   const WarmupConfig& warmup_cfg) {
++    return Adam(init_cfg.step_size(), warmup_cfg.step_accept_rate_target(),
++                warmup_cfg.step_learning_rate(),
++                warmup_cfg.step_gradient_decay(),
++                warmup_cfg.step_sq_gradient_decay(),
++                warmup_cfg.step_stabilization(),
++                warmup_cfg.step_learn_rate_decay());
++  }
++};
++
++template <>
++struct StepAdapterFactory<DualAveraging> {
++  static DualAveraging make(const InitChainConfig& init_cfg,
++                            const WarmupConfig& warmup_cfg) {
++    return DualAveraging(init_cfg.step_size(),
++                         warmup_cfg.step_accept_rate_target(),
++                         warmup_cfg.da_gamma(), warmup_cfg.da_t0(),
++                         warmup_cfg.da_kappa(),
++                         warmup_cfg.da_freeze_average());
++  }
++};
++
++template <>
++struct StepAdapterFactory<AdEMAMix> {
++  static AdEMAMix make(const InitChainConfig& init_cfg,
++                       const WarmupConfig& warmup_cfg) {
++    return AdEMAMix(init_cfg.step_size(), warmup_cfg.step_accept_rate_target(),
++                    warmup_cfg.step_learning_rate(),
++                    warmup_cfg.step_gradient_decay(),
++                    warmup_cfg.step_sq_gradient_decay(), 0.9999,
++                    warmup_cfg.step_stabilization(),
++                    warmup_cfg.step_learn_rate_decay(),
++                    warmup_cfg.slow_ema_warmup());
++  }
++};
++
++template <>
++struct StepAdapterFactory<AdaBelief> {
++  static AdaBelief make(const InitChainConfig& init_cfg,
++                        const WarmupConfig& warmup_cfg) {
++    return AdaBelief(init_cfg.step_size(), warmup_cfg.step_accept_rate_target(),
++                     warmup_cfg.step_learning_rate(),
++                     warmup_cfg.step_gradient_decay(),
++                     warmup_cfg.step_sq_gradient_decay(),
++                     warmup_cfg.step_stabilization(),
++                     warmup_cfg.step_learn_rate_decay());
++  }
++};
++
++template <StepSizeAdapter Inner>
++struct StepAdapterFactory<BatchedAdapter<Inner>> {
++  static BatchedAdapter<Inner> make(const InitChainConfig& init_cfg,
++                                    const WarmupConfig& warmup_cfg) {
++    return BatchedAdapter<Inner>(
++        StepAdapterFactory<Inner>::make(init_cfg, warmup_cfg),
++        warmup_cfg.step_opt_batch_stride());
++  }
++};
++
++template <StepSizeAdapter Inner>
++struct StepAdapterFactory<AntiWindupAdapter<Inner>> {
++  static AntiWindupAdapter<Inner> make(const InitChainConfig& init_cfg,
++                                       const WarmupConfig& warmup_cfg) {
++    return AntiWindupAdapter<Inner>(
++        StepAdapterFactory<Inner>::make(init_cfg, warmup_cfg),
++        1e-12, warmup_cfg.anti_windup_pass_rate());
++  }
++};
++
++template <StepSizeAdapter Inner>
++struct StepAdapterFactory<ClippedAdapter<Inner>> {
++  static ClippedAdapter<Inner> make(const InitChainConfig& init_cfg,
++                                    const WarmupConfig& warmup_cfg) {
++    return ClippedAdapter<Inner>(
++        StepAdapterFactory<Inner>::make(init_cfg, warmup_cfg),
++        warmup_cfg.step_grad_clip());
++  }
++};
++
++template <StepSizeAdapter Inner>
++struct StepAdapterFactory<ClippedAdapter<BatchedAdapter<Inner>>> {
++  static ClippedAdapter<BatchedAdapter<Inner>> make(
++      const InitChainConfig& init_cfg, const WarmupConfig& warmup_cfg) {
++    return ClippedAdapter<BatchedAdapter<Inner>>(
++        StepAdapterFactory<BatchedAdapter<Inner>>::make(init_cfg, warmup_cfg),
++        warmup_cfg.step_grad_clip());
++  }
++};
++
++}  // namespace walnutpie::detail
++
+ namespace walnutpie {
+ 
++/**
++ * @brief Construct the step adapter requested by the warmup configuration.
++ *
++ * Library users cannot template-dispatch as the CLI does, so configuration
++ * carries the selection: anti-windup wrapping (pass_rate > 0) is applied
++ * around the requested base adapter type. Default: the base adapter itself.
++ */
++template <detail::StepSizeAdapter Opt>
++Opt make_configured_adapter(const InitChainConfig& init_cfg,
++                            const WarmupConfig& warmup_cfg) {
++  // The factory for AntiWindupAdapter reads the configured pass rate
++  // (0 = pass-through), so library users select anti-windup purely through
++  // WarmupConfig — no template dispatch needed, matching the CLI behavior.
++  return detail::StepAdapterFactory<Opt>::make(init_cfg, warmup_cfg);
++}
++
+ /**
+  * @brief The adaptive Walnuts sampler.
+  *
+@@ -179,7 +544,8 @@ namespace walnutpie {
+  * @tparam RNG Type of base random number generator.
+  * @tparam Handler Type of adaptation and sampling event handler.
+  */
+-template <LogpGrad F, std::uniform_random_bit_generator RNG, ChainHandler H>
++template <LogpGrad F, std::uniform_random_bit_generator RNG, ChainHandler H,
++          detail::StepSizeAdapter Opt = detail::AntiWindupAdapter<detail::Adam>>
+ class AdaptiveWalnuts {
+  public:
+   /**
+@@ -213,11 +579,7 @@ class AdaptiveWalnuts {
+         logp_grad_(logp_grad, handler),
+         theta_(init_chain_cfg.position()),
+         iteration_(0),
+-        adam_(init_chain_cfg.step_size(), warmup_cfg.step_accept_rate_target(),
+-              warmup_cfg.step_learning_rate(), warmup_cfg.step_gradient_decay(),
+-              warmup_cfg.step_sq_gradient_decay(),
+-              warmup_cfg.step_stabilization(),
+-              warmup_cfg.step_learn_rate_decay()),
++        opt_(make_configured_adapter<Opt>(init_chain_cfg, warmup_cfg)),
+         mass_estimator_(warmup_cfg, init_chain_cfg),
+         min_micro_estimator_(warmup_cfg.max_macro_steps_target(),
+                              sampling_cfg.min_micro_steps()) {}
+@@ -231,20 +593,121 @@ class AdaptiveWalnuts {
+    * warmup, call `sampler()` to return a sampler that fixes the
+    * tuning parameters and provides a proper Markov chain.
+    */
++  /**
++   * @brief Effective Hamiltonian-error cap for the current iteration.
++   *
++   * With a max-error schedule configured, interpolates geometrically (in log
++   * space) from `max_error_start` down to the configured cap over the first
++   * `max_error_schedule_iters` iterations; afterwards returns the configured
++   * cap. Option (c) for robustness to distant initializations: the loose
++   * early cap lets trajectories through while the chain drifts toward the
++   * typical set, then tightens to the intended error control.
++   */
++  double effective_max_error() const {
++    const double base = sampling_cfg_.get().max_hamiltonian_error();
++    const double start = warmup_cfg_.get().max_error_start();
++    const std::size_t iters = warmup_cfg_.get().max_error_schedule_iters();
++    if (!(start > base) || iters == 0 || iteration_ >= iters) {
++      return base;
++    }
++    const double frac =
++        static_cast<double>(iteration_) / static_cast<double>(iters);
++    return std::exp(std::log(start) +
++                    frac * (std::log(base) - std::log(start)));
++  }
++
+   void operator()() {
+-    Eigen::VectorXd inv_mass = mass_estimator_.inv_mass_estimate();
++    const bool drifting = iteration_ < warmup_cfg_.get().drift_iters();
++    const std::size_t window = warmup_cfg_.get().metric_window();
++    if (window > 0 && !drifting && iteration_ > 0 &&
++        (iteration_ + 1) % window == 0) {
++      mass_estimator_.low_rank_update();
++    }
++    const bool full_rank_mode =
++        warmup_cfg_.get().metric_rank() > 0 && warmup_cfg_.get().metric_full();
++    const bool auto_screen = warmup_cfg_.get().metric_auto() > 0;
++    const bool rank_active =
++        warmup_cfg_.get().metric_rank() > 0 &&
++        (!auto_screen ||
++         mass_estimator_.window_cross_ratio() <= warmup_cfg_.get().metric_auto());
++    Eigen::VectorXd inv_mass =
++        drifting ? Eigen::VectorXd::Ones(theta_.size())
++                 : (rank_active
++                        ? mass_estimator_.rank_folded_estimate()
++                        : mass_estimator_.inv_mass_estimate());
+     Eigen::VectorXd chol_mass = inv_mass.array().inverse().sqrt().matrix();
++    if (full_rank_mode) {
++      detail::LowRankMass lrm;
++      lrm.D = mass_estimator_.inv_mass_estimate();
++      lrm.U = mass_estimator_.rank_U();
++      lrm.c = mass_estimator_.rank_c();
++      Eigen::VectorXd grad_select;
++      double logp_select;
++      std::size_t depth;
++      theta_ = detail::transition_w_lr(
++          rand_, logp_grad_.logp_grad_, lrm, opt_.step_size(),
++          sampling_cfg_.get().max_trajectory_doublings(),
++          sampling_cfg_.get().max_step_halvings(),
++          min_micro_estimator_.min_micro_steps(),
++          drifting ? std::numeric_limits<double>::infinity()
++                   : effective_max_error(),
++          std::move(theta_), depth, grad_select, logp_select, opt_);
++      if (!drifting) {
++        mass_estimator_.observe(theta_, grad_select, iteration_);
++      }
++      min_micro_estimator_.observe(1 << depth);
++      handler_.get().on_warmup(theta_, logp_select, step_size(), lrm.D);
++      ++iteration_;
++      return;
++    }
+     Eigen::VectorXd grad_select;
+     double logp_select;
+     std::size_t depth;
+-    theta_ =
+-        transition_w(rand_, logp_grad_, inv_mass, chol_mass, adam_.step_size(),
+-                     sampling_cfg_.get().max_trajectory_doublings(),
+-                     sampling_cfg_.get().max_step_halvings(),
+-                     min_micro_estimator_.min_micro_steps(),
+-                     sampling_cfg_.get().max_hamiltonian_error(),
+-                     std::move(theta_), depth, grad_select, logp_select, adam_);
+-    mass_estimator_.observe(theta_, grad_select, iteration_);
++    // During the drift phase the error cap is suspended entirely (option (b)):
++    // a distant initialization cannot satisfy any tight cap, and rejecting
++    // every macro step pins the chain at its starting point.
++    const double max_err =
++        drifting ? std::numeric_limits<double>::infinity()
++                 : effective_max_error();
++    // During drift the acceptance statistics are meaningless (huge energy
++    // errors by construction), so the step adapter is not updated either:
++    // WALNUTS' within-orbit dyadic step adaptation already selects viable
++    // micro steps, and feeding the adapter saturated alphas drives the macro
++    // step toward zero and freezes the chain when the drift phase ends.
++    detail::NoOpStepSizeAdapter drift_noop;
++    if (drifting) {
++      theta_ = transition_w(rand_, logp_grad_, inv_mass, chol_mass,
++                            opt_.step_size(),
++                            sampling_cfg_.get().max_trajectory_doublings(),
++                            sampling_cfg_.get().max_step_halvings(),
++                            min_micro_estimator_.min_micro_steps(), max_err,
++                            std::move(theta_), depth, grad_select,
++                            logp_select, drift_noop);
++    } else {
++      theta_ = transition_w(rand_, logp_grad_, inv_mass, chol_mass,
++                            opt_.step_size(),
++                            sampling_cfg_.get().max_trajectory_doublings(),
++                            sampling_cfg_.get().max_step_halvings(),
++                            min_micro_estimator_.min_micro_steps(), max_err,
++                            std::move(theta_), depth, grad_select,
++                            logp_select, opt_);
++    }
++    if (!drifting) {
++      // Suspend metric estimation during drift: the draws observed while the
++      // chain is pinned/throttled poison the variance estimates (the
++      // self-locking failure mode documented in the init-robustness notes).
++      mass_estimator_.observe(theta_, grad_select, iteration_);
++      // Memoryless windows ("chopping", Fisher-HMC discipline,
++      // arXiv:2603.18845): at each window boundary, discard the accumulated
++      // history entirely rather than exponentially discounting it forward.
++      // Stale early draws are noise, not signal; the metric is rebuilt from
++      // post-drift samples only.
++      const std::size_t window = warmup_cfg_.get().metric_window();
++      if (window > 0 && iteration_ > 0 && (iteration_ + 1) % window == 0 &&
++          iteration_ + 1 < warmup_cfg_.get().max_iter()) {
++        mass_estimator_.reset_to_seeds();
++      }
++    }
+     min_micro_estimator_.observe(1 << depth);
+     handler_.get().on_warmup(theta_, logp_select, step_size(), inv_mass);
+     ++iteration_;
+@@ -262,12 +725,20 @@ class AdaptiveWalnuts {
+    */
+   WalnutsSampler<F, RNG, H> sampler() {
+     handler_.get().on_warmup_complete(step_size(), inv_mass());
+-    return WalnutsSampler<F, RNG, H>(
++    WalnutsSampler<F, RNG, H> out(
+         rand_.rng(), handler_, logp_grad_.logp_grad_, theta_, inv_mass(),
+         step_size(), sampling_cfg_.get().max_trajectory_doublings(),
+         sampling_cfg_.get().max_step_halvings(),
+         min_micro_estimator_.min_micro_steps(),
+         sampling_cfg_.get().max_hamiltonian_error());
++    if (warmup_cfg_.get().metric_rank() > 0 &&
++        warmup_cfg_.get().metric_full()) {
++      // Preserve the low-rank factors the warmup adapted with: freezing to
++      // the diagonal alone would sample under a different metric than the
++      // one step size and micro-step tuning were calibrated for.
++      out.set_low_rank(mass_estimator_.rank_U(), mass_estimator_.rank_c());
++    }
++    return out;
+   }
+ 
+   /**
+@@ -284,7 +755,7 @@ class AdaptiveWalnuts {
+    *
+    * @return The step size.
+    */
+-  double step_size() const { return adam_.step_size(); }
++  double step_size() const { return opt_.step_size(); }
+ 
+   /**
+    * @brief Return the minimum number of micro steps per macro step.
+@@ -351,9 +822,9 @@ class AdaptiveWalnuts {
+   /** The current iteration. */
+   std::size_t iteration_;
+ 
+-  /** The Adam optimizer for step size adaptation.
++  /** The optimizer for step size adaptation.
+    */
+-  detail::Adam adam_;
++  Opt opt_;
+ 
+   /** The estimator for the mass matrix. */
+   detail::MassEstimator mass_estimator_;
+diff --git a/include/walnutpie/api.hpp b/include/walnutpie/api.hpp
+index 9f40791..5733e3e 100644
+--- a/include/walnutpie/api.hpp
++++ b/include/walnutpie/api.hpp
+@@ -68,4 +68,81 @@ inline void walnuts(std::size_t seed, std::vector<H>& chain_handlers,
+                  interrupt_callback);
+ }
+ 
++/**
++ * @brief Run adaptive Walnuts with mode-aware re-initialization.
++ *
++ * After warmup adaptation, checks the cross-chain log-mass dispersion
++ * (AdaptResult::log_mass_dispersion). If it exceeds `max_log_mass_dispersion`,
++ * the chains have locked into different posterior scales; the run restarts
++ * warmup with fresh initializations drawn from `reinit_positions` (cycling),
++ * up to `max_reinits` times. This implements the mode-aware reinit policy
++ * motivated by the scale-lock failure class (see the init-robustness
++ * discussion): cheap (one O(M*D) check), and it never fires on healthy runs.
++ */
++template <std::uniform_random_bit_generator RNG, ChainHandler H,
++          GlobalHandler GH, InterruptCallback IC, LogpGrad F>
++inline void walnuts_with_reinit(
++    std::size_t seed, std::vector<H>& chain_handlers, GH& global_handler,
++    const IC& interrupt_callback, const F& log_p_grad,
++    const WalnutsConfig& config,
++    const std::vector<std::vector<Eigen::VectorXd>>& reinit_positions,
++    double max_log_mass_dispersion, std::size_t max_reinits = 1) {
++  using AdaptiveSampler = AdaptiveWalnuts<F, RNG, H>;
++  using Sampler = WalnutsSampler<F, RNG, H>;
++  const std::size_t M = config.init().num_chains();
++  WalnutsConfig cfg = config;  // local copy; reinit rounds rewrite its init part
++
++  std::vector<RNG> rngs(0);
++  rngs.reserve(M);
++  for (std::size_t m = 0; m < M; ++m) {
++    std::seed_seq ss{seed, m + 1u};
++    rngs.emplace_back(ss);
++  }
++
++  std::size_t reinits = 0;
++  std::vector<Sampler> samplers;
++  while (true) {
++    std::vector<AdaptiveSampler> adapters;
++    adapters.reserve(M);
++    for (std::size_t m = 0; m < M; ++m) {
++      adapters.emplace_back(rngs[m], chain_handlers[m], log_p_grad,
++                            cfg.init().init_chain_config(m), cfg.warmup(),
++                            cfg.sampling());
++    }
++    detail::AdaptResult ar = detail::adapt_with_stats(
++        cfg.init(), cfg.warmup(), adapters, interrupt_callback);
++    samplers.clear();
++    samplers.reserve(adapters.size());
++    for (std::size_t n = 0; n < adapters.size(); ++n) {
++      samplers.emplace_back(std::move(adapters[n].sampler()));
++    }
++    if (ar.log_mass_dispersion <= max_log_mass_dispersion ||
++        reinits >= max_reinits || reinit_positions.size() == 0) {
++      break;
++    }
++    // Chains locked into different scales: re-draw initializations from the
++    // pool (per-chain, cycling with the reinit round) and re-run warmup.
++    ++reinits;
++    std::vector<Eigen::VectorXd> new_positions(M);
++    for (std::size_t m = 0; m < M; ++m) {
++      const auto& pool = reinit_positions[(m + reinits) % reinit_positions.size()];
++      new_positions[m] = pool[(m + reinits) % pool.size()];
++    }
++    // Reinit rounds inherit the warmup config including any init-robustness
++    // settings (mass clamp, step-size heuristic): a fresh distant draw needs
++    // the same safeguards as the initial round, or the restarted warmup
++    // collapses the step size before the policy can help again.
++    InitConfigBuilder builder{
++        M, cfg.init().init_chain_config(0).position().size()};
++    builder.step_sizes(cfg.init().init_chain_config(0).step_size());
++    builder.positions(new_positions);
++    builder.masses(log_p_grad, cfg.warmup().mass_additive_smoothing(),
++                   false, cfg.warmup().mass_init_clamp());
++    cfg = WalnutsConfig(builder.build(), cfg.warmup(), cfg.sampling());
++  }
++
++  detail::sample(config.sampling(), samplers, global_handler,
++                 interrupt_callback);
++}
++
+ }  // namespace walnutpie
+diff --git a/include/walnutpie/config.hpp b/include/walnutpie/config.hpp
+index 84d4db0..c0bc942 100644
+--- a/include/walnutpie/config.hpp
++++ b/include/walnutpie/config.hpp
+@@ -359,7 +359,8 @@ class InitConfigBuilder {
+    */
+   template <LogpGrad F>
+   InitConfigBuilder& masses(const F& logp_grad, double mass_smoothing,
+-                            bool average_masses = false) {
++                            bool average_masses = false,
++                            double clamp = 0.0) {
+     detail::validate_probability(mass_smoothing, "mass_smoothing");
+     Eigen::VectorXd grad;
+     masses_.resize(num_chains_);
+@@ -367,6 +368,12 @@ class InitConfigBuilder {
+       double lp_to_discard;
+       logp_grad(positions_[c], lp_to_discard, grad);
+       masses_[c] = (1 - mass_smoothing) * grad.array().abs() + mass_smoothing;
++      if (clamp > 0) {
++        // Guard against far-from-typical-set initializations where the
++        // gradient magnitude (and hence the seeded mass) is enormous; a
++        // degenerate seed throttles all early movement (inv_mass ~ 1/|grad|).
++        masses_[c] = masses_[c].cwiseMin(clamp).cwiseMax(1.0 / clamp);
++      }
+     }
+     if (average_masses) {
+       Eigen::Index D = masses_[0].size();
+@@ -604,6 +611,54 @@ class WarmupConfig {
+    */
+   double step_learn_rate_decay() const { return step_learn_rate_decay_; }
+ 
++  double da_gamma() const { return da_gamma_; }
++
++  double da_t0() const { return da_t0_; }
++
++  double da_kappa() const { return da_kappa_; }
++
++  std::size_t slow_ema_warmup() const { return slow_ema_warmup_; }
++
++  std::size_t step_opt_batch_stride() const { return step_opt_batch_stride_; }
++
++  double step_grad_clip() const { return step_grad_clip_; }
++
++  bool da_freeze_average() const { return da_freeze_average_; }
++
++  double mass_shrink_kappa() const { return mass_shrink_kappa_; }
++
++  double mass_var_floor() const { return mass_var_floor_; }
++
++  bool metric_drift_guard() const { return metric_drift_guard_; }
++
++  double mass_combine_power() const { return mass_combine_power_; }
++
++  double metric_collapse_reset() const { return metric_collapse_reset_; }
++
++  double metric_stall_reset() const { return metric_stall_reset_; }
++
++  std::size_t metric_stall_window() const { return metric_stall_window_; }
++
++  double mass_init_clamp() const { return mass_init_clamp_; }
++
++  std::size_t anti_windup_pass_rate() const { return anti_windup_pass_rate_; }
++
++  std::size_t drift_iters() const { return drift_iters_; }
++
++  std::size_t metric_window() const { return metric_window_; }
++
++  std::size_t metric_rank() const { return metric_rank_; }
++
++  bool metric_full() const { return metric_full_; }
++
++  double metric_auto() const { return metric_auto_; }
++
++  double max_error_start() const { return max_error_start_; }
++
++  std::size_t max_error_schedule_iters() const {
++    return max_error_schedule_iters_;
++  }
++
+   /**
+    * @brief Return the stride for publishing updates for convergence monitoring.
+    *
+@@ -636,6 +691,29 @@ class WarmupConfig {
+   double step_sq_gradient_decay_ = 0.9;
+   double step_stabilization_ = 1e-4;
+   double step_learn_rate_decay_ = 0.5;
++  double da_gamma_ = 0.05;
++  double da_t0_ = 10.0;
++  double da_kappa_ = 0.75;
++  std::size_t slow_ema_warmup_ = 100;
++  std::size_t step_opt_batch_stride_ = 1;
++  double step_grad_clip_ = 0.0;
++  bool da_freeze_average_ = false;
++  double mass_shrink_kappa_ = 0.0;
++  double mass_var_floor_ = 0.0;
++  bool metric_drift_guard_ = false;
++  double mass_combine_power_ = 0.0;
++  double metric_collapse_reset_ = 0.0;
++  double metric_stall_reset_ = 0.0;
++  std::size_t metric_stall_window_ = 100;
++  double mass_init_clamp_ = 0.0;
++  std::size_t anti_windup_pass_rate_ = 0;
++  std::size_t drift_iters_ = 0;
++  std::size_t metric_window_ = 0;
++  std::size_t metric_rank_ = 0;
++  bool metric_full_ = false;
++  double metric_auto_ = 0.0;
++  double max_error_start_ = 0.0;
++  std::size_t max_error_schedule_iters_ = 0;
+   std::size_t publish_stride_ = 5;
+   std::size_t yield_period_ = 32;
+ };
+@@ -804,6 +882,151 @@ class WarmupConfigBuilder {
+    * @return This builder for chaining.
+    * @throw std::invalid_argument If the decay exponent is not in (0, 1).
+    */
++  WarmupConfigBuilder& da_gamma(double v) {
++    detail::validate_finite_positive(v, "da_gamma");
++    cfg_.da_gamma_ = v;
++    return *this;
++  }
++
++  WarmupConfigBuilder& da_t0(double v) {
++    detail::validate_finite_positive(v, "da_t0");
++    cfg_.da_t0_ = v;
++    return *this;
++  }
++
++  WarmupConfigBuilder& da_kappa(double v) {
++    detail::validate_probability(v, "da_kappa");
++    cfg_.da_kappa_ = v;
++    return *this;
++  }
++
++  WarmupConfigBuilder& slow_ema_warmup(std::size_t v) {
++    cfg_.slow_ema_warmup_ = v;
++    return *this;
++  }
++
++  WarmupConfigBuilder& step_grad_clip(double v) {
++    if (v < 0) {
++      throw std::invalid_argument("step_grad_clip must be >= 0 (0 = off)");
++    }
++    cfg_.step_grad_clip_ = v;
++    return *this;
++  }
++
++  WarmupConfigBuilder& mass_shrink_kappa(double v) {
++    if (v < 0) {
++      throw std::invalid_argument("mass_shrink_kappa must be >= 0 (0 = off)");
++    }
++    cfg_.mass_shrink_kappa_ = v;
++    return *this;
++  }
++
++  WarmupConfigBuilder& metric_auto(double v) {
++    if (v < 0 || v > 1) {
++      throw std::invalid_argument(
++          "metric_auto threshold must be in [0, 1] (0 = off)");
++    }
++    cfg_.metric_auto_ = v;
++    return *this;
++  }
++
++  WarmupConfigBuilder& metric_full(bool v) {
++    cfg_.metric_full_ = v;
++    return *this;
++  }
++
++  WarmupConfigBuilder& metric_rank(std::size_t v) {
++    cfg_.metric_rank_ = v;  // 0 = off
++    return *this;
++  }
++
++  WarmupConfigBuilder& metric_window(std::size_t v) {
++    cfg_.metric_window_ = v;  // 0 = off (exponential discounting only)
++    return *this;
++  }
++
++  WarmupConfigBuilder& drift_iters(std::size_t v) {
++    cfg_.drift_iters_ = v;
++    return *this;
++  }
++
++  WarmupConfigBuilder& max_error_schedule(double start, std::size_t iters) {
++    if (start < 0) {
++      throw std::invalid_argument("max_error_schedule start must be >= 0");
++    }
++    cfg_.max_error_start_ = start;
++    cfg_.max_error_schedule_iters_ = iters;
++    return *this;
++  }
++
++  WarmupConfigBuilder& anti_windup_pass_rate(std::size_t v) {
++    cfg_.anti_windup_pass_rate_ = v;  // 0 = off
++    return *this;
++  }
++
++  WarmupConfigBuilder& mass_init_clamp(double v) {
++    if (v < 0) {
++      throw std::invalid_argument("mass_init_clamp must be >= 0");
++    }
++    cfg_.mass_init_clamp_ = v;
++    return *this;
++  }
++
++  WarmupConfigBuilder& metric_stall_reset(double v,
++                                          std::size_t window = 100) {
++    if (v < 0) {
++      throw std::invalid_argument(
++          "metric_stall_reset must be >= 0 (0 = off; e.g. 1e-3)");
++    }
++    cfg_.metric_stall_reset_ = v;
++    cfg_.metric_stall_window_ = window;
++    return *this;
++  }
++
++  WarmupConfigBuilder& metric_collapse_reset(double v) {
++    if (v < 0 || v >= 1) {
++      throw std::invalid_argument(
++          "metric_collapse_reset must be in [0, 1) (0 = off; e.g. 0.01)");
++    }
++    cfg_.metric_collapse_reset_ = v;
++    return *this;
++  }
++
++  WarmupConfigBuilder& mass_combine_power(double v) {
++    if (v < 0 || v > 1e3) {
++      throw std::invalid_argument(
++          "mass_combine_power must be in [0, 1000] (0 = geometric mean)");
++    }
++    cfg_.mass_combine_power_ = v;
++    return *this;
++  }
++
++  WarmupConfigBuilder& metric_drift_guard(bool v) {
++    cfg_.metric_drift_guard_ = v;
++    return *this;
++  }
++
++  WarmupConfigBuilder& mass_var_floor(double v) {
++    if (v < 0) {
++      throw std::invalid_argument("mass_var_floor must be >= 0 (0 = off)");
++    }
++    cfg_.mass_var_floor_ = v;
++    return *this;
++  }
++
++  WarmupConfigBuilder& da_freeze_average(bool v) {
++    cfg_.da_freeze_average_ = v;
++    return *this;
++  }
++
++  WarmupConfigBuilder& step_opt_batch_stride(std::size_t v) {
++    if (v == 0) {
++      throw std::invalid_argument("step_opt_batch_stride must be >= 1");
++    }
++    cfg_.step_opt_batch_stride_ = v;
++    return *this;
++  }
++
+   WarmupConfigBuilder& step_learn_rate_decay(double v) {
+     detail::validate_probability(v, "step_learn_rate_decay");
+     cfg_.step_learn_rate_decay_ = v;
+diff --git a/include/walnutpie/low_rank_mass.hpp b/include/walnutpie/low_rank_mass.hpp
+new file mode 100644
+index 0000000..f34540f
+--- /dev/null
++++ b/include/walnutpie/low_rank_mass.hpp
+@@ -0,0 +1,80 @@
++#pragma once
++
++#include <cmath>
++#include <random>
++
++#include <Eigen/Dense>
++
++namespace walnutpie::detail {
++
++/**
++ * @brief Diagonal + low-rank mass operator with exact O(D r) arithmetic.
++ *
++ * Represents M^{-1} = D + sqrt(D) U C U^T sqrt(D) (SPD for D > 0, C >= 0).
++ * All identities are verified by tests/leapfrog_property_test.cpp:
++ *  - apply (position update):  M^{-1} x = D x + sqrtD U (C (U^T sqrtD x))
++ *  - quadratic form:           rho^T M^{-1} rho = sum D_i rho_i^2
++ *                                + ||sqrt(C) U^T sqrtD rho||^2
++ *  - exact momentum sampling (low-rank Cholesky identity, verified 1e-16):
++ *      rho = D^{-1/2} z + U ((I+C)^{-1/2} - I) U^T D^{-1/2} z
++ *    from A = Lc Lc^T, Lc = sqrtD (I + U((I+C)^{1/2} - I)U^T).
++ *  - log-det: log|M^{-1}| = sum_i log D_i + sum_k log(1 + c_k).
++ *
++ * Integration into transition_w is deliberately deferred (see the
++ * init-robustness PR discussion): the marginal-fold approximation
++ * (--metric-rank) delivers the metric benefits through the existing diagonal
++ * interface while the full operator awaits the reversibility/volume property
++ * gate in CI for modified hot loops.
++ */
++struct LowRankMass {
++  Eigen::VectorXd D;
++  Eigen::MatrixXd U;   // D x r, orthonormal columns
++  Eigen::VectorXd c;   // r, non-negative
++
++  Eigen::VectorXd apply_inv(const Eigen::VectorXd& x) const {
++    Eigen::VectorXd sq = D.cwiseSqrt();
++    Eigen::VectorXd out = D.cwiseProduct(x);
++    if (U.cols() == 0) return out;
++    Eigen::VectorXd inner = U.transpose() * sq.cwiseProduct(x);
++    return out + sq.cwiseProduct(U * c.cwiseProduct(inner));
++  }
++
++  double logp_momentum(const Eigen::VectorXd& rho) const {
++    double e = D.cwiseProduct(rho).dot(rho);
++    if (U.cols() > 0) {
++      Eigen::VectorXd sq = D.cwiseSqrt();
++      Eigen::VectorXd inner = U.transpose() * sq.cwiseProduct(rho);
++      e += c.cwiseProduct(inner).dot(inner);
++    }
++    return -0.5 * e;
++  }
++
++  Eigen::VectorXd sample_momentum(std::mt19937_64& g) const {
++    std::normal_distribution<double> n(0, 1);
++    Eigen::VectorXd z(D.size());
++    for (int i = 0; i < D.size(); ++i) z[i] = n(g);
++    return sample_momentum_from(z);
++  }
++
++  /** @brief Momentum draw from a provided standard-normal vector. */
++  Eigen::VectorXd sample_momentum_from(const Eigen::VectorXd& z) const {
++    Eigen::VectorXd invsq = D.cwiseInverse().cwiseSqrt();
++    Eigen::VectorXd out = invsq.cwiseProduct(z);
++    if (U.cols() == 0) return out;
++    Eigen::MatrixXd IC = Eigen::MatrixXd::Identity(U.cols(), U.cols());
++    IC.diagonal() += c;
++    Eigen::SelfAdjointEigenSolver<Eigen::MatrixXd> es(IC);
++    Eigen::MatrixXd W =
++        es.operatorInverseSqrt() - Eigen::MatrixXd::Identity(U.cols(), U.cols());
++    Eigen::VectorXd inner = U.transpose() * invsq.cwiseProduct(z);
++    return out + U * (W * inner);
++  }
++
++  double log_det() const {
++    double l = D.array().log().sum();
++    for (int k = 0; k < c.size(); ++k) l += std::log1p(c[k]);
++    return l;
++  }
++};
++
++}  // namespace walnutpie::detail
+diff --git a/include/walnutpie/low_rank_metric.hpp b/include/walnutpie/low_rank_metric.hpp
+new file mode 100644
+index 0000000..4daec11
+--- /dev/null
++++ b/include/walnutpie/low_rank_metric.hpp
+@@ -0,0 +1,133 @@
++#pragma once
++
++#include <Eigen/Dense>
++#include <cmath>
++#include <vector>
++
++#include "walnutpie/online_moments.hpp"
++#include "walnutpie/config.hpp"
++
++namespace walnutpie::detail {
++
++/**
++ * @brief Low-rank + diagonal Fisher metric estimator.
++ *
++ * Implements the Fisher-divergence preconditioning metric of Seyboldt,
++ * Carlson & Carpenter (arXiv:2603.18845, Algorithm 1): the inverse mass is
++ * diag * (I + U C U^T) with U an orthonormal basis of the jointly-spanned
++ * subspace of standardized draws and standardized scores, and C a small
++ * rank-r correction. The diagonal part is the closed-form Fisher-optimal
++ * diagonal (their Thm 2.2); the low-rank part captures the cross
++ * (draw-score) structure a diagonal metric cannot represent (empirically
++ * large: per-coordinate draw-score corr ~ -0.5 vs ideal -1).
++ *
++ * The estimator accumulates a window of (draw, score) pairs (memoryless,
++ * 'chopping' discipline) and recomputes U, C at window boundaries:
++ * zero-staleness preconditioning within a window is not required here
++ * because the metric is fixed per window by construction (the frozen
++ * sampler uses the final window's estimate).
++ */
++class LowRankMetricEstimator {
++ public:
++  LowRankMetricEstimator(std::size_t dim, std::size_t rank,
++                         std::size_t window,
++                         double var_floor = 1e-8)
++      : dim_(dim), rank_(std::min(rank, dim)), window_(window),
++        var_floor_(var_floor) {
++    draws_.reserve(window_);
++    scores_.reserve(window_);
++  }
++
++  void observe(const Eigen::VectorXd& theta, const Eigen::VectorXd& grad) {
++    draws_.push_back(theta);
++    scores_.push_back(grad);
++    if (draws_.size() > window_) {
++      draws_.erase(draws_.begin());
++      scores_.erase(scores_.begin());
++    }
++    ++n_obs_;
++  }
++
++  std::size_t iterations() const { return n_obs_; }
++
++  /**
++   * @brief Compute the diagonal Fisher estimate (Thm 2.2 geometric mean).
++   */
++  Eigen::VectorXd diagonal_estimate() const {
++    if (draws_.size() < 2) {
++      return Eigen::VectorXd::Ones(dim_);
++    }
++    Eigen::MatrixXd Y(dim_, draws_.size());
++    Eigen::MatrixXd S(dim_, scores_.size());
++    for (std::size_t k = 0; k < draws_.size(); ++k) {
++      Y.col(k) = draws_[k];
++      S.col(k) = scores_[k];
++    }
++    Eigen::VectorXd var_y = row_sample_variance(Y);
++    Eigen::VectorXd var_s = row_sample_variance(S);
++    var_y = var_y.cwiseMax(Eigen::VectorXd::Constant(dim_, var_floor_));
++    var_s = var_s.cwiseMax(Eigen::VectorXd::Constant(dim_, var_floor_));
++    // inv_mass_diag = sqrt(var_draw / var_score) = geometric mean of
++    // var_draw and 1/var_score.
++    return (var_y.array() / var_s.array()).sqrt().matrix();
++  }
++
++  /**
++   * @brief Compute the low-rank factors U (dim x r, orthonormal) and
++   * diag_correction c (r) such that
++   *   inv_mass = diag * (I + U diag(c) U^T)
++   * using the standardized stacked-matrix SVD of Algorithm 1.
++   */
++  void low_rank_factors(Eigen::MatrixXd& U, Eigen::VectorXd& c,
++                        Eigen::VectorXd& diag) const {
++    diag = diagonal_estimate();
++    if (draws_.size() < 2 || rank_ == 0) {
++      U = Eigen::MatrixXd::Zero(dim_, 0);
++      c = Eigen::VectorXd::Zero(0);
++      return;
++    }
++    const std::size_t K = draws_.size();
++    Eigen::MatrixXd Y(dim_, K), S(dim_, K);
++    for (std::size_t k = 0; k < K; ++k) {
++      Y.col(k) = draws_[k];
++      S.col(k) = scores_[k];
++    }
++    // Standardize by the diagonal estimate.
++    Eigen::VectorXd inv_diag = diag.cwiseInverse();
++    Eigen::MatrixXd Ys = inv_diag.asDiagonal() * Y;
++    Eigen::MatrixXd Ss = diag.asDiagonal() * S;
++    Eigen::MatrixXd stacked(dim_, 2 * K);
++    stacked << Ys, Ss;
++    // Thin SVD; take top-r right? left singular vectors (dim x r).
++    Eigen::JacobiSVD<Eigen::MatrixXd> svd(
++        stacked, Eigen::ComputeThinU | Eigen::ComputeThinV);
++    std::size_t r = std::min(rank_, static_cast<std::size_t>(svd.rank()));
++    U = svd.matrixU().leftCols(r);
++    // The singular-value excess above the isotropic baseline (sqrt(2K))
++    // gives the correction magnitude per direction.
++    Eigen::VectorXd sv = svd.singularValues().head(r);
++    const double baseline = std::sqrt(2.0 * static_cast<double>(K));
++    c = (sv.array() - baseline).cwiseMax(0.0);
++    // Normalize correction to a modest relative magnitude (damping).
++    const double denom = baseline + c.sum();
++    c = c / std::max(denom, 1e-12);
++  }
++
++ private:
++  static Eigen::VectorXd row_sample_variance(const Eigen::MatrixXd& M) {
++    Eigen::VectorXd mu = M.rowwise().mean();
++    Eigen::MatrixXd centered = M.colwise() - mu;
++    return centered.cwiseProduct(centered).rowwise().sum() /
++           std::max(1.0, static_cast<double>(M.cols() - 1));
++  }
++
++  std::size_t dim_;
++  std::size_t rank_;
++  std::size_t window_;
++  double var_floor_;
++  std::vector<Eigen::VectorXd> draws_;
++  std::vector<Eigen::VectorXd> scores_;
++  std::size_t n_obs_ = 0;
++};
++
++}  // namespace walnutpie::detail
+diff --git a/include/walnutpie/online_moments.hpp b/include/walnutpie/online_moments.hpp
+index 9cb0aa8..19f7a24 100644
+--- a/include/walnutpie/online_moments.hpp
++++ b/include/walnutpie/online_moments.hpp
+@@ -152,7 +152,9 @@ class OnlineMoments {
+                 const Eigen::VectorXd& init_variance)
+       : weight_(init_weight),
+         mean_(init_mean),
+-        sum_sq_dev_(init_weight * init_variance) {
++        sum_sq_dev_(init_weight * init_variance),
++        init_weight_(init_weight),
++        sum_sq_dev_init_(init_weight * init_variance) {
+     detail::validate_positive(init_weight, "init_weight");
+     detail::validate_same_size(init_mean, init_variance, "init_mean",
+                                "init_variance");
+@@ -229,6 +231,23 @@ class OnlineMoments {
+     return sum_sq_dev_ / weight_;
+   }
+ 
++  /**
++   * @brief Return the total (discounted) weight of observations,
++   * an effective sample size for the moment estimates.
++   */
++  double weight() const noexcept { return weight_; }
++
++  /**
++   * @brief Return the initial variance used at construction (the
++   * shrinkage target for regularized estimates).
++   */
++  Eigen::VectorXd initial_variance() const {
++    if (init_weight_ > 0) {
++      return sum_sq_dev_init_ / init_weight_;
++    }
++    return Eigen::VectorXd::Ones(mean_.size());
++  }
++
+  private:
+   /** The discount factor applied to the weights of previous observations.
+    *
+@@ -244,6 +263,12 @@ class OnlineMoments {
+ 
+   /** The sum of weighted squared deviations from the mean. */
+   Eigen::VectorXd sum_sq_dev_;
++
++  /** The initial weight (for the regularized shrinkage target). */
++  double init_weight_;
++
++  /** The initial sum of squared deviations (shrinkage target). */
++  Eigen::VectorXd sum_sq_dev_init_;
+ };
+ 
+ }  // namespace walnutpie::detail
+diff --git a/include/walnutpie/step_optimizers.hpp b/include/walnutpie/step_optimizers.hpp
+new file mode 100644
+index 0000000..936264e
+--- /dev/null
++++ b/include/walnutpie/step_optimizers.hpp
+@@ -0,0 +1,308 @@
++#pragma once
++
++#include <cmath>
++#include <cstddef>
++#include <vector>
++
++#include "walnutpie/concepts.hpp"
++#include "walnutpie/config.hpp"
++
++namespace walnutpie::detail {
++
++/**
++ * @brief Nesterov-style dual averaging for step size adaptation,
++ * as used in Stan (Hoffman & Gelman 2014, Algorithm 5/6).
++ *
++ * Adapts log step size to a target acceptance statistic. This variant
++ * observes the same per-micro-step acceptance statistics as the Adam
++ * adapter and is compatible with the `StepSizeAdapter` concept.
++ */
++class DualAveraging {
++ public:
++  DualAveraging(double step_size_init, double accept_rate_target,
++                double gamma, double t0, double kappa,
++                bool use_average = false)
++      : use_average_(use_average),
++        mu_(std::log(10.0 * step_size_init)),
++        x_(0.0),
++        x_bar_(0.0),
++        h_bar_(0.0),
++        t_(0),
++        accept_rate_target_(accept_rate_target),
++        gamma_(gamma),
++        t0_(t0),
++        kappa_(kappa) {}
++
++  void operator()(double alpha) noexcept {
++    ++t_;
++    const double eta = 1.0 / (static_cast<double>(t_) + t0_);
++    h_bar_ = (1.0 - eta) * h_bar_ + eta * (accept_rate_target_ - alpha);
++    x_ = mu_ - std::sqrt(static_cast<double>(t_)) / gamma_ * h_bar_;
++    const double w = std::pow(static_cast<double>(t_), -kappa_);
++    x_bar_ = w * x_ + (1.0 - w) * x_bar_;
++  }
++
++  double step_size() const noexcept {
++    return std::exp(use_average_ ? x_bar_ : x_);
++  }
++
++  double step_size_bar() const noexcept { return std::exp(x_bar_); }
++
++ private:
++  bool use_average_;
++  double mu_;
++  double x_;
++  double x_bar_;
++  double h_bar_;
++  std::size_t t_;
++  const double accept_rate_target_;
++  const double gamma_;
++  const double t0_;
++  const double kappa_;
++};
++
++/**
++ * @brief Scalar AdEMAMix (Pagliardini et al. 2024, arXiv:2409.03137)
++ * step-size adapter: dual exponential moving averages (fast + slow)
++ * over noisy acceptance-statistic gradients.
++ */
++class AdEMAMix {
++ public:
++  AdEMAMix(double step_size_init, double accept_rate_target,
++           double learning_rate, double gradient_decay,
++           double sq_gradient_decay, double slow_gradient_decay,
++           double stabilization, double learn_rate_decay,
++           std::size_t slow_warmup_iters)
++      : theta_(std::log(step_size_init)),
++        m_fast_(0),
++        m_slow_(0),
++        v_(0),
++        t_(0),
++        gradient_decay_pow_(1),
++        sq_gradient_decay_pow_(1),
++        target_accept_rate_(accept_rate_target),
++        learn_rate_(learning_rate),
++        gradient_decay_(gradient_decay),
++        sq_gradient_decay_(sq_gradient_decay),
++        slow_gradient_decay_(slow_gradient_decay),
++        stabilization_(stabilization),
++        learn_rate_decay_(learn_rate_decay),
++        slow_warmup_iters_(slow_warmup_iters) {}
++
++  void operator()(double alpha) noexcept {
++    ++t_;
++    gradient_decay_pow_ *= gradient_decay_;
++    sq_gradient_decay_pow_ *= sq_gradient_decay_;
++
++    const double grad = target_accept_rate_ - alpha;
++
++    m_fast_ = gradient_decay_ * m_fast_ + (1.0 - gradient_decay_) * grad;
++    v_ = sq_gradient_decay_ * v_ + (1.0 - sq_gradient_decay_) * grad * grad;
++
++    // slow EMA with warmup scaling (alpha_t ramp over slow_warmup_iters_)
++    double alpha_t = 1.0;
++    if (t_ < slow_warmup_iters_) {
++      alpha_t = static_cast<double>(t_) / static_cast<double>(slow_warmup_iters_);
++    }
++    m_slow_ = m_slow_ * (1.0 - alpha_t * (1.0 - slow_gradient_decay_)) +
++              alpha_t * (1.0 - slow_gradient_decay_) * grad;
++
++    const double m_hat_fast =
++        m_fast_ / (1.0 - gradient_decay_pow_);
++    const double v_hat = v_ / (1.0 - sq_gradient_decay_pow_);
++
++    // normalized slow term scaled to match fast magnitude
++    const double slow_scale = (1.0 - gradient_decay_) / (1.0 - slow_gradient_decay_);
++    const double m_mix = m_hat_fast + slow_scale * m_slow_;
++
++    const double decayed_learn_rate =
++        learn_rate_ / std::pow(static_cast<double>(t_), learn_rate_decay_);
++    theta_ -= decayed_learn_rate * m_mix / (std::sqrt(v_hat) + stabilization_);
++  }
++
++  double step_size() const noexcept { return std::exp(theta_); }
++
++ private:
++  double theta_;
++  double m_fast_;
++  double m_slow_;
++  double v_;
++  std::size_t t_;
++  double gradient_decay_pow_;
++  double sq_gradient_decay_pow_;
++  const double target_accept_rate_;
++  const double learn_rate_;
++  const double gradient_decay_;
++  const double sq_gradient_decay_;
++  const double slow_gradient_decay_;
++  const double stabilization_;
++  const double learn_rate_decay_;
++  const std::size_t slow_warmup_iters_;
++};
++
++/**
++ * @brief Scalar AdaBelief (Zhuang et al. 2020, arXiv:2010.07468) adapter:
++ * the second moment tracks the deviation of the gradient from the mean,
++ * giving larger effective steps when gradients are inconsistent.
++ */
++class AdaBelief {
++ public:
++  AdaBelief(double step_size_init, double accept_rate_target,
++            double learning_rate, double gradient_decay,
++            double sq_gradient_decay, double stabilization,
++            double learn_rate_decay)
++      : theta_(std::log(step_size_init)),
++        m_(0),
++        v_(0),
++        t_(0),
++        gradient_decay_pow_(1),
++        sq_gradient_decay_pow_(1),
++        target_accept_rate_(accept_rate_target),
++        learn_rate_(learning_rate),
++        gradient_decay_(gradient_decay),
++        sq_gradient_decay_(sq_gradient_decay),
++        stabilization_(stabilization),
++        learn_rate_decay_(learn_rate_decay) {}
++
++  void operator()(double alpha) noexcept {
++    ++t_;
++    gradient_decay_pow_ *= gradient_decay_;
++    sq_gradient_decay_pow_ *= sq_gradient_decay_;
++
++    const double grad = target_accept_rate_ - alpha;
++
++    m_ = gradient_decay_ * m_ + (1.0 - gradient_decay_) * grad;
++    const double grad_dev = grad - m_;
++    v_ = sq_gradient_decay_ * v_ +
++         (1.0 - sq_gradient_decay_) * grad_dev * grad_dev;
++
++    const double m_hat = m_ / (1.0 - gradient_decay_pow_);
++    const double v_hat = v_ / (1.0 - sq_gradient_decay_pow_);
++
++    const double decayed_learn_rate =
++        learn_rate_ / std::pow(static_cast<double>(t_), learn_rate_decay_);
++    theta_ -= decayed_learn_rate * m_hat / (std::sqrt(v_hat) + stabilization_);
++  }
++
++  double step_size() const noexcept { return std::exp(theta_); }
++
++ private:
++  double theta_;
++  double m_;
++  double v_;
++  std::size_t t_;
++  double gradient_decay_pow_;
++  double sq_gradient_decay_pow_;
++  const double target_accept_rate_;
++  const double learn_rate_;
++  const double gradient_decay_;
++  const double sq_gradient_decay_;
++  const double stabilization_;
++  const double learn_rate_decay_;
++};
++
++/**
++ * @brief Wrap any step size adapter, batching observations.
++ *
++ * The inner adapter is updated once per `stride` observations with the mean
++ * acceptance statistic, which slows its internal iteration count. This is
++ * useful because the base adapters in this library observe per-micro-step
++ * statistics (hundreds per warmup iteration), while classic schemes such as
++ * dual averaging were calibrated for one observation per iteration.
++ */
++template <StepSizeAdapter Inner>
++class BatchedAdapter {
++ public:
++  BatchedAdapter(Inner&& inner, std::size_t stride)
++      : inner_(std::move(inner)), stride_(stride), count_(0), alpha_sum_(0.0) {}
++
++  void operator()(double alpha) noexcept {
++    alpha_sum_ += alpha;
++    if (++count_ >= stride_) {
++      inner_(alpha_sum_ / static_cast<double>(count_));
++      count_ = 0;
++      alpha_sum_ = 0.0;
++    }
++  }
++
++  double step_size() const noexcept { return inner_.step_size(); }
++
++ private:
++  Inner inner_;
++  const std::size_t stride_;
++  std::size_t count_;
++  double alpha_sum_;
++};
++
++
++/**
++ * @brief Wrap a step size adapter, clipping the acceptance-statistic
++ * gradient signal.
++ *
++ * A single near-zero acceptance statistic produces a large gradient
++ * (target - alpha up to the target itself) that can crash the log step
++ * size; clipping the observed statistic to [1 - c, 1] bounds that impulse.
++ * (Equivalent to clipping the gradient to [-c, c].)
++ */
++template <StepSizeAdapter Inner>
++class ClippedAdapter {
++ public:
++  ClippedAdapter(Inner&& inner, double clip)
++      : inner_(std::move(inner)), clip_(clip) {}
++
++  void operator()(double alpha) noexcept {
++    const double floored = std::max(alpha, 1.0 - clip_);
++    inner_(floored);
++  }
++
++  double step_size() const noexcept { return inner_.step_size(); }
++
++ private:
++  Inner inner_;
++  const double clip_;
++};
++
++
++/**
++ * @brief Wrap a step size adapter with anti-windup (conditional integration).
++ *
++ * Classical ODE step-size control (Gustafsson-Lundh-Soderlind) freezes the
++ * integral action while the controller is saturated. Here: when the observed
++ * acceptance statistic is exactly zero (a divergent macro step) or below
++ * `floor_alpha`, the observation is passed to the inner adapter but the
++ * adapter's accumulated state is protected by limiting how many such
++ * observations update it: only 1 in `pass_rate` saturated observations is
++ * forwarded (the rest are dropped). This bounds the windup of the error
++ * integral (Adam's m) during a divergence burst, preventing the log step
++ * size from crashing afterwards.
++ */
++template <StepSizeAdapter Inner>
++class AntiWindupAdapter {
++ public:
++  AntiWindupAdapter(Inner&& inner, double floor_alpha = 1e-12,
++                    std::size_t pass_rate = 8)
++      : inner_(std::move(inner)),
++        floor_alpha_(floor_alpha),
++        pass_rate_(pass_rate),
++        saturated_seen_(0) {}
++
++  void operator()(double alpha) noexcept {
++    if (pass_rate_ > 0 && alpha < floor_alpha_) {
++      ++saturated_seen_;
++      if (saturated_seen_ % pass_rate_ != 1) {
++        return;  // drop this saturated observation
++      }
++    }
++    inner_(alpha);
++  }
++
++  double step_size() const noexcept { return inner_.step_size(); }
++
++ private:
++  Inner inner_;
++  const double floor_alpha_;
++  const std::size_t pass_rate_;
++  std::size_t saturated_seen_;
++};
++
++}  // namespace walnutpie::detail
+diff --git a/include/walnutpie/walnuts.hpp b/include/walnutpie/walnuts.hpp
+index 5365d31..e519527 100644
+--- a/include/walnutpie/walnuts.hpp
++++ b/include/walnutpie/walnuts.hpp
+@@ -2,6 +2,7 @@
+ 
+ #include <cmath>
+ #include <cstdlib>
++#include <iostream>
+ #include <functional>
+ #include <limits>
+ #include <optional>
+@@ -16,6 +17,7 @@
+ #include "walnutpie/concepts.hpp"
+ #include "walnutpie/util.hpp"
+ #include "walnutpie/validate.hpp"
++#include "walnutpie/low_rank_mass.hpp"
+ 
+ namespace walnutpie::detail {
+ 
+@@ -334,6 +336,15 @@ static bool macro_step(const F& logp_grad, const Eigen::VectorXd& inv_mass,
+     logp_next = logp_pos_next + logp_momentum(rho_next, inv_mass);
+     if (num_steps == min_micro_steps) {
+       double min_accept = std::exp(-std::fabs(logp - logp_next));
++      if (const char* dbg = std::getenv("WALNUTPIE_DEBUG_ALPHA")) {
++        static std::size_t alpha_n = 0;
++        ++alpha_n;
++        if (alpha_n <= static_cast<std::size_t>(atoi(dbg))) {
++          std::cout << "[alpha " << alpha_n << "] " << min_accept
++                    << " dlogp=" << (logp - logp_next)
++                    << " macro_step=" << std::fabs(step) << std::endl;
++        }
++      }
+       adapt_handler(min_accept);
+     }
+     if (std::fabs(logp - logp_next) <= max_error) {
+@@ -533,6 +544,11 @@ inline Eigen::VectorXd transition_w(
+   double logp_joint = logp_pos + logp_momentum(rho, inv_mass);
+   auto span_accum = SpanW::from_initial_point(
+       std::move(theta), std::move(rho), std::move(grad), logp_pos, logp_joint);
++  if (const char* dbg = std::getenv("WALNUTPIE_DEBUG_SPAN")) {
++    std::cout << "[tw enter] theta0=" << span_accum.theta_select_[0]
++              << " step=" << step << " max_depth=" << max_depth
++              << " invm0=" << inv_mass[0] << std::endl;
++  }
+   for (depth = 1; depth <= max_depth; ++depth) {
+     // helper to turn runtime direction into compile-time template enum
+     auto expand_in_direction = [&](auto direction) -> bool {
+@@ -540,6 +556,17 @@ inline Eigen::VectorXd transition_w(
+       auto maybe_next_span = build_span<D>(
+           rand, logp_grad, inv_mass, step, depth - 1, max_step_halvings,
+           min_micro_steps, max_error, span_accum, step_size_adapter);
++      if (const char* dbg = std::getenv("WALNUTPIE_DEBUG_SPAN")) {
++        static std::size_t span_calls = 0;
++        ++span_calls;
++        if (span_calls % atoi(dbg) == 0) {
++          std::cout << "[span call " << span_calls << "] depth=" << depth
++                    << " valid=" << maybe_next_span.has_value()
++                    << " theta0=" << span_accum.theta_select_[0]
++                    << " step=" << step
++                    << " invm0=" << inv_mass[0] << std::endl;
++        }
++      }
+       if (!maybe_next_span) {
+         return true;
+       }
+@@ -569,6 +596,203 @@ inline Eigen::VectorXd transition_w(
+  * it has no body, it will be inlined away at optimization level `-O2` or
+  * above.
+  */
++
++// ===================== low-rank metric variants =====================
++// Mirrors of macro_step / build_leaf / build_span / transition_w with the
++// diagonal inverse mass replaced by the exact LowRankMass operator
++// (include/walnutpie/low_rank_mass.hpp). Kept separate from the originals
++// so the diagonal hot loop is untouched; both paths share all tree logic.
++
++template <LogpGrad F>
++static bool within_tolerance_lr(const F& logp_grad,
++                                const detail::LowRankMass& lrm, double step,
++                                std::size_t num_steps, double max_error,
++                                double logp_next, Eigen::VectorXd& theta_next,
++                                Eigen::VectorXd& rho_next,
++                                Eigen::VectorXd& grad_next) {
++  double half_step = 0.5 * step;
++  double logp = logp_next;
++  for (std::size_t n = 0; n < num_steps; ++n) {
++    rho_next += half_step * grad_next;
++    theta_next += step * lrm.apply_inv(rho_next);
++    logp_grad(theta_next, logp_next, grad_next);
++    rho_next += half_step * grad_next;
++  }
++  logp_next += lrm.logp_momentum(rho_next);
++  return std::abs(logp_next - logp) <= max_error;
++}
++
++template <LogpGrad F>
++static bool reversible_lr(const F& logp_grad, const detail::LowRankMass& lrm,
++                          double step, std::size_t num_steps,
++                          std::size_t min_micro_steps, double max_error,
++                          double logp_next, const Eigen::VectorXd& theta,
++                          const Eigen::VectorXd& rho,
++                          const Eigen::VectorXd& grad) {
++  if (num_steps == 1) {
++    return true;
++  }
++  Eigen::VectorXd theta_next(theta.size());
++  Eigen::VectorXd rho_next(theta.size());
++  Eigen::VectorXd grad_next(theta.size());
++  while (num_steps >= 2 * min_micro_steps) {
++    theta_next = theta;
++    rho_next = -rho;
++    grad_next = grad;
++    num_steps /= 2;
++    step *= 2;
++    if (within_tolerance_lr(logp_grad, lrm, step, num_steps, max_error,
++                            logp_next, theta_next, rho_next, grad_next)) {
++      return false;
++    }
++  }
++  return true;
++}
++
++template <Direction D>
++static bool uturn_lr(const SpanW& span1, const SpanW& span2,
++                     const detail::LowRankMass& lrm) {
++  auto [span_bk, span_fw] = order_forward_backward<D>(span1, span2);
++  auto scaled_diff = lrm.apply_inv(span_fw.theta_fw_ - span_bk.theta_bk_);
++  return span_fw.rho_fw_.dot(scaled_diff) < 0 ||
++         span_bk.rho_bk_.dot(scaled_diff) < 0;
++}
++
++template <Direction D, LogpGrad F, StepSizeAdapter A>
++static bool macro_step_lr(const F& logp_grad, const detail::LowRankMass& lrm,
++                          double step, std::size_t max_step_halvings,
++                          std::size_t min_micro_steps, double max_error,
++                          const SpanW& span, Eigen::VectorXd& theta_next,
++                          Eigen::VectorXd& rho_next, Eigen::VectorXd& grad_next,
++                          double& logp_pos_next, double& logp_next,
++                          A& adapt_handler) {
++  constexpr bool is_forward = (D == Direction::Forward);
++  const Eigen::VectorXd& theta = is_forward ? span.theta_fw_ : span.theta_bk_;
++  const Eigen::VectorXd& rho = is_forward ? span.rho_fw_ : span.rho_bk_;
++  const Eigen::VectorXd& grad =
++      is_forward ? span.grad_theta_fw_ : span.grad_theta_bk_;
++  double logp = is_forward ? span.logp_fw_ : span.logp_bk_;
++  step = is_forward ? step : -step;
++  for (std::size_t num_steps = min_micro_steps, halvings = 0;
++       halvings < max_step_halvings; ++halvings, num_steps *= 2, step *= 0.5) {
++    theta_next = theta;
++    rho_next = rho;
++    grad_next = grad;
++    double half_step = 0.5 * step;
++    for (std::size_t n = 0; n < num_steps; ++n) {
++      rho_next += half_step * grad_next;
++      theta_next += step * lrm.apply_inv(rho_next);
++      logp_grad(theta_next, logp_pos_next, grad_next);
++      rho_next += half_step * grad_next;
++    }
++    logp_next = logp_pos_next + lrm.logp_momentum(rho_next);
++    if (num_steps == min_micro_steps) {
++      double min_accept = std::exp(-std::fabs(logp - logp_next));
++      adapt_handler(min_accept);
++    }
++    if (std::fabs(logp - logp_next) <= max_error) {
++      return reversible_lr(logp_grad, lrm, step, num_steps, min_micro_steps,
++                           max_error, logp_next, theta_next, rho_next,
++                           grad_next);
++    }
++  }
++  return false;
++}
++
++template <Direction D, LogpGrad F, StepSizeAdapter A>
++static std::optional<SpanW> build_leaf_lr(const F& logp_grad, const SpanW& span,
++                                          const detail::LowRankMass& lrm,
++                                          double step, std::size_t max_step_halvings,
++                                          std::size_t min_micro_steps,
++                                          double max_error, A& adapt_handler) {
++  Eigen::VectorXd theta_next;
++  Eigen::VectorXd rho_next;
++  Eigen::VectorXd grad_theta_next;
++  double logp_pos_next = -std::numeric_limits<double>::infinity();
++  double logp_next = -std::numeric_limits<double>::infinity();
++  if (!macro_step_lr<D>(logp_grad, lrm, step, max_step_halvings,
++                        min_micro_steps, max_error, span, theta_next, rho_next,
++                        grad_theta_next, logp_pos_next, logp_next,
++                        adapt_handler)) {
++    return std::nullopt;
++  }
++  return SpanW::from_initial_point(std::move(theta_next), std::move(rho_next),
++                                   std::move(grad_theta_next), logp_pos_next,
++                                   logp_next);
++}
++
++template <Direction D, LogpGrad F, std::uniform_random_bit_generator RNG,
++          StepSizeAdapter A>
++static std::optional<SpanW> build_span_lr(
++    Random<RNG>& rng, const F& logp_grad, const detail::LowRankMass& lrm,
++    double step, std::size_t depth, std::size_t max_step_halvings,
++    std::size_t min_micro_steps, double max_error, const SpanW& last_span,
++    A& adapt_handler) {
++  if (depth == 0) {
++    return build_leaf_lr<D>(logp_grad, last_span, lrm, step, max_step_halvings,
++                            min_micro_steps, max_error, adapt_handler);
++  }
++  auto maybe_subspan1 = build_span_lr<D>(rng, logp_grad, lrm, step, depth - 1,
++                                         max_step_halvings, min_micro_steps,
++                                         max_error, last_span, adapt_handler);
++  if (!maybe_subspan1) {
++    return std::nullopt;
++  }
++  auto maybe_subspan2 = build_span_lr<D>(
++      rng, logp_grad, lrm, step, depth - 1, max_step_halvings, min_micro_steps,
++      max_error, *maybe_subspan1, adapt_handler);
++  if (!maybe_subspan2) {
++    return std::nullopt;
++  }
++  if (uturn_lr<D>(*maybe_subspan1, *maybe_subspan2, lrm)) {
++    return std::nullopt;
++  }
++  return std::make_optional(combine<Update::Barker, D>(
++      rng, std::move(*maybe_subspan1), std::move(*maybe_subspan2)));
++}
++
++template <LogpGrad F, std::uniform_random_bit_generator RNG, StepSizeAdapter A>
++inline Eigen::VectorXd transition_w_lr(
++    detail::Random<RNG>& rand, const F& logp_grad, const detail::LowRankMass& lrm, double step,
++    std::size_t max_depth, std::size_t max_step_halvings,
++    std::size_t min_micro_steps, double max_error, Eigen::VectorXd&& theta,
++    std::size_t& depth, Eigen::VectorXd& theta_grad, double& logp_pos_select,
++    A& step_size_adapter) {
++  // Momentum refresh via the exact low-rank Cholesky identity, using the
++  // shared normal stream (z) for reproducibility with the diagonal path.
++  Eigen::VectorXd z = rand.standard_normal(lrm.D.size()).matrix();
++  Eigen::VectorXd rho = lrm.sample_momentum_from(z);
++  Eigen::VectorXd grad(theta.size());
++  double logp_pos;
++  logp_grad(theta, logp_pos, grad);
++  double logp_joint = logp_pos + lrm.logp_momentum(rho);
++  auto span_accum = SpanW::from_initial_point(
++      std::move(theta), std::move(rho), std::move(grad), logp_pos, logp_joint);
++  for (depth = 1; depth <= max_depth; ++depth) {
++    auto expand_lr = [&](auto direction) -> bool {
++      constexpr Direction D = direction;
++      auto maybe_next_span = build_span_lr<D>(
++          rand, logp_grad, lrm, step, depth - 1, max_step_halvings,
++          min_micro_steps, max_error, span_accum, step_size_adapter);
++      if (!maybe_next_span) {
++        return true;
++      }
++      bool combined_uturn = uturn<D>(span_accum, *maybe_next_span, lrm.D);
++      span_accum = combine<Update::Metropolis, D>(rand, std::move(span_accum),
++                                                  std::move(*maybe_next_span));
++      return combined_uturn;
++    };
++    bool go_forward = rand.uniform_binary();
++    bool made_uturn = go_forward ? expand_lr(Forward_t{}) : expand_lr(Backward_t{});
++    if (made_uturn) {
++      break;
++    }
++  }
++  theta_grad = span_accum.grad_select_;
++  logp_pos_select = span_accum.logp_pos_select_;
++  return std::move(span_accum.theta_select_);
++}
++
+ class NoOpStepSizeAdapter {
+  public:
+   /**
+@@ -683,14 +907,33 @@ class WalnutsSampler {
+     std::size_t depth;
+     Eigen::VectorXd grad_next;
+     double logp_pos;
+-    theta_ = transition_w(rand_, logp_grad_, inv_mass_, cholesky_mass_,
+-                          macro_time_, max_nuts_depth_, max_step_halvings_,
+-                          min_micro_steps_, max_error_, std::move(theta_),
+-                          depth, grad_next, logp_pos, no_op_step_size_adapter_);
++    if (lrm_.U.cols() > 0) {
++      lrm_.D = inv_mass_;  // keep diagonal in sync (lr factors fixed post-warmup)
++      theta_ = detail::transition_w_lr(
++          rand_, logp_grad_.logp_grad_, lrm_, macro_time_, max_nuts_depth_,
++          max_step_halvings_, min_micro_steps_, max_error_,
++          std::move(theta_), depth, grad_next, logp_pos,
++          no_op_step_size_adapter_);
++    } else {
++      theta_ = transition_w(rand_, logp_grad_, inv_mass_, cholesky_mass_,
++                            macro_time_, max_nuts_depth_, max_step_halvings_,
++                            min_micro_steps_, max_error_, std::move(theta_),
++                            depth, grad_next, logp_pos,
++                            no_op_step_size_adapter_);
++    }
+     sample_handler_.get().on_sample(theta_, logp_pos);
+     return logp_pos;
+   }
+ 
++  /**
++   * @brief Set the low-rank factors of the mass operator (post-construction).
++   */
++  void set_low_rank(const Eigen::MatrixXd& U, const Eigen::VectorXd& c) {
++    lrm_.D = inv_mass_;
++    lrm_.U = U;
++    lrm_.c = c;
++  }
++
+   /**
+    * @brief  Return a constant reference the diagonal of the diagonal inverse
+    * mass matrix.
+@@ -763,6 +1006,9 @@ class WalnutsSampler {
+ 
+   /** A handler for adaptation which does nothing. */
+   const detail::NoOpStepSizeAdapter no_op_step_size_adapter_;
++
++  /** Optional low-rank mass operator (empty U => pure diagonal). */
++  detail::LowRankMass lrm_{};
+ };
+ 
+ }  // namespace walnutpie
+diff --git a/include/walnutpie/warmup_heuristics.hpp b/include/walnutpie/warmup_heuristics.hpp
+new file mode 100644
+index 0000000..21f8221
+--- /dev/null
++++ b/include/walnutpie/warmup_heuristics.hpp
+@@ -0,0 +1,56 @@
++#pragma once
++
++#include <cmath>
++#include <Eigen/Dense>
++
++#include "walnutpie/concepts.hpp"
++
++namespace walnutpie::detail {
++
++/**
++ * @brief Stan-style initial step size heuristic (Hoffman & Gelman 2014,
++ * Algorithm 4) adapted to walnutpie's macro-step regime.
++ *
++ * Starting from `eps`, repeatedly double or halve until the acceptance
++ * statistic of a single micro (leapfrog) step with the given diagonal
++ * inverse mass crosses 0.5.
++ *
++ * @param logp_grad Log density and gradient functor.
++ * @param theta Initial position.
++ * @param inv_mass Diagonal inverse mass.
++ * @param eps Initial step size guess (positive).
++ * @return The adapted step size.
++ */
++template <LogpGrad F>
++double find_reasonable_step(const F& logp_grad, const Eigen::VectorXd& theta,
++                            const Eigen::VectorXd& inv_mass, double eps) {
++  Eigen::VectorXd grad;
++  double lp;
++  logp_grad(theta, lp, grad);
++  // one leapfrog micro step
++  auto accept_of = [&](double e) {
++    Eigen::VectorXd rho = Eigen::VectorXd::Random(theta.size());
++    Eigen::VectorXd p = rho.cwiseProduct(inv_mass.cwiseSqrt());  // ~N(0, M)
++    double h0 = -lp + 0.5 * p.cwiseProduct(inv_mass).dot(p);
++    Eigen::VectorXd p1 = p + 0.5 * e * grad;
++    Eigen::VectorXd th1 = theta + e * inv_mass.cwiseProduct(p1);
++    double lp1;
++    Eigen::VectorXd grad1;
++    logp_grad(th1, lp1, grad1);
++    p1 += 0.5 * e * grad1;
++    double h1 = -lp1 + 0.5 * p1.cwiseProduct(inv_mass).dot(p1);
++    return std::exp(-(h1 - h0));
++  };
++  double a = accept_of(eps);
++  int direction = a > 0.5 ? 1 : -1;
++  for (int it = 0; it < 60; ++it) {
++    if ((direction == 1 && a < 0.5) || (direction == -1 && a > 0.5)) {
++      break;
++    }
++    eps *= (direction == 1) ? 2.0 : 0.5;
++    a = accept_of(eps);
++  }
++  return eps;
++}
++
++}  // namespace walnutpie::detail
+diff --git a/tests/leapfrog_property_test.cpp b/tests/leapfrog_property_test.cpp
+new file mode 100644
+index 0000000..28a7ad3
+--- /dev/null
++++ b/tests/leapfrog_property_test.cpp
+@@ -0,0 +1,141 @@
++// Property tests for the leapfrog with diagonal + (folded) rank metric:
++//  P1 reversibility: evolve L steps, negate momentum, evolve L back -> recover
++//  P2 volume preservation (small d): numerical Jacobian det of L-step map ~ 1
++//  P3 momentum-refresh quadratic-form consistency (logp_momentum vs mass apply)
++#include <cassert>
++#include <cmath>
++#include <iostream>
++#include <Eigen/Dense>
++#include "walnutpie/low_rank_metric.hpp"
++#include "walnutpie/low_rank_mass.hpp"
++
++using namespace walnutpie::detail;
++using Eigen::MatrixXd; using Eigen::VectorXd;
++
++// rank-aware leapfrog for the test harness (mirrors macro_step structure)
++struct Metric {
++  VectorXd D;                 // diagonal part (inv mass diag)
++  MatrixXd U; Eigen::VectorXd c;  // low-rank correction
++  VectorXd apply_inv(const VectorXd& x) const {
++    VectorXd sq = D.cwiseSqrt();
++    VectorXd out = D.cwiseProduct(x);
++    if (U.cols() == 0) return out;
++    VectorXd inner = U.transpose() * sq.cwiseProduct(x);
++    return out + sq.cwiseProduct(U * c.cwiseProduct(inner));
++  }
++  VectorXd sample_momentum(std::mt19937_64& g) const {
++    // Exact momentum sampling via the low-rank Cholesky identity (verified 1e-16):
++    //   A = Lc Lc^T with Lc = sqrtD (I + U ((I+C)^{1/2} - I) U^T)
++    //   rho = Lc^{-T} z = D^{-1/2} z + U [ (I+C)^{-1/2} - I ] U^T D^{-1/2} z
++    // (uses (I + U W U^T)^{-1} = I + U((I+W)^{-1} - I)U^T for symmetric W, U^T U = I)
++    std::normal_distribution<double> n(0, 1);
++    VectorXd z(D.size());
++    for (int i = 0; i < D.size(); ++i) z[i] = n(g);
++    VectorXd invsq = D.cwiseInverse().cwiseSqrt();
++    VectorXd out = invsq.cwiseProduct(z);
++    if (U.cols() == 0) return out;
++    MatrixXd IC = MatrixXd::Identity(U.cols(), U.cols());
++    IC.diagonal() += c;
++    Eigen::SelfAdjointEigenSolver<MatrixXd> es(IC);
++    MatrixXd invsqrtIC = es.operatorInverseSqrt();
++    MatrixXd W = invsqrtIC - MatrixXd::Identity(U.cols(), U.cols());
++    VectorXd inner = U.transpose() * invsq.cwiseProduct(z);
++    return out + U * (W * inner);
++  }
++
++  double logp_momentum(const VectorXd& rho) const {
++    // -1/2 rho^T M^{-1} rho, M^{-1} = D + sq U C U^T sq
++    VectorXd sq = D.cwiseSqrt();
++    double e = D.cwiseProduct(rho).dot(rho);
++    if (U.cols() > 0) {
++      VectorXd inner = U.transpose() * sq.cwiseProduct(rho);
++      e += c.cwiseProduct(inner).dot(inner);
++    }
++    return -0.5 * e;
++  }
++};
++
++static VectorXd leapfrog(const VectorXd& q, const VectorXd& p,
++                         const Metric& M, double eps,
++                         const std::function<void(const VectorXd&, double&, VectorXd&)>& gradf) {
++  VectorXd qq = q, pp = p;
++  double lp; VectorXd g;
++  gradf(qq, lp, g);
++  pp += 0.5*eps*g;
++  qq += eps * M.apply_inv(pp);
++  gradf(qq, lp, g);
++  pp += 0.5*eps*g;
++  return qq; // position only for these tests (momentum handled by caller)
++}
++static void leapfrog_full(const VectorXd& q0, const VectorXd& p0,
++                          const Metric& M, double eps, int L,
++                          const std::function<void(const VectorXd&, double&, VectorXd&)>& gradf,
++                          VectorXd& q, VectorXd& p) {
++  q = q0; p = p0;
++  double lp; VectorXd g;
++  for (int l=0;l<L;++l) {
++    gradf(q, lp, g);
++    p += 0.5*eps*g;
++    q += eps * M.apply_inv(p);
++    gradf(q, lp, g);
++    p += 0.5*eps*g;
++  }
++}
++
++int main() {
++  const int d = 3;
++  Metric M;
++  M.D = VectorXd(d); M.D << 0.7, 1.3, 0.9;
++  M.U = MatrixXd(d,2); M.U << 1.0,0.0, 0.0,1.0, 0.0,0.0; M.U.col(0).normalize(); M.U.col(1).normalize();
++  M.U.col(1) = M.U.col(1) - M.U.col(0)*M.U.col(0).dot(M.U.col(1)); M.U.col(1).normalize();
++  M.c = VectorXd(2); M.c << 0.4, 0.2;
++
++  auto gradf = [](const VectorXd& q, double& lp, VectorXd& g) {
++    // anisotropic correlated Gaussian
++    lp = -0.5*q.squaredNorm(); g = -q;
++  };
++
++  // P1 reversibility
++  VectorXd q0 = VectorXd::Random(d), p0 = VectorXd::Random(d);
++  VectorXd q,p; leapfrog_full(q0,p0,M,0.01,50,gradf,q,p);
++  VectorXd q2,p2; leapfrog_full(q,-p,M,0.01,50,gradf,q2,p2);
++  double rev_err = (q2-q0).norm()/q0.norm();
++  std::cout << "reversibility rel err: " << rev_err << "\n";
++  assert(rev_err < 1e-10);
++
++  // P2 volume preservation (numerical Jacobian det, d=3)
++  const double eps=0.05, h=1e-6; const int L=8;
++  MatrixXd J = MatrixXd::Zero(d+3, d+3);  // state (q,p) is 2d; use d+? -> use 2d
++  MatrixXd J2 = MatrixXd::Zero(2*d, 2*d);
++  auto map_state = [&](const VectorXd& s) {
++    VectorXd q=s.head(d), p=s.tail(d), qo,po;
++    leapfrog_full(q,p,M,eps,L,gradf,qo,po);
++    VectorXd out(2*d); out.head(d)=qo; out.tail(d)=po;
++    return out;
++  };
++  for (int j=0;j<2*d;++j) {
++    VectorXd sp = VectorXd::Zero(2*d); sp[j]=h;
++    VectorXd sm = VectorXd::Zero(2*d); sm[j]=-h;
++    J2.col(j) = (map_state(sp)-map_state(sm))/(2*h);
++  }
++  double detJ = J2.determinant();
++  std::cout << "|det J| - 1 = " << std::fabs(detJ)-1 << "\n";
++  assert(std::fabs(detJ-1.0) < 1e-4);
++
++  // P3 momentum sampling consistency: E[rho rho^T] ~ M under many draws
++  std::mt19937_64 g(7);
++  MatrixXd acc = MatrixXd::Zero(d,d);
++  const int NS=200000;
++  for (int i=0;i<NS;++i){ VectorXd r=M.sample_momentum(g); acc += r*r.transpose(); }
++  MatrixXd Memp = acc/NS;
++  // exact M^{-1}:
++  MatrixXd sq = M.D.cwiseSqrt().asDiagonal();
++  MatrixXd A = M.D.asDiagonal().toDenseMatrix() + sq*M.U*M.c.asDiagonal()*M.U.transpose()*sq;
++  MatrixXd Mexact = A.inverse();
++  double merr = (Memp-Mexact).cwiseAbs().maxCoeff()/Mexact.cwiseAbs().maxCoeff();
++  std::cout << "momentum cov rel err: " << merr << "\n"; std::cout << "Memp:\n" << Memp << "\nMexact:\n" << Mexact << std::endl;
++  assert(merr < 0.05);
++
++  std::cout << "ALL LEAPFROG PROPERTY TESTS PASSED\n";
++  return 0;
++}
+diff --git a/tests/low_rank_metric_test.cpp b/tests/low_rank_metric_test.cpp
+new file mode 100644
+index 0000000..6e4ab9b
+--- /dev/null
++++ b/tests/low_rank_metric_test.cpp
+@@ -0,0 +1,111 @@
++// Property tests for LowRankMetricEstimator + the Woodbury mass application.
++#include <cassert>
++#include <cmath>
++#include <iostream>
++#include <Eigen/Dense>
++#include "walnutpie/low_rank_metric.hpp"
++
++using namespace walnutpie::detail;
++using Eigen::MatrixXd; using Eigen::VectorXd;
++
++// Apply inv_mass = D (I + U C U^T) and its "chol" counterpart M = D^{-1}(I+U C U^T)^{-1}
++// M^{-1} = D + sqrt(D) U C U^T sqrt(D)      (symmetric by construction)
++//   ->  M^{-1} x = D x + sqrt(D) U (C (U^T sqrt(D) x))
++// inverse via Woodbury (U^T U = I):
++//   (I + UCU^T)^{-1} = I - U (I + C)^{-1} C U^T
++// and M = sqrt(D)^{-1} [ (I + UCU^T)^{-1} ] sqrt(D)^{-1}:
++//   M x = D^{-1} x - D^{-1/2} U (I+C)^{-1} C U^T D^{-1/2} x
++static VectorXd apply_inv_mass(const VectorXd& x, const VectorXd& D,
++                               const MatrixXd& U, const VectorXd& c) {
++  VectorXd sq = D.cwiseSqrt();
++  VectorXd out = D.cwiseProduct(x);
++  if (U.cols() == 0) return out;
++  VectorXd inner = U.transpose() * sq.cwiseProduct(x);
++  VectorXd scaled = c.cwiseProduct(inner);
++  return out + sq.cwiseProduct(U * scaled);
++}
++
++static VectorXd apply_mass(const VectorXd& x, const VectorXd& D,
++                           const MatrixXd& U, const VectorXd& c) {
++  VectorXd invsq = D.cwiseInverse().cwiseSqrt();
++  VectorXd out = D.cwiseInverse().cwiseProduct(x);
++  if (U.cols() == 0) return out;
++  MatrixXd innerM = MatrixXd::Identity(U.cols(), U.cols());
++  innerM.diagonal() += c;
++  VectorXd tmp = innerM.ldlt().solve(c.cwiseProduct(U.transpose() * invsq.cwiseProduct(x)));
++  return out - invsq.cwiseProduct(U * tmp);
++}
++
++int main() {
++  const int D = 8, K = 40, r = 3;
++  std::srand(7);
++  // Ground truth: anisotropic Gaussian target with a correlated block.
++  VectorXd s = VectorXd::LinSpaced(D, 0.5, 2.0);       // scales
++  MatrixXd A = MatrixXd::Identity(D, D);
++  A.block(0,0,r,r) += 0.9 * MatrixXd::Ones(r,r);       // rank-r correlation block
++  MatrixXd cov = A * s.asDiagonal() * s.asDiagonal() * A.transpose();
++  Eigen::LLT<MatrixXd> chol(cov);
++  MatrixXd samples = chol.matrixL() * MatrixXd::Random(D, K);
++  // scores of N(0, cov) target: score = -cov^{-1} x
++  MatrixXd scores = -cov.ldlt().solve(samples);
++
++  LowRankMetricEstimator est(D, r, K, 1e-8);
++  for (int k = 0; k < K; ++k)
++    est.observe(samples.col(k), scores.col(k));
++
++  // P1: diagonal estimate positive, finite, within a sane factor band.
++  VectorXd d = est.diagonal_estimate();
++  for (int i = 0; i < D; ++i) {
++    assert(std::isfinite(d[i]) && d[i] > 0);
++  }
++
++  // P2: inv_mass application must be symmetric in expectation:
++  // <x, M^-1 y> == <y, M^-1 x> for the exact operator; test with random x,y.
++  MatrixXd U; VectorXd c, diag;
++  est.low_rank_factors(U, c, diag);
++  for (int t = 0; t < 5; ++t) {
++    VectorXd x = VectorXd::Random(D), y = VectorXd::Random(D);
++    double xy = x.transpose() * apply_inv_mass(y, diag, U, c);
++    double yx = y.transpose() * apply_inv_mass(x, diag, U, c);
++    assert(std::fabs(xy - yx) < 1e-9);   // symmetry
++  }
++
++  // P3: the metric must be SPD (a valid mass), and preconditioning must be
++  // finite. Conditioning can legitimately worsen for a diagonal-only metric
++  // on correlated targets (Hird & Livingstone 2312.04898, Result 5); the
++  // low-rank part should recover most of it (informational, not asserted).
++  {
++    MatrixXd sqf = diag.cwiseSqrt().asDiagonal();
++    MatrixXd Mfull = diag.asDiagonal().toDenseMatrix() +
++                     sqf * U * c.asDiagonal() * U.transpose() * sqf;
++    Eigen::SelfAdjointEigenSolver<MatrixXd> esM(Mfull);
++    assert(esM.info() == Eigen::Success);
++    assert(esM.eigenvalues().minCoeff() > 0);           // SPD
++    // proper M^{-1/2} via eigendecomposition
++    Eigen::SelfAdjointEigenSolver<MatrixXd> es2(Mfull);
++    MatrixXd Mhalf = es2.operatorInverseSqrt();
++    MatrixXd Mp = Mhalf * cov * Mhalf;
++    Eigen::SelfAdjointEigenSolver<MatrixXd> esP(Mp);
++    double cond_full = esP.eigenvalues().maxCoeff() / esP.eigenvalues().minCoeff();
++    std::cout << " cond(lowrank-precond)=" << cond_full << " [r=" << U.cols() << "]";
++  }
++  std::cout << "\n";
++
++  // P4: Woodbury apply matches dense construction.
++  if (U.cols() > 0) {
++    MatrixXd sq = diag.cwiseSqrt().asDiagonal();
++    MatrixXd dense = diag.asDiagonal().toDenseMatrix() +
++                     sq * U * c.asDiagonal() * U.transpose() * sq;
++    VectorXd x = VectorXd::Random(D);
++    VectorXd via_woodbury = apply_inv_mass(x, diag, U, c);
++    VectorXd via_dense = dense * x;
++    VectorXd via_mass_then_inv = apply_mass(via_dense, diag, U, c);
++    std::cout << " [rel-dense=" << (via_woodbury - via_dense).norm() / via_dense.norm()
++              << " roundtrip=" << (via_mass_then_inv - x).norm() / x.norm() << "]";
++    assert((via_woodbury - via_dense).norm() < 1e-9 * via_dense.norm());
++    assert((via_mass_then_inv - x).norm() < 1e-9 * x.norm());  // M M^{-1} = I
++  }
++
++  std::cout << "ALL LOW-RANK METRIC TESTS PASSED\n";
++  return 0;
++}

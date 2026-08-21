@@ -1,0 +1,3 @@
+name,thread_id,total_time,forward_time,reverse_time,chain_stack,no_chain_stack,autodiff_calls,no_autodiff_calls
+tp,133374059398976,0.014140345,0.007651615,0.00648873,0,0,278802,201
+model,133374059398976,1.202535,1.0457259,0.1568091,46282575,2509290,278802,1

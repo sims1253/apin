@@ -1,0 +1,86 @@
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[nutpie-compile] eight_schools_noncentered: 19.5s
+[run] nutpie/eight_schools_noncentered/rep0: wall=0.1s div=0 lf=26572
+[nutpie-compile] blr: 15.9s
+[run] nutpie/blr/rep0: wall=0.1s div=0 lf=22434
+[nutpie-compile] kidscore_momiq: 17.1s
+[run] nutpie/kidscore_momiq/rep0: wall=0.3s div=0 lf=43420
+[nutpie-compile] lsat_model: 20.2s
+[run] nutpie/lsat_model/rep0: wall=8.4s div=0 lf=60000
+[nutpie-compile] logmesquite_logvash: 19.0s
+[run] nutpie/logmesquite_logvash/rep0: wall=0.2s div=0 lf=85246
+[nutpie-compile] wells_dist100_model: 16.4s
+[run] nutpie/wells_dist100_model/rep0: wall=0.5s div=0 lf=15546
+[nutpie-compile] diamonds: 19.9s
+[run] nutpie/diamonds/rep0: wall=20.4s div=0 lf=978432
+[nutpie-compile] radon_partially_pooled_noncentered: 17.6s
+[run] nutpie/radon_partially_pooled_noncentered/rep0: wall=24.6s div=0 lf=59992
+[nutpie-compile] radon_variable_intercept_slope_noncentered: 17.7s
+[run] nutpie/radon_variable_intercept_slope_noncentered/rep0: wall=2.8s div=4 lf=58246
+[nutpie-compile] dogs_hierarchical: 16.4s
+[run] nutpie/dogs_hierarchical/rep0: wall=0.7s div=0 lf=13254
+[nutpie-compile] pilots: 18.1s
+[run] nutpie/pilots/rep0: wall=0.3s div=1180 lf=155852
+[nutpie-compile] hier_2pl: 29.5s
+[run] nutpie/hier_2pl/rep0: wall=31.9s div=0 lf=60000
+[nutpie-compile] gp_regr: 26.0s
+[run] nutpie/gp_regr/rep0: wall=0.1s div=0 lf=11650
+[nutpie-compile] kronecker_gp: 41.5s
+[run] nutpie/kronecker_gp/rep0: wall=469.1s div=44 lf=1146869
+[nutpie-compile] accel_gp: 23.2s
+[run] nutpie/accel_gp/rep0: wall=21.9s div=372 lf=1689441
+[nutpie-compile] bym2_offset_only: 20.3s
+[run] nutpie/bym2_offset_only/rep0: wall=34.4s div=0 lf=252192
+[nutpie-compile] eight_schools_centered: 15.1s
+[run] nutpie/eight_schools_centered/rep0: wall=0.1s div=40 lf=40438
+[nutpie-compile] garch11: 15.5s
+[run] nutpie/garch11/rep0: wall=0.5s div=0 lf=26086
+[nutpie-compile] lotka_volterra: 19.4s
+[run] nutpie/lotka_volterra/rep0: wall=4.3s div=0 lf=63380
+[nutpie-compile] low_dim_gauss_mix: 16.2s
+[run] nutpie/low_dim_gauss_mix/rep0: wall=2.4s div=0 lf=17150
+[nutpie-compile] arma11: 15.7s
+[run] nutpie/arma11/rep0: wall=0.2s div=0 lf=13224
+[run] nutpie/eight_schools_noncentered/rep1: wall=0.1s div=28 lf=26232
+[run] nutpie/blr/rep1: wall=0.1s div=0 lf=22174
+[run] nutpie/kidscore_momiq/rep1: wall=0.3s div=0 lf=41794
+[run] nutpie/lsat_model/rep1: wall=7.9s div=0 lf=60000
+[run] nutpie/logmesquite_logvash/rep1: wall=0.2s div=0 lf=83098
+[run] nutpie/wells_dist100_model/rep1: wall=0.5s div=0 lf=15430
+[run] nutpie/diamonds/rep1: wall=20.8s div=0 lf=974624
+[run] nutpie/radon_partially_pooled_noncentered/rep1: wall=21.9s div=0 lf=59960
+[run] nutpie/radon_variable_intercept_slope_noncentered/rep1: wall=3.0s div=0 lf=58080
+[run] nutpie/dogs_hierarchical/rep1: wall=0.7s div=0 lf=13048
+[run] nutpie/pilots/rep1: wall=0.3s div=1264 lf=134763
+[run] nutpie/hier_2pl/rep1: wall=32.2s div=0 lf=60000
+[run] nutpie/gp_regr/rep1: wall=0.1s div=0 lf=11668
+[run] nutpie/kronecker_gp/rep1: wall=292.8s div=32 lf=891012
+[run] nutpie/accel_gp/rep1: wall=21.2s div=432 lf=1694558
+[run] nutpie/bym2_offset_only/rep1: wall=467.6s div=0 lf=1210816
+[run] nutpie/eight_schools_centered/rep1: wall=0.1s div=28 lf=66216
+[run] nutpie/garch11/rep1: wall=0.6s div=0 lf=25820
+[run] nutpie/lotka_volterra/rep1: wall=4.2s div=0 lf=65576
+[run] nutpie/low_dim_gauss_mix/rep1: wall=2.4s div=0 lf=16670
+[run] nutpie/arma11/rep1: wall=0.2s div=4000 lf=11036
+[run] nutpie/eight_schools_noncentered/rep2: wall=0.1s div=4 lf=26436
+[run] nutpie/blr/rep2: wall=0.1s div=0 lf=22464
+[run] nutpie/kidscore_momiq/rep2: wall=0.4s div=0 lf=42848
+[run] nutpie/lsat_model/rep2: wall=9.8s div=0 lf=60000
+[run] nutpie/logmesquite_logvash/rep2: wall=0.2s div=0 lf=86276
+[run] nutpie/wells_dist100_model/rep2: wall=0.5s div=0 lf=15476
+[run] nutpie/diamonds/rep2: wall=20.2s div=0 lf=978848
+[run] nutpie/radon_partially_pooled_noncentered/rep2: wall=22.1s div=0 lf=59976
+[run] nutpie/radon_variable_intercept_slope_noncentered/rep2: wall=3.0s div=0 lf=55752
+[run] nutpie/dogs_hierarchical/rep2: wall=0.8s div=0 lf=12806
+[run] nutpie/pilots/rep2: wall=0.3s div=1032 lf=138726
+[run] nutpie/hier_2pl/rep2: wall=32.8s div=0 lf=60000
+[run] nutpie/gp_regr/rep2: wall=0.1s div=0 lf=11640
+[run] nutpie/kronecker_gp/rep2: wall=468.2s div=24 lf=1558447
+[run] nutpie/accel_gp/rep2: wall=21.7s div=364 lf=1694557
+[run] nutpie/bym2_offset_only/rep2: wall=33.4s div=0 lf=250432
+[run] nutpie/eight_schools_centered/rep2: wall=0.1s div=40 lf=48090
+[run] nutpie/garch11/rep2: wall=0.5s div=0 lf=25020
+[run] nutpie/lotka_volterra/rep2: wall=1162.9s div=0 lf=1071780
+[run] nutpie/low_dim_gauss_mix/rep2: wall=2.3s div=0 lf=16940
+[run] nutpie/arma11/rep2: wall=0.2s div=0 lf=12958
+NUTPIE GRID DONE

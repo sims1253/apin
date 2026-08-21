@@ -1,0 +1,35 @@
+[ 37%] [32mBuilding CXX object examples/CMakeFiles/summary.dir/summary.cpp.o[0m
+[ 37%] [32mBuilding CXX object examples/CMakeFiles/walnutpie_api.dir/walnutpie_api.cpp.o[0m
+[ 37%] [32mBuilding CXX object examples/CMakeFiles/examples.dir/examples.cpp.o[0m
+[ 37%] Built target CLI11
+[ 50%] [32mBuilding CXX object examples/CMakeFiles/stan_cli.dir/stan_cli.cpp.o[0m
+/home/m0hawk/Documents/apin/stan/external/walnutpie/examples/examples.cpp:20:13: warning: ‘void ill_normal(const VectorXd&, double&, Eigen::VectorXd&)’ defined but not used [-Wunused-function]
+   20 | static void ill_normal(const Eigen::VectorXd& x, double& logp,
+      |             ^~~~~~~~~~
+/home/m0hawk/Documents/apin/stan/external/walnutpie/examples/examples.cpp:13:13: warning: ‘void std_normal(const VectorXd&, double&, Eigen::VectorXd&)’ defined but not used [-Wunused-function]
+   13 | static void std_normal(const Eigen::VectorXd& x, double& logp,
+      |             ^~~~~~~~~~
+/home/m0hawk/Documents/apin/stan/external/walnutpie/examples/examples.cpp:10:20: warning: ‘count’ defined but not used [-Wunused-variable]
+   10 | static std::size_t count = 0;
+      |                    ^~~~~
+/home/m0hawk/Documents/apin/stan/external/walnutpie/examples/examples.cpp:9:15: warning: ‘total_time’ defined but not used [-Wunused-variable]
+    9 | static double total_time = 0.0;
+      |               ^~~~~~~~~~
+In file included from /home/m0hawk/Documents/apin/stan/external/walnutpie/examples/examples.cpp:7:
+/home/m0hawk/Documents/apin/stan/external/walnutpie/examples/handlers.hpp:447:13: warning: ‘void write_sample(const string&, const std::vector<ChainStore>&, bool)’ defined but not used [-Wunused-function]
+  447 | static void write_sample(const std::string& file_name,
+      |             ^~~~~~~~~~~~
+/home/m0hawk/Documents/apin/stan/external/walnutpie/examples/handlers.hpp:426:13: warning: ‘void write_mass_matrix(const string&, const std::vector<ChainStore>&)’ defined but not used [-Wunused-function]
+  426 | static void write_mass_matrix(const std::string& file_name,
+      |             ^~~~~~~~~~~~~~~~~
+/home/m0hawk/Documents/apin/stan/external/walnutpie/examples/handlers.hpp:405:13: warning: ‘void write_step_size(const string&, const std::vector<ChainStore>&)’ defined but not used [-Wunused-function]
+  405 | static void write_step_size(const std::string& file_name,
+      |             ^~~~~~~~~~~~~~~
+[ 62%] [32m[1mLinking CXX executable summary[0m
+[ 62%] Built target summary
+[ 75%] [32m[1mLinking CXX executable examples[0m
+[ 75%] Built target examples
+[ 87%] [32m[1mLinking CXX executable walnutpie_api[0m
+[ 87%] Built target walnutpie_api
+[100%] [32m[1mLinking CXX executable stan_cli[0m
+[100%] Built target stan_cli

@@ -1,0 +1,72 @@
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[pf] radon_partially_pooled_noncentered: pathfinder 10.8s
+[run] pf_full/radon_partially_pooled_noncentered/rep0: wall=52.9s warm=30.955 samp=8.989 div=0
+[run] pf_full/radon_partially_pooled_noncentered/rep1: wall=50.8s warm=31.764 samp=9.226 div=0
+[run] pf_full/radon_partially_pooled_noncentered/rep2: wall=49.6s warm=32.801 samp=8.83 div=0
+[run] pf_w200/radon_partially_pooled_noncentered/rep0: wall=45.9s warm=22.236 samp=8.651 div=0
+[run] pf_w200/radon_partially_pooled_noncentered/rep1: wall=49.8s warm=23.042 samp=17.295 div=0
+[run] pf_w200/radon_partially_pooled_noncentered/rep2: wall=46.2s warm=24.477 samp=8.582 div=0
+[pf] bym2_offset_only: pathfinder 14.3s
+[run] pf_full/bym2_offset_only/rep0: wall=62.5s warm=27.899 samp=16.369 div=0
+[run] pf_full/bym2_offset_only/rep1: wall=58.0s warm=27.454 samp=17.326 div=0
+[run] pf_full/bym2_offset_only/rep2: wall=57.7s warm=28.404 samp=16.784 div=0
+[run] pf_w200/bym2_offset_only/rep0: wall=46.8s warm=16.5 samp=17.39 div=0
+[run] pf_w200/bym2_offset_only/rep1: wall=47.2s warm=16.337 samp=17.49 div=0
+[run] pf_w200/bym2_offset_only/rep2: wall=48.0s warm=15.735 samp=17.817 div=0
+[pf] hier_2pl: pathfinder 57.6s
+[run] pf_full/hier_2pl/rep0: wall=145.9s warm=42.481 samp=42.077 div=0
+[run] pf_full/hier_2pl/rep1: wall=166.4s warm=53.959 samp=59.796 div=0
+[run] pf_full/hier_2pl/rep2: wall=155.9s warm=49.143 samp=38.414 div=0
+[run] pf_w200/hier_2pl/rep0: wall=125.4s warm=14.865 samp=55.152 div=0
+[run] pf_w200/hier_2pl/rep1: wall=123.5s warm=13.525 samp=55.111 div=0
+[run] pf_w200/hier_2pl/rep2: wall=119.7s warm=13.642 samp=49.003 div=0
+[pf] diamonds: pathfinder 3.4s
+[run] pf_full/diamonds/rep0: wall=88.0s warm=34.548 samp=50.919 div=0
+[run] pf_full/diamonds/rep1: wall=93.4s warm=34.11 samp=52.422 div=0
+[run] pf_full/diamonds/rep2: wall=89.7s warm=36.525 samp=53.575 div=0
+[run] pf_w200/diamonds/rep0: wall=49.0s warm=5.404 samp=39.588 div=0
+[run] pf_w200/diamonds/rep1: wall=47.3s warm=5.064 samp=37.003 div=0
+[run] pf_w200/diamonds/rep2: wall=49.0s warm=5.727 samp=32.709 div=0
+[pf] lsat_model: pathfinder 2.4s
+[run] pf_full/lsat_model/rep0: wall=12.7s warm=6.14 samp=3.931 div=0
+[run] pf_full/lsat_model/rep1: wall=12.9s warm=6.267 samp=3.825 div=0
+[run] pf_full/lsat_model/rep2: wall=11.6s warm=6.572 samp=3.994 div=0
+[run] pf_w200/lsat_model/rep0: wall=9.4s warm=2.881 samp=4.113 div=0
+[run] pf_w200/lsat_model/rep1: wall=9.2s warm=2.585 samp=3.827 div=0
+[run] pf_w200/lsat_model/rep2: wall=11.8s warm=2.87 samp=4.101 div=0
+[pf] accel_gp: pathfinder 0.9s
+[run] pf_full/accel_gp/rep0: wall=31.8s warm=13.396 samp=18.155 div=43
+[run] pf_full/accel_gp/rep1: wall=31.3s warm=11.91 samp=19.575 div=42
+[run] pf_full/accel_gp/rep2: wall=30.5s warm=12.788 samp=18.279 div=119
+[run] pf_w200/accel_gp/rep0: wall=21.6s warm=2.56 samp=16.502 div=55
+[run] pf_w200/accel_gp/rep1: wall=21.2s warm=2.701 samp=16.517 div=96
+[run] pf_w200/accel_gp/rep2: wall=21.1s warm=2.552 samp=15.369 div=50
+[pf] kronecker_gp: pathfinder 2.3s
+[run] pf_full/kronecker_gp/rep0: wall=798.1s warm=429.424 samp=392.145 div=26
+[run] pf_full/kronecker_gp/rep1: wall=718.4s warm=365.353 samp=379.1 div=18
+[run] pf_full/kronecker_gp/rep2: wall=740.0s warm=366.97 samp=389.878 div=14
+[run] pf_w200/kronecker_gp/rep0: wall=446.2s warm=71.653 samp=385.83 div=9
+[run] pf_w200/kronecker_gp/rep1: wall=445.9s warm=71.699 samp=385.672 div=17
+[run] pf_w200/kronecker_gp/rep2: wall=441.3s warm=67.258 samp=383.731 div=14
+[pf] pilots: pathfinder 0.1s
+[run] pf_full/pilots/rep0: wall=1.7s warm=0.553 samp=0.765 div=871
+[run] pf_full/pilots/rep1: wall=1.8s warm=0.369 samp=1.319 div=907
+[run] pf_full/pilots/rep2: wall=1.7s warm=0.497 samp=1.067 div=352
+[run] pf_w200/pilots/rep0: wall=1.7s warm=0.07 samp=0.439 div=796
+[run] pf_w200/pilots/rep1: wall=0.7s warm=0.042 samp=0.232 div=647
+[run] pf_w200/pilots/rep2: wall=1.2s warm=0.065 samp=0.095 div=1062
+[pf] eight_schools_centered: pathfinder 0.1s
+[run] pf_full/eight_schools_centered/rep0: wall=0.2s warm=0.027 samp=0.017 div=32
+[run] pf_full/eight_schools_centered/rep1: wall=0.2s warm=0.023 samp=0.02 div=41
+[run] pf_full/eight_schools_centered/rep2: wall=0.2s warm=0.028 samp=0.017 div=91
+[run] pf_w200/eight_schools_centered/rep0: wall=0.2s warm=0.011 samp=0.04 div=67
+[run] pf_w200/eight_schools_centered/rep1: wall=0.2s warm=0.01 samp=0.019 div=35
+[run] pf_w200/eight_schools_centered/rep2: wall=0.2s warm=0.013 samp=0.022 div=63
+[pf] lotka_volterra: pathfinder 0.4s
+[run] pf_full/lotka_volterra/rep0: wall=5.9s warm=2.721 samp=2.851 div=0
+[run] pf_full/lotka_volterra/rep1: wall=6.6s warm=2.628 samp=3.567 div=0
+[run] pf_full/lotka_volterra/rep2: wall=4.8s warm=2.64 samp=3.136 div=0
+[run] pf_w200/lotka_volterra/rep0: wall=4.5s warm=0.591 samp=2.485 div=0
+[run] pf_w200/lotka_volterra/rep1: wall=4.3s warm=0.786 samp=2.535 div=0
+[run] pf_w200/lotka_volterra/rep2: wall=3.6s warm=0.637 samp=2.418 div=0
+PATHFINDER GRID DONE

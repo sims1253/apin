@@ -1,0 +1,22 @@
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[bs] eight_schools_noncentered: OK
+[bs] blr: OK
+[bs] kidscore_momiq: OK
+[bs] lsat_model: OK
+[bs] logmesquite_logvash: OK
+[bs] wells_dist100_model: OK
+[bs] diamonds: OK
+[bs] radon_partially_pooled_noncentered: OK
+[bs] radon_variable_intercept_slope_noncentered: OK
+[bs] dogs_hierarchical: OK
+[bs] pilots: OK
+[bs] hier_2pl: OK
+[bs] gp_regr: OK
+[bs] kronecker_gp: OK
+[bs] accel_gp: OK
+[bs] bym2_offset_only: OK
+[bs] eight_schools_centered: OK
+[bs] garch11: OK
+[bs] lotka_volterra: OK
+[bs] low_dim_gauss_mix: OK
+[bs] arma11: OK

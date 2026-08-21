@@ -1,0 +1,12 @@
+Pass 2 complete: `/home/m0hawk/Documents/apin/stan/external/research_optimizer_pass2.md` (617 lines, 58 methods in the table, all arXiv IDs verified via the arXiv API).
+
+Headline finding, above any optimizer news: **walnutpie's mass-matrix rule is now a theorem.** arXiv 2603.18845 (Seyboldt, Carlson & Carpenter — PyMC Labs + Flatiron, Mar 2026) proves the Fisher-divergence-optimal diagonal metric is exactly `sqrt(Var_draw/Var_score)` (their Thm 2.2), implemented in nutpie with online Welford streams of draws and scores — but with window *chopping* instead of exponential discounting, beating Stan/PyMC diagonals by 1.3x median (4x with their low-rank+diagonal variant) across 114 posteriordb models.
+
+Top-5 new actionable ideas:
+1. (b) Switch discounting → chopping, cite Thm 2.2; A/B their low-rank+diagonal extension (strong evidence, published NUTS-class benchmark)
+2. (a) Reframe the adapter as a PI controller with anti-windup: freeze the integral (Adam's m) at α=0/divergence — the ODE-solver PID-stepsize literature (Gustafsson–Söderlind) is the classical home of exactly this loop; no published MCMC instance, so marked grounded-but-novel
+3. (a) Amid et al. 2202.00145 — exponentiated-gradient updates on a *scalar global step size* with an alignment gate: the one published answer to your EG-for-1-D question
+4. (a) AdaGrad-Norm closed-loop lr (Ward–Wu–Bottou 1806.01811; OptMuon/AdaGO's core) replacing t^-0.5, with the 2406.04443 result that clipping is *required* under heavy-tailed noise — root-finding use flagged as speculation
+5. (b) Winsorize/clip/Catoni the score stream before second moments — same heavy-tail theory; no published HMC-warmup evaluation (honest gap)
+
+Honesty notes: the brief's own ID guesses contained several errors (2404.19537 is a graph paper, 2310.10973 is valleytronics, Prodigy is 2306.06101) — all corrected with a dedicated table. "1-bit Shampoo" and "RowAdagrad" don't exist on arXiv. PID-stepsize-control for MCMC accept-stats: no published method found — the real literature is ODE integrators (1988–2003), which is what idea 2 draws on. Thirteen explicit "no literature found" entries, six flagged speculations.

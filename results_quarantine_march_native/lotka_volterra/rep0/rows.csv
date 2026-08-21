@@ -1,0 +1,5 @@
+warmup_s,sampling_s,n_draws,n_leapfrog_total,n_leapfrog_sampling,divergences,treedepth_hits,stepsize_final,accept_mean,lp_mean,model,variant,rep,chain,wall_batch_s,seed
+2.906,2.777,1000,32576,16608,0,0,0.10749111,0.91896430043,-13.977938873,lotka_volterra,march_native,0,0,5.218,20260819
+3.154,3.217,1000,37000,18728,0,0,0.10254932,0.94376493064,-14.0733576759,lotka_volterra,march_native,0,1,5.218,20260819
+3.11,3.109,1000,37012,18396,0,0,0.032709897,0.946605183,-14.2403143263,lotka_volterra,march_native,0,2,5.218,20260819
+2.861,3.072,1000,36008,17844,0,0,0.10270493,0.93196308794,-13.987589516,lotka_volterra,march_native,0,3,5.218,20260819

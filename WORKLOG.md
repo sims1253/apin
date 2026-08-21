@@ -813,3 +813,61 @@ multimodality handling).
   hermes: no published sampler-side NS orthogonalization exists; our score
   variance diagonal = Fisher-adaptive Langevin (2305.14442) restricted to
   diagonal.
+
+
+## 2026-08-23 ~02:00 — w16clean verdict + W-19 pre-registration (2-D optimizer comparison)
+
+- w16clean IS bit-reproducible (initial cmp mismatch = analyzer header rewrite
+  in place + trailing newline; no second bug; CLI warmup = fixed direct loop).
+- Clean verdict: fold 35/1.084 ~= rec 33/1.089 medians (tracks rep-for-rep);
+  full 21/1.139 worse. 11.75x retraction confirmed (clock-luck). Rep-variance
+  dominates: init draw quality >> arm choice on hier_2pl. PR #4 follow-up 15.
+- W-17 + w16clean agree: fold ~= rec core-set-wide with pf inits; rank stays
+  opt-in behind auto-screen.
+
+## W-19 (pre-registered BEFORE running): basis-extraction rules for the
+low-rank Fisher metric — the sampler-side 2-D optimizer comparison
+
+Rationale: the 2-D object is the window matrices Y,S (D x K) or the
+score-momentum matrix they induce; the "optimizer" is the rule that extracts
+the rank-r basis U (+ weights c). All variants feed the SAME frozen
+LowRankMass operator; only MassEstimator's low_rank_update changes.
+
+Variants (flag --metric-basis):
+  svd    : current — thin SVD of normalized [Ys|Ss] per window (chop)
+  power  : streaming — accumulate M = beta*M + (1-beta)*S_norm per obs,
+           rank-r via orthogonal iteration every window (no full SVD)
+  muon   : Newton-Schulz polar(M) of the score-momentum matrix (5 NS its,
+           standard Muon coefficients), basis = polar columns, per window
+  muoneq : MuonEq-style diagonal equilibration BEFORE NS (row RMS of M),
+           then de-equilibrate the basis
+  (aurora-style row-oblique projection: only if muon shows pathology —
+   its leverage fix is one more alternating projection on top)
+
+Protocol: rank-relevant models only (kronecker_gp, bym2_offset_only,
+hier_2pl, eight_schools_centered, diamonds, pilots, arma11, blr as control),
+3 reps, 4 chains, 1000+500, pf inits, fold-mode config, fixed binary.
+Metrics: min-ESS/R-hat medians (as everywhere), + basis-orthonormality and
+operator SPD property tests before any sampling.
+Expected (honest): bounded upside — fold~=rec says the basis is not the
+bottleneck on the core set; the test is whether ANY extraction rule unlocks
+the funnel class or beats svd on the rank-positive models. Negative result
+also valuable: closes the "Muon-in-a-sampler" question empirically.
+
+
+## 2026-08-23 ~04:00 — W-19 basis rules landed; stale-.o debugging tale; post-fix e/grad
+
+- --metric-basis {0,1,2,3} (svd/power/muon/muoneq) committed (2f97cd6),
+  property-tested BEFORE sampling: orthonormality 1e-15, c>=0, top-direction
+  recovery, replay determinism. Test caught OOB (V(best,j), 2K-index into
+  D x r) pre-sampling.
+- Debugging tale: after the fix, cmake binary STILL crashed (malloc unaligned
+  tcache) while manual/ASAN builds (same compiler, same flags, same vendored
+  paths) ran clean. ROOT CAUSE: stale object file — incremental build
+  silently skipped the header change (.o mtime 00:34 < header mtime 00:35).
+  RUNBOOK: after scripted header edits, delete .o or --clean-first. (gdb
+  backtrace + mtime comparison pinned it; no compiler/ABI/allocator issue.)
+- w17g (7 models x 3 reps, log capture) processed: post-fix e/grad
+  hier_2pl 2.6x better than pre-fix (1.05e-3), esc 1.3x, pilots 2.8x.
+  Evidence package + PR #4 follow-up 16 updated.
+- W-19 sweep launched: 8 models x 4 bases x 3 reps (fold config).

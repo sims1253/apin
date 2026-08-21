@@ -1,0 +1,98 @@
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[compile] eight_schools_noncentered/clang_native: cached
+[compile] blr/clang_native: cached
+[compile] kidscore_momiq/clang_native: cached
+[compile] lsat_model/clang_native: cached
+[compile] logmesquite_logvash/clang_native: cached
+[compile] wells_dist100_model/clang_native: cached
+[compile] diamonds/clang_native: cached
+[compile] radon_partially_pooled_noncentered/clang_native: cached
+[compile] radon_variable_intercept_slope_noncentered/clang_native: cached
+[compile] dogs_hierarchical/clang_native: cached
+[compile] pilots/clang_native: cached
+[compile] hier_2pl/clang_native: cached
+[compile] gp_regr/clang_native: cached
+[compile] kronecker_gp/clang_native: cached
+[compile] accel_gp/clang_native: cached
+[compile] bym2_offset_only/clang_native: cached
+[compile] eight_schools_centered/clang_native: cached
+[compile] garch11/clang_native: cached
+[compile] lotka_volterra/clang_native: cached
+[compile] low_dim_gauss_mix/clang_native: FAILED make failed: _1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/low_dim_gauss_mix__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/low_dim_gauss_mix__clang_native/model.hpp
+ since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/low_dim_gauss_mix__clang_native/model.o] Error 1
+
+[compile] arma11/clang_native: FAILED make failed: ib/stan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/arma11__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/arma11__clang_native/model.hpp
+ n modified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/arma11__clang_native/model.o] Error 1
+
+[run] clang_native/eight_schools_noncentered/rep0: wall=0.1s warm=0.0 samp=0.0 div=0 lf=32010
+[run] clang_native/blr/rep0: wall=0.1s warm=0.1 samp=0.1 div=0 lf=58274
+[run] clang_native/kidscore_momiq/rep0: wall=0.7s warm=0.4 samp=0.3 div=0 lf=109036
+[run] clang_native/lsat_model/rep0: wall=12.6s warm=7.9 samp=4.6 div=0 lf=60000
+[run] clang_native/logmesquite_logvash/rep0: wall=0.5s warm=0.2 samp=0.3 div=0 lf=211528
+[run] clang_native/wells_dist100_model/rep0: wall=0.8s warm=0.4 samp=0.4 div=0 lf=21402
+[run] clang_native/diamonds/rep0: wall=67.7s warm=26.1 samp=39.7 div=0 lf=3775072
+[run] clang_native/radon_partially_pooled_noncentered/rep0: wall=76.5s warm=47.7 samp=14.8 div=0 lf=77936
+[run] clang_native/radon_variable_intercept_slope_noncentered/rep0: wall=6.2s warm=3.3 samp=1.5 div=0 lf=76240
+[run] clang_native/dogs_hierarchical/rep0: wall=1.3s warm=0.5 samp=0.7 div=0 lf=17608
+[run] clang_native/pilots/rep0: wall=2.4s warm=0.6 samp=1.8 div=305 lf=1784756
+[run] clang_native/hier_2pl/rep0: FAILED chain 0 rc=-6: Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then 
+[run] clang_native/gp_regr/rep0: wall=0.1s warm=0.1 samp=0.1 div=0 lf=18464
+[run] clang_native/kronecker_gp/rep0: FAILED chain 0 rc=-6: Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+Exception: lkj_corr_cholesky_lpdf: Random variable[3] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/kronecker_gp.stan', line 73, column 2 to column 27)
+If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, t
+[run] clang_native/accel_gp/rep0: wall=28.6s warm=12.3 samp=13.4 div=70 lf=2998116
+[run] clang_native/bym2_offset_only/rep0: wall=50.6s warm=28.7 samp=20.2 div=0 lf=252000
+[run] clang_native/eight_schools_centered/rep0: wall=0.1s warm=0.0 samp=0.0 div=120 lf=71232
+[run] clang_native/garch11/rep0: wall=0.5s warm=0.2 samp=0.3 div=0 lf=46102
+[run] clang_native/lotka_volterra/rep0: FAILED chain 0 rc=-6: Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+Exception: lognormal_lpdf: Location parameter[17] is -nan, but must be finite! (in '/home/m0hawk/Documents/apin/stan/models/lotka_volterra.stan', line 44, column 4 to column 52)
+If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, th
+[run] clang_native/low_dim_gauss_mix/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/low_dim_gauss_mix__clang_native/model
+[run] clang_native/arma11/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/arma11__clang_native/model
+[run] clang_native/eight_schools_noncentered/rep1: wall=0.1s warm=0.0 samp=0.0 div=1 lf=34792
+[run] clang_native/blr/rep1: wall=0.1s warm=0.0 samp=0.0 div=0 lf=56264
+[run] clang_native/kidscore_momiq/rep1: wall=0.7s warm=0.3 samp=0.2 div=0 lf=101500
+[run] clang_native/lsat_model/rep1: wall=11.3s warm=7.2 samp=4.6 div=0 lf=61872
+[run] clang_native/logmesquite_logvash/rep1: wall=0.4s warm=0.2 samp=0.2 div=0 lf=191012
+[run] clang_native/wells_dist100_model/rep1: wall=0.8s warm=0.4 samp=0.4 div=0 lf=24220
+[run] clang_native/diamonds/rep1: wall=60.3s warm=24.2 samp=35.1 div=0 lf=3914336
+[run] clang_native/radon_partially_pooled_noncentered/rep1: wall=49.6s warm=40.3 samp=10.4 div=0 lf=60000
+[run] clang_native/radon_variable_intercept_slope_noncentered/rep1: wall=5.5s warm=2.9 samp=1.2 div=1 lf=92024
+[run] clang_native/dogs_hierarchical/rep1: wall=1.1s warm=0.4 samp=0.7 div=0 lf=18070
+[run] clang_native/pilots/rep1: wall=2.2s warm=0.5 samp=0.9 div=384 lf=1511266
+[run] clang_native/hier_2pl/rep1: FAILED chain 0 rc=-6: double free or corruption (out)
+
+[run] clang_native/gp_regr/rep1: wall=0.1s warm=0.1 samp=0.1 div=0 lf=17744
+[run] clang_native/kronecker_gp/rep1: FAILED chain 0 rc=-6: Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+Exception: lkj_corr_cholesky_lpdf: Random variable[5] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/kronecker_gp.stan', line 73, column 2 to column 27)
+If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, t
+[run] clang_native/accel_gp/rep1: wall=36.0s warm=14.5 samp=18.5 div=64 lf=3422038
+[run] clang_native/bym2_offset_only/rep1: wall=63.2s warm=39.6 samp=23.4 div=0 lf=252000
+[run] clang_native/eight_schools_centered/rep1: wall=0.1s warm=0.1 samp=0.0 div=57 lf=55360
+[run] clang_native/garch11/rep1: wall=0.6s warm=0.3 samp=0.2 div=0 lf=39666
+[run] clang_native/lotka_volterra/rep1: FAILED chain 0 rc=-6: Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+Exception: integrate_ode_rk45: ode parameters and data[1] is inf, but must be finite! (in '/home/m0hawk/Documents/apin/stan/models/lotka_volterra.stan', line 33, column 2 to line 35, column 66)
+If this warning occurs sporadically, such as for highly constrained variable types like covaria
+[run] clang_native/low_dim_gauss_mix/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/low_dim_gauss_mix__clang_native/model
+[run] clang_native/arma11/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/arma11__clang_native/model
+[run] clang_native/eight_schools_noncentered/rep2: wall=0.1s warm=0.0 samp=0.0 div=2 lf=34316
+[run] clang_native/blr/rep2: wall=0.1s warm=0.0 samp=0.0 div=0 lf=53222
+[run] clang_native/kidscore_momiq/rep2: wall=0.7s warm=0.3 samp=0.3 div=0 lf=99392
+[run] clang_native/lsat_model/rep2: wall=14.2s warm=8.4 samp=5.2 div=0 lf=60000
+[run] clang_native/logmesquite_logvash/rep2: wall=0.5s warm=0.2 samp=0.2 div=0 lf=197318
+[run] clang_native/wells_dist100_model/rep2: wall=0.9s warm=0.4 samp=0.4 div=0 lf=23074
+[run] clang_native/diamonds/rep2: wall=63.8s warm=23.7 samp=37.8 div=0 lf=3783008
+[run] clang_native/radon_partially_pooled_noncentered/rep2: wall=57.0s warm=39.7 samp=11.4 div=0 lf=60064
+[run] clang_native/radon_variable_intercept_slope_noncentered/rep2: wall=5.4s warm=2.9 samp=2.5 div=0 lf=84224
+[run] clang_native/dogs_hierarchical/rep2: wall=1.4s warm=0.5 samp=0.7 div=0 lf=19100
+[run] clang_native/pilots/rep2: wall=2.3s warm=0.7 samp=0.2 div=1019 lf=1028151
+[run] clang_native/hier_2pl/rep2: wall=110.7s warm=51.1 samp=60.7 div=0 lf=123440
+[run] clang_native/gp_regr/rep2: wall=0.1s warm=0.0 samp=0.0 div=0 lf=17400

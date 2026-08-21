@@ -1,0 +1,5 @@
+warmup_s,sampling_s,n_draws,n_leapfrog_total,n_leapfrog_sampling,divergences,treedepth_hits,stepsize_final,accept_mean,lp_mean,model,variant,rep,chain,wall_batch_s,seed
+0.239,0.141,1000,24440,12576,0,0,0.11200968,0.93828800387,-1479.3776223,kidscore_momiq,march_native,2,0,0.424,20262819
+0.221,0.14,1000,22124,10968,0,0,0.12487555,0.91957897296,-1479.272864,kidscore_momiq,march_native,2,1,0.424,20262819
+0.277,0.141,1000,22720,11624,0,0,0.1175735,0.9206820861,-1479.3807762,kidscore_momiq,march_native,2,2,0.424,20262819
+0.201,0.144,1000,22356,10988,0,0,0.10072149,0.9194696836,-1479.4010633,kidscore_momiq,march_native,2,3,0.424,20262819

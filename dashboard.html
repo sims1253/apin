@@ -1,0 +1,204 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>nindan — Stan wall-clock → ESS</title>
+<style>
+:root { --ink:#111827; --mut:#6b7280; --bg:#f8fafc; --card:#ffffff; --line:#e5e7eb;
+        --ok:#047857; --bad:#b91c1c; --warn:#b45309; --acc:#1d4ed8; }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--ink);
+       font:15px/1.55 ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 28px 20px 80px; }
+h1 { font-size: 26px; margin:0 0 4px; letter-spacing:-0.02em; }
+h2 { font-size: 19px; margin: 34px 0 10px; letter-spacing:-0.01em; }
+h2 .n { color:#9ca3af; font-weight:500; margin-right:8px; }
+p.sub { color:var(--mut); margin:0 0 18px; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin:12px 0; }
+table { border-collapse: collapse; width:100%; font-size:13.5px; background:var(--card); }
+th, td { padding:6px 9px; border-bottom:1px solid var(--line); text-align:right; white-space:nowrap; }
+th { background:#f1f5f9; font-weight:600; position:sticky; top:0; }
+td.l, th.l { text-align:left; }
+tr:hover td { background:#f8fafc; }
+.badge { display:inline-block; padding:1px 8px; border-radius:99px; font-size:11.5px; font-weight:600; }
+.b-ok { background:#d1fae5; color:var(--ok); }
+.b-bad { background:#fee2e2; color:var(--bad); }
+.b-warn { background:#fef3c7; color:var(--warn); }
+.b-run { background:#dbeafe; color:var(--acc); }
+.b-idle { background:#e5e7eb; color:#4b5563; }
+.small { color:var(--mut); font-size:12.5px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:10px; }
+.kpi { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
+.kpi .v { font-size:22px; font-weight:700; letter-spacing:-0.02em; }
+.kpi .k { color:var(--mut); font-size:12px; text-transform:uppercase; letter-spacing:0.05em; }
+pre.wl { background:#0f172a; color:#e2e8f0; padding:14px; border-radius:10px; overflow-x:auto;
+         font:12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; white-space:pre-wrap; }
+.mono { font-family: ui-monospace,Menlo,monospace; font-size:12.5px; }
+footer { margin-top:40px; color:var(--mut); font-size:12.5px; }
+</style></head><body><div class="wrap">
+<h1>nindan <span class="small">— make Stan reach target ESS in half the wall-clock</span></h1>
+<p class="sub">Posteriors from posteriordb · CmdStan <b>2.39.0</b> pinned · Ryzen 9 5900X (Zen 3, AVX2-only, ≤4 cores) · updated 2026-08-21 21:10 UTC</p>
+<div class="grid">
+<div class="kpi"><div class="v">21</div><div class="k">models in CORE_SET</div><div class="small">frozen 2026-08-19</div></div>
+<div class="kpi"><div class="v">1.21x</div><div class="k">nutpie wall speedup</div><div class="small">geomean of medians</div></div>
+<div class="kpi"><div class="v">0.98x</div><div class="k">nutpie ESS/sec ratio</div><div class="small">quality-adjusted</div></div>
+<div class="kpi"><div class="v">2.63x</div><div class="k">µs/grad nutpie vs cmdstan</div><div class="small">geomean, same Stan math</div></div>
+<div class="kpi"><div class="v">52.7%</div><div class="k">warmup share of wall</div><div class="small">median, &gt;1s models</div></div>
+</div>
+<h2><span class="n">01</span>Live status</h2><div class="card">
+<div class="small">No sampler jobs active right now.</div>
+<div style="margin-top:8px" class="small">Completed configs per variant: 
+<b>clang_native</b> 63/63 · <b>default</b> 63/63 · <b>nutpie</b> 63/63 · <b>oexp</b> 51/63 · <b>pathfinder</b> 0/0 · <b>pf_full</b> 30/30 · <b>pf_w200</b> 30/30 · <b>w10_auto05</b> 58/63 · <b>w11_nore_diamonds</b> 0/0 · <b>w11_nore_eight_schools_centered</b> 0/0 · <b>w11_nore_lotka_volterra</b> 0/0 · <b>w11_nore_pilots</b> 0/0 · <b>w11_re_diamonds</b> 0/0 · <b>w11_re_eight_schools_centered</b> 0/0 · <b>w11_re_lotka_volterra</b> 0/0 · <b>w11_re_pilots</b> 0/0 · <b>w11_reinit</b> 0/12 · <b>w14_full_diamonds</b> 0/0 · <b>w14_full_eight_schools_centered</b> 0/0 · <b>w14_full_pilots</b> 0/0 · <b>w15_targeted_diamonds</b> 0/0 · <b>w15_targeted_eight_schools_centered</b> 0/0 · <b>w15_targeted_pilots</b> 0/0 · <b>w16_freeze_fold_hier_2pl</b> 0/0 · <b>w16_freeze_full_hier_2pl</b> 0/0 · <b>w16_freeze_rec_hier_2pl</b> 0/0 · <b>w16clean_fold_hier_2pl</b> 0/0 · <b>w16clean_full_hier_2pl</b> 0/0 · <b>w16clean_rec_hier_2pl</b> 0/0 · <b>w17_auto_accel_gp</b> 0/0 · <b>w17_auto_arma11</b> 0/0 · <b>w17_auto_blr</b> 0/0 · <b>w17_auto_bym2_offset_only</b> 0/0 · <b>w17_auto_diamonds</b> 0/0 · <b>w17_auto_dogs_hierarchical</b> 0/0 · <b>w17_auto_eight_schools_centered</b> 0/0 · <b>w17_auto_eight_schools_noncentered</b> 0/0 · <b>w17_auto_garch11</b> 0/0 · <b>w17_auto_gp_regr</b> 0/0 · <b>w17_auto_hier_2pl</b> 0/0 · <b>w17_auto_kidscore_momiq</b> 0/0 · <b>w17_auto_kronecker_gp</b> 0/0 · <b>w17_auto_logmesquite_logvash</b> 0/0 · <b>w17_auto_lotka_volterra</b> 0/0 · <b>w17_auto_low_dim_gauss_mix</b> 0/0 · <b>w17_auto_lsat_model</b> 0/0 · <b>w17_auto_pilots</b> 0/0 · <b>w17_auto_radon_partially_pooled_noncentered</b> 0/0 · <b>w17_auto_radon_variable_intercept_slope_noncentered</b> 0/0 · <b>w17_auto_wells_dist100_model</b> 0/0 · <b>w17_fold_accel_gp</b> 0/0 · <b>w17_fold_arma11</b> 0/0 · <b>w17_fold_blr</b> 0/0 · <b>w17_fold_bym2_offset_only</b> 0/0 · <b>w17_fold_diamonds</b> 0/0 · <b>w17_fold_dogs_hierarchical</b> 0/0 · <b>w17_fold_eight_schools_centered</b> 0/0 · <b>w17_fold_eight_schools_noncentered</b> 0/0 · <b>w17_fold_garch11</b> 0/0 · <b>w17_fold_gp_regr</b> 0/0 · <b>w17_fold_hier_2pl</b> 0/0 · <b>w17_fold_kidscore_momiq</b> 0/0 · <b>w17_fold_kronecker_gp</b> 0/0 · <b>w17_fold_logmesquite_logvash</b> 0/0 · <b>w17_fold_lotka_volterra</b> 0/0 · <b>w17_fold_low_dim_gauss_mix</b> 0/0 · <b>w17_fold_lsat_model</b> 0/0 · <b>w17_fold_pilots</b> 0/0 · <b>w17_fold_radon_partially_pooled_noncentered</b> 0/0 · <b>w17_fold_radon_variable_intercept_slope_noncentered</b> 0/0 · <b>w17_fold_wells_dist100_model</b> 0/0 · <b>w17_rec_accel_gp</b> 0/0 · <b>w17_rec_arma11</b> 0/0 · <b>w17_rec_blr</b> 0/0 · <b>w17_rec_bym2_offset_only</b> 0/0 · <b>w17_rec_diamonds</b> 0/0 · <b>w17_rec_dogs_hierarchical</b> 0/0 · <b>w17_rec_eight_schools_centered</b> 0/0 · <b>w17_rec_eight_schools_noncentered</b> 0/0 · <b>w17_rec_garch11</b> 0/0 · <b>w17_rec_gp_regr</b> 0/0 · <b>w17_rec_hier_2pl</b> 0/0 · <b>w17_rec_kidscore_momiq</b> 0/0 · <b>w17_rec_kronecker_gp</b> 0/0 · <b>w17_rec_logmesquite_logvash</b> 0/0 · <b>w17_rec_lotka_volterra</b> 0/0 · <b>w17_rec_low_dim_gauss_mix</b> 0/0 · <b>w17_rec_lsat_model</b> 0/0 · <b>w17_rec_pilots</b> 0/0 · <b>w17_rec_radon_partially_pooled_noncentered</b> 0/0 · <b>w17_rec_radon_variable_intercept_slope_noncentered</b> 0/0 · <b>w17_rec_wells_dist100_model</b> 0/0 · <b>w17g_arma11</b> 0/0 · <b>w17g_blr</b> 0/0 · <b>w17g_diamonds</b> 0/0 · <b>w17g_eight_schools_centered</b> 0/0 · <b>w17g_hier_2pl</b> 0/0 · <b>w17g_kronecker_gp</b> 0/0 · <b>w17g_pilots</b> 0/0 · <b>w18_1000_bym2_offset_only</b> 0/0 · <b>w18_1000_eight_schools_centered</b> 0/0 · <b>w18_1000_hier_2pl</b> 0/0 · <b>w18_1000_kronecker_gp</b> 0/0 · <b>w18_1000_logmesquite_logvash</b> 0/0 · <b>w18_1000_lotka_volterra</b> 0/0 · <b>w2_adam_b50_shr</b> 56/63 · <b>w2_adam_b50_shr_c3</b> 57/63 · <b>w2_da_b50_shr_avg</b> 57/63 · <b>w3_mdt7</b> 61/63 · <b>w3_mst31</b> 61/63 · <b>w3_mst63</b> 61/63 · <b>w4_init_fix</b> 59/63 · <b>w5_pf_init</b> 62/63 · <b>w6_pf_chop50</b> 60/63 · <b>w7_batch_1000</b> 61/63 · <b>w7_batch_2000</b> 61/63 · <b>w7_batch_250</b> 61/63 · <b>w7_batch_4000</b> 61/63 · <b>w7_batch_500</b> 61/63 · <b>w7_full_1000</b> 60/63 · <b>w7_full_2000</b> 60/63 · <b>w7_full_250</b> 61/63 · <b>w7_full_4000</b> 59/63 · <b>w7_full_500</b> 60/63 · <b>w7_stock_1000</b> 62/63 · <b>w7_stock_2000</b> 62/63 · <b>w7_stock_250</b> 62/63 · <b>w7_stock_4000</b> 62/63 · <b>w7_stock_500</b> 62/63 · <b>w8_lr10</b> 59/63 · <b>w9_diag</b> 18/18 · <b>w9_fold</b> 17/18 · <b>w9_full</b> 17/18 · <b>walnut</b> 63/63 · <b>walnut_adam_b50</b> 61/63 · <b>walnut_adam_b50_c3</b> 61/63 · <b>walnut_belief</b> 60/63 · <b>walnut_da</b> 22/63 · <b>walnut_da_avg</b> 34/63 · <b>walnut_da_b50</b> 60/63 · <b>walnut_dem</b> 50/63
+</div></div>
+<h2><span class="n">02</span>Phase tracker</h2>
+<table><tr><th class="l">Phase</th><th class="l">Status</th><th class="l">Note</th></tr>
+<tr><td class="l" style="font-weight:600">0 · Harness + baselines</td><td class="l"><span class="badge b-ok">DONE</span></td><td class="l">21 models × {default, oexp, nutpie, walnutpie} × 3 reps; ESS via posterior 1.7</td></tr>
+<tr><td class="l" style="font-weight:600">0.5 · Pathfinder warmup ablation</td><td class="l"><span class="badge b-ok">DONE</span></td><td class="l">pre-registered pf_full + pf_w200 on 10 warmup-heavy models; 20 model-variants measured</td></tr>
+<tr><td class="l" style="font-weight:600">1 · Bottleneck atlas</td><td class="l"><span class="badge b-ok">DONE</span></td><td class="l">ATLAS.md: model-grad 76–97% on data-heavy models; kernel-bound on small; checks ≤2.2% (rejected); cmdstan does 2.1–5x more Ir/grad than bridgestan driver</td></tr>
+<tr><td class="l" style="font-weight:600">2 · Implementation wins</td><td class="l"><span class="badge b-warn">PARTIAL</span></td><td class="l">2c closed: clang -march=native no geomean win (1.13x slower, diamonds-only gain). Stan-services 2.1–5x Ir/grad gap localized (kernel bookkeeping) — 2a patch pending</td></tr>
+<tr><td class="l" style="font-weight:600">W · walnutpie acceleration (NEW PRIMARY)</td><td class="l"><span class="badge b-run">RUNNING</span></td><td class="l">optimizer-swap infra + 5 adapters shipped; W-1: batch-50 halves rhat failures 17→9; W-2: mass shrink no further gain; scale lock-in diagnosed as sampler-level blocker</td></tr>
+<tr><td class="l" style="font-weight:600">4 · Property harness</td><td class="l"><span class="badge b-idle">QUEUED</span></td><td class="l">reversibility/volume/moment tests, negative control</td></tr>
+</table>
+<h2><span class="n">03</span>Headline findings so far</h2><div class="card"><ul style="margin:4px 0;padding-left:20px">
+<li><b>nutpie's "2x" localized:</b> 1.21x geomean wall on this set — and a <b>wash quality-adjusted</b> (0.98x ESS/sec). The real portable gap is <b>per-gradient cost: 2.6x geomean</b> (same Stan math via bridgestan). Phase 1 target.</li>
+<li><b>stanc3 2.39 <span class="mono">--Oexperimental</span> is unsafe:</b> 3/21 models emit uncompilable C++, 1 miscompiles (Eigen resize assert; silent corruption risk with NDEBUG). Also no quality-adjusted win (0.97x).</li>
+<li><b>WALNUTS at defaults does not mix:</b> 1.73x wall geomean but 17/21 models R-hat&gt;1.01 (up to 9.45), ESS ratio 0.062x. Kept as attribution probe: its logp_grad fraction is 0.91–0.99.</li>
+<li><b>Warmup eats 52.7%</b> of sampler wall (median, &gt;1s models); radon 77%. Pathfinder ablation in flight.</li>
+<li>Pathologies confirmed: kronecker_gp 99.5% maxdepth hits (731s); pilots 11–17% divergences, R-hat 1.10.</li>
+</ul></div>
+<h2><span class="n">04</span>Baseline geomeans (vs cmdstan default)</h2>
+<table><tr><th class="l">variant</th><th>models</th><th>geo ESS/s</th><th>geo ESS/grad</th><th>rhat&gt;1.01</th><th class="l">verdict</th></tr>
+<tr><td class="l"><b>clang_native</b></td><td>21</td><td>423.1</td><td>0.0078</td><td>3</td><td class="l small"></td></tr>
+<tr><td class="l"><b>default</b></td><td>21</td><td>481.3</td><td>0.0081</td><td>4</td><td class="l small">reference</td></tr>
+<tr><td class="l"><b>nutpie</b></td><td>21</td><td>473.3</td><td>0.0031</td><td>4</td><td class="l small">wall 1.21x, QA wash; per-grad 2.6x cheaper — target</td></tr>
+<tr><td class="l"><b>oexp</b></td><td>17</td><td>456.3</td><td>0.0080</td><td>3</td><td class="l small">unsafe: 3 uncompilable + 1 miscompile; no QA win</td></tr>
+<tr><td class="l"><b>pf_full</b></td><td>10</td><td>22.1</td><td>0.0013</td><td>3</td><td class="l small"></td></tr>
+<tr><td class="l"><b>pf_w200</b></td><td>10</td><td>23.9</td><td>0.0010</td><td>4</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w10_auto05</b></td><td>20</td><td>145.0</td><td>0.0013</td><td>8</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w2_adam_b50_shr</b></td><td>20</td><td>25.3</td><td>0.0002</td><td>9</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w2_adam_b50_shr_c3</b></td><td>20</td><td>22.7</td><td>0.0002</td><td>9</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w2_da_b50_shr_avg</b></td><td>20</td><td>82.9</td><td>0.0007</td><td>13</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w3_mdt7</b></td><td>21</td><td>19.7</td><td>0.0002</td><td>9</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w3_mst31</b></td><td>21</td><td>17.6</td><td>0.0002</td><td>9</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w3_mst63</b></td><td>21</td><td>15.8</td><td>0.0002</td><td>9</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w4_init_fix</b></td><td>20</td><td>38.6</td><td>0.0003</td><td>13</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w5_pf_init</b></td><td>21</td><td>177.1</td><td>0.0013</td><td>11</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w6_pf_chop50</b></td><td>20</td><td>190.0</td><td>0.0014</td><td>8</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w7_batch_1000</b></td><td>21</td><td>21.9</td><td>0.0002</td><td>9</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w7_batch_2000</b></td><td>21</td><td>25.2</td><td>0.0002</td><td>10</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w7_batch_250</b></td><td>21</td><td>23.9</td><td>0.0002</td><td>9</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w7_batch_4000</b></td><td>21</td><td>17.6</td><td>0.0001</td><td>10</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w7_batch_500</b></td><td>21</td><td>23.0</td><td>0.0002</td><td>9</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w7_full_1000</b></td><td>20</td><td>190.5</td><td>0.0015</td><td>8</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w7_full_2000</b></td><td>20</td><td>193.5</td><td>0.0014</td><td>8</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w7_full_250</b></td><td>21</td><td>83.9</td><td>0.0007</td><td>13</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w7_full_4000</b></td><td>20</td><td>127.2</td><td>0.0009</td><td>9</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w7_full_500</b></td><td>20</td><td>78.1</td><td>0.0007</td><td>10</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w7_stock_1000</b></td><td>21</td><td>60.9</td><td>0.0005</td><td>17</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w7_stock_2000</b></td><td>21</td><td>66.1</td><td>0.0005</td><td>14</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w7_stock_250</b></td><td>21</td><td>60.1</td><td>0.0004</td><td>11</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w7_stock_4000</b></td><td>21</td><td>45.0</td><td>0.0003</td><td>15</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w7_stock_500</b></td><td>21</td><td>66.3</td><td>0.0005</td><td>14</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w8_lr10</b></td><td>20</td><td>173.1</td><td>0.0012</td><td>9</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w9_diag</b></td><td>6</td><td>12.0</td><td>0.0006</td><td>3</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w9_fold</b></td><td>6</td><td>8.5</td><td>0.0004</td><td>3</td><td class="l small"></td></tr>
+<tr><td class="l"><b>w9_full</b></td><td>6</td><td>10.0</td><td>0.0005</td><td>4</td><td class="l small"></td></tr>
+<tr><td class="l"><b>walnut</b></td><td>21</td><td>52.1</td><td>0.0005</td><td>17</td><td class="l small">17/21 rhat bad at defaults — attribution probe only</td></tr>
+<tr><td class="l"><b>walnut_adam_b50</b></td><td>21</td><td>21.7</td><td>0.0002</td><td>9</td><td class="l small"></td></tr>
+<tr><td class="l"><b>walnut_adam_b50_c3</b></td><td>21</td><td>22.8</td><td>0.0002</td><td>10</td><td class="l small"></td></tr>
+<tr><td class="l"><b>walnut_belief</b></td><td>21</td><td>98.7</td><td>0.0007</td><td>15</td><td class="l small"></td></tr>
+<tr><td class="l"><b>walnut_da</b></td><td>11</td><td>36.9</td><td>0.0004</td><td>8</td><td class="l small"></td></tr>
+<tr><td class="l"><b>walnut_da_avg</b></td><td>14</td><td>37.4</td><td>0.0004</td><td>10</td><td class="l small"></td></tr>
+<tr><td class="l"><b>walnut_da_b50</b></td><td>21</td><td>77.2</td><td>0.0006</td><td>16</td><td class="l small"></td></tr>
+<tr><td class="l"><b>walnut_dem</b></td><td>19</td><td>9.9</td><td>0.0001</td><td>15</td><td class="l small"></td></tr>
+</table>
+<h2><span class="n">05</span>Per-model detail (median of 3 reps)</h2>
+<table><tr><th class="l">model</th><th class="l">family</th><th>wall def</th><th>wall nutpie</th><th>nutpie×wall</th><th>ESS def</th><th>ESS nutpie</th><th>rhat def</th><th>rhat nutpie</th><th>µs/grad def</th><th>µs/grad nutpie</th></tr>
+<tr><td class="l">kronecker_gp</td><td class="l small">GP/spatial</td><td>731.3</td><td>468.2</td><td><b>1.56</b></td><td>944</td><td>407</td><td><span class="badge b-ok">1.010</span></td><td><span class="badge b-warn">1.011</span></td><td>179.1</td><td>82.2</td></tr>
+<tr><td class="l">hier_2pl</td><td class="l small">hierarchical</td><td>70.1</td><td>32.2</td><td><b>2.18</b></td><td>1,947</td><td>865</td><td><span class="badge b-ok">1.007</span></td><td><span class="badge b-ok">1.007</span></td><td>585.4</td><td>134.2</td></tr>
+<tr><td class="l">diamonds</td><td class="l small">GLM</td><td>64.8</td><td>20.4</td><td><b>3.18</b></td><td>1,306</td><td>414</td><td><span class="badge b-ok">1.003</span></td><td><span class="badge b-ok">1.009</span></td><td>16.4</td><td>5.2</td></tr>
+<tr><td class="l">bym2_offset_only</td><td class="l small">GP/spatial</td><td>34.0</td><td>34.4</td><td><b>0.99</b></td><td>352</td><td>435</td><td><span class="badge b-warn">1.013</span></td><td><span class="badge b-warn">1.016</span></td><td>134.8</td><td>34.1</td></tr>
+<tr><td class="l">radon_partially_pooled_noncentered</td><td class="l small">hierarchical</td><td>29.6</td><td>22.1</td><td><b>1.34</b></td><td>309</td><td>617</td><td><span class="badge b-warn">1.020</span></td><td><span class="badge b-ok">1.008</span></td><td>486.3</td><td>92.3</td></tr>
+<tr><td class="l">accel_gp</td><td class="l small">GP/spatial</td><td>25.3</td><td>21.7</td><td><b>1.17</b></td><td>1,811</td><td>727</td><td><span class="badge b-ok">1.004</span></td><td><span class="badge b-ok">1.005</span></td><td>8.0</td><td>3.2</td></tr>
+<tr><td class="l">lsat_model</td><td class="l small">easy/small</td><td>8.4</td><td>8.4</td><td><b>1.00</b></td><td>1,076</td><td>1,021</td><td><span class="badge b-ok">1.006</span></td><td><span class="badge b-ok">1.007</span></td><td>139.9</td><td>35.0</td></tr>
+<tr><td class="l">lotka_volterra</td><td class="l small">stiff/funnel</td><td>5.5</td><td>4.3</td><td><b>1.28</b></td><td>882</td><td>578</td><td><span class="badge b-ok">1.009</span></td><td><span class="badge b-ok">1.008</span></td><td>42.2</td><td>17.1</td></tr>
+<tr><td class="l">radon_variable_intercept_slope_noncentered</td><td class="l small">hierarchical</td><td>3.1</td><td>3.0</td><td><b>1.03</b></td><td>768</td><td>709</td><td><span class="badge b-ok">1.007</span></td><td><span class="badge b-ok">1.009</span></td><td>36.3</td><td>13.0</td></tr>
+<tr><td class="l">low_dim_gauss_mix</td><td class="l small">stiff/funnel</td><td>3.0</td><td>2.4</td><td><b>1.25</b></td><td>3,927</td><td>2,609</td><td><span class="badge b-ok">1.001</span></td><td><span class="badge b-ok">1.001</span></td><td>123.6</td><td>35.1</td></tr>
+<tr><td class="l">pilots</td><td class="l small">hierarchical</td><td>1.3</td><td>0.3</td><td><b>4.84</b></td><td>40</td><td>19</td><td><span class="badge b-bad">1.096</span></td><td><span class="badge b-bad">1.382</span></td><td>1.1</td><td>0.5</td></tr>
+<tr><td class="l">dogs_hierarchical</td><td class="l small">hierarchical</td><td>0.8</td><td>0.7</td><td><b>1.17</b></td><td>1,456</td><td>2,250</td><td><span class="badge b-ok">1.003</span></td><td><span class="badge b-ok">1.002</span></td><td>45.7</td><td>13.4</td></tr>
+<tr><td class="l">wells_dist100_model</td><td class="l small">GLM</td><td>0.7</td><td>0.5</td><td><b>1.31</b></td><td>1,234</td><td>1,165</td><td><span class="badge b-ok">1.003</span></td><td><span class="badge b-ok">1.003</span></td><td>30.5</td><td>8.7</td></tr>
+<tr><td class="l">kidscore_momiq</td><td class="l small">easy/small</td><td>0.4</td><td>0.3</td><td><b>1.40</b></td><td>1,256</td><td>537</td><td><span class="badge b-ok">1.003</span></td><td><span class="badge b-ok">1.005</span></td><td>3.8</td><td>1.6</td></tr>
+<tr><td class="l">garch11</td><td class="l small">stiff/funnel</td><td>0.4</td><td>0.5</td><td><b>0.68</b></td><td>1,916</td><td>1,464</td><td><span class="badge b-ok">1.003</span></td><td><span class="badge b-ok">1.002</span></td><td>8.4</td><td>5.3</td></tr>
+<tr><td class="l">logmesquite_logvash</td><td class="l small">GLM</td><td>0.2</td><td>0.2</td><td><b>1.12</b></td><td>1,434</td><td>718</td><td><span class="badge b-ok">1.005</span></td><td><span class="badge b-ok">1.005</span></td><td>1.2</td><td>0.6</td></tr>
+<tr><td class="l">arma11</td><td class="l small">stiff/funnel</td><td>0.1</td><td>0.2</td><td><b>0.66</b></td><td>3,836</td><td>4,934</td><td><span class="badge b-ok">1.003</span></td><td><span class="badge b-ok">1.003</span></td><td>6.1</td><td>3.8</td></tr>
+<tr><td class="l">gp_regr</td><td class="l small">GP/spatial</td><td>0.1</td><td>0.1</td><td><b>1.03</b></td><td>3,505</td><td>5,273</td><td><span class="badge b-ok">1.001</span></td><td><span class="badge b-ok">1.002</span></td><td>5.0</td><td>1.8</td></tr>
+<tr><td class="l">eight_schools_centered</td><td class="l small">stiff/funnel</td><td>0.1</td><td>0.1</td><td><b>1.06</b></td><td>55</td><td>192</td><td><span class="badge b-bad">1.059</span></td><td><span class="badge b-warn">1.016</span></td><td>1.1</td><td>0.3</td></tr>
+<tr><td class="l">blr</td><td class="l small">easy/small</td><td>0.1</td><td>0.1</td><td><b>0.63</b></td><td>717</td><td>686</td><td><span class="badge b-ok">1.005</span></td><td><span class="badge b-ok">1.004</span></td><td>1.2</td><td>1.2</td></tr>
+<tr><td class="l">eight_schools_noncentered</td><td class="l small">easy/small</td><td>0.0</td><td>0.1</td><td><b>0.51</b></td><td>2,446</td><td>2,251</td><td><span class="badge b-ok">1.003</span></td><td><span class="badge b-ok">1.003</span></td><td>1.3</td><td>0.8</td></tr>
+</table>
+<h2><span class="n">06</span>Pathfinder warmup ablation (pre-registered)</h2>
+<table><tr><th class="l">variant</th><th class="l">model</th><th>wall (incl. PF)</th><th>ESS_bulk min</th><th>rhat max</th><th class="l">vs default wall</th></tr>
+<tr><td>pf_full</td><td class="l">kronecker_gp</td><td>740.0</td><td>680</td><td>1.013</td><td>1.01</td></tr>
+<tr><td>pf_full</td><td class="l">hier_2pl</td><td>155.9</td><td>2,025</td><td>1.007</td><td>2.22</td></tr>
+<tr><td>pf_full</td><td class="l">diamonds</td><td>89.7</td><td>1,478</td><td>1.005</td><td>1.39</td></tr>
+<tr><td>pf_full</td><td class="l">bym2_offset_only</td><td>58.0</td><td>346</td><td>1.019</td><td>1.71</td></tr>
+<tr><td>pf_full</td><td class="l">radon_partially_pooled_noncentered</td><td>50.8</td><td>388</td><td>1.022</td><td>1.71</td></tr>
+<tr><td>pf_full</td><td class="l">accel_gp</td><td>31.3</td><td>1,604</td><td>1.011</td><td>1.24</td></tr>
+<tr><td>pf_full</td><td class="l">lsat_model</td><td>12.7</td><td>893</td><td>1.009</td><td>1.52</td></tr>
+<tr><td>pf_full</td><td class="l">lotka_volterra</td><td>5.9</td><td>1,135</td><td>1.008</td><td>1.08</td></tr>
+<tr><td>pf_full</td><td class="l">pilots</td><td>1.7</td><td>12</td><td>1.550</td><td>1.34</td></tr>
+<tr><td>pf_full</td><td class="l">eight_schools_centered</td><td>0.2</td><td>157</td><td>1.053</td><td>3.06</td></tr>
+<tr><td>pf_w200</td><td class="l">kronecker_gp</td><td>445.9</td><td>239</td><td>1.034</td><td>0.61</td></tr>
+<tr><td>pf_w200</td><td class="l">hier_2pl</td><td>123.5</td><td>1,763</td><td>1.009</td><td>1.76</td></tr>
+<tr><td>pf_w200</td><td class="l">diamonds</td><td>49.0</td><td>713</td><td>1.010</td><td>0.76</td></tr>
+<tr><td>pf_w200</td><td class="l">bym2_offset_only</td><td>47.2</td><td>241</td><td>1.014</td><td>1.39</td></tr>
+<tr><td>pf_w200</td><td class="l">radon_partially_pooled_noncentered</td><td>46.2</td><td>452</td><td>1.015</td><td>1.56</td></tr>
+<tr><td>pf_w200</td><td class="l">accel_gp</td><td>21.2</td><td>1,576</td><td>1.005</td><td>0.84</td></tr>
+<tr><td>pf_w200</td><td class="l">lsat_model</td><td>9.4</td><td>1,010</td><td>1.008</td><td>1.12</td></tr>
+<tr><td>pf_w200</td><td class="l">lotka_volterra</td><td>4.3</td><td>937</td><td>1.006</td><td>0.78</td></tr>
+<tr><td>pf_w200</td><td class="l">pilots</td><td>1.2</td><td>9</td><td>1.706</td><td>0.94</td></tr>
+<tr><td>pf_w200</td><td class="l">eight_schools_centered</td><td>0.2</td><td>170</td><td>1.023</td><td>2.72</td></tr>
+</table>
+<p class="small">pf_full = pathfinder inits + 1000 warmup · pf_w200 = pathfinder inits + 200 warmup · wall includes the one-time pathfinder run. Judged on ESS/wall-second, rhat, divergences.</p>
+<h2><span class="n">07</span>WORKLOG (latest entries)</h2>
+<pre class="wl">## 2026-08-22 ~03:30 — ESS/grad evidence package: 0.06x claim corrected to 0.31x
+
+- Found two metric-definition asymmetries in the per-variant table:
+  walnutpie&#x27;s n_leapfrog_total includes WARMUP grads, cmdstan&#x27;s is
+  sampling-only (saved rows); cmdstan&#x27;s n_leapfrog_sampling is actually
+  &quot;last 500 of 1000 draws&quot;. The ~0.06x ESS/grad claim was an artifact.
+- Fair recompute (sampling-phase-only both sides, 20 models, median of 3):
+  geomean 0.31x. Splits cleanly: 0.25-1.33x on the 13 well-mixed models
+  (kronecker 1.33x, pilots 1.05x, esc 1.00x = walnut WINS); collapse only
+  where mixing fails (hier_2pl 0.025x, bym2 0.062x, diamonds 0.075x).
+- aggregate.py fixed to prefer n_leapfrog_sampling for ess_per_grad.
+- accel_gp robustness asymmetry documented: walnutpie aborts on non-finite
+  logp mid-trajectory where Stan rejects; all samplers give ESS 1.0 anyway.
+- Package: external/ess_per_grad_evidence.md (for the Flatiron team).
+- W-17 sweep running (rec/fold/auto x 21 models x 3 reps, freeze-fix binary);
+  accel_gp aborts expected under all configs (known).</pre>
+<pre class="wl">## 2026-08-23 ~00:30 — W-17/W-18 verdicts; reproducibility bug found+fixed (ours)
+
+- W-17 (21 models x rec/fold/auto x 3 reps, pre-fix binary): arms
+  statistically indistinguishable (fail counts 14/16/14 @rhat&gt;1.01;
+  geomeans within 13%). No fold catastrophes; no robust fold win either.
+- W-18 (6 marginal models, 1000 draws, 2 reps): ESS ~doubles, R-hat stays
+  1.02-1.06 =&gt; marginal misses are slow mixing, not short runs. Answer to
+  &#x27;are 500 too short?&#x27;: longer helps ESS, does not flip the R-hat verdict.
+- REPRODUCIBILITY BUG (ours, found via W-16 vs W-17 contradiction 16 vs 247):
+  find_reasonable_step drew probe momentum from Eigen::VectorXd::Random()
+  (std::rand, clock-seeded by main) =&gt; --step-init-heuristic made fixed-seed
+  runs irreproducible. Fixed (869dbe7): seeded detail::Random&lt;RNG&gt; threaded
+  through; 3-run bit-identity verified. warmup_heuristics.hpp never existed
+  upstream =&gt; NOT an upstream bug. W-16 hier_2pl numbers retracted; clean
+  rerun (w16clean) queued after W-18. Earlier &#x27;init-file-only nondeterminism&#x27;
+  was a harness false positive (duplicate flag; cmp on missing files).
+- Aurora research (hermes glm-5.3): arXiv:2606.27715, tall-2-D only,
+  degenerate below 2-D like Muon; full 2025-26 successor table incl. MuonEq
+  (diagonal equilibration before NS) and scalar closed-loop line
+  (NAMO/OptMuon/AdaGO). Saved external/research_optimizer_aurora.md.
+- Score-as-second-dimension: confirmed live in the low-rank estimator
+  (st = [Ys|Ss] stacked, SVD) — the sampler-appropriate &#x27;2-D&#x27; structure;
+  hermes: no published sampler-side NS orthogonalization exists; our score
+  variance diagonal = Fisher-adaptive Langevin (2305.14442) restricted to
+  diagonal.</pre>
+<footer>nindan · autonomous lane · CORE_SET frozen 2026-08-19 · harness/make_dashboard.py regenerates this page · numbers from results/*.csv (median of 3 unless noted)</footer>
+</div></body></html>

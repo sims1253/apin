@@ -1,0 +1,109 @@
+In file included from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/prim/fun/beta.hpp:6,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/prim/fun.hpp:33,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/prim/constraint.hpp:4,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev/constraint.hpp:24,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev.hpp:11,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math.hpp:19,
+                 from bench/bench_lpdf.cpp:4:
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/prim/fun/lgamma.hpp:19:2: error: #error "stan-math requires _REENTRANT being defined during compilation" "to make lgamma_r available."
+   19 | #error \
+      |  ^~~~~
+bench/bench_lpdf.cpp: In function ‘int main()’:
+bench/bench_lpdf.cpp:38:7: error: ‘set_zero_adjoint’ was not declared in this scope
+   38 |       set_zero_adjoint(); recover_memory();
+      |       ^~~~~~~~~~~~~~~~
+bench/bench_lpdf.cpp:67:7: error: ‘set_zero_adjoint’ was not declared in this scope
+   67 |       set_zero_adjoint(); recover_memory();
+      |       ^~~~~~~~~~~~~~~~
+In file included from /usr/include/c++/11/bits/move.h:57,
+                 from /usr/include/c++/11/bits/exception_ptr.h:43,
+                 from /usr/include/c++/11/exception:153,
+                 from /usr/include/c++/11/stdexcept:38,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/prim/fun/Eigen.hpp:3,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev.hpp:4,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math.hpp:19,
+                 from bench/bench_lpdf.cpp:4:
+/usr/include/c++/11/type_traits: In instantiation of ‘struct std::invoke_result<Eigen::internal::scalar_cmp_op<double, double, Eigen::internal::cmp_EQ>, const double&, const double&>’:
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/util/Meta.h:504:61:   required from ‘struct Eigen::internal::result_of<Eigen::internal::scalar_cmp_op<double, double, Eigen::internal::cmp_EQ>(const double&, const double&)>’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/CwiseBinaryOp.h:38:28:   required from ‘struct Eigen::internal::traits<Eigen::CwiseBinaryOp<Eigen::internal::scalar_cmp_op<double, double, Eigen::internal::cmp_EQ>, const Eigen::Array<double, 3, 1>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Array<double, 3, 1> > > >’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/CwiseBinaryOp.h:148:7:   required from ‘class Eigen::CwiseBinaryOpImpl<Eigen::internal::scalar_cmp_op<double, double, Eigen::internal::cmp_EQ>, const Eigen::Array<double, 3, 1>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Array<double, 3, 1> >, Eigen::Dense>’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/CwiseBinaryOp.h:77:7:   required from ‘class Eigen::CwiseBinaryOp<Eigen::internal::scalar_cmp_op<double, double, Eigen::internal::cmp_EQ>, const Eigen::Array<double, 3, 1>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Array<double, 3, 1> > >’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/prim/fun/hypergeometric_3F2.hpp:45:47:   required from ‘stan::return_type_t<T, L, U> stan::math::internal::hypergeometric_3F2_infsum(const Ta&, const Tb&, const Tz&, double, int) [with Ta = Eigen::Matrix<double, -1, 1>; Tb = Eigen::Matrix<double, -1, 1>; Tz = double; stan::require_all_vector_t<T_y, T_high>* <anonymous> = 0; stan::require_stan_scalar_t<T2>* <anonymous> = 0; stan::return_type_t<T, L, U> = double]’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/prim/fun/hypergeometric_3F2.hpp:128:47:   required from ‘auto stan::math::hypergeometric_3F2(const Ta&, const Tb&, const Tz&) [with Ta = std::vector<double, std::allocator<double> >; Tb = std::vector<double, std::allocator<double> >; Tz = double; stan::require_all_vector_t<T_y, T_high>* <anonymous> = 0; stan::require_stan_scalar_t<T2>* <anonymous> = 0]’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/prim/fun/hypergeometric_3F2.hpp:154:28:   required from ‘auto stan::math::hypergeometric_3F2(const std::initializer_list<_Tp>&, const std::initializer_list<_Value>&, const Tz&) [with Ta = double; Tb = double; Tz = double; stan::require_all_stan_scalar_t<T, L, U>* <anonymous> = 0]’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev/fun/inv_inc_beta.hpp:80:37:   required from here
+/usr/include/c++/11/type_traits:3009:7: error: ambiguous overload for ‘operator&&’ (operand types are ‘std::true_type’ {aka ‘std::integral_constant<bool, true>’} and ‘std::true_type’ {aka ‘std::integral_constant<bool, true>’})
+ 3009 |       static_assert((std::__is_complete_or_unbounded(
+      |       ^~~~~~~~~~~~~
+/usr/include/c++/11/type_traits:3009:7: note: candidate: ‘operator&&(std::integral_constant<bool, true>::value_type {aka bool}, std::integral_constant<bool, true>::value_type {aka bool})’ (built-in)
+In file included from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev/core.hpp:39,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev/constraint/cholesky_corr_constrain.hpp:4,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev/constraint.hpp:6,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev.hpp:11,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math.hpp:19,
+                 from bench/bench_lpdf.cpp:4:
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev/core/operator_logical_and.hpp:18:13: note: candidate: ‘bool stan::math::operator&&(const var&, const var&)’
+   18 | inline bool operator&&(const var& x, const var& y) {
+      |             ^~~~~~~~
+In file included from /usr/include/c++/11/bits/move.h:57,
+                 from /usr/include/c++/11/bits/exception_ptr.h:43,
+                 from /usr/include/c++/11/exception:153,
+                 from /usr/include/c++/11/stdexcept:38,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/prim/fun/Eigen.hpp:3,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev.hpp:4,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math.hpp:19,
+                 from bench/bench_lpdf.cpp:4:
+/usr/include/c++/11/type_traits: In instantiation of ‘struct std::invoke_result<Eigen::internal::scalar_quotient_op<double, int>, const double&, const int&>’:
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/util/Meta.h:504:61:   required from ‘struct Eigen::internal::result_of<Eigen::internal::scalar_quotient_op<double, int>(const double&, const int&)>’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/CwiseBinaryOp.h:38:28:   required from ‘struct Eigen::internal::traits<Eigen::CwiseBinaryOp<Eigen::internal::scalar_quotient_op<double, int>, const Eigen::CwiseBinaryOp<Eigen::internal::scalar_difference_op<int, double>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, const Eigen::Array<int, -1, 1> >, const Eigen::CwiseNullaryOp<Eigen::internal::linspaced_op<double>, Eigen::Array<double, -1, 1> > >, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, const Eigen::Array<int, -1, 1> > > >’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/CwiseBinaryOp.h:148:7:   required from ‘class Eigen::CwiseBinaryOpImpl<Eigen::internal::scalar_quotient_op<double, int>, const Eigen::CwiseBinaryOp<Eigen::internal::scalar_difference_op<int, double>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, const Eigen::Array<int, -1, 1> >, const Eigen::CwiseNullaryOp<Eigen::internal::linspaced_op<double>, Eigen::Array<double, -1, 1> > >, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, const Eigen::Array<int, -1, 1> >, Eigen::Dense>’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/CwiseBinaryOp.h:77:7:   required from ‘class Eigen::CwiseBinaryOp<Eigen::internal::scalar_quotient_op<double, int>, const Eigen::CwiseBinaryOp<Eigen::internal::scalar_difference_op<int, double>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, const Eigen::Array<int, -1, 1> >, const Eigen::CwiseNullaryOp<Eigen::internal::linspaced_op<double>, Eigen::Array<double, -1, 1> > >, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, const Eigen::Array<int, -1, 1> > >’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/prim/fun/lmgamma.hpp:58:75:   required from ‘stan::return_type_t<T> stan::math::lmgamma(int, T) [with T = double; stan::require_arithmetic_t<T>* <anonymous> = 0; stan::return_type_t<T> = double]’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev/fun/lmgamma.hpp:16:27:   required from here
+/usr/include/c++/11/type_traits:3009:7: error: ambiguous overload for ‘operator&&’ (operand types are ‘std::true_type’ {aka ‘std::integral_constant<bool, true>’} and ‘std::true_type’ {aka ‘std::integral_constant<bool, true>’})
+ 3009 |       static_assert((std::__is_complete_or_unbounded(
+      |       ^~~~~~~~~~~~~
+/usr/include/c++/11/type_traits:3009:7: note: candidate: ‘operator&&(std::integral_constant<bool, true>::value_type {aka bool}, std::integral_constant<bool, true>::value_type {aka bool})’ (built-in)
+In file included from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev/core.hpp:39,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev/constraint/cholesky_corr_constrain.hpp:4,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev/constraint.hpp:6,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev.hpp:11,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math.hpp:19,
+                 from bench/bench_lpdf.cpp:4:
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev/core/operator_logical_and.hpp:18:13: note: candidate: ‘bool stan::math::operator&&(const var&, const var&)’
+   18 | inline bool operator&&(const var& x, const var& y) {
+      |             ^~~~~~~~
+In file included from /usr/include/c++/11/bits/move.h:57,
+                 from /usr/include/c++/11/bits/exception_ptr.h:43,
+                 from /usr/include/c++/11/exception:153,
+                 from /usr/include/c++/11/stdexcept:38,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/prim/fun/Eigen.hpp:3,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev.hpp:4,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math.hpp:19,
+                 from bench/bench_lpdf.cpp:4:
+/usr/include/c++/11/type_traits: In instantiation of ‘struct std::invoke_result<Eigen::internal::scalar_conj_product_op<double, double>, const double&, const double&>’:
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/util/Meta.h:504:61:   required from ‘struct Eigen::internal::result_of<Eigen::internal::scalar_conj_product_op<double, double>(const double&, const double&)>’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/CwiseBinaryOp.h:38:28:   required from ‘struct Eigen::internal::traits<Eigen::CwiseBinaryOp<Eigen::internal::scalar_conj_product_op<double, double>, const Eigen::Transpose<const Eigen::Block<const Eigen::Matrix<double, -1, -1, 1, -1, -1>, 1, -1, true> >, const Eigen::Block<const Eigen::Block<const Eigen::Transpose<const Eigen::Matrix<double, -1, -1, 1, -1, -1> >, -1, 1, true>, -1, 1, true> > >’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/CwiseBinaryOp.h:148:7:   required from ‘class Eigen::CwiseBinaryOpImpl<Eigen::internal::scalar_conj_product_op<double, double>, const Eigen::Transpose<const Eigen::Block<const Eigen::Matrix<double, -1, -1, 1, -1, -1>, 1, -1, true> >, const Eigen::Block<const Eigen::Block<const Eigen::Transpose<const Eigen::Matrix<double, -1, -1, 1, -1, -1> >, -1, 1, true>, -1, 1, true>, Eigen::Dense>’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/CwiseBinaryOp.h:77:7:   required from ‘class Eigen::CwiseBinaryOp<Eigen::internal::scalar_conj_product_op<double, double>, const Eigen::Transpose<const Eigen::Block<const Eigen::Matrix<double, -1, -1, 1, -1, -1>, 1, -1, true> >, const Eigen::Block<const Eigen::Block<const Eigen::Transpose<const Eigen::Matrix<double, -1, -1, 1, -1, -1> >, -1, 1, true>, -1, 1, true> >’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/Dot.h:50:56:   required from ‘static Eigen::internal::dot_nocheck<T, U, true>::ResScalar Eigen::internal::dot_nocheck<T, U, true>::run(const Eigen::MatrixBase<Derived>&, const Eigen::MatrixBase<U>&) [with T = Eigen::Block<const Eigen::Matrix<double, -1, -1, 1, -1, -1>, 1, -1, true>; U = Eigen::Block<const Eigen::Block<const Eigen::Transpose<const Eigen::Matrix<double, -1, -1, 1, -1, -1> >, -1, 1, true>, -1, 1, true>; Eigen::internal::dot_nocheck<T, U, true>::ResScalar = double]’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/Dot.h:84:58:   [ skipping 6 instantiation contexts, use -ftemplate-backtrace-limit=0 to disable ]
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/PlainObjectBase.h:797:41:   required from ‘Derived& Eigen::PlainObjectBase<Derived>::_set_noalias(const Eigen::DenseBase<OtherDerived>&) [with OtherDerived = Eigen::Product<Eigen::Matrix<double, -1, -1, 1, -1, -1>, Eigen::Transpose<const Eigen::Matrix<double, -1, -1, 1, -1, -1> >, 0>; Derived = Eigen::Matrix<double, -1, -1>]’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/PlainObjectBase.h:594:19:   required from ‘Eigen::PlainObjectBase<Derived>::PlainObjectBase(const Eigen::DenseBase<OtherDerived>&) [with OtherDerived = Eigen::Product<Eigen::Matrix<double, -1, -1, 1, -1, -1>, Eigen::Transpose<const Eigen::Matrix<double, -1, -1, 1, -1, -1> >, 0>; Derived = Eigen::Matrix<double, -1, -1>]’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/lib/eigen_3.4.0/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::Product<Eigen::Matrix<double, -1, -1, 1, -1, -1>, Eigen::Transpose<const Eigen::Matrix<double, -1, -1, 1, -1, -1> >, 0>; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/prim/fun/tcrossprod.hpp:29:36:   required from ‘Eigen::Matrix<typename stan::value_type<T>::type, T::RowsAtCompileTime, T::RowsAtCompileTime> stan::math::tcrossprod(const T&) [with T = Eigen::Transpose<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::TriangularView<const Eigen::Transpose<const Eigen::Matrix<double, -1, -1> >, 2>, 0> >; stan::require_eigen_vt<std::is_arithmetic, T>* <anonymous> = 0; typename stan::value_type<T>::type = double]’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/prim/fun/crossprod.hpp:21:20:   required from ‘auto stan::math::crossprod(const EigMat&) [with EigMat = Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::TriangularView<const Eigen::Transpose<const Eigen::Matrix<double, -1, -1> >, 2>, 0>; stan::require_eigen_t<T>* <anonymous> = 0]’
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/prim/prob/wishart_rng.hpp:34:19:   required from here
+/usr/include/c++/11/type_traits:3009:7: error: ambiguous overload for ‘operator&&’ (operand types are ‘std::true_type’ {aka ‘std::integral_constant<bool, true>’} and ‘std::true_type’ {aka ‘std::integral_constant<bool, true>’})
+ 3009 |       static_assert((std::__is_complete_or_unbounded(
+      |       ^~~~~~~~~~~~~
+/usr/include/c++/11/type_traits:3009:7: note: candidate: ‘operator&&(std::integral_constant<bool, true>::value_type {aka bool}, std::integral_constant<bool, true>::value_type {aka bool})’ (built-in)
+In file included from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev/core.hpp:39,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev/constraint/cholesky_corr_constrain.hpp:4,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev/constraint.hpp:6,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev.hpp:11,
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math.hpp:19,
+                 from bench/bench_lpdf.cpp:4:
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev/core/operator_logical_and.hpp:18:13: note: candidate: ‘bool stan::math::operator&&(const var&, const var&)’
+   18 | inline bool operator&&(const var& x, const var& y) {
+      |             ^~~~~~~~

@@ -1,0 +1,40 @@
+=== [P1-1] compile microbenches ===
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math.hpp:19,
+                 from bench/bench_lpdf.cpp:4:
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev/core/operator_logical_and.hpp:18:13: note: candidate: ‘bool stan::math::operator&&(const var&, const var&)’
+   18 | inline bool operator&&(const var& x, const var& y) {
+      |             ^~~~~~~~
+                 from /home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math.hpp:19,
+                 from bench/bench_var_alloc.cpp:3:
+/home/m0hawk/.cmdstan/cmdstan-2.39.0/stan/lib/stan_math/stan/math/rev/core/operator_logical_and.hpp:18:13: note: candidate: ‘bool stan::math::operator&&(const var&, const var&)’
+   18 | inline bool operator&&(const var& x, const var& y) {
+      |             ^~~~~~~~
+bench_ps_point built
+bench_cache built
+=== [P1-2] run microbenches ===
+--- bench_ps_point
+ps_point copy n=  18          :    30.8 ns/copy
+ps_point copy n= 100          :    40.4 ns/copy
+ps_point copy n=1000          :   335.3 ns/copy
+ps_point copy n=7000          : 30495.8 ns/copy
+--- bench_cache
+contiguous stream   :     0.8 ns/M  (s=20979282)
+pointer chase       :    67.9 ns/M  (s=20979282)
+L1-hot 4k loop      :     0.0 ns/M
+=== [P1-3] Stan profile() runs (models_prof) ===
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[profile] accel_gp: sampler=4.14s profiled=1.22s tp=0.01s model=1.20s
+[profile] diamonds: sampler=10.61s profiled=10.14s model=10.14s tdata=0.00s
+[profile] kronecker_gp: sampler=133.60s profiled=107.48s tdata=0.00s tp=76.47s model=31.01s
+[profile] lsat_model: sampler=2.85s profiled=2.50s tdata=0.00s model=2.50s
+[profile] pilots: sampler=0.06s profiled=0.03s model=0.02s tp=0.01s
+[profile] radon_partially_pooled_noncentered: sampler=17.85s profiled=17.43s tp=0.20s model=17.23s
+harness/phase1_all.sh: line 23: le_models.py: command not found
+=== [P1-4] callgrind attribution ===
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[callgrind] diamonds: total=0 
+[callgrind] radon_partially_pooled_noncentered: total=0 
+[callgrind] accel_gp: total=0 
+[callgrind] pilots: total=0 
+[callgrind] lsat_model: total=0 
+PHASE1 RUNS DONE

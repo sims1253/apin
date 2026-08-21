@@ -1,0 +1,248 @@
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+[compile] eight_schools_noncentered/clang_native: FAILED make failed: lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__clang_native/model.hpp
+ e precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__clang_native/model.o] Error 1
+
+[compile] blr/clang_native: FAILED make failed: stan/lib/stan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/blr__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/blr__clang_native/model.hpp
+ been modified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/blr__clang_native/model.o] Error 1
+
+[compile] kidscore_momiq/clang_native: FAILED make failed: /boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/kidscore_momiq__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/kidscore_momiq__clang_native/model.hpp
+ ed since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/kidscore_momiq__clang_native/model.o] Error 1
+
+[compile] lsat_model/clang_native: FAILED make failed: math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/lsat_model__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/lsat_model__clang_native/model.hpp
+ dified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/lsat_model__clang_native/model.o] Error 1
+
+[compile] logmesquite_logvash/clang_native: FAILED make failed: 7.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/logmesquite_logvash__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/logmesquite_logvash__clang_native/model.hpp
+ nce the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/logmesquite_logvash__clang_native/model.o] Error 1
+
+[compile] wells_dist100_model/clang_native: FAILED make failed: 7.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/wells_dist100_model__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/wells_dist100_model__clang_native/model.hpp
+ nce the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/wells_dist100_model__clang_native/model.o] Error 1
+
+[compile] diamonds/clang_native: FAILED make failed: tan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/diamonds__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/diamonds__clang_native/model.hpp
+ modified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/diamonds__clang_native/model.o] Error 1
+
+[compile] radon_partially_pooled_noncentered/clang_native: FAILED make failed: sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__clang_native/model.hpp
+ iled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__clang_native/model.o] Error 1
+
+[compile] radon_variable_intercept_slope_noncentered/clang_native: FAILED make failed: nclude -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/radon_variable_intercept_slope_noncentered__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/radon_variable_intercept_slope_noncentered__clang_native/model.hpp
+ der 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/radon_variable_intercept_slope_noncentered__clang_native/model.o] Error 1
+
+[compile] dogs_hierarchical/clang_native: FAILED make failed: _1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/dogs_hierarchical__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/dogs_hierarchical__clang_native/model.hpp
+ since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/dogs_hierarchical__clang_native/model.o] Error 1
+
+[compile] pilots/clang_native: FAILED make failed: ib/stan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/pilots__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/pilots__clang_native/model.hpp
+ n modified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/pilots__clang_native/model.o] Error 1
+
+[compile] hier_2pl/clang_native: FAILED make failed: tan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/hier_2pl__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/hier_2pl__clang_native/model.hpp
+ modified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/hier_2pl__clang_native/model.o] Error 1
+
+[compile] gp_regr/clang_native: FAILED make failed: /stan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/gp_regr__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/gp_regr__clang_native/model.hpp
+  modified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/gp_regr__clang_native/model.o] Error 1
+
+[compile] kronecker_gp/clang_native: FAILED make failed: /lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/kronecker_gp__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/kronecker_gp__clang_native/model.hpp
+ fied since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/kronecker_gp__clang_native/model.o] Error 1
+
+[compile] accel_gp/clang_native: FAILED make failed: tan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/accel_gp__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/accel_gp__clang_native/model.hpp
+ modified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/accel_gp__clang_native/model.o] Error 1
+
+[compile] bym2_offset_only/clang_native: FAILED make failed: st_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/bym2_offset_only__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/bym2_offset_only__clang_native/model.hpp
+  since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/bym2_offset_only__clang_native/model.o] Error 1
+
+[compile] eight_schools_centered/clang_native: FAILED make failed:  stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/eight_schools_centered__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/eight_schools_centered__clang_native/model.hpp
+  the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/eight_schools_centered__clang_native/model.o] Error 1
+
+[compile] garch11/clang_native: FAILED make failed: /stan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/garch11__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/garch11__clang_native/model.hpp
+  modified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/garch11__clang_native/model.o] Error 1
+
+[compile] lotka_volterra/clang_native: FAILED make failed: /boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/lotka_volterra__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/lotka_volterra__clang_native/model.hpp
+ ed since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/lotka_volterra__clang_native/model.o] Error 1
+
+[compile] low_dim_gauss_mix/clang_native: FAILED make failed: _1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/low_dim_gauss_mix__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/low_dim_gauss_mix__clang_native/model.hpp
+ since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/low_dim_gauss_mix__clang_native/model.o] Error 1
+
+[compile] arma11/clang_native: FAILED make failed: ib/stan_math/lib/boost_1.87.0 -I stan/lib/stan_math/lib/sundials_6.1.1/include -I stan/lib/stan_math/lib/sundials_6.1.1/src/sundials    -DBOOST_DISABLE_ASSERTS          -c -include-pch stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch -x c++ -o /home/m0hawk/Documents/apin/stan/build/arma11__clang_native/model.o /home/m0hawk/Documents/apin/stan/build/arma11__clang_native/model.hpp
+ n modified since the precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch' was built: mtime changed (was 1784295402, now 1786107474)
+note: please rebuild precompiled header 'stan/src/stan/model/model_header.hpp.gch/model_header_14_0.hpp.gch'
+1 error generated.
+make: *** [make/program:77: /home/m0hawk/Documents/apin/stan/build/arma11__clang_native/model.o] Error 1
+
+[run] clang_native/eight_schools_noncentered/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__clang_native/model
+[run] clang_native/blr/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/blr__clang_native/model
+[run] clang_native/kidscore_momiq/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/kidscore_momiq__clang_native/model
+[run] clang_native/lsat_model/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/lsat_model__clang_native/model
+[run] clang_native/logmesquite_logvash/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/logmesquite_logvash__clang_native/model
+[run] clang_native/wells_dist100_model/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/wells_dist100_model__clang_native/model
+[run] clang_native/diamonds/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/diamonds__clang_native/model
+[run] clang_native/radon_partially_pooled_noncentered/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__clang_native/model
+[run] clang_native/radon_variable_intercept_slope_noncentered/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/radon_variable_intercept_slope_noncentered__clang_native/model
+[run] clang_native/dogs_hierarchical/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/dogs_hierarchical__clang_native/model
+[run] clang_native/pilots/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/pilots__clang_native/model
+[run] clang_native/hier_2pl/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/hier_2pl__clang_native/model
+[run] clang_native/gp_regr/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/gp_regr__clang_native/model
+[run] clang_native/kronecker_gp/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/kronecker_gp__clang_native/model
+[run] clang_native/accel_gp/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/accel_gp__clang_native/model
+[run] clang_native/bym2_offset_only/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/bym2_offset_only__clang_native/model
+[run] clang_native/eight_schools_centered/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/eight_schools_centered__clang_native/model
+[run] clang_native/garch11/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/garch11__clang_native/model
+[run] clang_native/lotka_volterra/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/lotka_volterra__clang_native/model
+[run] clang_native/low_dim_gauss_mix/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/low_dim_gauss_mix__clang_native/model
+[run] clang_native/arma11/rep0: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/arma11__clang_native/model
+[run] clang_native/eight_schools_noncentered/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__clang_native/model
+[run] clang_native/blr/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/blr__clang_native/model
+[run] clang_native/kidscore_momiq/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/kidscore_momiq__clang_native/model
+[run] clang_native/lsat_model/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/lsat_model__clang_native/model
+[run] clang_native/logmesquite_logvash/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/logmesquite_logvash__clang_native/model
+[run] clang_native/wells_dist100_model/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/wells_dist100_model__clang_native/model
+[run] clang_native/diamonds/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/diamonds__clang_native/model
+[run] clang_native/radon_partially_pooled_noncentered/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__clang_native/model
+[run] clang_native/radon_variable_intercept_slope_noncentered/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/radon_variable_intercept_slope_noncentered__clang_native/model
+[run] clang_native/dogs_hierarchical/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/dogs_hierarchical__clang_native/model
+[run] clang_native/pilots/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/pilots__clang_native/model
+[run] clang_native/hier_2pl/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/hier_2pl__clang_native/model
+[run] clang_native/gp_regr/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/gp_regr__clang_native/model
+[run] clang_native/kronecker_gp/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/kronecker_gp__clang_native/model
+[run] clang_native/accel_gp/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/accel_gp__clang_native/model
+[run] clang_native/bym2_offset_only/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/bym2_offset_only__clang_native/model
+[run] clang_native/eight_schools_centered/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/eight_schools_centered__clang_native/model
+[run] clang_native/garch11/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/garch11__clang_native/model
+[run] clang_native/lotka_volterra/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/lotka_volterra__clang_native/model
+[run] clang_native/low_dim_gauss_mix/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/low_dim_gauss_mix__clang_native/model
+[run] clang_native/arma11/rep1: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/arma11__clang_native/model
+[run] clang_native/eight_schools_noncentered/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/eight_schools_noncentered__clang_native/model
+[run] clang_native/blr/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/blr__clang_native/model
+[run] clang_native/kidscore_momiq/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/kidscore_momiq__clang_native/model
+[run] clang_native/lsat_model/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/lsat_model__clang_native/model
+[run] clang_native/logmesquite_logvash/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/logmesquite_logvash__clang_native/model
+[run] clang_native/wells_dist100_model/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/wells_dist100_model__clang_native/model
+[run] clang_native/diamonds/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/diamonds__clang_native/model
+[run] clang_native/radon_partially_pooled_noncentered/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__clang_native/model
+[run] clang_native/radon_variable_intercept_slope_noncentered/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/radon_variable_intercept_slope_noncentered__clang_native/model
+[run] clang_native/dogs_hierarchical/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/dogs_hierarchical__clang_native/model
+[run] clang_native/pilots/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/pilots__clang_native/model
+[run] clang_native/hier_2pl/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/hier_2pl__clang_native/model
+[run] clang_native/gp_regr/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/gp_regr__clang_native/model
+[run] clang_native/kronecker_gp/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/kronecker_gp__clang_native/model
+[run] clang_native/accel_gp/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/accel_gp__clang_native/model
+[run] clang_native/bym2_offset_only/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/bym2_offset_only__clang_native/model
+[run] clang_native/eight_schools_centered/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/eight_schools_centered__clang_native/model
+[run] clang_native/garch11/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/garch11__clang_native/model
+[run] clang_native/lotka_volterra/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/lotka_volterra__clang_native/model
+[run] clang_native/low_dim_gauss_mix/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/low_dim_gauss_mix__clang_native/model
+[run] clang_native/arma11/rep2: FAILED missing exe /home/m0hawk/Documents/apin/stan/build/arma11__clang_native/model
+GRID DONE
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+33 ESS jobs
+ess_bulk min=758 geomean=1465 rhat_max=1.0057 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__blr__rep0.json
+ess_bulk min=836 geomean=1683 rhat_max=1.0034 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__blr__rep1.json
+ess_bulk min=915 geomean=1393 rhat_max=1.0015 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__blr__rep2.json
+ess_bulk min=1211 geomean=3213 rhat_max=1.0035 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__diamonds__rep0.json
+ess_bulk min=1402 geomean=3360 rhat_max=1.0036 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__diamonds__rep1.json
+ess_bulk min=1270 geomean=3307 rhat_max=1.0048 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__diamonds__rep2.json
+ess_bulk min=1576 geomean=3910 rhat_max=1.0023 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__dogs_hierarchical__rep0.json
+ess_bulk min=1639 geomean=3920 rhat_max=1.0039 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__dogs_hierarchical__rep1.json
+ess_bulk min=1254 geomean=3924 rhat_max=1.0029 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__dogs_hierarchical__rep2.json
+ess_bulk min=47 geomean=584 rhat_max=1.0590 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__eight_schools_centered__rep0.json
+ess_bulk min=149 geomean=844 rhat_max=1.0261 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__eight_schools_centered__rep1.json
+ess_bulk min=124 geomean=602 rhat_max=1.0352 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__eight_schools_centered__rep2.json
+ess_bulk min=2141 geomean=2331 rhat_max=1.0022 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__garch11__rep0.json
+ess_bulk min=1851 geomean=2213 rhat_max=1.0023 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__garch11__rep1.json
+ess_bulk min=1631 geomean=1989 rhat_max=1.0019 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__garch11__rep2.json
+ess_bulk min=1452 geomean=1504 rhat_max=1.0035 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__kidscore_momiq__rep0.json
+ess_bulk min=1124 geomean=1228 rhat_max=1.0045 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__kidscore_momiq__rep1.json
+ess_bulk min=1123 geomean=1315 rhat_max=1.0026 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__kidscore_momiq__rep2.json
+ess_bulk min=1334 geomean=1722 rhat_max=1.0063 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__logmesquite_logvash__rep0.json
+ess_bulk min=1657 geomean=1999 rhat_max=1.0024 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__logmesquite_logvash__rep1.json
+ess_bulk min=1318 geomean=1741 rhat_max=1.0079 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__logmesquite_logvash__rep2.json
+ess_bulk min=1175 geomean=3093 rhat_max=1.0024 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__lotka_volterra__rep0.json
+ess_bulk min=872 geomean=2977 rhat_max=1.0050 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__lotka_volterra__rep1.json
+ess_bulk min=906 geomean=2917 rhat_max=1.0070 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__lotka_volterra__rep2.json
+ess_bulk min=4018 geomean=4711 rhat_max=1.0025 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__low_dim_gauss_mix__rep0.json
+ess_bulk min=3425 geomean=4431 rhat_max=1.0029 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__low_dim_gauss_mix__rep1.json
+ess_bulk min=4148 geomean=4973 rhat_max=1.0016 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__low_dim_gauss_mix__rep2.json
+ess_bulk min=1004 geomean=5087 rhat_max=1.0075 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__lsat_model__rep0.json
+ess_bulk min=1056 geomean=5044 rhat_max=1.0074 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__lsat_model__rep1.json
+ess_bulk min=972 geomean=5207 rhat_max=1.0062 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__lsat_model__rep2.json
+ess_bulk min=1159 geomean=1164 rhat_max=1.0021 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__wells_dist100_model__rep0.json
+ess_bulk min=1195 geomean=1198 rhat_max=1.0034 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__wells_dist100_model__rep1.json
+ess_bulk min=1217 geomean=1227 rhat_max=1.0085 -> /home/m0hawk/Documents/apin/stan/results/ess/QUARANTINED_march_native_gcc11_corruption__wells_dist100_model__rep2.json
+ESS DONE
+warning: Malware checks are experimental and may change without warning. Pass `--preview-features malware-check` to disable this warning.
+                                  variant  n_models  geo_ess_per_sec  geo_wall  geo_ess_per_grad  total_div_rate  total_td_rate  n_configs_rhat_bad
+QUARANTINED_march_native_gcc11_corruption        11      1054.354922  0.989684          0.013106        0.001841       0.076114                   1
+                                  default        21       481.278007  1.995224          0.008109        0.007714       0.113619                   4
+                                   nutpie        21       473.277717  1.653804          0.003074        0.019381       0.001524                   4
+                                     oexp        17       456.340801  1.874413          0.007969        0.008603       0.116544                   3
+                                  pf_full        10        22.056315 21.952823          0.001274        0.024325       0.260275                   3
+                                  pf_w200        10        23.926098 16.034789          0.001048        0.023200       0.179250                   4
+                                   walnut        21        52.106239  1.156098          0.000461       -0.001000      -0.001000                  17
+wrote /home/m0hawk/Documents/apin/stan/dashboard.html (19 KB)
+upload response: {
+  "ok": true,
+  "draftId": "gbcfyftfncsi",
+  "versionId": "4hcl6AeKW5XgsTShxBVl",
+  "versionNumber": 7,
+  "title": "nindan \u2014 Stan wall-clock \u2192 ESS",
+  "requestId": "vaEreLAuRcCmsHyoljLL4A",
+  "publicUrl": "https://gbcfyftfncsi.postplan.dev",
+  "rawUrl": "https://postplan.dev/d/gbcfyftfncsi/raw",
+  "warnings": []
+}
