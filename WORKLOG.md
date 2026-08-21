@@ -786,3 +786,30 @@ multimodality handling).
 - Package: external/ess_per_grad_evidence.md (for the Flatiron team).
 - W-17 sweep running (rec/fold/auto x 21 models x 3 reps, freeze-fix binary);
   accel_gp aborts expected under all configs (known).
+
+
+## 2026-08-23 ~00:30 — W-17/W-18 verdicts; reproducibility bug found+fixed (ours)
+
+- W-17 (21 models x rec/fold/auto x 3 reps, pre-fix binary): arms
+  statistically indistinguishable (fail counts 14/16/14 @rhat>1.01;
+  geomeans within 13%). No fold catastrophes; no robust fold win either.
+- W-18 (6 marginal models, 1000 draws, 2 reps): ESS ~doubles, R-hat stays
+  1.02-1.06 => marginal misses are slow mixing, not short runs. Answer to
+  'are 500 too short?': longer helps ESS, does not flip the R-hat verdict.
+- REPRODUCIBILITY BUG (ours, found via W-16 vs W-17 contradiction 16 vs 247):
+  find_reasonable_step drew probe momentum from Eigen::VectorXd::Random()
+  (std::rand, clock-seeded by main) => --step-init-heuristic made fixed-seed
+  runs irreproducible. Fixed (869dbe7): seeded detail::Random<RNG> threaded
+  through; 3-run bit-identity verified. warmup_heuristics.hpp never existed
+  upstream => NOT an upstream bug. W-16 hier_2pl numbers retracted; clean
+  rerun (w16clean) queued after W-18. Earlier 'init-file-only nondeterminism'
+  was a harness false positive (duplicate flag; cmp on missing files).
+- Aurora research (hermes glm-5.3): arXiv:2606.27715, tall-2-D only,
+  degenerate below 2-D like Muon; full 2025-26 successor table incl. MuonEq
+  (diagonal equilibration before NS) and scalar closed-loop line
+  (NAMO/OptMuon/AdaGO). Saved external/research_optimizer_aurora.md.
+- Score-as-second-dimension: confirmed live in the low-rank estimator
+  (st = [Ys|Ss] stacked, SVD) — the sampler-appropriate '2-D' structure;
+  hermes: no published sampler-side NS orthogonalization exists; our score
+  variance diagonal = Fisher-adaptive Langevin (2305.14442) restricted to
+  diagonal.
