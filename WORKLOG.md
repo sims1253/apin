@@ -871,3 +871,26 @@ also valuable: closes the "Muon-in-a-sampler" question empirically.
   hier_2pl 2.6x better than pre-fix (1.05e-3), esc 1.3x, pilots 2.8x.
   Evidence package + PR #4 follow-up 16 updated.
 - W-19 sweep launched: 8 models x 4 bases x 3 reps (fold config).
+
+
+## 2026-08-23 ~05:00 — W-19 VERDICT: basis rule is second-order (clean negative)
+
+8 models x {svd,power,muon,muoneq} x 3 reps, fold, reproducible binary:
+geoESS(all) 32/30/38/35 — all within rep noise; no rule rescues funnels
+(diamonds best 1.534 via muon, pilots 2.31; both still fail). Muon's NS
+performs like windowed SVD here: the 2K-column data matrix is
+well-conditioned; NS's LLM-regime advantage (ill-conditioned momentum)
+doesn't exist at sampler scale/cadence. Closes the 2-D-optimizer question
+empirically: basis is NOT the bottleneck; init + single-chain mixing are.
+W-19 numbers are the citable ones (reproducible binary; W-17 absolutes
+shifted by clock-eps). PR #4 follow-up 17. results/w19_summary.json.
+
+NIGHT-SHIFT LEDGER (all threads closed):
+- reproducibility: found (Eigen::Random clock-seed), fixed, verified
+  bit-identical; retraction posted; clean rerun confirmed fold~=rec
+- stale-.o trap: diagnosed (mtime), documented, runbook updated
+- W-17/W-18: fold~=rec core-set; 500->1000 draws don't flip R-hat verdicts
+- e/grad: post-fix 2.6x on hier_2pl (direct capture), package updated
+- Aurora: researched (tall-2-D only), notes filed
+- 2-D comparison: implemented (--metric-basis), property-tested, swept,
+  NEGATIVE with mechanism explanation
