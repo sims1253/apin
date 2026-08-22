@@ -2235,3 +2235,72 @@ unblocked QL loop — W-29's deeper items.
 Artifacts: results/eigh_reuse_w32.md, results/profile/w32/{stock,patched,lang}/
 (+draws_md5.txt), harness/w32/ (scripts + kronecker_gp_eigendecompose.stan),
 this entry. scratch/w32/ builds kept local. walnutpie build_e27 untouched.
+
+## 2026-08-22 — W-33 CLOSE-OUT: pow->mul one-liner measured at the FULL pow bucket (−9.1% Ir/grad, −12.9/−15.2% us/call, bit-identical end-to-end); cholesky rev assessed — no patch for the n=11 class
+
+Source audit finding: the 8.9%G libm pow is one line —
+stan/math/prim/fun/square.hpp:28 implements square(x) for arithmetic x as
+std::pow(x, 2) while its own doc comment says "just x * x". Kernel paths
+(prim AND rev gp_exp_quad_cov, which computes distances on value_of data)
+instantiate it: W-29 tree shows 32,889/33,078 pow calls from gp_exp_quad_cov
+= 57/grad (55 kernel pairs + square(sigma) + square(l_val)); rev callback
+is pow-free. Patch = that single line -> x * x (scratch/w33/
+pow_to_mul.patch; pristine backup scratch/w33/square.hpp.pristine; two
+sibling pow-with-2 sites in rev/fun/squared_distance.hpp:24,38 noted for
+the upstream PR, not patched — gp_regr does not exercise them).
+
+GATES:
+(a) CORRECTNESS: PASS at bit-identity — 100/100 random unconstrained
+    points: logp max rel 0.0, gradients bit-identical, 0 sign flips, 0
+    non-finite (glibc pow correctly rounded: pow(x,2)==x*x exactly, as
+    pre-registered). FD spot-check on patched: 4.9e-8 (noise level).
+    BONUS end-to-end canary: full sampler draws (W-29 protocol) md5-
+    IDENTICAL across stock/patched .so, native AND under valgrind (all
+    four CSVs 32881fbe4b02fc9b6c5665ac2867cb5a).
+(b) COST (577 grads, both arms, one callgrind job at a time):
+      Ir/grad 66,950 -> 60,864 (−6,086, −9.09%); pow Ir 3,453,345 -> 0
+      in the model gradient path (19.9k residual = sampler-side Adam).
+      Stock arm reproduced W-29 to the digit (pow Ir exactly 3,453,345).
+      Wall (native stan_cli stanza, 3 reps interleaved, medians):
+      warmup 6.681 -> 5.820 us/call (0.871x), sampling 6.655 -> 5.640
+      (0.848x); per-rep ranges non-overlapping (absolute us inflated by
+      a co-running agent job; ratio is the measurement). Wall win EXCEEDS
+      the 9.1% Ir share — glibc pow's branchy path has poor IPC.
+      Python-driver cross-check: same direction, −1.4% on ~13.7us
+      Python-inflated calls (dilution).
+(c) RESTORATION: square.hpp restored, byte-identical to pristine backup;
+    find confirms it was the only header touched in the stan-math tree;
+    patched+stock .so and patch file kept in scratch/w33/ (untracked, like
+    W-32's scratch).
+
+CHOLESKY ASSESSMENT (no patch — numbers identical in W-29 and both W-33
+dumps): N=11 <= 35 so the UNBLOCKED Giles scalar sweep runs (blocked
+Murray lambda only above n=35). Reverse lambda 6,718,588 Ir = 11,643
+Ir/grad = 17.4%G; forward cholesky_decompose<var> 3,787,995 = 9.8%G, of
+which LLT kernel 2,078,354 (5.4%G) and var-glue ~1.71M (~4.4%G). Ratios:
+rev = 1.77x forward total, 3.23x LLT kernel. Flop accounting: sweep does
+~950 flops + 121 divisions at ~12 Ir/flop vs LLT's 443 flops at ~8 Ir/flop
+— the Giles recurrence is already AT its ~2x-forward-flop algorithmic
+floor; the excess is loop machinery, not redundant work; no factorization
+recomputation to reuse. Rewrite ceiling at n=11: <= ~4.4k Ir/grad
+(<= 6.6%G) best case, realistically much less (Eigen dispatch overhead at
+11x11 — why stan-math itself only blocks above 35). Micro-levers rejected:
+1/L_jj division-hoist ~1.7%G but breaks bit-identity (reassociation);
+adjL/adjA allocations ~0.4%G. Verdict: no gp_regr-class cholesky patch;
+upstream targets are mid-size n (36–few hundred, blocked lambda level-3
+adjoint — re-atlas on a representative model first) and the general
+var-glue/arena lever (W-29 candidate #4).
+
+UPSTREAM CANDIDATURE (evidence now in hand): the square() pow->mul one-
+liner removes the full 9.1%G / 13–15% per-call bucket on gp_regr with
+bit-identical behavior end-to-end. PR notes: code contradicts its doc
+comment; square<int> overflow nuance (x*x overflows for |x|>46341 where
+pow promotes to double — promote or document); sibling sites in
+rev/fun/squared_distance.hpp:24,38; on non-glibc libms expect <=1 ulp
+shifts. Indicative pow shares elsewhere (W-29, not re-measured):
+kronecker_gp 1.93%T, accel_gp 0.71%T, diamonds 0.08%T.
+
+Deliverable: results/gp_micro_w33.md. Raw:
+results/profile/w33/gp_regr_{stock,patched}/ (committed); drivers +
+patch + .so in scratch/w33/ (untracked). No walnutpie submodule changes,
+no pushes.
