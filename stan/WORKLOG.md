@@ -1739,3 +1739,84 @@ pilot ESS estimate (cost ~ a full 50-draw pilot per param block — no
 longer cheap) or an adaptation signal internal to trajectory geometry.
 Ship state: exp/pilot-burst-gate @ b80f4a8, default off; base + mc
 paths bit-identical. Raw: runs/mc_pilot50/, results/w28_*.json.
+
+## W-30 (pre-registered BEFORE running): parallel multi-chain execution — event-driven controller sync + serial-execution control
+
+Mission: wall time of the `--chains 4` in-process path. W-28 measured
+the mc path at 1.5x wall vs 4 PARALLEL single-chain procs on lsat
+(21.8 vs 14.5s; warmup 6 -> 14-17s) and attributed it to (a) the
+controller's busy-poll core and (b) in-process contention. Correction
+to the task brief, recorded up front: the mc path at b80f4a8 is NOT
+serial — warmup workers already run as jthreads (adapt.hpp AdaptWorker)
+and sampling already runs as jthreads in the CLI. The work is therefore
+(a) remove the busy-poll, (b) make thread topology CONTROLLABLE so
+serial vs threaded is a measurable, deterministic comparison, (c)
+quantify remaining contention. Budget: 4 chains = 4 worker threads =
+the whole core budget; machine has 12 CPUs so no hard oversubscription
+discipline applies beyond convention (<= 4 runnable threads per run
+after the fix; 5 while the spinner exists).
+
+Design (walnutpie branch exp/parallel-chains off exp/pilot-burst-gate
+@ b80f4a8):
+- ADAPTMONITOR: mutex + condition_variable + version counter in
+  adapt.hpp. Workers notify after EVERY snapshot publish
+  (publish_stride = 5 iters -> ~800 notifies/chain/full warmup,
+  negligible). The controller replaces its spin loop with
+  cv.wait_for(100ms cap, version-changed predicate): wakes on any
+  publish; the timeout keeps the interrupt-callback contract bounded
+  (interrupt latency <= 100ms vs ~immediate before; NullInterrupt in
+  the CLI) and bounds any missed-notify bug (final publish at
+  max_iter always wakes it). Convergence arithmetic UNCHANGED.
+- SERIAL EXECUTION MODE (ChainExec::serial, new defaulted parameter on
+  adapt_with_stats / adapt_with_pilot; default ChainExec::threads =
+  current behavior minus the spin): the calling thread runs all chains
+  round-robin in blocks of publish_stride iterations, publishing every
+  chain's snapshot at block boundaries and running the SAME factored
+  stop evaluation (controller body refactored into a shared helper —
+  no arithmetic change) — deterministic observation points, same
+  (chain, iter) publish grid as the threaded workers. No jthreads.
+- CLI: --chain-exec threads|serial (default threads; serial also runs
+  the SAMPLING phase and pilot bursts serially in-process) and
+  --fixed-warmup (mc only: min_iter = max_iter so the controller's
+  cross-chain criteria can only stop at the budget — gives a
+  deterministic warmup LENGTH for the equivalence gates; the default
+  early-exit behavior is unchanged).
+- ISOLATION (carried from W-25): per-chain BridgeStan model instance,
+  mt19937_64, StanHandler + handler GQ rng; STAN_THREADS=1 .so from
+  bs_models_threads/ for every multi-threaded model loading.
+- DETERMINISM MODEL (pre-registered gate definition): per-chain draw
+  CONTENT depends only on (seed+c, init, config) — never on thread
+  scheduling; all per-chain state is chain-local and the RNG streams
+  never interleave. Warmup-LENGTH nondeterminism under the default
+  cross-chain early exit is PRE-EXISTING (W-28: identical blr runs
+  exited at 500/520/540/550) and out of scope; the gates pin the
+  length via --fixed-warmup.
+
+GATES (pre-registered):
+- (a) CANARY: default single-chain path draws bit-identical pre/post
+  (md5, 12/12 = 3 models blr/arma11/hier_2pl x 4 chains x seed
+  20260819+c, warmup 400 samples 200, default init, bs_models_threads
+  .so). Pre binary: stan/build/stan_cli_w30_pre (clean-first rebuild
+  at b80f4a8).
+- (b) MC EQUIVALENCE: --chains 4 --fixed-warmup output CSVs md5-identical
+  between --chain-exec threads and --chain-exec serial (all 5 gate- c
+  models, rep0). BONUS check (not gating; failure investigated for
+  pre-existence): mc chain-c CSV md5 vs single-chain proc chain-c CSV
+  (W-25 seeded the mc path to replicate per-chain streams).
+- (c) WALL: 5 models (blr, arma11, hier_2pl, lsat_model,
+  eight_schools_noncentered) x 3 reps x 4 chains, warmup=1000
+  draws=1000, seeds 20260819+1000*rep(+c), pf inits from inits_w25/
+  (all 5 available), --metric-window 50, --fixed-warmup on BOTH mc
+  arms (isolates execution topology from early-exit noise).
+  Arms: seq4 = 4 SEQUENTIAL single-chain procs (wall = batch elapsed);
+  par4 = 4 parallel procs (W-28's base configuration, re-measured
+  fresh under current machine conditions); mc_serial = --chains 4
+  --chain-exec serial; mc_threads = --chains 4 --chain-exec threads.
+  Medians. Expectation: mc_threads/seq4 ~ 0.25-0.4 on the multi-second
+  models (~3-4x); mc_threads <= par4 x 1.1 (contention gone); mc_serial
+  ~ seq4 (same work, one process). Contention disclosure: agent I runs
+  single-core callgrind concurrently on this box — real-usage
+  contention, affects all arms' medians, noted per-run.
+- Negative results recorded either way. Builds: env -u LD_LIBRARY_PATH
+  cmake --build external/walnutpie/build --clean-first -j2 after every
+  header edit (standing rule).
