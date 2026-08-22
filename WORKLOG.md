@@ -1016,3 +1016,18 @@ controls) x 3 reps.
   quality-preserving version = adapt() multi-chain path (controller already
   has the machinery) — natural upstream follow-up.
 - Commits 024d458, 3eddfc4; PR #4 follow-up 19.
+
+
+## 2026-08-23 ~12:45 — W-22 diagnosis: WHY W-21 hurts the marginal class (step, not mass)
+
+Per-iter traces (chain 0, fixed warmup): the late warmup signal is the STEP
+SIZE, not the metric:
+- hier_2pl: step 0.0141->0.0378 (+169%) between windows 200-400 and 800-1000
+  while invm moves only +13%
+- lsat: step +172%, invm +1.8%
+- arma11: step +12%, invm -2.3% (and arma11 regressed only -33%)
+=> W-21's failure mode is precisely characterized: mass stabilizes early,
+  step keeps growing (Adam still marching toward its equilibrium for
+  hundreds of iters). A future quality-preserving early exit must gate on
+  STEP stabilization specifically (e.g., relative step drift over the last
+  2 windows < 5%), not mass. Recorded for the library-level follow-up.
