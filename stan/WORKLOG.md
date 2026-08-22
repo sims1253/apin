@@ -2020,3 +2020,218 @@ off). Raw: runs/w30/{seq4,par4,mc_serial,mc_threads}/,
 results/w30_wall.json, results/w30_md5.json; harness/run_w30.py,
 harness/analyze_w30.py. Pre-change binary kept at
 stan/build/stan_cli_w30_pre.
+
+## W-31 (pre-registered BEFORE running): safe default cross-chain tolerances in the walnutpie controller
+
+From W-25 side finding 3 + W-26 gate c FAIL-as-designed: the library
+multi-chain controller's DEFAULT cross-chain tols (mass 1.0 / step 0.1,
+temporal gate off) stop warmup at iter 50-80 with good inits + windowed
+metric and destroy quality (hier_2pl bulk-ESS 519 -> 61, arma11 -19%,
+blr -38%). Any embedder calling adapt()/adapt_with_stats() with a default
+WarmupConfig is exposed. Mission: make the default SAFE out of the box,
+keep the old behavior reachable for W-25/W-26 reproducibility, and
+package the upstream-worthy findings.
+
+DESIGN CHOICE (decided up front): default cross-chain early-exit OFF
+(opt-in), NOT "more conservative tolerances". Rationale: W-25/W-28
+together show no cheap tolerance-based gate makes the exit
+quality-preserving — the most conservative gate tested (temporal
+2-window tol 0.05, min_iter 200) still collapsed hier_2pl 519 -> 126,
+and the pilot gate preserved quality only by never exiting. Therefore
+"defaults conservative enough that exit at iter 50-80 is impossible"
+cannot be met by any tolerance: the only default that makes the
+destructive exit impossible is no early exit. The useful safe default
+for embedders is fixed-budget warmup with full AdaptResult observability
+(exit_iter = max_iter, early_exit = false, dispersion diagnostics still
+computed at stop).
+
+Implementation (walnutpie branch exp/safe-adapt-defaults off
+exp/parallel-chains @ da71e5b):
+- WarmupConfig gains allow_early_exit (default FALSE; builder setter of
+  the same name). poll_controller evaluates/acts on the cross-chain
+  criteria (incl. the temporal mode) ONLY when allow_early_exit() is
+  true; otherwise the only stop is the budget (hit_max_iter) — the
+  W-30 --fixed-warmup posture as the library default. The debug trace
+  keeps printing mass/step diffs either way.
+- CLI: new opt-in flag --early-exit restores the exact pre-W-31 default
+  semantics (cross-chain tols, temporal off -> exit at iter 50-80).
+  --temporal-step-tol > 0 also opts in (W-25/W-28 arm command lines stay
+  reproducible verbatim). --pilot-burst without an early-exit enabler
+  (--early-exit or --temporal-step-tol > 0) now FAILS loudly instead of
+  silently never firing. --fixed-warmup unchanged (still pins min=max;
+  now redundant at default, still meaningful with early exit on).
+- Single-chain path untouched (canary must stay 12/12).
+
+GATES (pre-registered):
+- (a) CANARY: default single-chain draws bit-identical pre/post (md5,
+  12/12 = 3 models blr/arma11/eight_schools_noncentered x 4 chains,
+  seeds 20260819+c, warmup 400 / samples 200, default deterministic
+  inits, bs_models_threads .so). Pre binary: clean-first rebuild at
+  da71e5b kept as stan/build/stan_cli_w31_pre.
+- (b) SAFE DEFAULT: --chains 4 with DEFAULT flags (no --early-exit, no
+  --temporal-step-tol, no --fixed-warmup) on eight_schools_noncentered +
+  hier_2pl, 3 reps x 4 chains, seeds 20260819+1000*rep (+c), pf inits
+  from inits_w25/, warmup=1000 samples=1000, --metric-window 50,
+  bs_models_threads .so. PASS = controller exit_iter=1000 early_exit=0
+  on every run AND per-rep bulk-ESS-min (arviz, same procedure as W-25)
+  within the base arm's per-rep spread (results/w25_ess.json: hier base
+  reps 548/502/520, esc 1678/1488/1459). Expected stronger: per-chain
+  CSVs md5-identical to runs/base (W-30 gate b bonus implies mc ==
+  single-chain at fixed warmup length; full-budget default has the same
+  per-chain warmup iteration count).
+- (c) FOOTGUN OPT-IN NOT GONE: --chains 4 --early-exit on the same grid
+  reproduces the W-25/W-26 destructive exit: early_exit=1 with
+  exit_iter ~50-80, hier_2pl bulk-ESS collapse vs base (W-25: median
+  61 vs 519), esc exits at ~50.
+- STAN_THREADS evidence for the audit doc (no code change): one
+  --chains 4 --fixed-warmup esc run against bs_models/ (default
+  bridgestan make, STAN_THREADS off) vs bs_models_threads/ (built with
+  make_args=['STAN_THREADS=True']) — documents the arena corruption
+  repro; single-chain draws are .so-independent.
+- Builds: env -u LD_LIBRARY_PATH cmake --build external/walnutpie/build
+  --clean-first -j2 after every header edit; runs serialized; <=4 cores.
+- Negative results recorded either way.
+
+## W-33 (pre-registered BEFORE running): stan-math micro-lever ceiling on gp_regr — pow->mul in the exp-quad kernel + cholesky<var> reverse-pass assessment
+
+From W-29 atlas candidate #3: gp_regr's gradient spends 8.9%G in libm `pow`
+(attributed to `gp_exp_quad_cov` kernel distances — squaring a scalar via
+pow) and the `cholesky_decompose<var>` reverse lambda costs 17.0%G vs the
+forward call's 9.8%G (1.7x). Mission: put NUMBERS on the cheap stan-math
+patches before proposing them upstream. This is a LOCAL stan-math patch +
+rebuild + measure task: the bridgestan 2.9.0 stan-math tree at
+~/.bridgestan/bridgestan-2.9.0/stan/lib/stan_math is patched (backed up to
+scratch/w33/ first), gp_regr is rebuilt against it, and the tree is
+RESTORED to pristine afterwards (other agents build against it). walnutpie
+submodule untouched; nothing pushed.
+
+Pre-patch source audit (done before registering gates):
+- The pow is NOT in gp_exp_quad_cov itself; it is
+  stan/math/prim/fun/square.hpp:28 — `square(x)` for arithmetic x is
+  implemented as `std::pow(x, 2)` (despite the doc comment saying "just
+  x * x"). Kernel loop calls squared_distance(x[i], x[j]) -> square(diff).
+  W-29 callgrind confirms: 32,889/33,078 pow calls come from
+  gp_exp_quad_cov = 57/grad (55 kernel pairs + square(sigma) +
+  square(l_val)); the rev callback uses products (no pow). Patch: replace
+  that one std::pow(x, 2) with x * x. Two further pow-with-2 sites exist
+  in rev/fun/squared_distance.hpp scalar-var overloads (NOT exercised by
+  gp_regr: x is data) — noted for the upstream proposal, not patched
+  here so the measured diff stays attributable to one line.
+- cholesky: N=11 <= 35 so the UNBLOCKED Giles lambda runs (blocked Murray
+  path only for n>35). Assessment only (see gates) unless a trivially
+  bit-safe patch is obvious; the rev pass does NOT recompute the
+  factorization (L_A is reused).
+
+Build: stock + patched .so from COPIED models/gp_regr.stan per variant in
+scratch/w33/{stock,patched}_build/ (W-27 gotcha: compile_model silently
+reuses the cached .so next to the .stan); default CXXFLAGS (-march=native
+forbidden, W-27); env -u LD_LIBRARY_PATH; make -j2 max (cores shared).
+
+GATES:
+(a) correctness: gradient parity stock vs patched on ~100 random
+    unconstrained points (deterministic rng scheme, W-27 style):
+    max rel diff < 1e-12, no sign flips, no NaN/Inf, logp parity.
+    NOTE: pow(x,2) vs x*x should be BIT-identical (glibc pow is correctly
+    rounded and x*x is the correctly rounded square) — anything above
+    exact-0 rel diff indicates a non-glibc pow path and gets
+    investigated, not waved through. PLUS finite-difference spot-check
+    on the patched .so (W-27 method).
+(b) cost: matched per-call logp_grad timing from one Python driver on
+    identical points (both .so in-process, interleaved, 3 timing
+    repeats, medians, us/call), AND callgrind Ir per gradient (W-29
+    protocol: valgrind 3.23 ~/vginstall, one job at a time, short runs,
+    seed 20260819, fixed init inits_w27/gp_regr/rep0/chain_0.txt,
+    warmup 50 samples 50) stock vs patched.
+(c) restoration: patched header restored to pristine, verified against
+    the scratch backup; patched .so + patch file kept in scratch/w33/.
+Deliverable: results/gp_micro_w33.md — numbers, patch file pointer
+(scratch/w33/pow_to_mul.patch), cholesky assessment (2-3 paragraphs with
+the measured part-breakdown and ceiling), upstream-proposal text.
+Expectation (pre-registered): pow Ir (3.45M of 38.7M = 8.9%G) collapses
+to ~0; wall/call win bounded by ~9% of the gradient -> expect single-
+digit % us/call on this 5.4us/call model; Ir/grad 66,990 -> ~61-63k.
+Cholesky assessment expected to conclude: 17.0%G is the scalar Giles
+sweep at n=11 (~11.4k Ir/grad, ~14 Ir/inner-loop-flop); blocked level-3
+rewrite targets n>35 models, not gp_regr; division-hoist in the (i,j)
+pair loop saves O(1k) Ir/grad (~1.5%G) — measured honestly if attempted,
+else assessment-only. Negative results recorded.
+
+## 2026-08-22 — W-32 CLOSE-OUT: eigh-reuse ceiling MEASURED — the fix already exists upstream (eigendecompose_sym); bit-identical lang rewrite saves 19.4% gradient Ir / 14.3% wall on kronecker_gp
+
+Codegen (from source, confirming W-29's 4-runs claim): stanc3 v2.39 emits
+eigenvectors_sym + eigenvalues_sym on BOTH Sigma1 and Lambda in 3 hpp
+instantiations (double log_prob_impl, var log_prob_impl = gradient path,
+write_array_impl); each stan-math rev overload runs its OWN full
+SelfAdjointEigenSolver (default ComputeEigenvectors mode — the rev eigenvalues
+overload cannot use EigenvaluesOnly because its adjoint needs V) => 4 full
+decompositions/gradient, 2 redundant. Stock callgrind reproduces W-29 to 3
+digits (T 27.633e9, G 96.88%T, 5.254e6 Ir/grad, 5094 calls, solver 36.56%T,
+eigenvectors+eigenvalues 39.26%T).
+
+KEY DISCOVERY: stan-math 5.3.0 (both cmdstan-2.39 and bridgestan-2.9 trees)
+ALREADY SHIPS rev/fun/eigendecompose_sym.hpp — one solver, one callback, both
+adjoints — and stanc3 2.39 exposes it in the language
+(tuple(V,w) = eigendecompose_sym(A)). The gap is only discoverability/codegen:
+nothing fuses the natural two-call pattern.
+
+ARMS (scratch/w32/, default CXXFLAGS, per-variant dirs for the compile_model
+cache; NEW gotcha: bridgestan's Makefile deletes the .hpp/.o intermediates —
+build the .hpp as an EXPLICIT make target to patch it, then request
+.hpp + .so together):
+- stock: fresh build, (logp,grad) BIT-IDENTICAL to bs_models .so (100 pts).
+- lang: model rewritten with eigendecompose_sym (2 lines/matrix, pure Stan,
+  works on stock cmdstan 2.39) — harness/w32/kronecker_gp_eigendecompose.stan.
+- hand: hpp patched to stan::math::w32_eigh — one solver + ONE callback with
+  the FUSED inner F.(V^T G_V) + diag(g_w) (saves one GEMM pair vs the official
+  primitive). Adjoint derivation validated at unit level
+  (harness/w32/w32_unit.cpp): fused == stock two-call at 4-6e-16 rel on
+  well-conditioned 30x30; both == central FD at 6-8e-8 (FD truncation);
+  documented: stan's eigenvector adjoint is not symmetric (antisymmetric part
+  inert for symmetric dA) so FD validates the symmetrized adjoint.
+
+GATES:
+(a) correctness — SPLIT VERDICT, documented:
+  - lang vs stock: BIT-IDENTICAL logp AND gradients on 100 random points
+    (worst rel-L2 exactly 0.0) AND the whole 150-iter callgrind trajectory:
+    draws.csv md5 IDENTICAL (6b61df9f), same 5094 grad calls. Structural
+    argument: adjoints start at 0, 0+x exact => two-callback and combined
+    accumulation give identical bits. An upstream peephole can promise ZERO
+    numerical change.
+  - hand vs stock: logp bit-identical; gradients differ by amplified last-ulp
+    rounding (fused inner reassociation): at posterior init median abs diff
+    5.2e-8 (|g| median 11.5), p99 1.0e-2, max 8.9e-2; worst vector rel-L2
+    3.8e-3, cos >= 0.9999929. The PRE-REGISTERED <1e-9 max-rel bar FAILED for
+    the hand arm — and the controls show it is unattainable on this model for
+    ANY independent reimplementation: FD-vs-stock == FD-vs-hand at every
+    sigma cloud (0/0.01/0.1/0.25) to all digits, while the stock reference
+    itself is only FD-verifiable to 4.5e-2 at the init and O(1) at random
+    points (Richardson-stable). Root cause: jittered exp-quad Sigma1 (30x30)
+    has an intrinsically near-degenerate bottom eigenvalue cluster; F=1/(w_j-
+    w_i) amplifies ulp noise. Correctness of the adjoint MATH rests on the
+    unit test; bit-identity is delivered by the lang arm. (Also informs W-27:
+    this amplification is how -march=native reassociation produced O(1)
+    L-block signature on this model.)
+(b) per-call wall (serial bridgestan driver, 100 identical posterior-cloud
+    points, 3 interleaved reps, medians, taskset 0-3): stock 393.0, lang
+    337.0 (-14.3%), hand 324.1 us/call (-17.5%). (2-arm rerun reproduced:
+    375.1 vs 309.6, -17.5%.)
+(c) callgrind (W-29 protocol, one job at a time): stock T=27.633e9;
+    lang T=22.430e9 (-18.4%), G=21.589e9, SAME 5094 calls => 4.238e6 Ir/grad
+    (-19.4%), computeFromTridiagonal halved exactly (5.537e9 -> 2.778e9,
+    -49.8%), eigen fwd complex 39.26%T -> 25.19%T; hand per-grad 4.066e6
+    (-22.6%) but its trajectory drifted (5615 calls, +10.2%) so its TOTAL
+    (-14.3%) is contaminated — lang is the clean number. Callbacks remain
+    ~3.3e9 Ir (the same adjoint GEMMs are required; hand's fused inner saves
+    ~15% of callback Ir at the cost of bit-identity).
+
+UPSTREAM PROPOSAL (results/eigh_reuse_w32.md §7): (1) model-level — use
+eigendecompose_sym TODAY (6-line diff, bit-identical draws, -19.4% Ir);
+(2) stanc3 peephole fusing the eigenvectors_sym+eigenvalues_sym pair on the
+same matrix into one eigendecompose_sym call, shippable with a bit-identity
+guarantee; (3) optional math micro-polish (fused inner, +3% wall, loses
+bit-identity); (4) NOT fixed by this: adjoint GEMM complex (~12-15%T) and the
+unblocked QL loop — W-29's deeper items.
+
+Artifacts: results/eigh_reuse_w32.md, results/profile/w32/{stock,patched,lang}/
+(+draws_md5.txt), harness/w32/ (scripts + kronecker_gp_eigendecompose.stan),
+this entry. scratch/w32/ builds kept local. walnutpie build_e27 untouched.

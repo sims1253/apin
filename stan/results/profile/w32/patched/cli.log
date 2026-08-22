@@ -1,0 +1,722 @@
+==87485== Callgrind, a call-graph generating cache profiler
+==87485== Copyright (C) 2002-2017, and GNU GPL'd, by Josef Weidendorfer et al.
+==87485== Using Valgrind-3.23.0 and LibVEX; rerun with -h for copyright info
+==87485== Command: external/walnutpie/build_e27/examples/stan_cli scratch/w32/patched_build/kronecker_gp_model.so data/kronecker_gp.json --seed 20260819 --init-file inits_w27/kronecker_gp/rep0/chain_0.txt --warmup 100 --samples 50 --metric-window 50 --output results/profile/w32/patched/draws.csv
+==87485== 
+==87485== For interactive control, run 'callgrind_control -h'.
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[13] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[26] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[20] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/scratch/w32/patched_build/kronecker_gp.stan', line 73, column 2 to column 27)
+
+    total time: 56.9266s
+logp_grad time: 56.7591s
+logp_grad fraction: 0.997058
+        logp_grad calls: 4771
+        time per call: 0.0118967s
+
+Adaptation completed.
+Note: multi-chain mode (walnutpie::adapt) reports a log-mass cross-chain dispersion diagnostic for mode-aware reinit policies; single-chain CLI does not.
+Macro time = 0.213527
+Mass matrix diagonal = [0.00250601
+0.00710639
+ 0.0286559
+ 0.0104636
+ 0.0234159
+ 0.0189036
+ 0.0326117
+ 0.0368993
+ 0.0112986
+ 0.0284905
+  0.032521
+  0.035605
+ 0.0197302
+  0.029135
+ 0.0259516
+ 0.0170485
+  0.025552
+ 0.0109693
+ 0.0236731
+ 0.0269712
+  0.030973
+ 0.0326645
+ 0.0405126
+ 0.0179853
+ 0.0272578
+ 0.0360398
+ 0.0284851
+ 0.0244893
+ 0.0172299
+ 0.0788565
+  0.012053
+ 0.0201614
+ 0.0223256
+ 0.0175573
+ 0.0194089
+ 0.0369269
+ 0.0267348
+ 0.0327879
+ 0.0185896
+  0.038643
+ 0.0305168
+ 0.0310422
+ 0.0251336
+ 0.0212609
+ 0.0335881
+  0.031958
+ 0.0255766
+ 0.0164003
+  0.024114
+ 0.0270749
+ 0.0198281
+ 0.0186917
+ 0.0180035
+ 0.0304843
+ 0.0338949
+ 0.0323004
+ 0.0306002
+0.00860347
+   0.02276
+ 0.0242015
+ 0.0242084
+ 0.0216158
+ 0.0206248
+ 0.0265968
+ 0.0254774
+ 0.0222082
+  0.025462
+ 0.0202341
+0.00794446
+ 0.0188215
+  0.024595
+ 0.0632659
+ 0.0202276
+  0.016257
+ 0.0471824
+ 0.0340757
+ 0.0234625
+ 0.0173393
+ 0.0220201
+ 0.0125947
+ 0.0175651
+ 0.0194975
+ 0.0353095
+ 0.0212603
+ 0.0270039
+  0.023137
+ 0.0376115
+ 0.0381229
+ 0.0530834
+ 0.0264703
+ 0.0182122
+ 0.0302647
+ 0.0159531
+ 0.0199085
+ 0.0192594
+  0.021436
+ 0.0310893
+ 0.0317279
+ 0.0259125
+ 0.0390198
+ 0.0273967
+ 0.0269108
+ 0.0169069
+ 0.0186319
+ 0.0203242
+ 0.0248717
+  0.026949
+ 0.0140459
+ 0.0234776
+ 0.0279529
+ 0.0270405
+ 0.0228495
+ 0.0434563
+ 0.0303518
+  0.032673
+ 0.0350961
+ 0.0289531
+ 0.0232067
+ 0.0260162
+ 0.0221203
+ 0.0283612
+ 0.0569935
+ 0.0110396
+ 0.0255502
+ 0.0193902
+ 0.0400959
+ 0.0209928
+ 0.0201628
+ 0.0244792
+ 0.0251364
+ 0.0200326
+ 0.0337985
+ 0.0161072
+ 0.0237899
+ 0.0221186
+ 0.0257544
+ 0.0436879
+ 0.0281166
+0.00832275
+ 0.0188928
+ 0.0250438
+ 0.0259092
+ 0.0220479
+ 0.0242215
+ 0.0306959
+ 0.0313287
+ 0.0300923
+ 0.0270619
+ 0.0240346
+ 0.0440095
+ 0.0183414
+ 0.0296243
+ 0.0318139
+ 0.0266519
+ 0.0564284
+ 0.0119742
+  0.021983
+ 0.0218238
+ 0.0332455
+ 0.0228753
+ 0.0270195
+ 0.0259167
+ 0.0273071
+ 0.0293432
+ 0.0434656
+ 0.0328884
+ 0.0308668
+ 0.0302959
+ 0.0558974
+  0.024074
+ 0.0346484
+ 0.0408459
+ 0.0860857
+ 0.0177702
+ 0.0318913
+ 0.0259988
+ 0.0287163
+ 0.0195662
+  0.032506
+  0.029797
+ 0.0256354
+ 0.0513509
+ 0.0292491
+ 0.0276539
+ 0.0258278
+ 0.0223349
+ 0.0368092
+ 0.0400544
+ 0.0442166
+ 0.0317311
+  0.638383
+  0.047394
+ 0.0139898
+ 0.0226075
+   0.03847
+ 0.0145195
+  0.020585
+ 0.0210632
+ 0.0216499
+ 0.0229986
+ 0.0157588
+ 0.0121429
+ 0.0105743
+ 0.0155612
+ 0.0123238
+ 0.0276307
+ 0.0204495
+ 0.0211161
+ 0.0283259
+ 0.0354712
+ 0.0291988
+ 0.0191153
+ 0.0165267
+ 0.0188273
+  0.027935
+ 0.0299642
+ 0.0139647
+ 0.0142389
+ 0.0227649
+ 0.0178677
+ 0.0202778
+ 0.0157399
+ 0.0157413
+  0.011858
+ 0.0182951
+ 0.0152754
+ 0.0294817
+ 0.0219837
+ 0.0411928
+ 0.0240852
+ 0.0319468
+ 0.0263224
+ 0.0742242
+0.00576016
+ 0.0178224
+ 0.0185798
+ 0.0187245
+ 0.0122422
+ 0.0211654
+ 0.0216339
+  0.021325
+ 0.0247227
+ 0.0258053
+ 0.0139641
+ 0.0100398
+ 0.0202233
+ 0.0301924
+ 0.0323884
+ 0.0273158
+ 0.0314477
+ 0.0268679
+ 0.0343787
+ 0.0288526
+ 0.0291676
+ 0.0685367
+ 0.0119781
+ 0.0192547
+ 0.0253622
+ 0.0274685
+ 0.0157994
+ 0.0232634
+  0.027601
+ 0.0213365
+ 0.0323133
+ 0.0245859
+  0.024735
+ 0.0139647
+ 0.0137487
+ 0.0216974
+ 0.0455158
+ 0.0352105
+ 0.0599961
+ 0.0458012
+ 0.0330478
+ 0.0340422
+ 0.0394091
+ 0.0561228
+ 0.0506499
+  0.010394
+ 0.0211045
+   0.02422
+ 0.0410133
+ 0.0192989
+ 0.0195011
+ 0.0218585
+ 0.0218444
+ 0.0349319
+ 0.0280549
+ 0.0247219
+ 0.0131213
+ 0.0130009
+ 0.0322472
+ 0.0249351
+ 0.0338969
+ 0.0246175
+ 0.0293023
+ 0.0249117
+ 0.0334721
+ 0.0232105
+ 0.0560001
+ 0.0417404
+  0.127318
+  0.013842
+ 0.0213356
+ 0.0234637
+ 0.0199953
+ 0.0123299
+ 0.0370666
+ 0.0209613
+ 0.0256706
+ 0.0204691
+ 0.0130083
+ 0.0111889
+ 0.0195249
+ 0.0194963
+ 0.0209939
+ 0.0233506
+  0.019693
+ 0.0285074
+ 0.0354912
+ 0.0374096
+ 0.0216662
+ 0.0305284
+  0.271902
+ 0.0375895
+ 0.0825845
+  0.078459
+ 0.0127151
+ 0.0175845
+ 0.0272123
+ 0.0276945
+ 0.0256286
+ 0.0387103
+ 0.0903938
+ 0.0311766
+  0.039446
+ 0.0182905
+ 0.0281384
+ 0.0219785
+ 0.0168847
+ 0.0209428
+  0.028652
+ 0.0285534
+ 0.0313468
+ 0.0444459
+ 0.0215038
+ 0.0315676
+ 0.0337597
+ 0.0361472
+ 0.0855735
+ 0.0338439
+ 0.0843185
+ 0.0703933
+ 0.0171334
+ 0.0217665
+ 0.0302089
+ 0.0291424
+ 0.0567862
+ 0.0239022
+ 0.0307106
+ 0.0325195
+ 0.0319402
+ 0.0297349
+  0.041522
+ 0.0296703
+ 0.0215761
+ 0.0255372
+ 0.0443331
+ 0.0232872
+ 0.0463854
+ 0.0446161
+ 0.0434936
+ 0.0599476
+ 0.0661981
+ 0.0708994
+ 0.0588135
+  0.104636
+ 0.0806185
+  0.055601
+  0.104661
+ 0.0168037
+  0.029238
+ 0.0386636
+ 0.0256742
+ 0.0320986
+ 0.0288753
+ 0.0402799
+ 0.0365517
+ 0.0252496
+ 0.0172434
+ 0.0180266
+ 0.0276773
+ 0.0192062
+ 0.0489754
+ 0.0491814
+ 0.0248385
+ 0.0296963
+ 0.0405437
+ 0.0356457
+ 0.0394828
+ 0.0344227
+ 0.0563536
+ 0.0439573
+ 0.0545583
+ 0.0502846
+  0.106945
+ 0.0733309
+   0.16193
+ 0.0141619
+ 0.0120216
+  0.028657
+ 0.0162178
+ 0.0121802
+ 0.0106846
+ 0.0244371
+ 0.0150831
+ 0.0222232
+ 0.0220595
+0.00794646
+0.00954281
+ 0.0222523
+ 0.0238335
+ 0.0134565
+  0.029606
+ 0.0355157
+ 0.0228523
+ 0.0220626
+ 0.0244464
+  0.021326
+ 0.0479415
+ 0.0328653
+ 0.0303881
+  0.088605
+ 0.0670383
+  0.176899
+  0.178545
+  0.341817
+ 0.0494729]
+    total time: 10.2433s
+logp_grad time: 10.0138s
+logp_grad fraction: 0.977597
+        logp_grad calls: 844
+        time per call: 0.0118647s
+
+var1: mean = 0.565969, stddev = 0.0444073
+bw1: mean = 1.10646, stddev = 0.0429549
+L.1.1: mean = 1, stddev = 0
+L.2.1: mean = 0.387103, stddev = 0.102531
+... elided 5457 rows ...
+Lambda.28.30: mean = 0.0864891, stddev = 0.0967651
+Lambda.29.30: mean = 0.313372, stddev = 0.10466
+Lambda.30.30: mean = 1, stddev = 1.19743e-16
+==87485== 
+==87485== Events    : Ir
+==87485== Collected : 23676607638
+==87485== 
+==87485== I   refs:      23,676,607,638
