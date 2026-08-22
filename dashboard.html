@@ -35,7 +35,7 @@ pre.wl { background:#0f172a; color:#e2e8f0; padding:14px; border-radius:10px; ov
 footer { margin-top:40px; color:var(--mut); font-size:12.5px; }
 </style></head><body><div class="wrap">
 <h1>nindan <span class="small">— make Stan reach target ESS in half the wall-clock</span></h1>
-<p class="sub">Posteriors from posteriordb · CmdStan <b>2.39.0</b> pinned · Ryzen 9 5900X (Zen 3, AVX2-only, ≤4 cores) · updated 2026-08-22 00:47 UTC</p>
+<p class="sub">Posteriors from posteriordb · CmdStan <b>2.39.0</b> pinned · Ryzen 9 5900X (Zen 3, AVX2-only, ≤4 cores) · updated 2026-08-22 05:59 UTC</p>
 <div class="grid">
 <div class="kpi"><div class="v">21</div><div class="k">models in CORE_SET</div><div class="small">frozen 2026-08-19</div></div>
 <div class="kpi"><div class="v">1.21x</div><div class="k">nutpie wall speedup</div><div class="small">geomean of medians</div></div>
@@ -159,42 +159,38 @@ footer { margin-top:40px; color:var(--mut); font-size:12.5px; }
 </table>
 <p class="small">pf_full = pathfinder inits + 1000 warmup · pf_w200 = pathfinder inits + 200 warmup · wall includes the one-time pathfinder run. Judged on ESS/wall-second, rhat, divergences.</p>
 <h2><span class="n">07</span>WORKLOG (latest entries)</h2>
-<pre class="wl">## 2026-08-23 ~04:00 — W-19 basis rules landed; stale-.o debugging tale; post-fix e/grad
+<pre class="wl">## W-20 (pre-registered): position-reuse rate inside a run — the memoization question
 
-- --metric-basis {0,1,2,3} (svd/power/muon/muoneq) committed (2f97cd6),
-  property-tested BEFORE sampling: orthonormality 1e-15, c&gt;=0, top-direction
-  recovery, replay determinism. Test caught OOB (V(best,j), 2K-index into
-  D x r) pre-sampling.
-- Debugging tale: after the fix, cmake binary STILL crashed (malloc unaligned
-  tcache) while manual/ASAN builds (same compiler, same flags, same vendored
-  paths) ran clean. ROOT CAUSE: stale object file — incremental build
-  silently skipped the header change (.o mtime 00:34 &lt; header mtime 00:35).
-  RUNBOOK: after scripted header edits, delete .o or --clean-first. (gdb
-  backtrace + mtime comparison pinned it; no compiler/ABI/allocator issue.)
-- w17g (7 models x 3 reps, log capture) processed: post-fix e/grad
-  hier_2pl 2.6x better than pre-fix (1.05e-3), esc 1.3x, pilots 2.8x.
-  Evidence package + PR #4 follow-up 16 updated.
-- W-19 sweep launched: 8 models x 4 bases x 3 reps (fold config).</pre>
-<pre class="wl">## 2026-08-23 ~05:00 — W-19 VERDICT: basis rule is second-order (clean negative)
+From the e/grad evidence package (candidate 2): &#x27;if the dyadic search revisits
+the same (position, step) pair, logp_grad is called again; a position-keyed
+cache within a run could cut evals with zero algorithmic change.&#x27;
+Cheap decisive measurement BEFORE implementing anything: wrap logp_grad in a
+counting driver, hash each unconstrained position (64-bit, full precision
+bytes), count duplicate hashes across the whole run (upper bound: includes
+different-eps visits which a cache keyed on position alone would wrongly
+serve; position-only duplicates are still the necessary condition).
+Models: blr, hier_2pl, kronecker_gp (the well-mixed class where the 0.3-0.8x
+e/grad gap lives). Expectation: near 0 (each macro step moves the chain; the
+dyadic ladder evaluates the SAME position at MULTIPLE eps - those are not
+reusable). If &lt;1%: hypothesis closed (negative); if &gt;5%: prototype the cache.</pre>
+<pre class="wl">## 2026-08-23 ~06:30 — W-20 VERDICT: no ladder revisits; exactly 1 redundant grad per iteration (boundary re-eval)
 
-8 models x {svd,power,muon,muoneq} x 3 reps, fold, reproducible binary:
-geoESS(all) 32/30/38/35 — all within rep noise; no rule rescues funnels
-(diamonds best 1.534 via muon, pilots 2.31; both still fail). Muon&#x27;s NS
-performs like windowed SVD here: the 2K-column data matrix is
-well-conditioned; NS&#x27;s LLM-regime advantage (ill-conditioned momentum)
-doesn&#x27;t exist at sampler scale/cadence. Closes the 2-D-optimizer question
-empirically: basis is NOT the bottleneck; init + single-chain mixing are.
-W-19 numbers are the citable ones (reproducible binary; W-17 absolutes
-shifted by clock-eps). PR #4 follow-up 17. results/w19_summary.json.
-
-NIGHT-SHIFT LEDGER (all threads closed):
-- reproducibility: found (Eigen::Random clock-seed), fixed, verified
-  bit-identical; retraction posted; clean rerun confirmed fold~=rec
-- stale-.o trap: diagnosed (mtime), documented, runbook updated
-- W-17/W-18: fold~=rec core-set; 500-&gt;1000 draws don&#x27;t flip R-hat verdicts
-- e/grad: post-fix 2.6x on hier_2pl (direct capture), package updated
-- Aurora: researched (tall-2-D only), notes filed
-- 2-D comparison: implemented (--metric-basis), property-tested, swept,
-  NEGATIVE with mechanism explanation</pre>
+Instrumented driver (position-hash counting, no library changes), 3 models,
+400 warmup + 200 draws, single chain, recommended config:
+- blr 5.55% / hier_2pl 3.91% / kronecker 3.56% duplicate positions.
+- Phase split: dups == warmup_iters + draws + 1 EXACTLY (400+200+1=601) on
+  every model =&gt; exactly ONE duplicate per macro step, uniformly across
+  warmup AND sampling: each transition re-evaluates its START position,
+  whose gradient the previous transition already computed as its END point.
+  The dyadic step ladder revisits nothing (0 accidental dups).
+- Implication: a hash cache is unnecessary; the fix is threading the
+  endpoint (theta, grad, logp) through WalnutsSampler/AdaptiveWalnuts state
+  (start-position eval becomes a reuse). Expected saving 4-6% of all
+  gradient calls, mechanically lifting e/grad by the same factor, with a
+  perfect verification gate (reusing an identical double is bit-neutral =&gt;
+  draws must stay bit-identical).
+- NOT implemented this session: hot-path surgery on walnuts.hpp (the
+  template-surgery-mishap lesson); pre-registered as the fresh-session item,
+  one change, bit-identity gate, 3-model verification.</pre>
 <footer>nindan · autonomous lane · CORE_SET frozen 2026-08-19 · harness/make_dashboard.py regenerates this page · numbers from results/*.csv (median of 3 unless noted)</footer>
 </div></body></html>
