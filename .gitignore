@@ -8,3 +8,9 @@ wheels/
 
 # Virtual environments
 .venv
+
+# generated artifacts — never track (44GB incident 2026-08-23)
+runs/
+bs_models/
+bs_models_o3/
+models/*_model.so
