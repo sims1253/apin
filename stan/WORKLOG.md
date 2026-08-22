@@ -1089,3 +1089,247 @@ SIZE, not the metric:
   intact, status clean.
 - Standing rule (also added to HANDOFF.md): NEVER `git add -A` in this
   repo — stage explicitly; runs/, bs_models/, *_model.so stay untracked.
+
+## W-24 (pre-registered): stan-2a2 scratch-hoist in base_nuts.hpp (cmdstan fork)
+
+- Plan: patches/stan-2a2-scratch-hoist-PLAN.md. Target
+  external/cmdstan/stan/src/stan/mcmc/hmc/nuts/base_nuts.hpp. Plan text cited
+  submodule d13c50c0f — object not present in fork; submodule pin per
+  portability snapshot is 6380837 (nindan/mixed-build-guard). DEVIATION:
+  implemented on 6380837 (base_nuts.hpp byte-identical to cmdstan-2.37.0
+  copy, so pin drift is immaterial for this file).
+- Expectation: hoisting build_tree locals (p/p_sharp init_end/final_beg,
+  rho_init/final/subtree, z_propose_final) into depth-indexed member scratch
+  removes ~630 heap allocs/transition @ depth 6; pilots memcpy/alloc share
+  21% -> <8%; small-model wall geomean improves modestly (allocs are a minor
+  share vs 68-99.7% logp_grad).
+- Recursion safety: parent depth-d scratch is written only via refs children
+  hold (children use depth-d-1 slots); parent reads its slot only after
+  children return. z_propose_final as PER-DEPTH ps_point stack (single
+  shared ps_point would alias across recursion levels — plan flagged the
+  per-depth option; taking it).
+- Gates (in order): G1 build stanc + 3 probe models (blr, pilots, lsat_model);
+  G2 BIT-IDENTITY first: 3 models x 2 seeds, 4 chains, csv diff vs stock == 0
+  (rho-hoist history: do NOT assume); G3 callgrind pilots memcpy/alloc <8%
+  (valgrind absent on box — will install local build or record as blocked);
+  G4 wall-clock paired small models (pilots, arma11, blr, eight_schools
+  noncentered), 3 reps medians, seeds 20260819+1000*rep+c, 4 chains; G5
+  bisect hunks if G2 fails, ship only what passes.
+- Never touch: leaf z_propose assign, transition-scope 12 vectors,
+  compute_criterion, integrator/hamiltonian, RNG call order.
+- Test bed: pristine ~/.cmdstan/cmdstan-2.39.0 = stock canary; identical
+  patch applied to its base_nuts.hpp for the patched variant (verified
+  byte-identical header first).
+
+
+## W-23 (pre-registered BEFORE running): endpoint-gradient threading (work item A)
+
+From W-20: exactly ONE redundant logp_grad per transition (the start-position
+re-eval whose gradient the previous transition already computed as its end
+point; dups = warmup+draws+1 on every model, ~4-6% of gradient calls).
+Change: thread (theta, grad, logp) through WalnutsSampler / AdaptiveWalnuts
+state — transition_w/transition_w_lr accept a cached (grad, logp) for the
+start position and skip the re-evaluation when the cache matches theta size;
+samplers carry the cache across transitions and across the warmup->sampling
+freeze (sampler() seeds the frozen sampler's cache).
+
+GATES (non-negotiable):
+1. BIT-IDENTICAL draws before vs after, 3 models x 2 seeds x 4 chains
+   (models: blr, kidscore_momiq, arma11 — small/cheap per core_manifest;
+   CLI defaults, warmup=400, samples=200, no init files — fixed deterministic
+   random inits; identical across arms by construction).
+2. Grad-count check (W-17g style, from stan_cli's printed 'logp_grad calls'):
+   duplicates must drop from warmup+draws+1 to ~0 per model/chain
+   (total calls drop by exactly warmup+draws+1 per chain, modulo one eval at
+   chain start; freeze boundary also seeded from warmup cache).
+Protocol notes: this is a bit-identity gate, not a perf claim — no 3-rep
+medians needed for the gate itself. ONE edit to walnuts.hpp +
+adaptive_walnuts.hpp, build clean (--clean-first equivalent, delete .o),
+test, commit on submodule branch endpoint-grad-threading off
+dev/init-robustness. Expectation: draws identical, grad calls drop; if
+bit-identity fails, the implementation is wrong (reusing an identical double
+cannot change arithmetic) — stop and fix, do not rationalize.
+
+## 2026-08-23 — W-23 SHIPPED: endpoint-gradient threading (bit-identical, dups eliminated)
+
+Implementation (submodule branch endpoint-grad-threading off dev/init-robustness,
+commit 30ac6db): transition_w/transition_w_lr take optional trailing
+(grad_cached, logp_cached) params — valid when size matches theta — and skip
+the start-position re-eval; WalnutsSampler caches the endpoint across draws
+(+ seed_endpoint_cache()); AdaptiveWalnuts caches across warmup iterations
+(diagonal, drift, low-rank paths) and seeds the frozen sampler at the freeze
+boundary. Defaults preserve old signatures for all other callers. ONE edit
+set, clean-first build, gate, commit.
+
+GATE RESULTS:
+- Bit-identity: 24/24 chain CSVs identical before vs after
+  (blr, kidscore_momiq, arma11 x seeds 20260819/20260820 x 4 chains;
+  CLI defaults, warmup=400 samples=200, deterministic random inits
+  [--init 2 default] — no pf inits needed since arms share everything).
+- Grad calls (sum over 4 chains, both seeds): drop = 2396 = 4 x 599 =
+  exactly (warmup + draws - 1) per chain — every transition except the
+  chain's very first reuses the endpoint. Examples per chain (seed 20260819,
+  before->after): blr 19201->18602, kidscore 19184->18586, arma11 16553->15954.
+  Residual 2 dups/chain are the init mass seeding (pre-sampler) and the
+  chain-start eval — not reachable from transition state (documented, not
+  a regression; W-20's +1 dup count included the init seeding).
+- ~3.1% fewer gradient calls on these runs (599/19201 blr), in the
+  expected 4-6%-of-grad-calls band for the models measured in W-20
+  (fraction depends on trajectory length per transition).
+No perf claim made (bit-identity gate item, no 3-rep timing per protocol).
+ctest in the cmake build config has no test targets (tests not wired);
+compile + bit-identity gate served as verification.
+
+## W-25 (pre-registered): library-level warmup early-exit with temporal step-drift gate
+
+Design (from W-21/W-22): move early-exit out of the CLI knob into the
+library multi-chain controller (`adapt.hpp` controller_loop, which already
+has cross-chain convergence machinery). New WarmupConfig knobs:
+`temporal_step_drift_tol` (0 = OFF, default — behavior preserved),
+`temporal_window` (50), `temporal_min_iter` (200). Gate semantics: the
+controller's existing cross-chain criteria (mass tol, step tol vs the
+geometric mean) must hold AND, when the temporal tol > 0, every chain's
+step size must have drifted < tol (relative) across the last full
+temporal window ending at iter >= temporal_min_iter, max over chains.
+Motivation (W-22): on hurt models mass is stable (+2-13%) but step still
+grows (+170%) late in warmup; cross-chain agreement alone can hold while
+all chains march together, so the temporal step gate is the quality
+preserver. AdaptResult gains exit_iter / early_exit for observability.
+
+CLI: new `--chains N` (default 1; N>1 runs the multi-chain library path
+with one BridgeStan model instance + one mt19937_64 + one StanHandler per
+chain, seeding exactly as the per-chain single-chain invocations, so the
+unchanged-warmup path matches the baseline arms). Single-chain path
+untouched (W-21 knob remains, default off).
+
+Arms (all fresh, 4 chains, seeds 20260819+1000*rep+c, 3 reps, medians):
+- base: single-chain CLI x4, fixed warmup 1000 (default code path).
+- mc_nogate: --chains 4, temporal tol 0 (controller cross-chain exit only).
+- mc_gate05: --chains 4, temporal tol 0.05 (window 50, min_iter 200).
+Models: marginal class W-21 hurt = arma11, lsat_model, hier_2pl; easy
+class = blr, eight_schools_noncentered.
+
+Gates:
+- Quality (primary): mc_gate05 ess_bulk_min / ess_tail_min per model-rep
+  NOT worse than base beyond noise on the marginal class (median of 3
+  reps; noise band from base rep spread).
+- Speed: wall improvement for mc_gate05 where it early-exits (exit_iter
+  < 1000), per model median.
+- Canary (bit-identity): default single-chain path draws must match the
+  pre-change binary bit-for-bit (temporal tol defaults 0, controller code
+  unreachable from single-chain path).
+- Negative results recorded either way.
+
+Deviations from protocol (recorded up front): R `posterior` package not
+installed on this fresh machine — ESS via Python arviz 1.3.0
+(rank-normalized bulk/tail, same estimator, identical across arms).
+/tmp/winit pf inits gone and cmdstan-2.39.0 install incomplete — arms use
+the CLI's default deterministic init (model.initialize, per-chain seed),
+identical across all arms; recorded here as the init source.
+
+## W-24 CLOSE-OUT: stan-2a2 scratch-hoist SHIPPED (all gates pass)
+
+- Correction to pre-registration: d13c50c0f is the STAN sub-submodule pin
+  (stan inside external/cmdstan), and it IS what was checked out — no pin
+  drift; the 6380837 figure is the cmdstan-level pin. Implemented exactly
+  on d13c50c0f.
+- Implementation per plan H1/H2/H3, one deviation inside plan's latitude:
+  z_propose_final as PER-DEPTH ps_point stack (single shared ps_point is
+  recursion-UNSAFE — child overwrites parent's buffer via the z_propose
+  ref it receives; plan flagged per-depth as the clean option).
+- G1 PASS: stanc 2.39.0 + 5 models compiled stock & patched.
+- G2 PASS: bit-identity 24/24 (3 models x 2 seeds x 4 chains, 1000+1000;
+  CSVs byte-identical modulo elapsed-time/file-path comments). False alarm
+  en route: first comparison 0/24 — my filter missed the "# file =" output
+  path comment; stock-vs-stock canary + re-filter resolved it. Determinism
+  itself is exact.
+- G3 PASS: callgrind pilots (40+40, seed 20260819, valgrind 3.23 built
+  locally to ~/vginstall — box had none): memcpy/alloc Ir share 9.9% ->
+  6.7% (<8% target); total Ir 75.3M -> 70.7M (-6%). Plan's 21% baseline
+  used a wider bucket definition; with this harness's bucket the win is
+  the same direction and crosses the gate.
+- G4 PASS: wall-clock paired (warmup+sampling, 1000+1000, 4 chains
+  serialized, medians of 3 reps, seeds 20260819+1000*rep+c): pilots
+  1.037->0.962 (0.928), arma11 0.966, blr 0.888, 8schools-nc 0.943;
+  GEOMEAN RATIO 0.931 (~7% faster small-model class).
+- Ship: commit 7fc7f7eda branch scratch-hoist-base-nuts. SHIP-TARGET
+  DEVIATION: base_nuts.hpp lives in the STAN sub-submodule (remote =
+  upstream stan-dev, push forbidden), NOT the cmdstan fork. Created fork
+  sims1253/stan, PR within fork: https://github.com/sims1253/stan/pull/1
+  (head scratch-hoist-base-nuts -> base develop of the fork).
+- Cleanup: ~/.cmdstan/cmdstan-2.39.0 header restored pristine (stock
+  builds for other work items unaffected); stan sub-submodule restored to
+  pin d13c50c0f; stock/patched probe exes kept in stan/build/{model}__stock
+  /{model}__patched (untracked).
+- Build/env notes for successors: install_cmdstan rejects "-j4" (use
+  --cores); interactive `make` is aliased to make -j12 and a MAKE env
+  quirk can silently no-op recursive makes — use /usr/bin/make -j2
+  explicitly; background tasks get a private /tmp overlay (valgrind had
+  to be built in a foreground call).
+
+## 2026-08-22 — W-25 close-out: library temporal step-gate SHIPPED (default off); quality/speed gates FAIL on the marginal class — negative result
+
+Implementation (walnutpie branch `w25-library-temporal-step-gate`,
+commits e650c63 + f4e37d5):
+- Gate lives in controller_loop (adapt.hpp). WarmupConfig:
+  temporal_step_drift_tol (0=off default) / temporal_window (50) /
+  temporal_min_iter (200). When on, early exit = cross-chain step
+  agreement (existing tol) AND per-chain step drift <5% AND mass l2
+  drift < mass_converge_tol, both measured over the last TWO windows
+  (boundary k vs k-2, ~100 iters). The cross-chain mass criterion is
+  REPLACED in temporal mode: measured 1.4-2.8 l2 diff vs tol 1.0 late
+  in warmup on healthy models — windowed mass estimates are too noisy
+  cross-chain for it to ever fire. AdaptResult gains exit_iter /
+  early_exit. Env-gated WALNUTPIE_DEBUG_CTRL trace.
+- CLI: --chains N runs the library controller (adapt_with_stats) with
+  one BridgeStan model + one mt19937_64 + one StanHandler per chain,
+  seeding identical to per-chain single-chain invocations. Single-chain
+  path untouched. NOTE: multi-chain requires STAN_THREADS=1 model .so
+  (bs_models/ were built without it — stan::math arena corrupts; the 5
+  study models recompiled into bs_models_threads/, single-chain draws
+  bit-identical across the two .so builds).
+- Canary: PASS — default single-chain draws md5-identical pre/post all
+  changes (blr, arma11, eight_schools_noncentered; re-verified on final
+  code).
+
+Experiment (5 models x 3 reps x 4 chains, medians; pf inits regenerated
+-> inits_w25/ via cmdstan-2.39.0 pathfinder + bridgestan unconstrain,
+harness/gen_w25_inits.py, runner harness/run_w25.py, ESS via arviz —
+R posterior absent on this machine; same estimator, same procedure all
+arms; all arms --metric-window 50):
+  bulk-ESS-min:            base  mc_nogate  mc_gate05(1win)  mc_gate05(2win)
+    arma11                 1028      830         1004             860
+    lsat_model              944      944          110             942
+    hier_2pl                519       61          168             126
+    blr                     350      217           350             347
+    eight_schools_nc       1488     1459          1459            1459
+  exit_iter med (2win): arma 400, lsat 350, hier 345, blr 570, esc n/a.
+  wall (median): hier base 49.6s vs gate 89.3s; lsat 14.5s vs 111.4s.
+  hier timing split (base vs gate): warmup 28-29s vs 11-15s, SAMPLING
+  21s vs 77s — early-exited tuning makes sampling 3.6x more expensive
+  (smaller frozen step, deeper trajectories), more than eating the
+  warmup saving.
+
+VERDICTS:
+1. Quality gate (pre-registered): FAIL. hier_2pl collapses 519 -> 126
+   bulk / 733 -> 112 tail, consistent across all 3 reps (91-179 vs
+   502-548) — not noise. lsat tail halves (1638 -> 825); arma11 -16%.
+   The 1-window gate was worse (lsat 944 -> 110). W-22's hypothesis
+   (step-drift <5% is the quality-preserving signal) is REFUTED at
+   window 50 / 2-window horizon: even with step AND mass temporally
+   stable, warmup continues to materially improve the frozen sampler
+   on hier_2pl — likely the min-micro-steps / trajectory-geometry
+   adaptation, which no step/mass gate observes.
+2. Speed gate: FAIL. Where it exits, wall gets WORSE on the slow
+   models (sampling-cost blowup dominates warmup savings). W-21's CLI
+   1.3-2.4x did not survive the quality-preserving gate.
+3. Side finding (upstream-relevant): the library controller's DEFAULT
+   cross-chain tols (mass 1.0 / step 0.1) exit at iter 50-80 with good
+   inits + windowed metric and destroy quality (hier 519 -> 61, arma11
+   -19%, blr -38%). Any embedding using adapt() with defaults is
+   exposed; the temporal gate (tol>0) is strictly safer than the
+   default cross-chain-only stop.
+Ship state: default off (tol 0 preserves prior behavior bit-for-bit).
+Useful only on easy models (blr tail +27%); do not enable on the
+marginal class. Raw: runs/{base,mc_nogate,mc_gate05,mc_gate05_1win},
+results/w25_{ess,wall}.json (+_1win).

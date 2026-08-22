@@ -1,0 +1,62 @@
+{
+ "base/arma11": {
+  "wall_med_s": 0.184,
+  "exit_iter_med": null
+ },
+ "mc_nogate/arma11": {
+  "wall_med_s": 0.515,
+  "exit_iter_med": 80.0
+ },
+ "mc_gate05/arma11": {
+  "wall_med_s": 0.233,
+  "exit_iter_med": 400.0
+ },
+ "base/lsat_model": {
+  "wall_med_s": 14.492,
+  "exit_iter_med": null
+ },
+ "mc_nogate/lsat_model": {
+  "wall_med_s": 15.899,
+  "exit_iter_med": 1000.0
+ },
+ "mc_gate05/lsat_model": {
+  "wall_med_s": 111.373,
+  "exit_iter_med": 350.0
+ },
+ "base/hier_2pl": {
+  "wall_med_s": 49.6,
+  "exit_iter_med": null
+ },
+ "mc_nogate/hier_2pl": {
+  "wall_med_s": 102.825,
+  "exit_iter_med": 50.0
+ },
+ "mc_gate05/hier_2pl": {
+  "wall_med_s": 89.342,
+  "exit_iter_med": 345.0
+ },
+ "base/blr": {
+  "wall_med_s": 0.345,
+  "exit_iter_med": null
+ },
+ "mc_nogate/blr": {
+  "wall_med_s": 0.322,
+  "exit_iter_med": 485.0
+ },
+ "mc_gate05/blr": {
+  "wall_med_s": 0.357,
+  "exit_iter_med": 570.0
+ },
+ "base/eight_schools_noncentered": {
+  "wall_med_s": 0.118,
+  "exit_iter_med": null
+ },
+ "mc_nogate/eight_schools_noncentered": {
+  "wall_med_s": 0.135,
+  "exit_iter_med": 1000.0
+ },
+ "mc_gate05/eight_schools_noncentered": {
+  "wall_med_s": 0.129,
+  "exit_iter_med": 1000.0
+ }
+}
