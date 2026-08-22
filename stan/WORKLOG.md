@@ -2304,3 +2304,160 @@ Deliverable: results/gp_micro_w33.md. Raw:
 results/profile/w33/gp_regr_{stock,patched}/ (committed); drivers +
 patch + .so in scratch/w33/ (untracked). No walnutpie submodule changes,
 no pushes.
+
+## W-34 (pre-registered BEFORE running): elementwise var-mode plumbing ceiling on hier_2pl — codegen confirmation + rewrite arms
+
+From W-29 atlas candidate #2: ONE program line of hier_2pl —
+`y ~ bernoulli_logit(alpha[ii] .* (theta[jj] - beta[ii]))` — costs ~71% of a
+7.75M-Ir gradient: ~32%G plumbing (subtract/elt_multiply on
+Holder<IndexedView<var>> 23.9%G fwd + rvalue<index_multi> gathers 8.1%G) +
+~39%G likelihood math (bernoulli_logit 18.5% + libm log1p 14.4% + inv_logit
+rev lambda 6.3%). Mission: put a number on what better codegen / an available
+language-level primitive could buy — evidence for the upstream push (stanc3
+and/or stan-math). No walnutpie/submodule changes; scratch/w34/ +
+harness/w34/ only; nothing pushed. Instrument read-only:
+external/walnutpie/build_e27/examples/stan_cli @ 0cb5b7b (NOT rebuilt).
+
+Codegen + source findings (confirmed BEFORE building):
+- stanc3 v2.39 gradient (var) instantiation emits exactly:
+  bernoulli_logit_lpmf(y, elt_multiply(rvalue(alpha, index_multi(ii)),
+    subtract(rvalue(theta, index_multi(jj)), rvalue(beta, index_multi(ii)))))
+  — 3 index_multi gathers on var vectors (each an eager Holder<IndexedView>
+  materialization) + 2 N-element eltwise var ops (each a per-element vari +
+  arena matrix + reverse callback). TRIGGER: any eltwise operator applied to
+  an indexed var-container expression; nothing fuses the gather+eltwise chain.
+- bernoulli_logit_lpmf<var> itself ALREADY uses partials_propagator
+  (partials computed in the forward call, one edge — the diamonds /
+  normal_id_glm pattern; stan-math 5.3.0 prim/prob/bernoulli_logit_lpmf.hpp).
+  The lpmf is NOT the problem; its ARGUMENT EXPRESSION is.
+- KEY DATA FACT (verified from data/hier_2pl.json): the data is the COMPLETE
+  J×I response grid (I=32, J=600, N=19200=J*I), item-major order
+  (ii = 1..I each repeated J, jj = 1..J tiled) — the N-vector eta IS the
+  column-major flatten of eta_mat[j,i] = alpha_i*(theta_j - beta_i).
+
+ARMS:
+- A (language-level GLM): bernoulli_logit_glm_lpmf(y | x, alpha, beta)
+  computes bernoulli_logit_lpmf(y, alpha + x*beta), DENSE matrix x
+  (require_matrix_t), per-doc with analytic gradients; alpha may be a
+  per-observation vector. The 2PL predictor alpha_ii*(theta_jj - beta_ii) is
+  BILINEAR in two parameter vectors (alpha_i * theta_j product): no dense
+  O(1)-column design encodes it; sparse encodings (x_n = theta_jj*e_ii with
+  beta = item params) need dense N×I or N×J var matrices (32–600x the
+  current N-element work) and x must itself be var (theta is a parameter),
+  so the GLM would additionally differentiate through the design. VERDICT
+  (from signature + docs, up front): NO clean mapping exists — documented,
+  NOT implemented; proceed to B/C.
+- B (matrix/GEMM formulation — the codegen-ceiling arm): exploit the
+  complete grid; eta as a MODEL-BLOCK LOCAL (not tp — avoids 19200 output
+  columns):
+    matrix[J, I] eta = append_col(theta, rep_vector(-1.0, J))
+                       * append_row(alpha, alpha .* beta);
+    target += bernoulli_logit_lpmf(y | to_vector(eta));
+  ([theta, -1](J×2) x [alpha; alpha.*beta](2×I) = theta*alpha' - ones*c'
+  with c = alpha.*beta.) ONE var-mode GEMM (rev/fun/multiply.hpp: single
+  reverse_pass_callback, adjoints via 2 GEMMs on .val() doubles), ZERO
+  index_multi gathers, ZERO N-level eltwise var ops (only 600- and
+  32-element ones); to_vector(var_value<Matrix>) is a zero-copy view.
+  Same math, different per-element arithmetic (theta*alpha - alpha*beta vs
+  alpha*(theta-beta)) => bit-identity NOT expected; FP-reorder level diffs.
+- C (optional, only if cheap): column/row-major indexing reorder — SKIP
+  rationale: B removes the gathers entirely, mooting the gather-layout
+  question; recorded either way.
+
+BUILD: copied .stan per variant in scratch/w34/{stock,armB}_build/ (W-27
+gotcha: compile_model silently reuses the cached .so next to the .stan);
+default CXXFLAGS (-march=native forbidden, W-27); env -u LD_LIBRARY_PATH;
+/usr/bin/make -j2 max. Inits: inits_w25/hier_2pl/rep{0,1,2}/chain_{0..3}.txt
+(pf, unconstrained — covered, verified present).
+
+GATES:
+(a) correctness vs stock on 100 random unconstrained points (deterministic
+    rng, W-32 scheme): max rel logp <= 1e-12 REQUIRED (same lpmf, only eta
+    arithmetic reordered); gradient vector rel-L2 + cosine reported
+    honestly (expect small-FP-reorder ~1e-13, NOT 1e-16); FD spot-checks
+    (Richardson-style, W-27/W-32 method) on both arms.
+(b) cost: per-call logp_grad on identical posterior-cloud points via
+    Python/bridgestan driver (3 interleaved reps, medians) + callgrind
+    Ir/grad (W-29 protocol: valgrind 3.23 ~/vginstall, one job at a time,
+    warmup 100 samples 50, seed 20260819, init
+    inits_w25/hier_2pl/rep0/chain_0.txt). Attribute the delta: plumbing
+    (subtract/elt_multiply/rvalue/IndexedView + their rev callbacks + tape)
+    vs likelihood (bernoulli_logit/log1p/exp) shares before/after.
+(c) sampler-level sanity on the best arm: 3 reps x 4 chains, seeds
+    20260819+1000*rep+c, pf inits inits_w25/hier_2pl, warmup=1000
+    draws=1000, --metric-window 50, 4 parallel single-chain stan_cli procs
+    (W-30 par4 protocol, same read-only binary); bulk/tail ESS-min (arviz)
+    within noise of stock; wall medians per the same protocol.
+
+Expectations (pre-registered): plumbing bucket (~32%G) + eltwise rev
+callbacks (~6.6%G) + rvalue-adjacent tape share collapse; naive Ir/grad
+ceiling ~35-45%; wall saving >= Ir share plausible (per-element var
+machinery is instruction-dense); logp within 1e-12; gradients FP-reorder
+level; sampler ESS within noise. Negative results recorded either way.
+
+## 2026-08-22 — W-31 CLOSE-OUT: safe defaults SHIPPED — controller early exit opt-in; all three gates PASS; STAN_THREADS repro pinned down
+
+Implementation: walnutpie branch exp/safe-adapt-defaults @ 43b6435 (off
+exp/parallel-chains @ da71e5b). WarmupConfig gains allow_early_exit
+(DEFAULT FALSE; builder setter; config_test asserts the default).
+poll_controller gates the convergence stop (cross-chain criteria AND the
+temporal mode) behind allow_early_exit() — criteria still computed for
+the debug trace, which now also prints the early-exit posture; with it
+off, the only stop is the max_iter budget (the W-30 --fixed-warmup
+posture as the library default). CLI: new opt-in --early-exit restores
+the exact pre-W-31 semantics; --temporal-step-tol > 0 also opts in
+(W-25/W-28 arm command lines reproducible verbatim); --pilot-burst
+without an enabler now FAILS loudly instead of silently never firing;
+--fixed-warmup help corrected (redundant at default, meaningful with
+early exit). Single-chain path untouched.
+
+GATES (pre-registered):
+- (a) CANARY: PASS — 12/12 single-chain CSVs md5-identical pre/post
+  (blr, arma11, eight_schools_noncentered x 4 chains, seeds 20260819+c,
+  warmup 400 / samples 200, default inits; pre binary =
+  stan/build/stan_cli_w31_pre, clean-first rebuild at da71e5b).
+- (b) SAFE DEFAULT: PASS — default-flag --chains 4 runs exit_iter=1000
+  early_exit=0 on 6/6 runs (esc + hier_2pl x 3 reps). STRONGER than
+  pre-registered: per-chain CSVs are md5-identical to the W-25 base arm
+  24/24 (full-budget default warmup has the same per-chain iteration
+  count and seeding as fixed warmup), so bulk-ESS-min is IDENTICAL to
+  base by construction — medians esc 1487.6 (base 1487.6), hier_2pl
+  519.5 (base 519.5); per-rep values equal cell-for-cell
+  (results/w31_ess.json, results/w31_md5.json).
+- (c) FOOTGUN OPT-IN NOT GONE: PASS — --chains 4 --early-exit exits at
+  iter 50 with early_exit=1 on hier_2pl 3/3 reps and collapses quality:
+  bulk-ESS-min median 24.0 (per-rep 68.2/22.9/24.0) vs base 519.5
+  (548/502/519) — the W-25 side-finding-3 destruction, reproduced under
+  the explicit opt-in (median slightly worse than W-25's 61 because the
+  exit lands at exactly 50). esc: rep0 exits at 50 (early_exit=1);
+  rep1/rep2 run to budget — the criteria's known run-to-run
+  nondeterminism under thread timing (W-28: identical blr runs exited
+  500/520/540/550); the mechanism is reachable, the default is not.
+- STAN_THREADS evidence (audit doc §4): default-build bs_models/ .so +
+  threaded --chains 4 -> "free(): double free detected in tcache 2" /
+  SIGSEGV rc=139, 3/3 runs; STAN_THREADS=1 bs_models_threads/ .so ->
+  clean; SAME default .so with --chain-exec serial -> clean AND draws
+  md5-identical to the threads build. The hazard is precisely CONCURRENT
+  evaluation; raw in runs/w31_threads/. model_info() confirms the builds:
+  bs_models STAN_THREADS=false vs bs_models_threads true (bridgestan
+  2.9.0 Makefile default is OFF).
+
+VERDICT: embedders calling adapt()/adapt_with_stats() with a default
+WarmupConfig now get fixed-budget warmup (quality = the verified base
+arm, bit-identically) instead of a silent quality-destroying exit at
+iter 50-80; the old behavior is one explicit flag away and still
+reproduces its documented damage. Design rationale recorded up front in
+the pre-registration: OFF was chosen over "conservative tolerances"
+because W-25/W-28 showed NO tolerance-based gate preserves quality on
+the marginal class, so no tolerance default can make the failure mode
+impossible — only disabling the exit can.
+
+Ship state: exp/safe-adapt-defaults @ 43b6435 (submodule pointer
+updated in the outer repo); no pushes. Docs: STAN_THREADS addendum (§4)
+in external/upstream_audit_walnutpie.md; new consolidated candidate list
+external/upstream_candidates.md (6 items; item 4 = this change, item 1
+updated to the delivered W-32 finding — eigendecompose_sym already
+upstream, the ask narrowed to stanc3 codegen fusion). Artifacts:
+harness/run_w31.py, harness/analyze_w31.py, results/w31_{ess,md5}.json,
+runs/w31/ + runs/w31_threads/ (local), pre binary
+stan/build/stan_cli_w31_pre.

@@ -1,0 +1,92 @@
+{
+ "mc_default/eight_schools_noncentered": {
+  "n": 3,
+  "ess_bulk_min_med": 1487.6465917297335,
+  "ess_tail_min_med": 1361.3733066266911,
+  "per_rep_bulk": [
+   1678.0,
+   1487.6,
+   1459.0
+  ],
+  "per_rep_tail": [
+   1361.4,
+   1166.5,
+   1515.7
+  ]
+ },
+ "mc_earlyexit/eight_schools_noncentered": {
+  "n": 3,
+  "ess_bulk_min_med": 1458.9542360243327,
+  "ess_tail_min_med": 1179.3687149777236,
+  "per_rep_bulk": [
+   1103.3,
+   1487.6,
+   1459.0
+  ],
+  "per_rep_tail": [
+   1179.4,
+   1166.5,
+   1515.7
+  ]
+ },
+ "base/eight_schools_noncentered": {
+  "n": 3,
+  "ess_bulk_min_med": 1487.6465917297335,
+  "ess_tail_min_med": 1361.3733066266911,
+  "per_rep_bulk": [
+   1678.0,
+   1487.6,
+   1459.0
+  ],
+  "per_rep_tail": [
+   1361.4,
+   1166.5,
+   1515.7
+  ]
+ },
+ "mc_default/hier_2pl": {
+  "n": 3,
+  "ess_bulk_min_med": 519.4805499278408,
+  "ess_tail_min_med": 733.0438981767974,
+  "per_rep_bulk": [
+   548.2,
+   501.9,
+   519.5
+  ],
+  "per_rep_tail": [
+   437.4,
+   733.0,
+   820.7
+  ]
+ },
+ "mc_earlyexit/hier_2pl": {
+  "n": 3,
+  "ess_bulk_min_med": 24.022248638711893,
+  "ess_tail_min_med": 12.069904525675652,
+  "per_rep_bulk": [
+   68.2,
+   22.9,
+   24.0
+  ],
+  "per_rep_tail": [
+   30.1,
+   10.2,
+   12.1
+  ]
+ },
+ "base/hier_2pl": {
+  "n": 3,
+  "ess_bulk_min_med": 519.4805499278408,
+  "ess_tail_min_med": 733.0438981767974,
+  "per_rep_bulk": [
+   548.2,
+   501.9,
+   519.5
+  ],
+  "per_rep_tail": [
+   437.4,
+   733.0,
+   820.7
+  ]
+ }
+}

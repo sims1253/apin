@@ -1,0 +1,74 @@
+{
+ "eight_schools_noncentered/rep0/c0": {
+  "eq": true
+ },
+ "eight_schools_noncentered/rep0/c1": {
+  "eq": true
+ },
+ "eight_schools_noncentered/rep0/c2": {
+  "eq": true
+ },
+ "eight_schools_noncentered/rep0/c3": {
+  "eq": true
+ },
+ "eight_schools_noncentered/rep1/c0": {
+  "eq": true
+ },
+ "eight_schools_noncentered/rep1/c1": {
+  "eq": true
+ },
+ "eight_schools_noncentered/rep1/c2": {
+  "eq": true
+ },
+ "eight_schools_noncentered/rep1/c3": {
+  "eq": true
+ },
+ "eight_schools_noncentered/rep2/c0": {
+  "eq": true
+ },
+ "eight_schools_noncentered/rep2/c1": {
+  "eq": true
+ },
+ "eight_schools_noncentered/rep2/c2": {
+  "eq": true
+ },
+ "eight_schools_noncentered/rep2/c3": {
+  "eq": true
+ },
+ "hier_2pl/rep0/c0": {
+  "eq": true
+ },
+ "hier_2pl/rep0/c1": {
+  "eq": true
+ },
+ "hier_2pl/rep0/c2": {
+  "eq": true
+ },
+ "hier_2pl/rep0/c3": {
+  "eq": true
+ },
+ "hier_2pl/rep1/c0": {
+  "eq": true
+ },
+ "hier_2pl/rep1/c1": {
+  "eq": true
+ },
+ "hier_2pl/rep1/c2": {
+  "eq": true
+ },
+ "hier_2pl/rep1/c3": {
+  "eq": true
+ },
+ "hier_2pl/rep2/c0": {
+  "eq": true
+ },
+ "hier_2pl/rep2/c1": {
+  "eq": true
+ },
+ "hier_2pl/rep2/c2": {
+  "eq": true
+ },
+ "hier_2pl/rep2/c3": {
+  "eq": true
+ }
+}

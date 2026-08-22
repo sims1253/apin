@@ -126,3 +126,77 @@ Housekeeping on **our** side (not upstream patches), in priority order:
 | B1 (sampler drops low-rank at freeze) | `5e56ff2` | ours (`5302ed8` fold-mode instance; `5e56ff2` itself for `metric_full` mode) | **No** — requires `low_rank*`/`metric_full`, absent upstream (`-S` empty) | fold-mode variant: yes (`5302ed8`..HEAD); `metric_full` variant: no (born+fixed inside `5e56ff2`) |
 | B1b (reversible/uturn under wrong Hamiltonian) | `5e56ff2` | ours (`5e56ff2`'s own pre-commit working state) | **No** — upstream `reversible`/`uturn` (root `6162d88`) are called with the same metric they integrate; mismatch needs our `transition_w_lr` | no (residual instance remains at HEAD `walnuts.hpp:780`) |
 | B2 (anti-windup double-wrap) | `52051c9` | ours (`2260f29`/`250e5b3`/`980c249`) | **No** — `AntiWindupAdapter`/`anti_windup` absent upstream (`-S` empty) | double-wrap: no (never committed, verified across all refs); single CLI wrap: yes (`2260f29`..`a091334`) |
+
+---
+
+## 4. W-31 addendum (2026-08-22): STAN_THREADS requirement for walnutpie's threaded multi-chain path
+
+**Finding (from W-25, reproduced and pinned down in W-31):** a BridgeStan
+model `.so` built by DEFAULT `bridgestan.compile_model` corrupts Stan's
+autodiff arena when ONE `.so` is used from multiple threads concurrently —
+walnutpie's threaded multi-chain path (`--chains 4 --chain-exec threads`;
+one worker thread per chain, each with its own `DynamicStanModel` instance,
+all instances `dlopen`-ing the SAME library) crashes with heap corruption.
+Models must be rebuilt with `make_args=["STAN_THREADS=True"]` for that path.
+This is NOT a walnutpie code bug: stan-math without `-DSTAN_THREADS` uses a
+process-global autodiff arena/chain stack, so concurrent `logp_grad` from
+several threads into the same `.so` is undefined by construction.
+
+**What the shipped builds were (verified):**
+
+- `bs_models/` = `bridgestan.compile_model(models/<m>.stan)` with NO
+  `make_args` (`harness/compile_bridgestan.py`), i.e. bridgestan 2.9.0's
+  Makefile defaults. In the 2.9.0 Makefile `STAN_THREADS` is OFF unless
+  defined (`ifdef STAN_THREADS` at Makefile:34 only switches the bridge
+  object name `bridgestan[_threads].o`); the model `.so` target name is
+  `<stem>_model.so` either way. `model_info()` confirms:
+  `bs_models/model_eight_schools_noncentered.so` → `STAN_THREADS=false`,
+  `bs_models_threads/model_eight_schools_noncentered.so` →
+  `STAN_THREADS=true` (Stan 2.39.0, BridgeStan 2.9.0).
+- `bs_models_threads/` = the 5 study models rebuilt with
+  `make_args=["STAN_THREADS=True"]` (W-25). Single-chain draws are
+  bit-identical across the two builds (W-25 verification).
+
+**Repro (W-31 run, raw in `runs/w31_threads/`, walnutpie @
+exp/safe-adapt-defaults):** `stan_cli <so> data/eight_schools_noncentered.json
+--seed 20260819 --chains 4 --fixed-warmup --warmup 400 --samples 200
+--init-file inits_w25/.../{c}.txt --output ...`
+
+| .so build | topology | result |
+|---|---|---|
+| `bs_models_threads/` (STAN_THREADS=true) | threads | rc=0, clean, exit_iter=400 |
+| `bs_models/` (STAN_THREADS=false) | threads | `free(): double free detected in tcache 2` / SIGSEGV, rc=139 — **3/3 runs** |
+| `bs_models/` (STAN_THREADS=false) | `--chain-exec serial` | rc=0 AND draws md5-identical to the STAN_THREADS threaded run |
+
+The serial row is the useful nuance: the hazard is precisely CONCURRENT
+evaluation (walnutpie's serial topology evaluates one chain's gradient at a
+time, so the process-global arena is never shared mid-call). The W-25
+harness regenerates the crash with `harness/run_w25.py --so-dir bs_models`
+(any mc arm).
+
+**walnutpie-side doc issue vs upstream expectation gap:**
+
+- walnutpie-side (ours to fix in docs/README): the multi-chain feature
+  needs a "models must be built with STAN_THREADS=True for
+  `--chain-exec threads`" note next to `--chains`; our own harness initially
+  pointed at the default `bs_models/` build (W-25). The library cannot
+  detect the mismatch portably (the define is a C++ compile-time setting
+  inside the `.so`; `model_info` is a bridgestan-Python-side string, not
+  part of the C API walnutpie links).
+- Upstream (bridgestan/stan-math expectation gap): the DEFAULT build is
+  silently unsafe for the concurrency the docs themselves describe.
+  bridgestan 2.9.0 documents the flag ("Enabling Parallel Calls of Stan
+  Programs", `docs/getting-started.rst` ~104–122: the flag "must be set" to
+  call a model concurrently from multiple threads, and mixing enabled/
+  disabled models in one process "will most likely lead to segmentation
+  faults"), and `model_info()` exposes `STAN_THREADS=false` — so the
+  information EXISTS. What is missing is any signal at the point of misuse:
+  no warning/error when a non-thread-safe `.so` is constructed or first
+  called concurrently, and no build-mode marker in the `.so` FILE NAME (a
+  STAN_THREADS rebuild silently overwrites/aliases the default
+  `<stem>_model.so` name — compounding the `compile_model` cache gotcha
+  recorded as W-27 / upstream candidate 5). A cheap bridgestan-side
+  improvement: expose `STAN_THREADS` via the C API (e.g. a `model_info`
+  entry point callable from C consumers) or assert on concurrent entry
+  when built without it; a docs improvement: state the requirement in the
+  `compile_model` docstring, not only the getting-started page.
