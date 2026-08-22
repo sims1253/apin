@@ -1333,3 +1333,111 @@ Ship state: default off (tol 0 preserves prior behavior bit-for-bit).
 Useful only on easy models (blr tail +27%); do not enable on the
 marginal class. Raw: runs/{base,mc_nogate,mc_gate05,mc_gate05_1win},
 results/w25_{ess,wall}.json (+_1win).
+
+## W-27 (pre-registered BEFORE running): BridgeStan model .so with aggressive CXXFLAGS (-O3 -march=native -mtune=native) vs default build
+
+From NEXT_IDEAS section A; lever = logp_grad is 68-99.7% of walnutpie
+sampling wall (W-17g) and logp_grad speed is a MODEL-COMPILE property.
+(NEXT_IDEAS claimed bs_models_o3/ was prepared — it did NOT survive the
+move; rebuilding from scratch. bs_models/ is the default arm.)
+
+- Expectation: O3+native model .so cuts sampling wall by a single-digit-
+  to-tens % at ZERO quality cost, PROVIDED gradients are correct.
+- CAUTION (history): cmdstan -march=native corruption was root-caused as
+  mixed-build ABI (prebuilt main.o/PCH). bridgestan compile_model is a
+  single self-contained make -> likely safe, but gates below.
+- GATES:
+  G1 gradient parity: per model, (logp, grad) on 100 random unconstrained
+     points, default vs O3 .so: max rel diff < 1e-9, no NaN/Inf. FAIL -> stop.
+  G2 draws will NOT be bit-identical (vectorization reorders FP) — quality
+     compared STATISTICALLY only: bulk/tail min-ESS (arviz), 3 reps,
+     no regression beyond noise.
+  G3 wall: 5 models (blr, arma11, hier_2pl, kronecker_gp, diamonds) x 3 reps
+     x 4 chains, single-chain CLI procs (4 parallel), seeds 20260819+1000*rep+c,
+     warmup=1000 samples=1000 --metric-window 50, IDENTICAL fixed inits per arm:
+     inits_w25/ pf inits for blr/arma11/hier_2pl; for kronecker_gp/diamonds
+     deterministic normal(0,1) inits via random.Random(f'{seed}-{c}') written
+     once (same files for both arms). Medians per model + geomean; parse
+     per-call logp_grad time AND total wall from chain logs.
+  G4 if O3 wins cleanly: also test -O3 alone (portability: -march=native
+     may add nothing beyond -O3).
+- Negative result gets recorded same as a win.
+
+## W-26 (pre-registered BEFORE running): integration merge of W-23 + W-25 into dev/init-robustness
+
+Task: merge BOTH feature branches into the submodule's dev/init-robustness:
+1. endpoint-grad-threading (30ac6db, W-23) first, then
+2. w25-library-temporal-step-gate (e650c63 + f4e37d5, W-25).
+Branch topology is linear (origin/dev/init-robustness 3eddfc4 -> 30ac6db ->
+f4e37d5), so merges are recorded with --no-ff to keep explicit merge commits;
+conflict policy if any: W-23 semantics win in walnuts.hpp, W-25 in adapt.hpp.
+
+GATES (each on a CLEAN build, --clean-first -j2, after EVERY merge step):
+a. Canary bit-identity: default single-chain draws md5-identical to the
+   PRE-MERGE dev/init-robustness binary (i.e. WITHOUT W-23), 3 models
+   (blr, arma11, eight_schools_noncentered) x seed 20260819 x 4 chains,
+   --warmup 400 --samples 200, deterministic default inits. W-23 removes
+   redundant evals only; reused identical doubles change no arithmetic, so
+   draws must remain identical (failure = wrong implementation).
+b. Grad-count: post-W-23 the per-chain logp_grad call drop vs pre-merge
+   binary must equal warmup+draws-1 = 599 per chain.
+c. W-25 only: --chains 4 (bs_models_threads .so, STAN_THREADS=1) runs and
+   each chain's output matches the per-chain single-chain invocation with
+   seed S+c (pre-verified feasible: default controller settings run full
+   warmup on blr, exit_iter=400 early_exit=0, draws md5-identical).
+Do NOT delete feature branches. Update outer stan submodule pointer
+(explicit git add of external/walnutpie only). Negative results recorded
+either way.
+
+### W-26 correction (mid-task scope change, appended before close-out)
+
+Redirect from the user: feature branches/PRs in the personal forks are
+HISTORY for different ideas, NOT to be merged into mainline.
+dev/init-robustness must stay pristine. Correction applied: the two merges
+initially made on local dev/init-robustness were reset away
+(git reset --hard 3eddfc4; verified dev/init-robustness == origin/
+dev/init-robustness == 3eddfc4, nothing lost — branches hold all work).
+Both features merged instead into NEW experimental branch
+exp/endpoint-grad-threading+chains (off dev/init-robustness):
+  61cca46 exp merge endpoint-grad-threading (W-23)
+  0cb5b7b exp merge w25-library-temporal-step-gate (W-25)
+Both --no-ff, no conflicts (topology is linear: 3eddfc4 -> 30ac6db ->
+f4e37d5; W-25 branch already sat on top of W-23). Merged tree hash
+a438e36 identical to the (reset-away) mainline merge tree. Clean-first
+rebuild on the exp branch produced a byte-identical binary to the earlier
+merged build (cmp PASS).
+
+## 2026-08-22 — W-26 CLOSE-OUT: W-23 + W-25 integrated on exp/endpoint-grad-threading+chains (gates a+b PASS, gate c partial — pre-existing W-25 behavior)
+
+Submodule state: dev/init-robustness PRISTINE at 3eddfc4 (= origin);
+integration lives on exp/endpoint-grad-threading+chains @ 0cb5b7b;
+feature branches endpoint-grad-threading (30ac6db) and
+w25-library-temporal-step-gate (f4e37d5) kept, not deleted. No pushes.
+
+GATE RESULTS (all on --clean-first -j2 builds, env -u LD_LIBRARY_PATH;
+baseline = pre-merge dev/init-robustness binary WITHOUT W-23; 3 models
+blr/arma11/eight_schools_noncentered x seed 20260819 x 4 chains,
+--warmup 400 --samples 200, default deterministic inits; serialized runs):
+a. Bit-identity vs pre-merge baseline: PASS 12/12 chain CSVs md5-identical
+   at BOTH merge steps (post-W-23 merge and post-W-25 merge), and again on
+   the final exp-branch binary. Reused endpoint doubles changed no
+   arithmetic, as required.
+b. Grad-count: PASS 12/12. Per-chain logp_grad call drop vs baseline =
+   exactly 599 = warmup+draws-1 on every model/chain (e.g. blr
+   19201->18602, esc c0 5225->4626).
+c. --chains 4 vs per-chain single-chain (same seeds, bs_models_threads
+   .so): PASS on blr and arma11 (controller exit_iter=400 early_exit=0;
+   all 8 chain CSVs md5-identical to single-chain runs — seeding invariant
+   holds). FAIL-as-designed on eight_schools_noncentered: the controller's
+   DEFAULT cross-chain tols early-exit at iter 50 (early_exit=1), so the
+   frozen sampler differs from full-warmup single-chain runs. This is
+   W-25's already-documented side finding 3 (default tols are unsafe), not
+   a merge regression — the exp binary is byte-identical to the W-25
+   feature branch build (that branch already contained W-23), and
+   matching-warmup-length single runs (warmup 50) also differ because the
+   controller freezes chain states at its own exit, confirming the
+   divergence is the controller path, not seeding.
+Outer stan repo: submodule pointer updated to 0cb5b7b (explicit
+`git add external/walnutpie WORKLOG.md` only), local commit on main, no
+push. Feature branches NOT merged into any mainline; dev/init-robustness
+untouched.
