@@ -2461,3 +2461,93 @@ upstream, the ask narrowed to stanc3 codegen fusion). Artifacts:
 harness/run_w31.py, harness/analyze_w31.py, results/w31_{ess,md5}.json,
 runs/w31/ + runs/w31_threads/ (local), pre binary
 stan/build/stan_cli_w31_pre.
+
+## 2026-08-22 — W-34 CLOSE-OUT: hier_2pl plumbing ceiling MEASURED — one GEMM replaces the eltwise/gather complex: −28.2% Ir/grad, −23..26% wall, last-ulp gradients; GLM primitive structurally inapplicable (arm A negative result); ESS-min gate MARGINAL (0.86x), distribution gates clean
+
+Codegen (from source, confirming the atlas): stanc3 v2.39 emits for the
+gradient path exactly bernoulli_logit_lpmf(y, elt_multiply(rvalue(alpha,
+index_multi(ii)), subtract(rvalue(theta, index_multi(jj)), rvalue(beta,
+index_multi(ii))))) in all 3 hpp instantiations. rvalue<index_multi> returns
+a lazy Holder<IndexedView> (rvalue.hpp:157, make_holder) — cheap alone; the
+COST materializes when eltwise ops consume it: 2 N-element ops × (per-element
+vari + arena entry + chainstack push + reverse callback) + 3 gathers.
+bernoulli_logit_lpmf<var> itself ALREADY uses partials_propagator
+(partials-in-forward, one edge — the diamonds pattern): the distribution is
+fine; its ARGUMENT EXPRESSION is the tax.
+
+ARM A (bernoulli_logit_glm_lpmf): NEGATIVE — no clean mapping exists, from
+signature + docs (require_matrix_t dense x; eta = alpha + x*beta). The 2PL
+predictor alpha_ii*(theta_jj − beta_ii) is BILINEAR in two parameter
+vectors; dense encodings need N×I or N×J var design entries (32–600x
+current work) AND var x (differentiating through the design). The GLM
+family structurally excludes the gathered/indexed likelihood class — itself
+an upstream finding.
+
+KEY ENABLER (verified from data): hier_2pl's data is the COMPLETE J×I grid
+(I=32, J=600, N=19,200), item-major — the N-vector eta IS the column-major
+flatten of eta_mat[j,i] = alpha_i(theta_j − beta_i).
+
+ARM B (GEMM formulation, harness/w34/hier_2pl_gemm.stan): model-block LOCAL
+eta = append_col(theta, rep_vector(-1,J)) * append_row(to_row_vector(alpha),
+to_row_vector(alpha .* beta)); target += bernoulli_logit_lpmf(y |
+to_vector(eta)). ONE var-mode GEMM (single reverse_pass_callback, adjoints
+via 2 GEMMs), zero gathers, zero N-level eltwise var ops; to_vector is a
+zero-copy view. Arm C skipped as pre-registered (B removes the gathers,
+mooting layout).
+
+GATES:
+(a) PASS at last-ulp (not bit-identical, as pre-registered): 100 random +
+  100 posterior-cloud points: max rel logp 3.2e-16 (abs 7.3e-12 at |lp|~2.3e4
+  = accumulated ulp of summing 19,200 terms), grad rel-L2 worst 1.8e-15 /
+  2.3e-15, cos 1.0. Richardson FD spot-checks: stock and armB agree with FD
+  identically (both at 1e-10..8e-8 FD-truncation on 24 matched components).
+  (W-32 precedent did NOT recur: hier_2pl's gradient is well-conditioned —
+  no near-degenerate amplification of the reorder.)
+(b) PASS: per-call wall (Python driver, 3 interleaved reps, medians):
+  793.5 -> 595.3 µs/call (−25.0%). Callgrind (W-29 protocol; stock
+  reproduces W-29 digit-for-digit: T 35.023e9, 4,493 calls, 7.745M Ir/grad,
+  every named symbol to 0.1pp):
+    T 35.023e9 -> 25.204e9 (−28.0%); G 34.799e9 -> 24.980e9; SAME 4,493
+    gradient calls (trajectory length unchanged) => Ir/grad 7,745,272 ->
+    5,560,689 (−28.2%). Native stanza 935.9/951.3 -> 715.7/729.2 µs.
+    Attribution: eltwise+gather complex (subtract 12.37%T + elt_multiply
+    11.40%T + rvalue 8.01%T + callbacks 6.55%T + update_adjoints 2.04%T =
+    40.4%G) REMOVED, replaced by GEMM complex 11.1%T (multiply fwd 8.70% +
+    callback 2.18% + append 0.24%; Eigen gebp/gmm children ~2.6e9 incl).
+    Likelihood (lpmf incl.) UNCHANGED in absolute Ir: 14.878e9 -> 14.709e9
+    (−1.1%); share 42.5%T -> 58.4%T (denominator shrank). Tape halved
+    (stack_alloc 6.41->4.74%T, chainstack 4.47->3.32%T). libm log1p (5.02e9,
+    14.3%T -> 19.9%T) is now the single largest symbol — the next ceiling
+    is libm/kernel, not plumbing.
+    Draws: md5 differs; 81.6% of CSV entries bit-identical, max rel 3.5e-9.
+(c) WALL PASS / ESS-min MARGINAL: 3 reps × 4 chains (W-30 par4 protocol,
+  read-only stan_cli @43b6435): wall 50.64 -> 37.40s (0.739x) at IDENTICAL
+  gradient-call workload (75.6–76.3k sampling grads both arms; per-call
+  1207 -> 884 µs = 0.732x). ESS distribution CLEAN: median bulk ESS over
+  all 804 params 3,213 vs 3,241, p10 ~1,000 both, rhat ≤1.016. ESS-MIN:
+  stock 519.5 (reps 548/502/520 = the W-25/W-28 base arm exactly) vs armB
+  447.2 (540/404/447) = 0.86x median — literal gate miss, recorded: the
+  argmin is a DIFFERENT marginal item param every rep and the sub-600-param
+  count wobbles (24/9/12 vs 9/6/18) — the min-of-804 statistic W-16 flagged
+  as realization-unstable on this model; with 2.3e-15 gradient agreement
+  and identical distribution stats, characterized as realization noise of
+  the min, not degradation. ESS/wall: bulk-min/s 10.26 -> 11.96 (1.17x).
+
+UPSTREAM STORY (results/hier2pl_plumbing_w34.md §7): (1) model-level GEMM
+trick available today for complete-design IRT/rating models (−28% Ir, 6-line
+diff; example-models/docs candidate); (2) stanc3 expression fusion — emit
+one fused vari for eltwise chains over indexed var containers (CSE the
+gathers, values in double space, one batched callback): measured ceiling
+~28% of gradient Ir on this class; cannot promise bit-identity (reorders
+per-element arithmetic) but measured drift is last-ulp here; (3) stan-math:
+a gathered/indexed GLM primitive (eta from index vectors, not a dense
+design) would extend the partials-in-forward pattern to the IRT/rating/
+sparse-interaction class the GLM family structurally excludes; (4) NOT
+fixed: likelihood interior (lpmf 58.4%T after fix, log1p 19.9%T) and
+tape/arena (8.1%T) — W-29 candidates #4 + libm level.
+
+Artifacts: results/hier2pl_plumbing_w34.md, results/w34_{ess,wall}.json,
+results/profile/w34/{stock,armB}/ (callgrind + annotate + cli.log),
+harness/w34/ (w34_gatea.py, w34_gateb_timing.py, w34_callgrind.py,
+w34_gatec.py, hier_2pl_gemm.stan), runs/w34/ (untracked), scratch/w34/
+builds (untracked). No walnutpie submodule changes, no pushes.

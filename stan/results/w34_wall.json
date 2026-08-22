@@ -1,0 +1,48 @@
+{
+ "stock": {
+  "per_rep": [
+   {
+    "rep": 0,
+    "wall_s": 50.84,
+    "logp_grad_us_sampling": 1199.5,
+    "grad_calls_sampling": 75567.0
+   },
+   {
+    "rep": 1,
+    "wall_s": 50.64,
+    "logp_grad_us_sampling": 1219.4,
+    "grad_calls_sampling": 76345.0
+   },
+   {
+    "rep": 2,
+    "wall_s": 49.79,
+    "logp_grad_us_sampling": 1215.5,
+    "grad_calls_sampling": 75563.0
+   }
+  ],
+  "wall_med_s": 50.64
+ },
+ "armB": {
+  "per_rep": [
+   {
+    "rep": 0,
+    "wall_s": 37.13,
+    "logp_grad_us_sampling": 878.4,
+    "grad_calls_sampling": 75606.0
+   },
+   {
+    "rep": 1,
+    "wall_s": 37.85,
+    "logp_grad_us_sampling": 887.1,
+    "grad_calls_sampling": 75891.0
+   },
+   {
+    "rep": 2,
+    "wall_s": 37.4,
+    "logp_grad_us_sampling": 885.6,
+    "grad_calls_sampling": 75676.0
+   }
+  ],
+  "wall_med_s": 37.4
+ }
+}

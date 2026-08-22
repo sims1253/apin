@@ -1,0 +1,58 @@
+{
+ "stock": {
+  "per_rep": [
+   {
+    "rep": 0,
+    "ess_bulk_min": 548.2,
+    "ess_tail_min": 437.4,
+    "rhat_max": 1.0159,
+    "argmin_bulk": "xi2.32"
+   },
+   {
+    "rep": 1,
+    "ess_bulk_min": 501.9,
+    "ess_tail_min": 733.0,
+    "rhat_max": 1.0099,
+    "argmin_bulk": "xi2.21"
+   },
+   {
+    "rep": 2,
+    "ess_bulk_min": 519.5,
+    "ess_tail_min": 820.7,
+    "rhat_max": 1.0086,
+    "argmin_bulk": "xi2.17"
+   }
+  ],
+  "ess_bulk_min_med": 519.5,
+  "ess_tail_min_med": 733.0,
+  "rhat_max_med": 1.0099
+ },
+ "armB": {
+  "per_rep": [
+   {
+    "rep": 0,
+    "ess_bulk_min": 539.8,
+    "ess_tail_min": 813.2,
+    "rhat_max": 1.0164,
+    "argmin_bulk": "xi2.21"
+   },
+   {
+    "rep": 1,
+    "ess_bulk_min": 403.6,
+    "ess_tail_min": 401.9,
+    "rhat_max": 1.0118,
+    "argmin_bulk": "xi1.32"
+   },
+   {
+    "rep": 2,
+    "ess_bulk_min": 447.2,
+    "ess_tail_min": 567.3,
+    "rhat_max": 1.0096,
+    "argmin_bulk": "xi2.9"
+   }
+  ],
+  "ess_bulk_min_med": 447.2,
+  "ess_tail_min_med": 567.3,
+  "rhat_max_med": 1.0118
+ }
+}

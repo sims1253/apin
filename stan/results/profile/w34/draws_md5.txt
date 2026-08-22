@@ -1,0 +1,3 @@
+W-34 hier_2pl callgrind-trajectory draws (warmup 100 samples 50, seed 20260819):
+fe7c57c99a7a6530ce2dcc408d6e9c65  results/profile/w34/stock/draws.csv
+4bfc23f9abe6f21bdf99b5f5100b599a  results/profile/w34/armB/draws.csv
