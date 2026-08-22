@@ -1068,3 +1068,12 @@ SIZE, not the metric:
 - Verified SERVER-side by fresh clone: 0 large blobs in history, .git now
   11MiB (was ~40MiB pack), all entrypoint docs + submodule pins intact.
 - Local .export-apin mirrors the purged single-commit state.
+
+- LOCAL repo hygiene issue found (not fixed, documented): runs/ (26,692
+  files, raw chains) is TRACKED and entered history via my `git add -A` in
+  recent commits (0486440, 2162ffa, 62fb5bd, ...); .git = 44GB all loose
+  objects (never gc'd). NOT pushed anywhere; stays on this machine. Remedy
+  when wanted: git rm -r --cached runs/ + add runs/ to .gitignore + commit;
+  then git reflog expire --expire=now --all && git gc --prune=now
+  (expect hours, 44GB loose); or filter-repo if full purge of history.
+  The apin REMOTE is unaffected and verified clean.
