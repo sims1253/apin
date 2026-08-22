@@ -894,3 +894,40 @@ NIGHT-SHIFT LEDGER (all threads closed):
 - Aurora: researched (tall-2-D only), notes filed
 - 2-D comparison: implemented (--metric-basis), property-tested, swept,
   NEGATIVE with mechanism explanation
+
+
+## W-20 (pre-registered): position-reuse rate inside a run — the memoization question
+
+From the e/grad evidence package (candidate 2): 'if the dyadic search revisits
+the same (position, step) pair, logp_grad is called again; a position-keyed
+cache within a run could cut evals with zero algorithmic change.'
+Cheap decisive measurement BEFORE implementing anything: wrap logp_grad in a
+counting driver, hash each unconstrained position (64-bit, full precision
+bytes), count duplicate hashes across the whole run (upper bound: includes
+different-eps visits which a cache keyed on position alone would wrongly
+serve; position-only duplicates are still the necessary condition).
+Models: blr, hier_2pl, kronecker_gp (the well-mixed class where the 0.3-0.8x
+e/grad gap lives). Expectation: near 0 (each macro step moves the chain; the
+dyadic ladder evaluates the SAME position at MULTIPLE eps - those are not
+reusable). If <1%: hypothesis closed (negative); if >5%: prototype the cache.
+
+
+## 2026-08-23 ~06:30 — W-20 VERDICT: no ladder revisits; exactly 1 redundant grad per iteration (boundary re-eval)
+
+Instrumented driver (position-hash counting, no library changes), 3 models,
+400 warmup + 200 draws, single chain, recommended config:
+- blr 5.55% / hier_2pl 3.91% / kronecker 3.56% duplicate positions.
+- Phase split: dups == warmup_iters + draws + 1 EXACTLY (400+200+1=601) on
+  every model => exactly ONE duplicate per macro step, uniformly across
+  warmup AND sampling: each transition re-evaluates its START position,
+  whose gradient the previous transition already computed as its END point.
+  The dyadic step ladder revisits nothing (0 accidental dups).
+- Implication: a hash cache is unnecessary; the fix is threading the
+  endpoint (theta, grad, logp) through WalnutsSampler/AdaptiveWalnuts state
+  (start-position eval becomes a reuse). Expected saving 4-6% of all
+  gradient calls, mechanically lifting e/grad by the same factor, with a
+  perfect verification gate (reusing an identical double is bit-neutral =>
+  draws must stay bit-identical).
+- NOT implemented this session: hot-path surgery on walnuts.hpp (the
+  template-surgery-mishap lesson); pre-registered as the fresh-session item,
+  one change, bit-identity gate, 3-model verification.
