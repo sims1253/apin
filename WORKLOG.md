@@ -973,3 +973,46 @@ share on pilots must drop materially from 21%; (d) wall-clock paired t on
 the small-model class.
 Plan: implement as ONE coherent patch on a dev branch of the stan
 submodule, never mixed with other changes; fresh session per the lesson.
+
+
+## W-21 (pre-registered): single-chain warmup early-exit (temporal stabilization)
+
+Motivation (measured tonight): logp_grad = 68-99.7% of walnutpie sampling
+wall (w17g logs) => kernel/SIMD polish would target <=2% on most models —
+CLOSED as a direction, data on file. But warmup = 65-76% of total wall and
+the CLI burns a FIXED num_warmup loop, bypassing the library's convergence
+controller (which is multi-chain only). If the metric stabilizes at ~200 of
+1000 iterations, early exit saves ~40-50% of total wall.
+
+Prototype (CLI-side, no library changes, zero risk):
+- flag --early-exit-warmup [tol] (0=off default)
+- criterion: after min_iter=200, every 50 iters (aligned with metric-window
+  chopping = successive INDEPENDENT window estimates), snapshot inv_mass();
+  exit when successive-window l2 rel-diff < tol (default 0.25; library's
+  own cross-chain tol is 1.0 — ours tighter because temporal comparison on
+  the same chain) AND step rel-diff < 0.3.
+- Gates: (1) freeze-class models must not early-exit into failure — check
+  frozen params non-degenerate + failure count not worse across 21 models;
+  (2) ESS_min within noise of fixed-1000 on well-mixed class; (3) wall
+  drops materially; (4) reproducible (same seed + same early-exit decision
+  => bit-identical draws given identical iteration count).
+Sweep: both arms fresh on current binary, 12 models (wall-heavy + fast
+controls) x 3 reps.
+
+
+## 2026-08-23 ~12:00 — W-21 SHIPPED: --early-exit-warmup (knob, default off)
+
+- Direction triage (measured): logp_grad = 68-99.7% of sampling wall (w17g)
+  => SIMD/kernel polish targets <=2% on most models — direction CLOSED with
+  data on file. Real levers: fewer grads (W-20: 1/transition redundant,
+  threading fix queued fresh-session) and fewer wasted warmup iters (W-21).
+- W-21 final: tol flag (mass) + step tol 0.1 (library semantics; 0.3 draft
+  regressed lsat, 0.1 recovered 301->501 @exit 500). 12+6+2 models x 3 reps,
+  both arms. Wall 1.3-2.4x where it exits (geomean ~1.5x mixed); quality
+  neutral-to-positive on easy (blr +27% ESS), NEGATIVE on marginal class
+  (arma11 -33%, lsat -40%, hier_2pl -58%). Criterion self-protects (esc
+  exit@650, lsat/hier@500); funnel class no new failures; bit-reproducible.
+- Recommendation: default off; for wall-bound easy models. Library-level
+  quality-preserving version = adapt() multi-chain path (controller already
+  has the machinery) — natural upstream follow-up.
+- Commits 024d458, 3eddfc4; PR #4 follow-up 19.
