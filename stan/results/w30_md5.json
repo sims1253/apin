@@ -1,0 +1,422 @@
+{
+ "blr/rep0": {
+  "seq4": {
+   "chain_0": "f13400887a355f95f152953ed75b9e01",
+   "chain_1": "4be67d33fb601e11c7665a2219f3a680",
+   "chain_2": "2be16a2669881f91375661f5f420be0d",
+   "chain_3": "7200b138467cde9a9b78d0cc00a049e5"
+  },
+  "par4": {
+   "chain_0": "f13400887a355f95f152953ed75b9e01",
+   "chain_1": "4be67d33fb601e11c7665a2219f3a680",
+   "chain_2": "2be16a2669881f91375661f5f420be0d",
+   "chain_3": "7200b138467cde9a9b78d0cc00a049e5"
+  },
+  "mc_serial": {
+   "chain_0": "f13400887a355f95f152953ed75b9e01",
+   "chain_1": "4be67d33fb601e11c7665a2219f3a680",
+   "chain_2": "2be16a2669881f91375661f5f420be0d",
+   "chain_3": "7200b138467cde9a9b78d0cc00a049e5"
+  },
+  "mc_threads": {
+   "chain_0": "f13400887a355f95f152953ed75b9e01",
+   "chain_1": "4be67d33fb601e11c7665a2219f3a680",
+   "chain_2": "2be16a2669881f91375661f5f420be0d",
+   "chain_3": "7200b138467cde9a9b78d0cc00a049e5"
+  },
+  "gate_b_equal": true,
+  "bonus_mc_eq_singlechain": true
+ },
+ "blr/rep1": {
+  "seq4": {
+   "chain_0": "5c716ecc64d45737391bb3c21787adc0",
+   "chain_1": "959759f91e0ac2137fd2d44e02c86f6b",
+   "chain_2": "36e507256d689af9f4b7ecf83c914c0b",
+   "chain_3": "371a1d33a8c4ea862ff9ffcda45cf3c0"
+  },
+  "par4": {
+   "chain_0": "5c716ecc64d45737391bb3c21787adc0",
+   "chain_1": "959759f91e0ac2137fd2d44e02c86f6b",
+   "chain_2": "36e507256d689af9f4b7ecf83c914c0b",
+   "chain_3": "371a1d33a8c4ea862ff9ffcda45cf3c0"
+  },
+  "mc_serial": {
+   "chain_0": "5c716ecc64d45737391bb3c21787adc0",
+   "chain_1": "959759f91e0ac2137fd2d44e02c86f6b",
+   "chain_2": "36e507256d689af9f4b7ecf83c914c0b",
+   "chain_3": "371a1d33a8c4ea862ff9ffcda45cf3c0"
+  },
+  "mc_threads": {
+   "chain_0": "5c716ecc64d45737391bb3c21787adc0",
+   "chain_1": "959759f91e0ac2137fd2d44e02c86f6b",
+   "chain_2": "36e507256d689af9f4b7ecf83c914c0b",
+   "chain_3": "371a1d33a8c4ea862ff9ffcda45cf3c0"
+  },
+  "gate_b_equal": true,
+  "bonus_mc_eq_singlechain": true
+ },
+ "blr/rep2": {
+  "seq4": {
+   "chain_0": "23876e5dc07e49d96fa1b07ec5b04824",
+   "chain_1": "b4da9773634f53d2386b94b1bd94692f",
+   "chain_2": "d413d4bea29c3f57fa373e6211712340",
+   "chain_3": "51f06892c923955ef8234ce4e88b5fe1"
+  },
+  "par4": {
+   "chain_0": "23876e5dc07e49d96fa1b07ec5b04824",
+   "chain_1": "b4da9773634f53d2386b94b1bd94692f",
+   "chain_2": "d413d4bea29c3f57fa373e6211712340",
+   "chain_3": "51f06892c923955ef8234ce4e88b5fe1"
+  },
+  "mc_serial": {
+   "chain_0": "23876e5dc07e49d96fa1b07ec5b04824",
+   "chain_1": "b4da9773634f53d2386b94b1bd94692f",
+   "chain_2": "d413d4bea29c3f57fa373e6211712340",
+   "chain_3": "51f06892c923955ef8234ce4e88b5fe1"
+  },
+  "mc_threads": {
+   "chain_0": "23876e5dc07e49d96fa1b07ec5b04824",
+   "chain_1": "b4da9773634f53d2386b94b1bd94692f",
+   "chain_2": "d413d4bea29c3f57fa373e6211712340",
+   "chain_3": "51f06892c923955ef8234ce4e88b5fe1"
+  },
+  "gate_b_equal": true,
+  "bonus_mc_eq_singlechain": true
+ },
+ "arma11/rep0": {
+  "seq4": {
+   "chain_0": "5c92782a5d486df30f147a4e84bbce7a",
+   "chain_1": "13d48a553169760aece690326d266a56",
+   "chain_2": "f74c0d128a8d5b408c6fe70789183345",
+   "chain_3": "90abf4bbd808d15b39ba34cb9a885ebd"
+  },
+  "par4": {
+   "chain_0": "5c92782a5d486df30f147a4e84bbce7a",
+   "chain_1": "13d48a553169760aece690326d266a56",
+   "chain_2": "f74c0d128a8d5b408c6fe70789183345",
+   "chain_3": "90abf4bbd808d15b39ba34cb9a885ebd"
+  },
+  "mc_serial": {
+   "chain_0": "5c92782a5d486df30f147a4e84bbce7a",
+   "chain_1": "13d48a553169760aece690326d266a56",
+   "chain_2": "f74c0d128a8d5b408c6fe70789183345",
+   "chain_3": "90abf4bbd808d15b39ba34cb9a885ebd"
+  },
+  "mc_threads": {
+   "chain_0": "5c92782a5d486df30f147a4e84bbce7a",
+   "chain_1": "13d48a553169760aece690326d266a56",
+   "chain_2": "f74c0d128a8d5b408c6fe70789183345",
+   "chain_3": "90abf4bbd808d15b39ba34cb9a885ebd"
+  },
+  "gate_b_equal": true,
+  "bonus_mc_eq_singlechain": true
+ },
+ "arma11/rep1": {
+  "seq4": {
+   "chain_0": "8b5cd808ef1146acabe14a415e997d3b",
+   "chain_1": "012ed0289a5d391db31e02998f682ffc",
+   "chain_2": "589d4524e386f6eae714fbbd9e3e3d0a",
+   "chain_3": "5c40c6e05ad16d011c8e85488fb1cfb7"
+  },
+  "par4": {
+   "chain_0": "8b5cd808ef1146acabe14a415e997d3b",
+   "chain_1": "012ed0289a5d391db31e02998f682ffc",
+   "chain_2": "589d4524e386f6eae714fbbd9e3e3d0a",
+   "chain_3": "5c40c6e05ad16d011c8e85488fb1cfb7"
+  },
+  "mc_serial": {
+   "chain_0": "8b5cd808ef1146acabe14a415e997d3b",
+   "chain_1": "012ed0289a5d391db31e02998f682ffc",
+   "chain_2": "589d4524e386f6eae714fbbd9e3e3d0a",
+   "chain_3": "5c40c6e05ad16d011c8e85488fb1cfb7"
+  },
+  "mc_threads": {
+   "chain_0": "8b5cd808ef1146acabe14a415e997d3b",
+   "chain_1": "012ed0289a5d391db31e02998f682ffc",
+   "chain_2": "589d4524e386f6eae714fbbd9e3e3d0a",
+   "chain_3": "5c40c6e05ad16d011c8e85488fb1cfb7"
+  },
+  "gate_b_equal": true,
+  "bonus_mc_eq_singlechain": true
+ },
+ "arma11/rep2": {
+  "seq4": {
+   "chain_0": "3a02187b8cbe84d922cb89af86d47b6a",
+   "chain_1": "d24c8c8e84060632ef58bdde3b22fec1",
+   "chain_2": "5c5d1ee60cf70dcce07b911b7e84ac8d",
+   "chain_3": "35eae99af9891459586a81ae4fbd8622"
+  },
+  "par4": {
+   "chain_0": "3a02187b8cbe84d922cb89af86d47b6a",
+   "chain_1": "d24c8c8e84060632ef58bdde3b22fec1",
+   "chain_2": "5c5d1ee60cf70dcce07b911b7e84ac8d",
+   "chain_3": "35eae99af9891459586a81ae4fbd8622"
+  },
+  "mc_serial": {
+   "chain_0": "3a02187b8cbe84d922cb89af86d47b6a",
+   "chain_1": "d24c8c8e84060632ef58bdde3b22fec1",
+   "chain_2": "5c5d1ee60cf70dcce07b911b7e84ac8d",
+   "chain_3": "35eae99af9891459586a81ae4fbd8622"
+  },
+  "mc_threads": {
+   "chain_0": "3a02187b8cbe84d922cb89af86d47b6a",
+   "chain_1": "d24c8c8e84060632ef58bdde3b22fec1",
+   "chain_2": "5c5d1ee60cf70dcce07b911b7e84ac8d",
+   "chain_3": "35eae99af9891459586a81ae4fbd8622"
+  },
+  "gate_b_equal": true,
+  "bonus_mc_eq_singlechain": true
+ },
+ "hier_2pl/rep0": {
+  "seq4": {
+   "chain_0": "2514765c1a6856c308e16357be5e92b6",
+   "chain_1": "6e8e31ad9b1622a3ed2002918abcf355",
+   "chain_2": "8f6c9b13ef1e758aafb0ccf5d875c989",
+   "chain_3": "547515842a7229e83bf93aaefcd14526"
+  },
+  "par4": {
+   "chain_0": "2514765c1a6856c308e16357be5e92b6",
+   "chain_1": "6e8e31ad9b1622a3ed2002918abcf355",
+   "chain_2": "8f6c9b13ef1e758aafb0ccf5d875c989",
+   "chain_3": "547515842a7229e83bf93aaefcd14526"
+  },
+  "mc_serial": {
+   "chain_0": "2514765c1a6856c308e16357be5e92b6",
+   "chain_1": "6e8e31ad9b1622a3ed2002918abcf355",
+   "chain_2": "8f6c9b13ef1e758aafb0ccf5d875c989",
+   "chain_3": "547515842a7229e83bf93aaefcd14526"
+  },
+  "mc_threads": {
+   "chain_0": "2514765c1a6856c308e16357be5e92b6",
+   "chain_1": "6e8e31ad9b1622a3ed2002918abcf355",
+   "chain_2": "8f6c9b13ef1e758aafb0ccf5d875c989",
+   "chain_3": "547515842a7229e83bf93aaefcd14526"
+  },
+  "gate_b_equal": true,
+  "bonus_mc_eq_singlechain": true
+ },
+ "hier_2pl/rep1": {
+  "seq4": {
+   "chain_0": "a3dabe9f0adcf0919c8ecc4c6f0cada0",
+   "chain_1": "cef7d1639aebcd7dd1fef215713968bc",
+   "chain_2": "b69a707dc25c8b24476108e3f490d512",
+   "chain_3": "7cfdd9c3d9219134bcf32ff02d202d5e"
+  },
+  "par4": {
+   "chain_0": "a3dabe9f0adcf0919c8ecc4c6f0cada0",
+   "chain_1": "cef7d1639aebcd7dd1fef215713968bc",
+   "chain_2": "b69a707dc25c8b24476108e3f490d512",
+   "chain_3": "7cfdd9c3d9219134bcf32ff02d202d5e"
+  },
+  "mc_serial": {
+   "chain_0": "a3dabe9f0adcf0919c8ecc4c6f0cada0",
+   "chain_1": "cef7d1639aebcd7dd1fef215713968bc",
+   "chain_2": "b69a707dc25c8b24476108e3f490d512",
+   "chain_3": "7cfdd9c3d9219134bcf32ff02d202d5e"
+  },
+  "mc_threads": {
+   "chain_0": "a3dabe9f0adcf0919c8ecc4c6f0cada0",
+   "chain_1": "cef7d1639aebcd7dd1fef215713968bc",
+   "chain_2": "b69a707dc25c8b24476108e3f490d512",
+   "chain_3": "7cfdd9c3d9219134bcf32ff02d202d5e"
+  },
+  "gate_b_equal": true,
+  "bonus_mc_eq_singlechain": true
+ },
+ "hier_2pl/rep2": {
+  "seq4": {
+   "chain_0": "71616ddc0e02fd5aa3e4922168d6b108",
+   "chain_1": "bbd9054beebdb8425f8a3eb7aedf113a",
+   "chain_2": "e1cfbc3a39a9c3849b079e488305c4c1",
+   "chain_3": "27e03d0fd13c46cae3561abf4366a529"
+  },
+  "par4": {
+   "chain_0": "71616ddc0e02fd5aa3e4922168d6b108",
+   "chain_1": "bbd9054beebdb8425f8a3eb7aedf113a",
+   "chain_2": "e1cfbc3a39a9c3849b079e488305c4c1",
+   "chain_3": "27e03d0fd13c46cae3561abf4366a529"
+  },
+  "mc_serial": {
+   "chain_0": "71616ddc0e02fd5aa3e4922168d6b108",
+   "chain_1": "bbd9054beebdb8425f8a3eb7aedf113a",
+   "chain_2": "e1cfbc3a39a9c3849b079e488305c4c1",
+   "chain_3": "27e03d0fd13c46cae3561abf4366a529"
+  },
+  "mc_threads": {
+   "chain_0": "71616ddc0e02fd5aa3e4922168d6b108",
+   "chain_1": "bbd9054beebdb8425f8a3eb7aedf113a",
+   "chain_2": "e1cfbc3a39a9c3849b079e488305c4c1",
+   "chain_3": "27e03d0fd13c46cae3561abf4366a529"
+  },
+  "gate_b_equal": true,
+  "bonus_mc_eq_singlechain": true
+ },
+ "lsat_model/rep0": {
+  "seq4": {
+   "chain_0": "dde4a8c387079c944343af87a6df5d4c",
+   "chain_1": "63fa2bd6d780d8e9148f635a0cd53847",
+   "chain_2": "ee5bff25374302567257797c86fae336",
+   "chain_3": "15df8c43be5a46dcd3af0d5a1b07a3db"
+  },
+  "par4": {
+   "chain_0": "dde4a8c387079c944343af87a6df5d4c",
+   "chain_1": "63fa2bd6d780d8e9148f635a0cd53847",
+   "chain_2": "ee5bff25374302567257797c86fae336",
+   "chain_3": "15df8c43be5a46dcd3af0d5a1b07a3db"
+  },
+  "mc_serial": {
+   "chain_0": "dde4a8c387079c944343af87a6df5d4c",
+   "chain_1": "63fa2bd6d780d8e9148f635a0cd53847",
+   "chain_2": "ee5bff25374302567257797c86fae336",
+   "chain_3": "15df8c43be5a46dcd3af0d5a1b07a3db"
+  },
+  "mc_threads": {
+   "chain_0": "dde4a8c387079c944343af87a6df5d4c",
+   "chain_1": "63fa2bd6d780d8e9148f635a0cd53847",
+   "chain_2": "ee5bff25374302567257797c86fae336",
+   "chain_3": "15df8c43be5a46dcd3af0d5a1b07a3db"
+  },
+  "gate_b_equal": true,
+  "bonus_mc_eq_singlechain": true
+ },
+ "lsat_model/rep1": {
+  "seq4": {
+   "chain_0": "baa8868050633e719a4af93d2c3325ab",
+   "chain_1": "9be7fe01d8de83337ff46fe44840b8f7",
+   "chain_2": "6d107744363785af37e062752155ec19",
+   "chain_3": "f4f145e0888ca56e3cd50488df07cd23"
+  },
+  "par4": {
+   "chain_0": "baa8868050633e719a4af93d2c3325ab",
+   "chain_1": "9be7fe01d8de83337ff46fe44840b8f7",
+   "chain_2": "6d107744363785af37e062752155ec19",
+   "chain_3": "f4f145e0888ca56e3cd50488df07cd23"
+  },
+  "mc_serial": {
+   "chain_0": "baa8868050633e719a4af93d2c3325ab",
+   "chain_1": "9be7fe01d8de83337ff46fe44840b8f7",
+   "chain_2": "6d107744363785af37e062752155ec19",
+   "chain_3": "f4f145e0888ca56e3cd50488df07cd23"
+  },
+  "mc_threads": {
+   "chain_0": "baa8868050633e719a4af93d2c3325ab",
+   "chain_1": "9be7fe01d8de83337ff46fe44840b8f7",
+   "chain_2": "6d107744363785af37e062752155ec19",
+   "chain_3": "f4f145e0888ca56e3cd50488df07cd23"
+  },
+  "gate_b_equal": true,
+  "bonus_mc_eq_singlechain": true
+ },
+ "lsat_model/rep2": {
+  "seq4": {
+   "chain_0": "895f43db2e0d0e8d84a936c63f9ade98",
+   "chain_1": "ff17c682190e95a89d6415c18f43c4bb",
+   "chain_2": "94dbee7a7cd8bce935b4c184fc95ca56",
+   "chain_3": "5c1c65d8a03aa51b869c7fadf1484f76"
+  },
+  "par4": {
+   "chain_0": "895f43db2e0d0e8d84a936c63f9ade98",
+   "chain_1": "ff17c682190e95a89d6415c18f43c4bb",
+   "chain_2": "94dbee7a7cd8bce935b4c184fc95ca56",
+   "chain_3": "5c1c65d8a03aa51b869c7fadf1484f76"
+  },
+  "mc_serial": {
+   "chain_0": "895f43db2e0d0e8d84a936c63f9ade98",
+   "chain_1": "ff17c682190e95a89d6415c18f43c4bb",
+   "chain_2": "94dbee7a7cd8bce935b4c184fc95ca56",
+   "chain_3": "5c1c65d8a03aa51b869c7fadf1484f76"
+  },
+  "mc_threads": {
+   "chain_0": "895f43db2e0d0e8d84a936c63f9ade98",
+   "chain_1": "ff17c682190e95a89d6415c18f43c4bb",
+   "chain_2": "94dbee7a7cd8bce935b4c184fc95ca56",
+   "chain_3": "5c1c65d8a03aa51b869c7fadf1484f76"
+  },
+  "gate_b_equal": true,
+  "bonus_mc_eq_singlechain": true
+ },
+ "eight_schools_noncentered/rep0": {
+  "seq4": {
+   "chain_0": "652659521c041a46c858e4f7e906c755",
+   "chain_1": "29e676ff9de15d057399aed48c4156e7",
+   "chain_2": "4ea3f4f179efdf842db89d3fced068a4",
+   "chain_3": "2fb0ba99946357c76314e071c252192c"
+  },
+  "par4": {
+   "chain_0": "652659521c041a46c858e4f7e906c755",
+   "chain_1": "29e676ff9de15d057399aed48c4156e7",
+   "chain_2": "4ea3f4f179efdf842db89d3fced068a4",
+   "chain_3": "2fb0ba99946357c76314e071c252192c"
+  },
+  "mc_serial": {
+   "chain_0": "652659521c041a46c858e4f7e906c755",
+   "chain_1": "29e676ff9de15d057399aed48c4156e7",
+   "chain_2": "4ea3f4f179efdf842db89d3fced068a4",
+   "chain_3": "2fb0ba99946357c76314e071c252192c"
+  },
+  "mc_threads": {
+   "chain_0": "652659521c041a46c858e4f7e906c755",
+   "chain_1": "29e676ff9de15d057399aed48c4156e7",
+   "chain_2": "4ea3f4f179efdf842db89d3fced068a4",
+   "chain_3": "2fb0ba99946357c76314e071c252192c"
+  },
+  "gate_b_equal": true,
+  "bonus_mc_eq_singlechain": true
+ },
+ "eight_schools_noncentered/rep1": {
+  "seq4": {
+   "chain_0": "cb5fff8c9b78f0c31d9721521eb6fbdf",
+   "chain_1": "19a49468c0a3a69d0a51af177e83560b",
+   "chain_2": "6bd6d817f842129df3254df7d892ac02",
+   "chain_3": "1e2031a28dba5d6ada378dbff8b6cfb9"
+  },
+  "par4": {
+   "chain_0": "cb5fff8c9b78f0c31d9721521eb6fbdf",
+   "chain_1": "19a49468c0a3a69d0a51af177e83560b",
+   "chain_2": "6bd6d817f842129df3254df7d892ac02",
+   "chain_3": "1e2031a28dba5d6ada378dbff8b6cfb9"
+  },
+  "mc_serial": {
+   "chain_0": "cb5fff8c9b78f0c31d9721521eb6fbdf",
+   "chain_1": "19a49468c0a3a69d0a51af177e83560b",
+   "chain_2": "6bd6d817f842129df3254df7d892ac02",
+   "chain_3": "1e2031a28dba5d6ada378dbff8b6cfb9"
+  },
+  "mc_threads": {
+   "chain_0": "cb5fff8c9b78f0c31d9721521eb6fbdf",
+   "chain_1": "19a49468c0a3a69d0a51af177e83560b",
+   "chain_2": "6bd6d817f842129df3254df7d892ac02",
+   "chain_3": "1e2031a28dba5d6ada378dbff8b6cfb9"
+  },
+  "gate_b_equal": true,
+  "bonus_mc_eq_singlechain": true
+ },
+ "eight_schools_noncentered/rep2": {
+  "seq4": {
+   "chain_0": "e03712a1d33663470ecdf1c369b8fcd9",
+   "chain_1": "a2d7b69bf55bda3200dc4cb5514d7555",
+   "chain_2": "be243f193132a317a37652c276b06689",
+   "chain_3": "794b328f70bbad460d5caf65e4a1415a"
+  },
+  "par4": {
+   "chain_0": "e03712a1d33663470ecdf1c369b8fcd9",
+   "chain_1": "a2d7b69bf55bda3200dc4cb5514d7555",
+   "chain_2": "be243f193132a317a37652c276b06689",
+   "chain_3": "794b328f70bbad460d5caf65e4a1415a"
+  },
+  "mc_serial": {
+   "chain_0": "e03712a1d33663470ecdf1c369b8fcd9",
+   "chain_1": "a2d7b69bf55bda3200dc4cb5514d7555",
+   "chain_2": "be243f193132a317a37652c276b06689",
+   "chain_3": "794b328f70bbad460d5caf65e4a1415a"
+  },
+  "mc_threads": {
+   "chain_0": "e03712a1d33663470ecdf1c369b8fcd9",
+   "chain_1": "a2d7b69bf55bda3200dc4cb5514d7555",
+   "chain_2": "be243f193132a317a37652c276b06689",
+   "chain_3": "794b328f70bbad460d5caf65e4a1415a"
+  },
+  "gate_b_equal": true,
+  "bonus_mc_eq_singlechain": true
+ }
+}

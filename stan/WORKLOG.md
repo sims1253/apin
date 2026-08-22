@@ -1873,3 +1873,150 @@ Artifacts: results/hotspot_atlas_w29.md (the atlas), results/profile/w29/
 inits_w27/{gp_regr,accel_gp}/rep0/chain_0.txt, this entry.
 Contended with agent F's W-28/W-30 sampling runs on shared cores (their
 close-out notes it; medians unaffected direction).
+
+## W-32 (pre-registered BEFORE running): eigh-reuse ceiling on kronecker_gp — prototype one-decomposition values+vectors to measure the upstream win
+
+From W-29 atlas candidate #1: kronecker_gp's gradient spends 39.3% of
+whole-program Ir in reverse-mode eigenvectors_sym/eigenvalues_sym<var> — the
+generated code calls BOTH primitives on the SAME two matrices (Sigma1, Lambda),
+so each gradient runs 4 full double-mode SelfAdjointEigenSolver decompositions
+where 2 would suffice (each primitive internally computes values AND vectors
+and throws half away). This is an API gap: stan-math has no combined eigh
+primitive; stanc3 emits the two calls. The user will propose fixes upstream;
+this item MEASURES THE CEILING so the proposal has numbers. No walnutpie/
+stan-math/submodule changes; prototype lives in scratch/w32/ only.
+
+Method:
+- Codegen: stanc (cmdstan-2.39.0) kronecker_gp.stan -> hpp; confirm the 4-runs
+  claim from the generated source (2x eigenvectors_sym + 2x eigenvalues_sym on
+  var inputs; check what each stan-math overload actually runs).
+- Prototype (route a, stan-math-style): local header implementing a combined
+  eigh for var input — ONE SelfAdjointEigenSolver on the .val() matrix, one
+  reverse callback producing BOTH eigenvalue and eigenvector adjoints. Adjoint
+  math for A = V diag(w) V^T with eigen-adjoints G_V (for vectors) and g_w
+  (for values): dA = V [ (V^T G_V V + diag(g_w)) symmetrized w.r.t. the
+  w_i-w_j denominators ] V^T — derived against stan-math's own
+  eigenvectors_sym/eigenvalues_sym reverse implementations and validated by
+  (i) finite differences and (ii) max rel grad diff vs the STOCK model on
+  random points. Patch a COPY of the generated model hpp to use the helper for
+  both matrices. scratch/w32/ only.
+- Build: bridgestan.compile_model on a COPIED .stan per variant (W-27 gotcha:
+  cached .so next to the .stan is silently reused regardless of make_args);
+  default CXXFLAGS (W-27: -march=native MISCOMPILES this model's gradients —
+  forbidden). env -u LD_LIBRARY_PATH for make; /usr/bin/make if direct.
+- GATES:
+  (a) correctness: max rel gradient diff stock vs patched on ~100 random
+      unconstrained points < 1e-9 (no NaN/Inf), PLUS finite-difference
+      spot-checks on the patched model (W-27 method).
+  (b) per-call: matched serial timing of logp_grad via a small Python
+      bridgestan driver on identical points (do NOT touch external/walnutpie
+      builds — agent H owns that worktree); us/call stock vs patched,
+      3 repeats, medians.
+  (c) callgrind Ir/grad (valgrind 3.23 ~/vginstall, one job at a time,
+      W-29 short-run protocol: warmup 100 samples 50, seed 20260819,
+      inits_w27/kronecker_gp/rep0/chain_0.txt) on stock vs patched .so.
+- Deliverable: results/eigh_reuse_w32.md — codegen findings, prototype +
+  adjoint validation evidence, measured ceiling (expected order: tens of % of
+  the kronecker_gp gradient; report what is actually measured), and an
+  upstream proposal sketch (stan-math combined primitive / stanc3 codegen).
+- Expectation (pre-registered): eigenvectors_sym+eigenvalues_sym = 39.3%T of
+  which roughly the eigenvalues_sym half is the redundant solver work ->
+  naive ceiling ~19%T program / ~30-40% of Ir-per-gradient... measured
+  honestly; the adjoint callbacks (9.1%T) largely remain (still needed).
+  Cores <=4 shared; builds -j2; one callgrind job at a time. Negative
+  results recorded.
+
+## 2026-08-22 — W-30 CLOSE-OUT: event-driven controller + topology control SHIPPED; all determinism gates PASS; threaded mc = 3.2x sequential, within noise of 4 parallel procs — W-28's "contention" attribution largely corrected
+
+Implementation: walnutpie branch exp/parallel-chains @ da71e5b
+(off exp/pilot-burst-gate @ b80f4a8; commits 3041e9b adapt.hpp, da71e5b
+CLI). AdaptMonitor (mutex+condvar+version): workers notify after every
+snapshot publish, controller blocks in wait_for_change with a 100 ms cap
+(interrupt re-checked per wait; final publish always wakes it). The stop
+arithmetic is the former per-spin pass factored VERBATIM into
+poll_controller, shared by both schedules. ChainExec::Serial runs all
+chains round-robin in publish_stride blocks on the calling thread (same
+publish grid, deterministic observation points); CLI gains --chain-exec
+threads|serial (serial also runs sampling + pilots chain-by-chain) and
+--fixed-warmup (min_iter = max_iter; both reject single-chain mode
+loudly).
+
+Pre-implementation diagnostics (pre binary stan/build/stan_cli_w30_pre,
+clean-first rebuild at b80f4a8):
+- Busy-poll CONFIRMED: during an mc run the main (controller) thread
+  burned ~100% user CPU while the four workers got ~76% each; after the
+  fix the controller idles at ~1% and workers run ~99.7% (schedstat).
+- Correction to the task brief: the mc path at b80f4a8 was NOT serial —
+  warmup workers and sampling already ran as jthreads. Correction to
+  W-28's overhead attribution: per-call logp_grad cost is IDENTICAL
+  in-process (lsat: 0.159-0.173 ms/call mc vs 0.159-0.165 single-chain
+  procs), so there is no gradient-level "in-process contention" on this
+  12-CPU box. W-28's lsat warmup gap (6 -> 14-17 s) traces mostly to
+  EXTRA WORK: the pilot-resume phases re-chop the metric window at
+  different boundaries, so chains took deeper trajectories (measured
+  26-57k warmup logp calls vs 20-30k for the single-chain procs), plus
+  the spinner's core. The threaded mc path was already running at
+  wall = slowest chain.
+
+GATES (pre-registered):
+- (a) CANARY: PASS — 12/12 single-chain CSVs byte-identical pre/post
+  (blr, arma11, hier_2pl x 4 chains, seeds 20260819+c, warmup 400 /
+  samples 200, default init, bs_models_threads .so).
+- (b) MC EQUIVALENCE: PASS — with --chains 4 --fixed-warmup, threaded
+  vs serial output CSVs md5-identical in 15/15 cells (5 models x 3
+  reps). BONUS (stronger than pre-registered): mc chain-c CSVs are also
+  md5-identical to the SEQUENTIAL single-chain proc chain-c CSVs in
+  15/15 cells — W-25's per-chain stream replication now verified
+  bit-exactly end-to-end (it was unverifiable before --fixed-warmup
+  because early exit changed warmup length run-to-run). Threaded A/A
+  repeat (lsat, gate flags, 2 runs x 4 chains): 4/4 md5 pairs equal —
+  the threaded path is run-to-run deterministic once warmup length is
+  pinned; draw content is scheduling-independent as designed. ESS
+  therefore carries over from the W-25/W-28 base arm by construction.
+- (c) WALL (medians of 3 reps, warmup=1000 draws=1000, pf inits,
+  --metric-window 50, --fixed-warmup on both mc arms):
+    total wall (s):          seq4    par4  mc_ser  mc_thr  thr/seq thr/par ser/seq
+      blr                    1.20    0.35    1.16    0.39    0.33   1.13    0.96
+      arma11                 0.65    0.19    0.64    0.19    0.30   1.02    0.99
+      hier_2pl             160.06   52.04  159.38   45.01    0.28   0.86    1.00
+      lsat_model            42.93   15.02   43.63   15.90    0.37   1.06    1.02
+      eight_schools_nc       0.41    0.12    0.40    0.13    0.32   1.09    0.97
+    GEOMEANS: thr/seq 0.317 (3.2x), thr/par 1.027, ser/seq 0.988.
+    warmup split (s): e.g. hier 23.3(seq, per chain) / 29.4(par) /
+    92.2(ser) / 28.9(thr); lsat 6.9 / 7.7 / 23.3 / 8.1.
+  Verdicts: expectation thr/seq 0.25-0.4 MET (0.28-0.37 on all models);
+  mc_threads <= par4 x 1.1 holds on every model with wall > 1 s (hier
+  0.86 — 14% FASTER than 4 procs; lsat 1.06) and on the geomean (1.027),
+  but blr's median ratio is 1.13 (0.39 vs 0.35 s — a 40 ms absolute
+  delta on a sub-second model, startup-jitter-dominated; per-rep par4
+  [0.32, 0.48, 0.35] vs mc_threads [0.38, 0.55, 0.39]). Recorded as a
+  marginal miss of the literal per-model bound on the smallest model,
+  not as contention: hier — the model where W-28 saw the mc path lose —
+  now WINS. mc_serial ~ seq4 (0.96-1.02) as designed (same work, one
+  process; its warmup split shows the round-robin schedule costs nothing
+  beyond serialization).
+- Machine disclosure: no callgrind/valgrind process was observed during
+  the grid (top consumers zcode/firefox at <= 4% CPU); per-rep walls are
+  tight (hier mc_thr 45.49/44.98/45.01). Builds -j2 clean-first after
+  each header edit.
+
+VERDICT: the 4-chain in-process path now (i) respects the 4-thread
+budget (controller sleeps), (ii) is bit-deterministic in draw content
+and in run-to-run behavior once --fixed-warmup pins the length, and
+(iii) delivers the full ~Nx parallel speedup vs sequential execution
+(3.2x geomean, 0.28-0.37 vs the theoretical 0.25 floor at N=4; the gap
+is the serial non-gradient remainder + slowest-chain skew) with no
+measurable in-process contention penalty vs 4 independent processes.
+The remaining wall lever is not topology: it is per-chain work (W-29
+atlas) and the pre-existing warmup-length nondeterminism of the DEFAULT
+cross-chain early exit, which --fixed-warmup now makes avoidable.
+W-28's "busy-poll core + in-process contention" is hereby corrected:
+the core burn was real (removed), the contention was not measurable —
+the 1.5x it saw was pilot-resume work + environmental.
+
+Ship state: exp/parallel-chains @ da71e5b, defaults unchanged
+(--chain-exec threads = former behavior minus the spin; --fixed-warmup
+off). Raw: runs/w30/{seq4,par4,mc_serial,mc_threads}/,
+results/w30_wall.json, results/w30_md5.json; harness/run_w30.py,
+harness/analyze_w30.py. Pre-change binary kept at
+stan/build/stan_cli_w30_pre.

@@ -1,0 +1,226 @@
+{
+ "wall": {
+  "seq4/blr": {
+   "wall_med_s": 1.2,
+   "per_rep": [
+    1.08,
+    1.27,
+    1.2
+   ]
+  },
+  "par4/blr": {
+   "wall_med_s": 0.35,
+   "per_rep": [
+    0.32,
+    0.48,
+    0.35
+   ]
+  },
+  "mc_serial/blr": {
+   "wall_med_s": 1.157,
+   "per_rep": [
+    1.06,
+    1.25,
+    1.16
+   ]
+  },
+  "mc_threads/blr": {
+   "wall_med_s": 0.394,
+   "per_rep": [
+    0.38,
+    0.55,
+    0.39
+   ]
+  },
+  "seq4/arma11": {
+   "wall_med_s": 0.646,
+   "per_rep": [
+    0.59,
+    0.65,
+    0.68
+   ]
+  },
+  "par4/arma11": {
+   "wall_med_s": 0.189,
+   "per_rep": [
+    0.17,
+    0.19,
+    0.2
+   ]
+  },
+  "mc_serial/arma11": {
+   "wall_med_s": 0.64,
+   "per_rep": [
+    0.57,
+    0.64,
+    0.65
+   ]
+  },
+  "mc_threads/arma11": {
+   "wall_med_s": 0.192,
+   "per_rep": [
+    0.17,
+    0.19,
+    0.2
+   ]
+  },
+  "seq4/hier_2pl": {
+   "wall_med_s": 160.065,
+   "per_rep": [
+    160.06,
+    159.46,
+    160.1
+   ]
+  },
+  "par4/hier_2pl": {
+   "wall_med_s": 52.044,
+   "per_rep": [
+    50.51,
+    53.81,
+    52.04
+   ]
+  },
+  "mc_serial/hier_2pl": {
+   "wall_med_s": 159.377,
+   "per_rep": [
+    159.2,
+    159.38,
+    159.56
+   ]
+  },
+  "mc_threads/hier_2pl": {
+   "wall_med_s": 45.01,
+   "per_rep": [
+    45.49,
+    44.98,
+    45.01
+   ]
+  },
+  "seq4/lsat_model": {
+   "wall_med_s": 42.934,
+   "per_rep": [
+    42.93,
+    40.7,
+    45.65
+   ]
+  },
+  "par4/lsat_model": {
+   "wall_med_s": 15.02,
+   "per_rep": [
+    15.02,
+    13.12,
+    17.88
+   ]
+  },
+  "mc_serial/lsat_model": {
+   "wall_med_s": 43.633,
+   "per_rep": [
+    43.63,
+    40.44,
+    45.4
+   ]
+  },
+  "mc_threads/lsat_model": {
+   "wall_med_s": 15.901,
+   "per_rep": [
+    15.9,
+    14.13,
+    18.29
+   ]
+  },
+  "seq4/eight_schools_noncentered": {
+   "wall_med_s": 0.413,
+   "per_rep": [
+    0.41,
+    0.41,
+    0.41
+   ]
+  },
+  "par4/eight_schools_noncentered": {
+   "wall_med_s": 0.12,
+   "per_rep": [
+    0.12,
+    0.12,
+    0.12
+   ]
+  },
+  "mc_serial/eight_schools_noncentered": {
+   "wall_med_s": 0.402,
+   "per_rep": [
+    0.4,
+    0.4,
+    0.41
+   ]
+  },
+  "mc_threads/eight_schools_noncentered": {
+   "wall_med_s": 0.131,
+   "per_rep": [
+    0.13,
+    0.13,
+    0.13
+   ]
+  }
+ },
+ "warmup": {
+  "seq4/blr": {
+   "warm_med_s": 0.166
+  },
+  "par4/blr": {
+   "warm_med_s": 0.182
+  },
+  "mc_serial/blr": {
+   "warm_med_s": 0.66
+  },
+  "mc_threads/blr": {
+   "warm_med_s": 0.23
+  },
+  "seq4/arma11": {
+   "warm_med_s": 0.081
+  },
+  "par4/arma11": {
+   "warm_med_s": 0.091
+  },
+  "mc_serial/arma11": {
+   "warm_med_s": 0.33
+  },
+  "mc_threads/arma11": {
+   "warm_med_s": 0.094
+  },
+  "seq4/hier_2pl": {
+   "warm_med_s": 23.329
+  },
+  "par4/hier_2pl": {
+   "warm_med_s": 29.39
+  },
+  "mc_serial/hier_2pl": {
+   "warm_med_s": 92.237
+  },
+  "mc_threads/hier_2pl": {
+   "warm_med_s": 28.925
+  },
+  "seq4/lsat_model": {
+   "warm_med_s": 6.903
+  },
+  "par4/lsat_model": {
+   "warm_med_s": 7.707
+  },
+  "mc_serial/lsat_model": {
+   "warm_med_s": 23.286
+  },
+  "mc_threads/lsat_model": {
+   "warm_med_s": 8.093
+  },
+  "seq4/eight_schools_noncentered": {
+   "warm_med_s": 0.053
+  },
+  "par4/eight_schools_noncentered": {
+   "warm_med_s": 0.058
+  },
+  "mc_serial/eight_schools_noncentered": {
+   "warm_med_s": 0.209
+  },
+  "mc_threads/eight_schools_noncentered": {
+   "warm_med_s": 0.059
+  }
+ }
+}
