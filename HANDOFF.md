@@ -2,31 +2,52 @@
 
 Canonical records live in the repo — this skill only routes you to them:
 
-1. `WORKLOG.md` (append-only, W-1 … W-22) — every experiment, verdict, retraction.
-2. `results/FINAL_REPORT.md` — consolidated findings incl. the session-2 addendum.
-3. `external/upstream_audit_walnutpie.md` — provenance of every bug we found (all ours, none upstream).
+1. `WORKLOG.md` (append-only, W-1 … W-34) — every experiment, verdict, retraction.
+2. `results/FINAL_REPORT.md` — consolidated findings incl. the session-2 and session-3 addenda.
+3. `external/upstream_audit_walnutpie.md` — provenance of every bug we found (§4: STAN_THREADS hazard).
+4. `external/upstream_candidates.md` — the ranked upstream push list (stan-math/stanc3/bridgestan).
 
 Portable checkout: `git clone --recurse-submodules git@github.com:sims1253/apin.git` then
-follow `BOOTSTRAP.md`. walnutpie fork branch `dev/init-robustness`; cmdstan fork branch
-`nindan/mixed-build-guard`. Local working tree: `/home/m0hawk/Documents/apin/stan`.
+follow `BOOTSTRAP.md`. walnutpie fork branch `dev/init-robustness` (kept PRISTINE —
+personal-fork branches/PRs are idea history, never merge into mainlines; experimental
+stacking branches: `exp/endpoint-grad-threading+chains` → `exp/pilot-burst-gate` →
+`exp/parallel-chains` → `exp/safe-adapt-defaults`); cmdstan fork branch
+`nindan/mixed-build-guard`; `sims1253/stan` PR #1 = scratch-hoist idea history.
+Local working tree: `/home/m0hawk/Documents/apin/stan`.
+
+## Session-3 status (W-23 … W-34, all closed — see FINAL_REPORT §6)
+
+- Shipped in walnutpie exp stack: endpoint-gradient threading (W-23),
+  parallel multi-chain 3.2× wall + busy-poll fix (W-30), safe adapt defaults
+  (W-31, early exit OFF by default), `--chains N` multi-chain CLI.
+- Closed by measurement: warmup early-exit (W-21/25/28 — refuted three ways),
+  compile flags (W-27; `-march=native` = hard ban, miscompiles gradients),
+  cholesky rev pass at n≤35 (W-33, at algorithmic floor).
+- Upstream pack ready in `external/upstream_candidates.md`: stanc3 eigh
+  pair-fusion (W-32, −19.4% Ir bit-identical), stanc3 eltwise-fusion /
+  gathered-GLM primitive (W-34, −28.2% Ir), stan-math square() pow→mul
+  (W-33, one-liner), bridgestan .so cache + STAN_THREADS signals (W-27/W-31).
+- Environment gotchas since added to the ledger: ambient LD_LIBRARY_PATH
+  (ZCode AppImage) breaks cmake — `env -u LD_LIBRARY_PATH`; interactive make
+  aliased -j12 — call `/usr/bin/make`; `install_cmdstan` uses `--cores`;
+  multi-chain sampling needs STAN_THREADS=1 .so (`bs_models_threads/`).
 
 ## Queued fresh-session items (each is a ONE-decision start; do NOT batch them)
 
-### A. walnutpie endpoint-gradient threading (from W-20)
-- Measured: exactly ONE redundant logp_grad per transition (start re-eval; dups = warmup+draws+1 on every model). ~4–6% of all gradient calls.
-- Fix: thread (theta, grad, logp) through WalnutsSampler/AdaptiveWalnuts state.
-- **Gate: draws must stay bit-identical** (reusing an identical double changes no arithmetic — a wrong implementation cannot pass silently). 3 models × 2 seeds, then w17g-style grad-count check.
-- Touches `include/walnutpie/walnuts.hpp` (hot path — the 2026-08-21 template-surgery mishap happened there: make one edit, build, test, commit; never batch template edits).
-
-### B. cmdstan stan-2a2 scratch-hoist (Phase 2a)
-- Plan is COMPLETE in `patches/stan-2a2-scratch-hoist-PLAN.md`: hunks, recursion-safety argument, 5 gates (bit-identity first — the rho-hoist history says do not assume it), what never to touch.
-- Target: `external/cmdstan/stan/src/stan/mcmc/hmc/nuts/base_nuts.hpp` @ submodule d13c50c0f (~630 heap allocs/transition at depth 6; pilots memcpy share 21%).
-- Ship as PR to the cmdstan fork, `develop` base, never upstream.
-
-### C. walnutpie library-level warmup early-exit (from W-21/W-22)
-- CLI knob shipped (default off; `--early-exit-warmup`): 1.3–2.4× wall where it exits but hurts the marginal class.
-- W-22 root cause: on those models the **step size** still grows +170% late in warmup while mass is stable (+2–13%) — the quality-preserving gate must be step-drift (<5% over last 2 windows), and ideally cross-chain (the `adapt()` controller already has the machinery).
-- The natural place is the multi-chain controller, not the CLI.
+### A'. Upstream pushes (the endgame — user drives these)
+- The evidence pack is `external/upstream_candidates.md` (6 candidates, ranked,
+  with repro pointers). Best first: stan-math `square()` pow→mul one-liner
+  (W-33); stanc3 eigh pair-fusion (W-32); bridgestan cache/threading signals
+  (W-27/W-31). `-march=native` miscompile needs a gcc- or stan-math-side
+  reproducer minimization before reporting.
+### B'. walnutpie exp-stack promotion (user decision)
+- The exp stack (`exp/safe-adapt-defaults` @ 43b6435 tip) carries W-23/W-25/
+  W-28/W-30/W-31. If the user wants any of it as real walnutpie history, the
+  per-idea branches cherry-pick cleanly (they were stacked in that order).
+### C'. hier_2pl GEMM model variant adoption (harness decision)
+- `harness/w34/hier_2pl_gemm.stan` (−25% µs/call, ESS-clean). Adopting it as
+  the CORE_SET model changes benchmark definitions — one decision, then a
+  full grid re-baseline.
 
 ## Protocol (violating these produced both retractions)
 

@@ -161,3 +161,63 @@ Fair sampling-phase-only recompute, 20 models, median of 3:
 - WALNUTS e/grad ceiling on well-mixed models (0.3–0.8×): design overhead of
   the within-orbit dyadic search; candidate mitigations in the evidence
   package (per-macro-step grad accounting, position-keyed memoization).
+
+## 6. Session-3 addendum (W-23 … W-34)
+
+Branch model: walnutpie feature branches kept as per-idea history; integration
+on `exp/endpoint-grad-threading+chains` (0cb5b7b) → `exp/pilot-burst-gate`
+(b80f4a8) → `exp/parallel-chains` (da71e5b) → `exp/safe-adapt-defaults`
+(43b6435). `dev/init-robustness` verified pristine (3eddfc4 = origin).
+cmdstan-fork history: `sims1253/stan` PR #1 (scratch-hoist, all 5 gates pass,
+geomean wall 0.931).
+
+**Shipped sampler wins** (all canary-gated bit-identical on unchanged paths):
+- Endpoint-gradient threading (W-23): one redundant logp_grad/transition
+  eliminated; drop = warmup+draws−1 per chain; 24/24 bit-identical.
+- Parallel multi-chain (W-30): event-driven controller (busy-poll ~100%→1%
+  CPU), thread/serial bit-equivalence 15/15 (+ mc chain == sequential
+  single-chain run 15/15); wall geomean **3.2× vs sequential** 4-chain runs,
+  1.03× vs 4 separate processes (hier_2pl 14% faster than procs).
+- Safe adapt defaults (W-31): cross-chain early exit OFF by default
+  (`allow_early_exit`); default `--chains 4` bit-identical to full-warmup base
+  24/24; `--early-exit` still reproduces the destructive exit (519→24 ESS).
+
+**Closed directions (measured, recorded):**
+- Compile flags (W-27): default build already -O3-equivalent; -march=native
+  silently MISCOMPILES kronecker_gp gradient (lkj_corr_cholesky block, sign
+  flips) in a self-contained build — hard ban; bridgestan compile_model
+  silently reuses cached .so regardless of make_args.
+- Warmup early-exit: W-21 (fast, quality-destroying), W-25 (static step/mass
+  gate refuted — 519→126), W-28 (pilot-burst gate preserves quality only by
+  never exiting; lp lag-1 autocorr cannot separate classes: hier 0.71–0.91 vs
+  blr 0.62–0.74). Direction closed: warmup's late gains live in
+  trajectory-geometry adaptation invisible to step/mass/lp-window statistics.
+- cholesky rev pass (W-33): at n≤35 the Giles sweep is at its ~2×-forward
+  algorithmic floor; not worth patching at this size.
+
+**Gradient-cost levers (stan-math/stanc3 upstream pack — see
+external/upstream_candidates.md for details):**
+- kronecker_gp (W-32): rewrite with `eigendecompose_sym` (ALREADY upstream in
+  stan-math 5.3.0 / stanc3 2.39): −19.4% Ir/grad, −14.3% µs/call,
+  bit-identical. Upstream ask: stanc3 peephole fusing the
+  eigenvectors_sym+eigenvalues_sym pair (4 full decompositions per gradient
+  today where 2 suffice). results/eigh_reuse_w32.md.
+- hier_2pl (W-34): eltwise var-mode plumbing = 40.4% of gradient; complete
+  -design GEMM reformulation (6-line model diff): −28.2% Ir/grad, −25%
+  µs/call, 0.739× wall, ESS distribution clean (ESS-min marginal: unstable
+  statistic). Upstream asks: stanc3 expression fusion for eltwise chains over
+  indexed var containers; a gathered/indexed GLM primitive (dense GLMs
+  structurally exclude IRT/rating/sparse-interaction likelihoods — measured).
+  results/hier2pl_plumbing_w34.md.
+- gp_regr (W-33): stan-math `square()` calls std::pow(x,2) (contradicting its
+  own doc); x*x patch = −9.1% Ir/grad, −13–15% µs/call, bit-identical (glibc).
+  One-line upstream PR; patch at scratch/w33/pow_to_mul.patch.
+- Hotspot atlas (W-29): results/hotspot_atlas_w29.md — logp_grad = 81.6–99.4%
+  of program Ir across the 5 profiled models; walnutpie-internal sampling-loop
+  overhead 0.2–5.5% (sampler-side ceiling confirmed at instruction level);
+  tape/arena fixed tax 8–17%G (SoA-arena lever, not a single patch).
+
+**Safety findings for upstream:** -march=native gradient miscompile
+(reproducer: harness/run_w27.py parity); bridgestan default .so silently
+unsafe under threaded evaluation (double-free/SEGV; STAN_THREADS=1 build
+clean — repro + provenance in upstream_audit_walnutpie.md §4).
