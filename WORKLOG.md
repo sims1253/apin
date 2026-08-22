@@ -1057,3 +1057,14 @@ SIZE, not the metric:
 - HANDOFF.md added to repo (self-contained copy of the skill; skills dir
   does not travel between machines).
 - apin remote updated (slim + docs).
+
+
+## 2026-08-23 ~14:30 — history purge of apin remote (user caught it)
+
+- The .so/chain.csv deletions were tree-only; blobs remained in pack via
+  history (and, after local rewrite, via refs/remotes/origin/main until the
+  force-push). Fixed: orphan-squash to single commit e9d5a1c (snapshot repo;
+  ledger = WORKLOG), force-push, reflog expire + gc.
+- Verified SERVER-side by fresh clone: 0 large blobs in history, .git now
+  11MiB (was ~40MiB pack), all entrypoint docs + submodule pins intact.
+- Local .export-apin mirrors the purged single-commit state.
