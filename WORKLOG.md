@@ -1045,3 +1045,15 @@ SIZE, not the metric:
   records, lists the 3 queued fresh-session items with gates (endpoint-grad
   threading; stan-2a2; library early-exit w/ W-22 step-gate), protocol,
   gotchas.
+
+## 2026-08-23 ~14:00 — handoff packaging (docs only, per user)
+
+- NEXT_IDEAS.md: 4 documented open items (A: logp_grad via model flags —
+  bs_models_o3 prepared locally, per-call comparison pending, mixed-build
+  caution + statistical-not-bitwise comparison rule; B: mixing-difficulty
+  diagnostic — W-21 runs ARE labeled data, threshold-rule fit costs zero
+  sampling compute, pilot-burst design as fallback; C: slimming done,
+  export ~57MB; D: entrypoints clarified).
+- HANDOFF.md added to repo (self-contained copy of the skill; skills dir
+  does not travel between machines).
+- apin remote updated (slim + docs).
