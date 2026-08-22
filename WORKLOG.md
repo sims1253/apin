@@ -1077,3 +1077,15 @@ SIZE, not the metric:
   then git reflog expire --expire=now --all && git gc --prune=now
   (expect hours, 44GB loose); or filter-repo if full purge of history.
   The apin REMOTE is unaffected and verified clean.
+
+## 2026-08-23 ~15:00 — LOCAL cleanup EXECUTED (the deferred piece)
+
+- Untracked + ignored: runs/, bs_models/, bs_models_o3/, models/*_model.so
+  (.gitignore updated; files remain on disk: 26,692 runs files, 21 .so).
+- History purged with git-filter-repo (--invert-paths runs bs_models
+  'models/*_model.so'), 50s runtime. Result: .git 44G -> 86M (512x),
+  19 commits preserved (hashes rewritten; earlier SHAs cited in WORKLOG
+  are now historical narrative), 0 junk blobs reachable, submodule pins
+  intact, status clean.
+- Standing rule (also added to HANDOFF.md): NEVER `git add -A` in this
+  repo — stage explicitly; runs/, bs_models/, *_model.so stay untracked.

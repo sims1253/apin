@@ -44,3 +44,11 @@ follow `BOOTSTRAP.md`. walnutpie fork branch `dev/init-robustness`; cmdstan fork
 - cmdstan argv: separate tokens (`data` `file=x`); `init=` is one token. `pgrep -f` self-matches — use `kill -0`.
 - Machine discipline: ≤4 cores always, no GPU. `uv run python` for the project venv; posterior 1.7 needs per-variable `ess`.
 - Measurement priors (do not re-litigate without new data): logp_grad = 68–99.7% of walnutpie sampling wall (SIMD/kernel direction closed); warmup = 65–76% of total wall; checks ≤2.2% of cmdstan Ir (folklore rejected); fold ≈ rec core-set with good inits; basis-extraction rule is second-order (W-19); funnel class is a sampling/mode-lock problem, not adaptation.
+
+## Repo hygiene (2026-08-23 incident, now standing rule)
+
+**Never `git add -A` in the stan repo.** It swept `runs/` (26,692 files) and
+model `.so` binaries into history (44GB of loose objects; purged via
+git-filter-repo, `.git` now 86MB). `runs/`, `bs_models/`, `bs_models_o3/`,
+`models/*_model.so` are gitignored — stage explicitly (`git add WORKLOG.md
+harness/ ...`).
