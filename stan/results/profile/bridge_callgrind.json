@@ -1,0 +1,30 @@
+{
+  "diamonds": {
+    "model": "diamonds",
+    "total_instructions": 4176366265,
+    "warmup_calls": 3201,
+    "sample_calls": 3200,
+    "ir_per_grad_sample": 652455.2827683175
+  },
+  "lsat_model": {
+    "model": "lsat_model",
+    "total_instructions": 8558004314,
+    "warmup_calls": 2762,
+    "sample_calls": 1735,
+    "ir_per_grad_sample": 1903047.4347342672
+  },
+  "radon_partially_pooled_noncentered": {
+    "model": "radon_partially_pooled_noncentered",
+    "total_instructions": 32746355536,
+    "warmup_calls": 3201,
+    "sample_calls": 3200,
+    "ir_per_grad_sample": 5115818.705827215
+  },
+  "pilots": {
+    "model": "pilots",
+    "total_instructions": 203899992,
+    "warmup_calls": 5188,
+    "sample_calls": 5683,
+    "ir_per_grad_sample": 18756.323429307333
+  }
+}

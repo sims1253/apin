@@ -1,0 +1,207 @@
+{
+  "model": "pilots",
+  "iters": "40+40",
+  "total_instructions": 87843464,
+  "one_time_io_instructions": 888579,
+  "steady_state_instructions": 86954885,
+  "cache_totals": {
+    "Ir": 87843464,
+    "Dr": 24004956,
+    "Dw": 16247289,
+    "I1mr": 979200,
+    "D1mr": 144775,
+    "D1mw": 84740,
+    "ILmr": 7641,
+    "DLmr": 11498,
+    "DLmw": 4418
+  },
+  "d1_mr": 0.006,
+  "dl_mr": 0.0005,
+  "buckets": {
+    "model_log_prob": 22401097,
+    "autodiff_reverse": 4585763,
+    "checks": 168043,
+    "eigen_linalg": 17139333,
+    "memcpy_alloc": 18616347,
+    "rng": 2633113,
+    "io": 4265689
+  },
+  "bucket_share": {
+    "model_log_prob": 0.2576,
+    "autodiff_reverse": 0.0527,
+    "checks": 0.0019,
+    "eigen_linalg": 0.1971,
+    "memcpy_alloc": 0.2141,
+    "rng": 0.0303,
+    "io": 0.0491
+  },
+  "top_funcs": [
+    [
+      "???:stan::scalar_type<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::type model_model_namespace::model_model::log_prob_impl<true, true, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::Matrix<int, -1, 1, 0, -1, 1>, (void*)0, (void*)0, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, Eigen::Matrix<int, -1, 1, 0, -1, 1>&, std::ostream*) const [clone .isra.0] [/home/m0hawk/Documents/apin/stan/build/pilots__default/model]",
+      11786634,
+      0.1342
+    ],
+    [
+      "./malloc/./malloc/malloc.c:_int_free [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      7176713,
+      0.0817
+    ],
+    [
+      "???:stan::return_type<Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, stan::math::var_value<double, void>&>::type stan::math::normal_lpdf<true, Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, stan::math::var_value<double, void>&, (void*)0>(Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, stan::math::var_value<double, void>&) [/home/m0hawk/Documents/apin/stan/build/pilots__default/model]",
+      5906682,
+      0.0672
+    ],
+    [
+      "./malloc/./malloc/malloc.c:malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      4190864,
+      0.0477
+    ],
+    [
+      "???:void stan::math::gradient<stan::model::model_functional<stan::model::model_base> >(stan::model::model_functional<stan::model::model_base> const&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, double&, Eigen::Matrix<double, -1, 1, 0, -1, 1>&) [/home/m0hawk/Documents/apin/stan/build/pilots__default/model]",
+      3939824,
+      0.0449
+    ],
+    [
+      "./malloc/./malloc/malloc.c:_int_malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      3636982,
+      0.0414
+    ],
+    [
+      "???:stan::return_type<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, stan::math::var_value<double, void>, stan::math::var_value<double, void>&>::type stan::math::normal_lpdf<true, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, stan::math::var_value<double, void>, stan::math::var_value<double, void>&, (void*)0>(Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, stan::math::var_value<double, void>&&, stan::math::var_value<double, void>&) [/home/m0hawk/Documents/apin/stan/build/pilots__default/model]",
+      3629133,
+      0.0413
+    ],
+    [
+      "./stdio-common/./stdio-common/printf_fp.c:__printf_fp_l [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      2415541,
+      0.0275
+    ],
+    [
+      "./malloc/./malloc/malloc.c:free [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      2278406,
+      0.0259
+    ],
+    [
+      "???:void Eigen::internal::call_dense_assignment_loop<Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::internal::assign_op<double, double> >(Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, Eigen::internal::assign_op<double, double> const&) [/home/m0hawk/Documents/apin/stan/build/pilots__default/model]",
+      1616244,
+      0.0184
+    ],
+    [
+      "???:void stan::math::internal::update_adjoints<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, stan::math::arena_matrix<Eigen::Matrix<double, -1, 1, 0, -1, 1>, void>, (void*)0, (void*)0>(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>&, stan::math::arena_matrix<Eigen::Matrix<double, -1, 1, 0, -1, 1>, void> const&, stan::math::var_value<double, void> const&) [/home/m0hawk/Documents/apin/stan/build/pilots__default/model]",
+      1553022,
+      0.0177
+    ],
+    [
+      "???:stan::mcmc::base_nuts<stan::model::model_base, stan::mcmc::diag_e_metric, stan::mcmc::expl_leapfrog, boost::random::mixmax_engine<17, 36u, 0l> >::build_tree(int, stan::mcmc::ps_point&, Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1>&, double, double, int&, double&, double&, stan::callbacks::logger&)'2 [/home/m0hawk/Documents/apin/stan/build/pilots__default/model]",
+      1329771,
+      0.0151
+    ],
+    [
+      "???:stan::math::internal::callback_vari<double, stan::math::operator+(stan::math::var_value<double, void> const&, stan::math::var_value<double, void> const&)::{lambda(auto:1&&)#1}>::chain() [/home/m0hawk/Documents/apin/stan/build/pilots__default/model]",
+      1299600,
+      0.0148
+    ],
+    [
+      "???:Eigen::ScalarBinaryOpTraits<double, Eigen::internal::traits<Eigen::Matrix<double, -1, 1, 0, -1, 1> >::Scalar, Eigen::internal::scalar_product_op<double, Eigen::internal::traits<Eigen::Matrix<double, -1, 1, 0, -1, 1> >::Scalar> >::ReturnType Eigen::MatrixBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> >::dot<Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&) const [/home/m0hawk/Documents/apin/stan/build/pilots__default/model]",
+      1268358,
+      0.0144
+    ],
+    [
+      "./elf/./elf/dl-lookup.c:_dl_lookup_symbol_x [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]",
+      1165154,
+      0.0133
+    ],
+    [
+      "???:Eigen::PlainObjectBase<Eigen::Array<double, -1, 1, 0, -1, 1> >::PlainObjectBase<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::Array<double, -1, 1, 0, -1, 1> const, Eigen::Array<double, -1, 1, 0, -1, 1> const> >(Eigen::DenseBase<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::Array<double, -1, 1, 0, -1, 1> const, Eigen::Array<double, -1, 1, 0, -1, 1> const> > const&) [/home/m0hawk/Documents/apin/stan/build/pilots__default/model]",
+      1062423,
+      0.0121
+    ],
+    [
+      "???:stan::return_type<stan::math::var_value<double, void>&, double, double>::type stan::math::normal_lpdf<true, stan::math::var_value<double, void>&, double, double, (void*)0>(stan::math::var_value<double, void>&, double&&, double&&) [clone .isra.0] [/home/m0hawk/Documents/apin/stan/build/pilots__default/model]",
+      1013688,
+      0.0115
+    ],
+    [
+      "???:stan::math::internal::partials_propagator<stan::math::var_value<double, void>, void, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, stan::math::var_value<double, void>, stan::math::var_value<double, void> >::partials_propagator<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, stan::math::var_value<double, void> const&, stan::math::var_value<double, void>&>(Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, stan::math::var_value<double, void> const&, stan::math::var_value<double, void>&) [/home/m0hawk/Documents/apin/stan/build/pilots__default/model]",
+      974700,
+      0.0111
+    ],
+    [
+      "???:auto stan::io::deserializer<stan::math::var_value<double, void> >::read_constrain_lub<stan::math::var_value<double, void>, true, int, int, stan::math::var_value<double, void>>(int const&, int const&, stan::math::var_value<double, void>&) [/home/m0hawk/Documents/apin/stan/build/pilots__default/model]",
+      944938,
+      0.0108
+    ],
+    [
+      "./math/../sysdeps/ieee754/dbl-64/e_exp.c:__ieee754_exp_fma [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      910371,
+      0.0104
+    ],
+    [
+      "./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      865335,
+      0.0099
+    ],
+    [
+      "???:stan::math::vari_base*& std::vector<stan::math::vari_base*, std::allocator<stan::math::vari_base*> >::emplace_back<stan::math::vari_base*>(stan::math::vari_base*&&) [clone .isra.0] [/home/m0hawk/Documents/apin/stan/build/pilots__default/model]",
+      847973,
+      0.0097
+    ],
+    [
+      "./elf/./elf/dl-lookup.c:do_lookup_x [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]",
+      824319,
+      0.0094
+    ],
+    [
+      "???:Eigen::PlainObjectBase<Eigen::Array<double, -1, 1, 0, -1, 1> >::resize(long, long) [clone .constprop.0] [/home/m0hawk/Documents/apin/stan/build/pilots__default/model]",
+      805845,
+      0.0092
+    ],
+    [
+      "./stdio-common/./stdio-common/printf_fp.c:hack_digit [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      788924,
+      0.009
+    ]
+  ],
+  "top_leftover": [
+    [
+      "./stdio-common/./stdio-common/printf_fp.c:__printf_fp_l [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      2415541
+    ],
+    [
+      "./elf/./elf/dl-lookup.c:_dl_lookup_symbol_x [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]",
+      1165154
+    ],
+    [
+      "???:auto stan::io::deserializer<stan::math::var_value<double, void> >::read_constrain_lub<stan::math::var_value<double, void>, true, int, int, stan::math::var_value<double, void>>(int const&, int const&, stan::math::var_value<double, void>&) [/home/m0hawk/Documents/apin/stan/build/pilots__default/model]",
+      944938
+    ],
+    [
+      "./math/../sysdeps/ieee754/dbl-64/e_exp.c:__ieee754_exp_fma [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      910371
+    ],
+    [
+      "./elf/./elf/dl-lookup.c:do_lookup_x [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]",
+      824319
+    ],
+    [
+      "./stdio-common/./stdio-common/printf_fp.c:hack_digit [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      788924
+    ],
+    [
+      "./math/../sysdeps/ieee754/dbl-64/s_log1p.c:__log1p [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      768970
+    ],
+    [
+      "./math/../sysdeps/ieee754/dbl-64/e_log.c:__ieee754_log_fma [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      747141
+    ],
+    [
+      "./stdio-common/./stdio-common/vfprintf-internal.c:__vfprintf_internal [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      734972
+    ],
+    [
+      "./stdlib/../sysdeps/x86_64/mul_1.S:__mpn_mul_1 [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      576327
+    ]
+  ]
+}

@@ -1,0 +1,199 @@
+{
+  "model": "lsat_model",
+  "iters": "40+40",
+  "total_instructions": 13951128393,
+  "one_time_io_instructions": 0,
+  "steady_state_instructions": 13951128393,
+  "cache_totals": {
+    "Ir": 13951128393,
+    "Dr": 3449016433,
+    "Dw": 2240136387,
+    "I1mr": 2898130,
+    "D1mr": 305444571,
+    "D1mw": 144643011,
+    "ILmr": 198943,
+    "DLmr": 70377,
+    "DLmw": 179995
+  },
+  "d1_mr": 0.0886,
+  "dl_mr": 0.0,
+  "buckets": {
+    "model_log_prob": 136800685,
+    "autodiff_reverse": 2863308040,
+    "checks": 308514325,
+    "eigen_linalg": 6624314363,
+    "memcpy_alloc": 144935700,
+    "rng": 95524290,
+    "io": 308708190
+  },
+  "bucket_share": {
+    "model_log_prob": 0.0098,
+    "autodiff_reverse": 0.2052,
+    "checks": 0.0221,
+    "eigen_linalg": 0.4748,
+    "memcpy_alloc": 0.0104,
+    "rng": 0.0068,
+    "io": 0.0221
+  },
+  "top_funcs": [
+    [
+      "???:stan::return_type<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> >::type stan::math::bernoulli_logit_lpmf<true, std::vector<int, std::allocator<int> >, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, (void*)0>(std::vector<int, std::allocator<int> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&) [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      2613293400,
+      0.1873
+    ],
+    [
+      "./math/../sysdeps/ieee754/dbl-64/s_log1p.c:__log1p [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      2604493280,
+      0.1867
+    ],
+    [
+      "???:auto stan::math::subtract<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, (void*)0>(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void> const&, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void> const&) [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      1196270155,
+      0.0857
+    ],
+    [
+      "???:auto stan::math::multiply<stan::math::var_value<double, void>, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, (void*)0, (void*)0, (void*)0, (void*)0>(stan::math::var_value<double, void> const&, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&) [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      1099223985,
+      0.0788
+    ],
+    [
+      "???:double Eigen::DenseBase<Eigen::Select<Eigen::CwiseBinaryOp<Eigen::internal::scalar_cmp_op<double, double, (Eigen::internal::ComparisonName)1>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Array<double, -1, 1, 0, -1, 1> > const, Eigen::Array<double, -1, 1, 0, -1, 1> const>, Eigen::CwiseUnaryOp<Eigen::internal::scalar_opposite_op<double>, Eigen::Array<double, -1, 1, 0, -1, 1> const>, Eigen::Select<Eigen::CwiseBinaryOp<Eigen::internal::scalar_cmp_op<double, double, (Eigen::internal::ComparisonName)1>, Eigen::Array<double, -1, 1, 0, -1, 1> const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Array<double, -1, 1, 0, -1, 1> > const>, Eigen::Array<double, -1, 1, 0, -1, 1>, Eigen::CwiseUnaryOp<Eigen::internal::scalar_opposite_op<double>, Eigen::CwiseUnaryOp<stan::math::apply_scalar_unary<stan::math::log1p_fun, Eigen::Array<double, -1, 1, 0, -1, 1>&, void>::apply<Eigen::Array<double, -1, 1, 0, -1, 1>&>(Eigen::Array<double, -1, 1, 0, -1, 1>&)::{lambda(auto:1&&)#1}::operator()<Eigen::Array<double, -1, 1, 0, -1, 1>&>(Eigen::Array<double, -1, 1, 0, -1, 1>&) const::{lambda(auto:1&&)#1}, Eigen::Array<double, -1, 1, 0, -1, 1> const> const> > > >::redux<Eigen::internal::scalar_sum_op<double, double> >(Eigen::internal::scalar_sum_op<double, double> const&) const [clone .isra.0] [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      1038357863,
+      0.0744
+    ],
+    [
+      "???:auto stan::math::multiply<stan::math::var_value<double, void>, Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > const&, (void*)0, (void*)0, (void*)0, (void*)0>(stan::math::var_value<double, void> const&, Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > const&) [clone .isra.0] [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      963276335,
+      0.069
+    ],
+    [
+      "???:stan::math::internal::reverse_pass_callback_vari<stan::math::multiply<stan::math::var_value<double, void>, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, (void*)0, (void*)0, (void*)0, (void*)0>(stan::math::var_value<double, void> const&, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&)::{lambda()#1}>::chain() [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      499909250,
+      0.0358
+    ],
+    [
+      "???:stan::math::internal::reverse_pass_callback_vari<stan::math::subtract<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, (void*)0>(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void> const&, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void> const&)::{lambda()#1}>::chain() [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      499909250,
+      0.0358
+    ],
+    [
+      "./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:__memset_avx2_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      370401126,
+      0.0265
+    ],
+    [
+      "???:void stan::math::internal::update_adjoints<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, stan::math::arena_matrix<Eigen::Matrix<double, -1, 1, 0, -1, 1>, void>, (void*)0, (void*)0>(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>&, stan::math::arena_matrix<Eigen::Matrix<double, -1, 1, 0, -1, 1>, void> const&, stan::math::var_value<double, void> const&) [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      369709980,
+      0.0265
+    ],
+    [
+      "???:stan::math::internal::bounded<std::vector<int, std::allocator<int> >, int, int, true>::check(char const*, char const*, std::vector<int, std::allocator<int> > const&, int const&, int const&) [clone .isra.0] [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      308708190,
+      0.0221
+    ],
+    [
+      "???:void stan::math::elementwise_check<stan::math::check_not_nan<Eigen::Array<double, -1, 1, 0, -1, 1> >(char const*, char const*, Eigen::Array<double, -1, 1, 0, -1, 1> const&)::{lambda(double)#1}, Eigen::Array<double, -1, 1, 0, -1, 1>, , (void*)0, (void*)0>(stan::math::check_not_nan<Eigen::Array<double, -1, 1, 0, -1, 1> >(char const*, char const*, Eigen::Array<double, -1, 1, 0, -1, 1> const&)::{lambda(double)#1} const&, char const*, char const*, Eigen::Array<double, -1, 1, 0, -1, 1> const&, char const*) [clone .isra.0] [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      308514325,
+      0.0221
+    ],
+    [
+      "???:stan::math::internal::reverse_pass_callback_vari<stan::math::multiply<stan::math::var_value<double, void>, Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > const&, (void*)0, (void*)0, (void*)0, (void*)0>(stan::math::var_value<double, void> const&, Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > const&)::{lambda()#1}>::chain() [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      269628225,
+      0.0193
+    ],
+    [
+      "???:void stan::math::gradient<stan::model::model_functional<stan::model::model_base> >(stan::model::model_functional<stan::model::model_base> const&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, double&, Eigen::Matrix<double, -1, 1, 0, -1, 1>&) [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      234861460,
+      0.0168
+    ],
+    [
+      "???:stan::math::internal::ops_partials_edge<double, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::ops_partials_edge(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&) [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      196090460,
+      0.0141
+    ],
+    [
+      "./math/./w_log1p_template.c:log1p [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      192072825,
+      0.0138
+    ],
+    [
+      "???:stan::return_type<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double, double>::type stan::math::normal_lpdf<true, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double, double, (void*)0>(Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double&&, double&&) [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      136800685,
+      0.0098
+    ],
+    [
+      "???:void Eigen::internal::call_dense_assignment_loop<Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::internal::assign_op<double, double> >(Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, Eigen::internal::assign_op<double, double> const&) [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      129524934,
+      0.0093
+    ],
+    [
+      "???:Eigen::ScalarBinaryOpTraits<double, Eigen::internal::traits<Eigen::Matrix<double, -1, 1, 0, -1, 1> >::Scalar, Eigen::internal::scalar_product_op<double, Eigen::internal::traits<Eigen::Matrix<double, -1, 1, 0, -1, 1> >::Scalar> >::ReturnType Eigen::MatrixBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> >::dot<Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&) const [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      103905528,
+      0.0074
+    ],
+    [
+      "???:0x0000000000120c00 [???]",
+      76829130,
+      0.0055
+    ],
+    [
+      "???:void Eigen::internal::call_dense_assignment_loop<Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, 1, 0, -1, 1> const> const, Eigen::Matrix<double, -1, 1, 0, -1, 1> const>, Eigen::internal::sub_assign_op<double, double> >(Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, 1, 0, -1, 1> const> const, Eigen::Matrix<double, -1, 1, 0, -1, 1> const> const&, Eigen::internal::sub_assign_op<double, double> const&) [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      61491108,
+      0.0044
+    ],
+    [
+      "./malloc/./malloc/malloc.c:_int_malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      50713220,
+      0.0036
+    ],
+    [
+      "???:stan::mcmc::expl_leapfrog<stan::mcmc::diag_e_metric<stan::model::model_base, boost::random::mixmax_engine<17, 36u, 0l> > >::update_q(stan::mcmc::diag_e_point&, stan::mcmc::diag_e_metric<stan::model::model_base, boost::random::mixmax_engine<17, 36u, 0l> >&, double, stan::callbacks::logger&) [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      50264686,
+      0.0036
+    ],
+    [
+      "./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      44681257,
+      0.0032
+    ],
+    [
+      "???:void Eigen::internal::call_dense_assignment_loop<Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::internal::add_assign_op<double, double> >(Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, Eigen::internal::add_assign_op<double, double> const&) [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      44544695,
+      0.0032
+    ]
+  ],
+  "top_leftover": [
+    [
+      "./math/../sysdeps/ieee754/dbl-64/s_log1p.c:__log1p [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      2604493280
+    ],
+    [
+      "./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:__memset_avx2_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      370401126
+    ],
+    [
+      "./math/./w_log1p_template.c:log1p [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      192072825
+    ],
+    [
+      "???:0x0000000000120c00 [???]",
+      76829130
+    ],
+    [
+      "./stdio-common/./stdio-common/printf_fp.c:__printf_fp_l [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      35887810
+    ],
+    [
+      "???:stan::mcmc::ps_point::operator=(stan::mcmc::ps_point const&) [/home/m0hawk/Documents/apin/stan/build/lsat_model__default/model]",
+      29396260
+    ],
+    [
+      "./stdio-common/./stdio-common/vfprintf-internal.c:__vfprintf_internal [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      11461524
+    ],
+    [
+      "./stdio-common/./stdio-common/printf_fp.c:hack_digit [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      11424595
+    ]
+  ]
+}

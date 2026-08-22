@@ -1,0 +1,28 @@
+{
+  "model": "accel_gp",
+  "wall_s": 4.151434659957886,
+  "warmup_s": 1.746,
+  "sampling_s": 2.398,
+  "total_sampler_s": 4.144,
+  "profile_blocks": {
+    "tp": {
+      "total_time": 0.014140345,
+      "forward_time": 0.007651615,
+      "reverse_time": 0.00648873,
+      "chain_stack": 0.0,
+      "no_chain_stack": 0.0,
+      "autodiff_calls": 278802.0,
+      "no_autodiff_calls": 201.0
+    },
+    "model": {
+      "total_time": 1.202535,
+      "forward_time": 1.0457259,
+      "reverse_time": 0.1568091,
+      "chain_stack": 46282575.0,
+      "no_chain_stack": 2509290.0,
+      "autodiff_calls": 278802.0,
+      "no_autodiff_calls": 1.0
+    }
+  },
+  "profile_total_s": 1.2166753449999999
+}

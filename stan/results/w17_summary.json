@@ -1,0 +1,434 @@
+{
+ "rec__accel_gp": {
+  "ess_med": null,
+  "missing": 3
+ },
+ "rec__arma11": {
+  "ess_med": 506.0,
+  "geo_med": 1145.0,
+  "rhat_med": 1.0093,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__blr": {
+  "ess_med": 326.0,
+  "geo_med": 1327.0,
+  "rhat_med": 1.0142,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__bym2_offset_only": {
+  "ess_med": 73.0,
+  "geo_med": 1732.0,
+  "rhat_med": 1.0494,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__diamonds": {
+  "ess_med": 6.0,
+  "geo_med": 256.0,
+  "rhat_med": 1.9272,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__dogs_hierarchical": {
+  "ess_med": 771.0,
+  "geo_med": 1956.0,
+  "rhat_med": 1.0045,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__eight_schools_centered": {
+  "ess_med": 52.0,
+  "geo_med": 162.0,
+  "rhat_med": 1.0613,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__eight_schools_noncentered": {
+  "ess_med": 741.0,
+  "geo_med": 1645.0,
+  "rhat_med": 1.0074,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__garch11": {
+  "ess_med": 445.0,
+  "geo_med": 728.0,
+  "rhat_med": 1.0096,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__gp_regr": {
+  "ess_med": 1034.0,
+  "geo_med": 1340.0,
+  "rhat_med": 1.0032,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__hier_2pl": {
+  "ess_med": 247.0,
+  "geo_med": 1619.0,
+  "rhat_med": 1.0186,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__kidscore_momiq": {
+  "ess_med": 236.0,
+  "geo_med": 451.0,
+  "rhat_med": 1.0189,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__kronecker_gp": {
+  "ess_med": 55.0,
+  "geo_med": 391.0,
+  "rhat_med": 1.052,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__logmesquite_logvash": {
+  "ess_med": 98.0,
+  "geo_med": 280.0,
+  "rhat_med": 1.0217,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__lotka_volterra": {
+  "ess_med": 38.0,
+  "geo_med": 649.0,
+  "rhat_med": 1.0839,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__low_dim_gauss_mix": {
+  "ess_med": 557.0,
+  "geo_med": 920.0,
+  "rhat_med": 1.0041,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__lsat_model": {
+  "ess_med": 766.0,
+  "geo_med": 5331.0,
+  "rhat_med": 1.017,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__pilots": {
+  "ess_med": 5.0,
+  "geo_med": 148.0,
+  "rhat_med": 3.4417,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__radon_partially_pooled_noncentered": {
+  "ess_med": 331.0,
+  "geo_med": 3929.0,
+  "rhat_med": 1.0187,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__radon_variable_intercept_slope_noncentered": {
+  "ess_med": 283.0,
+  "geo_med": 3058.0,
+  "rhat_med": 1.0156,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "rec__wells_dist100_model": {
+  "ess_med": 524.0,
+  "geo_med": 561.0,
+  "rhat_med": 1.0067,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__accel_gp": {
+  "ess_med": null,
+  "missing": 3
+ },
+ "fold__arma11": {
+  "ess_med": 362.0,
+  "geo_med": 910.0,
+  "rhat_med": 1.0098,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__blr": {
+  "ess_med": 352.0,
+  "geo_med": 1393.0,
+  "rhat_med": 1.014,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__bym2_offset_only": {
+  "ess_med": 47.0,
+  "geo_med": 1660.0,
+  "rhat_med": 1.0774,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__diamonds": {
+  "ess_med": 7.0,
+  "geo_med": 252.0,
+  "rhat_med": 1.5594,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__dogs_hierarchical": {
+  "ess_med": 799.0,
+  "geo_med": 1959.0,
+  "rhat_med": 1.0041,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__eight_schools_centered": {
+  "ess_med": 30.0,
+  "geo_med": 114.0,
+  "rhat_med": 1.0979,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__eight_schools_noncentered": {
+  "ess_med": 924.0,
+  "geo_med": 1633.0,
+  "rhat_med": 1.007,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__garch11": {
+  "ess_med": 325.0,
+  "geo_med": 604.0,
+  "rhat_med": 1.016,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__gp_regr": {
+  "ess_med": 926.0,
+  "geo_med": 1205.0,
+  "rhat_med": 1.0076,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__hier_2pl": {
+  "ess_med": 77.0,
+  "geo_med": 950.0,
+  "rhat_med": 1.0565,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__kidscore_momiq": {
+  "ess_med": 180.0,
+  "geo_med": 401.0,
+  "rhat_med": 1.035,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__kronecker_gp": {
+  "ess_med": 54.5,
+  "geo_med": 393.5,
+  "rhat_med": 1.0700500000000002,
+  "n_reps": 2,
+  "missing": 0
+ },
+ "fold__logmesquite_logvash": {
+  "ess_med": 56.0,
+  "geo_med": 166.0,
+  "rhat_med": 1.0597,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__lotka_volterra": {
+  "ess_med": 44.0,
+  "geo_med": 680.0,
+  "rhat_med": 1.0811,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__low_dim_gauss_mix": {
+  "ess_med": 492.0,
+  "geo_med": 826.0,
+  "rhat_med": 1.0073,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__lsat_model": {
+  "ess_med": 723.0,
+  "geo_med": 5396.0,
+  "rhat_med": 1.0184,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__pilots": {
+  "ess_med": 5.0,
+  "geo_med": 159.0,
+  "rhat_med": 2.1703,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__radon_partially_pooled_noncentered": {
+  "ess_med": 352.0,
+  "geo_med": 4076.0,
+  "rhat_med": 1.017,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__radon_variable_intercept_slope_noncentered": {
+  "ess_med": 345.0,
+  "geo_med": 2990.0,
+  "rhat_med": 1.0168,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "fold__wells_dist100_model": {
+  "ess_med": 437.0,
+  "geo_med": 500.0,
+  "rhat_med": 1.0115,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__accel_gp": {
+  "ess_med": null,
+  "missing": 3
+ },
+ "auto__arma11": {
+  "ess_med": 506.0,
+  "geo_med": 1145.0,
+  "rhat_med": 1.0093,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__blr": {
+  "ess_med": 269.0,
+  "geo_med": 1343.0,
+  "rhat_med": 1.0172,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__bym2_offset_only": {
+  "ess_med": 79.0,
+  "geo_med": 1835.0,
+  "rhat_med": 1.0455,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__diamonds": {
+  "ess_med": 7.0,
+  "geo_med": 381.0,
+  "rhat_med": 1.63,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__dogs_hierarchical": {
+  "ess_med": 771.0,
+  "geo_med": 1956.0,
+  "rhat_med": 1.0049,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__eight_schools_centered": {
+  "ess_med": 36.0,
+  "geo_med": 175.0,
+  "rhat_med": 1.0917,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__eight_schools_noncentered": {
+  "ess_med": 820.0,
+  "geo_med": 1668.0,
+  "rhat_med": 1.0066,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__garch11": {
+  "ess_med": 474.0,
+  "geo_med": 701.0,
+  "rhat_med": 1.0096,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__gp_regr": {
+  "ess_med": 1069.0,
+  "geo_med": 1339.0,
+  "rhat_med": 1.0031,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__hier_2pl": {
+  "ess_med": 310.0,
+  "geo_med": 2025.0,
+  "rhat_med": 1.0165,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__kidscore_momiq": {
+  "ess_med": 240.0,
+  "geo_med": 457.0,
+  "rhat_med": 1.0189,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__kronecker_gp": {
+  "ess_med": 38.5,
+  "geo_med": 355.0,
+  "rhat_med": 1.0957,
+  "n_reps": 2,
+  "missing": 0
+ },
+ "auto__logmesquite_logvash": {
+  "ess_med": 98.0,
+  "geo_med": 280.0,
+  "rhat_med": 1.0173,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__lotka_volterra": {
+  "ess_med": 48.0,
+  "geo_med": 681.0,
+  "rhat_med": 1.0774,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__low_dim_gauss_mix": {
+  "ess_med": 559.0,
+  "geo_med": 920.0,
+  "rhat_med": 1.0041,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__lsat_model": {
+  "ess_med": 723.0,
+  "geo_med": 5396.0,
+  "rhat_med": 1.0184,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__pilots": {
+  "ess_med": 6.0,
+  "geo_med": 132.0,
+  "rhat_med": 2.3575,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__radon_partially_pooled_noncentered": {
+  "ess_med": 342.0,
+  "geo_med": 4122.0,
+  "rhat_med": 1.0189,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__radon_variable_intercept_slope_noncentered": {
+  "ess_med": 291.0,
+  "geo_med": 3334.0,
+  "rhat_med": 1.0167,
+  "n_reps": 3,
+  "missing": 0
+ },
+ "auto__wells_dist100_model": {
+  "ess_med": 524.0,
+  "geo_med": 561.0,
+  "rhat_med": 1.0067,
+  "n_reps": 3,
+  "missing": 0
+ }
+}

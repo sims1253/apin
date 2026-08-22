@@ -1,0 +1,28 @@
+{
+  "model": "diamonds",
+  "wall_s": 9.339471817016602,
+  "warmup_s": 3.136,
+  "sampling_s": 7.472,
+  "total_sampler_s": 10.608,
+  "profile_blocks": {
+    "model": {
+      "total_time": 10.136176,
+      "forward_time": 10.101228,
+      "reverse_time": 0.034947729,
+      "chain_stack": 4857215.0,
+      "no_chain_stack": 1142875.0,
+      "autodiff_calls": 285715.0,
+      "no_autodiff_calls": 1.0
+    },
+    "tdata": {
+      "total_time": 6.2522e-05,
+      "forward_time": 6.2522e-05,
+      "reverse_time": 0.0,
+      "chain_stack": 0.0,
+      "no_chain_stack": 0.0,
+      "autodiff_calls": 0.0,
+      "no_autodiff_calls": 1.0
+    }
+  },
+  "profile_total_s": 10.136238522000001
+}

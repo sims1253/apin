@@ -1,0 +1,37 @@
+{
+  "model": "kronecker_gp",
+  "wall_s": 127.05861949920654,
+  "warmup_s": 63.642,
+  "sampling_s": 69.955,
+  "total_sampler_s": 133.597,
+  "profile_blocks": {
+    "tdata": {
+      "total_time": 1.156e-06,
+      "forward_time": 1.156e-06,
+      "reverse_time": 0.0,
+      "chain_stack": 0.0,
+      "no_chain_stack": 0.0,
+      "autodiff_calls": 0.0,
+      "no_autodiff_calls": 1.0
+    },
+    "tp": {
+      "total_time": 76.467699,
+      "forward_time": 58.995014,
+      "reverse_time": 17.472685,
+      "chain_stack": 1076398052.0,
+      "no_chain_stack": 1440312420.0,
+      "autodiff_calls": 393416.0,
+      "no_autodiff_calls": 201.0
+    },
+    "model": {
+      "total_time": 31.012923,
+      "forward_time": 16.851836,
+      "reverse_time": 14.161087,
+      "chain_stack": 396956780.0,
+      "no_chain_stack": 2138215972.0,
+      "autodiff_calls": 393416.0,
+      "no_autodiff_calls": 1.0
+    }
+  },
+  "profile_total_s": 107.480623156
+}

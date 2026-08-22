@@ -1,0 +1,28 @@
+{
+  "model": "radon_partially_pooled_noncentered",
+  "wall_s": 16.571781396865845,
+  "warmup_s": 15.861,
+  "sampling_s": 1.992,
+  "total_sampler_s": 17.853,
+  "profile_blocks": {
+    "tp": {
+      "total_time": 0.20015686,
+      "forward_time": 0.096259881,
+      "reverse_time": 0.10389698,
+      "chain_stack": 93590.0,
+      "no_chain_stack": 36125740.0,
+      "autodiff_calls": 46793.0,
+      "no_autodiff_calls": 201.0
+    },
+    "model": {
+      "total_time": 17.230991,
+      "forward_time": 13.222206,
+      "reverse_time": 4.0087848,
+      "chain_stack": 1770179214.0,
+      "no_chain_stack": 588515569.0,
+      "autodiff_calls": 46793.0,
+      "no_autodiff_calls": 1.0
+    }
+  },
+  "profile_total_s": 17.43114786
+}

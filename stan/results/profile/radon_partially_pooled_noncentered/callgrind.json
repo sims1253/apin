@@ -1,0 +1,176 @@
+{
+  "model": "radon_partially_pooled_noncentered",
+  "iters": "40+40",
+  "total_instructions": 175855727620,
+  "one_time_io_instructions": 0,
+  "steady_state_instructions": 175855727620,
+  "cache_totals": {
+    "Ir": 175855727620,
+    "Dr": 50210794570,
+    "Dw": 40440293860,
+    "I1mr": 9081159,
+    "D1mr": 1241203857,
+    "D1mw": 1276350582,
+    "ILmr": 1874178,
+    "DLmr": 243356,
+    "DLmw": 2069166
+  },
+  "d1_mr": 0.0247,
+  "dl_mr": 0.0,
+  "buckets": {
+    "model_log_prob": 104462365486,
+    "autodiff_reverse": 14969127205,
+    "checks": 0,
+    "eigen_linalg": 13842668126,
+    "memcpy_alloc": 231467574,
+    "rng": 0,
+    "io": 3940341367
+  },
+  "bucket_share": {
+    "model_log_prob": 0.594,
+    "autodiff_reverse": 0.0851,
+    "checks": 0.0,
+    "eigen_linalg": 0.0787,
+    "memcpy_alloc": 0.0013,
+    "rng": 0.0,
+    "io": 0.0224
+  },
+  "top_funcs": [
+    [
+      "???:stan::return_type<double, stan::math::var_value<double, void>, stan::math::var_value<double, void>&>::type stan::math::normal_lpdf<false, double, stan::math::var_value<double, void>, stan::math::var_value<double, void>&, (void*)0>(double&&, stan::math::var_value<double, void>&&, stan::math::var_value<double, void>&) [clone .isra.0] [/home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__default/model]",
+      82004806652,
+      0.4663
+    ],
+    [
+      "???:stan::scalar_type<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::type model_model_namespace::model_model::log_prob_impl<true, true, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::Matrix<int, -1, 1, 0, -1, 1>, (void*)0, (void*)0, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, Eigen::Matrix<int, -1, 1, 0, -1, 1>&, std::ostream*) const [clone .isra.0] [/home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__default/model]",
+      22138815238,
+      0.1259
+    ],
+    [
+      "./math/../sysdeps/ieee754/dbl-64/e_log.c:__ieee754_log_fma [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      19781679527,
+      0.1125
+    ],
+    [
+      "???:void stan::math::accumulator<stan::math::var_value<double, void>, void>::add<stan::math::var_value<double, void>, void>(stan::math::var_value<double, void>) [/home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__default/model]",
+      12642234346,
+      0.0719
+    ],
+    [
+      "???:void stan::math::gradient<stan::model::model_functional<stan::model::model_base> >(stan::model::model_functional<stan::model::model_base> const&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, double&, Eigen::Matrix<double, -1, 1, 0, -1, 1>&) [/home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__default/model]",
+      12157187192,
+      0.0691
+    ],
+    [
+      "???:stan::math::internal::reverse_pass_callback_vari<stan::math::internal::partials_propagator<stan::math::var_value<double, void>, void, double, stan::math::var_value<double, void>, stan::math::var_value<double, void> >::build(double)::{lambda(auto:1&&)#1}::operator()<stan::math::internal::ops_partials_edge<double, stan::math::var_value<double, void>, void>&>(stan::math::internal::ops_partials_edge<double, stan::math::var_value<double, void>, void>&)::{lambda()#1}>::chain() [/home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__default/model]",
+      6942106512,
+      0.0395
+    ],
+    [
+      "???:stan::math::vari_base*& std::vector<stan::math::vari_base*, std::allocator<stan::math::vari_base*> >::emplace_back<stan::math::vari_base*>(stan::math::vari_base*&&) [clone .isra.0] [/home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__default/model]",
+      3940341367,
+      0.0224
+    ],
+    [
+      "???:stan::math::var_value<double, void> stan::math::sum<stan::math::arena_allocator<stan::math::var_value<double, void> > >(std::vector<stan::math::var_value<double, void>, stan::math::arena_allocator<stan::math::var_value<double, void> > > const&) [/home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__default/model]",
+      3539829693,
+      0.0201
+    ],
+    [
+      "???:stan::math::internal::callback_vari<double, stan::math::sum<stan::math::arena_allocator<stan::math::var_value<double, void> > >(std::vector<stan::math::var_value<double, void>, stan::math::arena_allocator<stan::math::var_value<double, void> > > const&)::{lambda(auto:1&)#1}>::chain() [/home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__default/model]",
+      3096803151,
+      0.0176
+    ],
+    [
+      "./math/./w_log_template.c:log@@GLIBC_2.29 [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      2169471175,
+      0.0123
+    ],
+    [
+      "???:Eigen::PlainObjectBase<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> >::PlainObjectBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<stan::math::var_value<double, void> >, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> > >(Eigen::DenseBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<stan::math::var_value<double, void> >, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> > > const&) [/home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__default/model]",
+      898286819,
+      0.0051
+    ],
+    [
+      "???:0x0000000004adc2e0 [???]",
+      867788476,
+      0.0049
+    ],
+    [
+      "???:0x00000000001203c0 [???]",
+      867788470,
+      0.0049
+    ],
+    [
+      "???:stan::math::internal::reverse_pass_callback_vari<stan::math::internal::partials_propagator<stan::math::var_value<double, void>, void, double, stan::math::var_value<double, void>, stan::math::var_value<double, void> >::build(double)::{lambda(auto:1&&)#1}::operator()<stan::math::internal::ops_partials_edge<double, double, void>&>(stan::math::internal::ops_partials_edge<double, double, void>&)::{lambda()#1}>::chain() [/home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__default/model]",
+      867763314,
+      0.0049
+    ],
+    [
+      "./math/../sysdeps/ieee754/dbl-64/math_config.h:__ieee754_log_fma",
+      433894238,
+      0.0025
+    ],
+    [
+      "???:auto stan::math::multiply<stan::math::var_value<double, void>, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, (void*)0, (void*)0, (void*)0, (void*)0>(stan::math::var_value<double, void> const&, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&) [/home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__default/model]",
+      383348193,
+      0.0022
+    ],
+    [
+      "???:auto stan::math::add<stan::math::var_value<double, void>, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, (void*)0, (void*)0>(stan::math::var_value<double, void> const&, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>&&) [/home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__default/model]",
+      349113283,
+      0.002
+    ],
+    [
+      "???:stan::return_type<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double, double>::type stan::math::normal_lpdf<true, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double, double, (void*)0>(Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double&&, double&&) [/home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__default/model]",
+      318743596,
+      0.0018
+    ],
+    [
+      "./malloc/./malloc/malloc.c:_int_malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]",
+      231467574,
+      0.0013
+    ],
+    [
+      "???:void Eigen::internal::call_dense_assignment_loop<Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::internal::assign_op<double, double> >(Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, Eigen::internal::assign_op<double, double> const&) [/home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__default/model]",
+      216357400,
+      0.0012
+    ],
+    [
+      "???:Eigen::ScalarBinaryOpTraits<double, Eigen::internal::traits<Eigen::Matrix<double, -1, 1, 0, -1, 1> >::Scalar, Eigen::internal::scalar_product_op<double, Eigen::internal::traits<Eigen::Matrix<double, -1, 1, 0, -1, 1> >::Scalar> >::ReturnType Eigen::MatrixBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> >::dot<Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&) const [/home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__default/model]",
+      187488522,
+      0.0011
+    ],
+    [
+      "???:stan::math::internal::reverse_pass_callback_vari<stan::math::multiply<stan::math::var_value<double, void>, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, (void*)0, (void*)0, (void*)0, (void*)0>(stan::math::var_value<double, void> const&, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&)::{lambda()#1}>::chain() [/home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__default/model]",
+      173511252,
+      0.001
+    ]
+  ],
+  "top_leftover": [
+    [
+      "./math/../sysdeps/ieee754/dbl-64/e_log.c:__ieee754_log_fma [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      19781679527
+    ],
+    [
+      "???:void stan::math::accumulator<stan::math::var_value<double, void>, void>::add<stan::math::var_value<double, void>, void>(stan::math::var_value<double, void>) [/home/m0hawk/Documents/apin/stan/build/radon_partially_pooled_noncentered__default/model]",
+      12642234346
+    ],
+    [
+      "./math/./w_log_template.c:log@@GLIBC_2.29 [/usr/lib/x86_64-linux-gnu/libm.so.6]",
+      2169471175
+    ],
+    [
+      "???:0x0000000004adc2e0 [???]",
+      867788476
+    ],
+    [
+      "???:0x00000000001203c0 [???]",
+      867788470
+    ],
+    [
+      "./math/../sysdeps/ieee754/dbl-64/math_config.h:__ieee754_log_fma",
+      433894238
+    ]
+  ]
+}

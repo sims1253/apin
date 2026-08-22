@@ -1,0 +1,16 @@
+[submodule "stan/external/walnutpie"]
+	path = stan/external/walnutpie
+	url = git@github.com:sims1253/walnutpie.git
+	branch = dev/init-robustness
+[submodule "stan/external/cmdstan"]
+	path = stan/external/cmdstan
+	url = git@github.com:sims1253/cmdstan.git
+	branch = nindan/mixed-build-guard
+[submodule "stan/external/posteriordb"]
+	path = stan/external/posteriordb
+	url = https://github.com/stan-dev/posteriordb
+	branch = master
+[submodule "stan/external/tinystan"]
+	path = stan/external/tinystan
+	url = https://github.com/WardBrian/tinystan
+	branch = main

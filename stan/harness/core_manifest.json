@@ -1,0 +1,170 @@
+[
+  {
+    "model": "eight_schools_noncentered",
+    "family": "easy/small",
+    "posterior": "eight_schools-eight_schools_noncentered",
+    "data_name": "eight_schools",
+    "stan_file": "models/eight_schools_noncentered.stan",
+    "data_file": "data/eight_schools_noncentered.json"
+  },
+  {
+    "model": "blr",
+    "family": "easy/small",
+    "posterior": "sblrc-blr",
+    "data_name": "sblrc",
+    "stan_file": "models/blr.stan",
+    "data_file": "data/blr.json"
+  },
+  {
+    "model": "kidscore_momiq",
+    "family": "easy/small",
+    "posterior": "kidiq-kidscore_momiq",
+    "data_name": "kidiq",
+    "stan_file": "models/kidscore_momiq.stan",
+    "data_file": "data/kidscore_momiq.json"
+  },
+  {
+    "model": "lsat_model",
+    "family": "easy/small",
+    "posterior": "lsat_data-lsat_model",
+    "data_name": "lsat_data",
+    "stan_file": "models/lsat_model.stan",
+    "data_file": "data/lsat_model.json"
+  },
+  {
+    "model": "logmesquite_logvash",
+    "family": "GLM",
+    "posterior": "mesquite-logmesquite_logvash",
+    "data_name": "mesquite",
+    "stan_file": "models/logmesquite_logvash.stan",
+    "data_file": "data/logmesquite_logvash.json"
+  },
+  {
+    "model": "wells_dist100_model",
+    "family": "GLM",
+    "posterior": "wells_data-wells_dist100_model",
+    "data_name": "wells_data",
+    "stan_file": "models/wells_dist100_model.stan",
+    "data_file": "data/wells_dist100_model.json"
+  },
+  {
+    "model": "diamonds",
+    "family": "GLM",
+    "posterior": "diamonds-diamonds",
+    "data_name": "diamonds",
+    "stan_file": "models/diamonds.stan",
+    "data_file": "data/diamonds.json"
+  },
+  {
+    "model": "radon_partially_pooled_noncentered",
+    "family": "hierarchical",
+    "posterior": "radon_all-radon_partially_pooled_noncentered",
+    "data_name": "radon_all",
+    "stan_file": "models/radon_partially_pooled_noncentered.stan",
+    "data_file": "data/radon_partially_pooled_noncentered.json"
+  },
+  {
+    "model": "radon_variable_intercept_slope_noncentered",
+    "family": "hierarchical",
+    "posterior": "radon_mn-radon_variable_intercept_slope_noncentered",
+    "data_name": "radon_mn",
+    "stan_file": "models/radon_variable_intercept_slope_noncentered.stan",
+    "data_file": "data/radon_variable_intercept_slope_noncentered.json"
+  },
+  {
+    "model": "dogs_hierarchical",
+    "family": "hierarchical",
+    "posterior": "dogs-dogs_hierarchical",
+    "data_name": "dogs",
+    "stan_file": "models/dogs_hierarchical.stan",
+    "data_file": "data/dogs_hierarchical.json"
+  },
+  {
+    "model": "pilots",
+    "family": "hierarchical",
+    "posterior": "pilots-pilots",
+    "data_name": "pilots",
+    "stan_file": "models/pilots.stan",
+    "data_file": "data/pilots.json"
+  },
+  {
+    "model": "hier_2pl",
+    "family": "hierarchical",
+    "posterior": "sat-hier_2pl",
+    "data_name": "sat",
+    "stan_file": "models/hier_2pl.stan",
+    "data_file": "data/hier_2pl.json"
+  },
+  {
+    "model": "gp_regr",
+    "family": "GP/spatial",
+    "posterior": "gp_pois_regr-gp_regr",
+    "data_name": "gp_pois_regr",
+    "stan_file": "models/gp_regr.stan",
+    "data_file": "data/gp_regr.json"
+  },
+  {
+    "model": "kronecker_gp",
+    "family": "GP/spatial",
+    "posterior": "synthetic_grid_RBF_kernels-kronecker_gp",
+    "data_name": "synthetic_grid_RBF_kernels",
+    "stan_file": "models/kronecker_gp.stan",
+    "data_file": "data/kronecker_gp.json"
+  },
+  {
+    "model": "accel_gp",
+    "family": "GP/spatial",
+    "posterior": "mcycle_gp-accel_gp",
+    "data_name": "mcycle_gp",
+    "stan_file": "models/accel_gp.stan",
+    "data_file": "data/accel_gp.json"
+  },
+  {
+    "model": "bym2_offset_only",
+    "family": "GP/spatial",
+    "posterior": "traffic_accident_nyc-bym2_offset_only",
+    "data_name": "traffic_accident_nyc",
+    "stan_file": "models/bym2_offset_only.stan",
+    "data_file": "data/bym2_offset_only.json"
+  },
+  {
+    "model": "eight_schools_centered",
+    "family": "stiff/funnel",
+    "posterior": "eight_schools-eight_schools_centered",
+    "data_name": "eight_schools",
+    "stan_file": "models/eight_schools_centered.stan",
+    "data_file": "data/eight_schools_centered.json"
+  },
+  {
+    "model": "garch11",
+    "family": "stiff/funnel",
+    "posterior": "garch-garch11",
+    "data_name": "garch",
+    "stan_file": "models/garch11.stan",
+    "data_file": "data/garch11.json"
+  },
+  {
+    "model": "lotka_volterra",
+    "family": "stiff/funnel",
+    "posterior": "hudson_lynx_hare-lotka_volterra",
+    "data_name": "hudson_lynx_hare",
+    "stan_file": "models/lotka_volterra.stan",
+    "data_file": "data/lotka_volterra.json"
+  },
+  {
+    "model": "low_dim_gauss_mix",
+    "family": "stiff/funnel",
+    "posterior": "low_dim_gauss_mix-low_dim_gauss_mix",
+    "data_name": "low_dim_gauss_mix",
+    "stan_file": "models/low_dim_gauss_mix.stan",
+    "data_file": "data/low_dim_gauss_mix.json"
+  },
+  {
+    "model": "arma11",
+    "family": "stiff/funnel",
+    "posterior": "arma-arma11",
+    "data_name": "arma",
+    "stan_file": "models/arma11.stan",
+    "data_file": "data/arma11.json"
+  }
+]

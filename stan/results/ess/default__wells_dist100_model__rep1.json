@@ -1,0 +1,1 @@
+{"ess_bulk_min":1233.833859,"ess_bulk_geomean":1237.743363,"ess_tail_min":1431.655478,"rhat_max":1.003846,"n_params":2,"n_chains":4,"n_draws":1000,"worst_params":["beta.1","alpha"],"ess_bulk_per_param":{"alpha":1241.7,"beta.1":1233.8}}

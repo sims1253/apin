@@ -1,0 +1,28 @@
+{
+  "model": "lsat_model",
+  "wall_s": 2.856074810028076,
+  "warmup_s": 2.216,
+  "sampling_s": 0.633,
+  "total_sampler_s": 2.849,
+  "profile_blocks": {
+    "tdata": {
+      "total_time": 1.0975e-05,
+      "forward_time": 1.0975e-05,
+      "reverse_time": 0.0,
+      "chain_stack": 0.0,
+      "no_chain_stack": 0.0,
+      "autodiff_calls": 0.0,
+      "no_autodiff_calls": 1.0
+    },
+    "model": {
+      "total_time": 2.501205,
+      "forward_time": 2.0810403,
+      "reverse_time": 0.42016472,
+      "chain_stack": 444889.0,
+      "no_chain_stack": 230237728.0,
+      "autodiff_calls": 15341.0,
+      "no_autodiff_calls": 1.0
+    }
+  },
+  "profile_total_s": 2.501215975
+}
