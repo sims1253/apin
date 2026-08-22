@@ -1441,3 +1441,148 @@ Outer stan repo: submodule pointer updated to 0cb5b7b (explicit
 `git add external/walnutpie WORKLOG.md` only), local commit on main, no
 push. Feature branches NOT merged into any mainline; dev/init-robustness
 untouched.
+
+## W-28 (pre-registered BEFORE running): pilot sampling-burst gate for warmup early-exit
+
+From NEXT_IDEAS section B (dynamic upgrade). W-25 refuted STATIC gates: even
+with step AND mass temporally stable over 2 windows (tol 0.05), warmup keeps
+improving the frozen sampler on the marginal class (hier_2pl bulk 519->126)
+— suspected min-micro-steps / trajectory-geometry adaptation that no
+step/mass drift signal observes. W-28 tests the DYNAMIC gate: after a
+candidate exit point, actually LOOK at mixing.
+
+Design (implementation on walnutpie branch exp/pilot-burst-gate off
+exp/endpoint-grad-threading+chains @ 0cb5b7b):
+
+- CANDIDATE TRIGGER (unchanged from W-25): controller cross-chain step
+  agreement + per-chain 2-window temporal step drift <= 0.05 and mass drift
+  <= mass tol, window 50, min-iter 200 (--temporal-step-tol 0.05).
+- PILOT BURST: at each candidate, take P=50 draws per chain from the
+  would-be-frozen sampler. Pilots run on SEPARATE per-chain RNG streams
+  (seed + 7919*(c+1), fresh per check) and a recording-only handler, so
+  pilot draws NEVER enter saved draws and never advance the chains'
+  sampling RNG streams (bit-transparent to the no-pilot arm when the first
+  check passes). Pilot draws are ALWAYS discarded (requirement: safest for
+  the ESS comparison); after a pass, sampling starts fresh via
+  adapters[c].sampler().
+- GATE FORMULAS (exact, on the P=50 lp__ values per chain):
+  1. Per-chain lag-1 autocorrelation (biased/ML autocovariance estimator):
+     mean = (1/P) sum lp; c0 = (1/P) sum (lp-mean)^2;
+     c1 = (1/P) sum_{n=0..P-2} (lp_n-mean)(lp_{n+1}-mean);
+     rho1 = c1/c0 (if c0 <= 0: rho1 := 1, i.e. fail).
+     Statistic: rho1_max = max over chains. PASS requires rho1_max <= 0.5.
+     Rationale: AR(1) heuristic ESS/N=(1-r)/(1+r); r=0.5 -> ESS ~ N/3.
+     The marginal-class regressions (-33..-58% ESS) imply far slower mixing
+     than N/3 in the pilot window; r > 0.5 = visibly slow, resume.
+  2. Cross-chain short R-hat proxy on lp (split-half, NOT rank-normalized
+     — 50 draws is too few; documented simple proxy): each chain's 50
+     draws split into first/last 25 -> J = 2*chains half-chains of n_h = 25.
+     W = mean of half-chain sample variances (ddof=1);
+     B = n_h/(J-1) * sum (mean_j - grand)^2;
+     var_plus = (n_h-1)/n_h * W + B/n_h; Rhat_lp = sqrt(var_plus/W)
+     (if W <= 0: Rhat := +inf, fail). PASS requires Rhat_lp < 1.10
+     (classic threshold; 8x25 halves are noisy, so false-FAIL is possible
+     and costs only warmup — conservative direction).
+  GATE PASS = (rho1_max <= 0.5) AND (Rhat_lp < 1.10). Both statistics and
+  the decision are printed per check (parseable `pilot check k: ...` lines).
+- RESUME on failure: warmup continues from the PRESERVED adapter state (no
+  adaptation state discarded) via adapt_with_pilot (new, adapt.hpp): it
+  loops adapt_with_stats phases with the remaining warmup budget as the
+  phase max_iter; a fresh controller phase re-arms the temporal gate
+  (~200 + 2 windows more iters before the next candidate, so at most ~2-3
+  pilot checks within a 1000-iter budget). If the budget is exhausted
+  after a rejection, warmup has run its full length (early_exit reported
+  0) and sampling proceeds — quality floor = full warmup.
+- CLI: --pilot-burst N (0 = OFF, default; N must be even), --pilot-rho1-max
+  (default 0.5), --pilot-rhat-max (default 1.1). Multi-chain only. Default
+  path (all new flags 0/absent) must stay bit-identical (canary).
+- Known approximation, recorded: pilot logp cost lands in the warm-phase
+  timing stanza; total wall measured externally (harness) is the honest
+  speed metric. The adapter-internal metric-window reset guard reads the
+  PHASE-1 max_iter while resumed phases are shorter — affects only whether
+  the accumulator chops at the exact final iteration of a resumed phase
+  (interior-boundary semantics; immaterial and documented).
+
+Arms (3 reps x 4 chains, seeds 20260819+1000*rep (+c single-chain), pf
+inits from inits_w25/, --metric-window 50, warmup=1000 samples=1000):
+- base:              4 single-chain procs, fixed warmup (REUSE runs/base —
+                     W-25 runs; canary bit-identity makes them valid).
+- mc_gate05:         --chains 4 --temporal-step-tol 0.05 (the refuted
+                     static gate; REUSE runs/mc_gate05 for reference).
+- mc_pilot50 (NEW):  --chains 4 --temporal-step-tol 0.05 --pilot-burst 50.
+Models (W-25 grid): arma11, lsat_model, hier_2pl (marginal class), blr,
+eight_schools_noncentered (easy class). Harness: extend run_w25.py with the
+mc_pilot50 arm; new analyze_w28.py (3-arm tables, arviz ESS, medians).
+
+GATES (pre-registered):
+- Quality (primary): mc_pilot50 ess_bulk_min AND ess_tail_min per marginal
+  model NOT worse than base beyond noise (median of 3 reps; noise band =
+  base per-rep spread). This is the gate W-25 failed.
+- Speed: on models where the pilot arm's final exit is early
+  (exit_iter < 1000), wall median vs base must improve >= 1.2x; no model
+  may be > 1.1x SLOWER than base (pilot overhead must not eat the win).
+- Canary: default single-chain draws AND the unchanged multi-chain path
+  (mc_gate05 flags) bit-identical (md5) pre/post change.
+- Expectation: pilot REJECTS hier_2pl (and likely lsat) at the first
+  candidate, resumes, final ESS within noise of base; blr passes
+  immediately keeping most of the 1.3-2.4x wall win minus ~5-10% pilot
+  cost. Honest risk: arma11 (only -33% ESS, step stable +12%) may look
+  "well-mixed" in a 50-draw lp pilot and pass early — if its ESS then
+  regresses beyond noise, the quality gate FAILS and the early-exit
+  direction closes (lp-window mixing signals too weak): recorded either
+  way as the W-28 verdict.
+
+## 2026-08-22 — W-27 close-out: NEGATIVE RESULT — flags are a dead end; -march=native MISCOMPILES kronecker_gp gradients
+
+Setup: 5 models rebuilt as bs_models_o3 (-O3 -march=native -mtune=native) and
+bs_models_o3only (-O3) via bridgestan 2.9.0 compile_model (CXXFLAGS=...; NOTE
+compile_model caches <stem>_model.so next to the .stan file and silently
+returns it regardless of make_args — first build attempt shipped default
+binaries; had to copy .stan into scratch dirs per variant. out_dir kwarg
+does not exist in 2.9.0). CLI for wall runs: own build at
+external/walnutpie/build_e27 @ 0cb5b7b (shared build was being rebuilt by
+another agent; one consistent binary for both arms). Runner/analysis:
+harness/run_w27.py, harness/analyze_w27.py; inits: inits_w25 pf for
+blr/arma11/hier_2pl, deterministic normal(0,1) random.Random(f'{seed}-{c}')
+for kronecker_gp/diamonds -> inits_w27/. Raw: runs/w27/{default,o3only}.
+
+G1 GRADIENT PARITY (100 random unc points/model, default vs variant):
+- default vs -O3: BIT-IDENTICAL (logp AND grad, all 5 models, 0.0 diff) —
+  no fast-math => -O level cannot reassociate FP; only codegen changes.
+- default vs -O3+native: blr 8e-14, hier_2pl 2e-14, diamonds 2e-11,
+  arma11 5e-15 rel grad — PASS. kronecker_gp: CATASTROPHIC FAIL — 99/99
+  points wrong, ~250-305 of 438 components (the L lkj_corr_cholesky
+  block) off at 0.006-1.7 REL with SIGN FLIPS, while logp matches to 1e-16.
+  Richardson finite differences side with the default build (pt1 comp3:
+  fd -2.984 vs default -3.000, native -8.121) => -march=native
+  miscompiles the gradient (gcc FMA-contraction/eigen packet path).
+  The historic cmdstan corruption was blamed on mixed-build ABI; this
+  shows the hazard is NOT only mixed builds — self-contained single-make
+  -march=native can miscompile gradients outright. DO NOT USE
+  -march=native for Stan model builds.
+
+G2/G3 WALL (default vs -O3 only; -O3+native disqualified at G1), 5 models
+x 3 reps x 4 chains, seeds 20260819+1000*rep+c, warmup=1000 samples=1000
+--metric-window 50, identical inits per arm, single-chain CLI procs:
+  wall ratio (o3/default): blr 0.95, arma11 1.04, hier_2pl 0.99,
+    kronecker_gp 1.01, diamonds 1.02 — GEOMEAN 1.002 (no effect).
+  per-call logp_grad (sampling): ratios 0.98-1.02 all models.
+  Draws: 60/60 chain CSVs BIT-IDENTICAL default vs -O3 (expected from G1)
+  => ESS identical by construction, no separate ESS run needed.
+- Why no win: the default bridgestan build is ALREADY optimized at -O3-
+  equivalent level (-O0 control build of hier_2pl: 1343us/call vs ~976
+  default/~982 -O3 in matched serial CLI runs; default==explicit -O3).
+- What -march=native would have bought where its gradients pass: only
+  ~6-15% per call (hier_2pl serial CLI: 920 vs 981us; Python micro-bench
+  0.85-0.88x on hier/kron, 0.72-0.74x on blr/diamonds — but small-model
+  micro-bench numbers are Python-overhead-dominated, not trustworthy).
+
+VERDICT: no flags win available. Default build flags are already optimal
+in practice; -O3 alone is a provably safe no-op (bit-identical draws);
+-march=native is UNSAFE (silent gradient miscompile on kronecker_gp) for
+at most ~10% per-call. Recommend: keep default compile flags, close the
+"speed up logp_grad via build flags" direction (NEXT_IDEAS A). stanc
+--Oexperimental was already rejected in Phase 0; no remaining cheap
+compile lever.
+Artifacts committed: harness/run_w27.py, harness/analyze_w27.py,
+inits_w27/, this WORKLOG entry. bs_models_o3*/ kept local (not in repo).
