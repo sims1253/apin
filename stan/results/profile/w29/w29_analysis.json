@@ -1,0 +1,3033 @@
+{
+ "hier_2pl": {
+  "model": "hier_2pl",
+  "T": 35023874810,
+  "G": 34799540190,
+  "F": 31649972464,
+  "S": 34872453423,
+  "G_over_T": 0.9936,
+  "F_over_G": 0.9095,
+  "rev_over_G": 0.0905,
+  "grad_calls": 4493,
+  "grad_errors": 69,
+  "ir_per_grad": 7745279,
+  "per_call_us": [
+   950.2,
+   967.8
+  ],
+  "sampler_side_frac": 0.0064,
+  "alloc_share_G": 0.0666,
+  "buckets": {
+   "eltwise_ops": 0.2392,
+   "lpdf_lpmf": 0.1868,
+   "rev_sweep": 0.1498,
+   "libm": 0.1443,
+   "tape_build": 0.1263,
+   "index_glue": 0.0806,
+   "other": 0.0495,
+   "cholesky_llt": 0.0077,
+   "alloc_mem": 0.0046,
+   "eigen_linalg": 0.0016,
+   "model_glue": 0.0
+  },
+  "top": [
+   {
+    "cost": 6434394231,
+    "cost_g": 6434394231,
+    "name": "stan::return_type<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> >::type stan::math::bernoulli_logit_lpmf<true, std::vector<int, std::allocator<int> >, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, (void*)0>(std::vector<int, std::allocator<int> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&)",
+    "short": "stan::math::bernoulli_logit_lpmf",
+    "pct_G": 18.49,
+    "pct_T": 18.37,
+    "in_g": 1.0,
+    "bucket": "lpdf_lpmf",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::bernoulli_logit_lpmf"
+    ]
+   },
+   {
+    "cost": 5020052137,
+    "cost_g": 5020052137,
+    "name": "log1p",
+    "short": "libm::log1p",
+    "pct_G": 14.43,
+    "pct_T": 14.33,
+    "in_g": 1.0,
+    "bucket": "libm",
+    "path": [
+     "apply_scalar_unary::rev_lambda",
+     "libm::log1p"
+    ]
+   },
+   {
+    "cost": 4332644400,
+    "cost_g": 4332644400,
+    "name": "auto stan::math::subtract<stan::math::Holder<Eigen::IndexedView<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >, Eigen::CwiseBinaryOp<Eigen::internal::scalar_difference_op<int, int>, Eigen::Map<Eigen::Array<int, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, Eigen::Array<int, -1, 1, 0, -1, 1> const> const>, Eigen::internal::SingleRange>, stan::model::index_multi>, stan::math::Holder<Eigen::IndexedView<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::CwiseBinaryOp<Eigen::internal::scalar_difference_op<int, int>, Eigen::Map<Eigen::Array<int, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, Eigen::Array<int, -1, 1, 0, -1, 1> const> const>, Eigen::internal::SingleRange>, stan::model::index_multi>, (void*)0>(stan::math::Holder<Eigen::IndexedView<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >, Eigen::CwiseBinaryOp<Eigen::internal::scalar_difference_op<int, int>, Eigen::Map<Eigen::Array<int, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, Eigen::Array<int, -1, 1, 0, -1, 1> const> const>, Eigen::internal::SingleRange>, stan::model::index_multi> const&, stan::math::Holder<Eigen::IndexedView<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::CwiseBinaryOp<Eigen::internal::scalar_difference_op<int, int>, Eigen::Map<Eigen::Array<int, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, Eigen::Array<int, -1, 1, 0, -1, 1> const> const>, Eigen::internal::SingleRange>, stan::model::index_multi> const&)",
+    "short": "stan::math::subtract",
+    "pct_G": 12.45,
+    "pct_T": 12.37,
+    "in_g": 1.0,
+    "bucket": "eltwise_ops",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::subtract"
+    ]
+   },
+   {
+    "cost": 3992863504,
+    "cost_g": 3992863504,
+    "name": "auto stan::math::elt_multiply<stan::math::Holder<Eigen::IndexedView<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::CwiseBinaryOp<Eigen::internal::scalar_difference_op<int, int>, Eigen::Map<Eigen::Array<int, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, Eigen::Array<int, -1, 1, 0, -1, 1> const> const>, Eigen::internal::SingleRange>, stan::model::index_multi>, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, (void*)0, (void*)0>(stan::math::Holder<Eigen::IndexedView<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::CwiseBinaryOp<Eigen::internal::scalar_difference_op<int, int>, Eigen::Map<Eigen::Array<int, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, Eigen::Array<int, -1, 1, 0, -1, 1> const> const>, Eigen::internal::SingleRange>, stan::model::index_multi> const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&)",
+    "short": "stan::math::elt_multiply",
+    "pct_G": 11.47,
+    "pct_T": 11.4,
+    "in_g": 1.0,
+    "bucket": "eltwise_ops",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::elt_multiply"
+    ]
+   },
+   {
+    "cost": 2246152545,
+    "cost_g": 2245568455,
+    "name": "stan::math::stack_alloc::alloc(unsigned long)",
+    "short": "stan::math::stack_alloc::alloc(unsigned long)",
+    "pct_G": 6.45,
+    "pct_T": 6.41,
+    "in_g": 1.0,
+    "bucket": "tape_build",
+    "path": [
+     "stan::math::subtract",
+     "stan::math::stack_alloc::alloc(unsigned long)"
+    ]
+   },
+   {
+    "cost": 2204589439,
+    "cost_g": 2204589439,
+    "name": "double Eigen::DenseBase<Eigen::Select<Eigen::CwiseBinaryOp<Eigen::internal::scalar_cmp_op<double, double, (Eigen::internal::ComparisonName)1>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Array<double, -1, 1, 0, -1, 1> > const, Eigen::Array<double, -1, 1, 0, -1, 1> const>, Eigen::CwiseUnaryOp<Eigen::internal::scalar_opposite_op<double>, Eigen::Array<double, -1, 1, 0, -1, 1> const>, Eigen::Select<Eigen::CwiseBinaryOp<Eigen::internal::scalar_cmp_op<double, double, (Eigen::internal::ComparisonName)1>, Eigen::Array<double, -1, 1, 0, -1, 1> const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Array<double, -1, 1, 0, -1, 1> > const>, Eigen::Array<double, -1, 1, 0, -1, 1>, Eigen::CwiseUnaryOp<Eigen::internal::scalar_opposite_op<double>, Eigen::CwiseUnaryOp<stan::math::apply_scalar_unary<stan::math::log1p_fun, Eigen::Array<double, -1, 1, 0, -1, 1>&, void>::apply<Eigen::Array<double, -1, 1, 0, -1, 1>&>(Eigen::Array<double, -1, 1, 0, -1, 1>&)::{lambda(auto:1&&)#1}::operator()<Eigen::Array<double, -1, 1, 0, -1, 1>&>(Eigen::Array<double, -1, 1, 0, -1, 1>&) const::{lambda(auto:1&&)#1}, Eigen::Array<double, -1, 1, 0, -1, 1> const> const> > > >::redux<Eigen::internal::scalar_sum_op<double, double> >(Eigen::internal::scalar_sum_op<double, double> const&) const [clone .isra.0]",
+    "short": "apply_scalar_unary::rev_lambda",
+    "pct_G": 6.34,
+    "pct_T": 6.29,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "stan::math::bernoulli_logit_lpmf",
+     "apply_scalar_unary::rev_lambda"
+    ]
+   },
+   {
+    "cost": 1869157696,
+    "cost_g": 1869157696,
+    "name": "auto stan::model::rvalue<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, stan::model::index_multi, (void*)0, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, char const*, stan::model::index_multi&&) [clone .isra.0]",
+    "short": "stan::model::rvalue",
+    "pct_G": 5.37,
+    "pct_T": 5.34,
+    "in_g": 1.0,
+    "bucket": "index_glue",
+    "path": [
+     "stan::math::var_value",
+     "stan::model::rvalue"
+    ]
+   },
+   {
+    "cost": 1564528830,
+    "cost_g": 1564366424,
+    "name": "stan::math::vari_base*& std::vector<stan::math::vari_base*, std::allocator<stan::math::vari_base*> >::emplace_back<stan::math::vari_base*>(stan::math::vari_base*&&) [clone .isra.0]",
+    "short": "vector<stan::math>::emplace_back",
+    "pct_G": 4.5,
+    "pct_T": 4.47,
+    "in_g": 1.0,
+    "bucket": "tape_build",
+    "path": [
+     "stan::math::elt_multiply",
+     "vector<stan::math>::emplace_back"
+    ]
+   },
+   {
+    "cost": 1189224288,
+    "cost_g": 1189224288,
+    "name": "stan::math::elt_multiply<stan::math::Holder<Eigen::IndexedView<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::CwiseBinaryOp<Eigen::internal::scalar_difference_op<int, int>, Eigen::Map<Eigen::Array<int, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, Eigen::Array<int, -1, 1, 0, -1, 1> const> const>, Eigen::internal::SingleRange>, stan::model::index_multi>, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, (void*)0, (void*)0>(stan::math::Holder<Eigen::IndexedView<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::CwiseBinaryOp<Eigen::internal::scalar_difference_op<int, int>, Eigen::Map<Eigen::Array<int, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, Eigen::Array<int, -1, 1, 0, -1, 1> const> const>, Eigen::internal::SingleRange>, stan::model::index_multi> const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&)::{lambda()#1}::operator()()",
+    "short": "elt_multiply::rev_lambda",
+    "pct_G": 3.42,
+    "pct_T": 3.4,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "revcb:elt_multiply",
+     "elt_multiply::rev_lambda"
+    ]
+   },
+   {
+    "cost": 1104287912,
+    "cost_g": 1104287912,
+    "name": "stan::math::internal::reverse_pass_callback_vari<stan::math::subtract<stan::math::Holder<Eigen::IndexedView<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >, Eigen::CwiseBinaryOp<Eigen::internal::scalar_difference_op<int, int>, Eigen::Map<Eigen::Array<int, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, Eigen::Array<int, -1, 1, 0, -1, 1> const> const>, Eigen::internal::SingleRange>, stan::model::index_multi>, stan::math::Holder<Eigen::IndexedView<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::CwiseBinaryOp<Eigen::internal::scalar_difference_op<int, int>, Eigen::Map<Eigen::Array<int, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, Eigen::Array<int, -1, 1, 0, -1, 1> const> const>, Eigen::internal::SingleRange>, stan::model::index_multi>, (void*)0>(stan::math::Holder<Eigen::IndexedView<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >, Eigen::CwiseBinaryOp<Eigen::internal::scalar_difference_op<int, int>, Eigen::Map<Eigen::Array<int, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, Eigen::Array<int, -1, 1, 0, -1, 1> const> const>, Eigen::internal::SingleRange>, stan::model::index_multi> const&, stan::math::Holder<Eigen::IndexedView<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::CwiseBinaryOp<Eigen::internal::scalar_difference_op<int, int>, Eigen::Map<Eigen::Array<int, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<int>, Eigen::Array<int, -1, 1, 0, -1, 1> const> const>, Eigen::internal::SingleRange>, stan::model::index_multi> const&)::{lambda()#1}>::chain()",
+    "short": "revcb:subtract",
+    "pct_G": 3.17,
+    "pct_T": 3.15,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "bs_log_density_gradient (4,424x)",
+     "revcb:subtract"
+    ]
+   },
+   {
+    "cost": 1028448233,
+    "cost_g": 1022504868,
+    "name": "0x00000000001b1e00",
+    "short": "0x00000000001b1e00",
+    "pct_G": 2.94,
+    "pct_T": 2.94,
+    "in_g": 0.994,
+    "bucket": "other",
+    "path": [
+     "std::vector<int, std::allocator<int> >::vector(std::vector<int, std::a",
+     "0x00000000001b1e00"
+    ]
+   },
+   {
+    "cost": 934605392,
+    "cost_g": 934605392,
+    "name": "auto stan::model::rvalue<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, stan::model::index_multi, (void*)0, (void*)0>(Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, char const*, stan::model::index_multi&&) [clone .isra.0]",
+    "short": "stan::model::rvalue",
+    "pct_G": 2.69,
+    "pct_T": 2.67,
+    "in_g": 1.0,
+    "bucket": "index_glue",
+    "path": [
+     "stan::math::var_value",
+     "stan::model::rvalue"
+    ]
+   },
+   {
+    "cost": 714051296,
+    "cost_g": 714051296,
+    "name": "void stan::math::internal::update_adjoints<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, stan::math::arena_matrix<Eigen::Matrix<double, -1, 1, 0, -1, 1>, void>, (void*)0, (void*)0>(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>&, stan::math::arena_matrix<Eigen::Matrix<double, -1, 1, 0, -1, 1>, void> const&, stan::math::var_value<double, void> const&)",
+    "short": "stan::math::internal::update_adjoints",
+    "pct_G": 2.05,
+    "pct_T": 2.04,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "reverse_pass_callback_vari::rev_lambda",
+     "stan::math::internal::update_adjoints"
+    ]
+   },
+   {
+    "cost": 679619304,
+    "cost_g": 679619304,
+    "name": "stan::math::internal::bounded<std::vector<int, std::allocator<int> >, int, int, true>::check(char const*, char const*, std::vector<int, std::allocator<int> > const&, int const&, int const&) [clone .isra.0]",
+    "short": "stan::math::bounded",
+    "pct_G": 1.95,
+    "pct_T": 1.94,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::math::bernoulli_logit_lpmf",
+     "stan::math::bounded"
+    ]
+   },
+   {
+    "cost": 583701552,
+    "cost_g": 583701552,
+    "name": "stan::math::internal::ops_partials_edge<double, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::ops_partials_edge(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&)",
+    "short": "stan::math::ops_partials_edge",
+    "pct_G": 1.68,
+    "pct_T": 1.67,
+    "in_g": 1.0,
+    "bucket": "tape_build",
+    "path": [
+     "stan::math::bernoulli_logit_lpmf",
+     "stan::math::ops_partials_edge"
+    ]
+   },
+   {
+    "cost": 177696007,
+    "cost_g": 177696007,
+    "name": "stan::return_type<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> >::type stan::math::multi_normal_cholesky_lpdf<false, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, (void*)0, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&)",
+    "short": "stan::math::multi_normal_cholesky_lpdf",
+    "pct_G": 0.51,
+    "pct_T": 0.51,
+    "in_g": 1.0,
+    "bucket": "cholesky_llt",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::multi_normal_cholesky_lpdf"
+    ]
+   },
+   {
+    "cost": 113668880,
+    "cost_g": 109978071,
+    "name": "free",
+    "short": "free",
+    "pct_G": 0.32,
+    "pct_T": 0.32,
+    "in_g": 0.968,
+    "bucket": "alloc_mem",
+    "path": [
+     "stan::math::multi_normal_cholesky_lpdf",
+     "free"
+    ]
+   },
+   {
+    "cost": 94945735,
+    "cost_g": 0,
+    "name": "bs_log_density_gradient",
+    "short": "bs_log_density_gradient",
+    "pct_G": 0.0,
+    "pct_T": 0.27,
+    "in_g": 0.0,
+    "bucket": "model_glue",
+    "path": [
+     "Eigen::Matrix",
+     "bs_log_density_gradient"
+    ]
+   },
+   {
+    "cost": 79089631,
+    "cost_g": 0,
+    "name": "0x00000000000bc000",
+    "short": "0x00000000000bc000",
+    "pct_G": 0.0,
+    "pct_T": 0.23,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "malloc (676,524x)",
+     "0x00000000000bc000"
+    ]
+   },
+   {
+    "cost": 64624000,
+    "cost_g": 64624000,
+    "name": "stan::return_type<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double, double>::type stan::math::normal_lpdf<true, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double, double, (void*)0>(Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double&&, double&&)",
+    "short": "stan::math::normal_lpdf",
+    "pct_G": 0.19,
+    "pct_T": 0.18,
+    "in_g": 1.0,
+    "bucket": "lpdf_lpmf",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::normal_lpdf"
+    ]
+   },
+   {
+    "cost": 53561958,
+    "cost_g": 51206791,
+    "name": "malloc",
+    "short": "malloc",
+    "pct_G": 0.15,
+    "pct_T": 0.15,
+    "in_g": 0.956,
+    "bucket": "alloc_mem",
+    "path": [
+     "Eigen::internal::aligned_malloc",
+     "malloc"
+    ]
+   },
+   {
+    "cost": 48455680,
+    "cost_g": 48455680,
+    "name": "Eigen::internal::triangular_solve_matrix<double, long, 1, 1, false, 0, 0, 1>::run(long, long, double const*, long, double*, long, long, Eigen::internal::level3_blocking<double, double>&)",
+    "short": "Eigen::internal::triangular_solve_matrix",
+    "pct_G": 0.14,
+    "pct_T": 0.14,
+    "in_g": 1.0,
+    "bucket": "cholesky_llt",
+    "path": [
+     "stan::math::multi_normal_cholesky_lpdf",
+     "Eigen::internal::triangular_solve_matrix"
+    ]
+   },
+   {
+    "cost": 37342837,
+    "cost_g": 0,
+    "name": "0x000000000006af00",
+    "short": "0x000000000006af00",
+    "pct_G": 0.0,
+    "pct_T": 0.11,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "0x000000000006e390 (41,666x)",
+     "0x000000000006af00"
+    ]
+   },
+   {
+    "cost": 23224320,
+    "cost_g": 23224320,
+    "name": "Eigen::internal::triangular_matrix_vector_product<long, 1, double, false, double, false, 0, 0>::run(long, long, double const*, long, double const*, long, double*, long, double const&) [clone .constprop.0]",
+    "short": "Eigen::internal::triangular_matrix_vector_product",
+    "pct_G": 0.07,
+    "pct_T": 0.07,
+    "in_g": 1.0,
+    "bucket": "cholesky_llt",
+    "path": [
+     "Eigen::internal::trmv_selector",
+     "Eigen::internal::triangular_matrix_vector_product"
+    ]
+   },
+   {
+    "cost": 20088223,
+    "cost_g": 20088223,
+    "name": "stan::scalar_type<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::type hier_2pl_model_namespace::hier_2pl_model::log_prob_impl<true, true, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::Matrix<int, -1, 1, 0, -1, 1>, (void*)0, (void*)0, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, Eigen::Matrix<int, -1, 1, 0, -1, 1>&, std::ostream*) const [clone .isra.0]",
+    "short": "stan::math::var_value",
+    "pct_G": 0.06,
+    "pct_T": 0.06,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::model::model_base_crtp",
+     "stan::math::var_value"
+    ]
+   },
+   {
+    "cost": 19295162,
+    "cost_g": 19295162,
+    "name": "Eigen::internal::aligned_malloc(unsigned long)",
+    "short": "Eigen::internal::aligned_malloc",
+    "pct_G": 0.06,
+    "pct_T": 0.06,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::PlainObjectBase",
+     "Eigen::internal::aligned_malloc"
+    ]
+   },
+   {
+    "cost": 19131640,
+    "cost_g": 19129440,
+    "name": "Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::resize(long, long)",
+    "short": "Eigen::PlainObjectBase",
+    "pct_G": 0.05,
+    "pct_T": 0.05,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "stan::math::multi_normal_cholesky_lpdf",
+     "Eigen::PlainObjectBase"
+    ]
+   },
+   {
+    "cost": 19066880,
+    "cost_g": 19066880,
+    "name": "Eigen::internal::triangular_matrix_vector_product<long, 2, double, false, double, false, 1, 0>::run(long, long, double const*, long, double const*, long, double*, long, double const&) [clone .constprop.0]",
+    "short": "Eigen::internal::triangular_matrix_vector_product",
+    "pct_G": 0.05,
+    "pct_T": 0.05,
+    "in_g": 1.0,
+    "bucket": "cholesky_llt",
+    "path": [
+     "Eigen::internal::trmv_selector",
+     "Eigen::internal::triangular_matrix_vector_product"
+    ]
+   },
+   {
+    "cost": 16773120,
+    "cost_g": 16773120,
+    "name": "Eigen::internal::gemm_pack_rhs<double, long, Eigen::internal::blas_data_mapper<double, long, 0, 0, 1>, 4, 0, false, true>::operator()(double*, Eigen::internal::blas_data_mapper<double, long, 0, 0, 1> const&, long, long, long, long) [clone .isra.0]",
+    "short": "Eigen::internal::gemm_pack_rhs",
+    "pct_G": 0.05,
+    "pct_T": 0.05,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::triangular_solve_matrix",
+     "Eigen::internal::gemm_pack_rhs"
+    ]
+   }
+  ]
+ },
+ "kronecker_gp": {
+  "model": "kronecker_gp",
+  "T": 27629684975,
+  "G": 26767210251,
+  "F": 19000215907,
+  "S": 26905499042,
+  "G_over_T": 0.9688,
+  "F_over_G": 0.7098,
+  "rev_over_G": 0.2902,
+  "grad_calls": 5094,
+  "grad_errors": 138,
+  "ir_per_grad": 5254654,
+  "per_call_us": [
+   365.9,
+   369.4
+  ],
+  "sampler_side_frac": 0.0312,
+  "alloc_share_G": 0.0409,
+  "buckets": {
+   "eigen_linalg": 0.3515,
+   "eigen_sym": 0.2589,
+   "other": 0.1071,
+   "tape_build": 0.0822,
+   "libm": 0.0516,
+   "eltwise_ops": 0.0331,
+   "rev_sweep": 0.0194,
+   "io_checks": 0.0046,
+   "model_glue": 0.0
+  },
+  "top": [
+   {
+    "cost": 5520313443,
+    "cost_g": 5520313443,
+    "name": "Eigen::ComputationInfo Eigen::internal::computeFromTridiagonal_impl<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1>&, long, bool, Eigen::Matrix<double, -1, -1, 0, -1, -1>&)",
+    "short": "Eigen::internal::computeFromTridiagonal_impl",
+    "pct_G": 20.62,
+    "pct_T": 19.98,
+    "in_g": 1.0,
+    "bucket": "eigen_sym",
+    "path": [
+     "stan::math::var_value",
+     "Eigen::internal::computeFromTridiagonal_impl"
+    ]
+   },
+   {
+    "cost": 5074967612,
+    "cost_g": 5074967612,
+    "name": "Eigen::internal::gebp_kernel<double, double, long, Eigen::internal::blas_data_mapper<double, long, 0, 0, 1>, 4, 4, false, false>::operator()(Eigen::internal::blas_data_mapper<double, long, 0, 0, 1> const&, double const*, double const*, long, long, long, double, long, long, long, long) [clone .constprop.0]",
+    "short": "Eigen::internal::gebp_kernel",
+    "pct_G": 18.96,
+    "pct_T": 18.37,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::general_matrix_matrix_product",
+     "Eigen::internal::gebp_kernel"
+    ]
+   },
+   {
+    "cost": 1141005408,
+    "cost_g": 1141005408,
+    "name": "void Eigen::internal::tridiagonalization_inplace<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::Matrix<double, -1, -1, 0, -1, -1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1>&)",
+    "short": "Eigen::internal::tridiagonalization_inplace",
+    "pct_G": 4.26,
+    "pct_T": 4.13,
+    "in_g": 1.0,
+    "bucket": "eigen_sym",
+    "path": [
+     "Eigen::internal::tridiagonalization_inplace",
+     "Eigen::internal::tridiagonalization_inplace"
+    ]
+   },
+   {
+    "cost": 1111261104,
+    "cost_g": 1111261104,
+    "name": "void Eigen::internal::outer_product_selector_run<Eigen::Block<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, -1, false>, -1, -1, false>, Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, 1, 0, -1, 1> const> const, Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1> const, -1, 1, false> const>, Eigen::Map<Eigen::Matrix<double, 1, -1, 1, 1, -1>, 0, Eigen::Stride<0, 0> >, Eigen::internal::generic_product_impl<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, 1, 0, -1, 1> const> const, Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1> const, -1, 1, false> const>, Eigen::Map<Eigen::Matrix<double, 1, -1, 1, 1, -1>, 0, Eigen::Stride<0, 0> >, Eigen::DenseShape, Eigen::DenseShape, 5>::sub>(Eigen::Block<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, -1, false>, -1, -1, false>&, Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, 1, 0, -1, 1> const> const, Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1> const, -1, 1, false> const> const&, Eigen::Map<Eigen::Matrix<double, 1, -1, 1, 1, -1>, 0, Eigen::Stride<0, 0> > const&, Eigen::internal::generic_product_impl<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, 1, 0, -1, 1> const> const, Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1> const, -1, 1, false> const>, Eigen::Map<Eigen::Matrix<double, 1, -1, 1, 1, -1>, 0, Eigen::Stride<0, 0> >, Eigen::DenseShape, Eigen::DenseShape, 5>::sub const&, Eigen::internal::false_type const&) [clone .isra.0]",
+    "short": "Eigen::internal::outer_product_selector_run",
+    "pct_G": 4.15,
+    "pct_T": 4.02,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::MatrixBase",
+     "Eigen::internal::outer_product_selector_run"
+    ]
+   },
+   {
+    "cost": 1093945093,
+    "cost_g": 1093945093,
+    "name": "stan::math::stack_alloc::alloc(unsigned long)",
+    "short": "stan::math::stack_alloc::alloc(unsigned long)",
+    "pct_G": 4.09,
+    "pct_T": 3.96,
+    "in_g": 1.0,
+    "bucket": "tape_build",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::stack_alloc::alloc(unsigned long)"
+    ]
+   },
+   {
+    "cost": 918827808,
+    "cost_g": 918827808,
+    "name": "Eigen::internal::selfadjoint_matrix_vector_product<double, long, 0, 1, false, false, 0>::run(long, double const*, long, double const*, double*, double)",
+    "short": "Eigen::internal::selfadjoint_matrix_vector_product",
+    "pct_G": 3.43,
+    "pct_T": 3.33,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::selfadjoint_product_impl",
+     "Eigen::internal::selfadjoint_matrix_vector_product"
+    ]
+   },
+   {
+    "cost": 855346748,
+    "cost_g": 855346748,
+    "name": "stan::math::vari_base*& std::vector<stan::math::vari_base*, std::allocator<stan::math::vari_base*> >::emplace_back<stan::math::vari_base*>(stan::math::vari_base*&&) [clone .isra.0]",
+    "short": "vector<stan::math>::emplace_back",
+    "pct_G": 3.2,
+    "pct_T": 3.1,
+    "in_g": 1.0,
+    "bucket": "tape_build",
+    "path": [
+     "stan::math::var_value",
+     "vector<stan::math>::emplace_back"
+    ]
+   },
+   {
+    "cost": 814330763,
+    "cost_g": 813756494,
+    "name": "0x00000000001b2800",
+    "short": "0x00000000001b2800",
+    "pct_G": 3.04,
+    "pct_T": 2.95,
+    "in_g": 0.999,
+    "bucket": "other",
+    "path": [
+     "Eigen::DenseBase",
+     "0x00000000001b2800"
+    ]
+   },
+   {
+    "cost": 694719735,
+    "cost_g": 694719735,
+    "name": "stan::scalar_type<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::type kronecker_gp_model_namespace::kronecker_gp_model::log_prob_impl<true, true, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::Matrix<int, -1, 1, 0, -1, 1>, (void*)0, (void*)0, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, Eigen::Matrix<int, -1, 1, 0, -1, 1>&, std::ostream*) const [clone .isra.0]",
+    "short": "stan::math::var_value",
+    "pct_G": 2.6,
+    "pct_T": 2.51,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::model::model_base_crtp",
+     "stan::math::var_value"
+    ]
+   },
+   {
+    "cost": 579033128,
+    "cost_g": 579033128,
+    "name": "Eigen::internal::lhs_process_one_packet<4, 2l, 1l, double, double, double, double __vector(2), double __vector(2), double __vector(2), double __vector(2), Eigen::internal::gebp_traits<double, double, false, false, 1, 0>, Eigen::internal::BlasLinearMapper<double, long, 0, 1>, Eigen::internal::blas_data_mapper<double, long, 0, 0, 1> >::operator()(Eigen::internal::blas_data_mapper<double, long, 0, 0, 1> const&, double const*, double const*, double, long, long, long, long, long, long, int, long, long, long, long, long) [clone .constprop.0] [clone .isra.0]",
+    "short": "Eigen::internal::lhs_process_one_packet",
+    "pct_G": 2.16,
+    "pct_T": 2.1,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::gebp_kernel",
+     "Eigen::internal::lhs_process_one_packet"
+    ]
+   },
+   {
+    "cost": 532130311,
+    "cost_g": 532109835,
+    "name": "pow",
+    "short": "libm::pow",
+    "pct_G": 1.99,
+    "pct_T": 1.93,
+    "in_g": 1.0,
+    "bucket": "libm",
+    "path": [
+     "stan::math::var_value",
+     "libm::pow"
+    ]
+   },
+   {
+    "cost": 489649296,
+    "cost_g": 489649296,
+    "name": "Eigen::internal::general_matrix_vector_product<long, double, Eigen::internal::const_blas_data_mapper<double, long, 1>, 1, false, double, Eigen::internal::const_blas_data_mapper<double, long, 0>, false, 0>::run(long, long, Eigen::internal::const_blas_data_mapper<double, long, 1> const&, Eigen::internal::const_blas_data_mapper<double, long, 0> const&, double*, long, double) [clone .constprop.0]",
+    "short": "Eigen::internal::general_matrix_vector_product",
+    "pct_G": 1.83,
+    "pct_T": 1.77,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::gemv_dense_selector",
+     "Eigen::internal::general_matrix_vector_product"
+    ]
+   },
+   {
+    "cost": 483819721,
+    "cost_g": 483819721,
+    "name": "Eigen::Matrix<stan::return_type<stan::base_type<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::type, stan::base_type<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::type, stan::math::var_value<double, void> >::type, -1, -1, 0, -1, -1> kronecker_gp_model_namespace::calculate_eigenvalues<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, int, int, stan::math::var_value<double, void>, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&, int const&, int const&, stan::math::var_value<double, void> const&, std::ostream*) [clone .isra.0]",
+    "short": "stan::math::var_value",
+    "pct_G": 1.81,
+    "pct_T": 1.75,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::var_value"
+    ]
+   },
+   {
+    "cost": 399187249,
+    "cost_g": 0,
+    "name": "bs_log_density_gradient",
+    "short": "bs_log_density_gradient",
+    "pct_G": 0.0,
+    "pct_T": 1.44,
+    "in_g": 0.0,
+    "bucket": "model_glue",
+    "path": [
+     "Eigen::Matrix",
+     "bs_log_density_gradient"
+    ]
+   },
+   {
+    "cost": 270086536,
+    "cost_g": 0,
+    "name": "0x000000000006af00",
+    "short": "0x000000000006af00",
+    "pct_G": 0.0,
+    "pct_T": 0.98,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "0x000000000006e390 (274,224x)",
+     "0x000000000006af00"
+    ]
+   },
+   {
+    "cost": 269124306,
+    "cost_g": 269124306,
+    "name": "auto stan::math::eigenvectors_sym<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&)",
+    "short": "stan::math::eigenvectors_sym",
+    "pct_G": 1.01,
+    "pct_T": 0.97,
+    "in_g": 1.0,
+    "bucket": "eigen_sym",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::eigenvectors_sym"
+    ]
+   },
+   {
+    "cost": 263310864,
+    "cost_g": 263310864,
+    "name": "void Eigen::MatrixBase<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, -1, false> >::applyHouseholderOnTheLeft<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1> const, -1, 1, false> >(Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1> const, -1, 1, false> const&, double const&, double*)",
+    "short": "Eigen::MatrixBase",
+    "pct_G": 0.98,
+    "pct_T": 0.95,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::HouseholderSequence",
+     "Eigen::MatrixBase"
+    ]
+   },
+   {
+    "cost": 252213369,
+    "cost_g": 252213369,
+    "name": "stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void>::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&)",
+    "short": "stan::math::arena_matrix",
+    "pct_G": 0.94,
+    "pct_T": 0.91,
+    "in_g": 1.0,
+    "bucket": "tape_build",
+    "path": [
+     "stan::math::eigenvectors_sym",
+     "stan::math::arena_matrix"
+    ]
+   },
+   {
+    "cost": 239338348,
+    "cost_g": 239338348,
+    "name": "log1p",
+    "short": "libm::log1p",
+    "pct_G": 0.89,
+    "pct_T": 0.87,
+    "in_g": 1.0,
+    "bucket": "libm",
+    "path": [
+     "stan::math::var_value",
+     "libm::log1p"
+    ]
+   },
+   {
+    "cost": 238999211,
+    "cost_g": 238999211,
+    "name": "auto stan::math::multiply<stan::math::var_value<double, void>, Eigen::CwiseUnaryOp<stan::math::apply_scalar_unary<stan::math::exp_fun, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void>, void>::apply<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void> >(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void>&&)::{lambda(auto:1&&)#1}::operator()<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void>&>(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void>&&) const::{lambda(auto:1&&)#1}, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const>, (void*)0, (void*)0, (void*)0, (void*)0>(stan::math::var_value<double, void> const&, Eigen::CwiseUnaryOp<stan::math::apply_scalar_unary<stan::math::exp_fun, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void>, void>::apply<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void> >(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void>&&)::{lambda(auto:1&&)#1}::operator()<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void>&>(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void>&&) const::{lambda(auto:1&&)#1}, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const>&&)",
+    "short": "multiply::rev_lambda",
+    "pct_G": 0.89,
+    "pct_T": 0.87,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "stan::math::var_value",
+     "multiply::rev_lambda"
+    ]
+   },
+   {
+    "cost": 233177572,
+    "cost_g": 233177572,
+    "name": "Eigen::internal::gemm_pack_lhs<double, long, Eigen::internal::const_blas_data_mapper<double, long, 0>, 4, 2, double __vector(2), 0, false, false>::operator()(double*, Eigen::internal::const_blas_data_mapper<double, long, 0> const&, long, long, long, long) [clone .constprop.0]",
+    "short": "Eigen::internal::gemm_pack_lhs",
+    "pct_G": 0.87,
+    "pct_T": 0.84,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::general_matrix_matrix_product",
+     "Eigen::internal::gemm_pack_lhs"
+    ]
+   },
+   {
+    "cost": 230395211,
+    "cost_g": 230395211,
+    "name": "tanh",
+    "short": "libm::tanh",
+    "pct_G": 0.86,
+    "pct_T": 0.83,
+    "in_g": 1.0,
+    "bucket": "libm",
+    "path": [
+     "stan::math::var_value",
+     "libm::tanh"
+    ]
+   },
+   {
+    "cost": 218094919,
+    "cost_g": 216543876,
+    "name": "log",
+    "short": "libm::log",
+    "pct_G": 0.81,
+    "pct_T": 0.79,
+    "in_g": 0.993,
+    "bucket": "libm",
+    "path": [
+     "var_value::rev_lambda",
+     "libm::log"
+    ]
+   },
+   {
+    "cost": 189335766,
+    "cost_g": 189335766,
+    "name": "cosh",
+    "short": "cosh",
+    "pct_G": 0.71,
+    "pct_T": 0.69,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::math::tanh",
+     "cosh"
+    ]
+   },
+   {
+    "cost": 176360404,
+    "cost_g": 176360404,
+    "name": "Eigen::SelfAdjointEigenSolver<Eigen::Matrix<double, -1, -1, 0, -1, -1> >& Eigen::SelfAdjointEigenSolver<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::compute<Eigen::CwiseUnaryView<Eigen::MatrixBase<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >::val_Op, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > > >(Eigen::EigenBase<Eigen::CwiseUnaryView<Eigen::MatrixBase<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >::val_Op, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > > > const&, int) [clone .isra.0]",
+    "short": "stan::math::var_value",
+    "pct_G": 0.66,
+    "pct_T": 0.64,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::math::eigenvectors_sym",
+     "stan::math::var_value"
+    ]
+   },
+   {
+    "cost": 170887836,
+    "cost_g": 170887836,
+    "name": "auto stan::math::multiply<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&, (void*)0, (void*)0, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&)",
+    "short": "stan::math::multiply",
+    "pct_G": 0.64,
+    "pct_T": 0.62,
+    "in_g": 1.0,
+    "bucket": "eltwise_ops",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::multiply"
+    ]
+   },
+   {
+    "cost": 168221508,
+    "cost_g": 168221508,
+    "name": "auto stan::math::multiply<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&, Eigen::Transpose<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const>, (void*)0, (void*)0, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&, Eigen::Transpose<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const>&&)",
+    "short": "stan::math::multiply",
+    "pct_G": 0.63,
+    "pct_T": 0.61,
+    "in_g": 1.0,
+    "bucket": "eltwise_ops",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::multiply"
+    ]
+   },
+   {
+    "cost": 165342072,
+    "cost_g": 165342072,
+    "name": "auto stan::math::multiply<Eigen::Transpose<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const> const&, Eigen::Transpose<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const>, (void*)0, (void*)0, (void*)0>(Eigen::Transpose<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const> const&, Eigen::Transpose<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const>&&)",
+    "short": "stan::math::multiply",
+    "pct_G": 0.62,
+    "pct_T": 0.6,
+    "in_g": 1.0,
+    "bucket": "eltwise_ops",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::multiply"
+    ]
+   },
+   {
+    "cost": 161931109,
+    "cost_g": 161901767,
+    "name": "exp",
+    "short": "libm::exp",
+    "pct_G": 0.6,
+    "pct_T": 0.59,
+    "in_g": 1.0,
+    "bucket": "libm",
+    "path": [
+     "multiply::rev_lambda",
+     "libm::exp"
+    ]
+   },
+   {
+    "cost": 161689500,
+    "cost_g": 161689500,
+    "name": "Eigen::internal::gebp_kernel<double, double, long, Eigen::internal::blas_data_mapper<double, long, 0, 0, 1>, 4, 4, false, false>::operator()(Eigen::internal::blas_data_mapper<double, long, 0, 0, 1> const&, double const*, double const*, long, long, long, double, long, long, long, long) [clone .isra.0]",
+    "short": "Eigen::internal::gebp_kernel",
+    "pct_G": 0.6,
+    "pct_T": 0.59,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::product_triangular_matrix_matrix",
+     "Eigen::internal::gebp_kernel"
+    ]
+   },
+   {
+    "cost": 153204828,
+    "cost_g": 153204828,
+    "name": "stan::math::var_value<double, void> stan::math::sum<Eigen::CwiseUnaryOp<stan::math::apply_scalar_unary<stan::math::log_fun, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>&, void>::apply<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>&>(Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>&)::{lambda(auto:1&&)#1}::operator()<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>&>(Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>&) const::{lambda(auto:1&&)#1}, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const>, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>&)",
+    "short": "var_value::rev_lambda",
+    "pct_G": 0.57,
+    "pct_T": 0.55,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "stan::math::var_value",
+     "var_value::rev_lambda"
+    ]
+   },
+   {
+    "cost": 152466384,
+    "cost_g": 152466384,
+    "name": "auto stan::math::elt_divide<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, (void*)0, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&)",
+    "short": "stan::math::elt_divide",
+    "pct_G": 0.57,
+    "pct_T": 0.55,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::elt_divide"
+    ]
+   },
+   {
+    "cost": 151985306,
+    "cost_g": 151985306,
+    "name": "auto stan::math::multiply_lower_tri_self_transpose<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&)",
+    "short": "stan::math::multiply_lower_tri_self_transpose",
+    "pct_G": 0.57,
+    "pct_T": 0.55,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::multiply_lower_tri_self_transpose"
+    ]
+   },
+   {
+    "cost": 147911820,
+    "cost_g": 147911820,
+    "name": "auto stan::math::elt_multiply<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> >, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, (void*)0, (void*)0>(Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&)",
+    "short": "stan::math::elt_multiply",
+    "pct_G": 0.55,
+    "pct_T": 0.54,
+    "in_g": 1.0,
+    "bucket": "eltwise_ops",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::elt_multiply"
+    ]
+   },
+   {
+    "cost": 137593428,
+    "cost_g": 137593428,
+    "name": "Eigen::internal::gemm_pack_rhs<double, long, Eigen::internal::const_blas_data_mapper<double, long, 0>, 4, 0, false, false>::operator()(double*, Eigen::internal::const_blas_data_mapper<double, long, 0> const&, long, long, long, long) [clone .constprop.0]",
+    "short": "Eigen::internal::gemm_pack_rhs",
+    "pct_G": 0.51,
+    "pct_T": 0.5,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::general_matrix_matrix_product",
+     "Eigen::internal::gemm_pack_rhs"
+    ]
+   },
+   {
+    "cost": 125892312,
+    "cost_g": 125892312,
+    "name": "stan::math::eigenvectors_sym<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&)::{lambda()#1}::operator()()",
+    "short": "eigenvectors_sym::rev_lambda",
+    "pct_G": 0.47,
+    "pct_T": 0.46,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "revcb:eigenvectors_sym",
+     "eigenvectors_sym::rev_lambda"
+    ]
+   },
+   {
+    "cost": 123943248,
+    "cost_g": 123943248,
+    "name": "void stan::math::check_symmetric<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, (void*)0>(char const*, char const*, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&)",
+    "short": "stan::math::check_symmetric",
+    "pct_G": 0.46,
+    "pct_T": 0.45,
+    "in_g": 1.0,
+    "bucket": "io_checks",
+    "path": [
+     "stan::math::eigenvalues_sym",
+     "stan::math::check_symmetric"
+    ]
+   },
+   {
+    "cost": 123047568,
+    "cost_g": 123047568,
+    "name": "auto stan::math::multiply<Eigen::Transpose<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const> const&, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, (void*)0, (void*)0, (void*)0>(Eigen::Transpose<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const> const&, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&)",
+    "short": "stan::math::multiply",
+    "pct_G": 0.46,
+    "pct_T": 0.45,
+    "in_g": 1.0,
+    "bucket": "eltwise_ops",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::multiply"
+    ]
+   },
+   {
+    "cost": 114840432,
+    "cost_g": 114840432,
+    "name": "Eigen::internal::gemm_pack_lhs<double, long, Eigen::internal::const_blas_data_mapper<double, long, 1>, 4, 2, double __vector(2), 1, false, false>::operator()(double*, Eigen::internal::const_blas_data_mapper<double, long, 1> const&, long, long, long, long) [clone .constprop.0]",
+    "short": "Eigen::internal::gemm_pack_lhs",
+    "pct_G": 0.43,
+    "pct_T": 0.42,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::general_matrix_matrix_product",
+     "Eigen::internal::gemm_pack_lhs"
+    ]
+   },
+   {
+    "cost": 112881960,
+    "cost_g": 112881960,
+    "name": "Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, 1, true>::Block(Eigen::Matrix<double, -1, -1, 0, -1, -1>&, long)",
+    "short": "Eigen::Block",
+    "pct_G": 0.42,
+    "pct_T": 0.41,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::tridiagonalization_inplace",
+     "Eigen::Block"
+    ]
+   },
+   {
+    "cost": 110426426,
+    "cost_g": 110426426,
+    "name": "auto stan::math::multiply<stan::math::var_value<double, void>, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, (void*)0, (void*)0, (void*)0, (void*)0>(stan::math::var_value<double, void> const&, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&) [clone .isra.0]",
+    "short": "stan::math::multiply",
+    "pct_G": 0.41,
+    "pct_T": 0.4,
+    "in_g": 1.0,
+    "bucket": "eltwise_ops",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::multiply"
+    ]
+   },
+   {
+    "cost": 108645432,
+    "cost_g": 108645432,
+    "name": "void Eigen::internal::generic_product_impl<Eigen::Transpose<Eigen::CwiseUnaryOp<Eigen::MatrixBase<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >::val_Op, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > > >, Eigen::CwiseUnaryOp<Eigen::MatrixBase<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >::adj_Op, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >, Eigen::DenseShape, Eigen::DenseShape, 8>::scaleAndAddTo<Eigen::Matrix<double, -1, -1, 0, -1, -1> >(Eigen::Matrix<double, -1, -1, 0, -1, -1>&, Eigen::Transpose<Eigen::CwiseUnaryOp<Eigen::MatrixBase<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >::val_Op, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > > > const&, Eigen::CwiseUnaryOp<Eigen::MatrixBase<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >::adj_Op, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > > const&, double const&)",
+    "short": "stan::math::var_value",
+    "pct_G": 0.41,
+    "pct_T": 0.39,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::var_value"
+    ]
+   },
+   {
+    "cost": 107344696,
+    "cost_g": 107344696,
+    "name": "void Eigen::MatrixBase<Eigen::Block<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, 1, true>, -1, 1, false> >::makeHouseholder<Eigen::VectorBlock<Eigen::Block<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, 1, true>, -1, 1, false>, -1> >(Eigen::VectorBlock<Eigen::Block<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, 1, true>, -1, 1, false>, -1>&, double&, double&) const",
+    "short": "Eigen::MatrixBase",
+    "pct_G": 0.4,
+    "pct_T": 0.39,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::tridiagonalization_inplace",
+     "Eigen::MatrixBase"
+    ]
+   },
+   {
+    "cost": 103799120,
+    "cost_g": 103799120,
+    "name": "Eigen::internal::gemm_pack_rhs<double, long, Eigen::internal::const_blas_data_mapper<double, long, 1>, 4, 1, false, false>::operator()(double*, Eigen::internal::const_blas_data_mapper<double, long, 1> const&, long, long, long, long) [clone .constprop.0]",
+    "short": "Eigen::internal::gemm_pack_rhs",
+    "pct_G": 0.39,
+    "pct_T": 0.38,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::general_matrix_matrix_product",
+     "Eigen::internal::gemm_pack_rhs"
+    ]
+   },
+   {
+    "cost": 94738896,
+    "cost_g": 94738896,
+    "name": "void Eigen::internal::call_assignment<Eigen::CwiseUnaryView<Eigen::MatrixBase<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >::adj_Op, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >, Eigen::Product<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Transpose<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >, 0>, Eigen::internal::add_assign_op<double, double> >(Eigen::CwiseUnaryView<Eigen::MatrixBase<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >::adj_Op, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >&, Eigen::Product<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Transpose<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >, 0> const&, Eigen::internal::add_assign_op<double, double> const&, Eigen::internal::enable_if<Eigen::internal::evaluator_assume_aliasing<Eigen::Product<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Transpose<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >, 0>, Eigen::internal::evaluator_traits<Eigen::Product<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Transpose<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >, 0> >::Shape>::value, void*>::type) [clone .isra.0]",
+    "short": "stan::math::var_value",
+    "pct_G": 0.35,
+    "pct_T": 0.34,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "multiply::rev_lambda",
+     "stan::math::var_value"
+    ]
+   }
+  ]
+ },
+ "gp_regr": {
+  "model": "gp_regr",
+  "T": 47393116,
+  "G": 38653622,
+  "F": 29383775,
+  "S": 40881774,
+  "G_over_T": 0.8156,
+  "F_over_G": 0.7602,
+  "rev_over_G": 0.2398,
+  "grad_calls": 577,
+  "grad_errors": 0,
+  "ir_per_grad": 66990,
+  "per_call_us": [
+   5.4,
+   5.3
+  ],
+  "sampler_side_frac": 0.1844,
+  "alloc_share_G": 0.0219,
+  "buckets": {
+   "cholesky_llt": 0.2437,
+   "rev_sweep": 0.233,
+   "libm": 0.1291,
+   "eigen_linalg": 0.1206,
+   "other": 0.1187,
+   "eltwise_ops": 0.0534,
+   "tape_build": 0.0487,
+   "alloc_mem": 0.0179,
+   "model_glue": 0.0,
+   "io_checks": 0.0
+  },
+  "top": [
+   {
+    "cost": 6561067,
+    "cost_g": 6561067,
+    "name": "stan::math::internal::unblocked_cholesky_lambda<stan::math::arena_matrix<Eigen::Matrix<double, -1, -1, 0, -1, -1>, void>, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void>, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void> >(stan::math::arena_matrix<Eigen::Matrix<double, -1, -1, 0, -1, -1>, void>&, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void>&, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void>&)::{lambda()#1}::operator()()",
+    "short": "cholesky_decompose::rev_lambda",
+    "pct_G": 16.97,
+    "pct_T": 13.84,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "cholesky_decompose::rev_lambda",
+     "cholesky_decompose::rev_lambda"
+    ]
+   },
+   {
+    "cost": 3787995,
+    "cost_g": 3787995,
+    "name": "auto stan::math::cholesky_decompose<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&)",
+    "short": "stan::math::cholesky_decompose",
+    "pct_G": 9.8,
+    "pct_T": 7.99,
+    "in_g": 1.0,
+    "bucket": "cholesky_llt",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::cholesky_decompose"
+    ]
+   },
+   {
+    "cost": 3473268,
+    "cost_g": 3453422,
+    "name": "pow",
+    "short": "libm::pow",
+    "pct_G": 8.93,
+    "pct_T": 7.33,
+    "in_g": 0.994,
+    "bucket": "libm",
+    "path": [
+     "stan::math::var_value",
+     "libm::pow"
+    ]
+   },
+   {
+    "cost": 2731518,
+    "cost_g": 2731518,
+    "name": "Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> stan::math::gp_exp_quad_cov<double, stan::math::var_value<double, void>, (void*)0, (void*)0>(std::vector<double, std::allocator<double> > const&, stan::math::var_value<double, void>, stan::math::var_value<double, void>)",
+    "short": "stan::math::var_value",
+    "pct_G": 7.07,
+    "pct_T": 5.76,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::var_value"
+    ]
+   },
+   {
+    "cost": 2292421,
+    "cost_g": 2292421,
+    "name": "stan::return_type<Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> >, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, 1, 0, -1, 1> >, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> >::type stan::math::multi_normal_cholesky_lpdf<true, Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> >, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, 1, 0, -1, 1> >, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, (void*)0, (void*)0>(Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > const&, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&)",
+    "short": "stan::math::multi_normal_cholesky_lpdf",
+    "pct_G": 5.93,
+    "pct_T": 4.84,
+    "in_g": 1.0,
+    "bucket": "cholesky_llt",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::multi_normal_cholesky_lpdf"
+    ]
+   },
+   {
+    "cost": 2063934,
+    "cost_g": 2063934,
+    "name": "auto stan::math::add<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>&&, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>&&)",
+    "short": "stan::math::add",
+    "pct_G": 5.34,
+    "pct_T": 4.35,
+    "in_g": 1.0,
+    "bucket": "eltwise_ops",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::add"
+    ]
+   },
+   {
+    "cost": 1743694,
+    "cost_g": 1743694,
+    "name": "Eigen::internal::triangular_solve_matrix<double, long, 1, 1, false, 0, 0, 1>::run(long, long, double const*, long, double*, long, long, Eigen::internal::level3_blocking<double, double>&)",
+    "short": "Eigen::internal::triangular_solve_matrix",
+    "pct_G": 4.51,
+    "pct_T": 3.68,
+    "in_g": 1.0,
+    "bucket": "cholesky_llt",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::multi_normal_cholesky_lpdf",
+     "value_of::rev_lambda",
+     "Eigen::internal::triangular_solve_matrix"
+    ]
+   },
+   {
+    "cost": 1465355,
+    "cost_g": 1465355,
+    "name": "stan::math::vari_base*& std::vector<stan::math::vari_base*, std::allocator<stan::math::vari_base*> >::emplace_back<stan::math::vari_base*>(stan::math::vari_base*&&) [clone .isra.0]",
+    "short": "vector<stan::math>::emplace_back",
+    "pct_G": 3.79,
+    "pct_T": 3.09,
+    "in_g": 1.0,
+    "bucket": "tape_build",
+    "path": [
+     "stan::math::add",
+     "vector<stan::math>::emplace_back"
+    ]
+   },
+   {
+    "cost": 1291772,
+    "cost_g": 0,
+    "name": "0x000000000000d7b0",
+    "short": "0x000000000000d7b0",
+    "pct_G": 0.0,
+    "pct_T": 2.73,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "0x00000000000127d0 (3,682x)",
+     "0x000000000000d7b0"
+    ]
+   },
+   {
+    "cost": 1244532,
+    "cost_g": 1210187,
+    "name": "exp",
+    "short": "libm::exp",
+    "pct_G": 3.13,
+    "pct_T": 2.63,
+    "in_g": 0.972,
+    "bucket": "libm",
+    "path": [
+     "stan::math::var_value",
+     "libm::exp"
+    ]
+   },
+   {
+    "cost": 1209392,
+    "cost_g": 1209392,
+    "name": "Eigen::internal::general_matrix_vector_product<long, double, Eigen::internal::const_blas_data_mapper<double, long, 0>, 0, false, double, Eigen::internal::const_blas_data_mapper<double, long, 1>, false, 0>::run(long, long, Eigen::internal::const_blas_data_mapper<double, long, 0> const&, Eigen::internal::const_blas_data_mapper<double, long, 1> const&, double*, long, double) [clone .isra.0]",
+    "short": "Eigen::internal::general_matrix_vector_product",
+    "pct_G": 3.13,
+    "pct_T": 2.55,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::llt_inplace",
+     "Eigen::internal::general_matrix_vector_product"
+    ]
+   },
+   {
+    "cost": 1081829,
+    "cost_g": 0,
+    "name": "0x000000000000cac0",
+    "short": "0x000000000000cac0",
+    "pct_G": 0.0,
+    "pct_T": 2.28,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "0x000000000000d7b0 (4,066x)",
+     "0x000000000000cac0"
+    ]
+   },
+   {
+    "cost": 1038600,
+    "cost_g": 1038600,
+    "name": "Eigen::internal::gebp_kernel<double, double, long, Eigen::internal::blas_data_mapper<double, long, 0, 0, 1>, 4, 4, false, false>::operator()(Eigen::internal::blas_data_mapper<double, long, 0, 0, 1> const&, double const*, double const*, long, long, long, double, long, long, long, long) [clone .constprop.0]",
+    "short": "Eigen::internal::gebp_kernel",
+    "pct_G": 2.69,
+    "pct_T": 2.19,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::triangular_solve_matrix",
+     "Eigen::internal::gebp_kernel"
+    ]
+   },
+   {
+    "cost": 924931,
+    "cost_g": 924931,
+    "name": "stan::math::internal::reverse_pass_callback_vari<stan::math::add<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>&&, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>&&)::{lambda()#1}>::chain()",
+    "short": "revcb:add",
+    "pct_G": 2.39,
+    "pct_T": 1.95,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "bs_log_density_gradient",
+     "revcb:add"
+    ]
+   },
+   {
+    "cost": 918766,
+    "cost_g": 397654,
+    "name": "free",
+    "short": "free",
+    "pct_G": 1.03,
+    "pct_T": 1.94,
+    "in_g": 0.433,
+    "bucket": "alloc_mem",
+    "path": [
+     "operator delete",
+     "free"
+    ]
+   },
+   {
+    "cost": 857999,
+    "cost_g": 857999,
+    "name": "long Eigen::internal::llt_inplace<double, 1>::unblocked<Eigen::Ref<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::OuterStride<-1> > >(Eigen::Ref<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::OuterStride<-1> >&)",
+    "short": "Eigen::internal::llt_inplace",
+    "pct_G": 2.22,
+    "pct_T": 1.81,
+    "in_g": 1.0,
+    "bucket": "cholesky_llt",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::cholesky_decompose",
+     "Eigen::internal::llt_inplace",
+     "Eigen::internal::llt_inplace"
+    ]
+   },
+   {
+    "cost": 791525,
+    "cost_g": 0,
+    "name": "0x00000000000127d0",
+    "short": "0x00000000000127d0",
+    "pct_G": 0.0,
+    "pct_T": 1.67,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "0x0000000000018200",
+     "0x00000000000127d0"
+    ]
+   },
+   {
+    "cost": 717211,
+    "cost_g": 717211,
+    "name": "Eigen::internal::gemm_pack_rhs<double, long, Eigen::internal::blas_data_mapper<double, long, 0, 0, 1>, 4, 0, false, true>::operator()(double*, Eigen::internal::blas_data_mapper<double, long, 0, 0, 1> const&, long, long, long, long) [clone .isra.0]",
+    "short": "Eigen::internal::gemm_pack_rhs",
+    "pct_G": 1.86,
+    "pct_T": 1.51,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::triangular_solve_matrix",
+     "Eigen::internal::gemm_pack_rhs"
+    ]
+   },
+   {
+    "cost": 713692,
+    "cost_g": 294379,
+    "name": "malloc",
+    "short": "malloc",
+    "pct_G": 0.76,
+    "pct_T": 1.51,
+    "in_g": 0.412,
+    "bucket": "alloc_mem",
+    "path": [
+     "Eigen::internal::aligned_malloc",
+     "malloc"
+    ]
+   },
+   {
+    "cost": 699924,
+    "cost_g": 699924,
+    "name": "boost::random::mixmax_engine<17, 36u, 0l>::apply_bigskip(unsigned long*, unsigned long*, unsigned int, unsigned int, unsigned int, unsigned int) [clone .isra.0]",
+    "short": "boost::random::mixmax_engine<17, 36u, 0l>::apply_bigskip(unsigned long",
+    "pct_G": 1.81,
+    "pct_T": 1.48,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "bs_rng_construct",
+     "boost::random::mixmax_engine<17, 36u, 0l>::apply_bigskip(unsigned long"
+    ]
+   },
+   {
+    "cost": 634700,
+    "cost_g": 634700,
+    "name": "Eigen::internal::lhs_process_one_packet<4, 2l, 1l, double, double, double, double __vector(2), double __vector(2), double __vector(2), double __vector(2), Eigen::internal::gebp_traits<double, double, false, false, 1, 0>, Eigen::internal::BlasLinearMapper<double, long, 0, 1>, Eigen::internal::blas_data_mapper<double, long, 0, 0, 1> >::operator()(Eigen::internal::blas_data_mapper<double, long, 0, 0, 1> const&, double const*, double const*, double, long, long, long, long, long, long, int, long, long, long, long, long) [clone .constprop.0] [clone .isra.0]",
+    "short": "Eigen::internal::lhs_process_one_packet",
+    "pct_G": 1.64,
+    "pct_T": 1.34,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::gebp_kernel",
+     "Eigen::internal::lhs_process_one_packet"
+    ]
+   },
+   {
+    "cost": 574692,
+    "cost_g": 574692,
+    "name": "void stan::math::internal::update_adjoints<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void>, stan::math::arena_matrix<Eigen::Matrix<double, -1, -1, 0, -1, -1>, void>, (void*)0, (void*)0>(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void>&, stan::math::arena_matrix<Eigen::Matrix<double, -1, -1, 0, -1, -1>, void> const&, stan::math::var_value<double, void> const&)",
+    "short": "stan::math::internal::update_adjoints",
+    "pct_G": 1.49,
+    "pct_T": 1.21,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "reverse_pass_callback_vari::rev_lambda",
+     "stan::math::internal::update_adjoints"
+    ]
+   },
+   {
+    "cost": 547573,
+    "cost_g": 547573,
+    "name": "void Eigen::TriangularViewImpl<Eigen::CwiseUnaryOp<stan::math::value_of<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&, (void*)0, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&)::{lambda(auto:1&&)#1}::operator()<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&>(Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const&) const::{lambda(auto:1&&)#1}, Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> const> const, 1u, Eigen::Dense>::solveInPlace<1, Eigen::Matrix<double, -1, -1, 0, -1, -1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&) const",
+    "short": "value_of::rev_lambda",
+    "pct_G": 1.42,
+    "pct_T": 1.16,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::multi_normal_cholesky_lpdf",
+     "value_of::rev_lambda"
+    ]
+   },
+   {
+    "cost": 544688,
+    "cost_g": 544688,
+    "name": "void Eigen::internal::outer_product_selector_run<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, 1, -1, 1, 1, -1>, Eigen::internal::generic_product_impl<Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, 1, -1, 1, 1, -1>, Eigen::DenseShape, Eigen::DenseShape, 5>::set>(Eigen::Matrix<double, -1, -1, 0, -1, -1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, Eigen::Matrix<double, 1, -1, 1, 1, -1> const&, Eigen::internal::generic_product_impl<Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, 1, -1, 1, 1, -1>, Eigen::DenseShape, Eigen::DenseShape, 5>::set const&, Eigen::internal::false_type const&) [clone .isra.0]",
+    "short": "Eigen::internal::outer_product_selector_run",
+    "pct_G": 1.41,
+    "pct_T": 1.15,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::multi_normal_cholesky_lpdf",
+     "Eigen::internal::outer_product_selector_run"
+    ]
+   },
+   {
+    "cost": 512436,
+    "cost_g": 0,
+    "name": "getenv",
+    "short": "getenv",
+    "pct_G": 0.0,
+    "pct_T": 1.08,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "main::{lambda()#2}::operator()() const",
+     "walnutpie::Adam",
+     "Eigen::Matrix",
+     "getenv"
+    ]
+   },
+   {
+    "cost": 429865,
+    "cost_g": 429865,
+    "name": "void stan::model::internal::assign_impl<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>&, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void>, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>&, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1>, void>&&, char const*)",
+    "short": "stan::math::var_value",
+    "pct_G": 1.11,
+    "pct_T": 0.91,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::var_value"
+    ]
+   },
+   {
+    "cost": 424095,
+    "cost_g": 424095,
+    "name": "Eigen::internal::triangular_matrix_vector_product<long, 1, double, false, double, false, 0, 0>::run(long, long, double const*, long, double const*, long, double*, long, double const&) [clone .constprop.0]",
+    "short": "Eigen::internal::triangular_matrix_vector_product",
+    "pct_G": 1.1,
+    "pct_T": 0.89,
+    "in_g": 1.0,
+    "bucket": "cholesky_llt",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::multi_normal_cholesky_lpdf",
+     "Eigen::internal::trmv_selector",
+     "Eigen::internal::triangular_matrix_vector_product"
+    ]
+   },
+   {
+    "cost": 415440,
+    "cost_g": 415440,
+    "name": "stan::math::stack_alloc::alloc(unsigned long)",
+    "short": "stan::math::stack_alloc::alloc(unsigned long)",
+    "pct_G": 1.07,
+    "pct_T": 0.88,
+    "in_g": 1.0,
+    "bucket": "tape_build",
+    "path": [
+     "stan::math::multi_normal_cholesky_lpdf",
+     "stan::math::stack_alloc::alloc(unsigned long)"
+    ]
+   },
+   {
+    "cost": 396976,
+    "cost_g": 396976,
+    "name": "stan::math::gp_exp_quad_cov<double, stan::math::var_value<double, void>, (void*)0, (void*)0>(std::vector<double, std::allocator<double> > const&, stan::math::var_value<double, void>, stan::math::var_value<double, void>)::{lambda()#1}::operator()() const",
+    "short": "gp_exp_quad_cov::rev_lambda",
+    "pct_G": 1.03,
+    "pct_T": 0.84,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "revcb:gp_exp_quad_cov",
+     "gp_exp_quad_cov::rev_lambda"
+    ]
+   },
+   {
+    "cost": 364388,
+    "cost_g": 325343,
+    "name": "log",
+    "short": "libm::log",
+    "pct_G": 0.84,
+    "pct_T": 0.77,
+    "in_g": 0.893,
+    "bucket": "libm",
+    "path": [
+     "stan::math::multi_normal_cholesky_lpdf",
+     "libm::log"
+    ]
+   },
+   {
+    "cost": 315042,
+    "cost_g": 315042,
+    "name": "Eigen::internal::triangular_matrix_vector_product<long, 2, double, false, double, false, 1, 0>::run(long, long, double const*, long, double const*, long, double*, long, double const&) [clone .constprop.0]",
+    "short": "Eigen::internal::triangular_matrix_vector_product",
+    "pct_G": 0.82,
+    "pct_T": 0.66,
+    "in_g": 1.0,
+    "bucket": "cholesky_llt",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::multi_normal_cholesky_lpdf",
+     "Eigen::internal::call_dense_assignment_loop",
+     "Eigen::internal::trmv_selector",
+     "Eigen::internal::triangular_matrix_vector_product"
+    ]
+   },
+   {
+    "cost": 313888,
+    "cost_g": 313888,
+    "name": "stan::scalar_type<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::type gp_regr_model_namespace::gp_regr_model::log_prob_impl<true, true, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::Matrix<int, -1, 1, 0, -1, 1>, (void*)0, (void*)0, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, Eigen::Matrix<int, -1, 1, 0, -1, 1>&, std::ostream*) const [clone .isra.0]",
+    "short": "stan::math::var_value",
+    "pct_G": 0.81,
+    "pct_T": 0.66,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "bs_log_density_gradient",
+     "stan::model::model_base_crtp",
+     "stan::math::var_value"
+    ]
+   },
+   {
+    "cost": 258686,
+    "cost_g": 86299,
+    "name": "0x00000000001b1e00",
+    "short": "0x00000000001b1e00",
+    "pct_G": 0.22,
+    "pct_T": 0.55,
+    "in_g": 0.334,
+    "bucket": "other",
+    "path": [
+     "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocato",
+     "0x00000000001b1e00"
+    ]
+   },
+   {
+    "cost": 257457,
+    "cost_g": 0,
+    "name": "bs_log_density_gradient",
+    "short": "bs_log_density_gradient",
+    "pct_G": 0.0,
+    "pct_T": 0.54,
+    "in_g": 0.0,
+    "bucket": "model_glue",
+    "path": [
+     "main::{lambda()#2}::operator()() const",
+     "walnutpie::Adam",
+     "walnutpie::AdaptiveWalnuts",
+     "Eigen::Matrix",
+     "Eigen::Matrix",
+     "Eigen::Matrix",
+     "bs_log_density_gradient"
+    ]
+   },
+   {
+    "cost": 209885,
+    "cost_g": 0,
+    "name": "0x000000000000c900",
+    "short": "0x000000000000c900",
+    "pct_G": 0.0,
+    "pct_T": 0.44,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "0x000000000000cac0 (3,740x)",
+     "0x000000000000c900"
+    ]
+   },
+   {
+    "cost": 195603,
+    "cost_g": 195603,
+    "name": "Eigen::internal::gemm_pack_lhs<double, long, Eigen::internal::const_blas_data_mapper<double, long, 0>, 4, 2, double __vector(2), 0, false, false>::operator()(double*, Eigen::internal::const_blas_data_mapper<double, long, 0> const&, long, long, long, long) [clone .constprop.0]",
+    "short": "Eigen::internal::gemm_pack_lhs",
+    "pct_G": 0.51,
+    "pct_T": 0.41,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::triangular_solve_matrix",
+     "Eigen::internal::gemm_pack_lhs"
+    ]
+   },
+   {
+    "cost": 192752,
+    "cost_g": 0,
+    "name": "CLI::Option::check_lname(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) const",
+    "short": "CLI::Option::check_lname(std::__cxx11::basic_string<char, std::char_tr",
+    "pct_G": 0.0,
+    "pct_T": 0.41,
+    "in_g": 0.0,
+    "bucket": "io_checks",
+    "path": [
+     "CLI::Option::matching_name[abi:cxx11](CLI::Option const&) const (1,477",
+     "CLI::Option::check_lname(std::__cxx11::basic_string<char, std::char_tr"
+    ]
+   },
+   {
+    "cost": 185217,
+    "cost_g": 185217,
+    "name": "Eigen::internal::general_matrix_vector_product<long, double, Eigen::internal::const_blas_data_mapper<double, long, 0>, 0, false, double, Eigen::internal::const_blas_data_mapper<double, long, 1>, false, 1>::run(long, long, Eigen::internal::const_blas_data_mapper<double, long, 0> const&, Eigen::internal::const_blas_data_mapper<double, long, 1> const&, double*, long, double) [clone .isra.0]",
+    "short": "Eigen::internal::general_matrix_vector_product",
+    "pct_G": 0.48,
+    "pct_T": 0.39,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::multi_normal_cholesky_lpdf",
+     "Eigen::internal::trmv_selector",
+     "Eigen::internal::triangular_matrix_vector_product",
+     "Eigen::internal::general_matrix_vector_product"
+    ]
+   },
+   {
+    "cost": 183486,
+    "cost_g": 183486,
+    "name": "Eigen::PlainObjectBase<Eigen::Matrix<stan::math::var_value<double, void>, -1, -1, 0, -1, -1> >::PlainObjectBase<Eigen::DiagonalWrapper<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<stan::math::var_value<double, void> >, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> > const> >(Eigen::EigenBase<Eigen::DiagonalWrapper<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<stan::math::var_value<double, void> >, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> > const> > const&)",
+    "short": "stan::math::var_value",
+    "pct_G": 0.47,
+    "pct_T": 0.39,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::var_value"
+    ]
+   },
+   {
+    "cost": 166304,
+    "cost_g": 0,
+    "name": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_mutate(unsigned long, unsigned long, char const*, unsigned long)",
+    "short": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocato",
+    "pct_G": 0.0,
+    "pct_T": 0.35,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocato",
+     "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocato"
+    ]
+   },
+   {
+    "cost": 166240,
+    "cost_g": 0,
+    "name": "0x00000000000bc000",
+    "short": "0x00000000000bc000",
+    "pct_G": 0.0,
+    "pct_T": 0.35,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "malloc (1,330x)",
+     "0x00000000000bc000"
+    ]
+   },
+   {
+    "cost": 156994,
+    "cost_g": 0,
+    "name": "0x000000000006af00",
+    "short": "0x000000000006af00",
+    "pct_G": 0.0,
+    "pct_T": 0.33,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "vsnprintf",
+     "0x0000000000074af0",
+     "0x000000000006e390",
+     "0x000000000006af00"
+    ]
+   },
+   {
+    "cost": 143096,
+    "cost_g": 143096,
+    "name": "stan::return_type<stan::math::var_value<double, void>&, double, double>::type stan::math::normal_lpdf<true, stan::math::var_value<double, void>&, double, double, (void*)0>(stan::math::var_value<double, void>&, double&&, double&&) [clone .isra.0]",
+    "short": "stan::math::var_value",
+    "pct_G": 0.37,
+    "pct_T": 0.3,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::var_value"
+    ]
+   },
+   {
+    "cost": 140352,
+    "cost_g": 0,
+    "name": "CLI::Option::matching_name[abi:cxx11](CLI::Option const&) const",
+    "short": "CLI::Option::matching_name[abi:cxx11](CLI::Option const&) const",
+    "pct_G": 0.0,
+    "pct_T": 0.3,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "CLI::App::add_option(std::__cxx11::basic_string<char, std::char_traits",
+     "CLI::Option::matching_name[abi:cxx11](CLI::Option const&) const"
+    ]
+   },
+   {
+    "cost": 138040,
+    "cost_g": 138040,
+    "name": "Eigen::internal::aligned_malloc(unsigned long)",
+    "short": "Eigen::internal::aligned_malloc",
+    "pct_G": 0.36,
+    "pct_T": 0.29,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::PlainObjectBase",
+     "Eigen::internal::aligned_malloc"
+    ]
+   }
+  ]
+ },
+ "accel_gp": {
+  "model": "accel_gp",
+  "T": 573648437,
+  "G": 531019439,
+  "F": 417162767,
+  "S": 536486606,
+  "G_over_T": 0.9257,
+  "F_over_G": 0.7856,
+  "rev_over_G": 0.2144,
+  "grad_calls": 3102,
+  "grad_errors": 0,
+  "ir_per_grad": 171186,
+  "per_call_us": [
+   14.0,
+   13.7
+  ],
+  "sampler_side_frac": 0.0743,
+  "alloc_share_G": 0.09,
+  "buckets": {
+   "eigen_linalg": 0.1908,
+   "tape_build": 0.1689,
+   "eltwise_ops": 0.1433,
+   "other": 0.1402,
+   "lpdf_lpmf": 0.1284,
+   "rev_sweep": 0.0644,
+   "libm": 0.0539,
+   "alloc_mem": 0.0252,
+   "model_glue": 0.0,
+   "io_checks": 0.0
+  },
+  "top": [
+   {
+    "cost": 52057764,
+    "cost_g": 52057764,
+    "name": "Eigen::internal::general_matrix_vector_product<long, double, Eigen::internal::const_blas_data_mapper<double, long, 0>, 0, false, double, Eigen::internal::const_blas_data_mapper<double, long, 1>, false, 0>::run(long, long, Eigen::internal::const_blas_data_mapper<double, long, 0> const&, Eigen::internal::const_blas_data_mapper<double, long, 1> const&, double*, long, double) [clone .isra.0]",
+    "short": "Eigen::internal::general_matrix_vector_product",
+    "pct_G": 9.8,
+    "pct_T": 9.07,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "stan::math::multiply",
+     "Eigen::internal::general_matrix_vector_product"
+    ]
+   },
+   {
+    "cost": 47100768,
+    "cost_g": 47100768,
+    "name": "Eigen::internal::general_matrix_vector_product<long, double, Eigen::internal::const_blas_data_mapper<double, long, 1>, 1, false, double, Eigen::internal::const_blas_data_mapper<double, long, 0>, false, 0>::run(long, long, Eigen::internal::const_blas_data_mapper<double, long, 1> const&, Eigen::internal::const_blas_data_mapper<double, long, 0> const&, double*, long, double) [clone .constprop.0]",
+    "short": "Eigen::internal::general_matrix_vector_product",
+    "pct_G": 8.87,
+    "pct_T": 8.21,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "stan::math::var_value",
+     "Eigen::internal::general_matrix_vector_product"
+    ]
+   },
+   {
+    "cost": 42308337,
+    "cost_g": 42308337,
+    "name": "stan::math::stack_alloc::alloc(unsigned long)",
+    "short": "stan::math::stack_alloc::alloc(unsigned long)",
+    "pct_G": 7.97,
+    "pct_T": 7.38,
+    "in_g": 1.0,
+    "bucket": "tape_build",
+    "path": [
+     "stan::math::multiply",
+     "stan::math::stack_alloc::alloc(unsigned long)"
+    ]
+   },
+   {
+    "cost": 38304815,
+    "cost_g": 38304815,
+    "name": "stan::math::vari_base*& std::vector<stan::math::vari_base*, std::allocator<stan::math::vari_base*> >::emplace_back<stan::math::vari_base*>(stan::math::vari_base*&&) [clone .isra.0]",
+    "short": "vector<stan::math>::emplace_back",
+    "pct_G": 7.21,
+    "pct_T": 6.68,
+    "in_g": 1.0,
+    "bucket": "tape_build",
+    "path": [
+     "stan::math::add",
+     "vector<stan::math>::emplace_back"
+    ]
+   },
+   {
+    "cost": 28253016,
+    "cost_g": 28253016,
+    "name": "double __vector(2) Eigen::internal::plog_impl_double<double __vector(2), false>(double __vector(2))",
+    "short": "Eigen::internal::plog_impl_double",
+    "pct_G": 5.32,
+    "pct_T": 4.93,
+    "in_g": 1.0,
+    "bucket": "lpdf_lpmf",
+    "path": [
+     "stan::math::normal_lpdf",
+     "Eigen::internal::plog_impl_double"
+    ]
+   },
+   {
+    "cost": 27651228,
+    "cost_g": 27651228,
+    "name": "Eigen::Matrix<stan::return_type<stan::base_type<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> >, void>::type, stan::math::var_value<double, void>, stan::base_type<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::type, stan::base_type<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >, void>::type, stan::base_type<std::vector<Eigen::Matrix<double, -1, 1, 0, -1, 1>, std::allocator<Eigen::Matrix<double, -1, 1, 0, -1, 1> > >, void>::type>::type, -1, 1, 0, -1, 1> accel_gp_model_namespace::gpa<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> >, stan::math::var_value<double, void>, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >, std::vector<Eigen::Matrix<double, -1, 1, 0, -1, 1>, std::allocator<Eigen::Matrix<double, -1, 1, 0, -1, 1> > >, (void*)0>(Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, stan::math::var_value<double, void> const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const&, std::vector<Eigen::Matrix<double, -1, 1, 0, -1, 1>, std::allocator<Eigen::Matrix<double, -1, 1, 0, -1, 1> > > const&, std::ostream*) [clone .isra.0]",
+    "short": "stan::math::var_value",
+    "pct_G": 5.21,
+    "pct_T": 4.82,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::var_value"
+    ]
+   },
+   {
+    "cost": 27561270,
+    "cost_g": 27561270,
+    "name": "stan::return_type<Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&>::type stan::math::normal_lpdf<false, Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, (void*)0>(Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&)",
+    "short": "stan::math::normal_lpdf",
+    "pct_G": 5.19,
+    "pct_T": 4.8,
+    "in_g": 1.0,
+    "bucket": "lpdf_lpmf",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::normal_lpdf"
+    ]
+   },
+   {
+    "cost": 24648498,
+    "cost_g": 24648498,
+    "name": "auto stan::math::add<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, (void*)0>(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>&&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&&)",
+    "short": "stan::math::add",
+    "pct_G": 4.64,
+    "pct_T": 4.3,
+    "in_g": 1.0,
+    "bucket": "eltwise_ops",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::add"
+    ]
+   },
+   {
+    "cost": 24164584,
+    "cost_g": 24164584,
+    "name": "auto stan::math::multiply<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, (void*)0, (void*)0, (void*)0>(Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&&)",
+    "short": "stan::math::multiply",
+    "pct_G": 4.55,
+    "pct_T": 4.21,
+    "in_g": 1.0,
+    "bucket": "eltwise_ops",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::multiply"
+    ]
+   },
+   {
+    "cost": 22301412,
+    "cost_g": 22294611,
+    "name": "exp",
+    "short": "libm::exp",
+    "pct_G": 4.2,
+    "pct_T": 3.89,
+    "in_g": 1.0,
+    "bucket": "libm",
+    "path": [
+     "stan::math::var_value",
+     "libm::exp"
+    ]
+   },
+   {
+    "cost": 20435976,
+    "cost_g": 20435976,
+    "name": "stan::scalar_type<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::type accel_gp_model_namespace::accel_gp_model::log_prob_impl<true, true, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::Matrix<int, -1, 1, 0, -1, 1>, (void*)0, (void*)0, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, Eigen::Matrix<int, -1, 1, 0, -1, 1>&, std::ostream*) const [clone .isra.0]",
+    "short": "stan::math::var_value",
+    "pct_G": 3.85,
+    "pct_T": 3.56,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::model::model_base_crtp",
+     "stan::math::var_value"
+    ]
+   },
+   {
+    "cost": 18605796,
+    "cost_g": 18605796,
+    "name": "auto stan::math::add<stan::math::var_value<double, void>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, 1, 0, -1, 1> >, (void*)0, (void*)0>(stan::math::var_value<double, void> const&, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&)",
+    "short": "stan::math::add",
+    "pct_G": 3.5,
+    "pct_T": 3.24,
+    "in_g": 1.0,
+    "bucket": "eltwise_ops",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::add"
+    ]
+   },
+   {
+    "cost": 17321683,
+    "cost_g": 0,
+    "name": "bs_log_density_gradient",
+    "short": "bs_log_density_gradient",
+    "pct_G": 0.0,
+    "pct_T": 3.02,
+    "in_g": 0.0,
+    "bucket": "model_glue",
+    "path": [
+     "Eigen::Matrix",
+     "Eigen::Matrix",
+     "bs_log_density_gradient"
+    ]
+   },
+   {
+    "cost": 11037939,
+    "cost_g": 7889575,
+    "name": "free",
+    "short": "free",
+    "pct_G": 1.49,
+    "pct_T": 1.92,
+    "in_g": 0.715,
+    "bucket": "alloc_mem",
+    "path": [
+     "operator delete",
+     "free"
+    ]
+   },
+   {
+    "cost": 9982236,
+    "cost_g": 9982236,
+    "name": "stan::math::internal::reverse_pass_callback_vari<stan::math::add<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, (void*)0>(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>&&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&&)::{lambda()#1}>::chain()",
+    "short": "revcb:add",
+    "pct_G": 1.88,
+    "pct_T": 1.74,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "bs_log_density_gradient (6,204x)",
+     "revcb:add"
+    ]
+   },
+   {
+    "cost": 8933760,
+    "cost_g": 8933760,
+    "name": "void stan::math::internal::update_adjoints<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, stan::math::arena_matrix<Eigen::Matrix<double, -1, 1, 0, -1, 1>, void>, (void*)0, (void*)0>(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>&, stan::math::arena_matrix<Eigen::Matrix<double, -1, 1, 0, -1, 1>, void> const&, stan::math::var_value<double, void> const&)",
+    "short": "stan::math::internal::update_adjoints",
+    "pct_G": 1.68,
+    "pct_T": 1.56,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "reverse_pass_callback_vari::rev_lambda",
+     "stan::math::internal::update_adjoints"
+    ]
+   },
+   {
+    "cost": 8666988,
+    "cost_g": 8666988,
+    "name": "auto stan::math::elt_multiply<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >, (void*)0, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const&)",
+    "short": "stan::math::elt_multiply",
+    "pct_G": 1.63,
+    "pct_T": 1.51,
+    "in_g": 1.0,
+    "bucket": "eltwise_ops",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::elt_multiply"
+    ]
+   },
+   {
+    "cost": 7233864,
+    "cost_g": 7233864,
+    "name": "stan::math::internal::ops_partials_edge<double, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::ops_partials_edge(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&)",
+    "short": "stan::math::ops_partials_edge",
+    "pct_G": 1.36,
+    "pct_T": 1.26,
+    "in_g": 1.0,
+    "bucket": "tape_build",
+    "path": [
+     "stan::math::normal_lpdf",
+     "stan::math::ops_partials_edge"
+    ]
+   },
+   {
+    "cost": 7012434,
+    "cost_g": 5497199,
+    "name": "malloc",
+    "short": "malloc",
+    "pct_G": 1.04,
+    "pct_T": 1.22,
+    "in_g": 0.784,
+    "bucket": "alloc_mem",
+    "path": [
+     "Eigen::PlainObjectBase",
+     "malloc"
+    ]
+   },
+   {
+    "cost": 7007418,
+    "cost_g": 7007418,
+    "name": "stan::return_type<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double, double>::type stan::math::normal_lpdf<false, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double, double, (void*)0>(Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double&&, double&&)",
+    "short": "stan::math::normal_lpdf",
+    "pct_G": 1.32,
+    "pct_T": 1.22,
+    "in_g": 1.0,
+    "bucket": "lpdf_lpmf",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::normal_lpdf"
+    ]
+   },
+   {
+    "cost": 6483180,
+    "cost_g": 6483180,
+    "name": "void stan::model::internal::assign_impl<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, stan::math::Holder<Eigen::CwiseUnaryOp<stan::math::apply_scalar_unary<stan::math::sqrt_fun, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::apply<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> >(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&&)::{lambda(auto:1&&)#1}::operator()<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&&) const::{lambda(auto:1&&)#1}, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const>, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> >, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&&, stan::math::Holder<Eigen::CwiseUnaryOp<stan::math::apply_scalar_unary<stan::math::sqrt_fun, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::apply<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> >(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&&)::{lambda(auto:1&&)#1}::operator()<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&&) const::{lambda(auto:1&&)#1}, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const>, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> >&&, char const*)",
+    "short": "var_value::rev_lambda",
+    "pct_G": 1.22,
+    "pct_T": 1.13,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "stan::math::var_value",
+     "var_value::rev_lambda"
+    ]
+   },
+   {
+    "cost": 6108125,
+    "cost_g": 0,
+    "name": "0x00000000000bc000",
+    "short": "0x00000000000bc000",
+    "pct_G": 0.0,
+    "pct_T": 1.06,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "malloc (44,328x)",
+     "0x00000000000bc000"
+    ]
+   },
+   {
+    "cost": 5341644,
+    "cost_g": 5341644,
+    "name": "void Eigen::internal::gemv_dense_selector<2, 1, true>::run<Eigen::Transpose<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >, Eigen::CwiseUnaryOp<Eigen::MatrixBase<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > >::adj_Op, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > >, Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::Transpose<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > > const&, Eigen::CwiseUnaryOp<Eigen::MatrixBase<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > >::adj_Op, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > > const&, Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1>::Scalar const&)",
+    "short": "stan::math::var_value",
+    "pct_G": 1.01,
+    "pct_T": 0.93,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "revcb:multiply",
+     "stan::math::var_value"
+    ]
+   },
+   {
+    "cost": 4931819,
+    "cost_g": 0,
+    "name": "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<char>, rapidjson::CrtAllocator>::ParseNumber<274u, rapidjson::BasicIStreamWrapper<std::istream>, stan::json::RapidJSONHandler<stan::json::json_data_handler> >(rapidjson::BasicIStreamWrapper<std::istream>&, stan::json::RapidJSONHandler<stan::json::json_data_handler>&)",
+    "short": "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<c",
+    "pct_G": 0.0,
+    "pct_T": 0.86,
+    "in_g": 0.0,
+    "bucket": "io_checks",
+    "path": [
+     "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<c",
+     "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<c"
+    ]
+   },
+   {
+    "cost": 4832916,
+    "cost_g": 4832916,
+    "name": "void stan::model::internal::assign_impl<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&, stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>&&, char const*)",
+    "short": "stan::math::var_value",
+    "pct_G": 0.91,
+    "pct_T": 0.84,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::var_value"
+    ]
+   },
+   {
+    "cost": 4504104,
+    "cost_g": 4504104,
+    "name": "__lgamma_r_finite",
+    "short": "__lgamma_r_finite",
+    "pct_G": 0.85,
+    "pct_T": 0.79,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "lgamma_r (49,632x)",
+     "__lgamma_r_finite"
+    ]
+   },
+   {
+    "cost": 4200108,
+    "cost_g": 4200108,
+    "name": "stan::math::internal::reverse_pass_callback_vari<stan::math::add<stan::math::var_value<double, void>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, 1, 0, -1, 1> >, (void*)0, (void*)0>(stan::math::var_value<double, void> const&, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&)::{lambda()#1}>::chain()",
+    "short": "revcb:add",
+    "pct_G": 0.79,
+    "pct_T": 0.73,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "bs_log_density_gradient (6,204x)",
+     "revcb:add"
+    ]
+   },
+   {
+    "cost": 4081251,
+    "cost_g": 4076105,
+    "name": "pow",
+    "short": "libm::pow",
+    "pct_G": 0.77,
+    "pct_T": 0.71,
+    "in_g": 0.999,
+    "bucket": "libm",
+    "path": [
+     "stan::math::var_value",
+     "libm::pow"
+    ]
+   },
+   {
+    "cost": 3592116,
+    "cost_g": 3592116,
+    "name": "stan::math::internal::callback_vari<double, stan::math::exp(stan::math::var_value<double, void> const&)::{lambda(auto:1&)#1}>::chain()",
+    "short": "stan::math::exp",
+    "pct_G": 0.68,
+    "pct_T": 0.63,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "bs_log_density_gradient (598,686x)",
+     "stan::math::exp"
+    ]
+   },
+   {
+    "cost": 3348889,
+    "cost_g": 0,
+    "name": "0x000000000006af00",
+    "short": "0x000000000006af00",
+    "pct_G": 0.0,
+    "pct_T": 0.58,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "0x000000000006e390 (3,791x)",
+     "0x000000000006af00"
+    ]
+   },
+   {
+    "cost": 3157805,
+    "cost_g": 1231085,
+    "name": "0x00000000001b1e00",
+    "short": "0x00000000001b1e00",
+    "pct_G": 0.23,
+    "pct_T": 0.55,
+    "in_g": 0.39,
+    "bucket": "other",
+    "path": [
+     "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocato",
+     "0x00000000001b1e00"
+    ]
+   },
+   {
+    "cost": 2965512,
+    "cost_g": 2965512,
+    "name": "Eigen::PlainObjectBase<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> >::PlainObjectBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<stan::math::var_value<double, void> >, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> > >(Eigen::DenseBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<stan::math::var_value<double, void> >, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> > > const&)",
+    "short": "stan::math::var_value",
+    "pct_G": 0.56,
+    "pct_T": 0.52,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::var_value"
+    ]
+   },
+   {
+    "cost": 2822820,
+    "cost_g": 2822820,
+    "name": "stan::return_type<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, double, double, double>::type stan::math::student_t_lpdf<false, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, double, double, double, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&, double const&, double const&, double const&)",
+    "short": "stan::math::student_t_lpdf",
+    "pct_G": 0.53,
+    "pct_T": 0.49,
+    "in_g": 1.0,
+    "bucket": "lpdf_lpmf",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::student_t_lpdf"
+    ]
+   },
+   {
+    "cost": 2680128,
+    "cost_g": 2680128,
+    "name": "stan::math::elt_multiply<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >, (void*)0, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const&)::{lambda()#1}::operator()()",
+    "short": "elt_multiply::rev_lambda",
+    "pct_G": 0.5,
+    "pct_T": 0.47,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "revcb:elt_multiply",
+     "elt_multiply::rev_lambda"
+    ]
+   },
+   {
+    "cost": 2525028,
+    "cost_g": 2525028,
+    "name": "stan::return_type<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, double, double>::type stan::math::inv_gamma_lpdf<false, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, double, double, (void*)0>(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&, double const&, double const&)",
+    "short": "stan::math::inv_gamma_lpdf",
+    "pct_G": 0.48,
+    "pct_T": 0.44,
+    "in_g": 1.0,
+    "bucket": "lpdf_lpmf",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::inv_gamma_lpdf"
+    ]
+   },
+   {
+    "cost": 2415590,
+    "cost_g": 2261344,
+    "name": "log",
+    "short": "libm::log",
+    "pct_G": 0.43,
+    "pct_T": 0.42,
+    "in_g": 0.936,
+    "bucket": "libm",
+    "path": [
+     "stan::math::student_t_lpdf",
+     "libm::log"
+    ]
+   },
+   {
+    "cost": 2140380,
+    "cost_g": 2140380,
+    "name": "Eigen::PlainObjectBase<Eigen::Array<double, -1, 1, 0, -1, 1> >::resize(long, long) [clone .constprop.0]",
+    "short": "Eigen::PlainObjectBase",
+    "pct_G": 0.4,
+    "pct_T": 0.37,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "stan::math::normal_lpdf",
+     "Eigen::PlainObjectBase"
+    ]
+   },
+   {
+    "cost": 2115564,
+    "cost_g": 2115564,
+    "name": "stan::math::internal::multiply_vv_vari::chain()",
+    "short": "multiply_vv_vari::chain",
+    "pct_G": 0.4,
+    "pct_T": 0.37,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "bs_log_density_gradient (192,324x)",
+     "multiply_vv_vari::chain"
+    ]
+   },
+   {
+    "cost": 1941810,
+    "cost_g": 0,
+    "name": "char* rapidjson::internal::Stack<rapidjson::CrtAllocator>::Push<char>(unsigned long) [clone .constprop.0]",
+    "short": "char* rapidjson::internal::Stack<rapidjson::CrtAllocator>::Push<char>(",
+    "pct_G": 0.0,
+    "pct_T": 0.34,
+    "in_g": 0.0,
+    "bucket": "io_checks",
+    "path": [
+     "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<c",
+     "char* rapidjson::internal::Stack<rapidjson::CrtAllocator>::Push<char>("
+    ]
+   },
+   {
+    "cost": 1910832,
+    "cost_g": 1910832,
+    "name": "stan::math::internal::reverse_pass_callback_vari<stan::math::multiply<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, (void*)0, (void*)0, (void*)0>(Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>&&)::{lambda()#1}>::chain()",
+    "short": "revcb:multiply",
+    "pct_G": 0.36,
+    "pct_T": 0.33,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "bs_log_density_gradient (6,204x)",
+     "revcb:multiply"
+    ]
+   },
+   {
+    "cost": 1836384,
+    "cost_g": 1836384,
+    "name": "int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) [clone .isra.0]",
+    "short": "vector<int>::emplace_back",
+    "pct_G": 0.35,
+    "pct_T": 0.32,
+    "in_g": 1.0,
+    "bucket": "tape_build",
+    "path": [
+     "stan::math::var_value",
+     "vector<int>::emplace_back"
+    ]
+   },
+   {
+    "cost": 1787528,
+    "cost_g": 0,
+    "name": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_mutate(unsigned long, unsigned long, char const*, unsigned long)",
+    "short": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocato",
+    "pct_G": 0.0,
+    "pct_T": 0.31,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocato",
+     "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocato"
+    ]
+   },
+   {
+    "cost": 1781322,
+    "cost_g": 1781322,
+    "name": "stan::math::internal::callback_vari<double, stan::math::sqrt(stan::math::var_value<double, void> const&)::{lambda(auto:1&)#1}>::chain()",
+    "short": "stan::math::sqrt",
+    "pct_G": 0.34,
+    "pct_T": 0.31,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "bs_log_density_gradient (186,120x)",
+     "stan::math::sqrt"
+    ]
+   },
+   {
+    "cost": 1578655,
+    "cost_g": 0,
+    "name": "std::basic_streambuf<char, std::char_traits<char> >::xsgetn(char*, long)",
+    "short": "std::basic_streambuf<char, std::char_traits<char> >::xsgetn(char*, lon",
+    "pct_G": 0.0,
+    "pct_T": 0.28,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "std::basic_filebuf<char, std::char_traits<char> >::xsgetn(char*, long)",
+     "std::basic_streambuf<char, std::char_traits<char> >::xsgetn(char*, lon"
+    ]
+   },
+   {
+    "cost": 1533115,
+    "cost_g": 0,
+    "name": "rapidjson::BasicIStreamWrapper<std::istream>::Read()",
+    "short": "rapidjson::BasicIStreamWrapper<std::istream>::Read()",
+    "pct_G": 0.0,
+    "pct_T": 0.27,
+    "in_g": 0.0,
+    "bucket": "io_checks",
+    "path": [
+     "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<c",
+     "rapidjson::BasicIStreamWrapper<std::istream>::Read()"
+    ]
+   }
+  ]
+ },
+ "diamonds": {
+  "model": "diamonds",
+  "T": 2170841389,
+  "G": 1859908297,
+  "F": 1853272395,
+  "S": 1862831851,
+  "G_over_T": 0.8568,
+  "F_over_G": 0.9964,
+  "rev_over_G": 0.0036,
+  "grad_calls": 3102,
+  "grad_errors": 0,
+  "ir_per_grad": 599583,
+  "per_call_us": [
+   36.3,
+   34.7
+  ],
+  "sampler_side_frac": 0.1432,
+  "alloc_share_G": 0.0006,
+  "buckets": {
+   "eigen_linalg": 0.8242,
+   "lpdf_lpmf": 0.0968,
+   "other": 0.0904,
+   "alloc_mem": 0.0017,
+   "tape_build": 0.0015,
+   "libm": 0.0009,
+   "rev_sweep": 0.0007,
+   "io_checks": 0.0,
+   "model_glue": 0.0
+  },
+  "top": [
+   {
+    "cost": 751996146,
+    "cost_g": 751996146,
+    "name": "Eigen::internal::general_matrix_vector_product<long, double, Eigen::internal::const_blas_data_mapper<double, long, 0>, 0, false, double, Eigen::internal::const_blas_data_mapper<double, long, 1>, false, 0>::run(long, long, Eigen::internal::const_blas_data_mapper<double, long, 0> const&, Eigen::internal::const_blas_data_mapper<double, long, 1> const&, double*, long, double) [clone .isra.0]",
+    "short": "Eigen::internal::general_matrix_vector_product",
+    "pct_G": 40.43,
+    "pct_T": 34.64,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "stan::math::normal_id_glm_lpdf",
+     "Eigen::internal::general_matrix_vector_product"
+    ]
+   },
+   {
+    "cost": 745609128,
+    "cost_g": 745609128,
+    "name": "Eigen::internal::general_matrix_vector_product<long, double, Eigen::internal::const_blas_data_mapper<double, long, 1>, 1, false, double, Eigen::internal::const_blas_data_mapper<double, long, 0>, false, 0>::run(long, long, Eigen::internal::const_blas_data_mapper<double, long, 1> const&, Eigen::internal::const_blas_data_mapper<double, long, 0> const&, double*, long, double) [clone .constprop.0]",
+    "short": "Eigen::internal::general_matrix_vector_product",
+    "pct_G": 40.09,
+    "pct_T": 34.35,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "Eigen::internal::gemv_dense_selector",
+     "Eigen::internal::general_matrix_vector_product"
+    ]
+   },
+   {
+    "cost": 177251382,
+    "cost_g": 177251382,
+    "name": "stan::return_type<Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> >, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> >, stan::math::var_value<double, void>, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >, stan::math::var_value<double, void> >::type stan::math::normal_id_glm_lpdf<false, Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> >, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> >, stan::math::var_value<double, void>, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >, stan::math::var_value<double, void>, (void*)0>(Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, stan::math::var_value<double, void> const&, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const&, stan::math::var_value<double, void> const&)",
+    "short": "stan::math::normal_id_glm_lpdf",
+    "pct_G": 9.53,
+    "pct_T": 8.17,
+    "in_g": 1.0,
+    "bucket": "lpdf_lpmf",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::normal_id_glm_lpdf"
+    ]
+   },
+   {
+    "cost": 125491650,
+    "cost_g": 125421380,
+    "name": "0x00000000001b2800",
+    "short": "0x00000000001b2800",
+    "pct_G": 6.74,
+    "pct_T": 5.78,
+    "in_g": 0.999,
+    "bucket": "other",
+    "path": [
+     "stan::math::normal_id_glm_lpdf",
+     "0x00000000001b2800"
+    ]
+   },
+   {
+    "cost": 73145002,
+    "cost_g": 0,
+    "name": "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<char>, rapidjson::CrtAllocator>::ParseNumber<274u, rapidjson::BasicIStreamWrapper<std::istream>, stan::json::RapidJSONHandler<stan::json::json_data_handler> >(rapidjson::BasicIStreamWrapper<std::istream>&, stan::json::RapidJSONHandler<stan::json::json_data_handler>&)",
+    "short": "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<c",
+    "pct_G": 0.0,
+    "pct_T": 3.37,
+    "in_g": 0.0,
+    "bucket": "io_checks",
+    "path": [
+     "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<c",
+     "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<c"
+    ]
+   },
+   {
+    "cost": 35257332,
+    "cost_g": 35257332,
+    "name": "double Eigen::DenseBase<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::Array<double, -1, 1, 0, -1, 1> const, Eigen::Array<double, -1, 1, 0, -1, 1> const> >::redux<Eigen::internal::scalar_sum_op<double, double> >(Eigen::internal::scalar_sum_op<double, double> const&) const [clone .isra.0]",
+    "short": "Eigen::internal::scalar_product_op",
+    "pct_G": 1.9,
+    "pct_T": 1.62,
+    "in_g": 1.0,
+    "bucket": "eigen_linalg",
+    "path": [
+     "stan::math::normal_id_glm_lpdf",
+     "Eigen::internal::scalar_product_op"
+    ]
+   },
+   {
+    "cost": 28721520,
+    "cost_g": 0,
+    "name": "char* rapidjson::internal::Stack<rapidjson::CrtAllocator>::Push<char>(unsigned long) [clone .constprop.0]",
+    "short": "char* rapidjson::internal::Stack<rapidjson::CrtAllocator>::Push<char>(",
+    "pct_G": 0.0,
+    "pct_T": 1.32,
+    "in_g": 0.0,
+    "bucket": "io_checks",
+    "path": [
+     "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<c",
+     "char* rapidjson::internal::Stack<rapidjson::CrtAllocator>::Push<char>("
+    ]
+   },
+   {
+    "cost": 22925920,
+    "cost_g": 0,
+    "name": "std::basic_streambuf<char, std::char_traits<char> >::xsgetn(char*, long)",
+    "short": "std::basic_streambuf<char, std::char_traits<char> >::xsgetn(char*, lon",
+    "pct_G": 0.0,
+    "pct_T": 1.06,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "std::basic_filebuf<char, std::char_traits<char> >::xsgetn(char*, long)",
+     "std::basic_streambuf<char, std::char_traits<char> >::xsgetn(char*, lon"
+    ]
+   },
+   {
+    "cost": 22673358,
+    "cost_g": 0,
+    "name": "rapidjson::BasicIStreamWrapper<std::istream>::Read()",
+    "short": "rapidjson::BasicIStreamWrapper<std::istream>::Read()",
+    "pct_G": 0.0,
+    "pct_T": 1.04,
+    "in_g": 0.0,
+    "bucket": "io_checks",
+    "path": [
+     "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<c",
+     "rapidjson::BasicIStreamWrapper<std::istream>::Read()"
+    ]
+   },
+   {
+    "cost": 21154111,
+    "cost_g": 0,
+    "name": "std::istream::read(char*, long)",
+    "short": "std::istream::read(char*, long)",
+    "pct_G": 0.0,
+    "pct_T": 0.97,
+    "in_g": 0.0,
+    "bucket": "io_checks",
+    "path": [
+     "rapidjson::BasicIStreamWrapper<std::istream>::Read() (527,274x)",
+     "std::istream::read(char*, long)"
+    ]
+   },
+   {
+    "cost": 20566490,
+    "cost_g": 0,
+    "name": "std::basic_filebuf<char, std::char_traits<char> >::xsgetn(char*, long)",
+    "short": "std::basic_filebuf<char, std::char_traits<char> >::xsgetn(char*, long)",
+    "pct_G": 0.0,
+    "pct_T": 0.95,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "std::istream::read(char*, long) (587,614x)",
+     "std::basic_filebuf<char, std::char_traits<char> >::xsgetn(char*, long)"
+    ]
+   },
+   {
+    "cost": 17042475,
+    "cost_g": 0,
+    "name": "std::istream::sentry::sentry(std::istream&, bool)",
+    "short": "std::istream::sentry::sentry(std::istream&, bool)",
+    "pct_G": 0.0,
+    "pct_T": 0.79,
+    "in_g": 0.0,
+    "bucket": "io_checks",
+    "path": [
+     "std::istream::read(char*, long) (587,614x)",
+     "std::istream::sentry::sentry(std::istream&, bool)"
+    ]
+   },
+   {
+    "cost": 16906885,
+    "cost_g": 5658007,
+    "name": "0x00000000001b1e00",
+    "short": "0x00000000001b1e00",
+    "pct_G": 0.3,
+    "pct_T": 0.78,
+    "in_g": 0.335,
+    "bucket": "other",
+    "path": [
+     "std::basic_streambuf<char, std::char_traits<char> >::xsgetn(char*, lon",
+     "0x00000000001b1e00"
+    ]
+   },
+   {
+    "cost": 15436731,
+    "cost_g": 0,
+    "name": "stan::json::json_data_handler::promote_to_double()",
+    "short": "stan::json::json_data_handler::promote_to_double()",
+    "pct_G": 0.0,
+    "pct_T": 0.71,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<c",
+     "stan::json::json_data_handler::promote_to_double()"
+    ]
+   },
+   {
+    "cost": 7126130,
+    "cost_g": 7126130,
+    "name": "stan::json::json_data_handler::save_key_value_pair()",
+    "short": "stan::json::json_data_handler::save_key_value_pair()",
+    "pct_G": 0.38,
+    "pct_T": 0.33,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::json::json_data_handler::key(std::__cxx11::basic_string<char, st",
+     "stan::json::json_data_handler::save_key_value_pair()"
+    ]
+   },
+   {
+    "cost": 7059503,
+    "cost_g": 7053891,
+    "name": "0x00000000001b16a0",
+    "short": "0x00000000001b16a0",
+    "pct_G": 0.38,
+    "pct_T": 0.33,
+    "in_g": 0.999,
+    "bucket": "other",
+    "path": [
+     "stan::json::json_data_handler::promote_to_double() (487,911x)",
+     "0x00000000001b16a0"
+    ]
+   },
+   {
+    "cost": 6726972,
+    "cost_g": 6525274,
+    "name": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned long, unsigned long, char const*, unsigned long)",
+    "short": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocato",
+    "pct_G": 0.35,
+    "pct_T": 0.31,
+    "in_g": 0.97,
+    "bucket": "other",
+    "path": [
+     "boost::range_value<std::vector<std::__cxx11::basic_string<char, std::c",
+     "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocato"
+    ]
+   },
+   {
+    "cost": 6458286,
+    "cost_g": 0,
+    "name": "void rapidjson::SkipWhitespace<rapidjson::BasicIStreamWrapper<std::istream> >(rapidjson::BasicIStreamWrapper<std::istream>&)",
+    "short": "void rapidjson::SkipWhitespace<rapidjson::BasicIStreamWrapper<std::ist",
+    "pct_G": 0.0,
+    "pct_T": 0.3,
+    "in_g": 0.0,
+    "bucket": "io_checks",
+    "path": [
+     "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<c",
+     "void rapidjson::SkipWhitespace<rapidjson::BasicIStreamWrapper<std::ist"
+    ]
+   },
+   {
+    "cost": 4640767,
+    "cost_g": 4640767,
+    "name": "boost::range_value<std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > >::type boost::algorithm::join<std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >, char [2]>(std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&, char const (&) [2])",
+    "short": "boost::range_value<std::vector<std::__cxx11::basic_string<char, std::c",
+    "pct_G": 0.25,
+    "pct_T": 0.21,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::json::json_data_handler::promote_to_double() (123,228x)",
+     "boost::range_value<std::vector<std::__cxx11::basic_string<char, std::c"
+    ]
+   },
+   {
+    "cost": 4520125,
+    "cost_g": 0,
+    "name": "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<char>, rapidjson::CrtAllocator>::ParseValue<274u, rapidjson::BasicIStreamWrapper<std::istream>, stan::json::RapidJSONHandler<stan::json::json_data_handler> >(rapidjson::BasicIStreamWrapper<std::istream>&, stan::json::RapidJSONHandler<stan::json::json_data_handler>&)'2",
+    "short": "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<c",
+    "pct_G": 0.0,
+    "pct_T": 0.21,
+    "in_g": 0.0,
+    "bucket": "io_checks",
+    "path": [
+     "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<c",
+     "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<c"
+    ]
+   },
+   {
+    "cost": 3533365,
+    "cost_g": 1947853,
+    "name": "free",
+    "short": "free",
+    "pct_G": 0.1,
+    "pct_T": 0.16,
+    "in_g": 0.551,
+    "bucket": "alloc_mem",
+    "path": [
+     "operator delete",
+     "free"
+    ]
+   },
+   {
+    "cost": 3412315,
+    "cost_g": 0,
+    "name": "bs_log_density_gradient",
+    "short": "bs_log_density_gradient",
+    "pct_G": 0.0,
+    "pct_T": 0.16,
+    "in_g": 0.0,
+    "bucket": "model_glue",
+    "path": [
+     "Eigen::Matrix",
+     "bs_log_density_gradient"
+    ]
+   },
+   {
+    "cost": 3137457,
+    "cost_g": 0,
+    "name": "0x00000000000bc000",
+    "short": "0x00000000000bc000",
+    "pct_G": 0.0,
+    "pct_T": 0.14,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "malloc (19,770x)",
+     "0x00000000000bc000"
+    ]
+   },
+   {
+    "cost": 2965140,
+    "cost_g": 0,
+    "name": "rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<char>, rapidjson::CrtAllocator>::NumberStream<rapidjson::BasicIStreamWrapper<std::istream>, true, false>::TakePush()",
+    "short": "rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<char>,",
+    "pct_G": 0.0,
+    "pct_T": 0.14,
+    "in_g": 0.0,
+    "bucket": "io_checks",
+    "path": [
+     "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<c",
+     "rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<char>,"
+    ]
+   },
+   {
+    "cost": 2708046,
+    "cost_g": 2708046,
+    "name": "stan::return_type<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double, double>::type stan::math::normal_lpdf<false, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double, double, (void*)0>(Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double&&, double&&)",
+    "short": "stan::math::normal_lpdf",
+    "pct_G": 0.15,
+    "pct_T": 0.12,
+    "in_g": 1.0,
+    "bucket": "lpdf_lpmf",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::normal_lpdf"
+    ]
+   },
+   {
+    "cost": 2314623,
+    "cost_g": 2238203,
+    "name": "void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<true>(char const*, unsigned long)",
+    "short": "void std::__cxx11::basic_string<char, std::char_traits<char>, std::all",
+    "pct_G": 0.12,
+    "pct_T": 0.11,
+    "in_g": 0.967,
+    "bucket": "other",
+    "path": [
+     "stan::json::json_data_handler::save_key_value_pair() (125,001x)",
+     "void std::__cxx11::basic_string<char, std::char_traits<char>, std::all"
+    ]
+   },
+   {
+    "cost": 2189839,
+    "cost_g": 2189839,
+    "name": "diamonds_model_namespace::diamonds_model::diamonds_model(stan::io::var_context&, unsigned int, std::ostream*)",
+    "short": "diamonds_model_namespace::diamonds_model::diamonds_model(stan::io::var",
+    "pct_G": 0.12,
+    "pct_T": 0.1,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "new_model(stan::io::var_context&, unsigned int, std::ostream*)",
+     "diamonds_model_namespace::diamonds_model::diamonds_model(stan::io::var"
+    ]
+   },
+   {
+    "cost": 2142870,
+    "cost_g": 2142870,
+    "name": "std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, int> > >::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)",
+    "short": "std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std:",
+    "pct_G": 0.12,
+    "pct_T": 0.1,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::json::json_data_handler::start_array() (15,006x)",
+     "std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std:"
+    ]
+   },
+   {
+    "cost": 1920625,
+    "cost_g": 1920625,
+    "name": "std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, stan::json::array_dims, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, stan::json::array_dims> > >::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)",
+    "short": "std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std:",
+    "pct_G": 0.1,
+    "pct_T": 0.09,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::json::json_data_handler::start_array() (10,002x)",
+     "std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std:"
+    ]
+   },
+   {
+    "cost": 1900582,
+    "cost_g": 1155311,
+    "name": "malloc",
+    "short": "malloc",
+    "pct_G": 0.06,
+    "pct_T": 0.09,
+    "in_g": 0.608,
+    "bucket": "alloc_mem",
+    "path": [
+     "operator new",
+     "malloc"
+    ]
+   },
+   {
+    "cost": 1870506,
+    "cost_g": 1870506,
+    "name": "__lgamma_r_finite",
+    "short": "__lgamma_r_finite",
+    "pct_G": 0.1,
+    "pct_T": 0.09,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "lgamma_r (21,714x)",
+     "__lgamma_r_finite"
+    ]
+   },
+   {
+    "cost": 1764057,
+    "cost_g": 1758911,
+    "name": "pow",
+    "short": "libm::pow",
+    "pct_G": 0.09,
+    "pct_T": 0.08,
+    "in_g": 0.997,
+    "bucket": "libm",
+    "path": [
+     "stan::math::var_value",
+     "libm::pow"
+    ]
+   },
+   {
+    "cost": 1550422,
+    "cost_g": 0,
+    "name": "rapidjson::internal::StrtodDiyFp(char const*, int, int, double*)",
+    "short": "rapidjson::internal::StrtodDiyFp(char const*, int, int, double*)",
+    "pct_G": 0.0,
+    "pct_T": 0.07,
+    "in_g": 0.0,
+    "bucket": "io_checks",
+    "path": [
+     "void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<c",
+     "rapidjson::internal::StrtodDiyFp(char const*, int, int, double*)"
+    ]
+   },
+   {
+    "cost": 1452470,
+    "cost_g": 1452470,
+    "name": "stan::math::vari_base*& std::vector<stan::math::vari_base*, std::allocator<stan::math::vari_base*> >::emplace_back<stan::math::vari_base*>(stan::math::vari_base*&&) [clone .isra.0]",
+    "short": "vector<stan::math>::emplace_back",
+    "pct_G": 0.08,
+    "pct_T": 0.07,
+    "in_g": 1.0,
+    "bucket": "tape_build",
+    "path": [
+     "bs_log_density_gradient (80,652x)",
+     "vector<stan::math>::emplace_back"
+    ]
+   },
+   {
+    "cost": 1383492,
+    "cost_g": 1383492,
+    "name": "stan::return_type<stan::math::var_value<double, void>, double, double, double>::type stan::math::student_t_lpdf<false, stan::math::var_value<double, void>, double, double, double, (void*)0>(stan::math::var_value<double, void> const&, double const&, double const&, double const&) [clone .isra.0]",
+    "short": "stan::math::var_value",
+    "pct_G": 0.07,
+    "pct_T": 0.06,
+    "in_g": 1.0,
+    "bucket": "other",
+    "path": [
+     "stan::math::var_value",
+     "stan::math::var_value"
+    ]
+   },
+   {
+    "cost": 1377288,
+    "cost_g": 1377288,
+    "name": "void stan::math::internal::update_adjoints<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, stan::math::arena_matrix<Eigen::Matrix<double, -1, 1, 0, -1, 1>, void>, (void*)0, (void*)0>(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>&, stan::math::arena_matrix<Eigen::Matrix<double, -1, 1, 0, -1, 1>, void> const&, stan::math::var_value<double, void> const&)",
+    "short": "stan::math::internal::update_adjoints",
+    "pct_G": 0.07,
+    "pct_T": 0.06,
+    "in_g": 1.0,
+    "bucket": "rev_sweep",
+    "path": [
+     "reverse_pass_callback_vari::rev_lambda",
+     "stan::math::internal::update_adjoints"
+    ]
+   },
+   {
+    "cost": 1374186,
+    "cost_g": 1374186,
+    "name": "stan::math::internal::ops_partials_edge<double, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::ops_partials_edge(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&)",
+    "short": "stan::math::ops_partials_edge",
+    "pct_G": 0.07,
+    "pct_T": 0.06,
+    "in_g": 1.0,
+    "bucket": "tape_build",
+    "path": [
+     "stan::math::normal_id_glm_lpdf",
+     "stan::math::ops_partials_edge"
+    ]
+   },
+   {
+    "cost": 1293903,
+    "cost_g": 0,
+    "name": "0x000000000000d7b0",
+    "short": "0x000000000000d7b0",
+    "pct_G": 0.0,
+    "pct_T": 0.06,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "0x00000000000127d0 (3,691x)",
+     "0x000000000000d7b0"
+    ]
+   },
+   {
+    "cost": 1274637,
+    "cost_g": 0,
+    "name": "0x000000000006af00",
+    "short": "0x000000000006af00",
+    "pct_G": 0.0,
+    "pct_T": 0.06,
+    "in_g": 0.0,
+    "bucket": "other",
+    "path": [
+     "0x000000000006e390 (1,461x)",
+     "0x000000000006af00"
+    ]
+   }
+  ]
+ }
+}

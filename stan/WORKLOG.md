@@ -1820,3 +1820,56 @@ GATES (pre-registered):
 - Negative results recorded either way. Builds: env -u LD_LIBRARY_PATH
   cmake --build external/walnutpie/build --clean-first -j2 after every
   header edit (standing rule).
+
+## 2026-08-22 — W-29 CLOSE-OUT: hotspot atlas delivered (results/hotspot_atlas_w29.md)
+
+Method executed as pre-registered: callgrind (valgrind 3.23, ~/vginstall, Ir
+only, one job at a time) on build_e27/stan_cli @ 0cb5b7b, 5 models, seed
+20260819, fixed inits (hier_2pl pf from inits_w25; others inits_w27; gp_regr/
+accel_gp det-N(0,1) inits added to inits_w27), warmup 100+50 (hier_2pl,
+kronecker_gp) / 50+50 (rest). Subtree G = inclusive Ir of
+bs_log_density_gradient; shared callees attributed via --tree=both caller
+edges. Raw dumps + annotate text: results/profile/w29/<model>/; parser:
+harness/w29_callgrind.py + harness/analyze_w29.py.
+
+HEADLINE NUMBERS:
+- logp_grad subtree G/T: hier_2pl 99.4%, kronecker_gp 96.9%, accel_gp 92.6%,
+  diamonds 85.7%, gp_regr 81.6%. Walnutpie-INTERNAL (non-gradient) inside the
+  sampler loop: 0.2/0.5/1.0/0.2/5.5% respectively => sampler-side ceiling
+  ~0-5% on this class; one-time+IO outside the loop 0.4-14.2% (amortizes).
+- Ir/grad: hier_2pl 7.75M, kronecker_gp 5.25M, diamonds 600K, accel_gp 171K,
+  gp_regr 67K. Cross-check vs ATLAS bridge numbers: diamonds 599,583 vs old
+  652,455 (-8%, different warmup mix) — consistent.
+- RANKED stan-math UPSTREAM CANDIDATES:
+  1. Reverse-mode eigendecomposition eigenvectors_sym/eigenvalues_sym<var>
+     (kronecker_gp): 39.3% of TOTAL program Ir (20.4%T + 18.9%T inclusive);
+     model needs values AND vectors -> 4 full SelfAdjointEigenSolver runs/
+     gradient where 2 suffice (API gap); eigenvector adjoint callback 9.1%T;
+     Eigen computeFromTridiagonal unblocked scalar loop 20.6%G.
+  2. Elementwise var-mode tax on indexed likelihood lines (hier_2pl): ~32%G
+     plumbing (subtract/elt_multiply fwd 23.9% + rvalue<index_multi> 8.1%) +
+     ~39%G likelihood math (bernoulli_logit_lpmf 18.5%, libm log1p 14.4%,
+     inv_logit rev lambda 6.3%) for ONE program line (y ~ bernoulli_logit(
+     alpha[ii] .* (theta[jj] - beta[ii]))).
+  3. cholesky_decompose<var> REVERSE pass (gp_regr): rev lambda 17.0%G vs
+     forward 9.8%G (adjoint sweep 1.7x the factorization); gp_exp_quad_cov
+     calls libm pow (8.9%G) where d*d would do.
+  4. Tape/arena construction fixed cost (all var models): stack_alloc +
+     chainstack emplace_back + arena ctors = 12.6%G hier_2pl, 16.9%G
+     accel_gp, 8.2%G kronecker — the SoA-arena lever, not a single patch.
+  5. normal_id_glm_lpdf<var> GEMV pair (diamonds): 80.5%G in two GEMVs;
+     already near vectorization ceiling (ATLAS 50% FMA peak) — and the
+     PATTERN TO COPY (partials in-forward keeps rev pass at 0.4%G).
+- Checks folklore re-rejected at function level: bounded<>::check 1.9%G max.
+- Caveats recorded: 1.5%/2.7% exception-truncated gradient calls on
+  hier_2pl/kronecker_gp slightly undercount reverse-pass shares; tree blocks
+  only exist above callgrind's auto threshold (top paths hand-verified).
+- Drift note vs ATLAS.md: same regimes; old §2 bucket shares were cmdstan-
+  binary based, new ones are walnutpie-CLI + finer buckets — not comparable
+  number-for-number, direction unchanged.
+
+Artifacts: results/hotspot_atlas_w29.md (the atlas), results/profile/w29/
+(raw + parsed), harness/w29_callgrind.py, harness/analyze_w29.py,
+inits_w27/{gp_regr,accel_gp}/rep0/chain_0.txt, this entry.
+Contended with agent F's W-28/W-30 sampling runs on shared cores (their
+close-out notes it; medians unaffected direction).

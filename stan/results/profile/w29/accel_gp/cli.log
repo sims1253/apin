@@ -1,0 +1,89 @@
+    total time: 0.0219862s
+logp_grad time: 0.0217006s
+logp_grad fraction: 0.987011
+        logp_grad calls: 1552
+        time per call: 1.39824e-05s
+
+Adaptation completed.
+Note: multi-chain mode (walnutpie::adapt) reports a log-mass cross-chain dispersion diagnostic for mode-aware reinit policies; single-chain CLI does not.
+Macro time = 0.528592
+Mass matrix diagonal = [ 1.4478e-07
+1.74891e-05
+3.66796e-06
+3.03333e-05
+ 0.00165417
+    0.86807
+   0.994185
+    1.83883
+   0.897003
+   0.949961
+     5.6021
+   0.866432
+    5.20215
+    1.33202
+    1.40822
+    1.12917
+    0.84206
+    1.99605
+     3.7287
+    4.99949
+    4.63425
+   0.842095
+    4.01738
+     4.5553
+    1.01666
+    4.25566
+    1.25414
+   0.887581
+   0.916792
+    93.4507
+   0.844112
+    1.14705
+    1.46738
+   0.842134
+    3.77554
+    3.99144
+    3.18859
+    1.38119
+    3.91564
+    2.84509
+    2.25939
+    1.17681
+     1.5278
+1.31119e-08
+1.77335e-09
+1.04364e-07
+1.20086e-07
+3.19803e-07
+8.01173e-08
+1.10205e-07
+7.74618e-08
+5.54009e-08
+1.44419e-07
+6.24154e-08
+ 8.6934e-08
+1.67419e-07
+9.97161e-08
+9.90859e-08
+4.31751e-07
+1.49187e-07
+3.80844e-07
+ 1.9593e-07
+5.16708e-08
+1.46676e-07
+1.95975e-07
+2.90758e-07]
+    total time: 0.0214752s
+logp_grad time: 0.0212243s
+logp_grad fraction: 0.988314
+        logp_grad calls: 1550
+        time per call: 1.36931e-05s
+
+Intercept: mean = 0.0928569, stddev = 4.2056e-17
+sdgp_1: mean = 0.211442, stddev = 1.68224e-16
+lscale_1: mean = 2.42205, stddev = 4.48598e-16
+zgp_1.1: mean = -1.64176, stddev = 1.57009e-15
+... elided 66 rows ...
+vlscale_sigma_1.1.1: mean = 0.0659276, stddev = 5.60747e-17
+b_Intercept: mean = 0.0928569, stddev = 4.2056e-17
+b_sigma_Intercept: mean = -0.766742, stddev = 1.12149e-16

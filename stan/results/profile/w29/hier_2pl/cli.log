@@ -1,0 +1,830 @@
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: multi_normal_cholesky_lpdf: Location parameter[1] is -nan, but must be finite! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 32, column 4 to column 62)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: multi_normal_cholesky_lpdf: Location parameter[1] is -nan, but must be finite! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 32, column 4 to column 62)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: multi_normal_cholesky_lpdf: Location parameter[1] is -nan, but must be finite! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 32, column 4 to column 62)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: multi_normal_cholesky_lpdf: Location parameter[1] is -nan, but must be finite! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 32, column 4 to column 62)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: multi_normal_cholesky_lpdf: Location parameter[1] is -nan, but must be finite! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 32, column 4 to column 62)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: multi_normal_cholesky_lpdf: Location parameter[1] is -nan, but must be finite! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 32, column 4 to column 62)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: multi_normal_cholesky_lpdf: Location parameter[1] is -nan, but must be finite! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 32, column 4 to column 62)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: multi_normal_cholesky_lpdf: Location parameter[1] is -nan, but must be finite! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 32, column 4 to column 62)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: multi_normal_cholesky_lpdf: Location parameter[1] is -nan, but must be finite! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 32, column 4 to column 62)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: multi_normal_cholesky_lpdf: Location parameter[1] is -nan, but must be finite! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 32, column 4 to column 62)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: multi_normal_cholesky_lpdf: Location parameter[1] is -nan, but must be finite! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 32, column 4 to column 62)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: multi_normal_cholesky_lpdf: Location parameter[1] is -nan, but must be finite! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 32, column 4 to column 62)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: multi_normal_cholesky_lpdf: Location parameter[1] is -nan, but must be finite! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 32, column 4 to column 62)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive! (in '/home/m0hawk/Documents/apin/stan/models/hier_2pl.stan', line 35, column 2 to column 33)
+
+    total time: 3.55626s
+logp_grad time: 3.55093s
+logp_grad fraction: 0.998501
+        logp_grad calls: 3737
+        time per call: 0.000950209s
+
+Adaptation completed.
+Note: multi-chain mode (walnutpie::adapt) reports a log-mass cross-chain dispersion diagnostic for mode-aware reinit policies; single-chain CLI does not.
+Macro time = 0.238654
+Mass matrix diagonal = [  0.680881
+  0.180843
+  0.214537
+  0.488912
+  0.128989
+  0.207796
+  0.231065
+  0.356155
+  0.207061
+  0.202732
+  0.253406
+  0.165234
+  0.372408
+  0.499081
+  0.247283
+ 0.0591145
+  0.156283
+  0.297454
+  0.219804
+  0.162845
+  0.165249
+  0.125245
+  0.156181
+  0.341622
+  0.219882
+  0.158511
+  0.165106
+  0.651685
+  0.206786
+  0.307865
+  0.196628
+  0.252193
+   0.21545
+  0.273993
+  0.172679
+  0.169423
+  0.224671
+  0.284046
+   0.17764
+  0.437138
+  0.177662
+  0.233699
+  0.241228
+  0.216314
+  0.124915
+  0.161707
+  0.125332
+  0.227211
+  0.190099
+  0.584277
+  0.284492
+  0.220657
+  0.185191
+  0.130441
+  0.257945
+  0.239955
+   0.15423
+  0.126525
+  0.495934
+  0.172933
+ 0.0809658
+  0.551441
+  0.157914
+  0.418778
+  0.133672
+  0.256546
+ 0.0820382
+  0.392338
+   0.24723
+  0.138878
+  0.177413
+  0.410099
+  0.439946
+  0.156725
+  0.129649
+  0.313623
+    0.1139
+  0.179923
+  0.750741
+  0.123108
+  0.216926
+  0.182961
+   0.38297
+  0.246685
+  0.220415
+  0.249082
+  0.205461
+  0.259949
+  0.119057
+   0.20207
+  0.246513
+  0.217132
+   0.56641
+  0.187262
+  0.166293
+  0.118619
+  0.410602
+   0.15471
+  0.197944
+  0.103686
+  0.113279
+  0.214523
+  0.175196
+  0.239196
+  0.218051
+  0.172379
+  0.304168
+   0.12575
+  0.232236
+  0.173386
+   0.24778
+ 0.0959776
+  0.180448
+  0.184644
+  0.108843
+  0.170546
+  0.115737
+  0.278129
+  0.117913
+     0.148
+  0.159636
+  0.138515
+  0.127032
+ 0.0915886
+  0.209078
+  0.199894
+  0.176329
+  0.232897
+   0.14575
+  0.513465
+  0.236489
+   0.28558
+  0.347465
+  0.379151
+  0.321437
+  0.275421
+   0.85985
+  0.186117
+  0.126064
+  0.147573
+  0.146037
+  0.106182
+  0.175916
+  0.173698
+  0.678102
+  0.174615
+   0.11093
+  0.179252
+  0.290023
+  0.158563
+  0.213967
+ 0.0692016
+  0.298432
+  0.182919
+  0.288031
+  0.167197
+  0.133682
+  0.212414
+  0.324081
+   0.27512
+  0.183254
+  0.145648
+  0.114817
+  0.479318
+  0.455569
+  0.140339
+  0.235726
+  0.660351
+  0.184443
+  0.195265
+  0.120345
+  0.309927
+  0.149696
+ 0.0976505
+  0.187012
+  0.107047
+  0.131417
+  0.171009
+  0.247963
+  0.212806
+  0.205434
+  0.175567
+  0.260476
+  0.165615
+   0.15956
+  0.185165
+  0.740979
+  0.170401
+  0.135747
+   0.12061
+  0.144988
+  0.221692
+  0.131859
+  0.401726
+ 0.0573969
+  0.172319
+  0.123937
+  0.154037
+  0.151119
+ 0.0868025
+   0.12109
+  0.128047
+  0.218097
+  0.326573
+  0.178284
+ 0.0588685
+   0.30893
+  0.142543
+  0.325449
+  0.327658
+  0.151189
+  0.187735
+  0.406781
+   0.31524
+  0.176686
+  0.209771
+  0.424647
+  0.250662
+  0.206861
+ 0.0724273
+   0.13962
+  0.151423
+   0.25055
+  0.345278
+  0.300637
+  0.516652
+  0.171268
+  0.115841
+  0.194498
+  0.465806
+  0.216194
+  0.186946
+  0.185946
+  0.135247
+  0.154641
+   0.47463
+  0.197569
+  0.321817
+  0.127551
+  0.232277
+  0.572342
+  0.342825
+  0.117486
+  0.164403
+   1.05911
+  0.125968
+   0.14489
+  0.319001
+  0.119993
+  0.353012
+  0.170266
+  0.201337
+  0.181057
+  0.335828
+  0.296582
+  0.224875
+  0.156433
+   0.19639
+  0.152085
+  0.177789
+  0.678164
+  0.352442
+  0.209743
+  0.438103
+  0.217796
+  0.158648
+  0.262707
+ 0.0890838
+  0.234612
+  0.180685
+  0.133725
+  0.185897
+  0.147387
+   0.10664
+  0.285132
+  0.198835
+  0.122893
+  0.184012
+  0.121603
+  0.243306
+  0.170844
+   0.17461
+  0.147761
+  0.242689
+  0.237128
+  0.136291
+  0.475986
+ 0.0584535
+  0.550599
+  0.348079
+  0.379596
+  0.254279
+  0.126812
+  0.143462
+  0.250249
+  0.135151
+  0.117082
+  0.205253
+  0.190894
+  0.231801
+  0.175966
+  0.253091
+  0.327858
+  0.155295
+  0.768358
+ 0.0912037
+  0.195079
+ 0.0789638
+  0.259361
+  0.243252
+  0.171662
+  0.118605
+  0.259162
+  0.258756
+  0.152712
+  0.139431
+  0.153685
+   0.24256
+  0.738045
+  0.120171
+  0.284806
+  0.208632
+  0.145523
+  0.182642
+  0.201811
+  0.434264
+  0.197456
+  0.154295
+  0.182027
+ 0.0659373
+  0.197256
+  0.274362
+  0.733139
+  0.251121
+  0.200124
+  0.209915
+  0.194017
+  0.340798
+  0.198849
+  0.210869
+  0.209511
+  0.130577
+  0.222805
+ 0.0496887
+  0.311687
+  0.139956
+  0.117339
+  0.262199
+  0.139748
+  0.171557
+  0.170085
+  0.173013
+  0.363902
+  0.220116
+  0.158319
+  0.292928
+  0.563207
+  0.267653
+   0.35756
+   0.21984
+  0.250149
+  0.149818
+  0.131138
+  0.163491
+  0.272819
+  0.215282
+  0.206948
+  0.143244
+  0.313713
+  0.532189
+  0.163976
+ 0.0784292
+  0.209622
+  0.189916
+  0.168764
+  0.253486
+  0.159205
+  0.211058
+  0.274301
+  0.258306
+  0.170372
+  0.152531
+ 0.0838422
+  0.299815
+  0.111453
+  0.218139
+  0.413083
+  0.203416
+  0.256416
+  0.209548
+   0.35868
+  0.292001
+  0.158044
+   0.10962
+  0.705274
+  0.141988
+  0.179495
+  0.901534
+  0.243993
+   0.29636
+  0.199216
+  0.139124
+ 0.0477413
+  0.327688
+  0.191476
+  0.531418
+  0.267768
+  0.179224
+  0.760437
+  0.244527
+  0.211176
+  0.156538
+  0.191758
+   0.26836
+  0.145127
+  0.340504
+ 0.0866562
+   0.18165
+  0.625401
+  0.128683
+  0.303565
+  0.213884
+  0.160118
+  0.198185
+   0.16177
+    0.2835
+  0.148769
+  0.225814
+  0.249455
+  0.503884
+   1.56904
+ 0.0407456
+  0.668495
+  0.186817
+  0.233615
+  0.168046
+  0.269214
+  0.188025
+  0.209179
+  0.188269
+  0.178182
+     0.277
+  0.209915
+  0.124046
+  0.273831
+  0.275655
+  0.242138
+  0.267349
+  0.153929
+  0.252593
+  0.253356
+  0.412162
+  0.308756
+  0.189714
+  0.257301
+  0.235423
+    0.2289
+   0.16567
+  0.177736
+   0.18419
+  0.138447
+  0.174176
+  0.159658
+  0.211627
+  0.368131
+  0.197119
+  0.136288
+  0.207714
+  0.165403
+  0.307928
+  0.233662
+  0.295652
+  0.149211
+  0.118381
+  0.296662
+  0.150198
+  0.150792
+  0.212505
+  0.399159
+  0.169311
+  0.296913
+  0.191906
+  0.132788
+   0.39175
+  0.218896
+   0.26493
+  0.550759
+  0.491557
+  0.214027
+  0.236185
+  0.325221
+  0.274737
+   0.16051
+   0.14903
+  0.333808
+  0.852826
+  0.172837
+  0.346283
+  0.140599
+  0.149454
+  0.238075
+   0.10192
+   0.19562
+   0.60909
+  0.189724
+  0.182854
+  0.240243
+  0.205895
+  0.200354
+  0.152724
+  0.193774
+  0.214352
+  0.187665
+  0.277928
+ 0.0438441
+   0.25936
+  0.191791
+  0.155647
+  0.253427
+ 0.0521374
+  0.146742
+  0.172945
+  0.123356
+  0.151233
+  0.145401
+  0.249216
+  0.347356
+  0.240575
+  0.202221
+  0.346784
+  0.134826
+  0.142908
+  0.482212
+  0.573033
+  0.171374
+    0.1708
+ 0.0957374
+   0.55901
+  0.176986
+  0.160555
+ 0.0935566
+  0.345686
+  0.235661
+  0.257225
+  0.197543
+ 0.0816087
+ 0.0993934
+  0.251207
+  0.232894
+   0.18208
+  0.200953
+  0.151731
+ 0.0533201
+ 0.0864226
+  0.209654
+   0.23738
+   0.11537
+  0.189343
+  0.104877
+  0.183025
+  0.442214
+  0.169741
+  0.120637
+  0.152381
+  0.275541
+  0.276152
+  0.205159
+  0.134042
+  0.195503
+  0.188155
+  0.152568
+  0.253246
+   0.21635
+  0.181418
+  0.167907
+  0.172382
+  0.365362
+  0.189621
+  0.307925
+  0.177007
+  0.108842
+   0.13036
+  0.417788
+  0.279177
+  0.142318
+   0.14961
+  0.638863
+  0.175027
+  0.104932
+  0.191067
+  0.159145
+  0.213434
+  0.204442
+  0.263055
+  0.306871
+  0.323728
+  0.106212
+  0.258857
+  0.170685
+  0.112959
+ 0.0159104
+ 0.0371514
+ 0.0779116
+ 0.0194143
+ 0.0377103
+ 0.0528389
+ 0.0100408
+ 0.0434799
+   0.03605
+ 0.0205589
+ 0.0321711
+  0.115858
+ 0.0197149
+ 0.0234053
+ 0.0282669
+ 0.0526658
+ 0.0384092
+ 0.0317687
+  0.016858
+ 0.0145211
+ 0.0265904
+ 0.0646266
+ 0.0235618
+ 0.0203927
+   0.15331
+ 0.0319683
+ 0.0371092
+ 0.0294508
+ 0.0361091
+  0.119955
+ 0.0405705
+ 0.0236061
+ 0.0589962
+0.00449747
+  0.137335
+ 0.0217287
+0.00675386
+  0.280037
+ 0.0200752
+  0.325851
+  0.583242
+ 0.0106386
+  0.202625
+  0.492014
+0.00919604
+ 0.0341694
+ 0.0248376
+ 0.0227706
+  0.341483
+0.00820254
+ 0.0147941
+ 0.0445156
+  0.357735
+  0.343263
+ 0.0365671
+  0.013734
+ 0.0298849
+0.00512579
+  0.121989
+ 0.0120312
+ 0.0605527
+  0.200494
+ 0.0172981
+  0.559834
+ 0.0179208
+  0.152375
+ 0.0554676
+ 0.0762215
+ 0.0668054]
+    total time: 0.733783s
+logp_grad time: 0.731683s
+logp_grad fraction: 0.997138
+        logp_grad calls: 756
+        time per call: 0.000967835s
+
+theta.1: mean = 2.53481, stddev = 0.471095
+theta.2: mean = -0.251906, stddev = 0.367322
+theta.3: mean = 0.128965, stddev = 0.323884
+theta.4: mean = -0.527468, stddev = 0.25214
+... elided 798 rows ...
+Omega.2.1: mean = -0.46114, stddev = 0.11176
+Omega.1.2: mean = -0.46114, stddev = 0.11176
+Omega.2.2: mean = 1, stddev = 8.24127e-17
