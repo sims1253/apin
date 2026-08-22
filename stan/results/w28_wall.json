@@ -1,0 +1,137 @@
+{
+ "base/arma11": {
+  "wall_med_s": 0.184,
+  "per_rep_wall": [
+   0.2,
+   0.2,
+   0.2
+  ],
+  "exit_iter_med": null
+ },
+ "mc_gate05/arma11": {
+  "wall_med_s": 0.233,
+  "per_rep_wall": [
+   0.2,
+   0.2,
+   0.5
+  ],
+  "exit_iter_med": 400.0
+ },
+ "mc_pilot50/arma11": {
+  "wall_med_s": 0.211,
+  "per_rep_wall": [
+   0.2,
+   0.2,
+   0.3
+  ],
+  "exit_iter_med": 1000.0
+ },
+ "base/lsat_model": {
+  "wall_med_s": 14.492,
+  "per_rep_wall": [
+   14.5,
+   13.2,
+   17.9
+  ],
+  "exit_iter_med": null
+ },
+ "mc_gate05/lsat_model": {
+  "wall_med_s": 111.373,
+  "per_rep_wall": [
+   111.0,
+   111.4,
+   127.6
+  ],
+  "exit_iter_med": 350.0
+ },
+ "mc_pilot50/lsat_model": {
+  "wall_med_s": 21.757,
+  "per_rep_wall": [
+   21.6,
+   21.8,
+   26.0
+  ],
+  "exit_iter_med": 1000.0
+ },
+ "base/hier_2pl": {
+  "wall_med_s": 49.6,
+  "per_rep_wall": [
+   50.3,
+   49.6,
+   49.1
+  ],
+  "exit_iter_med": null
+ },
+ "mc_gate05/hier_2pl": {
+  "wall_med_s": 89.342,
+  "per_rep_wall": [
+   89.3,
+   88.2,
+   93.2
+  ],
+  "exit_iter_med": 345.0
+ },
+ "mc_pilot50/hier_2pl": {
+  "wall_med_s": 48.838,
+  "per_rep_wall": [
+   48.5,
+   50.8,
+   48.8
+  ],
+  "exit_iter_med": 1000.0
+ },
+ "base/blr": {
+  "wall_med_s": 0.345,
+  "per_rep_wall": [
+   0.3,
+   0.5,
+   0.3
+  ],
+  "exit_iter_med": null
+ },
+ "mc_gate05/blr": {
+  "wall_med_s": 0.357,
+  "per_rep_wall": [
+   0.4,
+   1.0,
+   0.4
+  ],
+  "exit_iter_med": 570.0
+ },
+ "mc_pilot50/blr": {
+  "wall_med_s": 0.429,
+  "per_rep_wall": [
+   0.4,
+   0.6,
+   0.4
+  ],
+  "exit_iter_med": 1000.0
+ },
+ "base/eight_schools_noncentered": {
+  "wall_med_s": 0.118,
+  "per_rep_wall": [
+   0.1,
+   0.1,
+   0.1
+  ],
+  "exit_iter_med": null
+ },
+ "mc_gate05/eight_schools_noncentered": {
+  "wall_med_s": 0.129,
+  "per_rep_wall": [
+   0.1,
+   0.1,
+   0.1
+  ],
+  "exit_iter_med": 1000.0
+ },
+ "mc_pilot50/eight_schools_noncentered": {
+  "wall_med_s": 0.132,
+  "per_rep_wall": [
+   0.1,
+   0.1,
+   0.1
+  ],
+  "exit_iter_med": 1000.0
+ }
+}

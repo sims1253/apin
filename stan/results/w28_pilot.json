@@ -1,0 +1,147 @@
+{
+ "arma11": [
+  {
+   "rep": 0,
+   "wall": 0.192,
+   "exit_iter": 1000,
+   "pilot_checks": 2,
+   "rho1_max": 0.685729,
+   "rhat_lp": 1.03463,
+   "decision": "resume"
+  },
+  {
+   "rep": 1,
+   "wall": 0.211,
+   "exit_iter": 1000,
+   "pilot_checks": 2,
+   "rho1_max": 0.66624,
+   "rhat_lp": 1.06276,
+   "decision": "resume"
+  },
+  {
+   "rep": 2,
+   "wall": 0.251,
+   "exit_iter": 730,
+   "pilot_checks": 2,
+   "rho1_max": 0.390112,
+   "rhat_lp": 1.00747,
+   "decision": "approve"
+  }
+ ],
+ "lsat_model": [
+  {
+   "rep": 0,
+   "wall": 21.642,
+   "exit_iter": 1000,
+   "pilot_checks": 2,
+   "rho1_max": 0.770072,
+   "rhat_lp": 1.17006,
+   "decision": "resume"
+  },
+  {
+   "rep": 1,
+   "wall": 21.757,
+   "exit_iter": 1000,
+   "pilot_checks": 2,
+   "rho1_max": 0.692116,
+   "rhat_lp": 1.14069,
+   "decision": "resume"
+  },
+  {
+   "rep": 2,
+   "wall": 25.96,
+   "exit_iter": 1000,
+   "pilot_checks": 2,
+   "rho1_max": 0.897936,
+   "rhat_lp": 1.24985,
+   "decision": "resume"
+  }
+ ],
+ "hier_2pl": [
+  {
+   "rep": 0,
+   "wall": 48.544,
+   "exit_iter": 1000,
+   "pilot_checks": 3,
+   "rho1_max": 0.724146,
+   "rhat_lp": 1.098,
+   "decision": "resume"
+  },
+  {
+   "rep": 1,
+   "wall": 50.828,
+   "exit_iter": 1000,
+   "pilot_checks": 3,
+   "rho1_max": 0.908244,
+   "rhat_lp": 1.45293,
+   "decision": "resume"
+  },
+  {
+   "rep": 2,
+   "wall": 48.838,
+   "exit_iter": 1000,
+   "pilot_checks": 2,
+   "rho1_max": 0.708894,
+   "rhat_lp": 1.11452,
+   "decision": "resume"
+  }
+ ],
+ "blr": [
+  {
+   "rep": 0,
+   "wall": 0.429,
+   "exit_iter": 1000,
+   "pilot_checks": 1,
+   "rho1_max": 0.708978,
+   "rhat_lp": 1.05533,
+   "decision": "resume"
+  },
+  {
+   "rep": 1,
+   "wall": 0.566,
+   "exit_iter": 1000,
+   "pilot_checks": 1,
+   "rho1_max": 0.737979,
+   "rhat_lp": 1.05104,
+   "decision": "resume"
+  },
+  {
+   "rep": 2,
+   "wall": 0.423,
+   "exit_iter": 1000,
+   "pilot_checks": 1,
+   "rho1_max": 0.621376,
+   "rhat_lp": 1.20358,
+   "decision": "resume"
+  }
+ ],
+ "eight_schools_noncentered": [
+  {
+   "rep": 0,
+   "wall": 0.123,
+   "exit_iter": 750,
+   "pilot_checks": 2,
+   "rho1_max": 0.469217,
+   "rhat_lp": 1.02777,
+   "decision": "approve"
+  },
+  {
+   "rep": 1,
+   "wall": 0.132,
+   "exit_iter": 1000,
+   "pilot_checks": null,
+   "rho1_max": null,
+   "rhat_lp": null,
+   "decision": null
+  },
+  {
+   "rep": 2,
+   "wall": 0.138,
+   "exit_iter": 1000,
+   "pilot_checks": null,
+   "rho1_max": null,
+   "rhat_lp": null,
+   "decision": null
+  }
+ ]
+}

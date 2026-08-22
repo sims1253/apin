@@ -51,24 +51,28 @@ def parse_sc(text):
             for m in SC_STANZA_RE.finditer(text)]
 
 
-def rows_from(timing_by_chain, model, tag, rep, wall, seed, exit_iters):
+def rows_from(timing_by_chain, model, tag, rep, wall, seed, exit_iters,
+              extras=None):
     rows = []
     for c in sorted(timing_by_chain):
         blocks = timing_by_chain[c]
         warm_b = blocks[0] if blocks else {}
         samp_b = blocks[1] if len(blocks) > 1 else {}
-        rows.append(dict(model=model, variant=tag, rep=rep, chain=c,
-                         warmup_s=warm_b.get('total'),
-                         sampling_s=samp_b.get('total'),
-                         n_draws=DRAWS,
-                         n_leapfrog_total=int(warm_b.get('logp_calls', 0) + samp_b.get('logp_calls', 0)),
-                         n_leapfrog_sampling=int(samp_b.get('logp_calls', 0)),
-                         divergences=-1, treedepth_hits=-1,
-                         stepsize_final=None, accept_mean=None, lp_mean=None,
-                         logp_frac_sampling=samp_b.get('logp_frac'),
-                         us_per_logp_grad=samp_b.get('per_call', 0) * 1e6 if samp_b.get('per_call') else None,
-                         wall_batch_s=round(wall, 3), seed=seed,
-                         exit_iter=exit_iters.get(c)))
+        row = dict(model=model, variant=tag, rep=rep, chain=c,
+                   warmup_s=warm_b.get('total'),
+                   sampling_s=samp_b.get('total'),
+                   n_draws=DRAWS,
+                   n_leapfrog_total=int(warm_b.get('logp_calls', 0) + samp_b.get('logp_calls', 0)),
+                   n_leapfrog_sampling=int(samp_b.get('logp_calls', 0)),
+                   divergences=-1, treedepth_hits=-1,
+                   stepsize_final=None, accept_mean=None, lp_mean=None,
+                   logp_frac_sampling=samp_b.get('logp_frac'),
+                   us_per_logp_grad=samp_b.get('per_call', 0) * 1e6 if samp_b.get('per_call') else None,
+                   wall_batch_s=round(wall, 3), seed=seed,
+                   exit_iter=exit_iters.get(c))
+        if extras:
+            row.update(extras)
+        rows.append(row)
     return rows
 
 
@@ -79,7 +83,7 @@ def write_rows(out_dir, rows):
     (out_dir / 'DONE').write_text('ok')
 
 
-def run_arm(model, rep, tag, so_dir, mc, temporal_tol=None):
+def run_arm(model, rep, tag, so_dir, mc, temporal_tol=None, pilot=0):
     out_dir = RUNS / tag / model / f'rep{rep}'
     if (out_dir / 'DONE').exists() and (out_dir / 'rows.csv').exists():
         return str(out_dir)
@@ -96,6 +100,8 @@ def run_arm(model, rep, tag, so_dir, mc, temporal_tol=None):
                '--temporal-step-tol', str(temporal_tol if temporal_tol is not None else 0.0),
                '--init-file', str(init_dir / 'chain_{c}.txt'),
                '--output', out_pat] + common
+        if pilot:
+            cmd += ['--pilot-burst', str(pilot)]
         log = (out_dir / 'mc.log')
         with log.open('w') as lf:
             p = subprocess.run(cmd, stdout=lf, stderr=subprocess.STDOUT, env={**os.environ, 'OMP_NUM_THREADS': '1'})
@@ -106,7 +112,18 @@ def run_arm(model, rep, tag, so_dir, mc, temporal_tol=None):
         em = re.search(r'controller exit_iter=(\d+) early_exit=(\d+)', text)
         exit_iters = {c: int(em.group(1)) for c in timing} if em else {}
         wall = time.time() - t0
-        rows = rows_from(timing, model, tag, rep, wall, seed, exit_iters)
+        # W-28 pilot-arm extras: per-check stats + totals from the pilot lines
+        extras = {}
+        checks = re.findall(
+            r'pilot check (\d+) at iter (\d+): rho1_max=([\d.eE+-]+) '
+            r'rhat_lp=([\d.eE+-]+) -> (\w+)', text)
+        if checks:
+            extras['pilot_checks'] = int(checks[-1][0])
+            extras['pilot_last_rho1_max'] = float(checks[-1][2])
+            extras['pilot_last_rhat_lp'] = float(checks[-1][3])
+            extras['pilot_last_decision'] = checks[-1][4]
+            extras['pilot_first_iter'] = int(checks[0][1])
+        rows = rows_from(timing, model, tag, rep, wall, seed, exit_iters, extras)
     else:
         procs = []
         for c in range(CHAINS):
@@ -138,7 +155,8 @@ def main():
     os.environ['OMP_NUM_THREADS'] = '1'
     models = [m for m in args.models.split(',') if m]
     arm_cfg = {'base': dict(mc=False), 'mc_nogate': dict(mc=True, temporal_tol=None),
-               'mc_gate05': dict(mc=True, temporal_tol=0.05)}
+               'mc_gate05': dict(mc=True, temporal_tol=0.05),
+               'mc_pilot50': dict(mc=True, temporal_tol=0.05, pilot=50)}
     for rep in range(args.reps):
         for m in models:
             if not (Path(args.so_dir) / f'model_{m}.so').exists():

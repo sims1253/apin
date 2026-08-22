@@ -1586,3 +1586,156 @@ at most ~10% per-call. Recommend: keep default compile flags, close the
 compile lever.
 Artifacts committed: harness/run_w27.py, harness/analyze_w27.py,
 inits_w27/, this WORKLOG entry. bs_models_o3*/ kept local (not in repo).
+
+## W-29 (pre-registered BEFORE running): stan-math model-gradient hotspot atlas for upstream candidature
+
+Mission: produce the EVIDENCE PACK naming which stan-math functions dominate
+logp_grad cost on our expensive models, so upstream proposals (walnutpie or
+stan-math) can target them. Measurement/documentation only — NO code changes
+to walnutpie or stan-math. W-27 closed the compile-flags direction; W-17g
+says logp_grad = 68-99.7% of walnutpie sampling wall, so the remaining
+per-call lever is the MATH LIBRARY itself.
+
+Method (one callgrind job at a time, <=4 cores shared, env -u LD_LIBRARY_PATH):
+- Binary: external/walnutpie/build_e27/examples/stan_cli @ 0cb5b7b (W-27's
+  stable build; NOT rebuilt). Models: default bs_models/*.so.
+- valgrind 3.23 from ~/vginstall. --tool=callgrind (no cache sim — Ir only).
+- Models (gradient-heavy class): hier_2pl, kronecker_gp, gp_regr, accel_gp,
+  diamonds. SHORT runs: warmup=100 samples=50 for hier_2pl/kronecker_gp
+  (longer warmup to keep exception-truncated gradient calls low: probe
+  1.5% / 2.7% of calls), warmup=50 samples=50 for the rest. Fixed seed
+  20260819, fixed inits (inits_w25 pf for hier_2pl, inits_w27 for the
+  others; gp_regr+accel_gp inits generated with the W-27 deterministic
+  random.Random('20260819-0') normal(0,1) scheme -> inits_w27/).
+- Attribution: cg_annotate exclusive + --inclusive=yes (logp_grad subtree
+  Ir = inclusive cost of the gradient entry) + --tree=both (call paths);
+  results/profile/w29/<model>/ holds raw dumps, harness/w29_callgrind.py
+  is the runner/parser.
+- Deliverable: results/hotspot_atlas_w29.md — per-model tables (function,
+  exclusive Ir, % of logp_grad subtree, call path), ranked upstream-
+  candidate list with WHY + fix shape (algorithmic vs vectorization vs
+  allocation), walnutpie-internal (non-logp_grad) overhead fraction per
+  model vs ATLAS.md's old numbers.
+
+Expectations (pre-registered):
+- hier_2pl: lkj_corr_cholesky + bernoulli/beta lpmf chains + reverse-pass
+  overhead dominate (its gradient has the known exception-heavy lkj block).
+- kronecker_gp: gp_exp_quad_cov / cov_exp_quad + cholesky + transformed-
+  params (ATLAS: 71% of profiled time in tp block).
+- diamonds: eigen linalg (normal_id_glm) should dominate (ATLAS 69% eigen).
+- accel_gp/gp_regr: small models — higher alloc/memcpy and sampler-side
+  share.
+- walnutpie-internal fraction expected <5% on these models except gp_regr/
+  accel_gp (small per-call cost) — consistency check vs W-17g 68-99.7%
+  wall shares (instruction shares should be lower than wall shares where
+  the sampler has I/O waits; note drift, don't re-litigate).
+Gate: every number in the atlas traceable to a callgrind.out in the repo;
+commands in the atlas must reproduce it verbatim.
+
+### W-28 mid-task note (implementation validated; pre-registered thresholds UNCHANGED)
+
+Implementation shipped (submodule exp/pilot-burst-gate @ b80f4a8). Canary:
+single-chain default path 12/12 CSVs bit-identical pre/post (3 models x 4
+chains, warmup 400 / samples 200, seeds 20260819+c). The multi-chain path
+is NOT run-to-run deterministic even pre-change (controller exit depends
+on thread timing: identical blr invocations exited at 500/520/540/550) —
+this is why W-25 reported exit-iter medians; with --pilot-burst 0 the CLI
+calls the unchanged adapt_with_stats on the unchanged controller, so the
+mc canary is the code-path argument + statistical equivalence.
+Functional probes (rep0 inits, seed 20260819, ONE run each — validation,
+not the grid; thresholds NOT recalibrated):
+  blr    check@515: rho1 0.861 rhat 1.262 -> resume (full warmup)
+  hier   check@385: 0.719/1.394; @685: 0.723/1.052 -> resume x2 (full)
+  arma11 check@600: 0.608/1.056 -> resume (full)
+  lsat   check@350: 0.663/1.034; @650: 0.773/1.197 -> resume x2 (full)
+  esc    check@350: 0.570/1.070; @685: 0.670/1.016; @985: 0.530/1.020
+        -> resume x3 (full)
+Early read (to be confirmed by the 3-rep grid): the sampler's lp stream
+carries lag-1 autocorr 0.5-0.9 at ALL candidate points — the AR(1)-based
+0.5 bar (ESS>=N/3 intuition) is miscalibrated to this model class, where
+even FULL-warmup min-param ESS is ~N/9 (blr 350/4000). And rho1 does NOT
+separate marginal from easy (easy blr 0.86 > marginal hier 0.72). Running
+the pre-registered grid unmodified; any threshold recalibration would be
+POST-HOC and labeled as such.
+
+## 2026-08-22 — W-28 CLOSE-OUT: pilot-burst gate SHIPPED (default off); quality gate PASSES where it matters, speed gate FAILS — the lp pilot statistic cannot separate marginal from easy; early-exit direction closed
+
+Implementation: walnutpie branch exp/pilot-burst-gate @ b80f4a8 (off
+exp/endpoint-grad-threading+chains @ 0cb5b7b). adapt_with_pilot (adapt.hpp)
+= phased adaptation under the total budget with a caller veto; vetoes
+resume warmup from preserved adapter state. CLI --pilot-burst 50
+(+ --pilot-rho1-max 0.5, --pilot-rhat-max 1.1), pilots on separate rng
+streams (seed + 7919*(c+1)) with a recording-only handler — discarded
+always; sampling after approval starts fresh from the untouched adapters.
+Arms: base + mc_gate05 reused from W-25 runs (canary argument: single-chain
+path 12/12 bit-identical; with --pilot-burst 0 the mc path calls the
+byte-identical adapt_with_stats; the mc path is inherently run-to-run
+nondeterministic anyway — identical blr invocations exit at 500/520/540/550,
+which is why W-25/W-28 use medians).
+
+Grid (3 reps x 4 chains x 5 models, medians; arviz ESS; full tables in
+results/w28_{ess,wall,pilot}.json):
+  bulk-ESS-min:            base   mc_gate05  mc_pilot50
+    arma11                 1028      860        806   (pilot per-rep 806/1150/584)
+    lsat_model              944      942        809   (884/809/758)
+    hier_2pl                519      126        511   (547/511/504)
+    blr                     350      347        346
+    eight_schools_nc       1488     1459       1488
+  tail-ESS-min:
+    arma11                 1539     1260       1320
+    lsat_model             1638      825       1463
+    hier_2pl                733      112        647
+    blr                     361      457        362
+    eight_schools_nc       1361     1361       1411
+  wall (median s):  hier 49.6/89.3/48.8; lsat 14.5/111.4/21.8;
+    arma 0.2/0.2/0.2; blr 0.3/0.4/0.4; esc 0.1/0.1/0.1
+  pilot behavior: 13/15 runs REJECTED every candidate -> full warmup
+  (checks 1-3 each). Approved: arma11 rep2 @730 (rho1 0.39, rhat 1.007),
+  esc rep0 @750 (0.47, 1.028). esc rep1/2: no candidate at all.
+
+VERDICTS (pre-registered gates):
+1. Quality: PASS with one borderline cell. hier_2pl — the model that
+   destroyed W-25 (519->126) — is fully protected (511 vs 519 bulk, tail
+   within base's per-rep spread). arma11 within base spread (806 vs 1028;
+   base reps span 605-1376). lsat bulk median 809 sits 9.5% BELOW base's
+   worst rep (894) — strictly out of the pre-registered noise band
+   (tail passes; and no early exit ever fired on lsat, so the delta is
+   mc-path/full-warmup variance, not an early-exit effect). Where the
+   gate DID approve (2/15), ESS stayed in-band (arma11 rep2 bulk 584 vs
+   base worst 605; esc rep0 1745, best of all arms).
+2. Speed: FAIL. No model's median exit was early (all 1000) — the gate
+   recreates full warmup, so no wall win exists to preserve. Worse, the
+   in-process mc path at full warmup carries overhead vs 4 parallel
+   single-chain procs: lsat 14.5 -> 21.8s (1.50x; warmup 6 -> 14-17s),
+   hier warm +12-18% (sampling actually cheaper, 21 -> 16s), sub-second
+   models unchanged. The pilot itself is cheap (~100 pilot draws; the
+   overhead is the controller's busy-poll core + in-process arena/thread
+   contention) — quantified for successors.
+3. Canary: PASS (12/12 single-chain bit-identical; mc path unchanged code
+   when --pilot-burst 0, inherently nondeterministic run-to-run).
+
+WHY IT FAILS (the scientific result): the sampler's lp stream carries
+lag-1 autocorrelation 0.5-0.9 at EVERY candidate point on this benchmark —
+including full-warmup-quality freezes on the easy class (blr 0.62-0.74,
+esc 0.53-0.67) — because even base min-param ESS is ~N/9 (blr 350/4000).
+So (a) absolute thresholds calibrated on iid intuition (rho1 <= 0.5 ~
+ESS >= N/3) reject everything, and (b) NO threshold separates classes:
+values that must reject marginal hier (0.71-0.91) and lsat (0.66-0.90)
+also reject easy blr (0.62-0.74) and esc (0.53-0.67); the two approvals
+landed on marginal-class arma11 (0.39) and esc (0.47). hier_2pl's
+catastrophic under-exit (ESS -76%) is INVISIBLE to a 50-draw lp window —
+consistent with W-25's suspicion that the damage lives in trajectory
+geometry / min-micro-steps, which only long-horizon min-dimension ESS
+sees.
+
+DIRECTION CLOSED: three independent gates now agree — CLI temporal knob
+(W-21: fast but quality-destroying), static step/mass drift gate (W-25:
+quality-destroying), dynamic lp pilot burst (W-28: quality-preserving
+only by never exiting). Library-level warmup early-exit on this benchmark
+has no cheap observable that is both class-separating and cheap to
+evaluate; recommendation: keep warmup fixed-length (defaults unchanged,
+gate ships default-off for future use), revisit only with a per-DIMENSION
+pilot ESS estimate (cost ~ a full 50-draw pilot per param block — no
+longer cheap) or an adaptation signal internal to trajectory geometry.
+Ship state: exp/pilot-burst-gate @ b80f4a8, default off; base + mc
+paths bit-identical. Raw: runs/mc_pilot50/, results/w28_*.json.
