@@ -931,3 +931,45 @@ Instrumented driver (position-hash counting, no library changes), 3 models,
 - NOT implemented this session: hot-path surgery on walnuts.hpp (the
   template-surgery-mishap lesson); pre-registered as the fresh-session item,
   one change, bit-identity gate, 3-model verification.
+
+
+## Phase 2a recon (read-only, this session): base_nuts.hpp copy/alloc inventory
+
+Submodule re-initialized at the pinned SHA (v2.38.0-rc1-3, d13c50c0f).
+Complete inventory of per-transition allocations in transition() + build_tree:
+
+CONSTANT (transition scope, 4 ps_points = 12 VectorXd):
+  z_fwd, z_bck, z_sample, z_propose  (+ VectorXd p_fwd_fwd, p_fwd_bck, p_bck_fwd,
+  p_bck_bck, 4x p_sharp_*, rho, and per-outer-iteration 2x rho_zero)
+PER-SUBTREE (build_tree recursion, EVERY internal node):
+  ps_point z_propose_final        -> 3 VectorXd allocs (q,p,g) + V copy
+  p_init_end, p_sharp_init_end    -> 2
+  rho_init (Zero)                 -> 1
+  p_final_beg, p_sharp_final_beg  -> 2
+  rho_final (Zero)                -> 1
+  rho_subtree = rho_init+rho_final-> 1 temp + 2 more for extended checks
+  => ~10 VectorXd allocations per internal build_tree node, ~2-3 temps.
+  At depth d there are 2^d - 1 internal nodes + 2^d leaves; for a typical
+  depth-6 trajectory that's 63 nodes x ~10 = ~630 heap allocs/transition,
+  on top of 63 leaf-level ps_point assignments (z_propose = this->z_:
+  3 assign each, no alloc after first).
+
+Attack order (highest leverage, lowest risk):
+  1. hoist z_propose_final + the 4 per-node VectorXd scratch into a
+     per-transition scratch stack (std::vector member, sized once per
+     model, indexed by depth) — kills ~630 allocs to ~0.
+  2. rho_init/rho_final: Zero() -> setZero() on hoisted buffers.
+  3. rho_subtree chain: reuse one buffer (3 sequential uses).
+  4. LEAVE ALONE: leaf z_propose = this->z_ (semantic, cheap assign),
+     transition-scope 12 vectors (once per transition, negligible),
+     compute_criterion (no alloc), integrator/hamiltonian internals
+     (diag_e: dtau_dp = inv_mass.cwiseProduct(p) — one temp, could be
+     noalias'd but tiny).
+Verification gates (the rho-hoist negative result showed bit-identity is
+NOT automatic): (a) draws bit-identical vs stock for 3 models x 3 seeds —
+REQUIRED for scratch reuse since arithmetic order unchanged; (b) if any
+gate fails, stop and bisect the specific hoist; (c) callgrind memcpy/alloc
+share on pilots must drop materially from 21%; (d) wall-clock paired t on
+the small-model class.
+Plan: implement as ONE coherent patch on a dev branch of the stan
+submodule, never mixed with other changes; fresh session per the lesson.
