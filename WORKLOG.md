@@ -1031,3 +1031,17 @@ SIZE, not the metric:
   hundreds of iters). A future quality-preserving early exit must gate on
   STEP stabilization specifically (e.g., relative step drift over the last
   2 windows < 5%), not mass. Recorded for the library-level follow-up.
+
+## 2026-08-23 ~13:15 — W-22 close-out; apin made portable; handoff skill
+
+- Portable remote live: git@github.com:sims1253/apin.git (snapshot @ 9fcabfe:
+  harness/results/models/data/patches/docs; externals as PINNED SUBMODULES —
+  walnutpie@3eddfc4 fork dev/init-robustness, cmdstan@6380837 fork
+  nindan/mixed-build-guard, posteriordb@28f8d3d6, tinystan@db27f82; runs/ and
+  bs_models/ excluded, regenerable per BOOTSTRAP.md). Verified by fresh
+  clone + submodule init. Local export mirror: ../.export-apin (for future
+  snapshot pushes).
+- Handoff skill: ~/.agents/skills/handoff/SKILL.md — routes to canonical
+  records, lists the 3 queued fresh-session items with gates (endpoint-grad
+  threading; stan-2a2; library early-exit w/ W-22 step-gate), protocol,
+  gotchas.
