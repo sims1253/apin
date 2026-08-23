@@ -1,0 +1,30 @@
+rep1 ARM A0 iters=300 build_ns=416178.4 rev_ns=162955.1 lp=541.802292 adj=708.533520
+rep1 ARM F_SS iters=300 build_ns=148321.2 rev_ns=148544.2 lp=541.802292 adj=708.533520
+rep1 ARM F_PS iters=300 build_ns=52999.3 rev_ns=150603.3 lp=541.802292 adj=708.533520
+rep1 ARM F_SF iters=300 build_ns=148256.1 rev_ns=148228.6 lp=541.802292 adj=708.533520
+rep1 ARM F_PF iters=300 build_ns=52140.6 rev_ns=147205.3 lp=541.802292 adj=708.533520
+rep1 ARM A1 iters=300 build_ns=78373.1 rev_ns=40.7
+rep2 ARM A0 iters=300 build_ns=388347.5 rev_ns=154443.5 lp=541.802292 adj=708.533520
+rep2 ARM F_SS iters=300 build_ns=148669.2 rev_ns=147567.9 lp=541.802292 adj=708.533520
+rep2 ARM F_PS iters=300 build_ns=53471.2 rev_ns=150374.8 lp=541.802292 adj=708.533520
+rep2 ARM F_SF iters=300 build_ns=153659.9 rev_ns=151776.7 lp=541.802292 adj=708.533520
+rep2 ARM F_PF iters=300 build_ns=51695.2 rev_ns=144541.2 lp=541.802292 adj=708.533520
+rep2 ARM A1 iters=300 build_ns=72443.0 rev_ns=32.0
+rep3 ARM A0 iters=300 build_ns=387957.6 rev_ns=155021.7 lp=541.802292 adj=708.533520
+rep3 ARM F_SS iters=300 build_ns=152508.0 rev_ns=152387.1 lp=541.802292 adj=708.533520
+rep3 ARM F_PS iters=300 build_ns=54086.5 rev_ns=149018.2 lp=541.802292 adj=708.533520
+rep3 ARM F_SF iters=300 build_ns=206469.4 rev_ns=186219.8 lp=541.802292 adj=708.533520
+rep3 ARM F_PF iters=300 build_ns=53264.0 rev_ns=151248.7 lp=541.802292 adj=708.533520
+rep3 ARM A1 iters=300 build_ns=79277.3 rev_ns=43.6
+rep4 ARM A0 iters=300 build_ns=478737.9 rev_ns=172764.4 lp=541.802292 adj=708.533520
+rep4 ARM F_SS iters=300 build_ns=164254.9 rev_ns=163848.4 lp=541.802292 adj=708.533520
+rep4 ARM F_PS iters=300 build_ns=61147.5 rev_ns=167219.3 lp=541.802292 adj=708.533520
+rep4 ARM F_SF iters=300 build_ns=160226.5 rev_ns=152185.4 lp=541.802292 adj=708.533520
+rep4 ARM F_PF iters=300 build_ns=62192.3 rev_ns=163793.9 lp=541.802292 adj=708.533520
+rep4 ARM A1 iters=300 build_ns=92195.5 rev_ns=41.0
+rep5 ARM A0 iters=300 build_ns=493620.8 rev_ns=176480.8 lp=541.802292 adj=708.533520
+rep5 ARM F_SS iters=300 build_ns=178186.7 rev_ns=170286.2 lp=541.802292 adj=708.533520
+rep5 ARM F_PS iters=300 build_ns=53800.3 rev_ns=148465.5 lp=541.802292 adj=708.533520
+rep5 ARM F_SF iters=300 build_ns=150875.6 rev_ns=144904.3 lp=541.802292 adj=708.533520
+rep5 ARM F_PF iters=300 build_ns=54644.7 rev_ns=153457.5 lp=541.802292 adj=708.533520
+rep5 ARM A1 iters=300 build_ns=79996.1 rev_ns=47.4

@@ -1,0 +1,44 @@
+{
+ "A0": {
+  "TOTAL": 782701950,
+  "subtract fwd (incl alloc/emplace)": 184360200,
+  "elt_multiply fwd (incl alloc/emplace)": 172837000,
+  "A0 build glue (params+rvalue+sum)": 172619204,
+  "chainstack emplace": 70321858,
+  "rev cb body: elt_multiply": 53762400,
+  "rev cb body: subtract": 49922600,
+  "memcpy": 46599862,
+  "rev cb body: sum": 26883400
+ },
+ "F_SS": {
+  "TOTAL": 392619730,
+  "fw build (noinline)": 201638188,
+  "fw reverse (noinline, incl cb bodies)": 108819400,
+  "fw arena alloc": 76800000
+ },
+ "F_PS": {
+  "TOTAL": 265394910,
+  "fw reverse (noinline, incl cb bodies)": 108819200,
+  "fw build (noinline)": 90281203
+ },
+ "F_SF": {
+  "TOTAL": 392603933,
+  "fw build (noinline)": 201632585,
+  "fw arena alloc": 76800000,
+  "fw flat sub fn": 46083400,
+  "fw reverse (noinline, incl cb bodies)": 39682600,
+  "fw flat mult fn": 23051000
+ },
+ "F_PF": {
+  "TOTAL": 265379217,
+  "fw build (noinline)": 90275600,
+  "fw flat sub fn": 46083400,
+  "fw reverse (noinline, incl cb bodies)": 39682400,
+  "fw flat mult fn": 23051000
+ },
+ "A1": {
+  "TOTAL": 250170898,
+  "A1 var(double) loop": 245780202,
+  "memcpy": 510108
+ }
+}

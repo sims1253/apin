@@ -4926,3 +4926,104 @@ patched,patched_base}/ (callgrind.out, cli.log, draws.csv); harness/w46/
 f003c78a165c2be67ce22b30c046c0e2 re-verified after restore; find confirms
 bernoulli_logit_lpmf.hpp was the only header touched). walnutpie
 submodule untouched; no pushes.
+
+## W-50 (pre-registered BEFORE running): the -fno-math-errno family — a compile-flag lever W-27 never tested
+
+RATIONALE (user's sharp question): gcc under its default -fmath-errno
+cannot optimize errno-setting libm calls; with -fno-math-errno the
+errno-guarded transforms unblock. W-33 proved std::pow(x,2) -> x*x in
+stan-math's square() is worth the full 8.9%G Ir / 13-15% wall bucket on
+gp_regr with BIT-IDENTICAL values (glibc pow correctly rounded). If gcc
+performs that same transform at the MODEL .so level under
+-fno-math-errno, W-33-style wins arrive WITHOUT touching stan-math.
+
+MECHANICS PROBE (done BEFORE registration; gcc 16.2.1, -O3 -std=c++17
+-fPIC, this box): -fno-math-errno turns pow(x,2) into mulsd (x*x);
+sqrt(x) loses its errno compare+branch (bare sqrtsd, value-identical);
+pow(x,3) and pow(x,0.5) are NOT transformed (stay pow@PLT) — so the only
+value-level transform is the bit-exact one from W-33. Elementwise
+exp/log1p loops do NOT vectorize under -fno-math-errno (nor with
+-fno-trapping-math added): glibc guards its libmvec __DECL_SIMD_*
+declarations behind __FAST_MATH__, which we will NOT define (it implies
+reassociation => breaks bit-identity). Honest scope: errno-only removal
+buys scalar errno-guarded transforms (pow2->mul, inline sqrt), NOT
+vectorized elementwise libm chains.
+
+ARMS (per model): default build vs CXXFLAGS=-fno-math-errno (flag
+APPENDED to the default set; default -O level O=3 preserved). Contingent
+3rd arm ONLY if arm 2 passes parity AND wins on the first two models:
+-fno-math-errno -fno-trapping-math (semantic difference stated:
+-fno-trapping-math additionally promises FP exceptions need not be
+raised precisely — no value change for non-trapping code; Stan never
+unmasks FP traps nor reads exception flags; parity gate unchanged).
+Models: gp_regr (pow-heavy: 8.93%G libm::pow), hier_2pl (log1p-heavy:
+14.43%G libm::log1p — expected UNTOUCHED, the falsification model for
+the vectorization half of the story), kronecker_gp (eigh-heavy control:
+pow 1.99%G, expect ~nothing). Build protocol: .stan COPIED per variant
+into scratch/w50/<model>_<variant>/ (W-27 cache gotcha: compile_model
+silently reuses a cached .so next to the .stan); env -u LD_LIBRARY_PATH
+(confirmed first-hand this session: the profile's AppImage
+LD_LIBRARY_PATH breaks the system g++ header search outright);
+MAKE=/usr/bin/make; MAKEFLAGS=-j2; shared cores -> serialized timing.
+Baselines: fresh default-build arm (plus gp_regr cross-check against
+the surviving W-33 stock .so).
+
+GATES (pre-registered):
+(a) PARITY — 100 deterministic random unconstrained points per model
+    (W-27 scheme, random.Random('w50-parity-0')): gradient AND logp
+    BIT-IDENTICAL vs default .so. Exact 0.0 is the target and the
+    expectation (errno-only removal changes no FP value; pow(x,2)->x*x
+    bit-exact per W-33). ANY nonzero diff stops the arm and gets
+    investigated/documented before any win is claimed. FD spot-check on
+    the flagged .so (W-27/W-33 method).
+(b) COST — per-call logp_grad us via the native stan_cli stanza
+    (build_e27 binary, read-only; 3 interleaved reps per arm-pair,
+    medians; W-33 protocol) + Python pair-interleaved cross-check +
+    callgrind Ir/grad (system valgrind 3.25.1, one job at a time;
+    ~/vginstall 3.23 cross-check on gp_regr stock vs the recorded W-29
+    digits 66,990 Ir/grad / pow 3,453,345 Ir for era-consistency).
+(c) SAMPLER SPOT — winning model only, 1 rep x 4 chains (single-chain
+    procs, seeds 20260819+c, warmup=1000 samples=1000 --metric-window
+    50, identical fixed inits per arm): draws md5-IDENTICAL to the
+    default-.so run + wall comparison.
+
+EXPECTATIONS (pre-registered): gp_regr replicates W-33 (Ir/grad about
+-9%, wall about -13..15%, bit-identical draws); hier_2pl about 0 (log1p
+stays scalar per the probe); kronecker_gp small (<=2% class). If
+confirmed, the flag is a free companion to the W-33 upstream ask (same
+transform, zero source change) — adoption decision recorded either way.
+Negative results recorded same as wins. Deliverable:
+results/errno_flags_w50.md. No stan-math / walnutpie tree changes
+(shared trees pristine; new scratch builds only); no pushes.
+
+### W-47 CLOSE-OUT: SoA-arena ceiling = ~1/3 of the eltwise complex; flat callbacks measured ZERO; span-chainstack prototype sampler-bitwise but codegen-blocked — results/sota_arena_w47.md
+
+Tax decomposition (existing W-29/W-34 dumps, harness/w47/alloc_edges.py):
+alloc 6.41%T + emplace 4.47%T (hier_2pl; 13.0/9.0 Ir per call, 172M/174M
+calls) + ctor stores inlined in op exclusives; grad() loop + recover =
+0.27%T; anatomy: eltwise ops build one nochain vari per element + ONE
+reverse_pass_callback per op — dispatch is O(#ops), NOT O(N).
+Microbench (scratch/w47/bench.cpp, bitwise-gated): stock per-vari floor
+32.6 Ir (A1); typed pool saves 16.6 Ir/record = -32% of the tape complex
+(F_SS 51.1 -> F_PS 34.6 Ir/record; build wall 3.97 -> 1.40 ps/record);
+FLAT CALLBACKS = 0.00 delta (negative result: vtable concern obsolete at
+per-op granularity); A0-F_SS gap (50.8 Ir/record) is Eigen/Holder glue =
+the fusion lane (W-34), not the arena lane. Integration: SoA var =
+rewrite (pointer type everywhere) -> STOPPED at ceiling per
+pre-registration, design doc in the writeup (Increment A: batch
+vari-array + span registration API; Increment B: typed pools keeping var
+a pointer). The shippable increment WAS attempted: span-chainstack
+shadow-header patch (8 files, scratch/w47/w47_span_chainstack.patch;
+pristine tree md5-verified untouched): correctness PERFECT (microbench
+gradients bitwise; hier_2pl .so full sampler run warmup100+draws50
+draws.csv md5-IDENTICAL fe7c57c9...; gotcha recorded: bridgestan's
+prebuilt src/bridgestan.o links pristine headers into every model .so —
+any layout-touching patch must rebuild it or segfault). Perf: microbench
+build -25.7% wall (controlled, non-overlapping reps) but model-level Ir
++1.0%T (GCC 16 -O3 -fPIC inlines per-record registration ~11 Ir/record
+WORSE than the out-of-line emplace; subtract excl +25.5%); model wall
+noise-bound. VERDICT: not shippable as per-record checks; needs the
+op-level batch API (design doc). Deliverable: results/sota_arena_w47.md;
+artifacts scratch/w47/ + harness/w47/alloc_edges.py; profile dumps
+scratch/w47/out/profile/{stock,patched}. No walnutpie changes; no
+pushes; bridgestan pristine (md5 OK; hardlink copy deleted).

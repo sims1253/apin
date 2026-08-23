@@ -1,0 +1,14 @@
+rep1 bench ARM A0 iters=300 build_ns=380286.5 rev_ns=148076.7 lp=541.802292 adj=708.533520
+rep1 bench_patched ARM A0 iters=300 build_ns=285083.0 rev_ns=150218.2 lp=541.802292 adj=708.533520
+rep2 bench ARM A0 iters=300 build_ns=367748.3 rev_ns=147135.0 lp=541.802292 adj=708.533520
+rep2 bench_patched ARM A0 iters=300 build_ns=275030.1 rev_ns=146048.7 lp=541.802292 adj=708.533520
+rep3 bench ARM A0 iters=300 build_ns=371633.3 rev_ns=147669.9 lp=541.802292 adj=708.533520
+rep3 bench_patched ARM A0 iters=300 build_ns=275803.3 rev_ns=147206.5 lp=541.802292 adj=708.533520
+rep4 bench ARM A0 iters=300 build_ns=371220.0 rev_ns=143666.3 lp=541.802292 adj=708.533520
+rep4 bench_patched ARM A0 iters=300 build_ns=273447.2 rev_ns=144472.1 lp=541.802292 adj=708.533520
+rep5 bench ARM A0 iters=300 build_ns=377875.7 rev_ns=146773.1 lp=541.802292 adj=708.533520
+rep5 bench_patched ARM A0 iters=300 build_ns=276581.9 rev_ns=146346.2 lp=541.802292 adj=708.533520
+rep6 bench ARM A0 iters=300 build_ns=372110.7 rev_ns=148886.1 lp=541.802292 adj=708.533520
+rep6 bench_patched ARM A0 iters=300 build_ns=285641.2 rev_ns=149881.4 lp=541.802292 adj=708.533520
+rep7 bench ARM A0 iters=300 build_ns=374392.6 rev_ns=147034.3 lp=541.802292 adj=708.533520
+rep7 bench_patched ARM A0 iters=300 build_ns=283256.1 rev_ns=149884.1 lp=541.802292 adj=708.533520
