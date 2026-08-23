@@ -243,6 +243,13 @@ NaN the first failure mode predicts.
 - Adjacent-AD common knowledge: Julia discourse #11563; TF/PyTorch `eigh`
   backward (SO 58856160) — same `1/(w_j−w_i)` structure, no degeneracy
   guard there either.
+- **Major-framework precedent for the gauge choice**: JAX PR #36832
+  (merged 2026-04) added an opt-in gauge-fixed eigenvector JVP for exactly
+  this reason (degenerate eigenbases make the raw JVP arbitrary within the
+  invariant subspace); see also arXiv:2411.14141 (minimal-norm SVD
+  backward). To our knowledge no framework applies the fix in the reverse
+  mode adjoint by default — stan-math's `var` path currently has no guard
+  at all, which is the NaN/FD-inconsistency demonstrated above.
 - stan-math #1803 (adjoint convention wart, open since 2020) is the closest
   prior in this repo; the 2017 discourse thread 7616 (bbbales2: "I dunno if
   the derivatives fall apart there or what") never became an issue.
