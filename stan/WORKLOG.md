@@ -5355,3 +5355,70 @@ hardlink copy, profile dumps, draws, drivers); external/math_soa
 untracked, left PATCHED at the slice state. Pristine bundle md5-verified
 untouched; walnutpie untouched; no pushes; W-51 WORKLOG append left
 as-is (my commits stage my own hunks only via git apply --cached).
+
+## W-48 OUTCOME (appended after completion; entry above is the
+pre-registration): eltwise fusion transform CORRECT but Ir/wall-NEUTRAL
+— W-34 §7.2(a,b) eltwise-fusion ceiling REFUTED on current math; −28%
+belongs to grid-structure exploitation
+
+Resumed from a predecessor that died on rate limits at 14:11 with the
+full implementation uncommitted on external/stanc3 w48-fusion; all state
+salvaged, re-verified, and completed. Branch committed: w48-fusion @
+4b07a23 (base 90c6532); patch scratch/w48/stanc3_fusion.patch; full
+writeup results/stanc3_fusion_w48.md.
+
+WHAT SHIPPED: Optimize.fuse_indexed_eltwise (Oexperimental-only, last in
+suite, reverse-mode log prob only; matches bernoulli_logit_lpmf args
+that are pure +,-.*,/ chains over containers indexed once by a
+data-variable multi-index, <=8 leaves) + Lower_expr.Fused_eltwise
+lowering (Cpp.IIFE): values gathered once in double space, ONE
+vari_value<VectorXd>, ONE reverse_pass_callback applying the batched
+chain rule with inline per-element partials; AoS (Matrix<var>) leaves
+get arena vari** pointer arrays, SoA (var_value<VectorXd>) leaves use
+x.vi_ — selected via if constexpr. Integration test fused-eltwise.stan
+(2 firing + 3 guarded cases); expectations regenerated; fused code only
+in the Oexperimental expectations.
+
+GATES: (a) PASS bit-identical (0.0 rel logp, 0.0 grad rel-L2, 200 pts)
+vs stock --Oexperimental — same per-element arithmetic order; (c) draws
+BIT-IDENTICAL same-seed (cmp clean); (d) arma11/gp_regr/lotka_volterra
+hpp diff = 1 boilerplate line each; (e) dune runtest -j2 green (full
+tree, twice; manual Oexperimental sweep content-matches cpp.expected).
+(b) FAIL: Ir/grad 5,644,934 -> 5,678,304 (+0.59%), wall 665.8 -> 671.1
+us/call (+0.80%, 7 reps medians); the HAND-coded same-shape reference
+also loses to its stock (+7.97% on its baseline). All arms traced
+identical 2172 gradient calls.
+
+MECHANISM (refutation): on stan-math 5.3.0 the eltwise rev ops over
+gathered containers are ALREADY one-callback-per-op with arena value
+matrices; the ~35%G eltwise+gather complex is per-element value-gather +
+adjoint-scatter, which eltwise-shape fusion cannot remove — the fused
+lowering re-spends forward (value_of-expression gathers cost MORE than
+direct var gathers for AoS; 2x19,200 vari** pointer fills) what it saves
+on op boundaries. W-34's −28.2% (arm B GEMM) eliminated per-element work
+entirely via the complete-grid identity — reachable only by (1) a stanc3
+grid-detection pass (complete-design IRT -> [theta,-1]*[alpha;alpha.*b]
+rewrite + runtime grid check) or (2) a stan-math gathered-GLM primitive
+(W-34 §7.3(i)). Candidate B (middle-end eltwise fusion) MOOT. GLM-codegen
+study done: GLM specialness is 100% stan-math prim/prob single headers
+via operands_and_partials (no rev/prob GLMs, zero stanc3 codegen — only
+signatures + OpenCL restrictions + pedantic); the general reusable route
+for compiler-side custom varis is the W-39/W-48 marker+lowering+
+reverse_pass_callback mechanism, now proven twice.
+
+CONFOUNDS/GOTCHAS recorded: predecessor's stock_build/handfused arms
+were compiled against the since-reverted W-46 vectorized-log1p math
+(w46_kern in profiles — worth −34%G alone on hier_2pl!); only the
+pristine-math pair stock_oexp/fused_build is comparable; cross-arm grad
+rel-L2 3e-10 vs those arms is the log1p kernel, not the fusion. stanc
+embeds absolute source paths + output path in the hpp (normalize before
+diffing). dune is silent on test success; verify by forcing output
+regeneration. hier_2pl tp-block per-element assignment (alpha[i]=...)
+forces Matrix<var> AoS layout — vectorized tp would give SoA and cheaper
+gathers for stock AND fused (orthogonal lever, unmeasured).
+
+Artifacts: external/stanc3 w48-fusion @ 4b07a23 committed (stanc3_pr and
+w39-eigh untouched); scratch/w48/ (5 .so arms, 5 callgrind profiles,
+gate scripts, gatec draws); results/stanc3_fusion_w48.md. Upstream pack
+consequence: the hier2pl-plumbing candidate should be refiled as
+grid-GEMM detection / gathered-GLM, NOT eltwise fusion.
