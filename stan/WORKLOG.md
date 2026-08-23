@@ -4324,3 +4324,75 @@ upstream_dryrun_w44.md + external/upstream_pr_kits.md + scratch/w44/ (4
 files); external/math_dev left untracked with the Kit 4 patch + test
 applied at 46a3133 for the user's PR branch; external/stanc3 index
 restored to its W-39 state.
+
+## 2026-08-23 — W-43 CLOSE-OUT: blr pin root-caused — saturated-alpha step-descent race (M2 engine + M4 first-passage trigger); M1/M3/M5 refuted; fix SHIPPED (3 defects in find_reasonable_step corrected, opt-in path); canary 12/12, 0/48 chains pinned post-fix, pf-class short warmup restored to full health
+
+MECHANISM VERDICT (trace WALNUTPIE_PIN_TRACE=1, exp/pin-diagnosis @
+8853fd7+468e60f, off exp/grad-accounting @ 33cd398): the pinned and
+escaped phases differ in exactly ONE bit of internal state — whether
+alpha = exp(-|dH_min-attempt|) has underflowed to ~0. Seeded mass =
+|grad| at blr's default init ~1.6e7 makes step 1.0 carry min-attempt
+|dH| = 8.2e6 (iteration 0 — E1's 8e6; pf init up to 2e12): all 5
+halvings fail (31 evals), alpha = 0, Adam descends log-step at
+0.100*(sqrt(t)-1) nats (measured to 2% over 948 iters), inv-mass is
+EXACTLY frozen (identical discount schedules on constant draw/score
+streams preserve the var ratio; trace shows 6.42493e-08 to all digits),
+and escape is the FIRST iteration where the FINEST attempt's |dH|
+crosses the 0.5 cap: def-init boundary margin 0.5017 -> 0.4987 at
+it=948 (step continuous, alpha jumps, accepted h=4). M1 (mass
+maturation) refuted — mass dormant until AFTER escape; M3 excluded by
+construction (metric_window=0, stride=1 at defaults; escapes happen
+anyway); M5 refuted as the pinning verdict (strictly pre-escape:
+tolpass=0, ladrej=0 in all 8 traced runs; ladder acts only
+post-escape). M4 modulates the trigger: escape iteration spreads
+{574,778,948,>1000} across def-init seeds (z-scatter vs a 0.3%/iter
+trend; seed 20260822 stays pinned the full 1000 — E2's rep1/c0 analog)
+but clusters {185,189,198,200} for pf inits (envelope ~step^16, steep
+approach). Zero-ESS has a second layer: if warmup ends pinned, the
+FROZEN sampler re-pins (no adapter; w100 CSVs = 1 unique row of 100) —
+resolves E2's 1e8-cap paradox (loose cap admits warmup movement but
+~1 nat of descent leaves the frozen step ~1000x divergent; E2's
+pinned-draws metric cannot distinguish).
+
+FIX SHIPPED (468e60f, opt-in --step-init-heuristic path only,
+include/walnutpie/warmup_heuristics.hpp): find_reasonable_step was
+broken 3 ways — (1) momentum scale INVERTED (p ~ N(0, inv_mass) vs the
+sampler's rho ~ N(0, mass); under mass 1e7 the probe moved 1e7x too
+little, always accepted, returned eps>=1; adapt_step in util.hpp uses
+the correct convention — the two heuristics disagreed), (2) fresh
+momentum per probe (sign lottery; H-G Alg 4 draws once), (3)
+asymmetric statistic exp(-(h1-h0)) reads divergent-direction energy
+gain as accept-and-DOUBLE. Fixed: correct scale, one draw,
+exp(-|dH|) mirroring macro_step's own alpha. Post-fix the probe
+returns eps~0.008 on the pinned cell; escape at iteration ONE with
+alpha=0.84~target; warmup 937 calls vs 3102 pinned; sampling 8.2
+evals/draw vs 31.
+
+GATES: (a) canary default-path bit-identity vs pre-fix binary
+(same worktree, saved build): PASS 12/12 (arma11/blr/hier_2pl x 4
+chains, 1000+1000, seeds 20260819+c, rep0 pf inits).
+(b) blr knob grid (3 reps x 4 chains, E2 seed protocol):
+0 of 48 chains pinned (base: 3/4 chains/rep at w100-pf, 1/12 at
+w400-pf, 1/4 at w1000-def). pf class restored to full health at SHORT
+warmup: w100 bulk-min med 779.0 / rhat 1.0048 (base w100: bulk 5-9
+pinned; w1000 base band 432.9-545.5); w400 630.4/693.7 vs probe-base
+612.4 (whose rep1 = 86.5 was its pinned chain) — strictly better.
+def class: pin equally gone (0/12, chains move from it~1, lp climbs
+-3.347e7 -> -2.93e7 in 100 iters) but short warmup remains
+DRIFT-limited (default init lp=-3.3e7; the full-warmup BASE there is
+itself garbage: bulk 4.2, rhat 5.4, 1/4 pinned — the never-escape
+seed): init-protocol territory (W-42), not the pin; recorded honestly.
+Follow-up recorded (not done): exp/freeze-clamp's W-41 fallback (b)
+calls the same broken probe — port 468e60f when that branch is next
+touched.
+
+Artifacts: results/blr_pin_w43.md (mechanism + boundary tables + fix
+gates), results/w43_{canary,knob,ess}.json, harness/run_w43.py,
+harness/analyze_w43.py; raw runs/w43/ (local). walnutpie commits
+8853fd7 + 468e60f on exp/pin-diagnosis (worktree external/walnutpie_w43
+LEFT IN PLACE). Feeds upstream candidate 7 + the Flatiron team: the
+saturated-alpha regime is a GENERAL warmup-robustness hazard for any
+gradient-seeded-mass sampler whose step adapter uses an underflowing
+acceptance statistic — the adapter is blind (constant-gradient descent)
+for as long as |dH| > ~745, and the descent pace (lr/sqrt(t)) sets a
+seed-dependent minimum warmup of hundreds to >1000 iterations.

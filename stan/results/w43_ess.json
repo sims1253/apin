@@ -1,0 +1,122 @@
+{
+ "w100_def": {
+  "n": 3,
+  "ess_bulk_min_med": 4.2,
+  "ess_tail_min_med": 4.6,
+  "rhat_max_med": 4.5572,
+  "pinned_chains_tot": 0,
+  "per_rep": [
+   {
+    "ess_bulk_min": 4.2,
+    "ess_tail_min": 4.6,
+    "rhat_max": 4.5577,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 4.3,
+    "ess_tail_min": 4.6,
+    "rhat_max": 4.2915,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 4.2,
+    "ess_tail_min": 4.6,
+    "rhat_max": 4.5572,
+    "pinned_chains": 0
+   }
+  ],
+  "calls_med": 1019.5,
+  "heuristic_eps_min": 0.00390625,
+  "heuristic_eps_max": 0.03125
+ },
+ "w100_pf": {
+  "n": 3,
+  "ess_bulk_min_med": 779.0,
+  "ess_tail_min_med": 769.5,
+  "rhat_max_med": 1.0048,
+  "pinned_chains_tot": 0,
+  "per_rep": [
+   {
+    "ess_bulk_min": 856.9,
+    "ess_tail_min": 876.2,
+    "rhat_max": 1.0052,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 772.5,
+    "ess_tail_min": 712.4,
+    "rhat_max": 1.0013,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 779.0,
+    "ess_tail_min": 769.5,
+    "rhat_max": 1.0048,
+    "pinned_chains": 0
+   }
+  ],
+  "calls_med": 3605.0,
+  "heuristic_eps_min": 0.0078125,
+  "heuristic_eps_max": 0.03125
+ },
+ "w400_def": {
+  "n": 3,
+  "ess_bulk_min_med": 4.3,
+  "ess_tail_min_med": 4.6,
+  "rhat_max_med": 4.2918,
+  "pinned_chains_tot": 0,
+  "per_rep": [
+   {
+    "ess_bulk_min": 4.2,
+    "ess_tail_min": 4.6,
+    "rhat_max": 4.5549,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 4.3,
+    "ess_tail_min": 4.6,
+    "rhat_max": 4.2908,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 4.3,
+    "ess_tail_min": 4.6,
+    "rhat_max": 4.2918,
+    "pinned_chains": 0
+   }
+  ],
+  "calls_med": 3520.5,
+  "heuristic_eps_min": 0.00390625,
+  "heuristic_eps_max": 0.03125
+ },
+ "w400_pf": {
+  "n": 3,
+  "ess_bulk_min_med": 630.4,
+  "ess_tail_min_med": 693.7,
+  "rhat_max_med": 1.0056,
+  "pinned_chains_tot": 0,
+  "per_rep": [
+   {
+    "ess_bulk_min": 630.4,
+    "ess_tail_min": 578.8,
+    "rhat_max": 1.0091,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 747.0,
+    "ess_tail_min": 753.4,
+    "rhat_max": 1.0056,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 628.6,
+    "ess_tail_min": 693.7,
+    "rhat_max": 1.005,
+    "pinned_chains": 0
+   }
+  ],
+  "calls_med": 8512.5,
+  "heuristic_eps_min": 0.0078125,
+  "heuristic_eps_max": 0.03125
+ }
+}

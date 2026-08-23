@@ -1,0 +1,394 @@
+{
+ "w100_pf": [
+  {
+   "rep": 0,
+   "c": 0,
+   "seed": 20260819,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 3700
+  },
+  {
+   "rep": 0,
+   "c": 1,
+   "seed": 20260820,
+   "rc": 0,
+   "heuristic_eps": 0.03125,
+   "calls": 3896
+  },
+  {
+   "rep": 0,
+   "c": 2,
+   "seed": 20260821,
+   "rc": 0,
+   "heuristic_eps": 0.03125,
+   "calls": 1498
+  },
+  {
+   "rep": 0,
+   "c": 3,
+   "seed": 20260822,
+   "rc": 0,
+   "heuristic_eps": 0.015625,
+   "calls": 3785
+  },
+  {
+   "rep": 1,
+   "c": 0,
+   "seed": 20261819,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 2864
+  },
+  {
+   "rep": 1,
+   "c": 1,
+   "seed": 20261820,
+   "rc": 0,
+   "heuristic_eps": 0.015625,
+   "calls": 3518
+  },
+  {
+   "rep": 1,
+   "c": 2,
+   "seed": 20261821,
+   "rc": 0,
+   "heuristic_eps": 0.015625,
+   "calls": 2748
+  },
+  {
+   "rep": 1,
+   "c": 3,
+   "seed": 20261822,
+   "rc": 0,
+   "heuristic_eps": 0.015625,
+   "calls": 3091
+  },
+  {
+   "rep": 2,
+   "c": 0,
+   "seed": 20262819,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 4154
+  },
+  {
+   "rep": 2,
+   "c": 1,
+   "seed": 20262820,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 3851
+  },
+  {
+   "rep": 2,
+   "c": 2,
+   "seed": 20262821,
+   "rc": 0,
+   "heuristic_eps": 0.03125,
+   "calls": 3064
+  },
+  {
+   "rep": 2,
+   "c": 3,
+   "seed": 20262822,
+   "rc": 0,
+   "heuristic_eps": 0.015625,
+   "calls": 3692
+  }
+ ],
+ "w100_def": [
+  {
+   "rep": 0,
+   "c": 0,
+   "seed": 20260819,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 937
+  },
+  {
+   "rep": 0,
+   "c": 1,
+   "seed": 20260820,
+   "rc": 0,
+   "heuristic_eps": 0.015625,
+   "calls": 1220
+  },
+  {
+   "rep": 0,
+   "c": 2,
+   "seed": 20260821,
+   "rc": 0,
+   "heuristic_eps": 0.015625,
+   "calls": 985
+  },
+  {
+   "rep": 0,
+   "c": 3,
+   "seed": 20260822,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 922
+  },
+  {
+   "rep": 1,
+   "c": 0,
+   "seed": 20261819,
+   "rc": 0,
+   "heuristic_eps": 0.00390625,
+   "calls": 1515
+  },
+  {
+   "rep": 1,
+   "c": 1,
+   "seed": 20261820,
+   "rc": 0,
+   "heuristic_eps": 0.00390625,
+   "calls": 1054
+  },
+  {
+   "rep": 1,
+   "c": 2,
+   "seed": 20261821,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 1147
+  },
+  {
+   "rep": 1,
+   "c": 3,
+   "seed": 20261822,
+   "rc": 0,
+   "heuristic_eps": 0.03125,
+   "calls": 874
+  },
+  {
+   "rep": 2,
+   "c": 0,
+   "seed": 20262819,
+   "rc": 0,
+   "heuristic_eps": 0.03125,
+   "calls": 789
+  },
+  {
+   "rep": 2,
+   "c": 1,
+   "seed": 20262820,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 1259
+  },
+  {
+   "rep": 2,
+   "c": 2,
+   "seed": 20262821,
+   "rc": 0,
+   "heuristic_eps": 0.00390625,
+   "calls": 1360
+  },
+  {
+   "rep": 2,
+   "c": 3,
+   "seed": 20262822,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 928
+  }
+ ],
+ "w400_pf": [
+  {
+   "rep": 0,
+   "c": 0,
+   "seed": 20260819,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 8661
+  },
+  {
+   "rep": 0,
+   "c": 1,
+   "seed": 20260820,
+   "rc": 0,
+   "heuristic_eps": 0.03125,
+   "calls": 8617
+  },
+  {
+   "rep": 0,
+   "c": 2,
+   "seed": 20260821,
+   "rc": 0,
+   "heuristic_eps": 0.03125,
+   "calls": 5636
+  },
+  {
+   "rep": 0,
+   "c": 3,
+   "seed": 20260822,
+   "rc": 0,
+   "heuristic_eps": 0.015625,
+   "calls": 8538
+  },
+  {
+   "rep": 1,
+   "c": 0,
+   "seed": 20261819,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 7478
+  },
+  {
+   "rep": 1,
+   "c": 1,
+   "seed": 20261820,
+   "rc": 0,
+   "heuristic_eps": 0.015625,
+   "calls": 8487
+  },
+  {
+   "rep": 1,
+   "c": 2,
+   "seed": 20261821,
+   "rc": 0,
+   "heuristic_eps": 0.015625,
+   "calls": 7985
+  },
+  {
+   "rep": 1,
+   "c": 3,
+   "seed": 20261822,
+   "rc": 0,
+   "heuristic_eps": 0.015625,
+   "calls": 7609
+  },
+  {
+   "rep": 2,
+   "c": 0,
+   "seed": 20262819,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 9349
+  },
+  {
+   "rep": 2,
+   "c": 1,
+   "seed": 20262820,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 8776
+  },
+  {
+   "rep": 2,
+   "c": 2,
+   "seed": 20262821,
+   "rc": 0,
+   "heuristic_eps": 0.03125,
+   "calls": 8176
+  },
+  {
+   "rep": 2,
+   "c": 3,
+   "seed": 20262822,
+   "rc": 0,
+   "heuristic_eps": 0.015625,
+   "calls": 8779
+  }
+ ],
+ "w400_def": [
+  {
+   "rep": 0,
+   "c": 0,
+   "seed": 20260819,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 3287
+  },
+  {
+   "rep": 0,
+   "c": 1,
+   "seed": 20260820,
+   "rc": 0,
+   "heuristic_eps": 0.015625,
+   "calls": 3574
+  },
+  {
+   "rep": 0,
+   "c": 2,
+   "seed": 20260821,
+   "rc": 0,
+   "heuristic_eps": 0.015625,
+   "calls": 4390
+  },
+  {
+   "rep": 0,
+   "c": 3,
+   "seed": 20260822,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 3271
+  },
+  {
+   "rep": 1,
+   "c": 0,
+   "seed": 20261819,
+   "rc": 0,
+   "heuristic_eps": 0.00390625,
+   "calls": 3836
+  },
+  {
+   "rep": 1,
+   "c": 1,
+   "seed": 20261820,
+   "rc": 0,
+   "heuristic_eps": 0.00390625,
+   "calls": 3393
+  },
+  {
+   "rep": 1,
+   "c": 2,
+   "seed": 20261821,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 3189
+  },
+  {
+   "rep": 1,
+   "c": 3,
+   "seed": 20261822,
+   "rc": 0,
+   "heuristic_eps": 0.03125,
+   "calls": 4403
+  },
+  {
+   "rep": 2,
+   "c": 0,
+   "seed": 20262819,
+   "rc": 0,
+   "heuristic_eps": 0.03125,
+   "calls": 6698
+  },
+  {
+   "rep": 2,
+   "c": 1,
+   "seed": 20262820,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 3467
+  },
+  {
+   "rep": 2,
+   "c": 2,
+   "seed": 20262821,
+   "rc": 0,
+   "heuristic_eps": 0.00390625,
+   "calls": 3667
+  },
+  {
+   "rep": 2,
+   "c": 3,
+   "seed": 20262822,
+   "rc": 0,
+   "heuristic_eps": 0.0078125,
+   "calls": 3319
+  }
+ ]
+}
