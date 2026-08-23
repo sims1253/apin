@@ -120,18 +120,27 @@ and the docs, but nothing signals at the point of misuse; even a
 
 ---
 
-## Kit 4 — gcc / stan-math: `-march=native` gradient miscompile (report pending W-35)
+## Kit 4 — stan-math: eigenvector adjoints silently ill-conditioned on degenerate spectra (W-35)
 
-Status: minimization in progress (WORKLOG W-35). Characterization (W-27):
-self-contained single-make bridgestan build of kronecker_gp with
-`-O3 -march=native -mtune=native` produces gradients wrong at up to 1.7 rel
-with sign flips (250–305 of 438 components; the `lkj_corr_cholesky` block)
-while logp matches to 1e-16; Richardson FD sides with the default build;
-`-O3` alone is bit-identical to default. Kit will be appended here once the
-minimal reproducer + sanitizer classification exist — do not file before
-that. Docs-facing ask in the meantime (cmdstan/bridgestan): mention that
-`-march=native` has a measured silent-wrongness mode, not just a speed
-question (our measured upside was ≤ ~10% per call anyway).
+**RETRACTED as a gcc bug** (W-27's "miscompile" wording withdrawn in WORKLOG
+W-35). Real classification: a stan-math numerics/docs issue. Any ISA widening
+Eigen's packet path beyond SSE2 (AVX, native) changes GEMM accumulation order
+by ~1e-14 (permitted FP); on models with rounding-degenerate spectra
+(kronecker_gp: Sigma1 bottom eigenvalues pinned at the 1e-5 jitter floor,
+gaps ~1e-16) `SelfAdjointEigenSolver` then returns a different-but-equally-
+valid eigenbasis, and the rev eigenvector adjoint `F_ij = 1/(w_j − w_i)`
+amplifies the basis flip to O(1)–O(1e3) relative gradient differences.
+Decisively: the DEFAULT build's own gradients are Richardson-FD-inconsistent
+(30–47%) at the failing points — there is no "correct" reference the native
+build deviates from; clang reproduces identically; ASan+UBSan clean; not -O
+level, not FMA contraction, not the vectorizer.
+
+**Ready-to-file stan-math issue**: §7a of `results/march_native_w35.md`;
+self-contained 65-line reproducer: `scratch/w35/repro/march_native_repro.cpp`
+(LCG-generated weights, no data files; 4-compiler output table in §5).
+**Docs paragraph for cmdstan/bridgestan** (the `-march=native` guidance):
+§7c of the same file. A gcc bugzilla report is deliberately NOT filed —
+reasoning recorded in §7b.
 
 ---
 
