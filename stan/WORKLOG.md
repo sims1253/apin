@@ -2917,3 +2917,177 @@ WORKLOG.md, results/session_benchmark_w36.md, results/w36_{wall,ess,
 md5}.json, harness/{run_w36,analyze_w36,gen_w36_inits}.py. Local
 (untracked/gitignored): runs/w36/, inits_w36/, build dirs, scratch.
 Stock worktree walnutpie_stock_w36 removed AFTER results were committed.
+
+## W-41 (pre-registered BEFORE running): freeze-time step clamp — fix the warmup-freeze abort "macro_time must be in (0, inf)" on kronecker_gp rep0 + lotka_volterra rep1 (W-36 failure)
+
+DIAGNOSIS (to verify first, from W-36 evidence + code reading): the W-36
+deterministic aborts fire at the freeze boundary — AdaptiveWalnuts::
+sampler() (include/walnutpie/adaptive_walnuts.hpp ~L744-764) passes
+step_size() (the step adapter's exp(theta_)) as the frozen sampler's
+macro_time; WalnutsSampler's ctor runs detail::validate_positive and
+throws std::invalid_argument when the value is 0 / NaN / +inf. 32001
+logp_grad calls = end of the 1000th warmup iteration. Same-family
+exposure: api.hpp walnuts_with_reinit reseeds outlier chains with
+ar.step_bar (geometric mean of per-chain exp(log_step)) — degenerate if
+any chain's log_step underflowed to -inf / NaN.
+
+EXPECTATION: freeze falls back to a finite positive step instead of
+aborting; healthy freezes are untouched bit-for-bit (clamp is dead code
+when step_size() is finite-positive).
+
+FIX DESIGN (minimal, in the spirit of the init-robustness clamps):
+- At freeze time in sampler(): validate step_size(); if not
+  finite-positive, fall back in order (a) last finite adapter state —
+  the last finite-positive step_size() observed during warmup, tracked
+  per iteration (seeded with the init step), (b) find_reasonable_step
+  (warmup_heuristics.hpp) re-derivation at the current position with the
+  current inv_mass and the init step as seed, (c) documented hard floor
+  1000 * numeric_limits<double>::min() (~2.2e-305). Computed once and
+  cached (pilot-mode double sampler() calls stay stable). on_warmup_
+  complete reports the value actually frozen.
+- Loud auditable warning to stderr (prefix "WALNUTS WARNING",
+  harness logs capture stderr; ChainHandler has no warning hook — noted
+  here as the deliberate channel choice) stating the degenerate value
+  and the fallback used + source.
+- Same guard on the api.hpp reinit path: if ar.step_bar is not
+  finite-positive, fall back to the geometric mean of the per-chain
+  frozen samplers' macro_time() (always valid post-clamp), else the
+  current init step, else the floor; same warning.
+- No change to warmup arithmetic: the tracker is a pure read of
+  opt_.step_size() (no existing member is modified differently).
+
+GATES (pre-registered):
+- (a) BIT-IDENTITY CANARY: default single-chain draws (warmup=1000
+  draws=1000, CLI defaults) md5-identical PRE vs POST change on 3
+  healthy models x 4 chains, seed 20260819+c (run_w36 single-chain arm
+  recipe, inits_w25 for hier_2pl/lsat_model, inits_w36 otherwise).
+  Models: hier_2pl, lsat_model, radon_partially_pooled_noncentered.
+- (b) RECOVERY: the two aborting cells — kronecker_gp rep0 chain 0
+  (seed 20260819), lotka_volterra rep1 chain 0 (seed 20261819), inits_w36
+  chain_0.txt, warmup=1000 draws=1000, CLI defaults — now COMPLETE
+  (rc=0, 1000 draws). Record: the exact degenerate step value (0? nan?
+  inf?), fallback source used per cell, warning line, and the resulting
+  chain set's bulk-ESS-min / R-hat-max (4 chains: the recovered chain 0
+  rerun + chains 1-3 rerun for a valid R-hat). Quality is informational:
+  a divergent-ish chain that completes still beats an abort; garbage ESS
+  gets recorded honestly.
+- (c) NO COLLATERAL: 2 healthy cells outside the canary set (different
+  model/rep/chain) md5-identical pre vs post binary.
+
+BUILD PROTOCOL: separate worktree walnutpie_w41, branch
+exp/freeze-clamp off exp/safe-adapt-defaults @ 43b6435; PRE-change
+binary built in the same worktree BEFORE the edit (that commit state IS
+pre-change). Header edits => clean-first rebuild; -j2; serialized
+sampling runs.
+
+## W-38 (pre-registered BEFORE running): per-macro-step gradient accounting — phase E1 of the W-37p fewer-gradients pack (results/proposals_fewer_gradients.md)
+
+Instrumentation-only, zero-risk: env-gated counters (precedent: the
+WALNUTPIE_DEBUG_ALPHA/SPAN env vars in walnuts.hpp) activated by
+WALNUTPIE_GRAD_ACCOUNTING=1. Accumulated per phase (warmup vs sampling,
+switched at the AdaptiveWalnuts->WalnutsSampler boundary) and per process:
+- accepted-halving-level histogram P(h) of macro steps;
+- reversibility-rejection count + succeeding-ladder-level histogram
+  (level 0 = first lattice checked = n/2 micro steps at 2*step);
+- halving-exhaustion count (all max_step_halvings attempts failed
+  tolerance);
+- FOUR eval buckets that exactly decompose every kernel logp_grad call:
+  forward-accepted (final attempt of accepted macro steps),
+  forward-wasted (tolerance-failed dyadic attempts),
+  backward-ladder (within_tolerance evals inside reversible()),
+  discarded-on-leaf-failure (tolerance-passing attempt whose reversibility
+  ladder succeeded -> macro step rejected);
+- macro-step/attempt/transition counts + min_micro_steps histogram
+  (E4's (m, h) joint input).
+Identity: forward m*2^h accepted + m(2^h - 1) wasted + ladder m(2^h - 1)
+= 3m*2^h - 2m per accepted refined step (h=0: m evals, no ladder).
+NO behavior change when unset (no doubles touched, no RNG, no output);
+when set, counters only.
+
+GATES:
+1. CANARY (bit-identity): same binary, WALNUTPIE_GRAD_ACCOUNTING=1 vs
+   unset, chain CSVs md5-identical, 2 models (blr, pilots) x 4 chains
+   (seeds 20260819+c), warmup=100 samples=100, deterministic default
+   inits. Instrumentation touching no arithmetic cannot change draws;
+   a mismatch means the implementation is wrong.
+2. CONSISTENCY: bucket sum + 2 boundary evals (masses() init + chain
+   start) == CLI per-phase logp_grad calls, per model per run.
+RUNS (light; 1 chain, warmup=100 samples=100, seed 20260819, fixed inits
+from inits_w36 rep0 / inits_w25 hier_2pl rep0): blr, hier_2pl,
+kronecker_gp, pilots; plus ONE fuller hier_2pl run (warmup=1000
+samples=1000) as a production-settings check.
+DELIVERABLE: results/grad_accounting_w38.md — bucket table (per model,
+warmup/sampling split) + pre-registered verdicts:
+- E2 (warmup error-discipline ablation): GO iff warmup-phase
+  (refinement + ladder + discard) share of warmup evals >= 20% (ceiling
+  >= ~10% of total evals at 50/50 warmup/sampling — the pack's
+  realistic 10-30% band floor);
+- E3 (truncated backward ladder): GO iff ladder share > 15% of total
+  kernel evals AND deep successes (ladder level >= 1) non-rare
+  (>= 1% of macro steps) — per the pack's own pre-condition;
+- E4 (refine-aware min_micro_steps): GO iff sampling-phase P(h>=1)
+  >= 10% of macro steps AND (refinement+ladder) share of sampling
+  evals >= 15% (persistent overhead in the frozen kernel; the 100-draw
+  vs 1000-draw hier_2pl comparison is the burstiness caveat check —
+  aggregate counters cannot see within-phase bursts, stated in report).
+BUILD PROTOCOL: separate worktree walnutpie_w38, branch
+exp/grad-accounting off exp/safe-adapt-defaults @ 43b6435; main
+submodule worktree untouched; header edits => clean-first rebuild; -j2;
+serialized runs (other agents share cores). Report() printed from the
+CLI at end of run; harness script + raw logs under runs/w38/ (local,
+gitignored).
+
+## 2026-08-22 — W-38 CLOSE-OUT: E1 gradient accounting shipped + measured — canary PASS 8/8 (+3-way vs pre-change binary), consistency PASS 7/7; E2 GO / E3 NO-GO / E4 GO; BONUS: blr pins at short warmup (pre-existing, 100% wasted evals, zero ESS)
+
+Implementation (walnutpie exp/grad-accounting, worktree walnutpie_w38,
+off exp/safe-adapt-defaults @ 43b6435): new
+include/walnutpie/grad_accounting.hpp; env-gated hooks in macro_step/
+reversible (+ low-rank mirrors) accumulating per phase (warmup vs
+sampling, switched at the AdaptiveWalnuts->WalnutsSampler boundary):
+accepted-halving histogram, ladder-success-level histogram,
+reversibility-rejection + halving-exhaustion counts, the four eval
+buckets (forward-accepted / forward-wasted / backward-ladder /
+discarded-on-leaf), macro/attempt/transition counts, m histogram;
+CLI prints the report at end of run. GATES: canary env-on vs env-off
+md5-identical 8/8 (blr+pilots x 4 chains) plus a 3-way smoke equality
+with the PRE-CHANGE binary; consistency kernel_total+2 boundary ==
+warmup calls, == sampling calls, exact on all 7 runs.
+
+HEADLINE NUMBERS (1 chain, defaults, 100+100; hier_2pl also 1000+1000,
+blr 1000+100 pin-escape check; kronecker_gp seed-20260820/chain-1
+deviation — seed-20260819/chain_0 aborts with the KNOWN W-36
+"macro_time must be in (0, inf)" failure):
+- Overhead (wasted+ladder+discard) share of evals: WARMUP 68-86%
+  (healthy models, 100 iters), 32.7% at hier_2pl 1000; SAMPLING 53-66%
+  (100 iters), 21.6% at 1000+1000.
+- E2 GO: ceiling = warmup-overhead x warmup-share = 18.2% of total
+  evals at production settings (in the pack's 10-30% band), >50% in
+  short-warmup regimes.
+- E3 NO-GO: ladder successes are ~97-100% at level 0; with m=1 an h=1
+  full ladder IS one level-0 eval (prize zero); beyond-level-0 prize
+  <=3% of sampling evals on all models except blr@1000 (14.1%, but
+  zero ladder successes ever and subsumed by E4). Pack's "likely dead
+  end" confirmed with numbers.
+- E4 GO: sampling P(h>=1) = 38-58% (short warmup), 96.6% on
+  blr@1000 (h2-h4 structural, 104 evals/draw), 8.7% on settled
+  hier_2pl@1000; fw+bl share 17-66%. KEY STRUCTURAL FACT:
+  min_micro_steps = 1 in 100% of macro steps everywhere — the current
+  estimator only pushes m DOWN to its floor; growing m toward h~0 is
+  an untested direction.
+- BONUS (pre-existing, now measured): blr at CLI defaults pins for
+  <=~400 warmup iters under BOTH pf and default inits — every
+  transition burns exactly 31 evals (all 5 halvings fail; |dH| ~ 8e6),
+  100% fw, all draws identical (zero ESS). W-23's canary arithmetic
+  (18602/600 ~ 31/transition) shows the pin was present there too —
+  bit-identity made it invisible. Escapes between 400 and 1000 warmup
+  iters. Feeds E2 (--max-error-start would unpin, config-only), W-25/
+  W-28 short-warmup work, W-41 freeze robustness.
+
+Artifacts: results/grad_accounting_w38.md (tables + verdicts),
+harness/run_w38.py, runs/w38/ (raw logs + accounting.json, local).
+Worktree NOT removed (supervisor). Caveats recorded in the report:
+aggregate counters can't see within-phase bursts (100 vs 1000 contrast
+is the proxy), single chain/cell, pooled multi-chain counts.
+Next (per pack ranking): E2 ablation grid {0.5,1,2}x{5,3,warmup-only-3}
+behind W-25/W-28 gates; E4 estimator rule behind a flag with joint
+(m,h) reporting; E3 closed.
