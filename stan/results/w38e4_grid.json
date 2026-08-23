@@ -1,0 +1,322 @@
+{
+ "arma11": {
+  "base": {
+   "n": 3,
+   "ess_bulk_min_med": 2939.0412057873427,
+   "ess_tail_min_med": 2528.5802751418423,
+   "rhat_max_med": 1.001641341543026,
+   "evals_draw_med": 5.3655,
+   "total_draw_med": 11.034500000000001,
+   "ess_per_wall": 5545.360765636496,
+   "per_rep_bulk": [
+    2939.0,
+    3042.8,
+    2601.4
+   ],
+   "per_rep_tail": [
+    2574.8,
+    2528.6,
+    2395.7
+   ],
+   "per_rep_rhat": [
+    1.0016,
+    1.002,
+    1.0016
+   ],
+   "per_rep_evals_draw": [
+    5.3,
+    5.4,
+    5.4
+   ]
+  },
+  "grow": {
+   "n": 3,
+   "ess_bulk_min_med": 2924.994369819522,
+   "ess_tail_min_med": 2355.747372796588,
+   "rhat_max_med": 1.0015979540464395,
+   "evals_draw_med": 5.3705,
+   "total_draw_med": 10.9155,
+   "ess_per_wall": 5421.198369730065,
+   "per_rep_bulk": [
+    2873.2,
+    2925.0,
+    2951.8
+   ],
+   "per_rep_tail": [
+    2178.0,
+    2367.3,
+    2355.7
+   ],
+   "per_rep_rhat": [
+    1.0027,
+    1.0015,
+    1.0016
+   ],
+   "per_rep_evals_draw": [
+    5.3,
+    5.4,
+    5.4
+   ],
+   "gate_pass": false,
+   "evals_draw_ratio": 1.0009318796011555,
+   "total_draw_ratio": 0.9892156418505594,
+   "ess_per_wall_ratio": 0.9776096811093264
+  }
+ },
+ "lsat_model": {
+  "base": {
+   "n": 3,
+   "ess_bulk_min_med": 730.0799291785946,
+   "ess_tail_min_med": 1209.8758630103857,
+   "rhat_max_med": 1.011244377934343,
+   "evals_draw_med": 16.1995,
+   "total_draw_med": 33.85,
+   "ess_per_wall": 19.56794235268278,
+   "per_rep_bulk": [
+    730.1,
+    949.5,
+    712.9
+   ],
+   "per_rep_tail": [
+    1162.5,
+    1467.0,
+    1209.9
+   ],
+   "per_rep_rhat": [
+    1.0102,
+    1.0116,
+    1.0112
+   ],
+   "per_rep_evals_draw": [
+    16.2,
+    15.9,
+    16.7
+   ]
+  },
+  "grow": {
+   "n": 3,
+   "ess_bulk_min_med": 881.3245030485899,
+   "ess_tail_min_med": 1299.774516310401,
+   "rhat_max_med": 1.0101822491891317,
+   "evals_draw_med": 16.231,
+   "total_draw_med": 35.614,
+   "ess_per_wall": 23.32163278773723,
+   "per_rep_bulk": [
+    881.3,
+    924.9,
+    637.3
+   ],
+   "per_rep_tail": [
+    1334.7,
+    1299.8,
+    1132.8
+   ],
+   "per_rep_rhat": [
+    1.0087,
+    1.0135,
+    1.0102
+   ],
+   "per_rep_evals_draw": [
+    16.5,
+    16.1,
+    16.2
+   ],
+   "gate_pass": true,
+   "evals_draw_ratio": 1.0019445044600144,
+   "total_draw_ratio": 1.0521122599704578,
+   "ess_per_wall_ratio": 1.191828571824253
+  }
+ },
+ "hier_2pl": {
+  "base": {
+   "n": 3,
+   "ess_bulk_min_med": 624.7147165261678,
+   "ess_tail_min_med": 707.5539340302862,
+   "rhat_max_med": 1.0092775347998875,
+   "evals_draw_med": 16.3795,
+   "total_draw_med": 36.6665,
+   "ess_per_wall": 4.040322833567247,
+   "per_rep_bulk": [
+    594.4,
+    662.0,
+    624.7
+   ],
+   "per_rep_tail": [
+    794.5,
+    707.6,
+    672.5
+   ],
+   "per_rep_rhat": [
+    1.0124,
+    1.0092,
+    1.0093
+   ],
+   "per_rep_evals_draw": [
+    16.1,
+    16.4,
+    16.4
+   ]
+  },
+  "grow": {
+   "n": 3,
+   "ess_bulk_min_med": 582.3447776424557,
+   "ess_tail_min_med": 711.2207150236633,
+   "rhat_max_med": 1.010838720859599,
+   "evals_draw_med": 16.612499999999997,
+   "total_draw_med": 37.559,
+   "ess_per_wall": 3.745464224610598,
+   "per_rep_bulk": [
+    582.3,
+    502.0,
+    584.4
+   ],
+   "per_rep_tail": [
+    659.5,
+    711.2,
+    746.5
+   ],
+   "per_rep_rhat": [
+    1.0108,
+    1.011,
+    1.0094
+   ],
+   "per_rep_evals_draw": [
+    16.7,
+    16.6,
+    16.4
+   ],
+   "gate_pass": false,
+   "evals_draw_ratio": 1.0142250984462284,
+   "total_draw_ratio": 1.0243410197319078,
+   "ess_per_wall_ratio": 0.9270210275013309
+  }
+ },
+ "blr": {
+  "base": {
+   "n": 3,
+   "ess_bulk_min_med": 510.2887607996537,
+   "ess_tail_min_med": 703.9176775971736,
+   "rhat_max_med": 1.010950269371216,
+   "evals_draw_med": 9.2745,
+   "total_draw_med": 25.2335,
+   "ess_per_wall": 879.8082082752651,
+   "per_rep_bulk": [
+    545.5,
+    432.9,
+    510.3
+   ],
+   "per_rep_tail": [
+    779.0,
+    652.2,
+    703.9
+   ],
+   "per_rep_rhat": [
+    1.012,
+    1.011,
+    1.0098
+   ],
+   "per_rep_evals_draw": [
+    9.3,
+    9.5,
+    9.1
+   ]
+  },
+  "grow": {
+   "n": 3,
+   "ess_bulk_min_med": 483.8920554992576,
+   "ess_tail_min_med": 594.9712039633566,
+   "rhat_max_med": 1.0061344408644417,
+   "evals_draw_med": 9.489,
+   "total_draw_med": 26.5375,
+   "ess_per_wall": 820.1560262699281,
+   "per_rep_bulk": [
+    483.9,
+    421.5,
+    515.3
+   ],
+   "per_rep_tail": [
+    728.4,
+    547.5,
+    595.0
+   ],
+   "per_rep_rhat": [
+    1.0061,
+    1.0059,
+    1.0069
+   ],
+   "per_rep_evals_draw": [
+    9.4,
+    9.6,
+    9.5
+   ],
+   "gate_pass": false,
+   "evals_draw_ratio": 1.0231279314248747,
+   "total_draw_ratio": 1.0516773337032121,
+   "ess_per_wall_ratio": 0.9321986525651127
+  }
+ },
+ "kronecker_gp": {
+  "base": {
+   "n": 3,
+   "ess_bulk_min_med": 29.12689394340744,
+   "ess_tail_min_med": 36.78096537497753,
+   "rhat_max_med": 1.132366322471213,
+   "evals_draw_med": 16.5625,
+   "total_draw_med": 34.628,
+   "ess_per_wall": 0.46284592314329315,
+   "per_rep_bulk": [
+    10.5,
+    29.1,
+    67.2
+   ],
+   "per_rep_tail": [
+    9.6,
+    36.8,
+    57.4
+   ],
+   "per_rep_rhat": [
+    1.3087,
+    1.1324,
+    1.0464
+   ],
+   "per_rep_evals_draw": [
+    16.6,
+    16.3,
+    16.9
+   ]
+  },
+  "grow": {
+   "n": 3,
+   "ess_bulk_min_med": 26.75998177613393,
+   "ess_tail_min_med": 40.4266482918454,
+   "rhat_max_med": 1.1139495995026634,
+   "evals_draw_med": 16.136499999999998,
+   "total_draw_med": 38.4735,
+   "ess_per_wall": 0.41662746031657993,
+   "per_rep_bulk": [
+    26.8,
+    19.8,
+    47.2
+   ],
+   "per_rep_tail": [
+    40.4,
+    27.6,
+    59.0
+   ],
+   "per_rep_rhat": [
+    1.1139,
+    1.1725,
+    1.0527
+   ],
+   "per_rep_evals_draw": [
+    16.0,
+    16.1,
+    17.1
+   ],
+   "gate_pass": true,
+   "evals_draw_ratio": 0.9742792452830188,
+   "total_draw_ratio": 1.1110517500288783,
+   "ess_per_wall_ratio": 0.9001428758131151
+  }
+ }
+}

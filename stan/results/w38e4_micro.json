@@ -1,0 +1,50 @@
+{
+ "g1": {
+  "n": 0,
+  "note": "ALL CELLS ABORTED (rc=-6, nan-grad macro_time abort)"
+ },
+ "g2": {
+  "n": 0,
+  "note": "ALL CELLS ABORTED (rc=-6, nan-grad macro_time abort)"
+ },
+ "g3": {
+  "n": 0,
+  "note": "ALL CELLS ABORTED (rc=-6, nan-grad macro_time abort)"
+ },
+ "t4": {
+  "n": 1,
+  "reps": [
+   2
+  ],
+  "evals_draw_med": 9.414000000000001,
+  "total_draw_med": 27.988500000000002,
+  "wall_sum": [
+   0.61
+  ]
+ },
+ "t2": {
+  "n": 3,
+  "reps": [
+   0,
+   1,
+   2
+  ],
+  "evals_draw_med": 9.489,
+  "total_draw_med": 26.5375,
+  "wall_sum": [
+   0.6,
+   0.74,
+   0.59
+  ]
+ },
+ "base(E2)": {
+  "n": 3,
+  "evals_draw_med": 9.2745,
+  "total_draw_med": 25.2335,
+  "wall_sum": [
+   0.59,
+   0.75,
+   0.58
+  ]
+ }
+}

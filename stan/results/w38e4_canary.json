@@ -1,0 +1,113 @@
+{
+ "arma11": {
+  "chain_0": [
+   true,
+   "e35703a3",
+   "e35703a3"
+  ],
+  "chain_1": [
+   true,
+   "a122c915",
+   "a122c915"
+  ],
+  "chain_2": [
+   true,
+   "0a0f03e6",
+   "0a0f03e6"
+  ],
+  "chain_3": [
+   true,
+   "6cdba172",
+   "6cdba172"
+  ]
+ },
+ "lsat_model": {
+  "chain_0": [
+   true,
+   "5e6760db",
+   "5e6760db"
+  ],
+  "chain_1": [
+   true,
+   "7044348a",
+   "7044348a"
+  ],
+  "chain_2": [
+   true,
+   "a10d7f12",
+   "a10d7f12"
+  ],
+  "chain_3": [
+   true,
+   "1414911f",
+   "1414911f"
+  ]
+ },
+ "hier_2pl": {
+  "chain_0": [
+   true,
+   "84571e75",
+   "84571e75"
+  ],
+  "chain_1": [
+   true,
+   "e21742bd",
+   "e21742bd"
+  ],
+  "chain_2": [
+   true,
+   "67e57817",
+   "67e57817"
+  ],
+  "chain_3": [
+   true,
+   "ba1a9daa",
+   "ba1a9daa"
+  ]
+ },
+ "blr": {
+  "chain_0": [
+   true,
+   "18b4c8db",
+   "18b4c8db"
+  ],
+  "chain_1": [
+   true,
+   "7ca28724",
+   "7ca28724"
+  ],
+  "chain_2": [
+   true,
+   "6055845d",
+   "6055845d"
+  ],
+  "chain_3": [
+   true,
+   "00125a97",
+   "00125a97"
+  ]
+ },
+ "kronecker_gp": {
+  "chain_0": [
+   true,
+   "cd1c97c5",
+   "cd1c97c5"
+  ],
+  "chain_1": [
+   true,
+   "904af4ae",
+   "904af4ae"
+  ],
+  "chain_2": [
+   true,
+   "2dd4cb62",
+   "2dd4cb62"
+  ],
+  "chain_3": [
+   true,
+   "26df7b38",
+   "26df7b38"
+  ]
+ },
+ "ALL_IDENTICAL": true
+}

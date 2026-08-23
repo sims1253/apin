@@ -3888,3 +3888,67 @@ per-window series is a standing measurement tool. Worktree left in
 place. Artifacts: results/traj_gate_w37.md (full tables + series),
 results/w37_separability.json, harness/run_w37.py + analyze_w37.py,
 runs/w37/ (local).
+
+## 2026-08-23 — W-38-E4 CLOSE-OUT: grow-m (refinement-aware min-micro-steps) — NEGATIVE RESULT, REJECTED; the E4 premise was sign-inverted; fewer-gradients pack fully closed
+
+Implementation (walnutpie exp/grow-m, worktree walnutpie_w38e4 = 43b6435
++ cherry-picked E1 accounting fe5dd61 + grow-m 9715518): MinMicroSteps-
+AdaptHandler gains a grow FLOOR fed per ACCEPTED macro step via a
+thread-local sink (new include/walnutpie/grow_m.hpp): k-consecutive
+h>=1 accepted steps grow the floor (double or +1, capped), 4k
+consecutive h=0 steps halve it (1->0 off), failed steps reset streaks
+(pins cannot ratchet); effective m = max(config floor, mean/target,
+grow_floor) at all call sites incl. sampler() freeze. WarmupConfig knobs
+default OFF (grow_min_micro_steps=false, streak 8, cap 32, increment 2)
++ CLI flags. GATE (a) CANARY: PASS 20/20 (12/12 required) — default
+path md5-identical to the E2 base arm (== safe-adapt binary) on all 5
+models rep0 x 4 chains, 1000+1000.
+
+GATE (d) MICRO-SEARCH (blr, 3 reps x 4 chains): NO viable variant. g1
+(k8 double cap32) / g2 (k16) / g3 (k8 linear) ABORT 9/9 cells each —
+the ARM-TRIGGERED known abort family: growth multiplies the pin burn
+(31 -> 992 evals per failed macro step at m=32; g1 rep0 c0 burned
+790k warmup evals vs ~15k base) with alpha saturated (e^{-8e6} -> 0,
+no adapter signal) until nan positions kill the run. t4 (cap 4) aborts
+2/3. t2 (cap 2) survives 3/3 but is WORSE than base: evals/draw 9.5 vs
+9.3 (+2%), total/draw +5%, tail ESS 595 below the base band (652).
+t2 -> full grid per the pre-registered smaller-cap tie rule.
+
+GATE (b) GRID (t2 arm vs E2 base, 5 models x 3 reps x 4 chains):
+quality 2/5 PASS (lsat, kronecker — the latter inside a wide band,
+base R-hats 1.05-1.31); FAILS: arma11 tail -1.7% vs band, hier_2pl
+bulk -2.0%, blr tail -8.8% — the E2 marginal-class lesson repeating.
+Efficiency: evals/draw ratios 0.974-1.023 (best kronecker -2.6%, bar
+was >=10% on >=2 models); ESS/wall ratios 0.900-1.192 (worse on 4/5;
+lsat +19% is a warmup lottery — at cap 2 the frozen m is 1, see (c)).
+
+GATE (c) MECHANISM (1 chain 1000+1000, E1 inits): at cap 2 the grow
+floor SELF-EXTINGUISHES before freeze (sampling m-hist m1-only both
+models): h0 share hier 91.0->92.0 (+1.0pp), blr 92.4->87.0 (-5.4pp,
+WORSE); evals/draw blr +1.0%, hier +3.7% — mechanism NOT confirmed at
+the survivable cap. At cap 32 (hier_2pl 200+100 smoke, before the blr
+aborts ruled g-variants out) the rule does exactly what it claims —
+warmup m1=110 -> m32=263 ratchet, frozen m=32, sampling h0 30%->84% —
+at 2.0x sampling evals/transition (56 vs 27.6) and 4.6x warmup evals
+(28886 vs 6265): the eps shrinkage the alpha-coupling buys costs more
+than the ladder it removes.
+
+VERDICT (pre-registered rule): REJECT — all three prongs fail. Lesson:
+at fixed eps the first attempt integrates m*eps (error ~ m*eps^3), so
+growing m makes h=0 HARDER; accepted h at adapter equilibrium is pinned
+by delta/max_error = -ln(0.8)/0.5 = 0.45 < 1 => h=0, and settled
+kernels already sit at 90%+ h0; persistent h>=1 is step-adapter LAG,
+m can only act through alpha->eps, which (a) has nothing to buy where
+alpha is informative and (b) is saturated exactly where h>=1 is
+structural (blr). E1's GO criterion selected FOR the models where grow
+is most counterproductive. Pack closed: E1 shipped, E2 rejected, E3
+NO-GO, E4 rejected, E5 opportunistic. blr's 104 evals/draw remains
+W-41's freeze-robustness problem.
+
+Artifacts: results/grow_m_w38e4.md (design, variant table, gates,
+verdict), results/w38e4_{canary,micro,grid,mech}.json,
+harness/run_w38e4.py, harness/analyze_w38e4.py, runs/w38e4/ (local).
+Worktree external/walnutpie_w38e4 left in place. Deviations recorded in
+the report (base arm reused from E2 per canary 20/20; t4/t2 TUNE arms
+added after the g-aborts per the pre-registered TUNE branch; kronecker
+rep0 c0 chain_1 init per E1/E2).
