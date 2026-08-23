@@ -159,7 +159,7 @@ is exactly that, plus tests.
 - IEEE-754 single-rounding guarantees for `x * x` — the basis of the
   strict-accuracy argument; our glibc 2.44 measurement of `pow(x,2)`'s
   1-ulp deviations (~0.08% of doubles).
-- Internal evidence trail: our benchmark repo `results/gp_micro_w33.md`
-  (measured ceiling), `results/errno_flags_w50.md` (the flag replication
-  and the pow-accuracy measurement), `results/upstream_dryrun_w44.md`
-  (develop-port test runs). Happy to attach.
+- Extended measurement logs (pre-registered experiment ledger, callgrind
+  dumps, kernel ulp grids, full run JSONs) are available on request, or at
+  the public benchmark repo: https://github.com/sims1253/apin
+  (`stan/results/` and `stan/WORKLOG.md`).

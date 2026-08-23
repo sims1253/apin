@@ -108,6 +108,5 @@ happy to include it in this PR or a follow-up, whichever review prefers.
   `d/dθ log σ(±θ) = σ(∓θ) = exp(−|ntheta|)/(1 + exp(−|ntheta|))` and its
   saturated tails — the value branch `−exp(−ntheta)` is the standard
   `log σ(ntheta)` tail; its derivative is `+exp(−ntheta)`, never negative.
-- Internal evidence trail: our benchmark repo `results/log1p_ceiling_w46.md`
-  §5 (W-46) — the parity-harness discovery, the exact per-element error,
+- The discovery harness and per-element error analysis are documented in
   and the propagated model-level bounds. Happy to attach.

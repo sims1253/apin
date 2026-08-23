@@ -248,8 +248,8 @@ NaN the first failure mode predicts.
   the derivatives fall apart there or what") never became an issue.
 
 Full internal evidence trail (four pre-registered gates, κ sweep, honest
-residual analysis): our benchmark repo docs `results/cluster_adjoint_w40.md`
-(W-40) and `results/upstream_dryrun_w44.md` (W-44, the develop/Eigen-5
+residual analysis): available on request (see the note below on the
+benchmark repo)
 port) — happy to attach or paste any section.
 
 ## Companion issue text (file first if preferred)

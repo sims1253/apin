@@ -183,8 +183,6 @@ maintainer can re-implement the rule from this section alone.
   `V diag(ḡ_w)Vᵀ`) accumulate into the same zero-initialized operand
   adjoint that the combined callback builds in one pass; forward values
   come from the same Eigen solver call.
-- Internal evidence trail: our benchmark repo `results/eigh_reuse_w32.md`
-  (W-32, the ceiling + bit-identity measurement),
-  `results/stanc3_w39.md` (W-39, the pass implementation and gates), and
-  `results/upstream_dryrun_w44.md` (W-44, zero-drift re-verification at
+- The ceiling and bit-identity measurements, the pass implementation
+  gates, and the zero-drift re-verification at
   the same tip). Happy to attach.

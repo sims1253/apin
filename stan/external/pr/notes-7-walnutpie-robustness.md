@@ -129,6 +129,6 @@ short warmup stays *drift*-limited — that is init-protocol territory
   tolerance-based gate fixes it). Implemented on `exp/safe-adapt-defaults`,
   default-path bit-identity 12/12, default `--chains 4` equals the
   full-warmup baseline 24/24.
-- Evidence docs (internal, attachable): `results/init_guard_w42.md`,
-  `results/freeze_clamp_w41.md`, `results/blr_pin_w43.md`;
-  WORKLOG W-41/W-42/W-43 carry the pre-registrations.
+- Evidence docs (attachable from the benchmark repo's results/ dir):
+  init_guard_w42.md, freeze_clamp_w41.md, blr_pin_w43.md; the
+  pre-registered protocol entries live in its WORKLOG.md.

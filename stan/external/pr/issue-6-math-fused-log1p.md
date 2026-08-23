@@ -156,6 +156,5 @@ expression-tree form).
   ulp-bounded packet transcendental kernels.
 - Muller et al., *Handbook of Floating-Point Arithmetic* — range
   reduction / polynomial evaluation methodology (FastTwoSum, minimax).
-- Internal evidence trail: our benchmark repo `results/log1p_ceiling_w46.md`
-  (W-46) — kernel ulp grids, micro-bench table, model-level gates, and the
+- Kernel ulp grids, the micro-bench table, model-level gates, and the
   honest SSE2 negative result. Happy to attach.
