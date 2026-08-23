@@ -29,7 +29,7 @@ all instructions in the stock formulation, 19.9% in a GEMM-formulated
 variant. The Select and redux machinery around it costs another 6.3%.
 
 Skipping the out-of-band elements does not help. On real data the in-band
-fraction is 99.63–100% (posterior draws all have |x| ≤ 15.66; even wild
+fraction is 99.63–100% (posterior draws all have |x| ≤ 15.66. Even wild
 random points are 99.6% in-band). And `exp` is already packetized (0.02%
 of instructions). The only lever left is a cheaper in-band log1p, with the
 surrounding machinery fused into one pass.
@@ -51,7 +51,7 @@ partial with respect to ntheta:
         1 / (1 + w)   if ntheta < 0
 ```
 
-So the primitive needed is `log1p(w)` on w ∈ [2.06e-9, 1] — a closed,
+So the primitive needed is `log1p(w)` on w ∈ [2.06e-9, 1], a closed,
 modest interval. Value and partial both follow from `w` and one
 `log1p(w)`. One fused pass over the array can produce both, and the eager
 full-array log1p, both Select passes, and the separate partials expression
@@ -112,8 +112,8 @@ moves gradients by O(1) (see the companion issue about eigenvector
 adjoints). The contained pattern that gets the win without touching global
 codegen:
 
-- one kernel function marked `#pragma GCC target("avx2,fma")` — compiled
-  with the wide ISA no matter what flags the translation unit uses — plus
+- one kernel function marked `#pragma GCC target("avx2,fma")`, compiled
+  with the wide ISA no matter what flags the translation unit uses, plus
   a plain scalar fallback;
 - one runtime dispatch per array, `__builtin_cpu_supports("avx2")`;
 - inside the island, only the confined-range polynomial arithmetic. No
@@ -131,8 +131,8 @@ Eigen's `pexp_double` with the 3-factor `pldexp` split, degree-16
 polynomial log1p, branchless blends, scalar and island paths, and the
 parity and timing gates that validated it. Every number above comes from
 it. Two kernel bugs the gates caught during development (a 2-factor
-instead of 3-factor `pldexp` split; stale polynomial coefficients) are
-documented with their gate signatures — a useful precedent for the test
+instead of 3-factor `pldexp` split. Stale polynomial coefficients) are
+documented with their gate signatures, a useful precedent for the test
 harness such a kernel needs: ulp grids on the confined range, plus
 model-level parity against the expression-tree form.
 
@@ -145,11 +145,11 @@ model-level parity against the expression-tree form.
 
 ## References
 
-- glibc `log1p` (correctly rounded) — the accuracy baseline for all
+- glibc `log1p` (correctly rounded), the accuracy baseline for all
   kernels above.
-- SLEEF and Eigen packet math — prior art for ulp-bounded packet
+- SLEEF and Eigen packet math, prior art for ulp-bounded packet
   transcendental kernels.
-- Muller et al., *Handbook of Floating-Point Arithmetic* — range reduction
+- Muller et al., *Handbook of Floating-Point Arithmetic*, range reduction
   and polynomial evaluation (FastTwoSum, minimax).
 - Kernel ulp grids, micro-bench data, and model-level gates:
   https://github.com/sims1253/apin (`stan/results/`, `stan/WORKLOG.md`),

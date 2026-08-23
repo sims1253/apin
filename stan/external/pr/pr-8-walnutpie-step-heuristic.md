@@ -1,8 +1,8 @@
-# Fix three defects in `find_reasonable_step` so `--step-init-heuristic` actually unpins hard inits (blr short-warmup bulk-ESS 5–9 → 779; escape iteration 948 → 1)
+# Fix three defects in `find_reasonable_step` so `--step-init-heuristic` actually unpins hard inits (blr short-warmup bulk-ESS 5–9 → 779. Escape iteration 948 → 1)
 
 Branch `robustness/step-heuristic-fix` (off `dev/init-robustness` @
 3eddfc4) in the `sims1253/walnutpie` fork. All changes sit on the
-opt-in, default-off, single-chain `--step-init-heuristic` path; the
+opt-in, default-off, single-chain `--step-init-heuristic` path. The
 default path is bit-identical (gated below). Part of the robustness trio
 with `robustness/init-guard` and `robustness/freeze-clamp`.
 
@@ -12,7 +12,7 @@ At CLI defaults, hard-init models (blr, Bayesian logistic regression) pin
 for the first 100–1000 warmup iterations: every transition burns 31
 evaluations, the acceptance statistic underflows to exactly 0, and all
 draws are identical (zero ESS). The in-tree mitigation for exactly this —
-the Stan-style step probe behind `--step-init-heuristic` — could not work,
+the Stan-style step probe behind `--step-init-heuristic`, could not work,
 because the probe itself was defective.
 
 The pin mechanism, verified by an env-gated per-iteration trace:
@@ -28,7 +28,7 @@ The pin mechanism, verified by an env-gated per-iteration trace:
   the inverse mass stays exactly frozen (the draw/score variance ratio is
   constant on constant streams).
 - Escape happens at the first iteration where the finest attempt's |ΔH|
-  crosses the 0.5 cap — a momentum-driven first passage. The escape
+  crosses the 0.5 cap, a momentum-driven first passage. The escape
   iteration scatters across seeds: {574, 778, 948, >1000} on default
   inits (one seed stays pinned the full 1000), clustered at 185–200 on
   Pathfinder inits. If warmup ends still pinned, the frozen sampler
@@ -42,10 +42,10 @@ The probe's three defects (`include/walnutpie/warmup_heuristics.hpp`):
    mass of 1.6e7, the probe moved about 1e7 times less per step than a
    real transition, always "accepted", and returned `eps ≥ 1` (measured:
    eps = 2.0 on the |ΔH| = 8e6 cell). The library's other heuristic
-   (`adapt_step` in util.hpp) uses the correct convention; the two
+   (`adapt_step` in util.hpp) uses the correct convention. The two
    disagreed.
 2. Fresh momentum per probe. Hoffman–Gelman Algorithm 4 draws the
-   momentum once; this loop redrew z per probe, making the one-step
+   momentum once. This loop redrew z per probe, making the one-step
    error's sign a lottery.
 3. Asymmetric accept statistic. `exp(−(h1 − h0))` is `inf > 0.5` for
    divergent-direction errors (energy gain), so the probe stepped up on
@@ -66,7 +66,7 @@ One file, +29/−6, opt-in path only.
   1000+1000, seeds 20260819+c). The fix is invisible with the knob off.
 - Pin elimination and quality (blr, 3 reps × 4 chains per arm, post-fix
   with `--step-init-heuristic`). 0 of 48 chains pinned (pinned = all
-  1000 draws identical; base pins 3 of 4 chains per rep at w100-pf):
+  1000 draws identical. Base pins 3 of 4 chains per rep at w100-pf):
 
   | arm | bulk-ESS-min med | tail-ESS-min med | R-hat max med | pinned | base reference |
   |---|---:|---:|---:|---:|---|
@@ -78,14 +78,14 @@ One file, +29/−6, opt-in path only.
   On the init class with a healthy reference (Pathfinder, the production
   protocol), the fix restores short warmup to full health: w100 bulk 779
   against a w1000 base band of 432.9–545.5. On the default-init class the
-  pin is equally gone (chains move from about iteration 1; lp climbs
+  pin is equally gone (chains move from about iteration 1. Lp climbs
   −3.347e7 → −2.93e7 over 100 warmup iterations), but short warmup stays
-  drift-limited. That is an init-protocol problem — the init-guard
-  sibling PR's territory — and it is outside this gate.
+  drift-limited. That is an init-protocol problem, the init-guard
+  sibling PR's territory, and it is outside this gate.
 - Probe behavior on the pinned cell: returns eps ≈ 0.008 (2.0 before);
   escape at iteration one with alpha = 0.84, close to target (escape was
   at iteration 948 on the traced default-init seed, and 574 to >1000
-  across seeds); warmup cost 937 calls versus 3102 pinned; sampling 8.2
+  across seeds). Warmup cost 937 calls versus 3102 pinned. Sampling 8.2
   evals/draw versus 31.
 
 ## Why this matters beyond blr
@@ -98,17 +98,17 @@ seed-dependent minimum warmup of hundreds to over 1000 iterations. A
 working init-step probe is the cheap way out. In the walnutpie 0.0.1
 release thread (discourse 41487, post 11), "Fable"'s analysis identified
 Stan's step initialization as the decisive difference against WALNUTS on
-exactly these inits. This PR is that mechanism, made to work; it was
+exactly these inits. This PR is that mechanism, made to work. It was
 present but broken in three ways.
 
 ## References
 
 - Full mechanism report (escape-boundary tables, pin invariants across 8
   traced runs, per-defect probe measurements) and repro commands:
-  https://github.com/sims1253/apin — `stan/results/blr_pin_w43.md`;
+  https://github.com/sims1253/apin, `stan/results/blr_pin_w43.md`;
   pre-registered protocol in `stan/WORKLOG.md` (W-43).
-- Hoffman & Gelman (2014), Algorithm 4 — the one-draw convention the
+- Hoffman & Gelman (2014), Algorithm 4, the one-draw convention the
   probe now follows.
 - Siblings: `robustness/init-guard` (root-cause init guard),
-  `robustness/freeze-clamp` (auditable freeze fallback; carries this same
+  `robustness/freeze-clamp` (auditable freeze fallback. Carries this same
   probe fix because its fallback (b) calls the probe).

@@ -22,14 +22,14 @@ square(x) is just x * x".
 set `errno` on domain/range/overflow/pole errors, which makes the call
 observable and prevents the optimizer from rewriting it to a multiply in
 general (the rewrite would change `errno` behavior on the generic-domain
-cases). The result is a real libm call per evaluation — glibc's `pow` is a
+cases). The result is a real libm call per evaluation, glibc's `pow` is a
 branchy, multi-path implementation (~105 instructions
 per call measured in the profile below: 3,473,268 Ir over 33,078 calls) —
 whereas `x * x` is one (fused) instruction. There is no constant to fold
 here: the exponent is a literal `2`, but the base is runtime data.
 
 This line sits in hot paths: covariance kernels (`gp_exp_quad_cov`
-computes `square(squared_distance(x_i, x_j))` per kernel pair; the rev
+computes `square(squared_distance(x_i, x_j))` per kernel pair. The rev
 overload computes distances on `value_of` data and instantiates this
 template), normal-type lpdfs, and user models. On the measured GP
 regression model, `square()` accounts for **57 `pow` calls per gradient
@@ -51,7 +51,7 @@ Two consequences stated plainly:
 1. This is not a bit-identity claim. Where the two disagree, results
    shift by 1 ulp. In my measurements such shifts stayed at FP-noise level
    (e.g. one gradient component of a hierarchical logit model at 2e-15 rel,
-   log-density exactly equal); full sampling trajectories on models whose
+   log-density exactly equal). Full sampling trajectories on models whose
    gradients I compared were bit-identical for the tested short runs, and
    diverged on some chains of longer runs purely through 1-ulp seed drift.
 2. On models with *rounding-degenerate eigendecompositions* (e.g. GP kernels
@@ -59,15 +59,15 @@ Two consequences stated plainly:
    different but equally valid eigenbasis, and reverse-mode eigenvector
    adjoints amplify that to O(1) gradient differences. That amplification is
    a pre-existing conditioning property of the adjoint (I report it
-   separately), not something this patch introduces — but reviewers should
+   separately), not something this patch introduces, but reviewers should
    know bit-for-bit reproducibility across this change is not guaranteed on
    that model class.
 
 ## Evidence
 
 GP regression model (`gp_exp_quad_cov`, n = 11 → 55 kernel pairs), matched
-binaries, identical inputs, gcc 16.2.1, glibc, Zen 3; medians of 3
-interleaved reps; callgrind on a fixed seeded run (warmup 50 / samples 50,
+binaries, identical inputs, gcc 16.2.1, glibc, Zen 3. Medians of 3
+interleaved reps. Callgrind on a fixed seeded run (warmup 50 / samples 50,
 577 gradient calls in both arms):
 
 | metric | stock | patched | delta |
@@ -80,16 +80,16 @@ interleaved reps; callgrind on a fixed seeded run (warmup 50 / samples 50,
 The wall win exceeds the instruction share because glibc `pow`'s branchy
 double path runs at much worse IPC than the surrounding Eigen/arithmetic
 code. Per-rep ranges do not overlap (stock 6.52–6.99, patched 5.61–5.89
-across all six stanzas); absolute µs are inflated by a co-running job on a
-shared machine — the interleaved A/B ratio is the measurement.
+across all six stanzas). Absolute µs are inflated by a co-running job on a
+shared machine, the interleaved A/B ratio is the measurement.
 
 Cross-model context (from profile dumps, indicative): `pow`'s exclusive
 share of total program Ir is 7.3% on this GP model, 1.9% on a Kronecker-GP
-model, 0.7% on an accelerated-GP model — the GP-kernel class is the
-exposure; the fix is unconditional and helps wherever arithmetic squaring
+model, 0.7% on an accelerated-GP model, the GP-kernel class is the
+exposure. The fix is unconditional and helps wherever arithmetic squaring
 occurs.
 
-## Solution (derivation; the diff is one concrete instantiation)
+## Solution (derivation. The diff is one concrete instantiation)
 
 1. Replace `std::pow(x, 2)` with a widened multiply:
 
@@ -98,14 +98,14 @@ occurs.
    return x_d * x_d;
    ```
 
-2. Widen before multiplying — this is the load-bearing detail. The
+2. Widen before multiplying, this is the load-bearing detail. The
    template is enabled for *all* arithmetic `T`, including integral and
    float types, and the previous code promoted through `double` (the
    function returns `double`; `std::pow`'s arithmetic overloads promote to
    `double`). A naive `x * x`:
    - for integral `x` computes an *int* product, which overflows for
      |x| > 46,341 where the promoted path does not;
-   - for `float` `x` rounds in float and then promotes — a
+   - for `float` `x` rounds in float and then promotes, a
      double-rounding drift relative to the correctly rounded double
      square.
    Widening to `double` first reproduces the previous semantics exactly
@@ -122,17 +122,17 @@ occurs.
    unchanged in form). The matrix/vector overloads already use
    `squaredNorm`/products and are untouched.
 
-A maintainer re-deriving this from scratch needs only steps 1–3; the diff
+A maintainer re-deriving this from scratch needs only steps 1–3. The diff
 is exactly that, plus tests.
 
 ## Validation
 
 - Value agreement at model level: stock vs patched model `.so` on 100
-  deterministic random unconstrained points — logp max rel diff 0.0,
-  gradients bit-identical on 100/100 points, zero sign flips; short sampler
+  deterministic random unconstrained points, logp max rel diff 0.0,
+  gradients bit-identical on 100/100 points, zero sign flips. Short sampler
   runs (warmup 50 + samples 50, fixed seed and init) produce md5-identical
   draws natively and under valgrind. (These establish agreement on the
-  tested inputs, not a universal bit-identity — see the accuracy section.)
+  tested inputs, not a universal bit-identity, see the accuracy section.)
 - Independent replication via a build flag: compiling the *stock*
   source with `-fno-math-errno` (which unblocks the compiler's own
   `pow(x,2) → x*x` transform; I verified it transforms exactly this
@@ -148,16 +148,16 @@ is exactly that, plus tests.
   `squared_distance_test` (7/7), plus the mix counterparts (1/1, 2/2) —
   the mix tests carry the finite-difference gradient references.
 - FD spot-check of the patched model (central, h = 1e-5): max rel
-  4.9e-8 — FD noise level.
+  4.9e-8, FD noise level.
 
 ## References
 
 - C/C++ math function errno semantics and `-fmath-errno` (default-on in
-  gcc/clang) — why the optimizer cannot remove the call; my flag
+  gcc/clang), why the optimizer cannot remove the call. My flag
   replication (above) directly demonstrates the transform is the
   compiler's own once unblocked.
-- IEEE-754 single-rounding guarantees for `x * x` — the basis of the
-  strict-accuracy argument; my glibc 2.44 measurement of `pow(x,2)`'s
+- IEEE-754 single-rounding guarantees for `x * x`, the basis of the
+  strict-accuracy argument. My glibc 2.44 measurement of `pow(x,2)`'s
   1-ulp deviations (~0.08% of doubles).
 - Extended measurement logs (pre-registered experiment ledger, callgrind
   dumps, kernel ulp grids, full run JSONs) are available on request, or at

@@ -1,4 +1,4 @@
-# Design conversation: the reverse-mode tape tax is forward-pass record machinery — batch allocation + span registration could recover ~8–12% of gradient time, bit-identically
+# Design conversation: the reverse-mode tape tax is forward-pass record machiner: batch allocation + span registration could recover ~8–12% of gradient time, bit-identically
 
 This is a conversation starter, not a PR. I measured where reverse-mode
 time goes on eltwise-heavy models, inventoried what a representation
@@ -17,7 +17,7 @@ constructor stores. In stan-math 5.3.0 and current develop, an eltwise op
 over `Matrix<var>` creates one nochain `vari` per element (empty
 `chain()`, registered only so `set_zero_all_adjoints` can find it) and one
 `reverse_pass_callback` per op. Gradient dispatch is therefore already
-O(#ops), not O(N) — but record construction and registration are O(N) with
+O(#ops), not O(N), but record construction and registration are O(N) with
 a real constant.
 
 Decomposition, from callgrind on a hierarchical 2PL IRT model (N = 19,200;
@@ -41,19 +41,19 @@ Three measurement layers, each gated on bitwise correctness.
 
 1. Microbench ceiling (typed pools). A framework replicating the model's
    hot line with identical array traffic, toggling record layout (stock AoS
-   with per-record bump-alloc, vptr store, nochain emplace — versus a dense
+   with per-record bump-alloc, vptr store, nochain emplace, versus a dense
    typed pool) and callback mechanism (virtual `chain()` vector versus a
    flat {fnptr,data} array):
    - Pool layout: −32% of the per-record tape complex in instructions
-     (51.12 → 34.56 Ir/record); build wall −65%.
-   - Flat callbacks: zero gain (51.12 vs 51.12 Ir/record; pool+flat is
+     (51.12 → 34.56 Ir/record). Build wall −65%.
+   - Flat callbacks: zero gain (51.12 vs 51.12 Ir/record. Pool+flat is
      indistinguishable from pool+virtual). With per-op callbacks there are
      about two dispatches per gradient on this line. The vtable fear is
      solving a problem stan-math no longer has. I state this so effort goes
      to records, not dispatch.
    - Cachegrind on the same pair: last-level data misses of the record
      complex drop 96.7% (0.413 → 0.014 misses/record). The dense record
-     array fills cache lines; per-record bump-allocation scatters 24-byte
+     array fills cache lines. Per-record bump-allocation scatters 24-byte
      stores across arena blocks.
 2. Pointer-semantics inventory. I classified all 1,900 headers in
    `stan/math/` by script. Pointer semantics are concentrated:
@@ -110,17 +110,17 @@ Two shippable increments, in order.
    init, same zeroing coverage). Measured ceiling on the eltwise-heavy
    model: the full alloc+emplace complex is 10.9% of program instructions;
    the slice's per-record net saving was −13.0 Ir/record (−40% of the
-   record tax) in the real model TU; migrating all eltwise ops bounds to
+   record tax) in the real model TU. Migrating all eltwise ops bounds to
    about −8 to −12% of gradient instructions on this model class.
 2. Typed pools (later). `var_value<T>::vi_` points into per-size typed
    pools instead of the monolithic arena. Pointer stability keeps `var`'s
    public type, all 400+ rev/ files, stanc3 codegen, and user code
    compiling unchanged. It requires pool interchange with `stack_alloc`
    for `arena_matrix` storage, exact replication of the nested-arena
-   bump-pointer rollback, and living inside `AutodiffStackStorage` (TLS; a
+   bump-pointer rollback, and living inside `AutodiffStackStorage` (TLS. A
    global pool would race under STAN_THREADS / reduce_sum workers). Ceiling
    per the microbench: the −32% Ir / −96.7% LLd-miss numbers above. Not
-   needed to realize most of the value — the batch API alone captured
+   needed to realize most of the value, the batch API alone captured
    −8.2% of gradient Ir at sampler level in the slice.
 
 Not worth doing, measured: flat/index-based callback chains (0.00 delta at
@@ -133,8 +133,8 @@ The slice is the existence proof: sampler-bit-identical output with a
 material instruction reduction, on a patch that touches only arena
 bookkeeping and one op branch. The sampler run exercised nested arenas,
 the TLS chainstack, and recover/nested lockstep. What changes: nochain
-registration order across the tape — zeroing is order-independent, so
-there is no observable effect; profiling counts were patched to parity. I
+registration order across the tape, zeroing is order-independent, so
+there is no observable effect. Profiling counts were patched to parity. I
 can share the 9-file patch and the gate battery (exact-zero parity
 harness, draws-md5 protocol) as a reference implementation.
 
@@ -155,18 +155,18 @@ harness, draws-md5 protocol) as a reference implementation.
   src/bridgestan.o`). Worth documenting wherever arena internals change;
   it will bite downstream packagers the same way.
 - Migration discipline. Value comes from migrating the whole eltwise
-  family; per-op wins are proportional to the op's record count. Each
+  family. Per-op wins are proportional to the op's record count. Each
   batch should run a bitwise-parity gate battery (exact-zero gradient
   parity plus draws md5) before the next. The inventory says the seam is
   small, but the serialize family and the ODE/adjoint integrators hold
   varis across nesting boundaries and deserve an audit pass
-  (pointer-stable pools keep their semantics; no code change expected, but
+  (pointer-stable pools keep their semantics. No code change expected, but
   verify).
 
 ## References
 
 - Measurements, inventory scripts, patch, and gate harness:
-  https://github.com/sims1253/apin — `stan/results/sota_arena_w47.md`
+  https://github.com/sims1253/apin, `stan/results/sota_arena_w47.md`
   (tax decomposition, microbench ceilings, span prototype and its codegen
   result), `stan/results/soa_var_w53.md` (pointer-semantics inventory,
   migration plan, the bit-identical slice and its −7.7%T / −8.2%G sampler

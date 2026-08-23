@@ -32,8 +32,8 @@ suffice.
 
 ### The combined primitive already exists
 
-`eigendecompose_sym` — one solver run, one callback, both adjoints —
-landed Aug 2023 (math PR #2931, stanc3 PR #1346; language support since
+`eigendecompose_sym`, one solver run, one callback, both adjoints —
+landed Aug 2023 (math PR #2931, stanc3 PR #1346. Language support since
 CmdStan 2.34, Jan 2024). Models can be rewritten by hand:
 
 ```stan
@@ -45,16 +45,16 @@ vector[N] w = eigh_A.2;
 and I verified this rewrite is bit-identical at the model level (the
 two-callback adjoints and the combined callback accumulate into the same
 zero-initialized operand adjoint, and the values come from the same Eigen
-solver either way — structural, not luck). But the compiler never
+solver either way, structural, not luck). But the compiler never
 generates it from the two-call idiom, so the entire corpus of existing
 models keeps paying double. This PR teaches stanc3 to do the rewrite.
 
 ## Evidence
 
-Kronecker-GP-class model; matched binaries, identical inputs; medians of
-3 interleaved reps; callgrind on a fixed seeded run; gcc 16.2.1, Zen 3.
+Kronecker-GP-class model. Matched binaries, identical inputs. Medians of
+3 interleaved reps. Callgrind on a fixed seeded run. Gcc 16.2.1, Zen 3.
 
-Language-level rewrite (stan-math 5.3.0 toolchain) — establishes the
+Language-level rewrite (stan-math 5.3.0 toolchain), establishes the
 ceiling and the bit-identity:
 
 | arm | Ir / gradient | µs / call | draws |
@@ -63,7 +63,7 @@ ceiling and the bit-identity:
 | hand rewrite via `eigendecompose_sym` | **4.238M (−19.4%)** | **337.0 (−14.3%)** | **bit-identical** (draws md5, same 5094 gradient calls) |
 
 Compiler-generated fusion (stanc3 develop @ 90c6532 with this patch,
-`--O1`) — the PR's own effect:
+`--O1`), the PR's own effect:
 
 | arm | µs / call (3 reps) | median | ratio |
 |---|---|---|---|
@@ -98,7 +98,7 @@ tuple(<type1>, <type2>) eigh_fusedsym<N>__ = eigendecompose_sym(<ARG>);
 
 preserving the original target names and their order, where `<type1>` /
 `<type2>` reuse the sized-declaration dimensions of the two targets when
-both are found (else an unsized tuple decl — identical generated C++,
+both are found (else an unsized tuple decl, identical generated C++,
 dynamic Eigen types).
 
 Generated C++ before (abridged, per matrix):
@@ -117,9 +117,9 @@ Eigen::Matrix<double, -1, -1> Q = std::get<0>(eigh_fusedsym0__);
 Eigen::Matrix<double, -1, 1>  w = std::get<1>(eigh_fusedsym0__);
 ```
 
-### Gates (all must hold; otherwise the pair is left untouched)
+### Gates (all must hold. Otherwise the pair is left untouched)
 
-1. Structurally equal arguments — the two argument expressions match
+1. Structurally equal arguments, the two argument expressions match
    under structural equality (`Expr.Typed.equal`, locations ignored).
 2. Distinct plain-variable targets, no index expressions, and the
    argument does not reference either target.
@@ -128,13 +128,13 @@ Eigen::Matrix<double, -1, 1>  w = std::get<1>(eigh_fusedsym0__);
    `cannot_duplicate_expr` predicate the optimizer already trusts), and no
    user-defined function calls (conservative: they may print/reject).
    This is required because the fused form evaluates the shared argument
-   once instead of twice — the only semantic difference the rewrite
+   once instead of twice, the only semantic difference the rewrite
    introduces, and exactly the difference the gates must license.
-4. Adjacency — no intervening statement (no dataflow proof available
-   that the argument is unchanged in between; decl-initializer pairs and
+4. Adjacency, no intervening statement (no dataflow proof available
+   that the argument is unchanged in between. Decl-initializer pairs and
    non-adjacent pairs are deliberately out of scope).
 5. Complex targets (`complex_matrix`) keep the real decomposition and
-   re-promote the two projections (bit-identity preserved); a genuinely
+   re-promote the two projections (bit-identity preserved). A genuinely
    complex argument fuses via the complex overload.
 
 Pass placement: after function inlining + constant folding, so the
@@ -146,13 +146,13 @@ around the tuple decl. Enabled at `--O1` and `--Oexperimental`, off at
 
 Under `--warn-pedantic`, fire once per distinct shared (pure) argument when
 the same argument feeds both primitives anywhere in log_prob or a function
-body — including the non-adjacent pairs the optimizer cannot fuse —
+body, including the non-adjacent pairs the optimizer cannot fuse —
 recommending the `tuple(matrix, vector) e = eigendecompose_sym(A);` form
 (available since CmdStan 2.34) and noting `--O1`+ fuses adjacent pairs
 automatically.
 
 The diff is one concrete implementation of the above (a peephole in
-`Optimize.ml` + a pass in `Pedantic_analysis.ml` + golden tests); a
+`Optimize.ml` + a pass in `Pedantic_analysis.ml` + golden tests). A
 maintainer can re-implement the rule from this section alone.
 
 ## Validation
@@ -160,30 +160,30 @@ maintainer can re-implement the rule from this section alone.
 - Golden tests (`test/integration/good/compiler-optimizations/eigh-fusion.stan`
   with `cppO0/cppO1/cpp.expected`): fused pair, reversed-order pair,
   different-arguments NOT fused, non-adjacent NOT fused, nested-block
-  fusion — at all three optimization levels; plus
+  fusion, at all three optimization levels. Plus
   `test/integration/cli-args/warn-pedantic/eigh-pair.stan` for the
   warning and its suppression on distinct arguments. Regenerated expected
   files are purely additive relative to develop.
 - Full `dune runtest` passes at the base commit (90c6532).
 - End-to-end model parity and timing (the tables above): fused .so
   bit-identical to vanilla-develop .so on 50 points, −15.6% µs/call
-  median; hpp-level token comparison against the known-good language
+  median. Hpp-level token comparison against the known-good language
   rewrite confirms identical eigen regions in all three instantiations.
 - Edge-model sweep (local): reversed order, non-adjacent,
-  different-args, user-fn argument (not fused — gate 3), complex target,
+  different-args, user-fn argument (not fused, gate 3), complex target,
   nested-in-loop, plus O0/no-fusion and Oexperimental/fusion level checks
-  — all behave as designed.
+ , all behave as designed.
 
 ## References
 
-- math PR #2931 and stanc3 PR #1346 — `eigendecompose_sym` primitive and
+- math PR #2931 and stanc3 PR #1346, `eigendecompose_sym` primitive and
   language support (shipped math 4.8.0 / CmdStan 2.34).
 - The bit-identity argument in full: the two-callback adjoints
   (`eigenvectors_sym`: `V(F∘(VᵀḠ_V))Vᵀ`; `eigenvalues_sym`:
   `V diag(ḡ_w)Vᵀ`) accumulate into the same zero-initialized operand
-  adjoint that the combined callback builds in one pass; forward values
+  adjoint that the combined callback builds in one pass. Forward values
   come from the same Eigen solver call.
 - The ceiling and bit-identity measurements, the pass implementation
   gates, and the zero-drift tip re-verification are available on request
   or via the public benchmark repo (https://github.com/sims1253/apin —
-  `stan/results/` and `stan/WORKLOG.md`); happy to attach.
+  `stan/results/` and `stan/WORKLOG.md`). Happy to attach.

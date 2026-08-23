@@ -7,17 +7,17 @@ Linux x86-64, gcc 16.2.1.
 
 A model `.so` built by default `bridgestan.compile_model` (i.e. without
 `make_args=["STAN_THREADS=True"]`) crashes the process when one model
-library is used concurrently from multiple threads — reproduced
+library is used concurrently from multiple threads, reproduced
 deterministically (3/3): `free(): double free detected in tcache 2` or
 SIGSEGV. The requirement is documented and visible in `model_info()`, but
-**nothing signals it at the point of misuse**; the failure is a heap
+**nothing signals it at the point of misuse**. The failure is a heap
 corruption far from the cause.
 
 ## Mechanism
 
 Without `-DSTAN_THREADS`, stan-math uses a process-global autodiff
 arena/chain stack. Concurrent `logp`/`logp_grad` calls from several
-threads into the same `.so` are therefore undefined by construction — this
+threads into the same `.so` are therefore undefined by construction, this
 is a build-configuration hazard, not a code bug in BridgeStan.
 
 ## Reproduction
@@ -46,7 +46,7 @@ files, warmup 400 / samples 200:
 | `STAN_THREADS=false` (default) | serialized | rc = 0 **and draws md5-identical to the threaded `STAN_THREADS=true` run** |
 
 The third row is the useful nuance: the hazard is precisely *concurrency*
-into a default build, not the default build itself — serialized use is
+into a default build, not the default build itself, serialized use is
 correct and bit-identical to the threaded build's output.
 
 ## Ask
@@ -70,5 +70,5 @@ Happy to prototype (1) or (3) as a PR.
 
 This compounds with the silent-cache behavior filed separately: building
 "with `STAN_THREADS=True`" against an already-built default pair returns
-the default `.so` without warning — the two together produce a workflow
+the default `.so` without warning, the two together produce a workflow
 that believes it is thread-safe and crashes at runtime.

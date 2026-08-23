@@ -37,7 +37,7 @@ already-built pair behaves the same.
 
 The model `.so`'s name does not encode the build mode. In the 2.9.0
 Makefile only the bridge object gets a `_threads` suffix
-(`bridgestan[_threads].o`); the model target is `<stem>_model.so` either
+(`bridgestan[_threads].o`). The model target is `<stem>_model.so` either
 way. So two hazards compound: the artifact name does not distinguish build
 modes, and the cache check does not compare the requested `make_args`
 with what produced the cached artifact.
@@ -50,7 +50,7 @@ with what produced the cached artifact.
 - On a cache hit, compare the stamp with the requested `make_args` and
   warn (or rebuild) on mismatch.
 - At minimum, document the cache-key semantics prominently in
-  `compile_model`'s docstring — the current behavior reads as "build with
+  `compile_model`'s docstring, the current behavior reads as "build with
   these args", not "return whatever is on disk".
 
 Happy to turn any of these into a PR if a direction is preferred.
