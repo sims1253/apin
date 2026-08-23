@@ -5605,3 +5605,113 @@ W-48's fused-node story).
 Artifacts: stan/external/research_scan2_2026-08.md (committed);
 scratch/w51/ (untracked, transcripts preserved). Read-only research:
 no builds, no model runs, shared trees untouched, no pushes.
+
+## W-55: REMAINING PRs prepared and PUSHED (batch 2) — math GLM sign sibling (fix, discriminating-test gated), walnutpie robustness trio (3 branches off dev/init-robustness), SoA-arena issue text; external/pr index items 5–9
+
+Mission: the follow-ups beyond the four already-pushed batch-1 branches.
+Fork pushes only (sims1253/*, the established idea-history pattern); NO
+upstream pushes. Concurrent agents respected (W-51/W-54 files untouched).
+
+TASK A — math `bernoulli-logit-glm-partials-sign` @ 305cc0cb, PUSHED to
+fork (sims1253/math) ✓. Base develop 46a31337 (same as batch 1); built in
+a NEW worktree external/math_dev_glm (math_dev proper left checked out on
+eigen-cluster-aware-adjoint, untouched; lib/ symlinked into the worktree).
+- Pattern VERIFIED (not just taken from PR 3's body): prim/prob/
+  bernoulli_logit_glm_lpmf.hpp builds theta_derivative =
+  select(ytheta>cutoff, -exp_m_ytheta, select(ytheta<-cutoff, signs*1.0,
+  signs*exp_m_ytheta/(exp_m_ytheta+1))) — value branch -exp(-ytheta) ⇒
+  d/dtheta = signs*exp(-ytheta); first branch drops signs (wrong sign
+  for y=1, theta>20; feeds x/alpha/beta adjoints). rev/mix instantiate
+  the same prim template (no overrides). BONUS same-pattern site found:
+  opencl/prim/bernoulli_logit_glm_lpmf.hpp
+  select(high_bound_expr, -exp_m_ytheta_expr, …) — flagged in the body,
+  NOT fixed (needs a STAN_OPENCL validation environment).
+- Fix: one line, sibling-branch style (`signs * exp_m_ytheta`). Test
+  `AgradRev.bernoulli_glm_cutoff_partials_sign` appended to
+  test/unit/math/rev/prob/bernoulli_logit_glm_lpmf_test.cpp: 1x1 design
+  matrix, alpha=0, beta=±25, y∈{0,1}; beta AND alpha autodiff gradients
+  vs analytic signs*exp(-ytheta) AND central FD (h=1e-3, both points
+  in-branch) of the double implementation.
+- GATES: full binary 23/23 PASS with the fix; verified to FAIL on stock
+  via stash/rebuild/run/pop — adjoints sign-flipped by exactly 2*exp(-25)
+  (-1.3887943864964021e-11 vs +1.3887943864964021e-11) — discriminating.
+  Worktree left rebuilt in the FIXED state. Body:
+  external/pr/pr-5-math-glm-sign.md (self-contained per the README spec;
+  cross-references the non-GLM sibling PR by title; offers fold-in).
+
+TASK B — external/pr/issue-9-math-soa-arena.md (no branch;
+conversation-starter): Problem/Evidence/Proposed direction/Feasibility
+proven/Risks/References, self-contained from results/soa_var_w53.md +
+results/sota_arena_w47.md. Contents: tape decomposition (stack_alloc
+6.41%T + emplace 4.47%T on hier_2pl, 172.4M+173.5M calls, 22.4 of 32.6
+Ir/record; one nochain vari/element + one callback/op ⇒ dispatch is
+O(#ops) not O(N), grad() loop 0.27%T); typed-pool microbench ceiling
+(−32% of the tape complex; LLd misses −96.7%, 0.413→0.014/record);
+flat-callback refutation (measured 0.00 — stated to focus effort on
+records); the bit-identical vertical slice (4-model exact-zero parity,
+sampler draws md5-identical fe7c57…, −7.69%T/−8.23%G at sampler level,
+identical 4,493-call trajectories); the two shippable increments (batch
+make_nochain_vari_array + span registration; typed pools keeping var a
+pointer); pointer-semantics inventory headline (19 push sites/5 files; 2
+identity compares, both null guards; 0 var-in-map/hash); risks (Eigen-5
+isolated-TU +17% wall codegen sensitivity — gate on wall per toolchain;
+bridgestan prebuilt bridgestan.o hazard with the exact rm+make command).
+
+TASK C — walnutpie trio off dev/init-robustness (3eddfc4 == the fork's
+origin/dev/init-robustness, so PR bases exist). New worktree
+external/walnutpie_rob; main submodule worktree untouched (still
+exp/safe-adapt-defaults); other agents' worktrees untouched. All three
+PUSHED to origin = sims1253/walnutpie ✓ (origin already is the user's
+fork — no remote changes needed):
+- robustness/step-heuristic-fix @ da42cc2 ← 468e60f only (trace commit
+  8853fd7 excluded). CLEAN cherry-pick (warmup_heuristics.hpp has zero
+  overlap with the 9 intermediate W-23..W-31 commits).
+- robustness/freeze-clamp @ c5058ff ← 53daa3e (W-41 clamp) then cfc1de3
+  (W-43 probe-fix port — the clamp's fallback (b) calls the probe).
+  CLEAN cherry-pick despite adaptive_walnuts.hpp/api.hpp overlap.
+- robustness/init-guard @ 1f963eb ← 5aed078 ADAPTED (documented in the
+  commit message): the cherry-pick hit delete/modify conflicts on
+  examples/stan_cli.cpp (the exp lineage carries the W-25..W-31
+  multi-chain machinery absent on dev/init-robustness) — resolved by
+  dropping the multi-chain plumbing; AND a g++ -fsyntax-only check
+  caught that the E5 endpoint-cache seeding (adaptive_walnuts.hpp)
+  references cached_grad_/cached_logp_ from W-23 (absent here) — that
+  file restored to base. Guard itself unchanged (config.hpp lp
+  recording + init_logps(), load_stan max_tries plumbing, CLI file-init
+  fail-fast + random-init rejection loop + --init-tries). E5 was proven
+  draw-neutral by the original W-42 gates, so dropping it cannot move
+  draws. All three branches passed the same -fsyntax-only check.
+- No binaries rebuilt (gates already run on the original commits:
+  results/init_guard_w42.md, freeze_clamp_w41.md, blr_pin_w43.md);
+  branches are history artifacts.
+- Bodies: external/pr/pr-6-walnutpie-init-guard.md,
+  pr-7-walnutpie-freeze-clamp.md, pr-8-walnutpie-step-heuristic.md —
+  each self-contained (mechanism derivation, discourse-41487-post-11
+  community cross-ref, fix, gates incl. bit-identity canaries,
+  before/after: init guard 8.22s/31,002 calls → 0.16s/1 eval loud abort
+  (lotka 5.28s→0.09s; unguarded outcomes = zero-ESS pinned chain, set
+  bulk-ESS 5.34/NaN estimators); freeze-clamp recovery table (both cells
+  complete, fallback (a)=init seed 1.0, chains 1-3 zero warnings,
+  quality recorded honestly as garbage); step-heuristic w100-pf
+  bulk-ESS-min 5–9 → 779.0 median, 0/48 chains pinned, escape iteration
+  948 → 1, probe eps 2.0 → ~0.008, warmup 3102 → 937 calls, sampling 31
+  → 8.2 evals/draw).
+
+INDEX — external/pr/README.md: restructured into batch-1 (W-52,
+historical) / batch-2 (W-55) sections with file names as the unique
+identifiers; items 5–9 with branch/clone/base/push-✓; filing commands
+for all (walnutpie BOTH variants: fork-internal PRs against
+dev/init-robustness, and upstream flatironinstitute/walnutpie with the
+check-the-upstream-base caveat; recommended order 6→7→8); batch-2
+verification evidence + not-verified list; drift-check extended with
+the GLM file.
+
+NOT VERIFIED (recorded): walnutpie gates not re-run on the re-based
+robustness/* branches (originals gated; per-branch syntax check only);
+OpenCL GLM sibling not fixed (flagged); upstream
+flatironinstitute/walnutpie base-branch layout unchecked; math develop
+drift past 46a31337 (README drift check now covers the GLM file).
+NOTE: external/pr/issue-6-math-fused-log1p.md carries a concurrent
+agent's uncommitted edit (6+/6−) — deliberately NOT committed by W-55.
+Worktrees left in place (external/math_dev_glm with lib→math_dev/lib
+symlink; external/walnutpie_rob). No upstream pushes anywhere.
