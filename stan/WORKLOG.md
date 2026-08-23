@@ -3824,3 +3824,67 @@ or criterion changes — only this formula expression is corrected.
 Every other pre-registered quantity (D_h, D_e, S_h, thresholds
 0.05/0.10/0.10/0.20, margins 0.5x/2x, k in {400..600}, pin rule,
 verdict rule) stands as written above.
+
+## 2026-08-22 — W-37 CLOSE-OUT: trajectory-geometry separability REFUTED — no gate implemented (pre-registered stop rule); early-exit direction CLOSED permanently (4th independent gate)
+
+Executed as pre-registered (separability-first; no exit code written).
+Instrumentation: walnutpie exp/traj-gate (worktree external/walnutpie_w37,
+off exp/grad-accounting @ 33cd398), commits 862381f + ec90f3f — per-window
+warmup accounting series (window 50), env-gated, canary env-on vs env-off
+bit-identical 8/8; window eval sums consistent with CLI call counts within
+exactly one transition's work per cell (boundary snapshot fires at the
+start of the boundary transition — 1-15 evals, uniform, documented).
+MEASUREMENT DATA NOTE: the grid ran commit 862381f whose sum_h/ge1 window
+records were delta-of-deltas; fixed in ec90f3f, and the true series was
+recovered EXACTLY by telescoping (integer identity, verified against the
+final phase histograms: blr_c0 recovered sum_h total 803 == 642*1+64*2+
+3*3+6*4). Nothing re-run.
+
+Runs: 6 models x 4 chains (sequential single-chain processes), seeds
+20260819+c, warmup 1000 samples 100, W-36 inits (kron c0 = chain_1 init,
+E1 deviation). 24/24 cells, 20 windows each.
+
+FINDINGS:
+1. THE CLASSES SHARE THE SETTLEMENT SCHEDULE — EARLY. By window 300-400
+   every model INCLUDING hier_2pl sits at the settled floor mean_h
+   0.05-0.14 / P(h>=1) 0.05-0.14 (hier w400 0.077 vs esc 0.113 vs blr
+   0.076); ept flat (hier 16.0 at w500 -> 16.4 at w1000). Class
+   differences live EARLY (w100 mean_h: blr 4.0 [pin escape], hier 1.49,
+   kron 0.99, lsat 0.28, esc 0.10) — where exiting is already known
+   unsafe. hier_2pl's late warmup (worth 4x ESS per W-25: 519 vs 126 on
+   exit ~350) is FLAT in every trajectory-geometry signal.
+2. NO SEPARATING THRESHOLD. D(k) (normalized distance from gate-pass):
+   easy models sit at D 1.5-3.1 across k 400-600 (noise floor), hier_2pl
+   DROPS TO 1.00/1.40 at k 550/600 — BELOW blr/esc/arma11 at the same ks.
+   Criterion fails at every k in {400..600} under BOTH class assignments;
+   labeled post-hoc scan: 0/18 boundaries in 100-1000 separate. At the
+   pre-registered thresholds the gate never exits (W-28 failure mode);
+   loosened to the noise floor it exits on hier_2pl too (W-25 failure
+   mode).
+3. THE RESIDUAL IS NOISE, NOT SIGNAL. D_e (ept 2-window drift) dominates
+   23/29 model-k cells at k>=400; heavy-tailed per-transition eval counts
+   swing 10-30% per window on both classes; lsat (marginal) has the
+   LARGEST cross-chain ept spread (S_e 0.45 at k=500 vs esc 0.14). Class
+   ordering inverts k to k — structural, not fixable by recalibration.
+4. Pin rule fired as designed (blr acc=0 windows at w50-150, escape
+   w150-250 — E2's 100-400 escape window confirmed at window resolution;
+   a constant-signal gate would have found the pin maximally "stable").
+
+VERDICT (pre-registered rule): REFUTED -> STOP, no implementation. The
+early-exit direction is now closed by FOUR independent gates (W-21 CLI
+temporal knob: fast but quality-destroying; W-25 static step/mass drift:
+quality-destroying; W-28 dynamic lp pilot: quality-preserving only by
+never exiting; W-37 trajectory geometry: not class-separating at any
+exit-relevant point). Consistent picture: the marginal class's
+late-warmup quality gains are invisible in every cheap windowed
+statistic of sampler operation — step/mass state, the lp stream, and
+now the search structure; they are visible only in long-horizon
+min-dimension ESS, which costs what it would save. Warmup length stays
+fixed. Any future early-exit proposal must name a quantity outside
+this exhausted list.
+
+Ship state: instrumentation only, default path bit-identical; the
+per-window series is a standing measurement tool. Worktree left in
+place. Artifacts: results/traj_gate_w37.md (full tables + series),
+results/w37_separability.json, harness/run_w37.py + analyze_w37.py,
+runs/w37/ (local).
