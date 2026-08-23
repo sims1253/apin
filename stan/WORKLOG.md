@@ -3091,3 +3091,51 @@ is the proxy), single chain/cell, pooled multi-chain counts.
 Next (per pack ranking): E2 ablation grid {0.5,1,2}x{5,3,warmup-only-3}
 behind W-25/W-28 gates; E4 estimator rule behind a flag with joint
 (m,h) reporting; E3 closed.
+
+## 2026-08-22 — W-41 CLOSE-OUT: freeze clamp SHIPPED — the two W-36 abort cells now complete; all three gates PASS; root cause = lp=-inf at init NaNs the adapter at iteration 0 (degenerate value NaN, not 0/inf)
+
+Executed as pre-registered (worktree external/walnutpie_w41, branch
+exp/freeze-clamp @ 53daa3e off exp/safe-adapt-defaults @ 43b6435; the
+pre-change binary is the same worktree built at the base commit before
+the edit). Report: results/freeze_clamp_w41.md.
+
+DIAGNOSIS CONFIRMED + SHARPENED: on both aborting cells the model
+returns lp=-inf AT THE INIT POSITION (no exception; invalid region of
+kronecker_gp / lotka_volterra at those inits_w36 draws). The acceptance
+statistic is inf-inf=NaN, so the step adapter (Adam) NaNs on its FIRST
+update: step=-nan from iteration 0, chain pinned at the init for all
+1000 warmup iterations, freeze throws validate_positive(NaN) at exactly
+the 32001st logp_grad call. Degenerate value: NaN on BOTH cells (not 0,
+not inf) — so fallback (a) resolves to the init-step seed (1.0), the
+tracked "last finite warmup step" never existing.
+
+GATES:
+- (a) CANARY PASS: 12/12 (hier_2pl, lsat_model, radon_partially_pooled
+  x 4 chains, seed 20260819+c) md5-identical pre/post; 0 warnings in
+  the post logs — the clamp is dead code on healthy freezes and the
+  per-iteration tracker changed no warmup arithmetic.
+- (b) RECOVERY PASS: both cells rc=0 with 1000 draws + the loud warning
+  `WALNUTS WARNING: freeze step size degenerate (step_size()=-nan);
+  falling back to 1 (last finite warmup step size); warmup
+  iterations=1000`. Chains 1-3 of both cells: 0 warnings. Quality
+  (informational, honestly garbage as pre-registered-acceptable):
+  kronecker_gp rep0 4-chain bulk-ESS min 5.34 / R-hat max 2.13 with
+  chain 0 fully pinned (all constrained columns constant); lotka_
+  volterra rep1 ESS/R-hat = NaN (chain 0 moves but every constrained
+  draw is NaN — constrain fails in the -inf region). Healthy reps of
+  these models: 48 / 174 bulk-ESS-min. Root pathology = init protocol
+  hitting -inf regions, NOT adaptation; queued for the init-policy
+  backlog (the clamp makes the failure loud + survivable, it does not
+  make the chain good).
+- (c) COLLATERAL PASS: eight_schools_centered rep1 c2 + diamonds rep2
+  c1 md5-identical pre/post, 0 warnings.
+
+api.hpp walnuts_with_reinit ar.step_bar guard: shipped (geometric mean
+of the just-frozen per-chain macro times -> init step -> floor, same
+warning); library-only path, guarded by inspection + compile (the CLI
+grid calls adapt_with_stats directly).
+
+Ship state: committed on walnutpie branch exp/freeze-clamp (worktree
+left in place, NOT merged — other agents active on the submodule);
+stan repo: WORKLOG.md + results/freeze_clamp_w41.md. Raw runs
+runs/w41/{pre,post}/ and scratch/w41_*.py local/untracked.
