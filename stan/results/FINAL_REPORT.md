@@ -221,3 +221,59 @@ external/upstream_candidates.md for details):**
 (reproducer: harness/run_w27.py parity); bridgestan default .so silently
 unsafe under threaded evaluation (double-free/SEGV; STAN_THREADS=1 build
 clean — repro + provenance in upstream_audit_walnutpie.md §4).
+
+## 7. Session-4 addendum (W-35 … W-42)
+
+**Verified end-to-end baseline (W-36):** stock 3eddfc4 sequential vs exp tip
+(exp/safe-adapt-defaults @ 43b6435) `--chains 4` threads, 10 models × 3 reps,
+defaults: **geomean wall 0.341 (2.93×)**; 28/28 completed cells bit-identical
+across ALL arms (quality identical by construction). Attribution 2.77×
+parallelism × 1.056 endpoint threading. Honest footnote: +10–25% per-call
+under 4-way concurrency (memory bandwidth).
+
+**Upstream packages completed (kits in external/upstream_pr_kits.md):**
+- stanc3 eigh pair-fusion (W-39): peephole + pedantic warning implemented,
+  dune tests pass, .so-level bit-identical, −15.6% µs/call on kronecker_gp.
+  Patch scratch/w39/stanc3_eigh.patch vs develop @ 90c6532. vectorize_loops
+  (#1666): 21/21 models now compile (Phase 0 verdict superseded); 0/21
+  eligible; 27× on synthetic eligible loops.
+- Cluster-aware eigh adjoint (W-40): THE session's scientific result —
+  stan-math's rev eigenvector adjoint is silently ill-conditioned on
+  degenerate spectra (novel upstream; W-35 retraction of the gcc-miscompile
+  theory: cross-ISA divergence is seeded by permitted FP reordering and
+  amplified by 1/(w_j−w_i)). Fix: minimal-norm (gauge) adjoint with gap
+  guard, well-separated path byte-identical (200/200). Divergence 1.156 →
+  3.1e-8; FD 30–52% → ~1e-6; **kronecker_gp bulk-ESS-min 29 → 411, R-hat
+  1.13 → 1.02** (stock adaptation was fitting a 30–50%-wrong gradient).
+  Ports trivially to develop (Eigen 5). Patch scratch/w40/cluster_adjoint.patch.
+  Caveat recorded: all pre-W-40 kronecker_gp quality numbers were measured
+  under the wrong gradient.
+
+**Closed with mechanism (negatives):**
+- Warmup early-exit: PERMANENTLY closed by four independent gates (W-21/25/
+  28/37). W-37's separability analysis: trajectory-geometry signals share the
+  settlement schedule across classes; 0/18 window boundaries separate; the
+  marginal class's late gains are invisible in every cheap windowed
+  statistic (step/mass/lp/search-structure) — only long-horizon min-dim ESS
+  sees them. Warmup stays fixed-length.
+- Fewer-gradients pack (W-38): E1 accounting shipped (standing tool,
+  exp/grad-accounting); E2 error-discipline REJECTED (dyadic "waste" is a
+  trajectory-growth limiter: kronecker +118–162% calls or marginal-class
+  ESS −24%); E4 grow-m REJECTED with sign-inverted premise (macro-time error
+  ∝ m·eps³ — growing m makes h=0 harder; the rule works as designed and
+  costs 2–4.6× evals); E3 no-go (ladder level-0 dominance); E5 shipped
+  inside W-42 (−1 eval/chain, bit-identical).
+- Robustness trio characterized + fixed (W-41/W-42, candidate 7): −inf init
+  draws → silent NaN-pin → freeze abort (clamp w/ fallback + warning;
+  root fix = fail-fast guard, 0.16s vs 8.2s, ~98% budget saved; random-init
+  100-try loop surfaced from BridgeStan as CLI policy); blr-class short-
+  warmup pin documented (not tolerance-gated; mechanism open); degenerate
+  freeze guarded in both sampler() and the controller.
+
+**walnutpie exp-stack state:** exp/safe-adapt-defaults (W-23..W-31 stack) +
+parallel branches: exp/grad-accounting, exp/freeze-clamp, exp/init-guard,
+exp/traj-gate (instrumentation), exp/error-discipline, exp/grow-m (last two
+carry the rejected knobs, default-off, kept as history). dev/init-robustness
+pristine. Merging order if promoted: init-guard → freeze-clamp → (reject
+error-discipline/grow-m) — supervisor's recommendation only; per-idea
+branches cherry-pick cleanly.
