@@ -18,11 +18,11 @@ partials = (ntheta > 20).select(-exp_m_ntheta,
 ```
 
 `log1p` here is `apply_scalar_unary` — a per-element wrapper
-(`is_nan` check + domain check + glibc `std::log1p`) — and **the nested
-Eigen `Select`s do not short-circuit**: the log1p is evaluated eagerly for
+(`is_nan` check + domain check + glibc `std::log1p`), and the nested
+Eigen `Select`s do not short-circuit: the log1p is evaluated eagerly for
 ALL N elements and its result discarded for `|ntheta| > 20`. Measured on a
-hierarchical 2PL IRT model (N = 19,200): **84,697,422 log1p calls /
-4,424 var-mode log_prob calls = 19,150 ≈ N per gradient**; glibc
+hierarchical 2PL IRT model (N = 19,200): 84,697,422 log1p calls /
+4,424 var-mode log_prob calls = 19,150 ≈ N per gradient; glibc
 `__log1p` (59.2 Ir/call, correctly rounded, branchy) is the single largest
 symbol in the program — 13.2% of total instructions in the stock
 formulation (19.9% in the GEMM-formulated variant), plus the Select/redux
@@ -31,8 +31,8 @@ machinery around it (6.3%) and the separate partials pass.
 Two facts close the remaining doors: the out-of-band skip is worthless on
 real data (in-band fraction 99.63–100%: posterior draws are 100% in-band
 with |x| ≤ 15.66; even wild random-unconstrained points are 99.6%+), and
-`exp` is already Eigen-packetized (0.02%T). **The only remaining lever is
-a cheaper in-band log1p and fusing the machinery around it.**
+`exp` is already Eigen-packetized (0.02%T). The only remaining lever is
+a cheaper in-band log1p and fusing the machinery around it.
 
 ## The math (derivation of the fused kernel)
 
