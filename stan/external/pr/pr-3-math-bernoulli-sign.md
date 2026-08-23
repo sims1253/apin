@@ -108,5 +108,7 @@ happy to include it in this PR or a follow-up, whichever review prefers.
   `d/dθ log σ(±θ) = σ(∓θ) = exp(−|ntheta|)/(1 + exp(−|ntheta|))` and its
   saturated tails — the value branch `−exp(−ntheta)` is the standard
   `log σ(ntheta)` tail; its derivative is `+exp(−ntheta)`, never negative.
-- The discovery harness and per-element error analysis are documented in
-  and the propagated model-level bounds. Happy to attach.
+- The discovery harness and per-element error analysis, together with the
+  propagated model-level bounds, are available on request or via the
+  public benchmark repo (https://github.com/sims1253/apin — `stan/results/`
+  and `stan/WORKLOG.md`); happy to attach.

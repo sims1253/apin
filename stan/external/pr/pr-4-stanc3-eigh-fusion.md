@@ -184,5 +184,6 @@ maintainer can re-implement the rule from this section alone.
   adjoint that the combined callback builds in one pass; forward values
   come from the same Eigen solver call.
 - The ceiling and bit-identity measurements, the pass implementation
-  gates, and the zero-drift re-verification at
-  the same tip). Happy to attach.
+  gates, and the zero-drift tip re-verification are available on request
+  or via the public benchmark repo (https://github.com/sims1253/apin —
+  `stan/results/` and `stan/WORKLOG.md`); happy to attach.

@@ -247,10 +247,10 @@ NaN the first failure mode predicts.
   prior in this repo; the 2017 discourse thread 7616 (bbbales2: "I dunno if
   the derivatives fall apart there or what") never became an issue.
 
-Full internal evidence trail (four pre-registered gates, κ sweep, honest
-residual analysis): available on request (see the note below on the
-benchmark repo)
-port) — happy to attach or paste any section.
+Full evidence trail (four pre-registered gates, κ sweep, honest residual
+analysis) is available on request or via the public benchmark repo
+(https://github.com/sims1253/apin — `stan/results/` and `stan/WORKLOG.md`)
+— happy to attach or paste any section.
 
 ## Companion issue text (file first if preferred)
 

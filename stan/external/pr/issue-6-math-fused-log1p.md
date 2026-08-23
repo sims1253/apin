@@ -157,4 +157,6 @@ expression-tree form).
 - Muller et al., *Handbook of Floating-Point Arithmetic* — range
   reduction / polynomial evaluation methodology (FastTwoSum, minimax).
 - Kernel ulp grids, the micro-bench table, model-level gates, and the
-  honest SSE2 negative result. Happy to attach.
+  honest SSE2 negative result are available on request or via the public
+  benchmark repo (https://github.com/sims1253/apin — `stan/results/` and
+  `stan/WORKLOG.md`); happy to attach.
