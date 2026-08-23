@@ -3092,6 +3092,78 @@ Next (per pack ranking): E2 ablation grid {0.5,1,2}x{5,3,warmup-only-3}
 behind W-25/W-28 gates; E4 estimator rule behind a flag with joint
 (m,h) reporting; E3 closed.
 
+## W-38-E2 (pre-registered BEFORE running): error-discipline ablation, warmup-weighted — phase E2 of the W-37p pack
+
+HYPOTHESIS (from E1, results/grad_accounting_w38.md): the dyadic overhead
+is gated by tolerance failures; loosening error discipline DURING WARMUP
+ONLY (sampling keeps full discipline 0.5 / 5 halvings) cuts total
+logp_grad calls materially while preserving sampling quality — warmup only
+needs to estimate mass/step/m reasonably, not exactness. E1 ceiling at
+production settings: warmup overhead 32.7% of warmup evals on hier_2pl
+1000+1000 = 18.2% of total evals; short-warmup regimes >50%.
+
+ARMS (all warmup=1000 draws=1000, 4 chains as 4 SEQUENTIAL single-chain
+invocations, 3 reps, seeds 20260819+1000*rep+c; inits identical across
+arms: inits_w25/ pf for arma11, blr, hier_2pl, lsat_model; inits_w36/
+deterministic for kronecker_gp — the W-36 assignment; CLI defaults
+otherwise, .so from bs_models_threads/):
+- base: CLI defaults (canary reference arm).
+- e2a: `--max-error-start 5.0 --max-error-iters 950` — the EXISTING
+  schedule knob (config.hpp max_error_schedule, default off): warmup cap
+  decays geometrically 5.0 -> 0.5 over iters 0..949, full 0.5 discipline
+  for the last 50 warmup iters and all of sampling. Zero new code.
+- e2b: `--warmup-max-step-halvings 3` — NEW WarmupConfig knob
+  (warmup_max_step_halvings, 0 = off default): caps the halving ladder at
+  3 during WARMUP only; the frozen sampler keeps --max-step-halvings (5).
+- e2c: `--warmup-max-error 5.0` — NEW WarmupConfig knob
+  (warmup_max_error, 0.0 = off default): constant loose warmup error cap
+  (overrides the e2a schedule when set); sampling keeps 0.5. Isolates
+  "constant loose" vs e2a's decay-to-0.5.
+New-knob implementation: consumed ONLY inside AdaptiveWalnuts (the warmup
+phase; WalnutsSampler/sampler() untouched); CLI flags default off.
+MODELS: marginal class arma11, lsat_model, hier_2pl + overhead class blr,
+kronecker_gp (the E1 overhead-heavy set).
+
+GATES (pre-registered):
+(a) CANARY bit-identity: default-path draws (all knobs off) of the NEW
+    binary md5-identical to the exp/safe-adapt-defaults binary
+    (external/walnutpie/build_w36exp @ 43b6435), 3 models (arma11, blr,
+    hier_2pl) x 4 chains, seed 20260819, 1000+1000, rep0 inits. New knobs
+    default off => draws must match exactly; mismatch = wrong impl.
+(b) QUALITY: arviz rank-normalized bulk/tail ESS-min + max R-hat per
+    model-rep (chains trimmed to min length), MEDIANS of 3 reps on
+    arma11, lsat_model, hier_2pl, blr. An arm PASSES a model iff
+    median(ess_bulk_min) >= min(base per-rep bulk) AND
+    median(ess_tail_min) >= min(base per-rep tail) AND
+    median(rhat_max) <= max(base per-rep rhat) — the W-25/W-28 "within
+    the base rep spread" band, measured on base runs from THIS grid.
+(c) SPEED: total logp_grad calls per chain (warmup+sampling, CLI stanzas)
+    and batch wall, medians of 3 reps. Pre-registered expectation: >=10%
+    call reduction vs base on the overhead class (hier_2pl, kronecker_gp,
+    blr); recorded honestly if less.
+(d) blr SHORT-WARMUP PROBE (E2 as a FIX for the E1-found pin): warmup=400
+    draws=1000, arms base / e2a5 (= e2a settings) / e2a8
+    (`--max-error-start 1e8 --max-error-iters 950` — E1 measured the
+    pinned |dH| ~ 8e6 at the min attempt, which a 5.0 cap cannot accept;
+    only a start above the pinned error can test "does a loose-early cap
+    unpin"). Pin-disappears criterion: ess_bulk_min > 0 AND unique draw
+    positions > 1 (pinned = all draws identical, zero ESS, 31 evals/
+    transition). 3 reps x 4 chains, same seeds/inits.
+VERDICT RULE (pre-registered): ADOPT an arm iff quality (b) passes on ALL
+three marginal-class models AND (c) gives >=10% median call reduction on
+>=2 of the 3 overhead-class models. TUNE if quality passes but the speed
+criterion misses (or vice versa). REJECT if any marginal-class model
+fails (b) below the base band.
+
+BUILD/RUN PROTOCOL: separate worktree external/walnutpie_w38e2, branch
+exp/error-discipline off exp/safe-adapt-defaults @ 43b6435, build dir
+build_e2 INSIDE the worktree; env -u LD_LIBRARY_PATH; /usr/bin/make -j2;
+header edits => clean-first rebuild; serialized sampling only (other
+agents share cores). Deliverable: results/error_discipline_w38e2.md +
+harness/run_w38e2.py + harness/analyze_w38e2.py; runs/w38e2/ local.
+Commits: worktree branch exp/error-discipline; stan repo explicit paths
+(never git add -A).
+
 ## 2026-08-22 — W-41 CLOSE-OUT: freeze clamp SHIPPED — the two W-36 abort cells now complete; all three gates PASS; root cause = lp=-inf at init NaNs the adapter at iteration 0 (degenerate value NaN, not 0/inf)
 
 Executed as pre-registered (worktree external/walnutpie_w41, branch
@@ -3139,3 +3211,238 @@ Ship state: committed on walnutpie branch exp/freeze-clamp (worktree
 left in place, NOT merged — other agents active on the submodule);
 stan repo: WORKLOG.md + results/freeze_clamp_w41.md. Raw runs
 runs/w41/{pre,post}/ and scratch/w41_*.py local/untracked.
+
+## 2026-08-23 — W-39 PRE-REGISTRATION: stanc3 eigh pair-fusion implemented (develop @ 90c6532) — validation about to run; plus fresh vectorize_loops verdict
+
+Mission (Kit 2, external/upstream_pr_kits.md; evidence results/
+eigh_reuse_w32.md; novelty check results/upstream_scan_2026-08.md #1):
+make stanc3 itself fuse the `eigenvectors_sym(A)` + `eigenvalues_sym(A)`
+pair into one `eigendecompose_sym` call (bit-identical per W-32's
+structural argument), with a pedantic-mode warning as companion, then
+validate against the W-32 language-level rewrite as ground truth.
+
+TOOLCHAIN (userspace, no root): opam 2.5.2 (~/.local/bin) + OCaml 5.5.0
+SOURCE-BUILT switch `w39` (ocaml-base-compiler; the distro ocaml package
+lacks compiler-libs so ocamlfind/base fail on ocaml-system — source build
+~25 min at -j2 resolved everything). stanc3 develop cloned to
+external/stanc3 (untracked) @ 90c6532 ("Merge PR #1672
+fix/vectorize-loops-nobase" — tip of develop, 2026-08-22). stanc.opam
+pins ocaml {= 5.5.0} exactly: satisfied. Vanilla build verified before
+patching.
+
+IMPLEMENTED (both deliverables, before any measurement):
+1. FUSION PASS `Optimize.fuse_eigendecompose` (src/analysis_and_
+   optimization/Optimize.ml): peephole over statement lists; rewrites
+   ADJACENT `V = eigenvectors_sym(A); w = eigenvalues_sym(A)` (either
+   order, incl. Promotion-wrapped complex-target case, incl. nested
+   blocks/loops) into `tuple ed = eigendecompose_sym(A); V = ed.1;
+   w = ed.2`. Gates: Expr.Typed.equal args (locs ignored), distinct
+   plain-variable targets, arg not referencing either target, arg free
+   of target/RNG/user-defined calls (fused form evaluates arg once).
+   Tuple decl reuses the targets' sized decl dims when both known,
+   else Unsized. Enabled at --O1 and --Oexperimental (not O0), runs
+   after function inlining / constant folding, before copy-prop.
+   Generated C++ on kronecker_gp verified to match the W-32 lang-arm
+   shape (`std::tuple` + `std::get<0/1>`) in all 3 instantiations.
+2. PEDANTIC WARNING `eigh_pair_warnings` (Pedantic_analysis.ml, fires
+   under --warn-pedantic when the same arg expression feeds both calls
+   anywhere in log_prob/functions, gated on arg purity): message
+   recommends `eigendecompose_sym` (notes --O1 fuses adjacent pairs).
+   Fires on kronecker_gp (2 sites), silent on harness/w32/
+   kronecker_gp_eigendecompose.stan.
+3. Tests: eigh-fusion.stan added to the compiler-optimizations golden
+   dir (fused/reversed/different-args/non-adjacent/nested cases; cpp,
+   cppO1, cppO0 .expected regenerated — diffs purely additive) and
+   eigh-pair.stan to cli-args/warn-pedantic (expected regenerated).
+   Full `dune runtest` running; any failure blocks shipping.
+
+VALIDATION PLAN (gates pre-stated, W-32 protocol, scratch/w39/ dirs —
+W-27 bridgestan cache gotcha: one dir per arm, fresh):
+- (a) SEMANTICS: compile harness/w32/kronecker_gp_eigendecompose.stan
+  with VANILLA develop stanc (no fusion) vs models/kronecker_gp.stan
+  with PATCHED stanc --O1 (fusion): diff hpp — expect only cosmetic
+  deltas (temp names, statement numbering, extra braces from the lang
+  rewrite's blocks). Then build BOTH .so via bridgestan (default flags,
+  env -u LD_LIBRARY_PATH, make -j2) and compare (logp, grad) on ~50
+  random N(0,1) points: EXPECT BIT-IDENTICAL (W-32 structural argument;
+  pre-registered bar: max rel-L2 == 0.0 exactly).
+- (b) STOCK CONTROL: patched stanc --O0 arm (fusion off) vs vanilla
+  develop --O1: builds must behave like stock two-call codegen —
+  guards against develop-vs-2.39 drift being attributed to fusion.
+- (c) TIMING: per-call logp_grad medians of 3 interleaved reps on the
+  same 50-point set (taskset 0-3, serialized): expect patched-O1 ~=
+  W-32 lang arm (~337 us/call vs ~393 stock); record honestly.
+- (d) Warning coverage: fires on kronecker_gp; silent on 3 models
+  without the pattern (incl. the w32 lang model).
+SECONDARY (time permitting): vectorize_loops fresh verdict — compile
+all stan/models/*.stan with patched stanc --Oexperimental (fusion +
+vectorize): record failures; for 2-3 scalar-loop models that compile,
+build .so and compare logp_grad vs default build (statistical parity
+~1e-6 rel, NOT bit-identity — vectorization reorders summation) +
+median-of-3 timing. Phase 0's old --Oexperimental verdict (3/21
+uncompilable + 1 silent miscompile) gets a fresh data point on the new
+pass set only.
+Patch saved as scratch/w39/stanc3_eigh.patch (external/stanc3
+untracked). Commit: explicit paths only.
+
+## W-40 (pre-registered BEFORE running): cluster-aware minimal-norm adjoint for rev eigenvectors_sym/eigendecompose_sym — fix the W-35 numerics at the stan-math level, validate locally, produce the fix PR kit
+
+Mission: W-35 classified the -march=native gradient divergence: rev
+eigenvectors_sym/eigendecompose_sym adjoints divide by eigenvalue gaps
+(F_ij = 1/(w_j-w_i)); on rounding-degenerate spectra (kronecker_gp Sigma1
+pinned cluster) this is catastrophically ill-conditioned, FD-inconsistent
+30-47% in EVERY build, and cross-ISA unstable O(1)-O(1e3). W-40 implements
+the mathematically defensible fix in the LOCAL bridgestan stan-math copy
+(~/.bridgestan/bridgestan-2.9.0/stan/lib/stan_math), measures it, RESTORES
+the tree pristine, and writes the upstream kit (issue + fix PR extending
+Kit 4). walnutpie submodule untouched.
+
+MATH (derived, to be validated against the W-35 evidence): for
+A = V diag(w) V^T, the standard first-order reverse adjoint is
+  dA-bar = V (F o (V^T G_V)) V^T + V diag(g_w) V^T,  F_ij = 1/(w_j - w_i),
+(F antisymmetric; o = Hadamard). For a group of numerically coincident
+eigenvalues (pairwise gaps |w_i - w_j| < tau) the individual eigenvectors
+are not identifiable — only the invariant subspace is: within the group,
+W = V^T dV has an arbitrary SKEW gauge (Fox-Kapoor/Nelson gauge), and the
+pairing with downstream adjoints satisfies skew((V^T G_V)_group) = 0
+WHENEVER the downstream composite is invariant to within-group rotations
+(the kronecker_gp case: V enters only through V f(w) V^T forms — W-35
+showed logp agrees to 1e-16 across flipped bases). Therefore zeroing the
+within-group couplings (the minimal-norm gauge choice) is EXACT for
+invariant downstream and the unique bounded, basis-invariant choice
+otherwise (matching literature: He et al. J Sound Vib 2023 adjoint
+eigen-derivatives incl. the repeated-eigenvalue pathology; de Leeuw
+arXiv:2508.09355; Friswell; van der Aa ELA 2007; shift-and-invert adjoint
+preconditioning 2025 — list in results/upstream_scan_2026-08.md).
+IMPLEMENTED FORMULA: F~_ij = 1/(w_j - w_i) if |w_j - w_i| >= tau else 0,
+tau = kappa * max(1, |w|_inf) * DBL_EPSILON, applied in
+rev/fun/eigenvectors_sym.hpp and rev/fun/eigendecompose_sym.hpp (the
+vector_adj term only). rev/fun/eigenvalues_sym.hpp callback
+(V diag(g_w) V^T) has NO gap division — unchanged (its cross-build
+variation is bounded; W-35: sigma1 FD-consistent 2e-9 already). NOTE on
+the task brief's "1/(w_i-w_j)^2 eigenvalue term": no squared-denominator
+term exists in the FIRST-order adjoint stan-math implements (verified by
+reading all three hpp files); 1/(w_i-w_j)^2 terms arise in SECOND-order
+eigenderivatives (Hessians) — out of scope, documented in the writeup.
+Guard: min adjacent gap (eigenvalues sorted ascending; min over adjacent
+== min over all pairs) >= tau => run the ORIGINAL code path VERBATIM
+(well-separated spectra: literally identical code path, bit-identical
+results). kappa pre-registered PRIMARY = 1e3; SENSITIVITY SWEEP
+kappa in {1e2, 1e3, 1e4, 1e5} on gates (a)/(b). Measured gap structure
+feeding this choice (scratch/w40/dump_gaps.out, Eigen 3.4.0 values):
+Sigma1_7 bottom ~12 eigenvalues pinned at exactly 1e-5 with internal gaps
+3.7e-17..6e-13 then a CONTINUUM (9.9e-12, 1.5e-10, ...); smallest
+retained gap at kappa=1e3 is ~1e-11 (1/d ~ 1e11). Because the spectrum is
+a continuum (NOT bimodal), cross-build agreement after masking is
+expected to be limited by the smallest RETAINED gap (dF/F ~ dw/delta with
+dw ~ 1e-14 cross-build eigenvalue wobble) — pre-registered honestly as
+the two-tier gate (a) below.
+
+ARMS:
+- stock stan-math tree: existing stock binaries (.so in bs_models_threads +
+  scratch/w35 builds) + freshly built stock unit drivers.
+- patched tree: same sources with the F~ mask (kappa=1e3 primary; sweep by
+  rebuilding unit drivers only).
+- ISA axis: default (SSE2) vs -mavx builds of BOTH trees (W-35: -mavx alone
+  reproduces the divergence).
+
+GATES (pre-registered):
+(a) DIVERGENCE COLLAPSE: patched default vs patched -mavx must agree on
+    kronecker_gp gradients (W-35 parity.py protocol: 20 N(0,1) unc points,
+    seed 20260822; grel = |dg|/max(1,|g|)). PRIMARY: max grel <= 1e-9 on
+    the previously-diverging points. FALLBACK (reported honestly if the
+    primary misses): max grel <= 1e-6 AND >= 5 orders collapse from stock's
+    O(1) AND the residual shown to be retained-gap-limited (improves
+    monotonically as kappa increases). Stock pair re-measured same session
+    for the baseline number.
+(b) FD-CONSISTENCY IMPROVES: Richardson central FD (h=1e-5, 5e-6; d4
+    protocol) vs AD at the W-35 failing points (parity pts 1/2/7/14,
+    var1/bw1 components): stock 30-47% -> patched report what it becomes.
+    Expected small-but-nonzero: even the 'true' gradient is ill-defined at
+    rounding level for non-invariant functionals; for the (invariant) model
+    logp the masked adjoint is exact, so the residual should be FD
+    truncation; residual documented honestly. Unit level: same comparison
+    on the d2 phi (NON-invariant; residual expected, documented) and on a
+    deliberately INVARIANT phi (V diag(1/w) V^T quadratic form) where the
+    masked adjoint must be FD-consistent to truncation while stock is not.
+(c) WELL-SEPARATED UNCHANGED: patched vs stock on well-conditioned random
+    symmetric matrices (min adjacent gap >= 1e-2; 200 seeds, n=30) through
+    eigenvectors_sym + eigendecompose_sym + eigenvalues_sym rev:
+    bit-identical output (%.17g dumps byte-compare; the if-guard makes the
+    code path literally identical). Edge case around tau documented.
+(d) SAMPLER SANITY: kronecker_gp 3 reps x 4 chains, warmup=1000 draws=1000,
+    seeds 20260819+1000*rep+c, inits from inits_w36/kronecker_gp
+    (deterministic; kronecker_gp has NO inits_w25 pf inits — deviation
+    from the brief noted here; W-41: rep0 c0 is the -inf-init cell), ONE
+    fixed binary for both arms (external/walnutpie_w41/build_w41
+    stan_cli — completes the -inf cell with the clamp) so the .so is the
+    only difference; stock .so = bs_models_threads/model_kronecker_gp.so
+    vs patched .so (STAN_THREADS=True, default CXXFLAGS otherwise).
+    GATE: bulk/tail ESS-min (arviz, protocol of analyze_w36.py) within the
+    stock arm's rep spread on healthy reps (rep1, rep2; rep0 reported with
+    the W-41 pinned-chain caveat). Draws NOT expected bit-identical
+    (adjoint changed on a clustered model) — divergence counts and R-hat
+    recorded.
+ALSO: Eigen-5 porting note (develop eigenvectors_sym.hpp fetched and
+compared — callback structure identical => patch ports trivially); patched
+tree RESTORED byte-identical after all patched-tree builds (backups +
+cluster_adjoint.patch + patched .so kept in scratch/w40/); ready-to-file
+issue + fix-PR text extending Kit 4 in results/cluster_adjoint_w40.md.
+Env: env -u LD_LIBRARY_PATH; /usr/bin/make; builds -j2; sampling
+serialized; no pushes; other agents' builds unaffected outside the
+measured patch window (patch applied, everything built, tree restored
+BEFORE long measurements).
+
+## 2026-08-23 — W-39 CLOSE-OUT: Kit 2 SHIPPED as a real stanc3 patch — fuse_eigendecompose pass (O1+) + pedantic warning on develop @ 90c6532; kronecker_gp fused build BIT-IDENTICAL to vanilla develop (logp/grad/constrained, worst rel-L2 exactly 0.0) and −15.6% wall (406.8→343.4 us/call); full dune runtest PASS; fresh vectorize_loops verdict: 21/21 compile, 0/21 grid coverage, synthetic 27x at N=200k with 2e-14 parity
+
+Executed as pre-registered. Toolchain: opam switch `w39` = OCaml 5.5.0
+SOURCE build (distro ocaml lacks compiler-libs; ocamlfind/base chain
+fails on ocaml-system — source build is the clean fix). stanc3 develop
+90c6532 (2026-08-22 tip, includes #1666 vectorize_loops + #1672).
+
+IMPLEMENTATION (patch: scratch/w39/stanc3_eigh.patch; external/stanc3
+untracked):
+- Optimize.fuse_eigendecompose (Optimize.ml/.mli): adjacent-pair
+  peephole, either order, nested blocks, complex-target promotion
+  handled (real decomposition kept, projections re-promoted); gates:
+  Expr.Typed.equal args, plain distinct targets, arg pure (no
+  target/RNG/user-defined fn — fused form evaluates arg once). Tuple
+  decl reuses target dims when known. Enabled --O1/--Oexperimental.
+  One bug caught by my own edge tests mid-flight (missing arg-equality
+  check fused `A*x` with `A+x`) — fixed before any measurement.
+- Pedantic_analysis.eigh_pair_warnings (--warn-pedantic): fires once
+  per shared pure argument; message recommends eigendecompose_sym.
+- Tests: eigh-fusion.stan golden model (cpp/cppO1/cppO0 expected
+  regenerated, additive-only), eigh-pair.stan pedantic expectation;
+  FULL dune runtest PASS (zero failures).
+
+GATES (all as pre-registered):
+- (a) SEMANTICS PASS: normalized hpp diff vs the W-32 lang rewrite =
+  token-identical eigen regions in all 3 instantiations (only deltas:
+  18 redundant frontend validates dropped, temp names, numbering,
+  wraps, local_scalar_t__ vs double in write_array). .so level:
+  BIT-IDENTICAL logp + gradient + constrained outputs on 50 random
+  pts (worst rel-L2 exactly 0.0 — pre-registered bar met; W-32's
+  structural argument transfers to compiler-generated code).
+- (b) CONTROL: stock arm built with VANILLA develop stanc --O1;
+  patched --O0 shows zero fusion (verified). Develop-vs-2.39 drift
+  cannot contaminate the comparison.
+- (c) TIMING PASS: 406.8 → 343.4 us/call medians (3 interleaved
+  reps), ratio 0.844 = −15.6%; consistent with W-32 lang arm (−14.3%).
+- (d) WARNING COVERAGE PASS: kronecker_gp 2 sites; silent on hier_2pl,
+  gp_regr, lotka_volterra, arma11, accel_gp + the w32 lang model.
+
+SECONDARY (vectorize_loops, fresh verdict on the new pass set):
+- 21/21 grid models compile with --Oexperimental (vanilla AND patched)
+  — Phase 0's 3/21 uncompilable + miscompile verdict superseded.
+- 0/21 grid models have an ELIGIBLE loop (compound-indexed args are
+  the documented #1666 follow-up; lsat_model's alpha[k]*ones is the
+  blocker) — measured the pass on 2 synthetic eligible models instead:
+  N=2k bit-identical + 1.01x (overhead-masked); N=200k: 7710.6 →
+  285.8 us/call = 27x, parity 2e-14 (rounding-level, statistical as
+  expected). --Oexperimental is a clean no-op on our current grid.
+
+Committed: WORKLOG.md, results/stanc3_w39.md, harness/w39/{w39_gates,
+w39_vec_gates,w39_vec_big}.py. Local (untracked): scratch/w39/
+(stanc binaries, arms, hpp arms, patch copy, edge models, Oexp sweep),
+external/stanc3 clone. Nothing pushed.
