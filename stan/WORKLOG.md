@@ -2804,3 +2804,64 @@ gradients (invariant-breaking), warmup early-exit (W-21/25/28), basis rules
 (W-19). Micro-state selection candidates flagged for the Flatiron team, not
 engineering. Any implementation session must pre-register and reuse the
 W-23/W-25 gate apparatus; no claims made here without runs.
+
+## W-38u (SCAN-ONLY): upstream ecosystem scan — stan-math/stanc3/bridgestan/walnutpie + WALNUTS literature
+
+Date: 2026-08-22/23. Web + local reading ONLY (gh API, web search, arXiv) —
+no builds, no benchmarks, no profiling (N's wall-time lane untouched).
+Mission: cross-check our upstream findings (upstream_candidates.md,
+upstream_pr_kits.md, march_native_w35.md) against the current state of the
+upstream repos. Full report with URLs: results/upstream_scan_2026-08.md.
+
+HEADLINES:
+1. eigendecompose_sym provenance CORRECTED: added Aug 2023 (math PR #2931 /
+   stanc3 PR #1346), shipped math 4.8.0 / CmdStan 2.34 (Jan 2024) — NOT
+   5.3.0/2.39 as our W-32/Kit-2 records say. Kit 2 ask (stanc3 pair-fusion
+   peephole) still novel — no upstream ask exists; reframe text.
+2. Eigenvector adjoint conditioning (W-35/W-40): NOT known/fixed/documented
+   upstream — no matching issue/PR; develop's eigenvectors_sym.hpp still has
+   raw 1/(w_j−w_i), no guard/docs; no degenerate-spectrum tests. Closest:
+   math #1803 (open, 2020; triangular-adjoint convention — sibling wart,
+   cite it) + 2017 discourse thread 7616 ("I dunno if the derivatives fall
+   apart there or what" — never filed). W-40 + Kit 4 PROCEED as novel;
+   enrich with adjoint-methods literature (shift-and-invert 2025; He et al.
+   2023; de Leeuw arXiv:2508.09355; Friswell/van der Aa). NOTE: math
+   develop migrated Eigen 3.4.0 → 5.0.1 (PR #3271) — re-validate the W-35
+   repro under Eigen 5 before filing.
+3. The "2.39 cholesky_decompose derivative fix" from our context prompt is
+   NOT in upstream release notes (checked 2.38/2.39/5.2/5.3 full texts);
+   no cheaper-cholesky-adjoint PR exists; candidates item 3(a) unaffected.
+4. Elementwise plumbing (W-29/W-34): stanc3 PR #1666 `vectorize_loops`
+   merged 2026-08-19 (`--Oexperimental`, nightlies): scalar density loops →
+   vectorized densities, "O(1) autodiff nodes instead of O(N)", 3.54x on
+   radon_pooled in their benches; follow-ups planned for indirect indexing
+   (a[county[n]]). Does NOT touch our hier_2pl line (already vectorized
+   syntax) — candidate 2 ceiling stands, reframe as #1666-family extension.
+   Adjacent: math PR #3352 (rev Eigen const views, 2026-07-23), PR #3346
+   map helpers (2026-08-12). No SoA-arena work.
+5. square()/std::pow (Kit 1): develop STILL `std::pow(x, 2)` (verified in
+   source, with the ironic "just x*x" doc comment); squared_distance sites
+   too; no issue/PR anywhere. Kit 1 valid — file as-is.
+6. bridgestan: v2.9.0 (2026-07-06) is LATEST; main = 5 CI-only commits past
+   it; compile_model cache issue unfiled upstream (Kit 3 valid). Adjacent:
+   issues #194 (threading control, open), #289 (parallel-misuse segfault,
+   closed). 
+7. No new CmdStan/math releases (latest 2.39.0/5.3.0, both 2026-05-19; no
+   2.40/5.4). Develop perf-relevant: Eigen 5.0.1 (above), vectorize_loops,
+   cmdstan clang-PCH template instantiation (PR #1346, compile-time). Stay
+   pinned 2.39.0 for W-36; backlog post-2.40 re-baseline.
+8. walnutpie upstream = github.com/flatironinstitute/walnutpie (not a fork,
+   no releases); upstream main tip = 6162d88 = OUR fork point — nothing
+   landed since. Paper published: JMLR 27(113):1-64 (2026), arXiv:2506.18746
+   (v1 only); companion research repo bob-carpenter/walnuts (Python/MATLAB)
+   is a DIFFERENT codebase. Watch: PR #77 (unroll leapfrogs, open), issue
+   #34 (cache gradients across transitions), branches preconditioner/
+   leapfrog-momentum-compose. Upstream style is warn-first (PR #90) — Kit 5
+   should present the warn-only alternative. New literature for our lane:
+   Picard-map PARALLEL Metropolis transitions (Grazzi et al., arXiv:
+   2506.09762, Biometrika 2026) — orthogonal axis to W-30/W-36 cross-chain
+   parallelism; parked in backlog.
+
+ACTIONS: see report §Action list (correct Kit 2 text; W-40 novel, cite
+lit + Eigen 5 re-validation; Kits 1/3 file as-is; --Oexperimental spot
+check cheap; keep 2.39.0 pin).
