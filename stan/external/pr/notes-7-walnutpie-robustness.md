@@ -132,3 +132,27 @@ short warmup stays *drift*-limited — that is init-protocol territory
 - Evidence docs (attachable from the benchmark repo's results/ dir):
   init_guard_w42.md, freeze_clamp_w41.md, blr_pin_w43.md; the
   pre-registered protocol entries live in its WORKLOG.md.
+
+## Cross-references to community reports (added 2026-08-23)
+
+- The stuck-chain bug class documented here is the same one reported in the
+  walnutpie 0.0.1 release thread (discourse 41487, post 11: seantalts
+  relaying "Fable"'s Lotka-Volterra analysis — uniform(-2,2) init landing at
+  lp ≈ -400..-16,000; continuous mass adaptation from iteration 1 letting
+  tail gradients collapse the metric into a self-reinforcing crawl; WALNUTS's
+  strict whole-trajectory failure after max halvings turning a bad initial
+  step into deadlock). Our series treats it systematically: init guard
+  (non-finite inits), freeze clamp (degenerate freeze), and the
+  find_reasonable_step fix (the Stan-side mechanism "Fable" identified as
+  the decisive difference — our probe was broken 3 ways; fixing it takes
+  the pinned w100 blr class from bulk-ESS 5–9 to 779). The thread's
+  init-buffer idea (identity metric for the first ~75 iterations, as Stan
+  does) is being tested as W-54.
+- The soft gradient-clipping idea from the "models where Stan outperforms
+  nutpie/walnuts" thread (discourse 41095, post 39: aseyboldt's
+  c·asinh(x/c)) is likewise under test as W-54 arm B, scoped to
+  adapter-visible gradients during early warmup only. Note for that
+  thread's tree-size-quantization question: our per-transition
+  gradient-accounting instrumentation (exp/grad-accounting branch, results/
+  grad_accounting_w38.md) measures evals-per-transition histograms directly
+  and can answer it empirically.
