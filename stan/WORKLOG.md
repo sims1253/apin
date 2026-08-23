@@ -4396,3 +4396,447 @@ gradient-seeded-mass sampler whose step adapter uses an underflowing
 acceptance statistic — the adapter is blind (constant-gradient descent)
 for as long as |dH| > ~745, and the descent pace (lr/sqrt(t)) sets a
 seed-dependent minimum warmup of hundreds to >1000 iterations.
+
+## W-46 (pre-registered BEFORE running): libm log1p ceiling in the bernoulli_logit likelihood path of hier_2pl — kernel micro-benchmarks + model-level ceiling
+
+From W-34: after the GEMM fix, the likelihood interior is ~58.4%T of the
+armB gradient and libm log1p alone is 19.9%T (5.020e9 Ir) — the single
+largest symbol. Mission: measure the CEILING for replacing the glibc
+log1p (and fusing the select/redux machinery around it) in
+bernoulli_logit_lpmf, as evidence for a stan-math vectorization/packet
+proposal. This is a ceiling measurement, not a production kernel.
+
+WHAT STAN-MATH CALLS TODAY (read before registering, from
+bernoulli_logit_lpmf.hpp 5.3.0 + W-34 callgrind dumps):
+- Per observation (var-mode forward): e = exp(-ntheta) via Eigen Packet2d
+  polynomial pexp (glibc exp is 0.02%T — ALREADY specialized, NOT
+  re-measured); then logp term = 3-way Select at cutoff 20
+  (x>20: -e; x<-20: x; else: -log1p(e)), partials = sel(x>20: -e;
+  band: e/(1+e); x<-20: 1)*signs — partials-in-forward, no libm in rev.
+- CRITICAL (verified from armB callgrind raw): log1p is called
+  84,697,422 times / 4,424 var log_prob calls = ~19,150 ~= N — the
+  nested Selects do NOT short-circuit; apply_scalar_unary evaluates
+  stan::math::log1p (is_nan + check_greater_or_equal + std::log1p,
+  glibc, ~59.3 Ir/call) EAGERLY on ALL 19,200 elements, and the result
+  is DISCARDED for |x|>20. So the u = exp(-x) argument spans the FULL
+  range (0, e^708] in principle, though only u in [e^-20, e^20] is used.
+- Replaceable complex at model level: log1p 19.9%T + Select/redux/lambda
+  machinery (stock-separable: 2.20e9 = 6.3%T; inlined into lpmf excl in
+  armB) + partials-select arithmetic — ~30%T of armB, ~23% of stock T.
+
+KEY MATH FACT (kernel enabler): with t = -x and the branch cut kept at
+20, the whole in-band term is min(x,0) - log1p(exp(-|x|)) — i.e. ONE
+log1p with argument w = exp(-|x|) in [e^-20, 1] (2.06e-9..1) for BOTH
+sign branches; partial = w/(1+w) (x>=0) / 1/(1+w) (x<0). The primitive
+reduces to log1p(w) on [2e-9, 1].
+
+KERNELS (scratch/w46/, pure C++, no model builds for the bench):
+- K0 stock-shape replica of the lpmf interior (Eigen array exp +
+  per-element stan::math::log1p wrapper + nested Selects + partials
+  select) — baseline; sanity: ~measured Ir share.
+- K1 std::log1p direct, no stan checks — isolates the wrapper tax.
+- K2 fused branch-cut SCALAR: glibc exp+log1p but log1p called ONLY
+  in-band; value/partial/select structure otherwise identical to stock
+  -> BIT-IDENTICAL outputs by construction (in-band bits unchanged).
+- K3 fused scalar min-form: v = min(x,0) - log1p(exp(-|x|)) (glibc
+  log1p always, but argument confined to [e^-20,1]); ulp-level reorder.
+- K4 Kahan-corrected log1p: log1p(u) = plog(1+u) + m/(1+u) with
+  m = ((1+u)-1)-u exact (FastTwoSum), u in [e^-20,1]; scalar and
+  Packet2d (Eigen internal plog_double) variants.
+- K5 polynomial log1p(w) = w*P(w), P a Chebyshev/minimax fit (mpmath,
+  high precision) on w in [e^-20,1]; scalar and Packet2d variants.
+- K7 Eigen generic_plog1p (exists for packets via Eigen
+  MathFunctions) — accuracy expected to FAIL the 2ulp bar; measured
+  anyway as the 'free' Eigen option.
+- SLEEF u10/u35: NOT trivially vendorable (not single-header, not on
+  system) -> SKIPPED, documented.
+- APPROXIMATE ARM (separate, pre-registered): low-degree poly (~u35
+  grade, few-ulp/1e-15 rel): gradient-parity gate NOT applicable by
+  design; only quality-only 1-rep ESS spot check IF tested at model
+  level; labeled approximate everywhere.
+
+ACCURACY BAR (likelihood MATH — strict): for exact-grade kernels, max
+abs error <= 2 ulp of the glibc log1p result on the tested argument
+range (dense grids over [e^-20,1] and [e^-20,e^20] + edges), and
+value/partial term ulp vs K0 on the real x sample. Model-level parity
+gate: <=1e-12 rel on ~50 random unconstrained points (bit-identity
+expected for K2).
+
+SPEED BAR: >1.5x on the interior (ns/element) vs K0 on the REAL x
+distribution (extracted by replicating eta = alpha_i*(theta_j - beta_i)
+from the model at: inits_w25/hier_2pl pf points, posterior-cloud (init
++ 0.25 sigma), and random N(0,1) points — numpy replication of the
+constraint transforms; the in-band fraction and |x| histogram get
+recorded). 3 interleaved reps, medians, taskset, shared machine.
+
+MODEL-LEVEL (only if a kernel clears accuracy+speed): patch
+bernoulli_logit_lpmf.hpp locally (backup to scratch/w46/ first,
+patch kept there), rebuild stock-form hier_2pl .so fresh in
+scratch/w46/{stock,patched}_build/ (W-27 compile_model cache gotcha —
+per-variant dirs), default CXXFLAGS, env -u LD_LIBRARY_PATH,
+/usr/bin/make -j2. Measure: per-call us (3 reps medians, Python
+driver, identical points), callgrind Ir/grad (W-29 protocol: warmup
+100 samples 50, seed 20260819, pf init rep0/chain_0, one job at a
+time), gradient parity ~50 points <=1e-12 rel. RESTORE stan-math to
+pristine (md5-verified) after measurement.
+
+Deliverable: results/log1p_ceiling_w46.md — what stan-math calls
+today, per-kernel table (ns/elem, max ulp value+partial), model-level
+ceiling, upstream proposal paragraph. Negative results recorded.
+Expectation (pre-registered): K2 wins ~= out-of-band fraction of x
+(likely small at posterior points — then its model win is only the
+skipped redux/select fusion); K4/K5 2-4x on the log1p bucket if the
+2ulp bar holds (packet 2-wide + inlined poly vs PLT call into glibc);
+model-level ceiling ~= replaceable-complex share times kernel speedup,
+i.e. up to ~15-25% further wall on top of armB-class codegen. The bar
+may FAIL for all exact-grade kernels — that is a legitimate ceiling
+answer (glibc log1p is correctly-rounded; beating it at 2ulp with a
+faster kernel is the open question).
+
+## W-45 (pre-registered BEFORE running): data-subsampled warmup transplant — the untried axis of warmup cost reduction
+
+HYPOTHESIS: warmup only needs to estimate (inv_mass, step, min_micro_steps)
+well enough that the FROZEN sampler is good. On data-heavy models a
+gradient computed on a random α fraction of observation rows estimates
+curvature/step nearly as well at ~αx the cost. Run WARMUP against a
+SUBSAMPLED-DATA .so, then SAMPLE with the full-data .so using the
+transplanted frozen state. NOT early exit (W-21/W-25/W-28/W-37 closed
+that 4 ways): iterations stay 1000, each is cheaper. NOT error-loosening
+(W-38-E2 rejected): the lever is the DATA the gradient sees.
+
+STATISTICAL EXPECTATION (pre-registered): a mass estimated on αN rows is
+a noisier but often near-sufficient curvature estimate — for iid-row
+models the observed-information per row is unbiased for the same
+population quantity, so E[inv_mass(alpha)] ≈ inv_mass(full) with variance
+~1/(αN); the step size should transfer to first order (same posterior
+geometry), BUT (a) hier_2pl/lsat per-person/per-item scale factors are
+estimated from fewer rows per person (alpha*I or alpha rows) — persons
+with 0 retained rows (P = (1-α)^32 ≈ 3% at α=0.1 on hier_2pl) fall back
+to prior-scale mass, so SOME components may transfer badly; (b) the step
+size at freeze is calibrated to the SUBSAMPLE posterior's error landscape
+on trajectories of the full model — a mismatch concentrated in models
+whose error scales with N (logp magnitude grows with N). Because of (b)
+TWO freeze-time variants are pre-registered:
+- V1 (pure transplant): frozen (inv_mass, step, min_micro_steps) + final
+  warmup POSITION transplanted verbatim into the full-data sampler,
+  warmup=0.
+- V2 (transplant + step re-tune): as V1 but re-run ONLY the step-size
+  heuristic (walnutpie find_reasonable_step, the library's own
+  --step-init-heuristic code path) on the full-data model with the
+  transplanted mass before sampling; mass and min_micro stay transplanted.
+  (The third variant — re-run min_micro adaptation only — is NOT tested:
+  min_micro is an integer trajectory-shape statistic with no cheap
+  outside-warmup estimator; recorded as out of scope.)
+
+MECHANISM (harness-only; walnutpie NOT edited, submodules NOT rebuilt):
+stan_cli exports neither the frozen mass vector (WALNUTPIE_DEBUG_WARMUP
+prints only invm[0]) nor accepts mass injection. The smallest harness
+alternative: a standalone tool harness/w45/w45_run.cpp, compiled against
+the walnutpie HEADERS read-only (same include set as build_w36exp's
+compile_commands; the library is header-only), replicating stan_cli's
+single-chain path exactly (same seeding, same StanHandler, same CSV
+writer, same timing stanzas) with three modes: FULL (= CLI clone, state
+dump added), WARMUP (subsample .so, warmup-only, dumps frozen step /
+inv_mass diag / min_micro_steps / final position / final lp), SAMPLE
+(full-data .so, constructs WalnutsSampler DIRECTLY from the transplanted
+state — the library's own frozen-sampler constructor — warmup=0, seeds
+the endpoint cache with one explicit full-data logp_grad eval, W-42
+finite-logp guard included; --retune-step switches V1->V2 via the CLI's
+find_reasonable_step call). TOOL FIDELITY GATE: FULL-mode draws must be
+md5-identical to stan_cli (external/walnutpie/build_w36exp, READ-ONLY,
+@43b6435) on 4 models x 3 reps x 4 chains (all cells; any mismatch = the
+tool is wrong, fix before any transplant arm). Transplant chains are NOT
+bit-comparable to base by design (fresh RNG stream in the sampling
+process, different warmup trajectory); gates are statistical.
+
+MODELS + SUBSAMPLING (deterministic seed 45; JSONs in scratch/w45/data,
+.stan copies per (model,alpha) in scratch/w45/build_* — W-27 cache
+gotcha; builds default flags, STAN_THREADS=1, env -u LD_LIBRARY_PATH,
+/usr/bin/make, -j2, serialized):
+- hier_2pl (N=19200 rows y/ii/jj; data-heavy, warmup share ~55%): random
+  αN row subset, I/J unchanged. Unconstrained dims identical (671).
+- blr (N=100 rows X/y; task labels it data-heavy class — N is in fact
+  only 100, so the expected win is capped by non-data warmup overhead;
+  recorded honestly either way): random αN aligned rows.
+- lsat_model (Rasch; N=1000 students encoded as pattern counts): the
+  aligned row unit is a STUDENT; subsampling students would change
+  parameter dim (theta[N]). DEVIATION (pre-registered): the α-subsample
+  .stan is a COPIED, data-block-modified version (likelihood over M=αN
+  retained students, parameters alpha[T]/theta[N]/beta UNCHANGED so dims
+  match 1006); retained thetas keep the likelihood, dropped thetas keep
+  only their normal(0,1) prior — their transplanted mass is
+  prior-variance-scale by construction (a known mechanism probe: does a
+  wrong-scale minority mass block ESS?). Full-data .so stays stock.
+- arma11 (CONTROL, T=200 time series, expect NO wall win — warmup is not
+  data-dominated): random row drops are INVALID for a lag model;
+  DEVIATION (pre-registered): contiguous PREFIX of length round(αT) is
+  the consistent aligned subsample. Quality gates still apply.
+α ∈ {0.25, 0.1}.
+
+ARMS (all: warmup 1000 iterations on the warmup model, draws 1000 on the
+full-data model, 4 chains as 4 SEQUENTIAL single-chain invocations,
+3 reps, seeds 20260819+1000*rep+c, pf inits inits_w25/ for all four
+models per the W-36 assignment, CLI-default configs otherwise, .so from
+bs_models_threads/ for full-data phases):
+- base: stan_cli full-data warmup+sampling (the reference; fresh runs,
+  same grid as the transplant arms).
+- toolbase: w45_run FULL mode (CLI-clone fidelity gate + source of base
+  adapted state for gate (c)).
+- v1_a25 / v1_a10: WARMUP on subsample α + SAMPLE full-data, pure
+  transplant.
+- v2_a25 / v2_a10: same WARMUP state (SHARED with v1 — same dump file,
+  one warmup run per (model,α,rep,chain)) + --retune-step.
+
+GATES (pre-registered):
+(a) QUALITY: arviz rank-normalized bulk/tail ESS-min + R-hat max per
+    model-rep (chains trimmed to min length, structurally-constant
+    columns excluded — W-38-E2 conventions), MEDIANS of 3 reps. An arm
+    PASSES a model iff median(ess_bulk_min) >= min(base per-rep bulk)
+    AND median(ess_tail_min) >= min(base per-rep tail) AND
+    median(rhat_max) <= max(base per-rep rhat) — the W-25/W-28/W-38-E2
+    base-noise band. The marginal-class rule applies in full (no ESS
+    regression on arma11/lsat/hier_2pl beyond the band).
+(b) WALL: median total wall (subsample warmup process + full sampling
+    process, external harness clock) vs base total (stan_cli warmup +
+    sampling stanzas summed), per model/α, medians of 3 reps. Report
+    realized saving vs theoretical (1-α)*warmup_share; warmup share
+    measured from THIS grid's base stanzas. Phase-2 process startup +
+    .so dlopen overhead counted against the arm (honest; a library-level
+    in-warmup .so swap would remove it — recorded in the verdict).
+(c) STATE TRANSFER (mechanism evidence either way): per model/α, the
+    transplanted (step, inv_mass, min_micro) vs toolbase's full-data
+    adapted values: step relative diff; inv_mass l2 rel diff + median/
+    p90 |log-ratio| per component (separately for prior-only components
+    on lsat); min_micro abs diff. Medians over 12 cells. If quality
+    fails, this table must show WHY (e.g. per-item scale factors need
+    full data; step mismatch from N-scaled error landscape).
+VERDICT RULE: ADOPT (harness-level; propose library in-warmup .so swap)
+iff (a) passes on ALL 4 models for at least one (variant, α) AND (b)
+gives >=25% median total-wall saving on hier_2pl for that arm. TUNE if
+quality passes but the wall saving is <25% or only at α=0.25. REJECT if
+no arm passes (a) on the marginal class; the mechanism section must then
+carry the state-transfer diagnosis.
+
+BUILD/RUN PROTOCOL: env -u LD_LIBRARY_PATH everywhere; /usr/bin/make -j2;
+serialized sampling (another agent shares the machine); no walnutpie
+edits, no submodule rebuilds, no pushes. Deliverable:
+results/subsampled_warmup_w45.md + harness/w45/* + runs/w45/ local.
+Commits: explicit paths only (never git add -A).
+
+## W-48 (pre-registered BEFORE running): stanc3 expression fusion for indexed elementwise likelihood arguments — the compiler-level fix for the W-34 plumbing tax
+
+From W-34: ONE line of hier_2pl,
+`y ~ bernoulli_logit(alpha[ii] .* (theta[jj] - beta[ii]))`, costs ~32%G
+in eltwise var plumbing (subtract/elt_multiply over Holder<IndexedView>
+gathered containers; per-element vari + arena entry + chainstack push, N
+= 19,200 x 2 ops) plus ~8%T in rvalue<index_multi> gathers — ~40%G
+total; the hand GEMM rewrite bounds the achievable win at -28.2% Ir/grad
+(-23..25% per-call wall) with last-ulp gradient agreement (rel-L2
+2.3e-15). W-34 Arm A showed no existing language primitive (GLM family)
+reaches the pattern. W-39 proved a scoped stanc3 peephole
+(fuse_eigendecompose) can be built, dune-tested, and validated
+bit-identically on this clone @ 90c6532 with opam switch w39. Mission:
+attempt the general fix in the compiler: remove the per-element vari for
+elementwise expressions over INDEXED containers feeding a density call,
+WITHOUT changing model semantics.
+
+CANDIDATE SHAPES (explore both; ship what validates):
+- A (narrow, first): detect when a density's vector argument is a pure
+  eltwise chain over indexed var containers (`elt_multiply(gather,
+  subtract(gather, gather))` and sub-patterns) and emit the value
+  computation in double space with ONE fused autodiff node carrying the
+  batched chain rule (partials-in-forward, the pattern the GLM lpmfs
+  use). Study first how bernoulli_logit_glm_lpmf / normal_id_glm_lpdf
+  get their special treatment (expectation: it is all in stan-math, NOT
+  stanc3 codegen — then the mechanism to reuse is the MIR synthesis +
+  codegen emission proven by W-39's eigendecompose_sym tuple trick).
+- B (general, only if A is tractable): a Middle-End fusion pass merging
+  elementwise chains over common indices before codegen (src/middle or
+  the typed MIR).
+
+GATES (validation is the arbiter; W-34 protocol):
+(a) SEMANTICS: patched-stanc hier_2pl .so vs stock .so on ~50+100
+    random/posterior-cloud unconstrained points: logp rel diff and
+    gradient rel-L2 at LAST-ULP level (NOT bit-identity — per-element
+    arithmetic is reordered by design), cosine ~1.0.
+(b) COST: per-call wall (3 interleaved reps, medians, taskset 0-3);
+    target approaches the -25% of the hand GEMM. Callgrind Ir/grad
+    (W-29 protocol; ceiling -28.2%).
+(c) SAMPLER SPOT: 1 rep x 4 chains ESS/rhat sanity vs stock base band.
+(d) NO-TRANSFORM CHECK: compile 3 other models without the pattern
+    (gp_regr, arma11, lotka_volterra); hpp diff vs vanilla-develop stanc
+    shows ONLY boilerplate (no behavioral change).
+(e) SUITE: dune runtest green.
+
+DEGRADATION (effort is free but honesty rules): if full fusion is
+intractable, deliver (i) the GLM-codegen study (how stan-math/stanc3
+special-case GLM densities — the machinery a general mechanism
+reuses), (ii) whatever scoped transform DID validate (e.g. gather-CSE
+only), (iii) design doc for the rest. Negative results recorded.
+
+BUILD/RUN PROTOCOL: work in external/stanc3 on branch w48-fusion off
+90c6532 (W-39 patch preserved separately on its own branch; w48 patch
+must apply to pristine develop); opam switch w39; dune -j2. Model
+builds: fresh scratch/w48 dirs (W-27 cache gotcha), bridgestan 2.9.0,
+default CXXFLAGS, env -u LD_LIBRARY_PATH, make -j2, custom stanc via
+make_args=['STANC=...'] (W-39 mechanism). Deliverables:
+results/stanc3_fusion_w48.md + scratch/w48/stanc3_fusion.patch. Commits:
+explicit paths only (never git add -A). No pushes; walnutpie untouched.
+
+## W-47 (pre-registered BEFORE running): SoA-arena / typed-pool / flat-callback tape refactor — tax decomposition + microbench ceiling + shippable-increment feasibility (research item X1)
+
+Mission: the tape/arena complex is W-29 candidate #4 (fixed tax:
+stack_alloc + chainstack emplace + arena ctors = 12.6%G hier_2pl,
+16.9%G accel_gp, 8.2%G kronecker, 4.9%G gp_regr; 10.9%T stock / 8.1%T
+post-GEMM-fix on hier_2pl per W-34). Upstream scan 2026-08: NO SoA-arena
+work exists in stan-dev/math (only closed PRs #1103/#2928 adjacency).
+Decompose the tax, measure the CEILING of alternative tape designs in a
+pure-C++ microbench (no stan-math edits), and either prototype a minimal
+integration hook or deliver the design document for the upstream
+conversation.
+
+WHAT THE TAPE ACTUALLY DOES (read from stan-math 5.3.0 source in
+~/.bridgestan/bridgestan-2.9.0/stan/lib/stan_math BEFORE registering):
+- var(double) -> new vari_value<double>(x,false) -> var_NOCHAIN_stack_
+  push (arena alloc 24B: vptr+val+adj{0.0}); eltwise ops over
+  Matrix<var> build ONE such vari PER ELEMENT of their output; each op
+  registers ONE reverse_pass_callback vari (var_stack_) whose lambda
+  loops the whole matrix on grad(). grad() iterates ONLY var_stack_
+  (virtual chain() per entry); the per-element scalar varis have EMPTY
+  chain() and are never dispatched — the nochain stack exists for
+  set_zero_all_adjoints{,_nested} only. recover_memory(): vector clears
+  + memalloc_.recover_all() + delete of chainable_alloc objects.
+- So candidate taxes to separate: (1) stack_alloc::alloc bump calls,
+  (2) chainstack emplace_back (both stacks), (3) vari ctor stores
+  (vptr+val+adj zero) mostly INLINED into op bodies, (4) grad()
+  dispatch loop + virtual calls (O(#ops) NOT O(N) on hier_2pl),
+  (5) recover_memory/clears, (6) cache effects of pointer-soup layout.
+
+TAX DECOMPOSITION (task 2): from EXISTING W-29/W-34 callgrind dumps in
+results/profile/{w29,w34}/ (no fresh model runs unless a needed number
+is missing; fresh hier_2pl callgrind allowed, W-29 protocol, one
+valgrind 3.23 job at a time, ~/vginstall). Sub-shares per model:
+stack_alloc::alloc excl; chainstack emplace_back excl; vari-ctor
+inlined share (tree edges from alloc/emplace callers into eltwise
+ops); grad() loop share (locate under logp_grad subtree);
+recover/clear share. Report as %G with Ir/grad and Ir/vari
+(vari counts derived: hier_2pl line = 2N scalar varis + 2 callbacks
+per gradient, N=19200).
+
+MICROBENCH (task 3, scratch/w47/, pure C++ linking the bridgestan
+stan-math 5.3.0 headers, -O3 default flags, no model builds, no .so):
+- A0 stock-replica: N=19200 gathered eltwise chain exactly like the
+  hier_2pl line (rvalue multi-index views -> subtract -> elt_multiply)
+  + grad + recover; measures real ns/vari and Ir/vari (build+reverse).
+- A1 scalar-vari floor: k*N var(double) constructions (isolates
+  alloc+emplace+ctor without Eigen glue).
+- B typed-pool variant: same elementwise OUTPUT as A0 but vari records
+  are POD {double val; double adj;} in a preallocated typed bump pool
+  (no vptr, no per-vari chainstack push — batched span registration),
+  callbacks unchanged; bounds allocation+record-layout savings only.
+- C flat-callback variant: reverse pass as an array of
+  {fnptr, void* data} POD entries replayed in reverse (no vari_base
+  vtable, no virtual dispatch), forward pass stock-shaped otherwise.
+- D = B+C combination.
+- Correctness gate per arm: gradient of the chain matches A0 to
+  rel-L2 <= 1e-12 on the same inputs (the bench computes a real
+  derivative of the chain, not a no-op loop).
+- Measurements: wall ns/vari (median of interleaved reps, taskset'd)
+  and Ir/vari via callgrind on the bench binary (one job at a time).
+  Report per arm: build ns/vari + Ir/vari, reverse ns/vari + Ir/vari.
+
+INTEGRATION FEASIBILITY (task 4): read hook points first (vari_base
+operator new -> memalloc_; vari ctors -> stack pushes; grad() loop;
+recover_memory). If a variant clears >30% of the vari overhead AND has
+a non-invasive hook (compile-time flag, no public-type change), attempt
+minimal integration in the bridgestan stan_math tree with md5-verified
+restore. var is a POINTER type (vi_) across all of rev/ + user code +
+stanc3 output — an index-based SoA var is a breaking rewrite: expected
+outcome is STOP-at-ceiling + design doc with the API surface needed
+(cite the scan's no-existing-work finding + stanc3 #1666 O(1)-nodes
+motivation as the upstream context).
+
+DELIVERABLE: results/sota_arena_w47.md (tax decomposition, microbench
+table, integration verdict + the incremental shippable proposal or
+design doc, honest ceiling statement). Artifacts under scratch/w47/
+(bench.cpp, Makefile, raw outputs, any patch files). RESTORE any
+patched bridgestan stan-math files to pristine (md5-verify). Commits:
+explicit paths only (never git add -A). No pushes; walnutpie untouched.
+Env: env -u LD_LIBRARY_PATH; /usr/bin/make -j2; serialized heavy runs.
+
+## W-49 (pre-registered, feasibility-first — no new runs; arithmetic over existing artifacts): within-chain speculative parallelism for WALNUTS — measured ceiling vs the 4-chain null
+
+Item X3. The parked lead from W-38u / upstream_scan §T7: Picard-map
+parallel Metropolis transitions. ID DISAMBIGUATION (verified): the
+Picard-map paper is arXiv:2506.09762 (Grazzi et al., Biometrika 2026);
+arXiv:2506.09355 is de Leeuw's eigenvalue-derivatives note (scan §2,
+unrelated — the context prompt's "2506.09355... verify" resolves to
+2506.09762, as the scan lists). Companion: WALNUTS paper arXiv:2506.18746
+(JMLR 27(113) 2026) — its §4.1 ALREADY anticipates one mechanism (see
+below). Walnutpie watchers that touch the accounting: issue #34
+(gradient caching), PR #77 (leapfrog unroll).
+
+QUESTION: can a single WALNUTS chain productively use >1 core by
+SPECULATION — evaluating leapfrog micro-steps along the orbit before the
+dyadic search / U-turn logic knows it needs them, then committing or
+discarding? Feasibility-first: the deliverable is a MEASURED ceiling
+verdict from EXISTING data (runs/w38/accounting.json buckets, W-36
+parallel-session walls, W-29 overhead shares) plus the paper mapping; a
+prototype is built ONLY if the ceiling clears the gate below.
+
+DEPENDENCY MAP (from walnuts.hpp @ 43b6435, the part that decides
+everything): within one attempt, micro-steps are a STRICTLY SERIAL chain
+(each leapfrog needs the previous gradient: macro_step L330-334). The
+dyadic attempts in a macro_step all RESTART from the same span endpoint
+(L326-328) — mutually independent, no guessing needed, bit-identical by
+construction. Same for the ladder rungs in reversible/within_tolerance
+(L269-279): independent integrations from the accepted endpoint. Macro
+steps chain endpoint-to-endpoint (build_span L489-497) — serial. The
+per-depth direction coin (transition_w L594, uniform_binary) is
+state-INDEPENDENT Bernoulli(1/2). U-turn and combine use no gradients
+(L194-203, L379-398). Walnutpie implements the paper's D (deterministic
+micro-selection) variant — no per-macro-step random lattice bit; the
+paper's R2P variant would add one more unguessable bit per step.
+
+PRE-REGISTERED CEILING SPLITS (work decomposition = W-38-E1 buckets
+{fa, fw, bl, dl} of kernel evals):
+- SPLIT A (the maximally generous framing, clairvoyant): fa alone is
+  speculative; fw+bl+dl serial. Amdahl S(N) = 1/(s + p/N).
+- SPLIT B (dependency-honest): hideable = fw+bl ONLY (the independent
+  attempts/rungs); critical path = fa+dl (micro-chains serial within
+  attempts; dl is decision-necessary; direction-coin lookahead has
+  expected correct-prefix length 1 = O(1) macro steps at m=1). More
+  cores beyond 2 cannot raise SPLIT B.
+
+NULL HYPOTHESIS TO BEAT (W-36, same 4 cores): 4-chain parallel
+exp_par/exp_seq = 2.77x geomean (3.43x on hier_2pl: 155.06 s -> 45.26 s),
+already carrying +10-25%/call memory-bandwidth contention. GATE
+(pre-registered): BUILD the prototype only if the best defensible 4-core
+ceiling >= 1.5x the null (~4.2x vs the geomean null); also fails if the
+dependency-honest ceiling < 1.5x absolute. STOP at analysis otherwise —
+a complete negative that parks the direction with numbers.
+
+CONTINGENT PROTOTYPE SHAPE (only on gate pass; own worktree
+external/walnutpie_w49 off exp/safe-adapt-defaults @ 43b6435): 2-thread
+producer that pre-integrates the next macro-step's most-likely forward
+span while the current transition's ladder/decision logic runs
+single-threaded; commit/discard rule on the main thread. Gates:
+bit-identity canary 12/12 with speculation OFF and ON (speculation must
+compute the SAME doubles, just earlier; any arithmetic-order change is a
+bug; RNG stream stays main-thread-only and untouchable); wall on
+hier_2pl + blr vs serial and 4-chain-parallel baselines, serialized
+runs.
+
+VERDICT RULE: report split A as the unphysical upper bound, split B as
+the honest one; the gate is evaluated on split B primarily (A only to
+show the idea fails even under clairvoyance). Where split B is large
+(mis-settled kernels), the evals in question are dyadic WASTE — the
+W-38-E2/E4 lane deletes them serially; parallelizing waste is strictly
+dominated by deleting waste, and that argument must appear in the
+verdict.
+
+Deliverable: results/speculative_w49.md (paper mapping, ceiling
+arithmetic, verdict, contingent-prototype gates). No builds unless the
+gate passes. Protocol: env -u LD_LIBRARY_PATH; /usr/bin/make -j2 only if
+building; serialized runs; explicit-path commits only (never git add -A);
+no pushes; walnutpie submodule branch untouched.
