@@ -277,3 +277,55 @@ carry the rejected knobs, default-off, kept as history). dev/init-robustness
 pristine. Merging order if promoted: init-guard → freeze-clamp → (reject
 error-discipline/grow-m) — supervisor's recommendation only; per-idea
 branches cherry-pick cleanly.
+
+## 8. Session-5/6 addendum (W-43 … W-56)
+
+**Robustness arc completed:** the blr short-warmup pin is root-caused
+(saturated-alpha descent race; only changing state during the pin) and its
+real fix found — find_reasonable_step was broken three ways (W-43; w100
+bulk-ESS 5–9 → 779). The −inf-init class is fail-fast guarded (W-42,
+8.2s → 0.16s) with freeze-time clamping (W-41). Community-sourced shields
+(init buffer from discourse 41487 p11; soft gradient clipping from 41095
+p39) were both tested and REJECTED with mechanisms (W-54): the
+variance-ratio collapse happens at the first observation, and soft
+clipping cannot reach the alpha engine from adapter inputs. The step-side
+fix remains the only effective shield.
+
+**Gradient-cost research program closed out:**
+- Subsampled warmup transplant REJECTED (W-45): mass estimates a
+  different posterior's geometry (per-component |log mass-ratio| 1.2–3.0
+  in data-dominated blocks). Warmup is now defended on every axis: no
+  early exit (4 gates), no looser discipline (E2), no grow-m (E4), no
+  cheap-estimate transfer (W-45).
+- log1p kernel ceiling measured (W-46): fused MVCC AVX2+FMA island =
+  −22.8% Ir/−15.3% wall on hier_2pl, parity 2.4e-16; found the
+  bernoulli_logit partials SIGN BUG (both lpmf and GLM, one-liners).
+- Tape/arena decomposition + SoA program (W-47/W-53): alloc 6.4%T +
+  emplace 4.5%T; typed-pool ceiling −32% of tape complex; vtable fear
+  refuted (0.00); vertical slice bit-identical at −7.7%T, LLd misses
+  −96.7%; 7-batch gated migration plan is the fresh-session artifact.
+  GO verdict.
+- stanc3 GENERAL eltwise fusion implemented and rejected on mechanism
+  (W-48): stock is already one-callback-per-op; the tax is per-element
+  gather/scatter; only grid-structure (GEMM) or a gathered-GLM primitive
+  can capture the W-34 ceiling.
+- errno-flags closed (W-50): −fno-math-errno replicates the square() win
+  but is NOT value-neutral (glibc pow(x,2) 1 ulp off ~0.08% — W-33's
+  bit-identity premise corrected BEFORE shipping); do-not-use docs ask
+  extended.
+- Speculative within-chain parallelism NO-GO by ceiling arithmetic
+  (W-49): clairvoyant 4-core bound 2.43× loses to the 4-chain null 2.77×.
+- Literature scan (W-51): top lead = score/Fisher low-rank+diagonal
+  metric (Seyboldt/Carlson/Carpenter, arXiv:2603.18845, 4× median
+  ESS/grad on posteriordb) with walnutpie upstream already moving there;
+  W-40's gauge fix has major-framework precedent (JAX #36832).
+
+**Upstream filing program:** all findings packaged as 9 fork-internal PRs
+(math #1–#4, stanc3 #1, docs #1, walnutpie #7–#9; plus sims1253/stan#1)
+after Stan's AI Contribution Policy (May 2026) ended agentic upstream
+PRs; every PR body self-contained (re-derivable), orwell-voice, DCO
+signed; the full stan-math checklist verified locally per branch (W-56:
+test-headers, dependencies, cpplint, doxygen, targeted units — all PASS,
+zero new doxygen warnings; full suite delegated to CI). Traces of the
+whole campaign published: huggingface.co/datasets/scholzmx/apin-agent-traces
+(campaign2: 39 subagent sessions + exec logs + context).
