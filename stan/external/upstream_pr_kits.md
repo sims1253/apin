@@ -6,6 +6,21 @@ Patches referenced live under `scratch/` or on walnutpie exp branches —
 verify they still apply at push time. Do NOT push from this repo; these are
 drafts for the user's own accounts.
 
+**DRY-RUN STATUS (W-44, 2026-08-22 — validated against the real target
+repos locally, no pushing; details `results/upstream_dryrun_w44.md`):**
+- Kit 1 PASS — square()/squared_distance fix green on math develop @
+  46a3133 (4 test binaries + bit-identity micro); use
+  `scratch/w44/square_fix_dev_46a3133.patch` (covers the int/float caveats).
+- Kit 2 PASS — stanc3 master tip is STILL 90c6532 (zero drift); applied
+  tree byte-matches `scratch/w39/stanc3_eigh.patch`; W-39 dune runtest stands.
+- Kit 3 n/a (issue-only, no patch).
+- Kit 4 PASS — cluster-adjoint patch ports to math develop @ 46a3133
+  (only the predicted `.val_op()`→`.val()` hunks hand-completed); all
+  existing touched-function tests pass (incl. mix FD tests); new
+  degenerate-spectrum test file 4/4 with patch, 2 NaN-fails on stock;
+  use `scratch/w44/cluster_adjoint_dev_with_tests_46a3133.patch`.
+- Kit 5 not in scope (walnutpie branch exp/safe-adapt-defaults stands).
+
 ---
 
 ## Kit 1 — stan-math PR: `square()` should multiply, not call `std::pow`

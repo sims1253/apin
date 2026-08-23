@@ -4124,3 +4124,203 @@ WORKLOG.md + results/init_guard_w42.md + results/w42_gates.json +
 harness/run_w42.py. Raw runs runs/w42/{pre,post,w41}/ local/untracked.
 The W-41 freeze clamp stays as the second line of defense; the
 init-policy backlog item behind W-36/W-41 is now closed at the root.
+
+## W-44 (pre-registered BEFORE running): upstream dry-run — apply the W-40 cluster-adjoint patch and Kit 1's square() fix to TODAY's stan-dev/math develop and run the repo's unit tests; re-verify the stanc3 patch against develop tip
+
+MISSION: land the user's PRs pre-validated. Kits 1/4 (stan-math) and
+Kit 2 (stanc3) exist as patches validated against older/local trees
+(W-40/W-39); before the user pushes, dry-run them against the REAL
+target repos. Clone stan-dev/math develop (untracked, external/math_dev,
+record commit hash), apply scratch/w40/cluster_adjoint.patch (port if
+the Eigen-5 migration moved lines; W-40 verified the callback is
+structurally identical — record any hunk edits), build+run ONLY the
+touched functions' unit tests (test/unit/math/rev/fun/
+eigenvectors_sym_test.cpp, eigendecompose_sym_test.cpp,
+eigenvalues_sym_test.cpp; -j2, /usr/bin/make, env -u LD_LIBRARY_PATH,
+serialized). If green: port the W-40 degenerate-spectrum tests (exact-
+degeneracy NaN->FD-consistent case; cluster-symmetric direction case)
+as a new test file following repo conventions (copy saved at
+scratch/w44/eigen_cluster_adjoint_test.cpp, local only). Then on a
+SECOND clean state apply Kit 1's square() x*x fix (scratch/w33/
+pow_to_mul.patch logic, adapted: int-overflow nuance + the two
+squared_distance sibling sites) and run square + squared_distance
+tests. Kit 2: re-verify scratch/w39/stanc3_eigh.patch applies to
+TODAY's develop tip (fetch/re-clone, record new hash; rebase + re-run
+touched dune tests only if quick). Kit 3 skipped (issue-only). NO
+PUSHING ANYWHERE — local validation only.
+
+GATES: (a) cluster patch applies to develop (clean or trivial port,
+hunk edits recorded); touched-function tests PASS with it; any failing
+test investigated + reported, not hidden. (b) new degenerate-spectrum
+test file PASSES (exact-degeneracy finite + FD-consistent; cluster-
+symmetric direction; well-separated path unchanged) and follows repo
+test conventions. (c) Kit 1 fix applies; square + squared_distance
+tests PASS (prim + rev). (d) stanc3 patch still applies at develop tip
+(new hash recorded; if drift: rebased + touched tests re-run).
+Deliverables: results/upstream_dryrun_w44.md + one-line status notes
+per kit in external/upstream_pr_kits.md; stan-repo commits by explicit
+paths (never git add -A); external clones stay untracked.
+
+## W-43 (pre-registered BEFORE running): blr short-warmup pin root cause — what distinguishes the pinned phase from the escaped phase, and what event/accumulation triggers escape between warmup 400 and 1000
+
+TARGET (W-38-E1 bonus, W-38-E2 gate (d), W-37 result 4): at CLI
+defaults blr's chain does not move for the first ~100-400+ warmup
+iterations — every transition = 1 macro step, all 5 halvings fail,
+31 evals burned, |dH| huge (E1 measured ~8e6), alpha underflows to 0,
+all later draws identical (zero ESS). Escapes between ~100 and 400
+(pf inits; E2 probe) / 400-1000 (E1 endpoints). NOT error-discipline
+gated (E2: caps 1e8 constant or decaying change nothing — so the
+pinned min-attempt |dH| is either > 1e8 or non-finite at w100, and
+E1's 8e6 must sit LATE in the pin; measuring the true series is part
+of this item). NOT the W-41 pathology (blr init logp is finite; the
+W-41/W-42 -inf-init pin is a different mechanism — do not conflate).
+
+SOURCE FACTS (read before pre-registering; walnutpie @ 43b6435):
+- CLI defaults: plain Adam step adapter (no anti-windup, no batching,
+  stride 1), step seeded 1.0, mass seeded (1-1e-5)*|grad(init)|+1e-5,
+  metric_window=0 (chopping OFF), drift_iters=0, stall/collapse resets
+  OFF, max_error 0.5, target accept 0.8, Adam lr 0.05 decayed by t^-0.5.
+- Momentum rho = sqrt(mass)*z; per-micro-step displacement =
+  step*sqrt(inv_mass)*z; every dyadic attempt integrates the SAME
+  macro time (m*2^h micro steps at step/2^h), so refinement changes
+  only discretization error, not trajectory length.
+- alpha = exp(-|dH|) is fed to the adapter ONLY at the min-micro
+  attempt (num_steps == min_micro_steps) of each macro step.
+- While pinned, draws AND scores are exactly constant and both
+  OnlineMoments share one discount schedule 1-1/(4+iter): the
+  var_draw/var_score ratio — hence inv_mass = sqrt(ratio) — is
+  EXACTLY constant during a true pin; there are NO window boundaries
+  to fire (metric_window=0) and no batching (stride=1).
+
+CANDIDATE MECHANISMS (pre-registered, with discriminating predictions):
+- M1 mass-estimate maturation (windowed Fisher/variance needs draws
+  before inv_mass stops throttling motion; echoes session-1
+  gradient-seeded-mass ~1e6 freeze). PREDICTS: inv_mass geo-mean
+  drifts materially (order-of-magnitude) during the pin and escape
+  coincides with an inv_mass threshold crossing; step flat/noise.
+  Structural prior against: at defaults inv_mass is provably constant
+  during a true pin (source fact above) — if the trace confirms
+  constancy, M1 is REFUTED for the default-config pin.
+- M2 step-adapter escape from saturated-alpha regime: alpha = exp(-|dH|)
+  underflows to exactly 0.0 every pinned iteration; Adam target 0.8
+  descends log-step at ~0.05/t^0.5 per iteration (cumulative ~0.1*sqrt(t)
+  nats); |dH| declines as step^k until an attempt first passes 0.5.
+  PREDICTS: log(step) declines smoothly as -0.1*sqrt(t) during the pin;
+  min-attempt |dH| declines smoothly (monotone trend) as a power of
+  step; at the escape boundary step is CONTINUOUS (no jump); alpha
+  jumps 0 -> O(1) exactly at escape; escape iteration roughly
+  reproducible across seeds/inits (schedule-driven).
+- M3 observation-batching / memoryless-window boundary event (stride-50
+  batches, Fisher window chopping crossing a threshold). PREDICTS:
+  escape aligns with a window/batch boundary multiple. Structural
+  exclusion at defaults: stride=1 and metric_window=0 — no boundaries
+  exist; verify escape still occurs with all window/batch knobs off.
+- M4 position drift / stochastic accumulation: fresh momentum z every
+  iteration makes the min-attempt dH a RANDOM variable (z-dependent);
+  the pin persists while P(|dH| <= 0.5 at some halving) ~ 0 per
+  iteration, and escape is the first lucky draw (hazard grows as step
+  shrinks). PREDICTS: min-attempt |dH| SCATTERS iteration-to-iteration
+  around a declining trend (not monotone); no structural state jump at
+  the boundary (step, inv_mass both continuous); escape iteration
+  varies strongly across seeds/inits/chains (consistent with E2's 3/4
+  chains pinned at w100 and per-chain escape spread).
+- M5 (added from source, W-43): reversible-ladder rejection as the
+  pinning verdict — attempts whose |dH| passes the cap are rejected by
+  the backward ladder (a coarser re-integration also within tolerance
+  => return false), which would make the pin cap-INDEPENDENT even for
+  passable |dH|. PREDICTS: with the trace on, pinned transitions show
+  tolerance-PASSING attempts (|dH| <= cap) that then fail reversible()
+  — distinguishable from M2/M4's tolerance failure by recording, per
+  transition, the min |dH| over ALL attempts and whether any attempt
+  passed tolerance. E2's 1e8-cap pin is only explainable by |dH|>cap,
+  NaN, or M5; the trace separates these.
+
+MEASUREMENT PLAN (before any run):
+1. Worktree external/walnutpie_w43, branch exp/pin-diagnosis off
+   exp/grad-accounting @ 33cd398 (W-38's hooks present). New env-gated
+   (WALNUTPIE_PIN_TRACE=1) zero-behavior instrumentation, new header
+   include/walnutpie/pin_trace.hpp + call sites in walnuts.hpp +
+   a per-iteration print in the CLI handler (extending the W-41
+   WALNUTPIE_DEBUG_WARMUP precedent): per warmup iteration record
+   iter, lp, step_size (pre-transition), inv_mass {geo-mean,min,max},
+   per-transition {macro-step count, evals, last min-attempt alpha,
+   last min-attempt dH, min |dH| over all attempts, any-tolerance-pass
+   flag}, position drift {l2 norm and max-abs vs init}, and position
+   changed? (pin verdict). Header edits => clean-first rebuild; -j2;
+   /usr/bin/make; env -u LD_LIBRARY_PATH; serialized runs.
+2. Runs (1 chain, seed 20260819, .so from bs_models_threads, defaults
+   otherwise, samples=100): blr {warmup 400, warmup 1000} x {default
+   init, pf init inits_w25/blr/rep0/chain_0.txt}; plus warmup=100
+   (E1's pinned endpoint) if 400 already escapes for a given init —
+   the pinned regime must be observed in the trace for both inits
+   (E1 claimed both pin at <=400; verify). Post-escape iterations are
+   part of the same trace (what the escaped phase looks like).
+3. ESCAPE BOUNDARY TABLE (the crux): for each run, the first
+   iteration where the position changes; a before/after table (escape
+   -10..+5) with step, inv_mass stats, alpha, min-attempt dH, min
+   all-attempt |dH|, evals, macro steps. Identify what changed AT or
+   just before escape and separate M1-M5 by the predictions above.
+4. Discriminating supplements (labeled): (i) escape-iteration spread
+   across 4 seeds (20260819..22) x 2 inits at warmup=400 — M2 predicts
+   tight clustering, M4 predicts spread; (ii) optional NaN check: does
+   any pinned attempt produce |dH| = inf/NaN (E2's not-cap-passable
+   finding)?
+5. VERDICT + fix latitude: if a minimal, default-off, library-latitude
+   fix is obvious (candidates already in the tree: --step-init-
+   heuristic at init with the seeded metric (config-only); a
+   warm-start/clamp on the saturated-alpha descent; a first-window
+   mass clamp), implement on exp/pin-diagnosis and gate: canary
+   bit-identity 12/12 (default path, 3 models x 4 chains, vs the
+   pre-change binary) + pin disappears at warmup=100/400 on blr with
+   ESS > 0 + healthy quality 3 reps x 4 chains vs the warmup=1000
+   base band. If no obvious small fix: STOP at the mechanism writeup
+   (a complete result; feeds upstream candidate 7 + the Flatiron team).
+DELIVERABLE: results/blr_pin_w43.md (mechanism verdict, escape-boundary
+table, fix status). Commits per repo, explicit paths only. Worktree
+left in place.
+
+OUTCOME (W-44, all gates PASS): all three patch-carrying kits are GREEN
+against today's real target tips (local only, nothing pushed; details
+results/upstream_dryrun_w44.md).
+
+- (a)+(b) KIT 4 GREEN on math develop @ 46a3133 (shallow clone,
+  external/math_dev untracked; Eigen 5.0.1 vendored — the W-40 §8 "not
+  established under Eigen 5" gap is now COMPILED + tested). Patch
+  apply: 3/5 hunks clean; the 2 rejects are exactly the predicted
+  `.val_op()`->`.val()` develop rename — hand-completed, no logic edits
+  (ported patch scratch/w44/cluster_adjoint_dev_46a3133.patch). Tests
+  with patch: rev/prim/mix eigenvectors_sym + eigenvalues_sym +
+  eigendecompose_sym 6/6 binaries PASS (mix = FD-reference tests). New
+  test file scratch/w44/eigen_cluster_adjoint_test.cpp (4 gtest cases,
+  repo conventions, LCG-deterministic): exact 4-fold repeat (finite +
+  Richardson-FD <=1e-8 on cluster-diagonal/separated/cross directions,
+  two-call == eigendecompose_sym bitwise), zero matrix (finite), 30-pt
+  exp-quad jitter kernel (guard fires: 10 eigenvalues at the 1e-5
+  floor, 8 gaps < tau; finite + idioms agree), 10 well-separated LCG
+  matrices (textbook adjoint to 4.4e-16). With patch 4/4 PASS; on stock
+  2/4 FAIL with exactly the NaN the issue describes. Dry run caught 3
+  test-authoring traps before any reviewer could: bit-exact double-EQ
+  vs 4e-16 GEMM reorder; column-major layout vs row-major read (operand
+  adjoint is NOT symmetric); FD claims only valid off the
+  within-cluster MIXING directions (W-40 §1.2(3) dropped term).
+- (c) KIT 1 GREEN on a second clean state @ 46a3133: square()
+  widen-to-double-then-multiply (covers BOTH kit caveats: int promotion
+  AND float double-rounding — micro bit-identity PASS incl. 3e9 int64,
+  -46341 int, float 1.0000001f, 1e300 overflow) + both
+  squared_distance pow sites hoisted to diff*diff; prim+mix square and
+  squared_distance 4/4 binaries PASS (scratch/w44/square_fix_dev_
+  46a3133.patch).
+- (d) KIT 2 NO DRIFT: stanc3's default branch is master and its tip is
+  STILL 90c6532 — the exact commit W-39 dune-validated; applied tree
+  diff-normalized byte-identical to scratch/w39/stanc3_eigh.patch.
+  Patch as-is; no rebase, no re-run needed.
+- Kit 3 skipped (issue-only); Kit 5 out of scope.
+
+Red flags: NONE anywhere (no test fails with any patch applied; the
+only failures seen are the intentional stock-NaN demonstrations).
+external/upstream_pr_kits.md now carries per-kit DRY-RUN STATUS notes
+with the tested commits. Ship: stan repo WORKLOG.md + results/
+upstream_dryrun_w44.md + external/upstream_pr_kits.md + scratch/w44/ (4
+files); external/math_dev left untracked with the Kit 4 patch + test
+applied at 46a3133 for the user's PR branch; external/stanc3 index
+restored to its W-39 state.
