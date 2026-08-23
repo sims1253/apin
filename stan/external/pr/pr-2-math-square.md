@@ -40,25 +40,25 @@ calls, 32,889 come from `gp_exp_quad_cov` (55 kernel pairs for N=11, plus
 ### Why the change is safe: the strictly-more-accurate argument
 
 For IEEE-754 double, `x * x` is by definition the correctly rounded square
-(single rounding of an exact product). We measured glibc 2.44's `pow(x, 2)`
+(single rounding of an exact product). I measured glibc 2.44's `pow(x, 2)`
 against that reference on dense input grids: it agrees on the vast majority
-of doubles but differs by **1 ulp on ~0.08% of them** (glibc's `pow` is not
+of doubles but differs by 1 ulp on ~0.08% of them (glibc's `pow` is not
 correctly rounded for this exponent in every case). The proposed multiply is
 therefore the *strictly more accurate* operation, not merely an equal one.
 
 Two consequences stated plainly:
 
-1. This is **not** a bit-identity claim. Where the two disagree, results
-   shift by 1 ulp. In our measurements such shifts stayed at FP-noise level
+1. This is not a bit-identity claim. Where the two disagree, results
+   shift by 1 ulp. In my measurements such shifts stayed at FP-noise level
    (e.g. one gradient component of a hierarchical logit model at 2e-15 rel,
    log-density exactly equal); full sampling trajectories on models whose
-   gradients we compared were bit-identical for the tested short runs, and
+   gradients I compared were bit-identical for the tested short runs, and
    diverged on some chains of longer runs purely through 1-ulp seed drift.
 2. On models with *rounding-degenerate eigendecompositions* (e.g. GP kernels
    with jitter-pinned eigenvalue clusters), a 1 ulp input change can select a
    different but equally valid eigenbasis, and reverse-mode eigenvector
    adjoints amplify that to O(1) gradient differences. That amplification is
-   a pre-existing conditioning property of the adjoint (we report it
+   a pre-existing conditioning property of the adjoint (I report it
    separately), not something this patch introduces — but reviewers should
    know bit-for-bit reproducibility across this change is not guaranteed on
    that model class.
@@ -98,7 +98,7 @@ occurs.
    return x_d * x_d;
    ```
 
-2. **Widen before multiplying — this is the load-bearing detail.** The
+2. Widen before multiplying — this is the load-bearing detail. The
    template is enabled for *all* arithmetic `T`, including integral and
    float types, and the previous code promoted through `double` (the
    function returns `double`; `std::pow`'s arithmetic overloads promote to
@@ -127,37 +127,37 @@ is exactly that, plus tests.
 
 ## Validation
 
-- **Value agreement at model level:** stock vs patched model `.so` on 100
+- Value agreement at model level: stock vs patched model `.so` on 100
   deterministic random unconstrained points — logp max rel diff 0.0,
   gradients bit-identical on 100/100 points, zero sign flips; short sampler
   runs (warmup 50 + samples 50, fixed seed and init) produce md5-identical
   draws natively and under valgrind. (These establish agreement on the
   tested inputs, not a universal bit-identity — see the accuracy section.)
-- **Independent replication via a build flag:** compiling the *stock*
+- Independent replication via a build flag: compiling the *stock*
   source with `-fno-math-errno` (which unblocks the compiler's own
-  `pow(x,2) → x*x` transform; we verified it transforms exactly this
-  pattern and nothing else on our workload) reproduces the win without any
+  `pow(x,2) → x*x` transform; I verified it transforms exactly this
+  pattern and nothing else on my workload) reproduces the win without any
   source change: Ir/gradient −8.5%, per-call wall ×0.86–0.88 on the same
   GP model. This is what the optimizer would do if `errno` semantics
   allowed it.
-- **Corner-type check of the widened multiply:** equals the promoted
+- Corner-type check of the widened multiply: equals the promoted
   `std::pow(x, 2)` semantics exactly on int64 3e9 (promotion), int −46,341
   (int-overflow corner), float 1.0000001f (double-rounding corner), and a
   double sweep {−3.7e5 … 1e300} including the overflow-to-inf case.
-- **Repo tests (current develop, Eigen 5.0.1):** `square_test` (2/2),
+- Repo tests (current develop, Eigen 5.0.1): `square_test` (2/2),
   `squared_distance_test` (7/7), plus the mix counterparts (1/1, 2/2) —
   the mix tests carry the finite-difference gradient references.
-- **FD spot-check** of the patched model (central, h = 1e-5): max rel
+- FD spot-check of the patched model (central, h = 1e-5): max rel
   4.9e-8 — FD noise level.
 
 ## References
 
 - C/C++ math function errno semantics and `-fmath-errno` (default-on in
-  gcc/clang) — why the optimizer cannot remove the call; our flag
+  gcc/clang) — why the optimizer cannot remove the call; my flag
   replication (above) directly demonstrates the transform is the
   compiler's own once unblocked.
 - IEEE-754 single-rounding guarantees for `x * x` — the basis of the
-  strict-accuracy argument; our glibc 2.44 measurement of `pow(x,2)`'s
+  strict-accuracy argument; my glibc 2.44 measurement of `pow(x,2)`'s
   1-ulp deviations (~0.08% of doubles).
 - Extended measurement logs (pre-registered experiment ledger, callgrind
   dumps, kernel ulp grids, full run JSONs) are available on request, or at

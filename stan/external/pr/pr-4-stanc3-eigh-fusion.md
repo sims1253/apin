@@ -42,7 +42,7 @@ matrix[N, N] Q = eigh_A.1;
 vector[N] w = eigh_A.2;
 ```
 
-and we verified this rewrite is bit-identical at the model level (the
+and I verified this rewrite is bit-identical at the model level (the
 two-callback adjoints and the combined callback accumulate into the same
 zero-initialized operand adjoint, and the values come from the same Eigen
 solver either way — structural, not luck). But the compiler never
@@ -119,21 +119,21 @@ Eigen::Matrix<double, -1, 1>  w = std::get<1>(eigh_fusedsym0__);
 
 ### Gates (all must hold; otherwise the pair is left untouched)
 
-1. **Structurally equal arguments** — the two argument expressions match
+1. Structurally equal arguments — the two argument expressions match
    under structural equality (`Expr.Typed.equal`, locations ignored).
-2. **Distinct plain-variable targets, no index expressions**, and the
+2. Distinct plain-variable targets, no index expressions, and the
    argument does not reference either target.
-3. **The argument is side-effect-free**: no target-incrementing calls, no
+3. The argument is side-effect-free: no target-incrementing calls, no
    RNG calls, no compiler-internal effectful calls (the same
    `cannot_duplicate_expr` predicate the optimizer already trusts), and no
    user-defined function calls (conservative: they may print/reject).
    This is required because the fused form evaluates the shared argument
-   **once** instead of twice — the only semantic difference the rewrite
+   once instead of twice — the only semantic difference the rewrite
    introduces, and exactly the difference the gates must license.
-4. **Adjacency** — no intervening statement (no dataflow proof available
+4. Adjacency — no intervening statement (no dataflow proof available
    that the argument is unchanged in between; decl-initializer pairs and
    non-adjacent pairs are deliberately out of scope).
-5. **Complex targets** (`complex_matrix`) keep the real decomposition and
+5. Complex targets (`complex_matrix`) keep the real decomposition and
    re-promote the two projections (bit-identity preserved); a genuinely
    complex argument fuses via the complex overload.
 
@@ -157,19 +157,19 @@ maintainer can re-implement the rule from this section alone.
 
 ## Validation
 
-- **Golden tests** (`test/integration/good/compiler-optimizations/eigh-fusion.stan`
+- Golden tests (`test/integration/good/compiler-optimizations/eigh-fusion.stan`
   with `cppO0/cppO1/cpp.expected`): fused pair, reversed-order pair,
   different-arguments NOT fused, non-adjacent NOT fused, nested-block
   fusion — at all three optimization levels; plus
   `test/integration/cli-args/warn-pedantic/eigh-pair.stan` for the
   warning and its suppression on distinct arguments. Regenerated expected
   files are purely additive relative to develop.
-- **Full `dune runtest` passes** at the base commit (90c6532).
-- **End-to-end model parity and timing** (the tables above): fused .so
+- Full `dune runtest` passes at the base commit (90c6532).
+- End-to-end model parity and timing (the tables above): fused .so
   bit-identical to vanilla-develop .so on 50 points, −15.6% µs/call
   median; hpp-level token comparison against the known-good language
   rewrite confirms identical eigen regions in all three instantiations.
-- **Edge-model sweep** (local): reversed order, non-adjacent,
+- Edge-model sweep (local): reversed order, non-adjacent,
   different-args, user-fn argument (not fused — gate 3), complex target,
   nested-in-loop, plus O0/no-fusion and Oexperimental/fusion level checks
   — all behave as designed.

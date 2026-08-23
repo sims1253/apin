@@ -96,23 +96,23 @@ F̃_ij = 1/(w_j − w_i)   if |w_i − w_j| ≥ τ
 
 Properties, each verifiable by direct argument or test:
 
-1. **Bounded:** `F̃ ≤ 1/τ`; the NaN and the O(1/ε) amplification disappear
+1. Bounded: `F̃ ≤ 1/τ`; the NaN and the O(1/ε) amplification disappear
    by construction, and the masked adjoint is invariant (up to retained-gap
    terms) under within-cluster basis rotation — which is what collapses the
    cross-build divergence.
-2. **Exact where exactness is recoverable:** for exactly repeated
+2. Exact where exactness is recoverable: for exactly repeated
    eigenvalues and cluster-symmetric/diagonal/cross directions the masked
    adjoint is the exact derivative of the well-defined composite (verified
    FD-consistent to ~1e-11 on a synthetic 4-fold degeneracy). The dropped
    within-cluster mixing term is the provably-uncomputable term above; on
    the measured model it is ≤1e-6 relative along parameter directions.
-3. **Zero behavior change outside clusters:** compute the minimum
+3. Zero behavior change outside clusters: compute the minimum
    *adjacent* gap (Eigen returns `w` ascending, so min adjacent = min over
    all pairs); if it is ≥ τ, run the original code path verbatim,
    bit-identical results on well-separated spectra (verified on 200/200
    random matrices).
 
-### Step-by-step implementation recipe (independent of our diff)
+### Step-by-step implementation recipe (independent of my diff)
 
 1. In the `reverse_pass_callback` of `eigenvectors_sym` (rev) and of
    `eigendecompose_sym` (rev), before building `F`:
@@ -127,7 +127,7 @@ Properties, each verifiable by direct argument or test:
    independently, not transitive cluster closure; the measured model spectra
    show a gap continuum, and pairwise is the minimal, most defensible rule).
    Everything else in the callback is unchanged.
-5. Do **not** touch `eigenvalues_sym`'s callback: `V diag(ḡ_w) Vᵀ` has no
+5. Do not touch `eigenvalues_sym`'s callback: `V diag(ḡ_w) Vᵀ` has no
    gap division and is effectively basis-invariant for cluster-constant
    `ḡ_w` (measured FD-consistent to 2e-11 in both builds).
 6. Tests: (a) exact 4-fold repeated eigenvalue → all gradient components
@@ -150,7 +150,7 @@ Model-level numbers: `kronecker_gp`-class model (2 symmetric eigendecoms of
 cmdstan 2.39 / bridgestan 2.9 (Eigen 3.4.0) — the numbers marked (develop)
 are unit tests on current develop (Eigen 5.0.1) at 46a3133.
 
-**Cross-ISA gradient divergence** (20 random N(0,1) unconstrained points;
+Cross-ISA gradient divergence (20 random N(0,1) unconstrained points;
 same source compiled default vs `-mavx`; grel = |Δg|/max(1,|g|)):
 
 | arm | max grel | sign flips | components > 1e-6 |
@@ -160,7 +160,7 @@ same source compiled default vs `-mavx`; grel = |Δg|/max(1,|g|)):
 | patched, κ = 1e4 | 1.58e-5 | 0 | 19 / 438 |
 | patched, κ = 1e5 | **3.1e-8** | 0 | 7 / 438 |
 
-**AD vs Richardson finite differences** (model level, failing points,
+AD vs Richardson finite differences (model level, failing points,
 h = 1e-4 / 5e-5; representative components):
 
 | point/component | stock | patched (κ = 1e3) |
@@ -171,17 +171,17 @@ h = 1e-4 / 5e-5; representative components):
 | pt14 var1 | 5.17e-1 | 9.2e-7 |
 | all sigma1 (control, not routed through the eigenvector adjoint) | 2.4e-11 | 2.4e-11 (identical) |
 
-**Exact degeneracy:** stock NaN → patched finite (435/438 → 0 NaN);
+Exact degeneracy: stock NaN → patched finite (435/438 → 0 NaN);
 synthetic 4-fold degeneracy: patched FD-consistent to 1.1e-11…2.2e-11 on
 cluster-symmetric/diagonal/cross directions; within-cluster *mixing*
 directions return the gauge value 0 while FD gives the bounded true value —
 the provably-dropped term, documented.
 
-**Well-separated spectra:** 200 random symmetric 30×30 (LCG-generated,
+Well-separated spectra: 200 random symmetric 30×30 (LCG-generated,
 min adjacent gap ≥ 1e-6·scale): stock vs patched gradient dumps
-**byte-identical (200/200)**.
+byte-identical (200/200).
 
-**Sampler-level effect** (kronecker_gp, 3 reps × 4 chains, warmup 1000,
+Sampler-level effect (kronecker_gp, 3 reps × 4 chains, warmup 1000,
 draws 1000, fixed deterministic inits, only the .so differs):
 
 | arm | healthy-rep median bulk-ESS-min | R-hat max (healthy reps) |
@@ -194,7 +194,7 @@ Mechanism: stock warmup/sampling adapted to a 30–50%-wrong gradient (table
 trajectories from correct gradients — ESS/second is far ahead. Per-call
 kernel cost of the guard: ~1% (393–399 µs/gradient both arms).
 
-**(develop) Test status at 46a3133 (Eigen 5.0.1):** all existing tests of
+(develop) Test status at 46a3133 (Eigen 5.0.1): all existing tests of
 the touched functions pass with the patch (`rev/fun/eigenvectors_sym_test`,
 `rev/fun/eigenvalues_sym_test`, `prim/fun/eigendecompose_sym_test`, and the
 three mix counterparts — the mix tests are the FD-reference ones). The new
@@ -243,11 +243,11 @@ NaN the first failure mode predicts.
 - Adjacent-AD common knowledge: Julia discourse #11563; TF/PyTorch `eigh`
   backward (SO 58856160) — same `1/(w_j−w_i)` structure, no degeneracy
   guard there either.
-- **Major-framework precedent for the gauge choice**: JAX PR #36832
+- Major-framework precedent for the gauge choice: JAX PR #36832
   (merged 2026-04) added an opt-in gauge-fixed eigenvector JVP for exactly
   this reason (degenerate eigenbases make the raw JVP arbitrary within the
   invariant subspace); see also arXiv:2411.14141 (minimal-norm SVD
-  backward). To our knowledge no framework applies the fix in the reverse
+  backward). To my knowledge no framework applies the fix in the reverse
   mode adjoint by default — stan-math's `var` path currently has no guard
   at all, which is the NaN/FD-inconsistency demonstrated above.
 - stan-math #1803 (adjoint convention wart, open since 2020) is the closest

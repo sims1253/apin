@@ -48,8 +48,8 @@ The per-element error is the full `2 · exp(−ntheta)` sign flip, bounded by
 `2·e^−20 ≈ 4.1e-9` just above the cutoff and shrinking exponentially.
 In an instrumented model (hierarchical 2PL IRT, N = 19,200 observations)
 the propagated effect at wild random unconstrained points was max
-**4.08e-9 per affected partial** (at ntheta = 20.011) and max
-**1.4e-6 absolute (5e-10 relative)** on parameter gradients — invisible to
+4.08e-9 per affected partial (at ntheta = 20.011) and max
+1.4e-6 absolute (5e-10 relative) on parameter gradients — invisible to
 casual tolerances, which is presumably how it went unnoticed. It was found
 by a tight value+partials parity harness whose reference derived the
 partial analytically: the mismatch was exactly `2·e^−ntheta` on the
@@ -77,7 +77,7 @@ and all surrounding code are untouched. This file is the shared
 implementation — the rev and mix paths instantiate the same template, so
 one fix covers all modes.
 
-**Same-pattern site, not fixed here (flagged for maintainers):**
+Same-pattern site, not fixed here (flagged for maintainers):
 `bernoulli_logit_glm_lpmf.hpp` builds its `theta_derivative` with the
 identical three-branch structure and the identical first branch
 (`-exp_m_ytheta` without `signs`), so GLM instances with `y = 1` and
@@ -87,7 +87,7 @@ happy to include it in this PR or a follow-up, whichever review prefers.
 
 ## Validation
 
-- **Added regression test** (`cutoff_partials_sign` in
+- Added regression test (`cutoff_partials_sign` in
   `test/unit/math/prim/prob/bernoulli_logit_test.cpp`): for both
   `n = 1, theta = +25` and `n = 0, theta = −25` (both put `ntheta` above
   the cutoff) it checks the autodiff gradient of
@@ -96,7 +96,7 @@ happy to include it in this PR or a follow-up, whichever review prefers.
   implementation with h = 1e-3 — small enough that both FD points stay
   inside the same branch, large enough that the ~1e-11-magnitude values
   subtract cleanly.
-- **The test fails on the unpatched code** (verified by rebuild: the
+- The test fails on the unpatched code (verified by rebuild: the
   autodiff gradient comes back with the sign flipped, off by
   `2·exp(−ntheta)`) and passes with the fix. Full test binary: 6/6.
 - Repo test suite for the file passes with the fix (the existing
