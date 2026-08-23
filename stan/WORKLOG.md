@@ -4057,3 +4057,70 @@ commit. Deliverable: results/init_guard_w42.md (design, gates, the
 fail-fast before/after) + harness/run_w42.py; runs/w42/ local.
 Commits: worktree branch exp/init-guard; stan repo explicit paths only
 (never git add -A). Worktree left in place.
+
+## 2026-08-23 — W-42 CLOSE-OUT: init-protocol guard SHIPPED — all four gates PASS; file-init -inf cells now fail in <0.2s (vs 8.2s/5.3s pinned W-41 completions or rc=134 freeze aborts); random-init policy moved to the CLI (--init-tries) after discovering Stan's own reject loop hidden inside BridgeStan; E5 init-eval threading shipped (−1 eval/chain, draws bit-identical 16/16)
+
+Executed as pre-registered (worktree external/walnutpie_w42, branch
+exp/init-guard @ 5aed078 off exp/safe-adapt-defaults @ 43b6435;
+pre-change reference = build_w36exp). Report: results/init_guard_w42.md;
+raw gates results/w42_gates.json.
+
+IMPLEMENTATION: (a) FILE-INIT — InitConfigBuilder::masses() records the
+logp it already computed (was literally discarded as lp_to_discard);
+InitConfig::init_logps() exposes it; the CLI checks finiteness right
+after the builder runs (before the step heuristic, before the adapter,
+zero warmup consumption, zero new evals) and fails with a loud stderr
+banner naming chain + file + logp, then throws invalid_argument (rc
+134, the CLI's init-file-error convention). Builder hygiene: recorded
+evals invalidated by any later positions() call. (b) RANDOM-INIT —
+MID-FLIGHT DISCOVERY: the Stan-convention rejection loop ALREADY
+EXISTED inside the model layer: BridgeStan 2.9.0 param_initialize calls
+stan::services::util::initialize with max_tries=100 HARDCODED by
+walnutpie's load_stan.hpp (cmdstan-style "Rejecting initial value"
+messages, "Initialization failed" throw) — invisible and un-knobbed
+from the CLI. W-42 exposes it (initialize(..., max_tries=100), default
+= historical behavior) and moves the policy to the CLI: inner layer
+called with max_tries=1, the CLI owns the budget (--init-tries, default
+100), per-draw audit lines, and the loud all-failed error. RNG
+discipline: one one-draw initialize() per attempt from the chain's bs
+init stream, strictly in order, before any warmup consumption (warmup
+runs on the separate mt19937_64 stream); the accepted position is
+IDENTICAL to what stock would have accepted for any run stock started
+(the inner loop always drew sequentially from the same stream) —
+verified bit-for-bit by the random canary cells. (d) E5 THREADING
+(trivial, shipped): masses() also records the raw init grad;
+InitChainConfig carries the optional (init_grad, init_logp) (5-arg
+ctor; 3-arg unchanged); the AdaptiveWalnuts ctor seeds its W-23
+endpoint cache from it, so the first warmup transition skips its
+start-position re-eval. Multi-chain guard included (chain-resolved file
+names in the banner).
+
+GATES (all PASS, harness/run_w42.py):
+- (a) CANARY 16/16: 12 file-init (hier_2pl + lsat_model inits_w25 rep0,
+  radon inits_w36 rep0, chains 0-3, seeds 20260819+c) + 4 random-init
+  (radon, no --init-file) md5-identical to build_w36exp; 0 post
+  warnings; EVERY cell shows warmup logp_grad calls exactly −1 (the E5
+  threading's only trace — draws unmoved, W-23 precedent holds).
+- (b) FAIL-FAST: kronecker_gp rep0 c0 (20260819) + lotka_volterra rep1
+  c0 (20261819) now rc=134 in 0.16s/0.09s with 1 logp_grad call total
+  (the masses seed), banner + what() naming chain/file/logp AND the
+  underlying model error surfaces (lkj_corr_cholesky reject / lognormal
+  NaN location). Baselines same cells: W-41 binary rc=0 in 8.22s/5.28s
+  (31k calls, pinned chain 0, freeze-degenerate warning) = garbage
+  draws; stock binary rc=134 in 2.97s/0.80s (abort at freeze, budget
+  burned). Wall saved ~98% of the pinned run, with zero poison draws.
+- (c) RANDOM RECOVERY: kronecker_gp seed 20260820 --init 2.2 (first
+  draw -inf — found by seed trial; acceptance cliff: radius 2.0
+  all-pass, >=2.5 100/100 fail): rc=0 at production settings, 1
+  audited rejection then acceptance; two identical invocations ->
+  identical retry counts + md5-identical CSVs. Exhaustion (seed
+  20260819 --init 2.5): 100/100 rejections + loud error, rc=134.
+- (d) NO COLLATERAL: eight_schools_centered rep1 c2 + diamonds rep2 c1
+  md5-identical, 0 warnings.
+
+Ship state: committed on walnutpie branch exp/init-guard (worktree left
+in place, NOT merged — other agents active on the submodule); stan repo:
+WORKLOG.md + results/init_guard_w42.md + results/w42_gates.json +
+harness/run_w42.py. Raw runs runs/w42/{pre,post,w41}/ local/untracked.
+The W-41 freeze clamp stays as the second line of defense; the
+init-policy backlog item behind W-36/W-41 is now closed at the root.
