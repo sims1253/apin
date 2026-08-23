@@ -5422,3 +5422,186 @@ w39-eigh untouched); scratch/w48/ (5 .so arms, 5 callgrind profiles,
 gate scripts, gatec draws); results/stanc3_fusion_w48.md. Upstream pack
 consequence: the hier2pl-plumbing candidate should be refiled as
 grid-GEMM detection / gathered-GLM, NOT eltwise fusion.
+
+## W-54 (pre-registered BEFORE running): two thread-inspired early-warmup shields — Arm A init-buffer mass deferral (mass_init_buffer) + Arm B warmup-only soft gradient clipping of the adapter's score stream (grad_clip_scale) — both default-off, both targeting the W-43 pin class from the mass/gradient sides the W-43 step fix left untouched
+
+COMMUNITY SOURCES (why these two levers): (1) walnutpie 0.0.1
+release thread (discourse 41487, post 11, seantalts relaying
+"Fable"'s analysis of a Lotka-Volterra stuck-chain report): nutpie-style
+CONTINUOUS mass adaptation from iteration 1 (mass_init_count=4, first
+observation ~20% weight) lets enormous tail gradients collapse the
+mass estimate -> chain crawls -> self-reinforcing; Stan avoids this
+with an INIT BUFFER (identity metric for the first ~75 iterations) so
+tail geometry never contaminates the metric. (2) discourse 41095
+post 39 (aseyboldt): SOFT gradient clipping f(x) = c*asinh(x/c)
+(c=1e10; identity below ~1e8, logarithmic beyond) eliminated stuck
+chains in nutpie, with only a reversibility intuition for validity.
+Our W-43 fixed the STEP side (find_reasonable_step); the MASS side
+(deferral) and the GRADIENT side (soft clipping) are untested by us.
+NOTE: session-2's "clipping negative" was clipping the MASS ESTIMATE
+(--mass-init-clamp family) — a different lever; do not conflate.
+
+BASE: worktree external/walnutpie_w54, branch exp/warmup-shields off
+exp/safe-adapt-defaults @ 43b6435. Cherry-picks first (both
+default-path-neutral, verified by the canary): 468e60f (W-43
+find_reasonable_step fix — REQUIRED for the 779-bar comparison arm;
+opt-in --step-init-heuristic path only) and 8853fd7 (W-43
+WALNUTPIE_PIN_TRACE instrumentation, env-gated zero-behavior; manual
+conflict resolution drops the W-38 grad-accounting context lines that
+do not exist on this branch).
+
+ARM A DESIGN — mass_init_buffer (std::size_t, default 0 = current
+behavior; CLI --mass-init-buffer N): for warmup iterations < N the
+mass estimator is NOT fed (no observe(), no window-chopping reset, no
+low-rank refresh) and the transition runs with the IDENTITY inverse
+mass; from iteration N on, continuous adaptation begins exactly as
+today. To avoid a metric discontinuity at the buffer boundary the
+estimator is SEEDED AT IDENTITY when mass_init_buffer > 0 (both
+OnlineMoments initial variances = 1; with the default 0 the constructor
+is byte-identical to today's gradient-seeded path). Reading of the
+latitude "identity/initial value": IDENTITY (the Stan transplant).
+Holding at the "initial" (CLI gradient-seeded |grad| ~ 1e7) value
+instead is NOT chosen because the seed is itself the contamination
+vector the thread diagnoses; that variant also equals drift-phase
+metric semantics minus the step/cap suspension (drift_iters), a
+different lever. Knob grid: N = 75 primary (Stan-style), 50/100
+probes. PRE-REGISTERED EXPECTATION (from W-43): A ALONE probably does
+NOT unpin the base cell — during a pin the mass is dormant anyway
+(ratio of constant streams) and the buffer's N iterations are spent
+pinned; escape remains the step-descent first passage (A changes the
+|dH| constants via the identity metric, shifting escape iteration
+either way). A's real test is ON TOP of the W-43 step fix: with
+--step-init-heuristic the chain moves from iteration ~1 and crosses
+the tail for ~100+ iterations (W-43: lp climbs -3.347e7 -> -2.93e7
+over 100 iters) — exactly the phase where continuous adaptation eats
+1e7-scale scores; the buffer should keep the metric clean until the
+chain is near the typical set. Prediction: A75+heur >= heur alone on
+the pf class; A alone shifts escape iteration but leaves the race.
+
+ARM B DESIGN — grad_clip_scale c (double, default 0 = off; CLI
+--grad-clip-scale) + grad_clip_iters M (std::size_t, default 200; CLI
+--grad-clip-iters): during warmup iterations < M the gradient fed to
+the ADAPTER — i.e. the score stream of the mass estimator,
+MassEstimator::observe's grad argument — is replaced elementwise by
+g' = c*asinh(g/c). SCOPE REASONING (pre-registered): the ONLY
+model-gradient input to adaptation is the mass estimator's score
+stream — the step adapter consumes the scalar alpha = exp(-|dH|)
+only (adam.hpp: grad = target - alpha), and |dH| is a property of the
+integrated trajectory. Clipping the INTEGRATOR gradient would change
+the Hamiltonian being integrated (the sampler would target a
+smoothed posterior — the reversibility ladder checks the same
+smoothed dynamics, so it is self-consistent but for a DIFFERENT
+target); that is out of scope for a warmup shield and we do NOT do
+it. Consequence, stated up front: B CANNOT tame the alpha underflow
+(the pin's engine) by construction — if the mechanism requires
+touching alpha via the trajectory gradient, the pre-registered
+action is STOP and document, not silent semantics change. B's testable
+claims are mass-side: bound the score-variance scale during the tail
+crossing so inv_mass cannot collapse; measurable in the trace and in
+B+heur vs heur. Knob grid: c = 1e10 (thread value), 1e8 (thread
+alternative), and a labeled exploratory 1e6 — pre-registered
+justification: blr's pinned-class gradients are 1e6-1e7 (W-43 seed
+1.6e7; pf class ~5e2), i.e. 1-4 orders BELOW the thread's c, where
+asinh is the identity function to <1e-6 relative; without a value at
+the model's own scale the lever cannot bite on THIS pin class. M = 200
+throughout. NOTE the honest prediction: during a true pin the score
+stream is CONSTANT, so clipping is a fixed monotone map of a constant
+— the var ratio (hence inv_mass) stays frozen at a slightly different
+level; B alone leaves the pin alone, exactly like A.
+
+GATES (same battery as W-43 for comparability; all runs serialized
+single-chain CLI invocations, env -u LD_LIBRARY_PATH, OMP_NUM_THREADS=1):
+(a) CANARY: default path (all knobs off) draws bit-identical 12/12
+(arma11/blr/hier_2pl x 4 chains, 1000+1000, seeds 20260819+c, rep0 pf
+inits) vs the exp/safe-adapt-defaults binary saved BEFORE the
+cherry-picks from the same worktree. This gate also transitively
+covers both cherry-picks.
+(b) UNPIN (blr, 3 reps x 4 chains, seeds 20260819+1000*rep+c,
+samples 1000; pinned = all draws identical): w100/w400 x default/pf
+inits, knob ON vs base. Because (a) proves the knob-off path is
+bit-identical to base, base pin behavior is INHERITED (W-43/E2 bands:
+w100-pf 3/4 chains pinned, bulk 5-9; w1000-def 1/4). Arms: A75
+(4 cells), A50/A100 (w100 both inits), B c=1e10 (4 cells), B c=1e8/
+1e6 (w100 both inits), AND the W-43 fixed-heuristic arm reproduced
+on this branch (--step-init-heuristic alone; its w100-pf bulk 779.0
+is the bar) plus combinations A75+heur and B(c best)+heur. PASS
+criterion for an arm: 0/12 pinned in its cells AND bulk-ESS-min
+median >> base's pinned 5-9; "beats the bar" = > 779 on w100-pf.
+(c) NO-HARM: hier_2pl AND lsat_model, w1000 samples 1000, 3 reps x
+4 chains (same seed protocol; rep0/1/2 pf inits), knob ON (A75; B
+c=1e10 and c=1e6) vs base runs on the SAME binary (knob-off):
+bulk/tail ESS-min medians within the base rep-to-rep noise band.
+(d) MECHANISM (WALNUTPIE_PIN_TRACE=1, blr, 1 chain, seed 20260819,
+w1000): knob off vs A75 vs B(1e6) — |dH| of first/min attempt, alpha,
+step, inv_mass geo/min/max per iteration. Questions: does A hold
+inv_mass at identity through the buffer and does adaptation then
+start from identity (no seed collapse, no boundary jump)? does B
+change the frozen inv_mass level (constant-stream map) and/or tame
+the post-escape score-variance scale? does either move the escape
+iteration materially? Expectation from W-43: neither tames alpha
+(step-side).
+DELIVERABLE: results/warmup_shields_w54.md (both arms, all gates,
+mechanism traces, verdict per arm: adopt as additional shield /
+redundant given the W-43 fix / reject; negatives recorded). Commits
+on exp/warmup-shields in the worktree; stan repo WORKLOG + results +
+harness with explicit paths only (NEVER git add -A). Worktree left
+in place. Hygiene: -j2 builds, clean-first after header edits,
+/usr/bin/make, serialized sampling, one edit -> build -> test ->
+commit.
+
+## 2026-08-23 — W-51 CLOSE-OUT: literature scan 2 DELIVERED — stan/external/research_scan2_2026-08.md; hermes 6/6 queries survived (one transient 429 post-answer, no fallback needed); TOP-5 ranked leads mapped to open items
+
+Executed as pre-registered (retry attempt; no prior entry existed).
+Hermes: all 6 one-shot queries completed (q1 13:58 / q2 9:39 / q3
+19:30 / q4 17:10 / q5 15:26 / q6 39:00 wall; sleep 90 between; raw
+transcripts scratch/w51/q{1..6}_*.txt). ONE provider 429 fired during
+q4's post-answer memory-save (zai 5-hour limit, reset 23:01) — q5/q6
+then ran clean on rotated pooled credentials, so the two-consecutive-
+failures fallback never triggered; WebSearch/WebFetch/gh used for the
+planned independent verification pass only (20+ leads verified
+first-hand: arXiv abs fetches, gh api on JAX PR #36832 / XAD v2.1.0 /
+AHMC.jl #470 (+ Carpenter's own comments) / numpyro #2070 / walnutpie
+README / lindermanlab/parallel-mcmc, Semantic Scholar citation pulls
+for 2506.18746, 2506.09762, 2508.09355).
+
+HEADLINES per front: (1) SoA arenas — the field SHIPPED our W-47
+design: CoDiPack 3.0/3.1 statement-level tape + custom evaluators,
+XAD 2.1.0 flat slot/multiplier op tape, Warp/PyTorch-compiled-autograd
+per-array-op registration, ParDiff direct-indexed tape (PPoPP 2026,
+geomean 30.9x vs Enzyme); Adept = negative (maintenance-only). (2) SIMD
+libm — glibc 2.41/2.43 imported correctly-rounded CORE-MATH binary32/
+binary64 + uses ifunc multiversioned FMA islands itself (the W-46
+mechanism); SLEEF u10/u35 two-tier policy is the norm; stan-math has
+NO vector libm and NO library ships correctly-rounded VECTOR binary64
+log/exp — our fused log1p kernel claim stays best-in-class; W-50 errno
+probe corroborated (__DECL_SIMD_* behind __FAST_MATH__). (3) Adaptation
+— Fisher-divergence low-rank+diagonal metrics (2603.18845, Carpenter
+co-author, 114 posteriordb models, 4x median) + theory-backed two-phase
+unadjusted-then-adjusted warmup (2603.22741, LAPS 2601.16696); explicit
+gap confirmed: nobody analyzes DA x expanding-window. (4) Degenerate
+eigenvalues — JAX PR #36832 (merged 2026-04-17) ships a gauge-fixed,
+opt-in-flag eigvec JVP; Zhang&Hu minimal-norm SVD backward (2411.14141);
+verified negative: NO paper does gauge-fixed/minimal-norm eigh adjoints
+valid at clusters — W-40/Kit 4 remains novel with new precedents to
+cite. (5) Within-chain parallelism — DEER trajectory parallelism incl.
+parallel leapfrog (2508.18413 NeurIPS 2025, 4-180x GPU) + Lyapunov
+predictability theory (2508.16817); multiproposal ceiling proven
+(2410.23174); open cell = Metropolis-adjusted + warmup (walnutpie-
+shaped). (6) WALNUTS — 9 citations pulled; upstream walnutpie is
+BECOMING "Adaptive WALNUTS" (README) = nutpie-style Fisher mass + Adam
+step size (Carpenter talk 3/2026 + his AHMC #470 comments, verified);
+only third-party WALNUTS quantification = AHMC #470's ~0.5x ESS/grad
+vs NUTS pre min-micro-steps tuning — matches our W-38-E1 framework.
+
+TOP-5 (full rationales in the deliverable): (1) score/Fisher
+low-rank+diagonal metric in walnutpie warmup -> W-45 follow-up + fork
+strategy; (2) two-phase unadjusted-warm-start warmup -> W-45 follow-up
+axis with new theory; (3) cite-and-ship gauge-fixed eigvec adjoint
+(JAX PR #36832 + 2411.14141 precedents) -> W-40/Kit 4; (4) DEER/Picard
+trajectory parallelism w/ predictability gate -> W-49 successor lane;
+(5) reframe W-53 SoA rollout on the CoDiPack-3/Warp pattern (feeds
+W-48's fused-node story).
+
+Artifacts: stan/external/research_scan2_2026-08.md (committed);
+scratch/w51/ (untracked, transcripts preserved). Read-only research:
+no builds, no model runs, shared trees untouched, no pushes.
