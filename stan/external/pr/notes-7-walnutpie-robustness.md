@@ -147,7 +147,15 @@ short warmup stays *drift*-limited — that is init-protocol territory
   the decisive difference — our probe was broken 3 ways; fixing it takes
   the pinned w100 blr class from bulk-ESS 5–9 to 779). The thread's
   init-buffer idea (identity metric for the first ~75 iterations, as Stan
-  does) is being tested as W-54.
+  does) was tested as W-54 arm A and REJECTED: walnutpie's variance-ratio
+  collapse happens at the FIRST post-buffer observation, not by
+  accumulation, so deferring the estimator does not help (w100 bulk 4.0–5.1
+  vs the heuristic fix's 779; combining them DAMAGES the fix to 165.8).
+  Soft gradient clipping (thread 41095's c·asinh(x/c)) was arm B, also
+  REJECTED: a numerical identity at thread scales, insufficient at model
+  scale — the lever cannot reach the alpha engine from adapter inputs.
+  The step-side heuristic fix remains the only effective shield for this
+  pin class (results/warmup_shields_w54.md).
 - The soft gradient-clipping idea from the "models where Stan outperforms
   nutpie/walnuts" thread (discourse 41095, post 39: aseyboldt's
   c·asinh(x/c)) is likewise under test as W-54 arm B, scoped to
