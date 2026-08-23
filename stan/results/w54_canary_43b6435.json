@@ -1,0 +1,65 @@
+{
+ "cli_base": "/tmp/stan_cli_w54_base (exp/safe-adapt-defaults @ 43b6435)",
+ "arma11_c0": {
+  "md5_base": "e35703a324db0d9179976316dd4964c3",
+  "md5_post": "7c9d2da44769a649722e7dfd3ccdbfdc",
+  "identical": false
+ },
+ "arma11_c1": {
+  "md5_base": "a122c9159bccba0ccfdb88238fb57bd6",
+  "md5_post": "a4a2b5ca9d7e4caf7591ac45f856335b",
+  "identical": false
+ },
+ "arma11_c2": {
+  "md5_base": "0a0f03e68cb8f75c9199515593ab66de",
+  "md5_post": "be0921fd4fb5fcd67ada9d7a7c584658",
+  "identical": false
+ },
+ "arma11_c3": {
+  "md5_base": "6cdba1721f807248af3b78c4f74df5a4",
+  "md5_post": "42263e8431c7a1a71d5e706cf98ecd77",
+  "identical": false
+ },
+ "blr_c0": {
+  "md5_base": "18b4c8db7ce8c428ba5d948e2c6f7f9b",
+  "md5_post": "e5e754be061fdaa130639d11f14e77e2",
+  "identical": false
+ },
+ "blr_c1": {
+  "md5_base": "7ca28724a007f17b1cd7cb96893b4c04",
+  "md5_post": "2c3d6f87a9bf56777b1920dfd7bed138",
+  "identical": false
+ },
+ "blr_c2": {
+  "md5_base": "6055845d713c5306878cc815d175b1e3",
+  "md5_post": "35b9d68e45561c671fdaf0e0dadb54a6",
+  "identical": false
+ },
+ "blr_c3": {
+  "md5_base": "00125a97e43df257dace991e2b5252ca",
+  "md5_post": "ff6606541264157362298d36499bd22e",
+  "identical": false
+ },
+ "hier_2pl_c0": {
+  "md5_base": "84571e7563531a70a05265143c88cb34",
+  "md5_post": "8e08c190d04c2707827fa3151ed5b8b6",
+  "identical": false
+ },
+ "hier_2pl_c1": {
+  "md5_base": "e21742bd65c5a49c3624470ebda1df25",
+  "md5_post": "f625f06620cf4247ce9915fead2100c9",
+  "identical": false
+ },
+ "hier_2pl_c2": {
+  "md5_base": "67e57817abe0ef3db48d59d37d84cb7c",
+  "md5_post": "fe0b1133ee9657be5d2003a96a1f0d94",
+  "identical": false
+ },
+ "hier_2pl_c3": {
+  "md5_base": "ba1a9daae47900ecfcbde1ae6e577b58",
+  "md5_post": "504c0fb062a494f017aa8a0e923f5238",
+  "identical": false
+ },
+ "pass": "0/12",
+ "note": "post binary = exp/warmup-shields @ e46da43 (knobs off). Divergence mechanism: pin-trace hooks (b657198) perturb hot-loop codegen vs 43b6435; knob commit itself is bit-neutral (see w54_canary_1e02b5)."
+}

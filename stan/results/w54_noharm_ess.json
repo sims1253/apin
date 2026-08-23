@@ -1,0 +1,218 @@
+{
+ "hier_2pl_a75": {
+  "n": 3,
+  "ess_bulk_min_med": 618.4,
+  "ess_tail_min_med": 700.6,
+  "rhat_max_med": 9.0,
+  "pinned_chains_tot": 0,
+  "per_rep": [
+   {
+    "ess_bulk_min": 618.4,
+    "ess_tail_min": 853.5,
+    "rhat_max": 9.0,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 645.4,
+    "ess_tail_min": 681.1,
+    "rhat_max": 9.0,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 549.4,
+    "ess_tail_min": 700.6,
+    "rhat_max": 9.0,
+    "pinned_chains": 0
+   }
+  ]
+ },
+ "hier_2pl_b1e10": {
+  "n": 3,
+  "ess_bulk_min_med": 560.6,
+  "ess_tail_min_med": 796.1,
+  "rhat_max_med": 9.0,
+  "pinned_chains_tot": 0,
+  "per_rep": [
+   {
+    "ess_bulk_min": 611.6,
+    "ess_tail_min": 799.7,
+    "rhat_max": 9.0,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 560.6,
+    "ess_tail_min": 686.7,
+    "rhat_max": 9.0,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 496.2,
+    "ess_tail_min": 796.1,
+    "rhat_max": 9.0,
+    "pinned_chains": 0
+   }
+  ]
+ },
+ "hier_2pl_b1e6": {
+  "n": 3,
+  "ess_bulk_min_med": 610.5,
+  "ess_tail_min_med": 796.1,
+  "rhat_max_med": 9.0,
+  "pinned_chains_tot": 0,
+  "per_rep": [
+   {
+    "ess_bulk_min": 611.6,
+    "ess_tail_min": 799.7,
+    "rhat_max": 9.0,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 610.5,
+    "ess_tail_min": 638.0,
+    "rhat_max": 9.0,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 496.2,
+    "ess_tail_min": 796.1,
+    "rhat_max": 9.0,
+    "pinned_chains": 0
+   }
+  ]
+ },
+ "hier_2pl_base": {
+  "n": 3,
+  "ess_bulk_min_med": 560.6,
+  "ess_tail_min_med": 796.1,
+  "rhat_max_med": 9.0,
+  "pinned_chains_tot": 0,
+  "per_rep": [
+   {
+    "ess_bulk_min": 611.6,
+    "ess_tail_min": 799.7,
+    "rhat_max": 9.0,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 560.6,
+    "ess_tail_min": 686.7,
+    "rhat_max": 9.0,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 496.2,
+    "ess_tail_min": 796.1,
+    "rhat_max": 9.0,
+    "pinned_chains": 0
+   }
+  ]
+ },
+ "lsat_model_a75": {
+  "n": 3,
+  "ess_bulk_min_med": 732.2,
+  "ess_tail_min_med": 1130.5,
+  "rhat_max_med": 1.0094,
+  "pinned_chains_tot": 0,
+  "per_rep": [
+   {
+    "ess_bulk_min": 855.9,
+    "ess_tail_min": 1176.2,
+    "rhat_max": 1.0091,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 732.2,
+    "ess_tail_min": 1130.5,
+    "rhat_max": 1.0118,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 580.4,
+    "ess_tail_min": 1125.8,
+    "rhat_max": 1.0094,
+    "pinned_chains": 0
+   }
+  ]
+ },
+ "lsat_model_b1e10": {
+  "n": 3,
+  "ess_bulk_min_med": 718.8,
+  "ess_tail_min_med": 1185.7,
+  "rhat_max_med": 1.0107,
+  "pinned_chains_tot": 0,
+  "per_rep": [
+   {
+    "ess_bulk_min": 767.0,
+    "ess_tail_min": 1185.7,
+    "rhat_max": 1.0122,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 647.9,
+    "ess_tail_min": 1051.0,
+    "rhat_max": 1.0085,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 718.8,
+    "ess_tail_min": 1235.7,
+    "rhat_max": 1.0107,
+    "pinned_chains": 0
+   }
+  ]
+ },
+ "lsat_model_b1e6": {
+  "n": 3,
+  "ess_bulk_min_med": 627.0,
+  "ess_tail_min_med": 1157.0,
+  "rhat_max_med": 1.0115,
+  "pinned_chains_tot": 0,
+  "per_rep": [
+   {
+    "ess_bulk_min": 627.0,
+    "ess_tail_min": 1160.2,
+    "rhat_max": 1.0115,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 568.8,
+    "ess_tail_min": 991.5,
+    "rhat_max": 1.0117,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 643.1,
+    "ess_tail_min": 1157.0,
+    "rhat_max": 1.0089,
+    "pinned_chains": 0
+   }
+  ]
+ },
+ "lsat_model_base": {
+  "n": 3,
+  "ess_bulk_min_med": 718.8,
+  "ess_tail_min_med": 1058.7,
+  "rhat_max_med": 1.0102,
+  "pinned_chains_tot": 0,
+  "per_rep": [
+   {
+    "ess_bulk_min": 849.5,
+    "ess_tail_min": 1058.7,
+    "rhat_max": 1.0102,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 647.9,
+    "ess_tail_min": 1051.0,
+    "rhat_max": 1.0085,
+    "pinned_chains": 0
+   },
+   {
+    "ess_bulk_min": 718.8,
+    "ess_tail_min": 1235.7,
+    "rhat_max": 1.0107,
+    "pinned_chains": 0
+   }
+  ]
+ }
+}

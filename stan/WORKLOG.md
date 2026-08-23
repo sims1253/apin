@@ -5715,3 +5715,70 @@ NOTE: external/pr/issue-6-math-fused-log1p.md carries a concurrent
 agent's uncommitted edit (6+/6−) — deliberately NOT committed by W-55.
 Worktrees left in place (external/math_dev_glm with lib→math_dev/lib
 symlink; external/walnutpie_rob). No upstream pushes anywhere.
+
+## 2026-08-23 — W-54 CLOSE-OUT: both shields REJECTED on the W-43 pin class — arm A (init-buffer) makes the pin WORSE alone (escape 948→>1000 def / ~198→266 pf; 10-12/12 pinned vs base 8/12) and damages the W-43 fix 4.7x (165.8 vs the 779.0 bar); arm B is the numerical identity at the thread's scales and a 4.1x metric lift that still can't reach the alpha engine at model scale; the step-side W-43 fix stands alone
+
+GATES (details results/warmup_shields_w54.md):
+- (a) Knob-isolated canary PASS 12/12 (e46da43 vs same-worktree
+  b657198, 3 models x 4 chains, 1000+1000, rep0 pf). The FULL-binary
+  comparison vs 43b6435 is 0/12 — a FINDING: the cherry-picked pin-trace
+  hooks perturb hot-loop codegen (semantically identical source), the
+  |dH| series shifts in the last ulp, and the pin's escape FIRST
+  PASSAGE moves a few iterations (save-warmup bisect: draws identical
+  for 183 iterations, diverge exactly at the escape region). W-43's
+  8853fd7 "zero-behavior" claim was only ever smoke-tested on a PINNED
+  cell, where identical draws are trivially preserved — pinned chains
+  hide last-bit differences. Second instance of W-50's
+  bit-identity-is-trajectory-conditional lesson. All gate-(b)/(c) base
+  references were therefore re-run knob-off on the SAME binary.
+- (b) Pin battery (3 reps x 4 chains, E2 seeds): heur bar EXACTLY
+  reproduced (w100-pf 779.0/769.5/rhat 1.005/0-12 pinned; w400-pf
+  630.4/693.7 — W-43's own numbers). A75/A50/A100: bulk 4.0-5.1,
+  10-12/12 pinned (base 8/12, bulk 7.0) — FAIL. A75+heur 165.8 (bar
+  779.0), w400 406.3 (bar 630.4) — HARM. B1e10/B1e8 == base (c is the
+  identity function on 1e6-1e7 gradients; pinned cells md5-identical);
+  B1e6 same pin structure, heur+1e6 750.6 (−4%). B1e10+heur = the
+  bar's exact medians (not bit-identical: the 1e-7-relative asinh
+  residue perturbs post-escape trajectories).
+- (c) No-harm (hier_2pl + lsat w1000, 3 reps x 4 chains): all arms
+  within the base band except b1e6 on lsat (−13% bulk-min median, all
+  reps below the base band; tail unaffected) — flagged. 0 pins
+  anywhere. hier_2pl NaN rhat = constant transformed-parameter columns
+  (L_Omega.1.1 etc.) in every arm incl. base — analysis artifact.
+- (d) Mechanism (WALNUTPIE_PIN_TRACE, blr w1000 1-chain, off-trace ==
+  W-43 digit-for-digit): A does NOT prevent the metric collapse — the
+  estimate crashes 1 → 2.07e-07 (def) / 6.05e-03 (pf) at the FIRST
+  post-buffer observation (the var-ratio collapse happens at first
+  observation, NOT by accumulation — the community thread's premise
+  does not transfer to walnutpie's continuous estimator); buffer-phase
+  |dH| = inf..1e24 under identity; and the step adapter spends the
+  buffer calibrating for a metric that is REPLACED at N (pf+heur:
+  step dives 0.0074→0.00098 during the buffer, re-inflates to 0.102 by
+  it999; def+heur: the fix's iteration-1 escape delayed to 76). B
+  never touches alpha (by construction; alpha=0 through every pinned
+  iteration in every arm); its one real effect: c=1e6 lifts the frozen
+  metric 4.1x (2.648e-07 vs 6.425e-08), doubling per-step displacement
+  and halving the required descent nats — escape 948 → 244 on the
+  traced def cell — still >> any short-warmup budget; and when the
+  clip window ends (M=200) still in the tail, the deferred
+  contamination lands compressed (2.65e-07 → 1.95e-08 in one
+  iteration).
+
+VERDICTS: arm A REJECT (fails unpin, harms the fix, safe-but-useless
+on healthy models); arm B REJECT-as-shield / REDUNDANT given W-43
+(numerical identity at thread scales; model-scale lift real but
+insufficient and mildly harmful). The W-43 step-side fix remains the
+only effective shield for this class. Upstream relevance: nutpie-
+style init buffers assume an identity-initialized windowed estimator
+and a step probe calibrated under identity; transplanting the buffer
+alone (without both assumptions) is counterproductive. General lesson
+recorded: env-gated hot-loop instrumentation is NOT draw-neutral
+across builds — first-passage escape times amplify last-ulp codegen
+differences; canaries must compare like-for-like builds.
+
+Artifacts: results/warmup_shields_w54.md + results/w54_{canary_
+1e02b5,canary_43b6435,knob_ess,noharm_ess,trace}.json; harness/{run_
+w54,analyze_w54,trace_w54}.py; raw runs/w54/ (local). walnutpie
+commits 33bcff5 + b657198 + e46da43 on exp/warmup-shields (worktree
+external/walnutpie_w54 LEFT IN PLACE; bisect worktree /tmp/w54_preknob
+kept for the canary base binary).
