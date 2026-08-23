@@ -2551,3 +2551,145 @@ results/profile/w34/{stock,armB}/ (callgrind + annotate + cli.log),
 harness/w34/ (w34_gatea.py, w34_gateb_timing.py, w34_callgrind.py,
 w34_gatec.py, hier_2pl_gemm.stan), runs/w34/ (untracked), scratch/w34/
 builds (untracked). No walnutpie submodule changes, no pushes.
+
+## W-35 (pre-registered BEFORE running): minimize + classify the W-27 -march=native kronecker_gp gradient divergence; produce a reportable upstream reproducer
+
+Mission: W-27 found self-contained single-make bridgestan builds of
+kronecker_gp with -O3 -march=native -mtune=native give WRONG GRADIENTS
+(99/99 random points, 250-305 of 438 components = the L block, 0.006-1.7
+rel with sign flips; logp matches 1e-16; -O3-only is bit-identical).
+Candidate 6 in external/upstream_candidates.md wants a gcc/stan-math bug
+report. W-32 complicates the "miscompile" label: kronecker_gp's Sigma1
+spectrum is intrinsically near-degenerate (jitter floor cluster), the
+eigenvector adjoint F=1/(w_j-w_i) amplifies ulp-level input differences to
+O(1) gradient components, and the stock gradient is itself only FD-verifiable
+to ~4e-2 at the init / O(1) at random points. W-35 must decide: compiler
+miscompile vs standard-permitted FP contraction/vectorization reordering
+amplified by model ill-conditioning (vs stan-math UB).
+
+PLAN (all controlled compile experiments, NO sampler runs):
+1. Reproduce cheaply: rebuild default + native .so (copied .stan per variant
+   in scratch/w35/<variant>_build/ — W-27 compile_model cache gotcha),
+   gradient parity on 20 random N(0,1) unc points; record per-block stats
+   (max rel, count wrong, sign flips) to confirm the W-27 signature.
+2. Model-level flag matrix (one .so per flag set): -O3; -O3 -march=native;
+   -march=native -ffp-contract=off; -mavx2; -mfma; -mavx; -march=znver3;
+   -march=native -fno-tree-vectorize -fno-slp-vectorize; -O2 -march=native;
+   also -ffp-contract=fast on the DEFAULT march (isolate contraction as a
+   variable independent of ISA). Identifies the triggering flag/feature.
+3. Isolate the function with standalone C++ drivers (scratch/w35/, linking
+   the bridgestan-2.9.0 stan-math tree): differential default-vs-native
+   binaries on candidate functions with var inputs on random data:
+   lkj_corr_cholesky_lpdf, multiply_lower_tri_self_transpose,
+   cholesky_decompose, eigenvectors_sym/eigenvalues_sym (values AND
+   gradients), and VALUE-level eigendecomposition comparison on the same
+   input matrix (do the two binaries return different eigenvectors for
+   identical input? eigenvalue gaps of the actual Lambda/Sigma1 at failing
+   points). Also FD self-consistency per binary (a miscompile fails its own
+   FD check on well-conditioned inputs; reordering-amplification stays
+   FD-consistent wherever the model is FD-resolvable).
+4. Minimize to the smallest self-contained snippet (goal < ~50 lines,
+   ideally pure stan-math+Eigen, no model); vary flags on the snippet.
+5. Classify: -fsanitize=address,undefined on the minimized case under both
+   flag sets; gcc 16.2.1 vs clang 22.1.8 -march=native; -ffp-contract.
+   UBSan/ASan finding => stan-math UB (find exact line) => stan-math issue.
+   Clean sanitizers + native fails its own FD / differs from default in a
+   way no permitted reordering explains => gcc miscompile => gcc bugzilla
+   draft. Clean sanitizers + divergence fully explained by contraction/
+   vectorization reordering amplified by near-degenerate eigen-clusters =>
+   NOT a compiler bug; reclassify candidate 6 (stan-math numerics/docs
+   issue, or expected-FP-behavior + documentation item) and record the
+   correction of W-27's "miscompile" wording honestly.
+GATES: (i) reproduce W-27's signature (max rel >= 0.1, >= 100 components
+wrong on native-vs-default, logp <= 1e-12); (ii) identify triggering flag
+set; (iii) minimization measured (lines + deps of final snippet);
+(iv) sanitizer verdict under both flag sets; (v) classification with a
+READY-TO-FILE draft (gcc bugzilla OR stan-math issue format; both if
+ambiguous) in results/march_native_w35.md, reproducer source also under
+scratch/w35/repro/.
+Env: env -u LD_LIBRARY_PATH for all make/compiles; /usr/bin/make; -j2 max;
+bridgestan 2.9.0; no pushes; walnutpie submodule untouched. Negative
+findings recorded honestly (e.g. cannot isolate below model level) with
+what WAS established. Expectation (pre-registered, from W-32 evidence): the
+divergence will turn out to be FMA-contraction-permitted reordering inside
+Eigen's SelfAdjointEigenSolver (or a reduction) amplified by the model's
+near-degenerate eigen-clusters — i.e. NOT a gcc miscompile — but this is
+to be TESTED, not assumed; sanitizer/FD/clang evidence decides.
+
+## 2026-08-23 — W-35 CLOSE-OUT: -march=native divergence MINIMIZED + CLASSIFIED — NOT a gcc miscompile; Eigen AVX packet GEMM rounding flips the eigenbasis of rounding-degenerate clusters; W-27 "miscompile" wording RETRACTED (guidance unchanged)
+
+All pre-registered gates PASS (reproduce / flag matrix / minimize / sanitize
+/ classify). Full evidence pack: results/march_native_w35.md; minimized
+reproducer: scratch/w35/repro/march_native_repro.cpp (committed).
+
+GATE (i) REPRODUCE: fresh default + native builds (scratch/w35/*_build/),
+20 random N(0,1) unc points: 20/20 wrong, max rel grad 6e-3..2.36, 55-221/438
+components > 1e-6, sign flips on 5/20 points (9 components), logp <= 4.5e-16. Worst components
+include var1/bw1 (Sigma1 block) alongside the L block. W-27 signature
+confirmed. -O3 control bit-identical.
+
+GATE (ii) FLAG MATRIX (10 model .so builds + repro-level): EVERY AVX-or-wider
+ISA diverges (-mavx alone sufficient; -mavx2 == -mavx outputs; -mfma ==
+-march=znver3 == native outputs; -O2 vs -O3 irrelevant). FMA contraction
+RULED OUT (-march=native -ffp-contract=off still diverges; -ffp-contract=fast
+on SSE2 baseline is bit-identical to default). GCC auto-vectorization RULED
+OUT (-fno-tree-vectorize -fno-tree-slp-vectorize still diverges — Eigen
+packetizes with its own intrinsics). Trigger = Eigen's 256-bit packet GEMM
+code paths (4 vs 2 doubles/packet -> different FP accumulation order).
+
+GATE (iii) ISOLATION + MINIMIZATION (standalone drivers d1-d6, exact
+hexfloat inputs, %.17g diffs): seed = GEMM rounding diff 2.1e-14 abs /
+9.8e-15 rel (d5). Amplifier at VALUE level (d1): on the model's actual
+Sigma1 (jitter floor pins bottom eigenvalues at EXACTLY 1e-5, gaps ~1e-16)
+default-vs-native eigenvectors differ in 489/900 entries up to 0.96 with 162
+sign flips while eigenvalues agree to 1.1e-14 and BOTH decompositions are
+valid (residual ~1e-14); well-conditioned control identical to 3.4e-14.
+Gradient level (d2/d4): rev eigenvector adjoint (F_ij = 1/(w_j-w_i)) turns
+the basis flip into cross-binary gradient diffs up to 3.7e3 rel; Richardson
+FD self-checks show BOTH builds' var1/bw1 gradients are 8-47% off FD at
+failing points (native sometimes CLOSER than default — pt1 var1: default
+30% off, native 8% off), while sigma1 (no eigen-adjoint coupling) is
+FD-consistent to 2e-9 in both and L-block functions (lkj_corr_cholesky,
+multiply_lower_tri_self_transpose, cholesky_decompose — d3/d6) are
+FD-consistent (1e-9) and cross-binary-stable. Eigendecomposition on BOTH
+model matrices affected (Sigma1 AND Lambda = L L^T near-singular, cluster
+1e-16..1e-12). Minimized reproducer: self-contained 65-line stan-math+Eigen
+snippet (no model/data/input files, LCG-generated weights), committed.
+
+GATE (iv) SANITIZERS: ASan+UBSan (-fno-sanitize-recover=all) on d2/d4/repro
+under baseline AND native: rc=0, ZERO reports — no stan-math UB, no memory
+corruption.
+
+GATE (v) CLASSIFICATION: NOT a gcc bug (native computes correct eigen
+gradients on well-conditioned input at 5e-8 FD agreement; clang 22 baseline
+is BIT-IDENTICAL to gcc baseline incl. cluster matrices; clang -march=native
+reproduces the divergence; reference build itself FD-inconsistent; only
+input-side diff is a permitted 1e-15 GEMM reordering). NOT stan-math UB.
+IS a stan-math numerics/docs issue: rev eigenvector/eigendecomposition
+adjoints assume separated eigenvalues; on rounding-degenerate spectra
+(jittered GP kernels, near-singular correlations) they silently return
+FD-inconsistent gradients in EVERY build, and any permitted FP variation
+moves them O(1). W-32's eigendecompose_sym does NOT change this (same
+adjoint) — only model conditioning does.
+
+RETRACTION (protocol: where the claim was made): W-27 close-out's
+"-march=native MISCOMPILES kronecker_gp gradients" and W-29 §3's "same tape
+region, different cause" miscompile framing are corrected to: "any
+AVX-or-wider ISA changes kronecker_gp gradients O(1) via rounding-level GEMM
+reordering amplified by near-degenerate eigendecompositions; both builds are
+FD-inconsistent at these points." external/upstream_candidates.md candidate 6
+rewritten accordingly. OPERATIONAL GUIDANCE UNCHANGED, now on solid grounds:
+never build Stan models with -march=native; -O3 safe (bit-identical); native
+upside was <= ~10%/call anyway (W-27).
+
+DELIVERABLES: results/march_native_w35.md (reproduction, flag matrix,
+isolation, reproducer source + 4-compiler output table, sanitizer results,
+classification, READY-TO-FILE stan-math issue draft §7a, cmdstan/bridgestan
+docs paragraph §7c, and §7b recording why the gcc bugzilla report is
+deliberately NOT filed). Committed: WORKLOG.md, results/march_native_w35.md,
+scratch/w35/repro/march_native_repro.cpp, scratch/w35/parity.py,
+scratch/w35/build_variant.sh, external/upstream_candidates.md. Local
+(untracked): scratch/w35/ drivers+outputs+builds, sanitizer binaries.
+Env note: this machine's gcc (AppImage-provided 16.2.1) needed cc1plus
+symlinks at ~/lib/gcc/x86_64-pc-linux-gnu/16/ before any compile worked.
+No sampler runs, no pushes, walnutpie submodule untouched.

@@ -92,25 +92,34 @@ nothing here is pushed anywhere yet.
    patch written. Repro: `bridgestan.compile_model(x.stan)` then again
    with `make_args=["STAN_THREADS=True"]` — returns the same mtime/.so.
 
-6. **`-march=native` silently MISCOMPILES Stan model gradients**
-   (W-27; likely a gcc -O3/auto-vectorization (FMA-contraction / Eigen
-   packet path) bug worth reporting to gcc or stan-math). Evidence: W-27
-   G1 — self-contained single-make builds of kronecker_gp with
-   `-O3 -march=native -mtune=native` produce gradients wrong at up to
-   1.7 REL with SIGN FLIPS on 99/99 random points (250–305 of 438
-   components, the `lkj_corr_cholesky` L block) while logp matches to
-   1e-16; Richardson finite differences side with the default build
-   (pt1 comp3: fd −2.984, default −3.000, native −8.121). Default and
-   `-O3`-only builds are bit-identical (no fast-math ⇒ pure codegen
-   defect). Affected repo: gcc (primary suspect: vectorizer/FMA
-   contraction in the Eigen SelfAdjointEigenSolver or the generated
-   lkj_corr_cholesky reverse code) and/or stan-math; also relevant to
-   cmdstan/bridgestan docs which mention `-march=native` as a speedup.
-   Proposed change: bug report with a preprocessed single-file
-   reproducer; meanwhile document "do not use -march=native for Stan
-   model builds" (W-27 verdict: at most ~10% per-call upside, silent
-   wrongness downside). Status: characterized (W-27); reproducer =
-   `harness/run_w27.py parity` (fixed-seed 100-point default-vs-native
-   gradient comparison + FD spot-checks; the `-march=native` `.so`s are
-   the local `bs_models_o3/` build, rebuildable via the script); gcc
-   report not yet filed.
+6. **`-march=native` changes Stan model gradients O(1) on eigen-degenerate
+   models — NOT a compiler miscompile (W-27 characterized; W-35 reclassified)**
+   (W-27 initially read this as a gcc miscompile; W-35 minimized + classified
+   and REFUTED the miscompile reading — see results/march_native_w35.md and
+   the retraction note in WORKLOG W-35.) Evidence: W-27 G1 — self-contained
+   single-make builds of kronecker_gp with `-O3 -march=native -mtune=native`
+   produce gradients wrong at up to 1.7 REL with SIGN FLIPS on 99/99 random
+   points (250–305 of 438 components, the `lkj_corr_cholesky` L block and
+   var1/bw1) while logp matches to 1e-16; default and `-O3`-only builds are
+   bit-identical. W-35 root cause: any AVX-or-wider ISA (even `-mavx` alone;
+   `-ffp-contract=off`, `-fno-tree-vectorize`, `-O2` vs `-O3` all do NOT
+   prevent it) switches Eigen's GEMM to 256-bit packets → rounding-level
+   (1e-15) summation-order change → Eigen SelfAdjointEigenSolver returns a
+   DIFFERENT BUT EQUALLY VALID eigenbasis inside the model's rounding-
+   degenerate eigenvalue clusters (Sigma1's 1e-5 jitter-floor cluster;
+   Lambda's 1e-16 near-null cluster) → stan-math's rev eigenvector adjoint
+   F_ij = 1/(w_j−w_i) amplifies the basis flip to O(1)–O(1e3) in the
+   gradient. Critically, the DEFAULT build's own gradients are equally
+   Richardson-FD-INCONSISTENT at those points (var1 30–47% off FD; native
+   sometimes CLOSER to FD), sanitizers (ASan+UBSan) are clean under both
+   flag sets, and clang 22 reproduces the phenomenon with `-march=native`
+   while clang baseline is bit-identical to gcc baseline. Affected repo:
+   stan-math (eigenvector adjoints assume separated eigenvalues — docs/
+   warning ask; ready-to-file issue draft in results/march_native_w35.md
+   §7a) and cmdstan/bridgestan docs (`-march=native` gradient-reproducibility
+   caveat, §7c). gcc bug deliberately NOT filed (§7b records the rationale).
+   Status: DONE (W-35): minimized self-contained reproducer committed at
+   scratch/w35/repro/march_native_repro.cpp (no model, no data file; 4-
+   compiler output table in the report); operational guidance unchanged —
+   never build Stan models with `-march=native` (≤ ~10% upside, O(1)
+   gradient instability downside), `-O3` is safe/bit-identical.
