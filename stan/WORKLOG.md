@@ -2693,3 +2693,114 @@ scratch/w35/build_variant.sh, external/upstream_candidates.md. Local
 Env note: this machine's gcc (AppImage-provided 16.2.1) needed cc1plus
 symlinks at ~/lib/gcc/x86_64-pc-linux-gnu/16/ before any compile worked.
 No sampler runs, no pushes, walnutpie submodule untouched.
+
+## W-36 (pre-registered BEFORE running): end-to-end session headline benchmark — stock walnutpie @ 3eddfc4 vs exp tip @ 43b6435, both at DEFAULTS, 10-model pathfinder grid
+
+PURPOSE: one defensible table quantifying the TOTAL sampler-side win of
+this session: stock dev/init-robustness @ 3eddfc4 (pre-session state)
+vs exp/safe-adapt-defaults @ 43b6435 (session tip), both binaries run at
+their CLI DEFAULTS (only --warmup 1000 --samples 1000 passed explicitly;
+--metric-window stays default 0/off, no --fixed-warmup, no --early-exit),
+across the 10-model pathfinder grid (run_pathfinder.py MODELS list).
+4 chains, 3 reps, seeds 20260819+1000*rep+c (per-chain +c; the mc path
+seeds per-chain identically — W-30 bonus gate verified equivalence).
+
+ARMS:
+- stock_seq: STOCK binary, 4 SEQUENTIAL single-chain CLI invocations
+  (pre-session status quo workflow; wall = batch elapsed).
+- exp_par: EXP binary, `--chains 4 --chain-exec threads` (default value;
+  everything else default). MUST print controller exit_iter=1000
+  early_exit=0 in every run (W-31 safe default) — verified per run.
+- exp_seq (optional, run after the main arms if time permits): EXP binary,
+  4 sequential single-chain invocations — isolates endpoint-threading
+  (W-23) contribution from parallelism (W-30).
+
+BUILD SETUP (worktree discipline): EXP binary built from the existing
+submodule worktree (exp/safe-adapt-defaults) into a NEW build dir
+external/walnutpie/build_w36exp; STOCK binary from a SEPARATE git worktree
+external/walnutpie_stock_w36 checked out at 3eddfc4 into its own build dir
+(submodule branch NEVER switched; worktree removed only at the very end,
+after all measurements are recorded). env -u LD_LIBRARY_PATH for all
+cmake/make. Builds -j4 allowed; sampling runs never exceed 4 threads total
+(sequential arms are 1 process at a time; exp_par = 4 worker threads).
+
+MODEL .so: STAN_THREADS=True builds in bs_models_threads/ for ALL 10 grid
+models (5 exist: arma11, blr, esc_nonc, hier_2pl, lsat — grid needs hier,
+lsat + 8 NEW: radon_partially_pooled_noncentered, bym2_offset_only,
+diamonds, accel_gp, kronecker_gp, pilots, eight_schools_centered,
+lotka_volterra). W-27 cache gotcha: compile each from a per-model scratch
+copy of the .stan so no cached default-flags .so can be silently reused;
+verify model_info() reports STAN_THREADS=true for every .so before
+trusting it. Both arms load the SAME .so per model.
+
+INITS (identical across arms per model/rep/chain): hier_2pl + lsat_model
+use inits_w25/ pf inits (rep0-2 x chain0-3 exist); the other 8 models get
+deterministic inits in inits_w36/<model>/rep<r>/chain_<c>.txt generated as
+normal(0,1) draws, one per unconstrained coordinate, dimension from
+BridgeStan num_unconstrained_parameters (bs_models_threads .so), rng =
+random.Random(f'{model}-{seed}-{c}').normalvariate(0,1) with seed =
+20260819+1000*rep (recorded method; standard-normal scale comparable to
+Stan's default uniform[-2,2] init radius).
+
+EXPECTATIONS (pre-registered):
+- WALL: exp_par/stock_seq geomean ~0.25-0.35 (W-30 measured 0.317
+  thr/seq on 5 models with --fixed-warmup + metric-window 50; defaults
+  here, so the number may shift — whatever it is, it is the headline).
+  exp_seq/stock_seq ~0.96-1.00 (endpoint threading removes exactly
+  warmup+draws-1 logp_grad calls per chain, ~3-6% of calls).
+- CALL COUNTS: per-chain logp_grad calls printed by both binaries; exp
+  arms should show stock_calls - (warmup+draws-1) per chain on the same
+  model/seed/init (W-23), µs/call ~unchanged (same .so, same machine).
+- QUALITY (non-negotiable): bulk/tail ESS-min and max R-hat (arviz,
+  rank-normalized, trim ragged chains to min length) — exp arms
+  statistically match stock on every model. Divergences recorded per
+  model/arm (pilots and eight_schools_centered are expected to diverge in
+  BOTH arms — model-inherent, not arm-attributable).
+- CANARY (bit-identity): draws for identical (seed, init, config) are
+  BIT-IDENTICAL stock_seq vs exp_seq on the single-chain path (md5 of
+  chain CSVs; every default-path change this session was canary-gated).
+  Spot check 2 models BEFORE the grid; full md5 on every exp_seq cell
+  covered by the optional arm.
+
+GATES: (a) early_exit=0 + exit_iter=1000 on every exp_par run; (b) canary
+md5 identical (spot 2 models, and all exp_seq cells if run); (c) quality
+per-model medians within the stock arm's rep spread on non-pathological
+models; (d) walls reported as 3-rep medians with per-rep values in the
+raw rows. Negative/unexpected results recorded either way.
+
+DELIVERABLE: results/session_benchmark_w36.md — headline table (per-model
++ geomean wall ratios exp_par/stock_seq, plus exp_seq ratios if run),
+quality table (ESS-min bulk/tail, max R-hat per model per arm), call-count
+deltas, short honest narrative (parallelism vs threading vs nothing).
+Runner harness/run_w36.py, analysis harness/analyze_w36.py, raw
+runs/w36/<arm>/<model>/rep<r>/. Commit explicit paths only.
+
+## W-37p (PROPOSAL-ONLY — pre-registration placeholder, no runs, no builds)
+
+Read-only source survey: how can WALNUTS compute FEWER logp_grad calls per
+effective draw (not cheaper per-call — that is the stan-math lane, W-29/W-32/
+W-33/W-34)? Deliverable: results/proposals_fewer_gradients.md — a proposal
+pack grounded in walnuts.hpp/adaptive_walnuts.hpp anatomy + the w17g/W-20/
+W-23 evidence. Key structure findings: every kernel eval sits in (a)
+macro_step forward dyadic attempts (failed attempts fully discarded), (b)
+the backward reversibility ladder (accept path walks the FULL coarser
+ladder; first success = macro-step REJECTION, and leaf failure terminates
+the trajectory — no retry path exists), (c) boundary (W-23 handled).
+Accepted-at-h=0 macro steps cost m evals with no ladder; refined steps cost
+3m·2^h − 2m for m·2^h useful (2x at h=1 → 3x asymptotic). Drift phase
+already runs cap-free (zero dyadic overhead). Ranked pack: E1 per-macro-step
+grad accounting (env-gated counters, the gateway measurement named in
+FINAL_REPORT §5a — run FIRST); E2 error-discipline ablation warmup-weighted
+(--max-hamiltonian-error/--max-error-start/--max-step-halvings already
+CLI-exposed; ~10–30% realistic eval cut, W-25/W-28 gates); E4
+refinement-aware min_micro_steps adaptation (target h≈0 ladder base, kills
+refinement AND ladder; kernel change within existing latitude); E3 truncated
+backward ladder (held: touches the correctness core, needs E1 evidence);
+E5 close the residual 2 dups/chain (masses() seeding + chain start, +
+find_reasonable_step's theta eval; bit-identical, ~0.01%). Dead ends
+re-confirmed with citations: memoization/lattice reuse (W-20), endpoint
+sharing (by design), uturn/momentum evals (none exist), subsampled kernel
+gradients (invariant-breaking), warmup early-exit (W-21/25/28), basis rules
+(W-19). Micro-state selection candidates flagged for the Flatiron team, not
+engineering. Any implementation session must pre-register and reuse the
+W-23/W-25 gate apparatus; no claims made here without runs.
