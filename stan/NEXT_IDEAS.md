@@ -67,3 +67,17 @@ prune locally whenever disk demands (nothing cites raw chains long-term).
   machine — install it on the new box by copying HANDOFF.md, or just read
   it from the repo).
 - `WORKLOG.md` = append-only experiment ledger (W-1…W-22).
+
+## Session-3 resolution (2026-08-23, W-23…W-35)
+
+- Idea A (model-build flags): CLOSED negative by W-27 — default bridgestan
+  builds are already -O3-equivalent; `-march=native` miscompiles gradients
+  (hard ban). No compile-flag lever remains.
+- Idea B (mixing-difficulty gating of early-exit): CLOSED by W-25/W-28 —
+  no static or dynamic gate preserves quality while exiting; lp-stream
+  statistics cannot separate marginal from easy models. Early-exit direction
+  dead; see FINAL_REPORT §6.
+- The live per-call levers moved to the upstream pack (stan-math/stanc3):
+  `external/upstream_candidates.md` + ready-to-paste `external/upstream_pr_kits.md`.
+- Remaining open locally: none beyond the HANDOFF queued items (upstream
+  pushes, exp-stack promotion, hier_2pl GEMM adoption — all user decisions).
