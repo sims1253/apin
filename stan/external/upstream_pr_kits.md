@@ -211,3 +211,16 @@ behavior behind an explicit opt-in. Implemented + gated on our branch
 `exp/safe-adapt-defaults` (canary: default-path draws bit-identical 12/12;
 default `--chains 4` now equals the full-warmup baseline bit-for-bit 24/24).
 Evidence: WORKLOG W-25/W-28/W-31.
+
+## Kit 4 addendum (W-50): errno-family flags join the do-not-use list
+
+`-fno-math-errno` replicates the square() win via the compiler's own
+pow(x,2)→x*x transform (−8.5% Ir, ×0.86–0.88 per-call on gp_regr) — but it
+is NOT value-neutral: the transform fires, glibc pow(x,2) differs from the
+correctly-rounded product by 1 ulp on ~0.08% of doubles (W-50 measurement,
+correcting W-33's premise), and on rounding-degenerate eigh models the
+1-ulp seed flips the eigenbasis exactly like -march=native did (kronecker_gp:
+14/100 gradient points O(1) off with sign flips). Recommendation for the
+cmdstan/bridgestan docs paragraph (Kit 4 §7c): add the errno-family flags
+(-fno-math-errno, and by extension -ffast-math class) to the
+march=native-style "known to change model results" list.
