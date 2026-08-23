@@ -1,0 +1,48 @@
+{
+ "stock": [
+  {
+   "ess_bulk_min": 5.335176006199123,
+   "ess_tail_min": 4.032258064516129,
+   "rhat_max": 2.1250375922142646,
+   "allnan_cols": 0,
+   "cols": 5462
+  },
+  {
+   "ess_bulk_min": 29.12689394340744,
+   "ess_tail_min": 40.04564337167214,
+   "rhat_max": 1.132366322471213,
+   "allnan_cols": 0,
+   "cols": 5462
+  },
+  {
+   "ess_bulk_min": 67.16965632500758,
+   "ess_tail_min": 93.95092975512529,
+   "rhat_max": 1.0463670765944457,
+   "allnan_cols": 0,
+   "cols": 5462
+  }
+ ],
+ "patched": [
+  {
+   "ess_bulk_min": 6.852341784210383,
+   "ess_tail_min": 4.032258064516129,
+   "rhat_max": 1.6759036945548245,
+   "allnan_cols": 0,
+   "cols": 5462
+  },
+  {
+   "ess_bulk_min": 411.4450195813765,
+   "ess_tail_min": 349.05651660110567,
+   "rhat_max": 1.0172836794728242,
+   "allnan_cols": 0,
+   "cols": 5462
+  },
+  {
+   "ess_bulk_min": 324.0366685325618,
+   "ess_tail_min": 308.58366459239977,
+   "rhat_max": 1.0240391541719374,
+   "allnan_cols": 0,
+   "cols": 5462
+  }
+ ]
+}

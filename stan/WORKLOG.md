@@ -3446,3 +3446,91 @@ Committed: WORKLOG.md, results/stanc3_w39.md, harness/w39/{w39_gates,
 w39_vec_gates,w39_vec_big}.py. Local (untracked): scratch/w39/
 (stanc binaries, arms, hpp arms, patch copy, edge models, Oexp sweep),
 external/stanc3 clone. Nothing pushed.
+
+## 2026-08-23 — W-40 CLOSE-OUT: cluster-aware minimal-norm adjoint SHIPPED (locally) + VALIDATED — cross-ISA divergence 1.16 -> 7e-5 (k=1e3) / 3.1e-8 (k=1e5); model FD-inconsistency 30-52% -> ~1e-6; well-separated BIT-IDENTICAL (200/200); stock NaN-at-exact-degeneracy FIXED; sampler ESS-min 48 -> 368; tree RESTORED byte-identical
+
+Executed as pre-registered. Report: results/cluster_adjoint_w40.md.
+Patch: scratch/w40/cluster_adjoint.patch (eigenvectors_sym.hpp +
+eigendecompose_sym.hpp rev callbacks; eigenvalues_sym.hpp read, NOT
+patched — its V diag(g_w) V^T callback has no gap division). Formula:
+F~_ij = 1/(w_j-w_i) if |w_i-w_j| >= kappa*max(1,|w|_inf)*eps else 0,
+kappa=1e3 primary, macro-overridable for the sweep; min-adjacent-gap
+if-guard keeps the well-separated code path VERBATIM (bit-identical by
+construction, verified). TREE RESTORED after all patched builds
+(md5-verified vs scratch/w40/backup/; patch round-trip verified).
+
+MATH SHARPENED during validation (report §1.2): for symmetric
+directions only the ANTIsymmetric combination F_ij(G'_ij - G'_ji) pairs
+survive — bounded as delta->0 (catastrophic 1/delta cancellation), and
+the bounded limit is NOT computable in doubles (SNR ~ delta/(eps*||G'||)
+<< 1 at rounding degeneracy). Hence the gauge choice (drop the coupling)
+is not merely defensible, it is the only library-level option short of
+NaN. Task-brief note recorded: NO 1/(w_i-w_j)^2 term exists in the
+first-order adjoint (squared denominators are second-order/Hessian
+terms — He et al. 2023, de Leeuw 2508.09355); the implemented
+eigenvalue adjoint term is division-free.
+
+GATE (a) DIVERGENCE COLLAPSE: model-level parity (20 pts, seed 20260822,
+default vs -mavx .so): stock max grel 1.156 (sign flips, var1 -2.50 ->
++0.39); patched 6.96e-5 (k=1e3), 1.58e-5 (1e4), 3.10e-8 (1e5), 0 sign
+flips, logp <= 1.3e-16. PRIMARY <=1e-9 NOT met; pre-registered FALLBACK
+(<=1e-6 AND >=5 orders AND monotone retained-gap-limited) PASSES at
+k=1e5 (collapse 3.7e7; residual = bottom-L retained-gap channel,
+monotone in kappa exactly as derived from the measured gap continuum —
+no bimodal cluster structure in these spectra, dump_gaps.out).
+Unit level: abs differences 1e16-1e22 -> <=1.5e13; remaining O(1) REL
+differences on the unit functionals are the required basis dependence
+of basis-DEPENDENT phis (G_V = fixed W), documented.
+
+GATE (b) FD-CONSISTENCY: model-level (logp, unc coords, Richardson
+h=1e-4): var1/bw1 at pts 1/2/7/14: stock 2.8e-1/5.1e-2/2.3e-1/5.2e-1
+and 1.3e-1/1.6e-3/1.8e-2/8.4e-2 -> patched 8.5e-7...1.4e-6 and
+6.7e-8...8.7e-7 (k=1e3; 1e-9..2e-8 at k=1e5); sigma1 control identical
+2.4e-11 both. Full pt7 scan: worst 1.6e-3 at L252 (identical across k
+AND matching stock's FD at that comp — FD truncation, not masking).
+Honest residuals documented: unit phi_inv on Sigma1/Lambda has NO valid
+FD reference at any h (h must exceed 1e-16 gaps, stay under the 1e-5
+floor); EXACT 4-fold degenerate test (mu=1): stock NaN, patched
+FD-consistent 1.1-2.2e-11 on cluster-symmetric/cross directions, gauge
+0 (vs bounded FD value) on within-cluster mixing directions — the
+uncomputable term, by design; W-35 repro phi (basis-dependent):
+|grad| 1e15 -> 1e8 (bounded), FD gap remains by necessity (no
+derivative exists). BONUS: kronecker_gp at theta=0 (Lambda == 0,
+30-fold exact degeneracy): stock grad NaN in 435/438 components,
+patched all finite (logp identical) — ready-to-file demo.
+
+GATE (c) WELL-SEPARATED UNCHANGED: 200 random well-separated symmetric
+30x30 (min gap >= 1e-6*scale, 0 skipped) through eigenvectors_sym +
+eigenvalues_sym + eigendecompose_sym: stock vs patched outputs
+BYTE-IDENTICAL (cmp). PASS.
+
+GATE (d) SAMPLER SANITY: kronecker_gp 3x4 chains, fixed walnutpie
+exp/freeze-clamp binary (inits_w36 deterministic — kronecker_gp has NO
+inits_w25 pf inits, deviation noted in pre-registration), .so the only
+difference: healthy-rep bulk/tail ESS-min stock 29.1/67.2 & 40.0/94.0
+(reps 1/2) -> patched 411.4/324.0 & 349.1/308.6; R-hat max 1.13 ->
+1.02; rep0/c0 (W-41 -inf-init) pinned in both arms identically (same
+warning both logs — init pathology, not arm-attributable). Draws NOT
+bit-identical (expected, pre-registered). Stock arm reproduces W-36
+stock_seq runs BIT-FOR-BIT (md5 match) — baseline independently
+corroborated. The 7.6x ESS improvement is mechanistic: stock adaptation
+used the 30-50%-wrong gradient. Per-call 393->397us (+1%, the mask);
+patched walls +35% from more (correct-gradient) trajectory work; ESS/s
+far ahead. PASS (exceeds).
+
+PORTING NOTE (Kit 4 gate): develop eigenvectors_sym.hpp fetched —
+callback structurally IDENTICAL (no guard; only .val() vs .val_op()
+naming) -> patch ports trivially; math is Eigen-5-independent; cannot
+compile develop here — noted for the kit.
+
+DELIVERABLES: results/cluster_adjoint_w40.md (derivation + citations,
+kappa sensitivity, 4 gates, porting note, updated ready-to-file issue +
+fix-PR kit extending Kit 4). Committed: WORKLOG.md,
+results/cluster_adjoint_w40.md, results/w40_ess.json,
+scratch/w40/{cluster_adjoint.patch, w40_unit.cpp, dump_gaps.cpp,
+cmp_grads.py, fd_model.py, run_w40.py, ess_w40.py, ccw40.sh,
+ccw40_stock.sh, build_so.sh}. Local (untracked): binaries + .out
+dumps, backup/ + patched/ headers, builds/ .so variants,
+runs/w40/ chains, repro_patch_*. No pushes. Walnutpie submodule
+untouched. Bridgestan stan-math tree PRISTINE (verified) for other
+agents.
