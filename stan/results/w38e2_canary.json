@@ -1,0 +1,69 @@
+{
+ "arma11": {
+  "chain_0": [
+   true,
+   "e35703a3",
+   "e35703a3"
+  ],
+  "chain_1": [
+   true,
+   "a122c915",
+   "a122c915"
+  ],
+  "chain_2": [
+   true,
+   "0a0f03e6",
+   "0a0f03e6"
+  ],
+  "chain_3": [
+   true,
+   "6cdba172",
+   "6cdba172"
+  ]
+ },
+ "blr": {
+  "chain_0": [
+   true,
+   "18b4c8db",
+   "18b4c8db"
+  ],
+  "chain_1": [
+   true,
+   "7ca28724",
+   "7ca28724"
+  ],
+  "chain_2": [
+   true,
+   "6055845d",
+   "6055845d"
+  ],
+  "chain_3": [
+   true,
+   "00125a97",
+   "00125a97"
+  ]
+ },
+ "hier_2pl": {
+  "chain_0": [
+   true,
+   "84571e75",
+   "84571e75"
+  ],
+  "chain_1": [
+   true,
+   "e21742bd",
+   "e21742bd"
+  ],
+  "chain_2": [
+   true,
+   "67e57817",
+   "67e57817"
+  ],
+  "chain_3": [
+   true,
+   "ba1a9daa",
+   "ba1a9daa"
+  ]
+ },
+ "ALL_IDENTICAL": true
+}

@@ -3534,3 +3534,66 @@ dumps, backup/ + patched/ headers, builds/ .so variants,
 runs/w40/ chains, repro_patch_*. No pushes. Walnutpie submodule
 untouched. Bridgestan stan-math tree PRISTINE (verified) for other
 agents.
+
+## 2026-08-23 — W-38-E2 CLOSE-OUT: error-discipline ablation, warmup-weighted — NEGATIVE RESULT, all three arms REJECTED; E1's "max-error-start would unpin blr" REFUTED
+
+Implementation (walnutpie exp/error-discipline @ b62969b, worktree
+walnutpie_w38e2 off exp/safe-adapt-defaults @ 43b6435): WarmupConfig
+knobs warmup_max_step_halvings (e2b) + warmup_max_error (e2c, overrides
+the max-error schedule when set), consumed ONLY in AdaptiveWalnuts
+(frozen sampler untouched); CLI --warmup-max-step-halvings /
+--warmup-max-error, both default off. GATE (a) CANARY: PASS 12/12 —
+default-path draws md5-identical to the pre-change binary (build_w36exp
+@ 43b6435; arma11/blr/hier_2pl x 4 chains, seed 20260819, 1000+1000).
+Knob liveness verified: pinned blr 10+10 warmup calls 312 -> 72 under
+e2b (10*7+2), sampling unchanged.
+
+ARMS (1000+1000, 4 chains serialized, 3 reps, seeds 20260819+1000*rep+c,
+inits per W-36 assignment): base / e2a (--max-error-start 5.0
+--max-error-iters 950, the EXISTING knob) / e2b (warmup halvings 3) /
+e2c (warmup error 5.0 constant). Models: arma11, lsat_model, hier_2pl,
+blr, kronecker_gp.
+
+GATE (b) QUALITY (arviz ESS-min bulk/tail + max R-hat, medians of 3
+reps, band = base per-rep spread; structurally constant GQ columns
+excluded — 4 on hier_2pl, 466 on kronecker_gp, constant in base too):
+ALL ARMS FAIL. e2a/e2c by small margins (e2a lsat tail -3.2%, e2c hier
+bulk -4.4%, several <0.4% "hairs"), e2b MATERIALLY (lsat -24%, hier_2pl
+-24% bulk — the same marginal class as W-25/W-28). e2a passes hier_2pl;
+e2b/e2c pass blr + kronecker.
+
+GATE (c) SPEED (calls/chain, median of 3): e2a/e2c FAIL 0/3 (hier_2pl
+-6.5%/-7.7% only vs the 18.2% E1 ceiling; kronecker_gp +118%/+162% —
+a loose warmup cap ADMITS long high-error trajectories, walls ~2-2.4x).
+e2b nominal 2/3 (kron -15.9%, blr -23.4% — the pin effect) but hier
++12.6%, blr rep1 calls 4.5x, and one hard kronecker_gp abort (the KNOWN
+"macro_time must be in (0, inf)" W-36 failure, hit under e2b's changed
+warmup trajectories; recorded as e2b failure count).
+
+GATE (d) BLR SHORT-WARMUP PROBE: at warmup=400 base is mostly unpinned
+(E1's "<=400" was inferred from 100/1000 endpoints; escape sits ~100-400
+for pf inits), but rep1/chain_0 stays pinned in EVERY arm incl.
+e2a8 (start 1e8). Supplementary post-hoc probes (labeled): at warmup=100
+base pins 3/4 chains/rep (bulk 5-9, 31-evals/transition signature);
+e2a8 (decaying 1e8) AND a constant 1e8 cap (--warmup-max-error 1e8)
+BOTH pin identically. The pin is NOT error-discipline-gated at all
+(caps 10x above the measured |dH|~8e6 change nothing; the failures are
+not cap-passable tolerance verdicts) — E1's "--max-error-start would
+unpin" is REFUTED; the pin is W-41's problem. e2a8 also degrades healthy
+cells (w400 rep2 bulk 612 -> 265) at 3.1x calls.
+
+VERDICT (pre-registered rule): REJECT all three arms. Mechanism lesson:
+E1's "wasted" warmup attempts double as a trajectory-growth limiter;
+harvesting them lengthens warmup trajectories or destabilizes the frozen
+sampler. Realized saving on the only production-relevant model
+(hier_2pl -6.5/-7.7% calls/wall) is below the 10% bar and costs
+marginal-class quality. E2 closed as a quality-preserving lever; the
+pack's live item is E4 (refine-aware min_micro_steps, E1 GO, m=1 in
+100% of steps — grow-m never exercised). Deviations recorded in the
+report (kronecker rep0 c0 init swap per E1; e2b kron rep0 c2 abort;
+ESS vectorization validated exact on blr).
+
+Artifacts: results/error_discipline_w38e2.md (tables + verdicts),
+results/w38e2_{canary,calls,ess,probe}.json, harness/run_w38e2.py,
+harness/analyze_w38e2.py, runs/w38e2/ (local). Worktree
+external/walnutpie_w38e2 left in place.

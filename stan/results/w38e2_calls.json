@@ -1,0 +1,330 @@
+{
+ "arma11": {
+  "base": {
+   "calls_med": 11048.0,
+   "wall_med": 0.144,
+   "calls_per_rep": [
+    10855,
+    11048,
+    11196
+   ],
+   "wall_per_rep": [
+    0.1,
+    0.1,
+    0.2
+   ]
+  },
+  "e2a": {
+   "calls_med": 10021.75,
+   "wall_med": 0.135,
+   "calls_per_rep": [
+    10022,
+    9906,
+    10208
+   ],
+   "wall_per_rep": [
+    0.1,
+    0.1,
+    0.1
+   ]
+  },
+  "e2b": {
+   "calls_med": 10805.0,
+   "wall_med": 0.142,
+   "calls_per_rep": [
+    10878,
+    10782,
+    10805
+   ],
+   "wall_per_rep": [
+    0.1,
+    0.1,
+    0.1
+   ]
+  },
+  "e2c": {
+   "calls_med": 9771.0,
+   "wall_med": 0.132,
+   "calls_per_rep": [
+    9771,
+    9736,
+    9936
+   ],
+   "wall_per_rep": [
+    0.1,
+    0.1,
+    0.1
+   ]
+  },
+  "base_calls_ratio": 1.0,
+  "base_wall_ratio": 1.0,
+  "e2a_calls_ratio": 0.9071098841419262,
+  "e2a_wall_ratio": 0.9375000000000001,
+  "e2b_calls_ratio": 0.9780050687907313,
+  "e2b_wall_ratio": 0.986111111111111,
+  "e2c_calls_ratio": 0.8844134685010862,
+  "e2c_wall_ratio": 0.9166666666666667
+ },
+ "lsat_model": {
+  "base": {
+   "calls_med": 34210.75,
+   "wall_med": 9.734,
+   "calls_per_rep": [
+    34412,
+    34131,
+    34211
+   ],
+   "wall_per_rep": [
+    9.6,
+    9.8,
+    9.7
+   ]
+  },
+  "e2a": {
+   "calls_med": 33770.0,
+   "wall_med": 10.282,
+   "calls_per_rep": [
+    33945,
+    33770,
+    32930
+   ],
+   "wall_per_rep": [
+    9.3,
+    10.4,
+    10.3
+   ]
+  },
+  "e2b": {
+   "calls_med": 33322.0,
+   "wall_med": 9.728,
+   "calls_per_rep": [
+    33322,
+    33524,
+    30292
+   ],
+   "wall_per_rep": [
+    7.7,
+    11.0,
+    9.7
+   ]
+  },
+  "e2c": {
+   "calls_med": 33810.75,
+   "wall_med": 10.238,
+   "calls_per_rep": [
+    33811,
+    34466,
+    32826
+   ],
+   "wall_per_rep": [
+    9.0,
+    11.8,
+    10.2
+   ]
+  },
+  "base_calls_ratio": 1.0,
+  "base_wall_ratio": 1.0,
+  "e2a_calls_ratio": 0.9871166226990055,
+  "e2a_wall_ratio": 1.056297513868913,
+  "e2b_calls_ratio": 0.9740213237067296,
+  "e2b_wall_ratio": 0.999383603862749,
+  "e2c_calls_ratio": 0.9883077687568966,
+  "e2c_wall_ratio": 1.0517772755290733
+ },
+ "hier_2pl": {
+  "base": {
+   "calls_med": 36698.5,
+   "wall_med": 39.328,
+   "calls_per_rep": [
+    36698,
+    36524,
+    37116
+   ],
+   "wall_per_rep": [
+    39.3,
+    40.8,
+    38.3
+   ]
+  },
+  "e2a": {
+   "calls_med": 34331.0,
+   "wall_med": 36.947,
+   "calls_per_rep": [
+    33802,
+    34331,
+    34431
+   ],
+   "wall_per_rep": [
+    36.3,
+    40.7,
+    36.9
+   ]
+  },
+  "e2b": {
+   "calls_med": 41322.75,
+   "wall_med": 46.577,
+   "calls_per_rep": [
+    41162,
+    41323,
+    42186
+   ],
+   "wall_per_rep": [
+    44.6,
+    51.9,
+    46.6
+   ]
+  },
+  "e2c": {
+   "calls_med": 33861.25,
+   "wall_med": 36.577,
+   "calls_per_rep": [
+    33786,
+    33861,
+    34320
+   ],
+   "wall_per_rep": [
+    36.6,
+    35.1,
+    36.8
+   ]
+  },
+  "base_calls_ratio": 1.0,
+  "base_wall_ratio": 1.0,
+  "e2a_calls_ratio": 0.9354878264779214,
+  "e2a_wall_ratio": 0.9394578925956062,
+  "e2b_calls_ratio": 1.12600651252776,
+  "e2b_wall_ratio": 1.1843216029292105,
+  "e2c_calls_ratio": 0.9226875757864763,
+  "e2c_wall_ratio": 0.9300498372660698
+ },
+ "blr": {
+  "base": {
+   "calls_med": 25375.0,
+   "wall_med": 0.171,
+   "calls_per_rep": [
+    24540,
+    27815,
+    25375
+   ],
+   "wall_per_rep": [
+    0.2,
+    0.3,
+    0.2
+   ]
+  },
+  "e2a": {
+   "calls_med": 24852.75,
+   "wall_med": 0.175,
+   "calls_per_rep": [
+    24308,
+    26840,
+    24853
+   ],
+   "wall_per_rep": [
+    0.2,
+    0.3,
+    0.2
+   ]
+  },
+  "e2b": {
+   "calls_med": 19434.0,
+   "wall_med": 0.104,
+   "calls_per_rep": [
+    18858,
+    125308,
+    19434
+   ],
+   "wall_per_rep": [
+    0.1,
+    1.2,
+    0.1
+   ]
+  },
+  "e2c": {
+   "calls_med": 24530.25,
+   "wall_med": 0.169,
+   "calls_per_rep": [
+    23734,
+    27382,
+    24530
+   ],
+   "wall_per_rep": [
+    0.2,
+    0.3,
+    0.2
+   ]
+  },
+  "base_calls_ratio": 1.0,
+  "base_wall_ratio": 1.0,
+  "e2a_calls_ratio": 0.9794187192118227,
+  "e2a_wall_ratio": 1.0233918128654969,
+  "e2b_calls_ratio": 0.765871921182266,
+  "e2b_wall_ratio": 0.6081871345029239,
+  "e2c_calls_ratio": 0.9667093596059113,
+  "e2c_wall_ratio": 0.9883040935672515
+ },
+ "kronecker_gp": {
+  "base": {
+   "calls_med": 34718.75,
+   "wall_med": 16.358,
+   "calls_per_rep": [
+    34561,
+    34719,
+    35614
+   ],
+   "wall_per_rep": [
+    16.4,
+    17.4,
+    16.2
+   ]
+  },
+  "e2a": {
+   "calls_med": 75720.75,
+   "wall_med": 32.069,
+   "calls_per_rep": [
+    75721,
+    76115,
+    75235
+   ],
+   "wall_per_rep": [
+    31.9,
+    34.6,
+    32.1
+   ]
+  },
+  "e2b": {
+   "calls_med": 29202.625,
+   "wall_med": 14.6095,
+   "calls_per_rep": [
+    29304,
+    29101
+   ],
+   "wall_per_rep": [
+    15.9,
+    13.3
+   ]
+  },
+  "e2c": {
+   "calls_med": 91092.5,
+   "wall_med": 38.772,
+   "calls_per_rep": [
+    89602,
+    91938,
+    91092
+   ],
+   "wall_per_rep": [
+    38.8,
+    42.1,
+    38.6
+   ]
+  },
+  "base_calls_ratio": 1.0,
+  "base_wall_ratio": 1.0,
+  "e2a_calls_ratio": 2.180975697569757,
+  "e2a_wall_ratio": 1.9604474874679056,
+  "e2b_calls_ratio": 0.8411197119711972,
+  "e2b_wall_ratio": 0.8931104046949505,
+  "e2c_calls_ratio": 2.6237263726372637,
+  "e2c_wall_ratio": 2.370216407873823
+ }
+}

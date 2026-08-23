@@ -1,0 +1,59 @@
+{
+ "probe_base": {
+  "n": 3,
+  "ess_bulk_min_med": 612.3674381863109,
+  "ess_tail_min_med": 621.3509451729093,
+  "rhat_max_med": 1.0108899089442724,
+  "uniq_med": 906,
+  "pinned_chains_tot": 1,
+  "calls_med": 23236.0,
+  "per_rep_bulk": [
+   651.2,
+   86.5,
+   612.4
+  ],
+  "per_rep_uniq": [
+   924,
+   1,
+   906
+  ]
+ },
+ "probe_e2a5": {
+  "n": 3,
+  "ess_bulk_min_med": 552.1678175681411,
+  "ess_tail_min_med": 530.4693533619007,
+  "rhat_max_med": 1.0076393393892722,
+  "uniq_med": 937,
+  "pinned_chains_tot": 1,
+  "calls_med": 22868.5,
+  "per_rep_bulk": [
+   552.9,
+   77.0,
+   552.2
+  ],
+  "per_rep_uniq": [
+   949,
+   1,
+   937
+  ]
+ },
+ "probe_e2a8": {
+  "n": 3,
+  "ess_bulk_min_med": 265.1611967442236,
+  "ess_tail_min_med": 322.96377024011224,
+  "rhat_max_med": 1.005165547098416,
+  "uniq_med": 803,
+  "pinned_chains_tot": 1,
+  "calls_med": 71013.5,
+  "per_rep_bulk": [
+   714.3,
+   65.1,
+   265.2
+  ],
+  "per_rep_uniq": [
+   853,
+   1,
+   803
+  ]
+ }
+}
