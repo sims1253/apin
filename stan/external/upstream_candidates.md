@@ -123,3 +123,22 @@ nothing here is pushed anywhere yet.
    compiler output table in the report); operational guidance unchanged —
    never build Stan models with `-march=native` (≤ ~10% upside, O(1)
    gradient instability downside), `-O3` is safe/bit-identical.
+
+7. **walnutpie: three silent-failure modes in warmup startup/freeze**
+   (W-38-E1/W-41/W-42, Aug 2026). Evidence: (a) non-finite-logp init draws
+   pin the chain silently — acceptance statistic NaNs the step adapter at
+   iteration 0, chain never moves, run ends in a freeze-time
+   `macro_time must be in (0, inf)` abort (kronecker_gp/lotka_volterra
+   repro in WORKLOG W-41) or a garbage completing chain; (b) blr-class pin
+   at warmup ≤400 — every transition burns 31 evals with all 5 halvings
+   failing (|ΔH|≈8e6), zero ESS, escapes only between 400–1000 iters;
+   error-discipline caps 10× above the measured |ΔH| change nothing
+   (W-38-E2 probe) so it is NOT tolerance-gated; (c) the frozen sampler is
+   constructed with the (possibly degenerate) adapted step as macro_time
+   with no fallback. Affected repo: walnutpie. Proposed changes (all
+   implemented on exp branches, gated): init-protocol guard (fail fast on
+   -inf file inits; 100-draw rejection loop for random inits — Stan
+   convention), freeze clamp with auditable fallback + warning
+   (exp/freeze-clamp), and the pin itself remains open (W-41 lineage).
+   Status: fixes done in fork (branches exp/init-guard, exp/freeze-clamp);
+   the pin's mechanism is documented but unresolved.
