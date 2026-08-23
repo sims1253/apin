@@ -3597,3 +3597,122 @@ Artifacts: results/error_discipline_w38e2.md (tables + verdicts),
 results/w38e2_{canary,calls,ess,probe}.json, harness/run_w38e2.py,
 harness/analyze_w38e2.py, runs/w38e2/ (local). Worktree
 external/walnutpie_w38e2 left in place.
+
+## W-37 (pre-registered BEFORE running): trajectory-geometry warmup-exit gate — measurement/separability FIRST, implementation only if separation passes
+
+HYPOTHESIS (user's, refined against W-21/W-25/W-28): warmup's late gains
+live in TRAJECTORY-GEOMETRY adaptation — the accepted-halving-level
+distribution, ladder behavior, and evals-per-transition that the E1
+accounting (results/grad_accounting_w38.md) instruments but the
+step/mass/lp gates never observed. If those distributions stabilize AND
+agree cross-chain, warmup has converged in the dimension that actually
+matters and exiting preserves quality. W-28's refutation measured
+lp-STREAM statistics (rho1/Rhat of pilot draws), not these
+search-structure statistics; E2's lesson (the "wasted" dyadic attempts
+double as a trajectory-growth limiter) says trajectory geometry is
+behaviorally load-bearing. This is the ONLY live early-exit idea left.
+
+SIGNALS (per window of 50 warmup transitions, per chain, from the E1
+counters): mean_h = mean accepted-halving level (undefined if the window
+has 0 accepted macro steps); P(h>=1); fw_share / bl_share = forward-
+wasted / backward-ladder share of window kernel evals; ept = kernel
+evals per transition. E1 anchors for magnitudes (aggregate, phase-level):
+mean_h settled hier_2pl@1000 = 0.090 vs unsettled @100 = 0.845,
+kronecker 0.61, pilots 0.55, escaped blr@1000 = 2.9; ept 16-104
+(hier warmup 20.4@1000 vs 36.5@100, blr 31 pinned vs 104 escaped).
+
+GATE FORMULAS (multi-chain controller, exit at a window boundary k,
+window 50, min_iter >= 300 = 6 full windows; per W-31 the traj gate is
+opt-in, default off, bit-identical when off):
+- T1 temporal mean-h drift: max over chains |mean_h(k) - mean_h(k-2)|
+  < 0.05 ABSOLUTE. Anchor: E1's settled-vs-unsettled adaptation
+  amplitude is ~0.75 mean-h units (0.845 -> 0.090 hier); 0.05 is <7% of
+  that amplitude.
+- T2 temporal ept drift: max over chains |ept(k) - ept(k-2)| / ept(k-2)
+  < 0.10 RELATIVE. Anchor: hier ept fell 44% between w100 and w1000
+  (36.5 -> 20.4) while W-22 measured step +170% over the last 800
+  warmup iters; 10% per 100 iters is ~1/3 of that late-growth rate.
+- T3 cross-chain spread at k: max over chain pairs |mean_h_i - mean_h_j|
+  < 0.10 absolute AND max_i ept_i / max_j ept_j - 1 < 0.20. No E1
+  anchor (E1 was single-chain); set at 2x the temporal bounds — W-25's
+  lesson that cross-chain tolerances tighter than per-chain window noise
+  never fire.
+- PIN RULE (pre-registered safety): a window with ZERO accepted macro
+  steps is the E1-measured blr pin signature (31 evals/transition, 100%
+  fw, zero-ESS sampler). Such a window is NOT CONVERGED: T1/T3 fail
+  (mean_h treated as +inf drift) regardless of how constant the other
+  signals look.
+- EXIT = T1 AND T2 AND T3. fw_share/bl_share are RECORDED but not
+  gated (their window-level behavior is unknown pre-data; gating on
+  them now would be post-hoc).
+
+MEASUREMENT-FIRST (the W-25 mistake was skipping this): before any exit
+is implemented, a separability pass on the exp/grad-accounting worktree
+(external/walnutpie_w38 @ 33cd398, DO NOT EDIT that branch) — extended
+in MY OWN worktree (external/walnutpie_w37, branch exp/traj-gate off
+exp/grad-accounting) ONLY with per-window accounting series (env-gated
+WALNUTPIE_GRAD_ACCOUNTING=1, window 50, zero behavior change; canary
+env-on vs env-off bit-identity before any measurement). Runs: full
+warmup 1000 iters, 4 chains as 4 sequential single-chain invocations,
+seeds 20260819+c, rep0 inits per the W-36 assignment (inits_w25 pf:
+arma11, blr, hier_2pl, lsat_model, eight_schools_noncentered; inits_w36
+deterministic: kronecker_gp; kron rep0 chain_0 uses the chain_1 init —
+E1's recorded deviation for the known W-36 abort cell). Models: EASY
+{blr, eight_schools_noncentered, arma11} + MARGINAL {hier_2pl,
+lsat_model} + kronecker_gp (overhead class, reported separately).
+samples=100 (separability needs only the warmup series).
+
+SEPARABILITY CRITERION (pre-registered): per model and window boundary
+k, define the normalized drift distance
+  D(k) = max( D_h(k)/0.05, D_e(k)/0.10, S_h(k)/0.10, S_e(k)/0.20 ),
+where D_h/D_e are the max-over-chains temporal drifts of T1/T2 and
+S_h/S_e the cross-chain spreads of T3 (pin rule applied to every term
+that needs mean_h). D(k) <= 1 means the W-37 gate WOULD exit at k.
+CLASSES SEPARATE iff there exists k in {400, 450, 500, 550, 600} with
+  max over EASY models of D(k) <= 0.5   (2x margin below the gate line)
+  AND min over MARGINAL models of D(k) >= 2.0  (2x margin above it).
+Class labels: PRIMARY = the brief's (easy: blr, esc, arma11; marginal:
+hier_2pl, lsat_model); SECONDARY (reported, labeled) = the W-21/W-25
+historical assignment (marginal includes arma11 — its ESS regressed
+-33% under W-21 exits). kronecker_gp is reported but not in either
+class (its known abort cell aside, E2 showed its behavior is dominated
+by the high-error-trajectory pathology, not the marginal-class
+mechanism). VERDICT RULE: PASS (primary) -> implement; PASS secondary
+only -> TUNE, no implementation, record; no separating k with margin ->
+REFUTED, STOP, no implementation — a fast refutation here closes the
+early-exit direction permanently (4th independent gate) and is a
+first-class result. Honest risks pre-registered: (a) blr may still be
+pinned or freshly-escaped at 400-600 (E1/E2: pin escape ~100-400 for pf
+inits, settled blr sits at mean_h ~2.9 / ept ~104) — if its drift
+there is large, blr simply fails exit-stability (safe direction, kills
+the speed win, not the quality claim); (b) like W-28, the classes may
+genuinely share the same trajectory-geometry settlement schedule —
+that is exactly the refutation the pass is designed to detect cheaply.
+
+IMPLEMENTATION (ONLY on separability PASS): gate lives in the
+multi-chain controller (adapt.hpp poll_controller, next to the W-25
+temporal scaffolding), fed by per-chain windowed accounting counters
+(lane-split so cross-chain spread is computable), zero cost when the
+gate is off (canary: default path bit-identical 12/12 vs the
+exp/grad-accounting binary, which is itself bit-identical to
+build_w36exp @ 43b6435). New WarmupConfig knobs traj_* default off;
+CLI opt-in flag(s). Then the 3-ARM gates:
+(a) CANARY: default-path draws md5-identical to the pre-change binary,
+    3 models (arma11, blr, hier_2pl) x 4 chains, seed 20260819,
+    1000+100, rep0 inits.
+(b) QUALITY: base (fixed warmup 1000) / naive W-25 early exit
+    (--temporal-step-tol 0.05) / traj-gate, models blr, arma11,
+    lsat_model, hier_2pl, kronecker_gp, 3 reps x 4 chains, seeds
+    20260819+1000*rep+c, W-36 init assignment; arviz bulk/tail ESS-min
+    within base's per-rep spread on the marginal class; ZERO exits
+    allowed on the marginal class (that asymmetry IS the hypothesis).
+(c) SPEED: wall + total logp_grad calls where the gate exits;
+    expectation 1.2-2x wall on the easy class where it exits; no model
+    >1.1x slower (in-process overhead confound recorded as in W-28).
+BUILD/RUN PROTOCOL: env -u LD_LIBRARY_PATH; /usr/bin/make -j2;
+clean-first after header edits; serialized sampling (<=4 cores);
+one edit -> build -> test -> commit. Deliverable either way:
+results/traj_gate_w37.md (separability analysis FIRST, published even
+if negative; then gates if implemented), harness/run_w37.py (+analyze),
+runs/w37/ local. stan repo commits: explicit paths only (never
+git add -A). Worktrees left in place.
