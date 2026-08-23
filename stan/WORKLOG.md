@@ -5074,3 +5074,75 @@ results/w45_{fidelity,ess,wall,state,hierblocks}.json.
   truncated K-iter full-data re-adaptation; mechanism data predict a
   modest ceiling (warmup share 0.52-0.56 minus re-adaptation length
   minus the measured sampling-phase inflation).
+
+## W-52: FILE-READY upstream PR branches + polished PR/issue bodies (external/pr/) — user files TODAY
+
+MISSION (release prep): per PR — a branch with clean commit history and
+meaningful message in a local clone, clean code, and a detailed body that
+identifies the issue, motivates the solution, and carries before/after
+benchmarks + references. Correctness of attribution and numbers over
+speed. NO PUSHES anywhere; exact push/PR commands produced for the user.
+
+ADDITIONAL REQUIREMENT (user, mid-task): every PR body must enable
+maintainer RE-DERIVATION — complete problem derivation (actual
+equations), step-by-step solution derivation followable WITHOUT reading
+our diff (patch positioned as "reference implementation, provided for
+convenience"), validation protocol precise enough to reproduce (model,
+N, seeds/method, parity bar, FD checks), references. Noted as the design
+principle in external/pr/README.md and applied to all four PR bodies.
+
+BRANCHES (one clean commit each; explicit-path adds only; never -A):
+1. math `eigen-cluster-aware-adjoint` @ 3f240769 (base develop 46a3133,
+   Eigen 5.0.1): W-44's uncommitted tree (verified byte-equal to
+   scratch/w44/cluster_adjoint_dev_46a3133.patch + identical test file)
+   committed as 3 files (+428/-4); test target force-recompiled and run:
+   4/4 PASS. math_dev left checked out here, clean.
+2. math `square-pow-to-mul` @ 3ef423bd (same base): scratch/w44/
+   square_fix_dev_46a3133.patch applied; square_test 2/2 +
+   squared_distance_test 7/7 recompiled and run.
+3. math `bernoulli-logit-partials-sign` @ 87026fef (same base): the
+   one-liner written directly against develop's
+   prim/prob/bernoulli_logit_lpmf.hpp (ntheta>cutoff partials branch:
+   `-exp_m_ntheta` -> promote_scalar<T_partials_return>(signs *
+   exp_m_ntheta); develop wraps sibling branches in promote_scalar —
+   matched). Shared template confirmed (rev/mix route through prim);
+   SEPARATE same-pattern site found in bernoulli_logit_glm_lpmf.hpp
+   (theta_derivative first branch) — NOT fixed in this PR, flagged in
+   the body with an offer to include or follow up. New gtest
+   `cutoff_partials_sign` (analytic signs*exp(-ntheta) + central FD of
+   the double impl, both y=1/theta=+25 and y=0/theta=-25, h=1e-3
+   staying in-branch): binary 6/6 with fix; verified to FAIL on the
+   unpatched header (stash/rebuild/run/pop cycle) — discriminating.
+4. stanc3 `fuse-eigendecompose-pair` @ c2c3b0b (base master 90c6532,
+   re-verified zero drift on a FRESH shallow clone at
+   external/stanc3_pr; external/stanc3 untouched per instruction):
+   scratch/w39/stanc3_eigh.patch applied (staged diff byte-verified
+   identical to the patch); opam switch w39; dune runtest of
+   compiler-optimizations + warn-pedantic golden dirs, then re-run with
+   --force: PASS exit 0. Single commit (9 files, +2914/-2).
+5. fork PR sims1253/stan#1 (scratch-hoist): already filed; indexed.
+
+BODIES (stan/external/pr/, tracked): README.md (index + per-item push +
+gh pr create commands incl. fork setup for account sims1253, drift-check
+snippet, could-not-verify list) + pr-1..4 + issue-5a/5b (bridgestan,
+with repro snippets + versions) + issue-6 (fused log1p proposal: design
++ reference-implementation pointer + the numbers + SSE2 latency caveat +
+MVCC-island ask) + notes-7 (walnutpie trio: init-guard 8.22s/31,002
+calls -> 0.16s/1 call loud abort; freeze-clamp auditable fallback; blr
+pin root cause + find_reasonable_step 3-defect fix, 0/48 chains pinned,
+w100-pf bulk-ESS-min 779.0 vs base 5-9, canary 12/12). Every number
+cross-checked against results/*.md before writing (key figures:
+cluster-adjoint divergence 1.156 -> 6.96e-5/3.1e-8, FD 30-52% ->
+<=1.4e-6, ESS-min 48.1 -> 367.7 median / R-hat 1.13 -> 1.02, 200/200
+well-separated bit-identical; square 66,950 -> 60,864 Ir/grad, wall
+6.681 -> 5.820 / 6.655 -> 5.640; stanc3 406.8 -> 343.4 us/call (-15.6%)
+with W-32 ceiling 5.254M -> 4.238M Ir/grad; log1p 7.772e6 -> 6.004e6
+Ir/grad (-22.8%), 1261.4 -> 1068.8 us/call (-15.3%), parity 1.24e-14 lp
+/ 2.37e-16 grad).
+
+NOT VERIFIED (recorded for the user): math develop drift past 46a3133
+(README carries the check command); CI on other platforms/compilers;
+Eigen-5 kappa sweep (kappa evidence measured on the 2.39/Eigen-3.4.0
+toolchain — guard math is Eigen-independent); GLM sign fix offered but
+not in the branch. Clones stay untracked; no pushes; machine shared
+(-j2 throughout).
