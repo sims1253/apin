@@ -5,7 +5,7 @@
 ### What the compiler emits today
 
 A Stan program that needs both the eigenvectors and the eigenvalues of a
-symmetric matrix — the natural two-call idiom, and what essentially all
+symmetric matrix, the natural two-call idiom, and what essentially all
 pre-2.34 GP / latent-factor code looks like:
 
 ```stan
@@ -14,27 +14,27 @@ vector[N] w = eigenvalues_sym(A);
 ```
 
 is compiled to two independent calls. Each stan-math primitive internally
-constructs and runs a **full `SelfAdjointEigenSolver` in
-`ComputeEigenvectors` mode**: `eigenvectors_sym` because its output is V,
+constructs and runs a full `SelfAdjointEigenSolver` in
+`ComputeEigenvectors` mode: `eigenvectors_sym` because its output is V,
 and `eigenvalues_sym` because its *reverse-mode adjoint needs V* (the
 operand adjoint `V diag(ḡ_w) Vᵀ` requires the vectors), so it cannot take
 the cheaper `EigenvaluesOnly` path. Consequences per gradient evaluation,
 for every symmetric matrix treated this way:
 
-- **2 full decompositions where 1 suffices**, both computing values *and*
+- 2 full decompositions where 1 suffices, both computing values *and*
   vectors and each discarding half the result;
 - 2 separate reverse-pass callbacks instead of 1.
 
 On a Kronecker-GP-class model (two symmetric eigendecompositions of 30×30
 and one 2×2 per gradient), eigh is 39.3% of total program instructions,
-and the model runs **4 full decompositions per gradient where 2 would
-suffice**.
+and the model runs 4 full decompositions per gradient where 2 would
+suffice.
 
 ### The combined primitive already exists
 
 `eigendecompose_sym` — one solver run, one callback, both adjoints —
 landed Aug 2023 (math PR #2931, stanc3 PR #1346; language support since
-**CmdStan 2.34**, Jan 2024). Models can be rewritten by hand:
+CmdStan 2.34, Jan 2024). Models can be rewritten by hand:
 
 ```stan
 tuple(matrix, vector) eigh_A = eigendecompose_sym(A);
@@ -42,7 +42,7 @@ matrix[N, N] Q = eigh_A.1;
 vector[N] w = eigh_A.2;
 ```
 
-and we verified this rewrite is **bit-identical** at the model level (the
+and we verified this rewrite is bit-identical at the model level (the
 two-callback adjoints and the combined callback accumulate into the same
 zero-initialized operand adjoint, and the values come from the same Eigen
 solver either way — structural, not luck). But the compiler never
@@ -54,7 +54,7 @@ models keeps paying double. This PR teaches stanc3 to do the rewrite.
 Kronecker-GP-class model; matched binaries, identical inputs; medians of
 3 interleaved reps; callgrind on a fixed seeded run; gcc 16.2.1, Zen 3.
 
-**Language-level rewrite (stan-math 5.3.0 toolchain)** — establishes the
+Language-level rewrite (stan-math 5.3.0 toolchain) — establishes the
 ceiling and the bit-identity:
 
 | arm | Ir / gradient | µs / call | draws |
@@ -62,15 +62,15 @@ ceiling and the bit-identity:
 | stock (two-call codegen) | 5.254M | 393.0 | — |
 | hand rewrite via `eigendecompose_sym` | **4.238M (−19.4%)** | **337.0 (−14.3%)** | **bit-identical** (draws md5, same 5094 gradient calls) |
 
-**Compiler-generated fusion (stanc3 develop @ 90c6532 with this patch,
-`--O1`)** — the PR's own effect:
+Compiler-generated fusion (stanc3 develop @ 90c6532 with this patch,
+`--O1`) — the PR's own effect:
 
 | arm | µs / call (3 reps) | median | ratio |
 |---|---|---|---|
 | vanilla develop stanc, `--O1` | 409.0 / 406.8 / 405.5 | 406.8 | 1 |
 | patched stanc, `--O1` (fusion) | 367.7 / 341.4 / 343.4 | 343.4 | **0.844 (−15.6%)** |
 
-with the fused `.so` **bit-identical** to the vanilla-develop `.so` on 50
+with the fused `.so` bit-identical to the vanilla-develop `.so` on 50
 random N(0,1) unconstrained points: max rel logp 0.00e+00, worst gradient
 rel-L2 0.00e+00, constrained outputs bit-identical. The compiler fusion
 realizes the language-level ceiling within noise, with no model rewrite.
@@ -79,8 +79,8 @@ realizes the language-level ceiling within noise, with no model rewrite.
 
 ### Exact rule
 
-Scan statement lists in every program block and user function. When **two
-adjacent statements** are full assignments
+Scan statement lists in every program block and user function. When two
+adjacent statements are full assignments
 
 ```
 <target1> = eigenvectors_sym(<ARG>);

@@ -25,9 +25,9 @@ matrix version):
 stan-math splits this across three primitives: `eigenvectors_sym`
 implements the first term, `eigenvalues_sym` the second, and
 `eigendecompose_sym` both. The eigenvalue term has no gap division and is
-unaffected by this PR. **The problem is the `1/(w_j − w_i)` factor in the
+unaffected by this PR. The problem is the `1/(w_j − w_i)` factor in the
 eigenvector term: it is computed with no guard, and it is only the
-derivative of anything when the eigenvalues are separated.**
+derivative of anything when the eigenvalues are separated.
 
 ### Failure mode 1: exactly repeated eigenvalues → NaN
 
@@ -36,8 +36,8 @@ whose floor pins bottom eigenvalues at exactly the jitter value; `L·Lᵀ` at
 `L = 0`), then `F` contains `1/0 = ±inf`, and `inf · 0` appears as `NaN`
 wherever the symmetric part of `VᵀḠ_V` vanishes. Concretely, the
 `kronecker_gp`-class model (Kronecker-GP with `2×2 ⊗ 30×30` kernels)
-initialized at zero parameters returns **NaN in 435 of 438 gradient
-components** (log density finite). A user initializing such a model at zero
+initialized at zero parameters returns NaN in 435 of 438 gradient
+components (log density finite). A user initializing such a model at zero
 gets NaN gradients today.
 
 ### Failure mode 2: rounding-degenerate clusters → silently wrong gradients in every build
@@ -47,12 +47,12 @@ the individual eigenvectors within the cluster are mathematically
 determined but carry condition `1/δ ~ 1e16`: any two runs that differ by a
 permitted floating-point reordering (e.g. compiling the identical model
 with any AVX-or-wider SIMD ISA, which changes GEMM accumulation order by
-~1e-15) get **different but equally valid eigenbases** (residual ~1e-14 in
+~1e-15) get different but equally valid eigenbases (residual ~1e-14 in
 both), and the `1/(w_j−w_i)` factor amplifies that basis difference to
 O(1)–O(1e3) relative gradient changes, with sign flips. Decisively, the
 default build's own gradients are Richardson-finite-difference
-**inconsistent by 30–52%** at those points — there is no "correct"
-reference that the reordered build deviates from; the adjoint is a function
+inconsistent by 30–52% at those points. There is no "correct"
+reference that the reordered build deviates from, the adjoint is a function
 of rounding noise. (This was initially suspected to be a gcc miscompile and
 refuted: not `-O` level, not FMA contraction, not the vectorizer, ASan+UBSan
 clean, clang reproduces it.)
@@ -61,13 +61,13 @@ clean, clang reproduces it.)
 
 The mathematically bounded limit exists: for a symmetric direction `E`, the
 contribution of a pair `(i, j)` involves `F_ij (G'_ij − G'_ji)` with
-`G' = VᵀḠ_V` — only the **antisymmetric** combination of `G'` pairs with
+`G' = VᵀḠ_V`, only the antisymmetric combination of `G'` pairs with
 the antisymmetric `F`, and `(G'_ij − G'_ji)/δ` stays finite as `δ → 0`
 when the downstream functional is smooth. But that difference is `O(δ)`
 mathematically while being computed with absolute error `~ε‖Ḡ_V‖` by the
-upstream tape: SNR ≈ δ/(ε‖Ḡ_V‖) ≪ 1 at rounding degeneracy. **The bounded
+upstream tape: SNR ≈ δ/(ε‖Ḡ_V‖) ≪ 1 at rounding degeneracy. The bounded
 within-cluster contribution is not computable from double-precision tape
-data**; a library-level choice is required. (This is the classical
+data, a library-level choice is required. (This is the classical
 repeated-eigenvalue situation: Friswell; Nelson; Fox–Kapoor; van der Aa et
 al. ELA 2007 solve supplemental systems that need downstream-specific
 information a primitive does not have; He et al. 2023 derive the adjoint
@@ -80,12 +80,12 @@ adjoint solve.)
 ### The gauge argument
 
 Within a cluster the eigenbasis is undetermined up to an orthogonal
-rotation `R` — the derivative of any *smooth* functional of `A` does not
+rotation `R`. The derivative of any *smooth* functional of `A` does not
 depend on `R`, only the *representation* does. The classical theory
 (Fox–Kapoor, Nelson) resolves the indeterminacy with the minimal-norm
 gauge: the within-cluster block of the eigenvector sensitivity is set to
-zero. In the adjoint this means: **zero the coupling terms whose gap is
-below the resolution at which eigenvalue pairs are identifiable**, keep the
+zero. In the adjoint this means: zero the coupling terms whose gap is
+below the resolution at which eigenvalue pairs are identifiable, keep the
 standard formula everywhere else:
 
 ```
@@ -108,7 +108,7 @@ Properties, each verifiable by direct argument or test:
    the measured model it is ≤1e-6 relative along parameter directions.
 3. **Zero behavior change outside clusters:** compute the minimum
    *adjacent* gap (Eigen returns `w` ascending, so min adjacent = min over
-   all pairs); if it is ≥ τ, run the original code path **verbatim** —
+   all pairs); if it is ≥ τ, run the original code path verbatim,
    bit-identical results on well-separated spectra (verified on 200/200
    random matrices).
 
@@ -138,7 +138,7 @@ Properties, each verifiable by direct argument or test:
    textbook adjoint `V(F∘(VᵀG_V))Vᵀ + V diag(g_w) Vᵀ` to ≤1e-12 — this
    guards against the fix overreaching.
 
-Reviewing knobs (deliberately left as discussion points, not dictated):
+Deliberately left as discussion points:
 the κ default (1e3 conservative vs 1e4–1e5 for cross-build gradient
 reproducibility), and whether masking on large clusters should emit a
 `warning()` analogous to the existing positive-definiteness checks.
@@ -198,7 +198,7 @@ kernel cost of the guard: ~1% (393–399 µs/gradient both arms).
 the touched functions pass with the patch (`rev/fun/eigenvectors_sym_test`,
 `rev/fun/eigenvalues_sym_test`, `prim/fun/eigendecompose_sym_test`, and the
 three mix counterparts — the mix tests are the FD-reference ones). The new
-test file: 4/4 PASS with the patch, **2/4 FAIL on stock** with exactly the
+test file: 4/4 PASS with the patch, 2/4 FAIL on stock with exactly the
 NaN the first failure mode predicts.
 
 ## Validation protocol (to reproduce the evidence)
@@ -258,31 +258,3 @@ Full evidence trail (four pre-registered gates, κ sweep, honest residual
 analysis) is available on request or via the public benchmark repo
 (https://github.com/sims1253/apin — `stan/results/` and `stan/WORKLOG.md`)
 — happy to attach or paste any section.
-
-## Companion issue text (file first if preferred)
-
-> **Title: Rev-mode eigenvector adjoints: NaN on exactly repeated
-> eigenvalues, silently FD-inconsistent (30–50%) on near-degenerate
-> spectra, O(1) gradient changes under any FP reordering — plus a ready
-> fix (cluster-gauged minimal-norm adjoint)**
->
-> The reverse-mode adjoints of `eigenvectors_sym` / `eigendecompose_sym`
-> compute `F_ij = 1/(w_j − w_i)` with no guard. Three measured failure
-> modes: (1) exactly repeated eigenvalues → NaN gradients (kronecker_gp
-> at θ=0: 435/438 components NaN, logp fine); (2) rounding-degenerate
-> clusters → gradients disagree with Richardson FD by 30–52% in every
-> build (components not routed through the eigenvector adjoint agree to
-> 1e-11); (3) any permitted FP reordering (e.g. `-mavx`; also clang)
-> changes gradients O(1)–O(1e3) with sign flips while logp agrees to
-> 1e-16 — not a compiler bug, since the default build is itself
-> FD-inconsistent at these points. The bounded within-cluster term is
-> not computable from double-precision tape data (SNR ≪ 1), so a
-> library-level gauge choice is required. We implemented and validated
-> the classical Fox–Kapoor/Nelson minimal-norm choice — zero couplings
-> with `|w_i − w_j| < κ·max(1,‖w‖∞)·ε`, κ = 1e3 default, well-separated
-> path byte-identical — with a PR ready: cross-ISA divergence 1.16 →
-> 7e-5 (κ=1e3) / 3.1e-8 (κ=1e5); AD-vs-FD 30–52% → ≤1.4e-6; exact
-> repeats NaN → finite; 200/200 well-separated matrices bit-identical;
-> and end-to-end sampling on the clustered model improves bulk-ESS-min
-> 48 → 368 (median of healthy reps) because adaptation no longer uses a
-> wrong gradient.

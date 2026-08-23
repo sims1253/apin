@@ -42,7 +42,7 @@ to take LLM-generated code, the text stands on its own.
 | 4 | eigh pair-fusion codegen (perf) | stan-dev/stanc3 | `fuse-eigendecompose-pair` (`external/stanc3_pr`) | `90c653249048b3aaa04bd488fcf20dceebeeda62` | `pr-4-stanc3-eigh-fusion.md` |
 | 5 | fork PR already filed | sims1253/stan | PR sims1253/stan#1 (scratch-hoist) | — | (already on GitHub; see below) |
 | 5a | issue: compile_model silent cache | stan-dev/bridgestan | — (no branch) | bridgestan 2.9.0 | `issue-5a-bridgestan-cache.md` |
-| 5b | issue: default .so unsafe under threads | stan-dev/bridgestan | — (no branch) | bridgestan 2.9.0 | `issue-5b-bridgestan-threads.md` |
+| 5b | issue: default .so unsafe under threads | stan-dev/bridgestan | — (no branch) | bridgestan 2.9.0 | **FILED as bridgestan #336 — closed as documented** (the docs cover STAN_THREADS; the point-of-misuse-signal ask was not taken). `issue-5b-bridgestan-threads.md` kept for the record |
 | 6 | issue/proposal: fused packetized log1p kernel | stan-dev/math | — (no branch) | math 5.3.0 measured; develop current | `issue-6-math-fused-log1p.md` |
 | 7 | walnutpie robustness trio (notes) | walnutpie | — | — | `notes-7-walnutpie-robustness.md` (superseded as filing text by batch-2 items 6–8; kept for the evidence summary + community cross-references) |
 

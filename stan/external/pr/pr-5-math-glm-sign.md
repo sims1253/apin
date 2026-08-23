@@ -51,10 +51,7 @@ constant in `alpha`, `beta` and `x`):
 
 The code instead returns `−exp_m_ytheta` — the derivative *of the value*
 with respect to `ytheta` without the chain-rule factor. That is correct
-only when `signs = −1` (`y = 0`). **For instances with `y = 1` and
-`theta_i > 20` (and, symmetrically, `y = 0` with `theta_i < −20`) the
-derivative that flows into every downstream adjoint has the wrong
-sign.** The propagated adjoints are
+only when `signs = −1` (`y = 0`). For instances with `y = 1` and `theta_i > 20` — and, symmetrically, `y = 0` with `theta_i < −20` — the derivative that flows into every downstream adjoint has the wrong sign. The propagated adjoints are
 
 ```
 ∂lp/∂beta  = xᵀ · theta_derivative        (matrix path)
@@ -113,21 +110,21 @@ an OpenCL test run.
 
 ## Validation
 
-- **Added regression test** (`AgradRev.bernoulli_glm_cutoff_partials_sign`
+- Added regression test (`AgradRev.bernoulli_glm_cutoff_partials_sign`
   in `test/unit/math/rev/prob/bernoulli_logit_glm_lpmf_test.cpp`): a
   1×1 design matrix `x = [1]`, `alpha = 0`, `beta = ±(cutoff + 5) = ±25`,
   for both `y = 1, theta = +25` and `y = 0, theta = −25` (both put
   `ytheta = signs · theta` above the cutoff). It checks the autodiff
-  gradients of **both** `beta` and `alpha` against (a) the analytic
+  gradients of `beta` and `alpha` against (a) the analytic
   value `signs * exp(−ytheta)` and (b) central finite differences of
   the double implementation with `h = 1e-3` — small enough that both FD
   points stay inside the same branch, large enough that the
   ~1.4e-11-magnitude values subtract cleanly.
-- **The test fails on the unpatched code** (verified by rebuild: for
+- The test fails on the unpatched code (verified by rebuild: for
   `y = 1, theta = 25` the adjoints come back as
   `−1.3887943864964021e-11` where `+1.3887943864964021e-11` is
   expected — off by exactly `2·exp(−25)`) and passes with the fix.
-  Full test binary with the fix: **23/23** (the file's existing
+  Full test binary with the fix: 23/23 (the file's existing
   value-parity and broadcast tests are unaffected — the bug is in the
   derivative array only).
 - The `mix` distribution test for this function (FD-reference tests

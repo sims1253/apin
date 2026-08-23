@@ -27,24 +27,22 @@ assert (t1, inode1) == (t2, inode2)   # PASSES: same object returned, nothing re
 assert m2.model_info()["stanc_version"]  # no field reflects the requested build mode
 ```
 
-The second call returns the *default-mode* `.so`: same mtime, same inode,
-no warning. (We hit this in practice shipping default binaries into an
-experiment that believed it had `STAN_THREADS=True` builds; caught only by
-md5-comparing the binaries. Related: requesting different `CXXFLAGS`
-against an already-built pair behaves the same.)
+The second call returns the default-mode `.so`: same mtime, same inode, no
+warning. I hit this in practice: an experiment shipped default binaries
+while believing it had `STAN_THREADS=True` builds. Only md5-comparing the
+binaries caught it. Requesting different `CXXFLAGS` against an
+already-built pair behaves the same.
 
 ## Why it bites
 
-The model `.so`'s name does not encode the build mode at all — in the 2.9.0
-Makefile only the *bridge* object gets a `_threads` suffix
+The model `.so`'s name does not encode the build mode. In the 2.9.0
+Makefile only the bridge object gets a `_threads` suffix
 (`bridgestan[_threads].o`); the model target is `<stem>_model.so` either
-way. So two independent hazards compound:
+way. So two hazards compound: the artifact name does not distinguish build
+modes, and the cache check does not compare the requested `make_args`
+with what produced the cached artifact.
 
-1. there is nothing in the artifact name distinguishing build modes, and
-2. the cache check does not compare the requested `make_args` with what
-   produced the cached artifact.
-
-## Suggested directions (any one of these would have caught our case)
+## Suggested directions (any one of these would have caught my case)
 
 - Encode the relevant build mode (at minimum the `STAN_*` variables, or a
   hash of the effective make args) into the `.so` name or a sidecar stamp
