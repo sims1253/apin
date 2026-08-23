@@ -3952,3 +3952,108 @@ Worktree external/walnutpie_w38e4 left in place. Deviations recorded in
 the report (base arm reused from E2 per canary 20/20; t4/t2 TUNE arms
 added after the g-aborts per the pre-registered TUNE branch; kronecker
 rep0 c0 chain_1 init per E1/E2).
+
+## W-42 (pre-registered BEFORE running): init-protocol guard — never start a chain at a non-finite-logp position (the ROOT fix behind the W-41 pathology)
+
+DIAGNOSIS (W-41, verified): both W-36 abort cells and both W-41
+"recoveries" share one root cause — the init protocol hands the sampler
+a position where the model logp is non-finite (-inf at the
+kronecker_gp rep0/c0 and lotka_volterra rep1/c0 inits_w36 draws; no
+exception fires — load_stan maps model errors to lp=-inf). NO init-time
+finitess check exists anywhere: the first logp evaluation happens in
+InitConfigBuilder::masses() (config.hpp), whose lp output is DISCARDED
+into `lp_to_discard` while only the gradient seeds the mass. The first
+warmup transition then starts from that position, the within-orbit
+acceptance statistic NaNs (inf - inf), Adam NaNs at iteration 0, the
+chain is pinned for the whole budget, and (pre-W-41) the freeze throws
+/ (post-W-41) the run "completes" with a zero-ESS chain that poisons
+R-hat. Stan convention (cmdstan/bridgestan): random init REJECTS
+non-finite-logp draws before warmup, retrying up to 100 times.
+
+FIX DESIGN (guard is a PRE-WARMUP check; finite inits behave exactly as
+today in both modes):
+- (a) FILE-INIT (--init-file): the provided draw is the draw — no
+  resampling. masses() already evaluates (logp, grad) at each chain's
+  position; W-42 RECORDS the lp (today discarded). The CLI checks
+  finiteness immediately after the builder runs, BEFORE the step-size
+  heuristic probe and before the AdaptiveWalnuts is constructed (zero
+  warmup consumption): non-finite -> loud multi-line stderr banner
+  naming chain, file, and the lp value + throw std::invalid_argument
+  (the CLI's existing init-error convention, e.g. dimension mismatch ->
+  uncaught -> terminate, exit code non-zero). Rationale: a pinned chain
+  is strictly worse than an early error — it burns the whole budget and
+  produces zero-ESS draws.
+- (b) RANDOM-INIT (CLI default when no file): rejection loop — draw,
+  check logp finite, retry, up to --init-tries draws (NEW knob, default
+  100, pre-registered per the Stan convention). A model eval error
+  (ret!=0 -> lp=-inf) or a thrown exception during the check counts as
+  rejection. One stderr line per rejected draw (WALNUTS WARNING prefix,
+  the W-41 auditable channel); all N exhausted -> loud error + throw.
+  RNG DISCIPLINE (pre-registered): candidates come from the chain's
+  BridgeStan init RNG stream (model.make_rng(seed) single-chain;
+  seed+c multi-chain), exactly one initialize() per attempt consumed
+  strictly in order, BEFORE any warmup consumption (warmup runs on the
+  separate std::mt19937_64{seed[+c]} stream, untouched by init
+  retries); the first ACCEPTED draw is the final init-stream
+  consumption and then seeds the chain exactly as today; a finite
+  first draw consumes one initialize() and reproduces today's stream
+  state bit-for-bit. Candidate checks are direct model.logp_grad calls
+  outside the timing stanzas (the accepted position is re-evaluated by
+  the builder's mass seeding exactly as before, so the random path adds
+  one eval per accepted draw + one per rejected draw; the file path adds
+  ZERO evals).
+- (c) NO behavior change for finite inits: the guard reads values
+  already computed; no warmup arithmetic, RNG or output changes.
+- (d) E5-HYGIENE THREADING (only if trivial; guard ships first):
+  masses() also records the raw init grad next to the lp;
+  InitChainConfig carries the optional (init_grad, init_logp) pair and
+  the AdaptiveWalnuts ctor seeds its W-23 endpoint cache
+  (cached_grad_/cached_logp_) from it, so the FIRST warmup transition
+  skips its start-position re-evaluation — the same duplicate-eval
+  elimination W-23 did for transitions and the freeze (the mass seed
+  eval and the first transition's start eval are the same
+  (position, function) pair; reused doubles change no arithmetic, W-23
+  precedent). Saving: 1 logp_grad call per chain (W-38's "2 boundary
+  evals" become 1). Dropped without ceremony if it turns out
+  non-trivial.
+
+GATES (pre-registered):
+(a) CANARY bit-identity: default-path draws (CLI defaults, warmup=1000
+    samples=1000, 4 SEQUENTIAL single-chain invocations, seeds
+    20260819+c) md5-identical to the exp/safe-adapt-defaults binary
+    (external/walnutpie/build_w36exp @ 43b6435): 12/12 file-init cells
+    (hier_2pl + lsat_model rep0 inits_w25 pf,
+    radon_partially_pooled_noncentered rep0 inits_w36, chains 0-3) PLUS
+    4 random-init cells (radon_partially_pooled_noncentered, NO
+    --init-file, seeds 20260819+c) = 16/16 required. If the E5
+    threading is implemented, draws must STILL be bit-identical.
+(b) FAIL-FAST: the two known -inf file-init cells — kronecker_gp rep0
+    c0 seed 20260819, lotka_volterra rep1 c0 seed 20261819, inits_w36
+    chain_0.txt (regenerated via harness/gen_w36_inits.py's exact
+    method if missing), warmup=1000 samples=1000 — now error
+    IMMEDIATELY (before any warmup iteration; 1 logp_grad call total =
+    the masses seed eval). Record error text + exit code + wall vs both
+    the W-41 pinned 1000-iter completion
+    (external/walnutpie_w41/build_w41 binary, same cell) and the
+    pre-W-41 freeze abort (build_w36exp, rc=134 after 32001 calls).
+(c) RANDOM-INIT RECOVERY: a random-init kronecker_gp run (no
+    --init-file) with a seed whose FIRST draw(s) land at non-finite lp
+    (found by seed trial — per-retry warnings in the log) COMPLETES
+    rc=0 having started from a finite-lp draw; retries DETERMINISTIC:
+    two identical invocations -> identical retry-warning counts +
+    md5-identical CSVs.
+(d) NO COLLATERAL: 2 healthy cells outside the canary set
+    (eight_schools_centered rep1 c2 seed 20261821, diamonds rep2 c1
+    seed 20262820 — the W-41 cells) md5-identical to build_w36exp.
+
+BUILD/RUN PROTOCOL: separate worktree external/walnutpie_w42, branch
+exp/init-guard off exp/safe-adapt-defaults @ 43b6435; build_w42 INSIDE
+the worktree mirroring the build_w36exp configure (empty
+CMAKE_BUILD_TYPE, /usr/sbin/c++, default flags); env -u
+LD_LIBRARY_PATH; /usr/bin/make -j2; header edits => clean-first
+rebuild; serialized sampling (OMP_NUM_THREADS=1, one chain process at
+a time — other agents share cores); one edit -> build -> test ->
+commit. Deliverable: results/init_guard_w42.md (design, gates, the
+fail-fast before/after) + harness/run_w42.py; runs/w42/ local.
+Commits: worktree branch exp/init-guard; stan repo explicit paths only
+(never git add -A). Worktree left in place.
