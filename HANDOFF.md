@@ -2,8 +2,8 @@
 
 Canonical records live in the repo — this skill only routes you to them:
 
-1. `WORKLOG.md` (append-only, W-1 … W-34) — every experiment, verdict, retraction.
-2. `results/FINAL_REPORT.md` — consolidated findings incl. the session-2 and session-3 addenda.
+1. `WORKLOG.md` (append-only, W-1 … W-42) — every experiment, verdict, retraction.
+2. `results/FINAL_REPORT.md` — consolidated findings incl. session-2/3/4 addenda.
 3. `external/upstream_audit_walnutpie.md` — provenance of every bug we found (§4: STAN_THREADS hazard).
 4. `external/upstream_candidates.md` — the ranked upstream push list (stan-math/stanc3/bridgestan).
 
@@ -32,22 +32,37 @@ Local working tree: `/home/m0hawk/Documents/apin/stan`.
   aliased -j12 — call `/usr/bin/make`; `install_cmdstan` uses `--cores`;
   multi-chain sampling needs STAN_THREADS=1 .so (`bs_models_threads/`).
 
+## Session-4 status (W-35 … W-42, all closed — see FINAL_REPORT §7)
+
+- Verified end-to-end: exp tip vs stock = **2.93× geomean**, 28/28 cells
+  bit-identical (W-36). Warmup early-exit CLOSED by 4 gates (W-37 separability:
+  no windowed statistic separates the classes). Fewer-gradients pack closed
+  (E1 shipped as standing tool; E2/E4 rejected with mechanism; E5 in W-42).
+- Upstream packages READY (external/upstream_pr_kits.md): stanc3 eigh
+  pair-fusion (patch + tests + validation, W-39); stan-math cluster-aware
+  eigh adjoint (patch + gates incl. kronecker ESS 29→411, W-40); square()
+  pow→mul (W-33); bridgestan cache/threads issues (W-27/W-31); walnutpie
+  safe-defaults + silent-failure trio (candidate 7, exp-branch fixes).
+- Robustness: −inf-init fail-fast + random-init retry policy (exp/init-guard),
+  freeze clamp (exp/freeze-clamp); blr short-warmup pin mechanism still open.
+- walnutpie exp branches all local, per-idea; suggested promotion order in
+  FINAL_REPORT §7. Pre-W-40 kronecker quality numbers carry the wrong-gradient
+  caveat.
+
 ## Queued fresh-session items (each is a ONE-decision start; do NOT batch them)
 
-### A'. Upstream pushes (the endgame — user drives these)
-- The evidence pack is `external/upstream_candidates.md` (6 candidates, ranked,
-  with repro pointers). Best first: stan-math `square()` pow→mul one-liner
-  (W-33); stanc3 eigh pair-fusion (W-32); bridgestan cache/threading signals
-  (W-27/W-31). `-march=native` miscompile needs a gcc- or stan-math-side
-  reproducer minimization before reporting.
-### B'. walnutpie exp-stack promotion (user decision)
-- The exp stack (`exp/safe-adapt-defaults` @ 43b6435 tip) carries W-23/W-25/
-  W-28/W-30/W-31. If the user wants any of it as real walnutpie history, the
-  per-idea branches cherry-pick cleanly (they were stacked in that order).
-### C'. hier_2pl GEMM model variant adoption (harness decision)
-- `harness/w34/hier_2pl_gemm.stan` (−25% µs/call, ESS-clean). Adopting it as
-  the CORE_SET model changes benchmark definitions — one decision, then a
-  full grid re-baseline.
+### A''. Upstream pushes (user drives; kits ready in external/upstream_pr_kits.md)
+- File order suggestion: stan-math cluster adjoint (strongest: ESS evidence),
+  stanc3 peephole (patch carries tests), square() one-liner, bridgestan
+  issues, walnutpie robustness set. Eigen-5 revalidation of Kit 4's repro
+  before filing (gate noted in kit).
+### B''. walnutpie exp-stack promotion (user decision)
+- Cherry-pick order suggestion: init-guard → freeze-clamp → grad-accounting
+  (tool); reject error-discipline + grow-m (history only); then re-run W-36
+  benchmark on the promoted stack.
+### C''. Open mechanisms (research-grade)
+- blr-class short-warmup pin (not tolerance-gated; W-38-E2 probe data).
+- kronecker_gp re-baseline under the fixed adjoint (only if W-40 adopted).
 
 ## Protocol (violating these produced both retractions)
 
