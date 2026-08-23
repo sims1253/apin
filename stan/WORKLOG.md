@@ -5027,3 +5027,50 @@ op-level batch API (design doc). Deliverable: results/sota_arena_w47.md;
 artifacts scratch/w47/ + harness/w47/alloc_edges.py; profile dumps
 scratch/w47/out/profile/{stock,patched}. No walnutpie changes; no
 pushes; bridgestan pristine (md5 OK; hardlink copy deleted).
+
+## 2026-08-23 — W-45 CLOSE-OUT: REJECT (negative result) — the transplanted geometry is a DIFFERENT posterior's, not a noisier full-data one; mechanism fully measured
+
+Executed as pre-registered (harness-only; walnutpie untouched, exp-tip
+binary read-only, no submodule rebuilds). Full report:
+results/subsampled_warmup_w45.md. Artifacts: harness/w45/ (make_subdata,
+build_subso, w45_run.cpp, run_w45.py, analyze_w45.py), runs/w45/ local,
+results/w45_{fidelity,ess,wall,state,hierblocks}.json.
+
+- TOOL FIDELITY: 48/48 toolbase CSVs md5-identical to stan_cli base — the
+  transplant runs on a bit-exact clone of the reference path. Mechanism
+  (documented, not a CLI flag): standalone w45_run.cpp consuming the
+  header-only walnutpie; SAMPLE mode constructs WalnutsSampler directly
+  from the dumped frozen (inv_mass, step, min_micro, position).
+- GATE (a) QUALITY: FAIL — no arm passes on the marginal class (all 4
+  arms fail hier_2pl, lsat_model, arma11; hier collapses to bulk-min
+  4-97 vs base 625, rhat to 3.4, up to 5/12 pinned chains; only
+  blr/v1_a25 passes, a 6-param N=100 model). REJECT per the
+  pre-registered rule.
+- GATE (b) WALL: subsample warmup prices ~alpha AND slightly fewer
+  calls (hier a25 17.6k vs 20.5k) — but the transplanted SAMPLER burns
+  1.2-1.9x base gradient calls (wrong metric -> deeper ladders), eating
+  the win on hier (38% -> net 0.62x at a25, 24% at a10). blr v2's
+  "90% saved" cells are PINNED chains (fast garbage). Control arma11: no
+  reliable win, as expected.
+- GATE (c) STATE TRANSFER (the result): STEP transfers (median
+  log-ratio +0.03..+0.26; V2's re-tune lands no closer AND is worse on
+  hier/lsat — a global step cannot repair per-component metric
+  mis-scaling); min_micro 1->1 everywhere. INV_MASS does NOT transfer:
+  hier med |log-ratio| 1.18 (a25) / 1.70 (a10), block split theta
+  1.19->1.70, xi2 1.49->3.01 vs population blocks 0.33-1.07 — exactly
+  the data-dominated per-person/per-item components (632/669 of hier's
+  dims); lsat's constructed retained-vs-prior-only split shows 0.07-0.19
+  vs 0.35. POSITION does not transfer: full-data logp at the subsample
+  warmup endpoint is -1,247 (a25) / -1,896 (a10) below base's on hier.
+  The optimistic premise ("noisier but near-sufficient curvature
+  estimate") is refuted: per-component posterior width scales with each
+  component's retained-row count; subsample warmup adapts toward a
+  different target (why subsampling-MCMC uses importance corrections,
+  not state transplants).
+- VERDICT + library question: REJECT V1/V2 as implemented; a library
+  in-warmup .so swap is NOT worth proposing in this form (failure is
+  statistical, not I/O). Recorded follow-up candidate (needs its own
+  pre-registration): two-phase warmup — alpha-subsample early phase +
+  truncated K-iter full-data re-adaptation; mechanism data predict a
+  modest ceiling (warmup share 0.52-0.56 minus re-adaptation length
+  minus the measured sampling-phase inflation).

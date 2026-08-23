@@ -1,0 +1,610 @@
+{
+ "arma11": {
+  "base": {
+   "n": 3,
+   "ess_bulk_min_med": 2939.0412057873427,
+   "ess_tail_min_med": 2528.5802751418423,
+   "rhat_max_med": 1.001641341543026,
+   "per_rep_bulk": [
+    2939.0,
+    3042.8,
+    2601.4
+   ],
+   "per_rep_tail": [
+    2574.8,
+    2528.6,
+    2395.7
+   ],
+   "per_rep_rhat": [
+    1.0016,
+    1.002,
+    1.0016
+   ],
+   "pinned_chains": 0,
+   "quality_pass": true,
+   "vs_base_bulk": 1.0,
+   "vs_base_tail": 1.0
+  },
+  "toolbase": {
+   "n": 3,
+   "ess_bulk_min_med": 2939.0412057873427,
+   "ess_tail_min_med": 2528.5802751418423,
+   "rhat_max_med": 1.001641341543026,
+   "per_rep_bulk": [
+    2939.0,
+    3042.8,
+    2601.4
+   ],
+   "per_rep_tail": [
+    2574.8,
+    2528.6,
+    2395.7
+   ],
+   "per_rep_rhat": [
+    1.0016,
+    1.002,
+    1.0016
+   ],
+   "pinned_chains": 0,
+   "quality_pass": true,
+   "vs_base_bulk": 1.0,
+   "vs_base_tail": 1.0
+  },
+  "v1_a25": {
+   "n": 3,
+   "ess_bulk_min_med": 2705.399137480254,
+   "ess_tail_min_med": 2273.2844055514265,
+   "rhat_max_med": 1.0016388408770713,
+   "per_rep_bulk": [
+    2705.4,
+    2439.8,
+    2789.5
+   ],
+   "per_rep_tail": [
+    2196.2,
+    2273.3,
+    2455.6
+   ],
+   "per_rep_rhat": [
+    1.0028,
+    1.0016,
+    1.0006
+   ],
+   "pinned_chains": 0,
+   "quality_pass": false,
+   "vs_base_bulk": 0.921,
+   "vs_base_tail": 0.899
+  },
+  "v1_a10": {
+   "n": 3,
+   "ess_bulk_min_med": 3904.414231173356,
+   "ess_tail_min_med": 1329.5831243798395,
+   "rhat_max_med": 1.0029807097328909,
+   "per_rep_bulk": [
+    4358.6,
+    3870.3,
+    3904.4
+   ],
+   "per_rep_tail": [
+    1658.2,
+    1194.0,
+    1329.6
+   ],
+   "per_rep_rhat": [
+    1.003,
+    1.003,
+    1.005
+   ],
+   "pinned_chains": 0,
+   "quality_pass": false,
+   "vs_base_bulk": 1.328,
+   "vs_base_tail": 0.526
+  },
+  "v2_a25": {
+   "n": 3,
+   "ess_bulk_min_med": 1258.3412717187953,
+   "ess_tail_min_med": 1172.4562087842328,
+   "rhat_max_med": 1.0063581671030768,
+   "per_rep_bulk": [
+    796.5,
+    1258.3,
+    1477.8
+   ],
+   "per_rep_tail": [
+    992.5,
+    1172.5,
+    1460.7
+   ],
+   "per_rep_rhat": [
+    1.0064,
+    1.013,
+    1.004
+   ],
+   "pinned_chains": 0,
+   "quality_pass": false,
+   "vs_base_bulk": 0.428,
+   "vs_base_tail": 0.464
+  },
+  "v2_a10": {
+   "n": 3,
+   "ess_bulk_min_med": 2265.9111572324177,
+   "ess_tail_min_med": 1086.2079070242903,
+   "rhat_max_med": 1.0083212926753033,
+   "per_rep_bulk": [
+    2237.5,
+    2265.9,
+    2345.4
+   ],
+   "per_rep_tail": [
+    1086.2,
+    1102.9,
+    574.1
+   ],
+   "per_rep_rhat": [
+    1.0083,
+    1.0071,
+    1.0174
+   ],
+   "pinned_chains": 0,
+   "quality_pass": false,
+   "vs_base_bulk": 0.771,
+   "vs_base_tail": 0.43
+  }
+ },
+ "lsat_model": {
+  "base": {
+   "n": 3,
+   "ess_bulk_min_med": 730.0799291785946,
+   "ess_tail_min_med": 1209.8758630103857,
+   "rhat_max_med": 1.011244377934343,
+   "per_rep_bulk": [
+    730.1,
+    949.5,
+    712.9
+   ],
+   "per_rep_tail": [
+    1162.5,
+    1467.0,
+    1209.9
+   ],
+   "per_rep_rhat": [
+    1.0102,
+    1.0116,
+    1.0112
+   ],
+   "pinned_chains": 0,
+   "quality_pass": true,
+   "vs_base_bulk": 1.0,
+   "vs_base_tail": 1.0
+  },
+  "toolbase": {
+   "n": 3,
+   "ess_bulk_min_med": 730.0799291785946,
+   "ess_tail_min_med": 1209.8758630103857,
+   "rhat_max_med": 1.011244377934343,
+   "per_rep_bulk": [
+    730.1,
+    949.5,
+    712.9
+   ],
+   "per_rep_tail": [
+    1162.5,
+    1467.0,
+    1209.9
+   ],
+   "per_rep_rhat": [
+    1.0102,
+    1.0116,
+    1.0112
+   ],
+   "pinned_chains": 0,
+   "quality_pass": true,
+   "vs_base_bulk": 1.0,
+   "vs_base_tail": 1.0
+  },
+  "v1_a25": {
+   "n": 3,
+   "ess_bulk_min_med": 364.3814705871078,
+   "ess_tail_min_med": 520.1634744088461,
+   "rhat_max_med": 1.0172443132355238,
+   "per_rep_bulk": [
+    441.5,
+    364.4,
+    344.4
+   ],
+   "per_rep_tail": [
+    358.2,
+    567.8,
+    520.2
+   ],
+   "per_rep_rhat": [
+    1.0172,
+    1.0187,
+    1.0152
+   ],
+   "pinned_chains": 0,
+   "quality_pass": false,
+   "vs_base_bulk": 0.499,
+   "vs_base_tail": 0.43
+  },
+  "v1_a10": {
+   "n": 3,
+   "ess_bulk_min_med": 20.80947918371413,
+   "ess_tail_min_med": 11.643986402697534,
+   "rhat_max_med": 1.1359348394485462,
+   "per_rep_bulk": [
+    20.8,
+    7.0,
+    69.6
+   ],
+   "per_rep_tail": [
+    11.6,
+    4.0,
+    34.4
+   ],
+   "per_rep_rhat": [
+    1.1359,
+    1.5743,
+    1.0473
+   ],
+   "pinned_chains": 1,
+   "quality_pass": false,
+   "vs_base_bulk": 0.029,
+   "vs_base_tail": 0.01
+  },
+  "v2_a25": {
+   "n": 3,
+   "ess_bulk_min_med": 96.93132166614323,
+   "ess_tail_min_med": 38.36303173672901,
+   "rhat_max_med": 1.0312408506292676,
+   "per_rep_bulk": [
+    479.4,
+    11.4,
+    96.9
+   ],
+   "per_rep_tail": [
+    548.7,
+    4.9,
+    38.4
+   ],
+   "per_rep_rhat": [
+    1.0167,
+    1.274,
+    1.0312
+   ],
+   "pinned_chains": 0,
+   "quality_pass": false,
+   "vs_base_bulk": 0.133,
+   "vs_base_tail": 0.032
+  },
+  "v2_a10": {
+   "n": 3,
+   "ess_bulk_min_med": 59.8777582502661,
+   "ess_tail_min_med": 26.104029462338936,
+   "rhat_max_med": 1.0418162746844009,
+   "per_rep_bulk": [
+    59.9,
+    100.7,
+    10.5
+   ],
+   "per_rep_tail": [
+    26.1,
+    49.3,
+    4.1
+   ],
+   "per_rep_rhat": [
+    1.0418,
+    1.0387,
+    1.3023
+   ],
+   "pinned_chains": 0,
+   "quality_pass": false,
+   "vs_base_bulk": 0.082,
+   "vs_base_tail": 0.022
+  }
+ },
+ "hier_2pl": {
+  "base": {
+   "n": 3,
+   "ess_bulk_min_med": 624.7147165261678,
+   "ess_tail_min_med": 707.5539340302862,
+   "rhat_max_med": 1.0092775347998875,
+   "per_rep_bulk": [
+    594.4,
+    662.0,
+    624.7
+   ],
+   "per_rep_tail": [
+    794.5,
+    707.6,
+    672.5
+   ],
+   "per_rep_rhat": [
+    1.0124,
+    1.0092,
+    1.0093
+   ],
+   "pinned_chains": 0,
+   "quality_pass": true,
+   "vs_base_bulk": 1.0,
+   "vs_base_tail": 1.0
+  },
+  "toolbase": {
+   "n": 3,
+   "ess_bulk_min_med": 624.7147165261678,
+   "ess_tail_min_med": 707.5539340302862,
+   "rhat_max_med": 1.0092775347998875,
+   "per_rep_bulk": [
+    594.4,
+    662.0,
+    624.7
+   ],
+   "per_rep_tail": [
+    794.5,
+    707.6,
+    672.5
+   ],
+   "per_rep_rhat": [
+    1.0124,
+    1.0092,
+    1.0093
+   ],
+   "pinned_chains": 0,
+   "quality_pass": true,
+   "vs_base_bulk": 1.0,
+   "vs_base_tail": 1.0
+  },
+  "v1_a25": {
+   "n": 3,
+   "ess_bulk_min_med": 96.83658002401691,
+   "ess_tail_min_med": 114.95595193364156,
+   "rhat_max_med": 1.0360365453968499,
+   "per_rep_bulk": [
+    98.7,
+    96.8,
+    24.7
+   ],
+   "per_rep_tail": [
+    133.8,
+    115.0,
+    34.4
+   ],
+   "per_rep_rhat": [
+    1.0304,
+    1.036,
+    1.1187
+   ],
+   "pinned_chains": 0,
+   "quality_pass": false,
+   "vs_base_bulk": 0.155,
+   "vs_base_tail": 0.162
+  },
+  "v1_a10": {
+   "n": 3,
+   "ess_bulk_min_med": 4.428259229438096,
+   "ess_tail_min_med": 4.032258064516129,
+   "rhat_max_med": 3.4238666052049234,
+   "per_rep_bulk": [
+    4.4,
+    4.4,
+    6.0
+   ],
+   "per_rep_tail": [
+    4.0,
+    4.0,
+    4.0
+   ],
+   "per_rep_rhat": [
+    3.4239,
+    3.6116,
+    1.802
+   ],
+   "pinned_chains": 5,
+   "quality_pass": false,
+   "vs_base_bulk": 0.007,
+   "vs_base_tail": 0.006
+  },
+  "v2_a25": {
+   "n": 3,
+   "ess_bulk_min_med": 4.602838053916431,
+   "ess_tail_min_med": 4.032258064516129,
+   "rhat_max_med": 2.885853786541696,
+   "per_rep_bulk": [
+    4.8,
+    4.1,
+    4.6
+   ],
+   "per_rep_tail": [
+    4.0,
+    4.0,
+    4.0
+   ],
+   "per_rep_rhat": [
+    2.5443,
+    9.4099,
+    2.8859
+   ],
+   "pinned_chains": 5,
+   "quality_pass": false,
+   "vs_base_bulk": 0.007,
+   "vs_base_tail": 0.006
+  },
+  "v2_a10": {
+   "n": 3,
+   "ess_bulk_min_med": 6.546734189528763,
+   "ess_tail_min_med": 4.032258064516129,
+   "rhat_max_med": 1.6318748210845637,
+   "per_rep_bulk": [
+    6.5,
+    6.9,
+    5.4
+   ],
+   "per_rep_tail": [
+    4.0,
+    4.0,
+    4.0
+   ],
+   "per_rep_rhat": [
+    1.6319,
+    1.6239,
+    2.1425
+   ],
+   "pinned_chains": 3,
+   "quality_pass": false,
+   "vs_base_bulk": 0.01,
+   "vs_base_tail": 0.006
+  }
+ },
+ "blr": {
+  "base": {
+   "n": 3,
+   "ess_bulk_min_med": 510.2887607996537,
+   "ess_tail_min_med": 703.9176775971736,
+   "rhat_max_med": 1.010950269371216,
+   "per_rep_bulk": [
+    545.5,
+    432.9,
+    510.3
+   ],
+   "per_rep_tail": [
+    779.0,
+    652.2,
+    703.9
+   ],
+   "per_rep_rhat": [
+    1.012,
+    1.011,
+    1.0098
+   ],
+   "pinned_chains": 0,
+   "quality_pass": true,
+   "vs_base_bulk": 1.0,
+   "vs_base_tail": 1.0
+  },
+  "toolbase": {
+   "n": 3,
+   "ess_bulk_min_med": 510.2887607996537,
+   "ess_tail_min_med": 703.9176775971736,
+   "rhat_max_med": 1.010950269371216,
+   "per_rep_bulk": [
+    545.5,
+    432.9,
+    510.3
+   ],
+   "per_rep_tail": [
+    779.0,
+    652.2,
+    703.9
+   ],
+   "per_rep_rhat": [
+    1.012,
+    1.011,
+    1.0098
+   ],
+   "pinned_chains": 0,
+   "quality_pass": true,
+   "vs_base_bulk": 1.0,
+   "vs_base_tail": 1.0
+  },
+  "v1_a25": {
+   "n": 3,
+   "ess_bulk_min_med": 454.5340478669061,
+   "ess_tail_min_med": 729.4988445012192,
+   "rhat_max_med": 1.0073719575481555,
+   "per_rep_bulk": [
+    454.5,
+    405.3,
+    526.0
+   ],
+   "per_rep_tail": [
+    690.8,
+    745.9,
+    729.5
+   ],
+   "per_rep_rhat": [
+    1.0074,
+    1.0182,
+    1.0053
+   ],
+   "pinned_chains": 0,
+   "quality_pass": true,
+   "vs_base_bulk": 0.891,
+   "vs_base_tail": 1.036
+  },
+  "v1_a10": {
+   "n": 3,
+   "ess_bulk_min_med": 5.0547995187336365,
+   "ess_tail_min_med": 4.032258064516129,
+   "rhat_max_med": 2.2972815920939653,
+   "per_rep_bulk": [
+    93.0,
+    5.0,
+    5.1
+   ],
+   "per_rep_tail": [
+    45.7,
+    4.0,
+    4.0
+   ],
+   "per_rep_rhat": [
+    1.0376,
+    2.2973,
+    2.9318
+   ],
+   "pinned_chains": 4,
+   "quality_pass": false,
+   "vs_base_bulk": 0.01,
+   "vs_base_tail": 0.006
+  },
+  "v2_a25": {
+   "n": 3,
+   "ess_bulk_min_med": 266.8504104287283,
+   "ess_tail_min_med": 382.3687501632296,
+   "rhat_max_med": 1.011921731403206,
+   "per_rep_bulk": [
+    229.3,
+    266.9,
+    293.1
+   ],
+   "per_rep_tail": [
+    346.4,
+    382.4,
+    492.9
+   ],
+   "per_rep_rhat": [
+    1.0097,
+    1.0235,
+    1.0119
+   ],
+   "pinned_chains": 0,
+   "quality_pass": false,
+   "vs_base_bulk": 0.523,
+   "vs_base_tail": 0.543
+  },
+  "v2_a10": {
+   "n": 3,
+   "ess_bulk_min_med": 19.463574762368285,
+   "ess_tail_min_med": 7.1897357378706035,
+   "rhat_max_med": 1.1844172846898218,
+   "per_rep_bulk": [
+    170.8,
+    19.5,
+    7.3
+   ],
+   "per_rep_tail": [
+    313.1,
+    7.2,
+    4.0
+   ],
+   "per_rep_rhat": [
+    1.0228,
+    1.1844,
+    1.5531
+   ],
+   "pinned_chains": 1,
+   "quality_pass": false,
+   "vs_base_bulk": 0.038,
+   "vs_base_tail": 0.01
+  }
+ }
+}

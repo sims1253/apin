@@ -1,0 +1,258 @@
+{
+ "arma11": {
+  "base": {
+   "ext_total_med": 0.142,
+   "int_warmup_med": 0.07179355,
+   "int_sampling_med": 0.0638167,
+   "warmup_share_int": 0.5294,
+   "logp_calls_warm_med": 5667,
+   "logp_calls_samp_med": 5385
+  },
+  "arms": {
+   "v1_a25": {
+    "ext_total_med": 0.1105,
+    "ext_warm_med": 0.019,
+    "ext_samp_med": 0.091,
+    "ratio_vs_base": 0.778,
+    "saving_realized": 0.222,
+    "saving_theoretical": 0.397,
+    "logp_calls_samp_med": 10542,
+    "samp_calls_vs_base": 1.958
+   },
+   "v2_a25": {
+    "ext_total_med": 0.136,
+    "ext_warm_med": 0.019,
+    "ext_samp_med": 0.116,
+    "ratio_vs_base": 0.958,
+    "saving_realized": 0.042,
+    "saving_theoretical": 0.397,
+    "logp_calls_samp_med": 13951,
+    "samp_calls_vs_base": 2.591
+   },
+   "v1_a10": {
+    "ext_total_med": 0.1605,
+    "ext_warm_med": 0.013,
+    "ext_samp_med": 0.146,
+    "ratio_vs_base": 1.13,
+    "saving_realized": -0.13,
+    "saving_theoretical": 0.476,
+    "logp_calls_samp_med": 17239,
+    "samp_calls_vs_base": 3.201
+   },
+   "v2_a10": {
+    "ext_total_med": 0.11699999999999999,
+    "ext_warm_med": 0.013,
+    "ext_samp_med": 0.103,
+    "ratio_vs_base": 0.824,
+    "saving_realized": 0.176,
+    "saving_theoretical": 0.476,
+    "logp_calls_samp_med": 11879,
+    "samp_calls_vs_base": 2.206
+   }
+  },
+  "sub_warmup": {
+   "a25": {
+    "logp_calls_med": 6008,
+    "int_wall_med": 0.017,
+    "calls_vs_base_warmup": 1.06
+   },
+   "a10": {
+    "logp_calls_med": 6989,
+    "int_wall_med": 0.011,
+    "calls_vs_base_warmup": 1.233
+   }
+  }
+ },
+ "lsat_model": {
+  "base": {
+   "ext_total_med": 9.500499999999999,
+   "int_warmup_med": 4.792625,
+   "int_sampling_med": 4.344845,
+   "warmup_share_int": 0.5245,
+   "logp_calls_warm_med": 17401,
+   "logp_calls_samp_med": 16199
+  },
+  "arms": {
+   "v1_a25": {
+    "ext_total_med": 3.335,
+    "ext_warm_med": 0.8955,
+    "ext_samp_med": 2.4285,
+    "ratio_vs_base": 0.351,
+    "saving_realized": 0.649,
+    "saving_theoretical": 0.393,
+    "logp_calls_samp_med": 14035,
+    "samp_calls_vs_base": 0.866
+   },
+   "v2_a25": {
+    "ext_total_med": 4.167,
+    "ext_warm_med": 0.8955,
+    "ext_samp_med": 3.2640000000000002,
+    "ratio_vs_base": 0.439,
+    "saving_realized": 0.561,
+    "saving_theoretical": 0.393,
+    "logp_calls_samp_med": 19422,
+    "samp_calls_vs_base": 1.199
+   },
+   "v1_a10": {
+    "ext_total_med": 3.1375,
+    "ext_warm_med": 0.49,
+    "ext_samp_med": 2.6544999999999996,
+    "ratio_vs_base": 0.33,
+    "saving_realized": 0.67,
+    "saving_theoretical": 0.472,
+    "logp_calls_samp_med": 15432,
+    "samp_calls_vs_base": 0.953
+   },
+   "v2_a10": {
+    "ext_total_med": 4.5120000000000005,
+    "ext_warm_med": 0.49,
+    "ext_samp_med": 4.013,
+    "ratio_vs_base": 0.475,
+    "saving_realized": 0.525,
+    "saving_theoretical": 0.472,
+    "logp_calls_samp_med": 24516,
+    "samp_calls_vs_base": 1.513
+   }
+  },
+  "sub_warmup": {
+   "a25": {
+    "logp_calls_med": 17279,
+    "int_wall_med": 0.891,
+    "calls_vs_base_warmup": 0.993
+   },
+   "a10": {
+    "logp_calls_med": 17340,
+    "int_wall_med": 0.486,
+    "calls_vs_base_warmup": 0.996
+   }
+  }
+ },
+ "hier_2pl": {
+  "base": {
+   "ext_total_med": 44.0135,
+   "int_warmup_med": 24.42045,
+   "int_sampling_med": 19.3168,
+   "warmup_share_int": 0.5583,
+   "logp_calls_warm_med": 20504,
+   "logp_calls_samp_med": 16319
+  },
+  "arms": {
+   "v1_a25": {
+    "ext_total_med": 27.436,
+    "ext_warm_med": 4.885,
+    "ext_samp_med": 22.83,
+    "ratio_vs_base": 0.623,
+    "saving_realized": 0.377,
+    "saving_theoretical": 0.419,
+    "logp_calls_samp_med": 22143,
+    "samp_calls_vs_base": 1.357
+   },
+   "v2_a25": {
+    "ext_total_med": 39.0,
+    "ext_warm_med": 4.885,
+    "ext_samp_med": 33.751,
+    "ratio_vs_base": 0.886,
+    "saving_realized": 0.114,
+    "saving_theoretical": 0.419,
+    "logp_calls_samp_med": 31662,
+    "samp_calls_vs_base": 1.94
+   },
+   "v1_a10": {
+    "ext_total_med": 33.227999999999994,
+    "ext_warm_med": 1.8385,
+    "ext_samp_med": 31.389499999999998,
+    "ratio_vs_base": 0.755,
+    "saving_realized": 0.245,
+    "saving_theoretical": 0.502,
+    "logp_calls_samp_med": 31000,
+    "samp_calls_vs_base": 1.9
+   },
+   "v2_a10": {
+    "ext_total_med": 34.6595,
+    "ext_warm_med": 1.8385,
+    "ext_samp_med": 32.86450000000001,
+    "ratio_vs_base": 0.787,
+    "saving_realized": 0.213,
+    "saving_theoretical": 0.502,
+    "logp_calls_samp_med": 29009,
+    "samp_calls_vs_base": 1.778
+   }
+  },
+  "sub_warmup": {
+   "a25": {
+    "logp_calls_med": 17643,
+    "int_wall_med": 4.876,
+    "calls_vs_base_warmup": 0.86
+   },
+   "a10": {
+    "logp_calls_med": 18939,
+    "int_wall_med": 1.826,
+    "calls_vs_base_warmup": 0.924
+   }
+  }
+ },
+ "blr": {
+  "base": {
+   "ext_total_med": 0.2185,
+   "int_warmup_med": 0.141249,
+   "int_sampling_med": 0.06232195,
+   "warmup_share_int": 0.6939,
+   "logp_calls_warm_med": 15926,
+   "logp_calls_samp_med": 9368
+  },
+  "arms": {
+   "v1_a25": {
+    "ext_total_med": 0.0915,
+    "ext_warm_med": 0.0605,
+    "ext_samp_med": 0.0315,
+    "ratio_vs_base": 0.419,
+    "saving_realized": 0.581,
+    "saving_theoretical": 0.52,
+    "logp_calls_samp_med": 13628,
+    "samp_calls_vs_base": 1.455
+   },
+   "v2_a25": {
+    "ext_total_med": 0.08549999999999999,
+    "ext_warm_med": 0.0605,
+    "ext_samp_med": 0.023,
+    "ratio_vs_base": 0.391,
+    "saving_realized": 0.609,
+    "saving_theoretical": 0.52,
+    "logp_calls_samp_med": 9266,
+    "samp_calls_vs_base": 0.989
+   },
+   "v1_a10": {
+    "ext_total_med": 0.127,
+    "ext_warm_med": 0.102,
+    "ext_samp_med": 0.0275,
+    "ratio_vs_base": 0.581,
+    "saving_realized": 0.419,
+    "saving_theoretical": 0.625,
+    "logp_calls_samp_med": 11694,
+    "samp_calls_vs_base": 1.248
+   },
+   "v2_a10": {
+    "ext_total_med": 0.1205,
+    "ext_warm_med": 0.102,
+    "ext_samp_med": 0.018,
+    "ratio_vs_base": 0.551,
+    "saving_realized": 0.449,
+    "saving_theoretical": 0.625,
+    "logp_calls_samp_med": 6076,
+    "samp_calls_vs_base": 0.649
+   }
+  },
+  "sub_warmup": {
+   "a25": {
+    "logp_calls_med": 13242,
+    "int_wall_med": 0.057,
+    "calls_vs_base_warmup": 0.831
+   },
+   "a10": {
+    "logp_calls_med": 15408,
+    "int_wall_med": 0.098,
+    "calls_vs_base_warmup": 0.967
+   }
+  }
+ }
+}
