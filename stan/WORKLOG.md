@@ -5782,3 +5782,95 @@ w54,analyze_w54,trace_w54}.py; raw runs/w54/ (local). walnutpie
 commits 33bcff5 + b657198 + e46da43 on exp/warmup-shields (worktree
 external/walnutpie_w54 LEFT IN PLACE; bisect worktree /tmp/w54_preknob
 kept for the canary base binary).
+
+## 2026-08-23 — W-56: stan-math PR checklist VERIFIED LOCAL for all four math branches — every checklist item PASS on full runs (test-headers 1901/1901 headers x4, runChecks x4, FULL make cpplint x4, make doxygen x4 + warning attribution, targeted runTests.py suites x4); 3 cpplint nits found+fixed (folded into the DCO-signed fork tips); honest gap = full test/unit suite delegated to CI
+
+Context: the user's PR checkboxes claim the stan-math pull-request-template
+items pass. W-56 ran them FOR REAL, per branch, in external/math_dev and
+worktrees (base origin/develop @ 46a31337; fork = sims1253/math):
+1. eigen-cluster-aware-adjoint (external/math_dev)
+2. square-pow-to-mul (temp worktree external/math_dev_sq, lib symlinked
+   to math_dev/lib; removed at the end)
+3. bernoulli-logit-partials-sign (temp worktree external/math_dev_bl;
+   removed at the end)
+4. bernoulli-logit-glm-partials-sign (external/math_dev_glm)
+All builds -j2 and serialized (W-54 sharing the machine); one -j2 compile
+stream max, plus at most one 1-core lint/doxygen stream.
+
+RESULTS (item = stan-math PULL_REQUEST_TEMPLATE):
+(a) make test-headers — PASS x4, FULL runs, -j2, ~16-19 min each
+    (b1 16:54:58-17:13:45, b2 17:23:18-17:39:33, b3 17:40:42-17:57:43,
+    b4 18:00:17-18:16:47). 1901/1901 headers compiled per branch
+    (b2/b3 logs show 61 extra lines = sundials .a rebuilds triggered by
+    fresh-worktree mtimes into the SHARED lib/ symlink — same sources,
+    same flags, no correctness impact; b4 ran after those and passed).
+(b) make test-math-dependencies (= ./runChecks.py) — PASS x4, exit 0.
+    Only output: Python 3.14 SyntaxWarnings from runChecks.py itself
+    (pre-existing upstream, not ours).
+(c) make cpplint — PASS x4 on FULL repo runs (~2 min each; the repo's
+    own target lints ALL of stan/ + test/unit, no fallback needed):
+    - b1: 1 error first run — eigen_cluster_adjoint_test.cpp(47)
+      runtime/int (unsigned long long) -> fixed to std::uint64_t +
+      <cstdint>; re-run clean.
+    - b2: clean first try (0 errors).
+    - b3: 1 error — bernoulli_logit_test.cpp(108) 81-col line ->
+      wrapped; re-run clean.
+    - b4: 1 error — bernoulli_logit_glm_lpmf_test.cpp(622) 81-col
+      line -> string split; re-run clean.
+    Fix commits 55ef6807 / c72d5d7b / 181be38e pushed to fork, then
+    folded by the coordinator's DCO-signed amend (see below).
+(d) make doxygen — PASS x4 (exit 0, real 185 MB HTML each; b1 also
+    re-verified FROM CLEAN after rm -rf doc/api). doxygen 1.13.2
+    upstream binary (distro has none) at scratch/w56/doxygen-1.13.2.
+    Warning attribution: repo cfg is WARNINGS=NO, so a second pass per
+    branch ran with WARNINGS=YES + WARN_IF_DOC_ERROR=YES +
+    WARN_IF_UNDOCUMENTED=NO (HTML off): 2046 library-wide baseline
+    doc warnings (all pre-existing: opencl CL/opencl.hpp, finite_diff,
+    CONTRIBUTING.md label clash, ...). Normalized diff b2/b3/b4 vs b1
+    warning sets: IDENTICAL modulo paths/line numbers; ZERO warnings
+    mention any changed file. The one red herring — square.hpp:64
+    "argument 'x' has multiple @param documentation sections" — exists
+    on develop at square.hpp:59 (the b2 diff just shifted the line).
+    (Attribution pass exits 1 solely from the GENERATE_HTML=NO
+    "no output formats" complaint; parse is complete — evidence is
+    the 2046-line log.)
+(e) Unit tests (runTests.py, -j2) — PASS x4, broader than the single
+    binaries W-40/W-50/W-55 had gated:
+    - b1: rev/fun eigen* (3 binaries incl. the new
+      eigen_cluster_adjoint_test) + prim/fun eigen* (3) + mix/fun
+      eigen* (10: eigendecompose part1/2, identity[_complex],
+      eigen_comparisons, eigenvalues[_sym], eigenvectors[_sym]) —
+      16 binaries, all OK.
+    - b2: prim+mix square*_test (square, squared_distance; 4 binaries,
+      12 cases) — this layout has NO dedicated rev square tests (rev
+      coverage is via mix), so rev leg = the three rev tests that USE
+      squared_distance through var: cov_exp_quad (25), gp_exp_quad_cov
+      (25), gp_periodic_cov (41) — all PASS.
+    - b3: prim/prob bernoulli_logit* (bernoulli_logit_test incl. the
+      new cutoff-sign tests + bernoulli_logit_glm_rng) + rev/prob +
+      mix/prob bernoulli_logit_glm_lpmf — 4 binaries, 32 cases OK.
+    - b4: same 4-binary set (the rev glm lpmf test carries the new
+      cutoff-sign cases) — 32 cases OK.
+(f) Touched test targets all rebuilt+run inside (e) (fresh worktrees
+    for b2/b3 prove it from scratch).
+NOT RUN (recorded honestly): the FULL test/unit suite per branch —
+out of scope locally by plan; CI owns that. That is the only gap
+between "user's checkboxes verified" and "everything CI will do".
+
+MID-RUN EVENT: coordinator force-pushed DCO-signed amended tips
+(Stan AI policy) — 951d9203 (b1), 1e68cf72 (b2), a84edfaa (b3),
+d7817886 (b4). Verified post-fetch: fork trees IDENTICAL to the
+tested local trees (tree hashes match; git diff empty), so all
+results above hold for the pushed tips verbatim. Local branches then
+reset to the fork tips (no-op for file content). Any future fix push
+to these branches needs --force-with-lease.
+
+Cleanup: temp worktrees math_dev_sq + math_dev_bl removed
+(git worktree remove --force after reset; lib symlinks gone with
+them). Left in place: math_dev (b1) and math_dev_glm (b4) checkouts
++ their stale test binaries, and the pre-existing stray self-referential
+math_dev/lib/lib symlink (observed, untouched — outside all find
+scopes). Evidence logs: stan/scratch/w56/ (testheaders_b*.log,
+tests_b*.log, cpplint_full_*.log, doxygen_b*[_warnings].log,
+runchecks_*.log, status.txt, drivers build_driver.sh +
+doxygen_driver.sh).
