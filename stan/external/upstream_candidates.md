@@ -163,3 +163,23 @@ nothing here is pushed anywhere yet.
    patched headers + island implementation: scratch/w46/. Status: measured;
    (a) is a ready one-line PR, (b) is a design proposal with a working
    reference implementation.
+
+9. **stan-math: tape/arena record machinery — typed-pool ceiling + design
+   doc** (W-47, Aug 2026). Tax decomposition (exact, from W-29/W-34 dumps):
+   stack_alloc::alloc 6.4%T + chainstack emplace_back 4.5%T on hier_2pl
+   (172M + 173M calls; 98% from two eltwise ops; one nochain vari/element +
+   one reverse_pass_callback per op — virtual dispatch is O(#ops), NOT
+   O(N)). Microbench ceilings: typed SoA pool = −32% of the tape complex
+   (≈ −10–16% of gradient Ir on hier_2pl stock); flat/index-based callbacks
+   = 0.00 gain (the vtable-dispatch fear is obsolete — worth stating
+   upstream to focus effort); ~2/3 of the eltwise complex is Eigen/Holder
+   glue (the stanc3-fusion lane, W-34/W-48), ~1/3 tape. Full SoA var =
+   rewrite (pointer type across 400+ files + codegen); shippable increments
+   designed: (A) batch make_vari_array + span registration, (B) typed pools
+   keeping var a pointer. A span-chainstack prototype was bitwise-correct
+   but not model-level profitable under per-record checks (needs the batch
+   API). Design doc: results/sota_arena_w47.md; patch (reference):
+   scratch/w47/w47_span_chainstack.patch. ALSO bridgestan-relevant:
+   prebuilt src/bridgestan.o embeds pristine stan-math headers into every
+   model .so — any layout-touching stan-math patch must rebuild it or the
+   .so segfaults (add to the bridgestan issues context).
