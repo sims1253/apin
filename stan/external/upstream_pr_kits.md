@@ -59,8 +59,10 @@ full `SelfAdjointEigenSolver` in ComputeEigenvectors mode (the reverse-mode
 adjoint needs V), so **every gradient evaluation runs 4 full decompositions
 where 2 would suffice**.
 
-stan-math 5.3.0 already ships the combined primitive (`eigendecompose_sym`,
-also exposed in the language since 2.39). Measured on kronecker_gp
+stan-math has shipped the combined primitive for a while — `eigendecompose_sym`
+landed Aug 2023 (math PR #2931 / stanc3 PR #1346), shipping in math 4.8.0 /
+CmdStan **2.34 (Jan 2024)** — but models written before it (and stanc3's own
+codegen for the old two-call idiom) never use it. Measured on kronecker_gp
 (2 × eigh of 30×30 + 2×2 per gradient; callgrind + matched-wall protocol):
 
 | arm | Ir/grad | µs/call | draws |
@@ -141,6 +143,18 @@ self-contained 65-line reproducer: `scratch/w35/repro/march_native_repro.cpp`
 **Docs paragraph for cmdstan/bridgestan** (the `-march=native` guidance):
 §7c of the same file. A gcc bugzilla report is deliberately NOT filed —
 reasoning recorded in §7b.
+
+**Before filing (scan W-38u, Aug 2026):** (a) this is NOVEL upstream — no
+matching issue/PR exists in stan-dev/math (develop still computes the raw
+`1/(w_j−w_i)` with no guard, tests have no degenerate-spectrum coverage);
+closest priors to cite: math #1803 (adjoint convention wart, open 2020),
+2017 discourse thread 7616 (bbbales2: "I dunno if the derivatives fall
+apart there or what" — never filed). (b) math develop migrated Eigen
+3.4.0 → 5.0.1 (PR #3271) — REVALIDATE the reproducer under Eigen 5 before
+filing so the issue lands against current develop. Useful literature for
+the fix design (cluster-aware/shift-and-invert adjoints for repeated
+eigenvalues): He et al. 2023, de Leeuw arXiv:2508.09355, Friswell/van der Aa
+(full list in results/upstream_scan_2026-08.md).
 
 ---
 
