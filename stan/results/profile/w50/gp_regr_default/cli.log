@@ -1,0 +1,21 @@
+    total time: 0.00194248s
+logp_grad time: 0.00177936s
+logp_grad fraction: 0.916027
+        logp_grad calls: 327
+        time per call: 5.44148e-06s
+
+Adaptation completed.
+Note: multi-chain mode (walnutpie::adapt) reports a log-mass cross-chain dispersion diagnostic for mode-aware reinit policies; single-chain CLI does not.
+Macro time = 0.822862
+Mass matrix diagonal = [0.0487038
+0.0963371
+0.0740791]
+    total time: 0.00146509s
+logp_grad time: 0.00135608s
+logp_grad fraction: 0.925596
+        logp_grad calls: 250
+        time per call: 5.42434e-06s
+
+rho: mean = 6.82477, stddev = 1.29565
+alpha: mean = 2.54299, stddev = 0.813732
+sigma: mean = 1.84001, stddev = 0.493992

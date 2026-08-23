@@ -5146,3 +5146,162 @@ Eigen-5 kappa sweep (kappa evidence measured on the 2.39/Eigen-3.4.0
 toolchain — guard math is Eigen-independent); GLM sign fix offered but
 not in the branch. Clones stay untracked; no pushes; machine shared
 (-j2 throughout).
+
+## W-51 (pre-registered BEFORE running; RETRY of the rate-limit-killed attempt — no prior W-51 entry survived): literature scan 2 — recent (2024–2026) published/preprint ideas for our active fronts
+
+MISSION: six fronts, one query each: (1) SoA/adjoint-array autodiff
+arenas (JAX/XLA, Enzyme, Adept lineage, batched vari APIs); (2) SIMD
+transcendental kernels in stats libraries (SLEEF/xsimd/libmvec
+adoption + accuracy standards); (3) HMC/NUTS step-size+mass adaptation
+theory post-2023 (dual-averaging successors, warmup-with-guarantees);
+(4) differentiation with repeated/degenerate eigenvalues
+(gauge/minimal-norm adjoints) beyond He 2023 / de Leeuw 2508.09355;
+(5) within-chain MCMC parallelism (parallel/speculative leapfrog
+beyond arXiv:2506.09762); (6) WALNUTS citations/derivatives since
+JMLR 2026 (arXiv:2506.18746).
+
+METHOD (rate-limit mitigation, pre-committed): at most 6 hermes
+one-shot queries (`hermes chat -q`), sleep 90 between calls, raw
+output saved under scratch/w51/ as it runs; after TWO consecutive
+rate-limit failures hermes is ABANDONED and WebSearch/WebFetch (zcode
+builtin) covers everything — fallback fully satisfies the mission and
+will be stated honestly in the close-out. Top ~5 leads independently
+verified via WebSearch/WebFetch (existence + one-line relevance,
+titles/abstracts only). Read-only research: no builds, no model runs,
+shared trees untouched.
+
+DELIVERABLE: stan/external/research_scan2_2026-08.md — per front:
+leads with arXiv IDs/URLs + one-paragraph relevance verdict; TOP-5
+ranked "try this next" mapped to open items (two-phase warmup W-45
+follow-up, SoA rollout W-53, fused log1p kernel W-46, errno flags
+W-50, eltwise fusion W-48). Commits: explicit paths only (never
+git add -A). Companion context: results/upstream_scan_2026-08.md +
+results/UPSTREAM_SUMMARY.md (read first).
+
+## W-53 (pre-registered BEFORE running; attempt 3 — two prior attempts died on infra rate limits before any artifact; no prior W-53 entry survived): staged SoA-var rewrite for stan-math — phase 0/1 only (pointer-semantics inventory + migration plan + 3-level utility estimate + ONE vertical slice)
+
+MISSION: W-47 stopped at the typed-pool ceiling (-32% of the tape
+complex, microbench) and wrote the design doc (Increment A batch
+make_vari_array + span registration; Increment B typed pools keeping
+var a pointer). W-53 is the staged rollout's phase 0/1: (0) classify
+EVERY var/vari POINTER-semantics dependency across stan/math/develop
+(raw vari* in signatures, identity comparisons on var, address-of,
+casts, containers of vari*, dump/serialize, direct chain() calls) into
+(i) mechanical / (ii) needs API shim (var stays a pointer backed by
+typed-pool storage) / (iii) structural blockers (nested arenas,
+thread-local chainstack, STAN_THREADS); write the ordered MIGRATION
+PLAN (file batches, seam, per-batch risk) as the fresh-session handoff
+artifact. Utility estimate at 3 levels: (a) arithmetic bound per model
+(W-47/W-29 tape shares x -32%), (b) locality bound via cachegrind on
+W-47's microbench pair (scratch/w47/, rebuild if needed), (c) ground
+truth from the slice. (1) vertical slice: typed-pool/SoA records for
+ONE op path end-to-end — elt_multiply (98% of hier_2pl's tape traffic;
+W-47 attribution: eltwise pair owns ~98% of arena-alloc calls).
+
+SAFEGUARD (non-negotiable, pre-registered): a pure layout refactor
+must be BIT-IDENTICAL by construction. Gates per increment: (a)
+exact-zero gradient parity on the 4-model battery (hier_2pl,
+kronecker_gp, gp_regr, accel_gp; bridgestan .so from per-variant
+scratch dirs — W-27 .so-cache gotcha), (b) full sampler draws
+md5-identical via walnutpie binary
+external/walnutpie/build_w36exp/examples/stan_cli READ-ONLY (never
+rebuild walnutpie), (c) stan-math unit tests for TOUCHED targets only,
+(d) documented arena-semantics reasoning for what bit-identity cannot
+see (nested arenas, reset/reuse). ANY nonzero parity = stop and
+diagnose. HAZARD (W-47): bridgestan's prebuilt src/bridgestan.o embeds
+pristine stan-math headers — model .so MUST be built with a
+consistent-ABI bridgestan copy whose stan_math carries the patch
+(hardlink-copy recipe, W-47-validated) or segfaults.
+
+SETUP: fresh clone github.com/stan-dev/math (develop) ->
+external/math_soa (untracked; commit recorded). external/math_dev and
+external/stanc3_pr are the PR-prep agent's — READ-ONLY for me, not
+used. Uncommitted W-51 WORKLOG append left as-is (selective staging
+for my commits: git apply --cached of my own hunks only). Env:
+env -u LD_LIBRARY_PATH; /usr/bin/make -j2; test targets only;
+measurements serialized (shared cores).
+
+STOP RULES: bit-identity failing structurally -> stop, document the
+impossibility precisely. Slice gates failing nonzero -> stop and
+diagnose before ANY further rollout. Deliverable:
+results/soa_var_w53.md (inventory, migration plan, 3-level utility,
+slice gates+measurements, go/kill verdict); patches scratch/w53/;
+external/math_soa untracked. Commits: explicit paths only (never git
+add -A). No pushes; walnutpie untouched. NOT in scope: the full
+400-file rollout (multi-session by design — this session delivers the
+validated foundation + measured utility number).
+
+## 2026-08-23 — W-50 CLOSE-OUT: -fno-math-errno replicates the W-33 win on gp_regr but is NOT value-neutral — glibc pow(x,2) is 1-ulp-unrounded; parity FAILS on hier_2pl/kronecker_gp, full-length draws diverge; DO NOT ADOPT, and W-33's bit-identity claim is demoted to trajectory-conditional
+
+ARMS BUILT (scratch/w50/<model>_{default,nme}/, copied .stan per variant,
+env -u LD_LIBRARY_PATH — confirmed first-hand: the profile's AppImage
+LD_LIBRARY_PATH breaks the system g++ header search outright, which is WHY
+the protocol demands unsetting it; MAKE=/usr/bin/make; MAKEFLAGS=-j2;
+CXXFLAGS=-fno-math-errno appended, O=3 default preserved). Arm 3
+(-fno-trapping-math) SKIPPED per pre-registration (arm 2 failed parity;
+mechanics probe shows it adds nothing anyway).
+
+(a) PARITY: gp_regr PASS (100/100 logp+grad bit-identical; fresh default
+    also 100/100 bit-identical to the surviving W-33 stock .so). hier_2pl
+    FAIL: 99/100, pt43 comp 667 (tau.2) 2.0e-15 rel. kronecker_gp FAIL
+    CATASTROPHICALLY: 14/100, max rel 1.72, 5 sign flips — W-27
+    march=native signature.
+    ROOT CAUSE (investigated as pre-registered): the premise inherited
+    from W-33 — glibc pow(x,2)==x*x — is FALSE. glibc 2.44 pow(x,2)
+    differs from the correctly-rounded x*x by 1 ulp on ~0.08% of doubles
+    (x*x is the CORRECT one; pow errs). Isolation with W-35's drivers
+    (rebuilt per flag arm) + a d0 stage printer + a dlopen gradient
+    driver + full-threshold callgrind: GEMM/eigh-fixed-inputs/cholesky/
+    lkj all bit-identical between arms; kronecker_gp's xd=-square(grid
+    diffs) differs on 4/900 entries (the 1-ulp cases) -> Sigma1 bits
+    differ -> SelfAdjointEigenSolver returns a different-but-valid basis
+    of the jitter-pinned near-degenerate cluster -> eigenvector adjoint
+    amplifies to O(1) (W-35's amplifier; same end-to-end signature as
+    march=native, different seed). hier_2pl: exactly 2 param-dependent
+    pow(x,2)/grad (W-29 tree confirms 8,986/4,493); default arm executes
+    libm pow at pt43, nme inlines it; one site hit a disagreeing double
+    -> 1-ulp seed -> 2-ulp wobble in tau.2's adjoint (logp bit-identical;
+    the fixed 150-iter callgrind trajectory never hits one -> draws
+    md5-identical on that protocol). gp_regr's 11-point grid: 0/121
+    kernel pairs disagree — the model's 55/57 pow sites are data-fixed,
+    which is exactly why W-33 measured perfect bit-identity there.
+(b) COST (native stan_cli stanza, 3 interleaved reps, medians; callgrind
+    system valgrind 3.25.1, one job at a time):
+      gp_regr:     us/call 5.414->4.738 warmup (0.875x), 5.320->4.584
+                   sampling (0.862x); Ir/grad 66,987->61,310 (-8.48%);
+                   pow Ir 3,473,268->18,975 (sampler-side Adam residual).
+                   REPRODUCES W-33 (-9.09% Ir, -12.9/-15.2% wall) within
+                   noise. Stock arm reproduces W-29 to the digit (pow Ir
+                   exactly 3,473,268; Ir/grad 66,987 vs 66,990; vginstall
+                   3.23 vs system 3.25.1 differ by 602 Ir total).
+      hier_2pl:    960.7->959.1 (0.998x), Ir/grad -0.002%; log1p Ir
+                   identical 423,531,966; ZERO pow in the model gradient.
+                   As pre-registered: no libmvec vectorization without
+                   __FAST_MATH__ (glibc guard), so the log1p bucket is
+                   untouchable by errno-family flags.
+      kronecker_gp: per-call 0.963/0.986 and Ir/grad -1.23% CONTAMINATED
+                   (trajectory drifts: 5,094->4,732 calls; the 1-ulp seed
+                   changes warmup) — same caveat class as W-32's hand arm.
+(c) SAMPLER SPOT (gp_regr, 4 chains, warmup=1000 samples=1000, seeds
+    20260819+c, deterministic inits inits_w50/gp_regr/): wall 278.1ms ->
+    244.1ms (-12.2%); draws md5 c1/c3 IDENTICAL, c0/c2 DIVERGED — gate
+    FAIL. Cross-check with the W-33 patched .so (same x*x semantics): it
+    ALSO diverges from stock at full length on both tested chains, and on
+    c2 its draws are md5-IDENTICAL to the nme arm (flag == patch != stock).
+    Short fixed-init 50+50 protocol stays md5-identical across all arms
+    (32881fbe..., native and under valgrind) — bit-identity there is real
+    but trajectory-length-dependent.
+
+VERDICT: no free W-33 via flags. -fno-math-errno delivers the same win
+only where parity already holds (gp_regr, by grid luck) and is a
+reproducibility hazard everywhere else; on eigh-heavy models it is the
+march=native hazard class (silent O(1) gradient changes). NOT adopting for
+our builds. UPSTREAM CONSEQUENCES: (1) W-33's pow->mul PR keeps its
+performance case but must drop the bit-identity promise — reframe as
+"replaces a <=1-ulp-error pow with the correctly-rounded product (strict
+accuracy improvement, glibc 2.44 measured), NOT bit-identical; can flip
+equally-valid eigenbases on rounding-degenerate models (W-35)"; (2) add
+errno-family flags to the march=native do-not-use list in the docs ask.
+Deliverable: results/errno_flags_w50.md; raw results/profile/w50/
+(committed); scripts+drivers+.so in scratch/w50/ (untracked);
+inits_w50/ committed. stan-math + walnutpie trees pristine; no pushes.

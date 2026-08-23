@@ -1,0 +1,190 @@
+{
+ "gp_regr_default": {
+  "total": 47390367,
+  "grad_incl": 38651218,
+  "grad_calls": 250.0,
+  "ir_per_grad": 154604.872,
+  "libm_excl": {
+   "pow": 3473268,
+   "exp": 1244532,
+   "log": 364388
+  },
+  "cli_stanzas": [
+   {
+    "total": 0.00194248,
+    "logp_time": 0.00177936,
+    "logp_frac": 0.916027,
+    "logp_calls": 327.0,
+    "per_call": 5.44148e-06
+   },
+   {
+    "total": 0.00146509,
+    "logp_time": 0.00135608,
+    "logp_frac": 0.925596,
+    "logp_calls": 250.0,
+    "per_call": 5.42434e-06
+   }
+  ]
+ },
+ "gp_regr_default_vg231": {
+  "total": 47390969,
+  "grad_incl": 38651218,
+  "grad_calls": 250.0,
+  "ir_per_grad": 154604.872,
+  "libm_excl": {
+   "pow": 3473268,
+   "exp": 1244532,
+   "log": 364388
+  },
+  "cli_stanzas": [
+   {
+    "total": 0.00208345,
+    "logp_time": 0.00190758,
+    "logp_frac": 0.915584,
+    "logp_calls": 327.0,
+    "per_call": 5.83357e-06
+   },
+   {
+    "total": 0.00154115,
+    "logp_time": 0.00142655,
+    "logp_frac": 0.925644,
+    "logp_calls": 250.0,
+    "per_call": 5.70621e-06
+   }
+  ]
+ },
+ "gp_regr_nme": {
+  "total": 44114506,
+  "grad_incl": 35375589,
+  "grad_calls": 250.0,
+  "ir_per_grad": 141502.356,
+  "libm_excl": {
+   "exp": 1244532,
+   "log": 364388,
+   "pow": 18975
+  },
+  "cli_stanzas": [
+   {
+    "total": 0.00174437,
+    "logp_time": 0.00157634,
+    "logp_frac": 0.903672,
+    "logp_calls": 327.0,
+    "per_call": 4.82061e-06
+   },
+   {
+    "total": 0.00129747,
+    "logp_time": 0.00118719,
+    "logp_frac": 0.915004,
+    "logp_calls": 250.0,
+    "per_call": 4.74878e-06
+   }
+  ]
+ },
+ "hier_2pl_default": {
+  "total": 34951417513,
+  "grad_incl": 34727092794,
+  "grad_calls": 756.0,
+  "ir_per_grad": 45935307.928571425,
+  "libm_excl": {
+   "log1p": 423531966
+  },
+  "cli_stanzas": [
+   {
+    "total": 5.0918,
+    "logp_time": 5.07616,
+    "logp_frac": 0.996928,
+    "logp_calls": 3737.0,
+    "per_call": 0.00135835
+   },
+   {
+    "total": 1.14982,
+    "logp_time": 1.14263,
+    "logp_frac": 0.993747,
+    "logp_calls": 756.0,
+    "per_call": 0.00151141
+   }
+  ]
+ },
+ "hier_2pl_nme": {
+  "total": 34950966896,
+  "grad_incl": 34726247246,
+  "grad_calls": 756.0,
+  "ir_per_grad": 45934189.47883598,
+  "libm_excl": {
+   "log1p": 423531966
+  },
+  "cli_stanzas": [
+   {
+    "total": 3.80209,
+    "logp_time": 3.79479,
+    "logp_frac": 0.99808,
+    "logp_calls": 3737.0,
+    "per_call": 0.00101546
+   },
+   {
+    "total": 0.789738,
+    "logp_time": 0.786735,
+    "logp_frac": 0.996197,
+    "logp_calls": 756.0,
+    "per_call": 0.00104065
+   }
+  ]
+ },
+ "kronecker_gp_default": {
+  "total": 27634560423,
+  "grad_incl": 26772105401,
+  "grad_calls": 1184.0,
+  "ir_per_grad": 22611575.50760135,
+  "libm_excl": {
+   "pow": 532130311,
+   "log": 213447392,
+   "tanh": 208908428,
+   "exp": 161930768,
+   "log1p": 21449259
+  },
+  "cli_stanzas": [
+   {
+    "total": 1.64115,
+    "logp_time": 1.63682,
+    "logp_frac": 0.997364,
+    "logp_calls": 3910.0,
+    "per_call": 0.000418624
+   },
+   {
+    "total": 0.508294,
+    "logp_time": 0.497959,
+    "logp_frac": 0.979668,
+    "logp_calls": 1184.0,
+    "per_call": 0.000420574
+   }
+  ]
+ },
+ "kronecker_gp_nme": {
+  "total": 25424467359,
+  "grad_incl": 24562653240,
+  "grad_calls": 959.0,
+  "ir_per_grad": 25612777.10114703,
+  "libm_excl": {
+   "log": 198401994,
+   "tanh": 193672488,
+   "exp": 150423643,
+   "log1p": 19924945
+  },
+  "cli_stanzas": [
+   {
+    "total": 1.42924,
+    "logp_time": 1.42512,
+    "logp_frac": 0.997116,
+    "logp_calls": 3773.0,
+    "per_call": 0.000377715
+   },
+   {
+    "total": 0.371642,
+    "logp_time": 0.362748,
+    "logp_frac": 0.976068,
+    "logp_calls": 959.0,
+    "per_call": 0.000378256
+   }
+  ]
+ }
+}
