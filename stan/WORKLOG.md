@@ -3716,3 +3716,111 @@ results/traj_gate_w37.md (separability analysis FIRST, published even
 if negative; then gates if implemented), harness/run_w37.py (+analyze),
 runs/w37/ local. stan repo commits: explicit paths only (never
 git add -A). Worktrees left in place.
+
+## W-38-E4 (pre-registered BEFORE running): refinement-aware min-micro-steps (grow-m) — phase E4 of the W-37p fewer-gradients pack
+
+HYPOTHESIS (from E1, results/grad_accounting_w38.md): the dyadic ladder
+always restarts at m = min_micro_steps and m = 1 in 100% of macro steps
+in every E1 run — the MinMicroStepsAdaptHandler only ever pushes m DOWN
+to its floor (mean_macro/target rounds to 0). A complementary GROW rule
+— when the last k accepted macro steps ALL refined (h >= 1), raise m
+(grow_floor), so the typical macro step accepts at h = 0 — removes the
+forward-refinement waste AND the backward ladder by construction
+(h = 0 => no ladder). E1 formula: accepted-at-h costs 3m*2^h - 2m evals
+vs m at h = 0; grow-m trades one halving level (~ +4m evals) for +m.
+Risk (pre-registered, sharpened from the pack's "coupling risk"): at
+FIXED eps the first attempt integrates macro time m*eps, so growing m
+RAISES first-attempt |dH| ~ linearly — h = 0 cannot be reached by m
+alone. The benefit route is the coupling: bigger |dH|_first => smaller
+alpha (the step adapter's statistic, measured at the min attempt) =>
+adapter pulls eps DOWN; at the adapter equilibrium |dH|_first ~
+-ln(0.8) = 0.223 < max_error 0.5 => h = 0 — persistent h >= 1 is
+adapter LAG (blr@1000 h2-h4 structural = |dH|_first ~ 2-8, eps stuck
+~2-4x above equilibrium). Equilibrium caricature says accepted-h is
+pinned by (adapter target)/(tolerance) and m-invariant; if the adapter
+is genuinely stuck, grow-m ratchets m to the cap with |dH| still high =>
+evals/unit-trajectory-time UP ~2^(5/3) ~ 3.2x (m=32). Cap bounds the
+damage; the micro-search catches it immediately on blr.
+
+RULE (minimal, E1 accounting commit 33cd398 cherry-picked for the
+mechanism gate — env-gated, draw-neutral, proven bit-identical in E1
+8/8 + 3-way): in MinMicroStepsAdaptHandler, a grow_floor state machine
+fed per ACCEPTED macro step (halvings h, via a thread_local sink set
+around warmup transitions; null when the knob is off => zero cost, no
+FP/RNG touched => bit-identical): streak over consecutive accepted
+steps — h >= 1 => streak_refine++, streak_coarse = 0; h = 0 =>
+streak_coarse++, streak_refine = 0; FAILED step (exhaustion or ladder
+reject) resets both (pins must not ratchet m). GROW: streak_refine >= k
+=> grow_floor <- 1 if 0 else min(2*grow_floor, cap) (or +1 variant),
+streak_refine = 0. SHRINK counterweight: streak_coarse >= 4k and
+grow_floor > 0 => grow_floor <- grow_floor / 2 (1 -> 0 = fully off).
+Effective m = max(config floor, lround(mean/target), grow_floor) at all
+4 call sites incl. sampler() freeze (the frozen m is what matters).
+Knobs in WarmupConfig (grow_min_micro_steps = false default,
+grow_m_streak k = 8, grow_m_cap = 32, grow_m_increment 2 = double /
+1 = +1); CLI --grow-min-micro-steps, --grow-m-streak, --grow-m-cap,
+--grow-m-increment. Default OFF = bit-identical handler.
+
+ARMS: base = CLI defaults (REUSES the W-38-E2 base arm runs
+runs/w38e2/base — same seeds/inits/models/binary-lineage; legitimacy
+rests on gate (a) below: this binary's default path must be md5-identical
+to that base arm, which was itself md5-verified against the
+exp/safe-adapt-defaults binary in E2). grow = best micro-search variant.
+
+GATES (pre-registered):
+(a) CANARY bit-identity: THIS binary, knobs off + env off, 3 models
+    (arma11, blr, hier_2pl) x 4 chains, seed 20260819+c, warmup=1000
+    draws=1000, rep0 inits (W-36 assignment) => md5-identical to
+    runs/w38e2/base rep0 CSVs (== build_w36exp @ 43b6435). 12/12
+    REQUIRED. Bonus: kronecker_gp + lsat_model rep0 cells too (20/20).
+(b) QUALITY: marginal class (arma11, lsat_model, hier_2pl) + blr +
+    kronecker_gp, 3 reps x 4 chains, seeds 20260819+1000*rep+c,
+    warmup=1000 draws=1000, on-arm: median bulk/tail ESS-min and max
+    R-hat within the base per-rep band (W-25/W-28 rule, medians of 3
+    reps; structurally constant GQ columns excluded as in E2). REPORT
+    co-primary efficiency: evals/draw (total logp_grad calls / draw)
+    AND ESS/wall per model — a config that cuts evals but ESS
+    proportionally is a wash.
+(c) MECHANISM: WALNUTPIE_GRAD_ACCOUNTING=1, 1 chain, 1000+1000, seed
+    20260819, inits per E1 (inits_w25 pf blr/hier_2pl rep0 chain_0):
+    blr@1000 (the P(h>=1) = 96.6% case) and hier_2pl@1000, on vs off:
+    accepted-h histogram shifts toward h = 0, forward-wasted and
+    backward-ladder shares drop; report measured evals/draw delta per
+    model + final frozen m (min_micro histogram).
+(d) MICRO-SEARCH (before the full grid): 3 variants on blr only,
+    3 reps x 4 chains, 1000+1000: g1 k=8 double; g2 k=16 double;
+    g3 k=8 linear (+1). Pick best by evals/draw among variants whose
+    ESS-min is within the base band; ties -> smaller cap-contact.
+    Then run gate (b) with the winner.
+VERDICT RULE: ADOPT iff (a) 12/12 AND (b) quality PASS on all 5 models
+AND evals/draw median reduction >= 10% on >= 2 models AND no model
+evals/draw increase > 5% AND ESS/wall not degraded beyond the base band
+on any model. TUNE if the mechanism gate shows h-shift without the
+evals win (smaller cap / slower trigger documented). REJECT otherwise
+(expected failure mode: m ratchets to cap with |dH| still > tolerance,
+evals/draw up; report as the equilibrium-caricature confirmation).
+
+BUILD PROTOCOL: worktree external/walnutpie_w38e4, branch exp/grow-m
+off exp/safe-adapt-defaults @ 43b6435 + cherry-picked E1 accounting
+commit 33cd398 (separate commit, no kernel changes mixed); build_e4
+mirrors build_w36exp/build_e2 configure (empty CMAKE_BUILD_TYPE,
+/usr/sbin/c++, -std=c++20); env -u LD_LIBRARY_PATH; /usr/bin/make -j2;
+header edits => clean-first; serialized sampling (OMP_NUM_THREADS=1,
+chains sequential); one edit -> build -> test -> commit. Harness:
+harness/run_w38e4.py + harness/analyze_w38e4.py (E2 pattern); raw runs
+under runs/w38e4/ (local, gitignored). Deliverable:
+results/grow_m_w38e4.md (design, variant table, gates, verdict).
+Deliverable commit paths explicit (WORKLOG.md, results/, harness/) —
+never git add -A. Worktree left in place.
+
+### W-37 pre-registration CORRECTION (formula typo, fixed before any
+outcome was inspected; measurement grid still running at time of write)
+
+In the W-37 pre-registration above, T3's ept spread term reads
+"max_i ept_i / max_j ept_j - 1", which is degenerate (identically 0).
+Intended formula, and the one used in the analysis: S_e(k) =
+max_i ept_i / min_j ept_j - 1 (the max/min spread ratio). No threshold
+or criterion changes — only this formula expression is corrected.
+Every other pre-registered quantity (D_h, D_e, S_h, thresholds
+0.05/0.10/0.10/0.20, margins 0.5x/2x, k in {400..600}, pin rule,
+verdict rule) stands as written above.
