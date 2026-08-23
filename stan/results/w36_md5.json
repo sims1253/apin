@@ -1,0 +1,620 @@
+{
+ "radon_partially_pooled_noncentered/rep0": {
+  "stock_seq": {
+   "chain_0": "71c090d9b668e1f5d29ef3866a088c76",
+   "chain_1": "e648065effdf2e05da79ae15a0f8bdff",
+   "chain_2": "2ee0aaea73fe157804f7977bc51c674c",
+   "chain_3": "551bfc14b36d9447d805b6d84acee2cb"
+  },
+  "exp_par": {
+   "chain_0": "71c090d9b668e1f5d29ef3866a088c76",
+   "chain_1": "e648065effdf2e05da79ae15a0f8bdff",
+   "chain_2": "2ee0aaea73fe157804f7977bc51c674c",
+   "chain_3": "551bfc14b36d9447d805b6d84acee2cb"
+  },
+  "exp_seq": {
+   "chain_0": "71c090d9b668e1f5d29ef3866a088c76",
+   "chain_1": "e648065effdf2e05da79ae15a0f8bdff",
+   "chain_2": "2ee0aaea73fe157804f7977bc51c674c",
+   "chain_3": "551bfc14b36d9447d805b6d84acee2cb"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "radon_partially_pooled_noncentered/rep1": {
+  "stock_seq": {
+   "chain_0": "ac9746bceb5ec03a9fdf79934f71b8b0",
+   "chain_1": "6a9f44efe0c83ba95a8132d863048012",
+   "chain_2": "be5681c7bca4499803678562721f5f86",
+   "chain_3": "127d2e2f4e39cabda2c65dc168aea68d"
+  },
+  "exp_par": {
+   "chain_0": "ac9746bceb5ec03a9fdf79934f71b8b0",
+   "chain_1": "6a9f44efe0c83ba95a8132d863048012",
+   "chain_2": "be5681c7bca4499803678562721f5f86",
+   "chain_3": "127d2e2f4e39cabda2c65dc168aea68d"
+  },
+  "exp_seq": {
+   "chain_0": "ac9746bceb5ec03a9fdf79934f71b8b0",
+   "chain_1": "6a9f44efe0c83ba95a8132d863048012",
+   "chain_2": "be5681c7bca4499803678562721f5f86",
+   "chain_3": "127d2e2f4e39cabda2c65dc168aea68d"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "radon_partially_pooled_noncentered/rep2": {
+  "stock_seq": {
+   "chain_0": "9909f6a54f70da1a35d31c0d113859b1",
+   "chain_1": "8b16de95cfddac5d5374ca7c610d62af",
+   "chain_2": "cf3efea6eb91b88b9ef97a6534644cb4",
+   "chain_3": "6e7a7a78d3e5a8199d16330053ff95c5"
+  },
+  "exp_par": {
+   "chain_0": "9909f6a54f70da1a35d31c0d113859b1",
+   "chain_1": "8b16de95cfddac5d5374ca7c610d62af",
+   "chain_2": "cf3efea6eb91b88b9ef97a6534644cb4",
+   "chain_3": "6e7a7a78d3e5a8199d16330053ff95c5"
+  },
+  "exp_seq": {
+   "chain_0": "9909f6a54f70da1a35d31c0d113859b1",
+   "chain_1": "8b16de95cfddac5d5374ca7c610d62af",
+   "chain_2": "cf3efea6eb91b88b9ef97a6534644cb4",
+   "chain_3": "6e7a7a78d3e5a8199d16330053ff95c5"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "bym2_offset_only/rep0": {
+  "stock_seq": {
+   "chain_0": "eb07469efb46bfaafe820ec37025be08",
+   "chain_1": "9a4e2d177e395040ebc6ba7c9f434913",
+   "chain_2": "f8a2670a11ef74ce03d39a5dc895ba91",
+   "chain_3": "1fa39c9446fb9a4a5eb012d0b87ea461"
+  },
+  "exp_par": {
+   "chain_0": "eb07469efb46bfaafe820ec37025be08",
+   "chain_1": "9a4e2d177e395040ebc6ba7c9f434913",
+   "chain_2": "f8a2670a11ef74ce03d39a5dc895ba91",
+   "chain_3": "1fa39c9446fb9a4a5eb012d0b87ea461"
+  },
+  "exp_seq": {
+   "chain_0": "eb07469efb46bfaafe820ec37025be08",
+   "chain_1": "9a4e2d177e395040ebc6ba7c9f434913",
+   "chain_2": "f8a2670a11ef74ce03d39a5dc895ba91",
+   "chain_3": "1fa39c9446fb9a4a5eb012d0b87ea461"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "bym2_offset_only/rep1": {
+  "stock_seq": {
+   "chain_0": "0e140ee47e5436e4f53a8ac7b00f533f",
+   "chain_1": "de2e4f36d416a45cf47a662f1d0fbc88",
+   "chain_2": "50bd50a78db2728101f752f992aa27ba",
+   "chain_3": "2a5af1b5761583bec4ad6a51bfeef0f7"
+  },
+  "exp_par": {
+   "chain_0": "0e140ee47e5436e4f53a8ac7b00f533f",
+   "chain_1": "de2e4f36d416a45cf47a662f1d0fbc88",
+   "chain_2": "50bd50a78db2728101f752f992aa27ba",
+   "chain_3": "2a5af1b5761583bec4ad6a51bfeef0f7"
+  },
+  "exp_seq": {
+   "chain_0": "0e140ee47e5436e4f53a8ac7b00f533f",
+   "chain_1": "de2e4f36d416a45cf47a662f1d0fbc88",
+   "chain_2": "50bd50a78db2728101f752f992aa27ba",
+   "chain_3": "2a5af1b5761583bec4ad6a51bfeef0f7"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "bym2_offset_only/rep2": {
+  "stock_seq": {
+   "chain_0": "f8296967ba8a12338d6e0855106f2b80",
+   "chain_1": "d609e91e2e99afdd10a608d5b6ac1f5c",
+   "chain_2": "77ab1817de9ac9ab460b36dde436fd77",
+   "chain_3": "40069e41d4429f1d426fabe8815f1c62"
+  },
+  "exp_par": {
+   "chain_0": "f8296967ba8a12338d6e0855106f2b80",
+   "chain_1": "d609e91e2e99afdd10a608d5b6ac1f5c",
+   "chain_2": "77ab1817de9ac9ab460b36dde436fd77",
+   "chain_3": "40069e41d4429f1d426fabe8815f1c62"
+  },
+  "exp_seq": {
+   "chain_0": "f8296967ba8a12338d6e0855106f2b80",
+   "chain_1": "d609e91e2e99afdd10a608d5b6ac1f5c",
+   "chain_2": "77ab1817de9ac9ab460b36dde436fd77",
+   "chain_3": "40069e41d4429f1d426fabe8815f1c62"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "hier_2pl/rep0": {
+  "stock_seq": {
+   "chain_0": "84571e7563531a70a05265143c88cb34",
+   "chain_1": "e21742bd65c5a49c3624470ebda1df25",
+   "chain_2": "67e57817abe0ef3db48d59d37d84cb7c",
+   "chain_3": "ba1a9daae47900ecfcbde1ae6e577b58"
+  },
+  "exp_par": {
+   "chain_0": "84571e7563531a70a05265143c88cb34",
+   "chain_1": "e21742bd65c5a49c3624470ebda1df25",
+   "chain_2": "67e57817abe0ef3db48d59d37d84cb7c",
+   "chain_3": "ba1a9daae47900ecfcbde1ae6e577b58"
+  },
+  "exp_seq": {
+   "chain_0": "84571e7563531a70a05265143c88cb34",
+   "chain_1": "e21742bd65c5a49c3624470ebda1df25",
+   "chain_2": "67e57817abe0ef3db48d59d37d84cb7c",
+   "chain_3": "ba1a9daae47900ecfcbde1ae6e577b58"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "hier_2pl/rep1": {
+  "stock_seq": {
+   "chain_0": "680a4334022d9ccfe6a9f3f8f14fa9aa",
+   "chain_1": "1779737d2407848bb8f467b4cbe41d27",
+   "chain_2": "ae0d978e7aec5102695997b7baf545b7",
+   "chain_3": "d4332e9ecbf4dd722498bbee0a97b07d"
+  },
+  "exp_par": {
+   "chain_0": "680a4334022d9ccfe6a9f3f8f14fa9aa",
+   "chain_1": "1779737d2407848bb8f467b4cbe41d27",
+   "chain_2": "ae0d978e7aec5102695997b7baf545b7",
+   "chain_3": "d4332e9ecbf4dd722498bbee0a97b07d"
+  },
+  "exp_seq": {
+   "chain_0": "680a4334022d9ccfe6a9f3f8f14fa9aa",
+   "chain_1": "1779737d2407848bb8f467b4cbe41d27",
+   "chain_2": "ae0d978e7aec5102695997b7baf545b7",
+   "chain_3": "d4332e9ecbf4dd722498bbee0a97b07d"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "hier_2pl/rep2": {
+  "stock_seq": {
+   "chain_0": "24d4c477b00e34e213e051195f477338",
+   "chain_1": "1c1fc6d3462f79da1c4738e8eee2de87",
+   "chain_2": "ba622fa616f7408c3c8d7df18acd73a0",
+   "chain_3": "39b75eb8fab8a82f76a6dff9dee1fe05"
+  },
+  "exp_par": {
+   "chain_0": "24d4c477b00e34e213e051195f477338",
+   "chain_1": "1c1fc6d3462f79da1c4738e8eee2de87",
+   "chain_2": "ba622fa616f7408c3c8d7df18acd73a0",
+   "chain_3": "39b75eb8fab8a82f76a6dff9dee1fe05"
+  },
+  "exp_seq": {
+   "chain_0": "24d4c477b00e34e213e051195f477338",
+   "chain_1": "1c1fc6d3462f79da1c4738e8eee2de87",
+   "chain_2": "ba622fa616f7408c3c8d7df18acd73a0",
+   "chain_3": "39b75eb8fab8a82f76a6dff9dee1fe05"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "diamonds/rep0": {
+  "stock_seq": {
+   "chain_0": "2bbb64d98733ab2c2b95821a2a083ae8",
+   "chain_1": "72db8af0d3baeddbc1a78299be432a8a",
+   "chain_2": "0503a5dea53f14be6219504387ef953c",
+   "chain_3": "8c2357f36925a25967e91984d5d07028"
+  },
+  "exp_par": {
+   "chain_0": "2bbb64d98733ab2c2b95821a2a083ae8",
+   "chain_1": "72db8af0d3baeddbc1a78299be432a8a",
+   "chain_2": "0503a5dea53f14be6219504387ef953c",
+   "chain_3": "8c2357f36925a25967e91984d5d07028"
+  },
+  "exp_seq": {
+   "chain_0": "2bbb64d98733ab2c2b95821a2a083ae8",
+   "chain_1": "72db8af0d3baeddbc1a78299be432a8a",
+   "chain_2": "0503a5dea53f14be6219504387ef953c",
+   "chain_3": "8c2357f36925a25967e91984d5d07028"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "diamonds/rep1": {
+  "stock_seq": {
+   "chain_0": "a274f083c671f506d6edfb9842a608e6",
+   "chain_1": "5bfb642c83e62ef7f3e1b66fdb6f2ca2",
+   "chain_2": "7fb2d60afc22870520f35d776cf62a56",
+   "chain_3": "e85801201a521149a8d1c6064c726644"
+  },
+  "exp_par": {
+   "chain_0": "a274f083c671f506d6edfb9842a608e6",
+   "chain_1": "5bfb642c83e62ef7f3e1b66fdb6f2ca2",
+   "chain_2": "7fb2d60afc22870520f35d776cf62a56",
+   "chain_3": "e85801201a521149a8d1c6064c726644"
+  },
+  "exp_seq": {
+   "chain_0": "a274f083c671f506d6edfb9842a608e6",
+   "chain_1": "5bfb642c83e62ef7f3e1b66fdb6f2ca2",
+   "chain_2": "7fb2d60afc22870520f35d776cf62a56",
+   "chain_3": "e85801201a521149a8d1c6064c726644"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "diamonds/rep2": {
+  "stock_seq": {
+   "chain_0": "7b7b65a2a849e364edf3fc71647fda25",
+   "chain_1": "e94edd958aaa444f8cda9f78d2dde6f0",
+   "chain_2": "d362b59fc0462a5135930735a9cf4577",
+   "chain_3": "73c0f63b0ed6d8fcf13d65eb48f40c08"
+  },
+  "exp_par": {
+   "chain_0": "7b7b65a2a849e364edf3fc71647fda25",
+   "chain_1": "e94edd958aaa444f8cda9f78d2dde6f0",
+   "chain_2": "d362b59fc0462a5135930735a9cf4577",
+   "chain_3": "73c0f63b0ed6d8fcf13d65eb48f40c08"
+  },
+  "exp_seq": {
+   "chain_0": "7b7b65a2a849e364edf3fc71647fda25",
+   "chain_1": "e94edd958aaa444f8cda9f78d2dde6f0",
+   "chain_2": "d362b59fc0462a5135930735a9cf4577",
+   "chain_3": "73c0f63b0ed6d8fcf13d65eb48f40c08"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "lsat_model/rep0": {
+  "stock_seq": {
+   "chain_0": "5e6760dbe90d17744c1cbe221b6943d5",
+   "chain_1": "7044348a8345cda3e14f77a9fa07fee1",
+   "chain_2": "a10d7f128221fbb7ab46f328622adc6b",
+   "chain_3": "1414911f090e8ddc25454d1ced78e088"
+  },
+  "exp_par": {
+   "chain_0": "5e6760dbe90d17744c1cbe221b6943d5",
+   "chain_1": "7044348a8345cda3e14f77a9fa07fee1",
+   "chain_2": "a10d7f128221fbb7ab46f328622adc6b",
+   "chain_3": "1414911f090e8ddc25454d1ced78e088"
+  },
+  "exp_seq": {
+   "chain_0": "5e6760dbe90d17744c1cbe221b6943d5",
+   "chain_1": "7044348a8345cda3e14f77a9fa07fee1",
+   "chain_2": "a10d7f128221fbb7ab46f328622adc6b",
+   "chain_3": "1414911f090e8ddc25454d1ced78e088"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "lsat_model/rep1": {
+  "stock_seq": {
+   "chain_0": "f8cdd9c5bf488e5a30b84722305a399f",
+   "chain_1": "50119cf89acac70843e9e4553fe01ec7",
+   "chain_2": "6b0facde220fc4fd25bd65f35909ec2e",
+   "chain_3": "6b9092e55394f3fa08a9f708428205ae"
+  },
+  "exp_par": {
+   "chain_0": "f8cdd9c5bf488e5a30b84722305a399f",
+   "chain_1": "50119cf89acac70843e9e4553fe01ec7",
+   "chain_2": "6b0facde220fc4fd25bd65f35909ec2e",
+   "chain_3": "6b9092e55394f3fa08a9f708428205ae"
+  },
+  "exp_seq": {
+   "chain_0": "f8cdd9c5bf488e5a30b84722305a399f",
+   "chain_1": "50119cf89acac70843e9e4553fe01ec7",
+   "chain_2": "6b0facde220fc4fd25bd65f35909ec2e",
+   "chain_3": "6b9092e55394f3fa08a9f708428205ae"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "lsat_model/rep2": {
+  "stock_seq": {
+   "chain_0": "af3507e10b6eb33277aec06a305b88ae",
+   "chain_1": "0be661ebeecc43870c6c10c34784f7e7",
+   "chain_2": "1cb10940e7a70f576753e6b7ef0904be",
+   "chain_3": "f9066747e44c3e4719937c9c9daf1a3c"
+  },
+  "exp_par": {
+   "chain_0": "af3507e10b6eb33277aec06a305b88ae",
+   "chain_1": "0be661ebeecc43870c6c10c34784f7e7",
+   "chain_2": "1cb10940e7a70f576753e6b7ef0904be",
+   "chain_3": "f9066747e44c3e4719937c9c9daf1a3c"
+  },
+  "exp_seq": {
+   "chain_0": "af3507e10b6eb33277aec06a305b88ae",
+   "chain_1": "0be661ebeecc43870c6c10c34784f7e7",
+   "chain_2": "1cb10940e7a70f576753e6b7ef0904be",
+   "chain_3": "f9066747e44c3e4719937c9c9daf1a3c"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "accel_gp/rep0": {
+  "stock_seq": {
+   "chain_0": "9199ee3e3b3377cdef84183cf4f5be49",
+   "chain_1": "16046cab1c5a7529a2e3a95e46c2e6af",
+   "chain_2": "73ef07017eb7ecf90278c7d87b9d9777",
+   "chain_3": "ec1bc02c81e6784adb50a42dade6ea29"
+  },
+  "exp_par": {
+   "chain_0": "9199ee3e3b3377cdef84183cf4f5be49",
+   "chain_1": "16046cab1c5a7529a2e3a95e46c2e6af",
+   "chain_2": "73ef07017eb7ecf90278c7d87b9d9777",
+   "chain_3": "ec1bc02c81e6784adb50a42dade6ea29"
+  },
+  "exp_seq": {
+   "chain_0": "9199ee3e3b3377cdef84183cf4f5be49",
+   "chain_1": "16046cab1c5a7529a2e3a95e46c2e6af",
+   "chain_2": "73ef07017eb7ecf90278c7d87b9d9777",
+   "chain_3": "ec1bc02c81e6784adb50a42dade6ea29"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "accel_gp/rep1": {
+  "stock_seq": {
+   "chain_0": "043344277e53f88e49e24a7638e68b3b",
+   "chain_1": "ff8cc3a78df5c8d13c9466be0c4416b9",
+   "chain_2": "6d4093f69809313286e615ed15122fac",
+   "chain_3": "6f2b1b6e1f0f1b870a29770fd3169b82"
+  },
+  "exp_par": {
+   "chain_0": "043344277e53f88e49e24a7638e68b3b",
+   "chain_1": "ff8cc3a78df5c8d13c9466be0c4416b9",
+   "chain_2": "6d4093f69809313286e615ed15122fac",
+   "chain_3": "6f2b1b6e1f0f1b870a29770fd3169b82"
+  },
+  "exp_seq": {
+   "chain_0": "043344277e53f88e49e24a7638e68b3b",
+   "chain_1": "ff8cc3a78df5c8d13c9466be0c4416b9",
+   "chain_2": "6d4093f69809313286e615ed15122fac",
+   "chain_3": "6f2b1b6e1f0f1b870a29770fd3169b82"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "accel_gp/rep2": {
+  "stock_seq": {
+   "chain_0": "f02633b62499fe42a4df699912309391",
+   "chain_1": "cf8e6d9f90a9e460c8fc6594dd7d3829",
+   "chain_2": "ae7e500c167dd340bfb7722f8341e74e",
+   "chain_3": "a00778a9c4dab2e4a3f4f0b4a52f8cd2"
+  },
+  "exp_par": {
+   "chain_0": "f02633b62499fe42a4df699912309391",
+   "chain_1": "cf8e6d9f90a9e460c8fc6594dd7d3829",
+   "chain_2": "ae7e500c167dd340bfb7722f8341e74e",
+   "chain_3": "a00778a9c4dab2e4a3f4f0b4a52f8cd2"
+  },
+  "exp_seq": {
+   "chain_0": "f02633b62499fe42a4df699912309391",
+   "chain_1": "cf8e6d9f90a9e460c8fc6594dd7d3829",
+   "chain_2": "ae7e500c167dd340bfb7722f8341e74e",
+   "chain_3": "a00778a9c4dab2e4a3f4f0b4a52f8cd2"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "kronecker_gp/rep0": {},
+ "kronecker_gp/rep1": {
+  "stock_seq": {
+   "chain_0": "dba5eb797a82e22f706073675a099524",
+   "chain_1": "ce859fe9489da63bf3dcfbfa5a82d437",
+   "chain_2": "5e0e07a11ddfbe02cbf309e0fa9407fb",
+   "chain_3": "99f86ad6826484ab17629cbc5dfc8ac6"
+  },
+  "exp_par": {
+   "chain_0": "dba5eb797a82e22f706073675a099524",
+   "chain_1": "ce859fe9489da63bf3dcfbfa5a82d437",
+   "chain_2": "5e0e07a11ddfbe02cbf309e0fa9407fb",
+   "chain_3": "99f86ad6826484ab17629cbc5dfc8ac6"
+  },
+  "exp_seq": {
+   "chain_0": "dba5eb797a82e22f706073675a099524",
+   "chain_1": "ce859fe9489da63bf3dcfbfa5a82d437",
+   "chain_2": "5e0e07a11ddfbe02cbf309e0fa9407fb",
+   "chain_3": "99f86ad6826484ab17629cbc5dfc8ac6"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "kronecker_gp/rep2": {
+  "stock_seq": {
+   "chain_0": "85d75ac4114590119137385c3ad2a38a",
+   "chain_1": "39eb43b65e1e9604774322106793c9de",
+   "chain_2": "8e87ad041e1d0c9ed7cd95c98a4b43ef",
+   "chain_3": "8b74fa60b1681281ae1e915661c60dc1"
+  },
+  "exp_par": {
+   "chain_0": "85d75ac4114590119137385c3ad2a38a",
+   "chain_1": "39eb43b65e1e9604774322106793c9de",
+   "chain_2": "8e87ad041e1d0c9ed7cd95c98a4b43ef",
+   "chain_3": "8b74fa60b1681281ae1e915661c60dc1"
+  },
+  "exp_seq": {
+   "chain_0": "85d75ac4114590119137385c3ad2a38a",
+   "chain_1": "39eb43b65e1e9604774322106793c9de",
+   "chain_2": "8e87ad041e1d0c9ed7cd95c98a4b43ef",
+   "chain_3": "8b74fa60b1681281ae1e915661c60dc1"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "pilots/rep0": {
+  "stock_seq": {
+   "chain_0": "9b196561a7a7377c3d75edfd29149be2",
+   "chain_1": "3a60c814148216ab430fbb80aa0136f7",
+   "chain_2": "7f57c4f7f2f62bbc78d1f652869a3706",
+   "chain_3": "c0e2e3cf3671eaa150e38dc670f93704"
+  },
+  "exp_par": {
+   "chain_0": "9b196561a7a7377c3d75edfd29149be2",
+   "chain_1": "3a60c814148216ab430fbb80aa0136f7",
+   "chain_2": "7f57c4f7f2f62bbc78d1f652869a3706",
+   "chain_3": "c0e2e3cf3671eaa150e38dc670f93704"
+  },
+  "exp_seq": {
+   "chain_0": "9b196561a7a7377c3d75edfd29149be2",
+   "chain_1": "3a60c814148216ab430fbb80aa0136f7",
+   "chain_2": "7f57c4f7f2f62bbc78d1f652869a3706",
+   "chain_3": "c0e2e3cf3671eaa150e38dc670f93704"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "pilots/rep1": {
+  "stock_seq": {
+   "chain_0": "30a33b8c56726adbe26763474a625ed8",
+   "chain_1": "7e73b93a8419a94892f22106ae9ce373",
+   "chain_2": "09a912e250149509456e44901084d29c",
+   "chain_3": "f758e1af99f9259e4d5e018ff1e150dc"
+  },
+  "exp_par": {
+   "chain_0": "30a33b8c56726adbe26763474a625ed8",
+   "chain_1": "7e73b93a8419a94892f22106ae9ce373",
+   "chain_2": "09a912e250149509456e44901084d29c",
+   "chain_3": "f758e1af99f9259e4d5e018ff1e150dc"
+  },
+  "exp_seq": {
+   "chain_0": "30a33b8c56726adbe26763474a625ed8",
+   "chain_1": "7e73b93a8419a94892f22106ae9ce373",
+   "chain_2": "09a912e250149509456e44901084d29c",
+   "chain_3": "f758e1af99f9259e4d5e018ff1e150dc"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "pilots/rep2": {
+  "stock_seq": {
+   "chain_0": "3db339262b00087a5fbd7f6b9ce9ace5",
+   "chain_1": "0dc6601690dc0a576ec926a291f4e081",
+   "chain_2": "201999c8e97788f071166d2677fff931",
+   "chain_3": "c1992ee29b07fb79c1ea4e4fea2c164c"
+  },
+  "exp_par": {
+   "chain_0": "3db339262b00087a5fbd7f6b9ce9ace5",
+   "chain_1": "0dc6601690dc0a576ec926a291f4e081",
+   "chain_2": "201999c8e97788f071166d2677fff931",
+   "chain_3": "c1992ee29b07fb79c1ea4e4fea2c164c"
+  },
+  "exp_seq": {
+   "chain_0": "3db339262b00087a5fbd7f6b9ce9ace5",
+   "chain_1": "0dc6601690dc0a576ec926a291f4e081",
+   "chain_2": "201999c8e97788f071166d2677fff931",
+   "chain_3": "c1992ee29b07fb79c1ea4e4fea2c164c"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "eight_schools_centered/rep0": {
+  "stock_seq": {
+   "chain_0": "34a5e4bcc1bc8c7173df136c339eb149",
+   "chain_1": "131bb56165b98fc84ffbf9660b63062f",
+   "chain_2": "1df331edd4d42841a2c55a97d0b22a29",
+   "chain_3": "edc51fdd3e5043ed42ab86a738439498"
+  },
+  "exp_par": {
+   "chain_0": "34a5e4bcc1bc8c7173df136c339eb149",
+   "chain_1": "131bb56165b98fc84ffbf9660b63062f",
+   "chain_2": "1df331edd4d42841a2c55a97d0b22a29",
+   "chain_3": "edc51fdd3e5043ed42ab86a738439498"
+  },
+  "exp_seq": {
+   "chain_0": "34a5e4bcc1bc8c7173df136c339eb149",
+   "chain_1": "131bb56165b98fc84ffbf9660b63062f",
+   "chain_2": "1df331edd4d42841a2c55a97d0b22a29",
+   "chain_3": "edc51fdd3e5043ed42ab86a738439498"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "eight_schools_centered/rep1": {
+  "stock_seq": {
+   "chain_0": "ee9edb4d8532f424a6db6829cbfb0de1",
+   "chain_1": "196d1ffdb01a77014abfe4a550745097",
+   "chain_2": "da66fde9bef9acf1a20ac0d6a79e7e38",
+   "chain_3": "e57a12d573b30036e42e19ffce58a49e"
+  },
+  "exp_par": {
+   "chain_0": "ee9edb4d8532f424a6db6829cbfb0de1",
+   "chain_1": "196d1ffdb01a77014abfe4a550745097",
+   "chain_2": "da66fde9bef9acf1a20ac0d6a79e7e38",
+   "chain_3": "e57a12d573b30036e42e19ffce58a49e"
+  },
+  "exp_seq": {
+   "chain_0": "ee9edb4d8532f424a6db6829cbfb0de1",
+   "chain_1": "196d1ffdb01a77014abfe4a550745097",
+   "chain_2": "da66fde9bef9acf1a20ac0d6a79e7e38",
+   "chain_3": "e57a12d573b30036e42e19ffce58a49e"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "eight_schools_centered/rep2": {
+  "stock_seq": {
+   "chain_0": "0dcb14ebe8985bba72b033aab55a2ceb",
+   "chain_1": "9fdc3d3cf3cfe81f0a9e948acaadccd5",
+   "chain_2": "450216eea9819eeb9367e830cc7f6998",
+   "chain_3": "6ad6b5c508d7e83bea959a35efbe439c"
+  },
+  "exp_par": {
+   "chain_0": "0dcb14ebe8985bba72b033aab55a2ceb",
+   "chain_1": "9fdc3d3cf3cfe81f0a9e948acaadccd5",
+   "chain_2": "450216eea9819eeb9367e830cc7f6998",
+   "chain_3": "6ad6b5c508d7e83bea959a35efbe439c"
+  },
+  "exp_seq": {
+   "chain_0": "0dcb14ebe8985bba72b033aab55a2ceb",
+   "chain_1": "9fdc3d3cf3cfe81f0a9e948acaadccd5",
+   "chain_2": "450216eea9819eeb9367e830cc7f6998",
+   "chain_3": "6ad6b5c508d7e83bea959a35efbe439c"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "lotka_volterra/rep0": {
+  "stock_seq": {
+   "chain_0": "5c81a6681bfe539f03cae50f80759ded",
+   "chain_1": "fc4c67fd4df6a08ccf868409fc98c2e9",
+   "chain_2": "ca489f9fb7a50f308e6e7ba9b7c950c6",
+   "chain_3": "ff7118ba90ea2781b8bcae074ed7f2ca"
+  },
+  "exp_par": {
+   "chain_0": "5c81a6681bfe539f03cae50f80759ded",
+   "chain_1": "fc4c67fd4df6a08ccf868409fc98c2e9",
+   "chain_2": "ca489f9fb7a50f308e6e7ba9b7c950c6",
+   "chain_3": "ff7118ba90ea2781b8bcae074ed7f2ca"
+  },
+  "exp_seq": {
+   "chain_0": "5c81a6681bfe539f03cae50f80759ded",
+   "chain_1": "fc4c67fd4df6a08ccf868409fc98c2e9",
+   "chain_2": "ca489f9fb7a50f308e6e7ba9b7c950c6",
+   "chain_3": "ff7118ba90ea2781b8bcae074ed7f2ca"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ },
+ "lotka_volterra/rep1": {},
+ "lotka_volterra/rep2": {
+  "stock_seq": {
+   "chain_0": "3337c2d1aea28027cf73f69357f0cc68",
+   "chain_1": "23aa6e8f39e2f0826ccf8d9db73b36ea",
+   "chain_2": "7fb748eec71d5e97382e7dd2dd8af53a",
+   "chain_3": "bd5e84844495756af233f83d0cbcd831"
+  },
+  "exp_par": {
+   "chain_0": "3337c2d1aea28027cf73f69357f0cc68",
+   "chain_1": "23aa6e8f39e2f0826ccf8d9db73b36ea",
+   "chain_2": "7fb748eec71d5e97382e7dd2dd8af53a",
+   "chain_3": "bd5e84844495756af233f83d0cbcd831"
+  },
+  "exp_seq": {
+   "chain_0": "3337c2d1aea28027cf73f69357f0cc68",
+   "chain_1": "23aa6e8f39e2f0826ccf8d9db73b36ea",
+   "chain_2": "7fb748eec71d5e97382e7dd2dd8af53a",
+   "chain_3": "bd5e84844495756af233f83d0cbcd831"
+  },
+  "canary_stock_vs_exp_seq": true,
+  "bonus_stock_vs_exp_par": true
+ }
+}

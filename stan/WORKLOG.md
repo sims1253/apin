@@ -2865,3 +2865,55 @@ HEADLINES:
 ACTIONS: see report §Action list (correct Kit 2 text; W-40 novel, cite
 lit + Eigen 5 re-validation; Kits 1/3 file as-is; --Oexperimental spot
 check cheap; keep 2.39.0 pin).
+
+## 2026-08-23 — W-36 CLOSE-OUT: session headline delivered — exp_par/stock_seq geomean 0.341 (2.93x) at DEFAULTS, draws BIT-IDENTICAL end-to-end 28/28 (+28/28 bonus incl. threaded mc); all gates PASS
+
+Executed as pre-registered (arms, builds, inits, seeds, gates). Builds:
+exp @ 43b6435 from the untouched submodule worktree into build_w36exp;
+stock @ 3eddfc4 from a separate git worktree (walnutpie_stock_w36) into
+build_w36stock — submodule branch never switched. All 10 grid models
+verified STAN_THREADS=true in bs_models_threads/ (8 newly compiled from
+per-model scratch .stan copies; W-27 cache trap avoided). Inits: hier_2pl
++ lsat_model = inits_w25 pf; other 8 = inits_w36 deterministic
+normal(0,1) via random.Random(f'{model}-{seed}-{c}').normalvariate
+(dims via BridgeStan). Machine idle; <=4 threads; sequential arms one
+process at a time. Raw: runs/w36/, results/w36_{wall,ess,md5}.json;
+report results/session_benchmark_w36.md.
+
+HEADLINE (medians of 3 reps, warmup=1000 draws=1000, 4 chains):
+- exp_par/stock_seq wall ratio per model 0.281 (hier_2pl, 161.2 -> 45.3s)
+  to 0.432 (diamonds); GEOMEAN 0.341 = 2.93x. Total grid time 481 -> 158s.
+- exp_seq/stock_seq GEOMEAN 0.947 (endpoint threading alone, ~5.6%);
+  per-chain logp_grad calls drop by EXACTLY warmup+draws-1 = 1999 on
+  every completed chain of every model (verified chain-by-chain);
+  us/call unchanged (+-3%).
+- Attribution: parallelism (W-25 mc path + W-30 event-driven threads)
+  = 2.77x of the 2.93x; threading (W-23) multiplies by 1.056. Honest
+  cost of concurrency: per-call logp_grad +10-25% under 4-way sharing
+  (memory bandwidth), plus slowest-chain skew — why it is 2.9x not 4x.
+
+GATES:
+- (a) PASS: controller exit_iter=1000 early_exit=0 on 28/28 exp_par runs
+  (W-31 safe default holds at the tip).
+- (b) CANARY PASS: stock_seq vs exp_seq chain CSVs md5-identical 28/28
+  (spot-checked on esc + lsat rep0 BEFORE the grid, then every cell).
+  BONUS: stock_seq vs exp_par (threaded mc) also md5-identical 28/28 —
+  the session's final binary reproduces the pre-session binary's draws
+  byte-for-byte on the full grid while running 2.9x faster.
+- (c) QUALITY PASS by exact identity: bulk/tail ESS-min and max R-hat
+  identical across arms on every model (bit-identical draws). The
+  pathological rows (bym2 R-hat 4.93, diamonds 3.63, accel 4.18,
+  pilots 3.05 ESS-min ~4) are init-protocol artifacts — normal(0,1)
+  inits stick chains in separated modes — IDENTICALLY in all arms;
+  pf-init models (hier 625/800, lsat 730/1255) healthy.
+- Failures recorded: kronecker_gp rep0 + lotka_volterra rep1 abort
+  deterministically in ALL THREE arms ("macro_time must be in (0, inf)"
+  at chain 0, exactly 32001 logp_grad calls) — pre-existing
+  warmup-adaptation robustness limit, unchanged by the session; those
+  models' medians use 2 reps. Queued: guard non-finite adaptation state.
+
+Ship state: no sampler code changed (measurement item). Committed:
+WORKLOG.md, results/session_benchmark_w36.md, results/w36_{wall,ess,
+md5}.json, harness/{run_w36,analyze_w36,gen_w36_inits}.py. Local
+(untracked/gitignored): runs/w36/, inits_w36/, build dirs, scratch.
+Stock worktree walnutpie_stock_w36 removed AFTER results were committed.
