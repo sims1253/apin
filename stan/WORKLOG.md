@@ -5305,3 +5305,53 @@ errno-family flags to the march=native do-not-use list in the docs ask.
 Deliverable: results/errno_flags_w50.md; raw results/profile/w50/
 (committed); scripts+drivers+.so in scratch/w50/ (untracked);
 inits_w50/ committed. stan-math + walnutpie trees pristine; no pushes.
+
+### W-53 CLOSE-OUT: staged SoA-var phase 0/1 DONE — pointer-semantics inventory (registration seam = 19 sites/5 files; 2 null-check-only identity cmps; no hash/map-on-var; nested+TLS = the structural set), ordered migration plan, 3-level utility (arithmetic −8..−12%G hier full rollout; locality −96.7% of record-complex LLd misses on the W-47 pair), and the elt_multiply vertical slice ALL GATES PASS + MEASURED — results/soa_var_w53.md
+
+TREE: external/math_soa = fresh clone develop @ 344d7167 (arena
+machinery byte-identical to bs bundle 5.3.0 except the stack_alloc pad
+bugfix). SLICE (scratch/w53/w53_soa_slice_develop.patch, 9 files + 1
+new header, applies to both develop and the bs 5.3.0 bundle tree):
+make_nochain_vari_array = ONE arena alloc + placement-new records +
+ONE nochain span; elt_multiply rev-rev Matrix<var> branch only;
+set_zero{,_nested}/start/recover{,_nested}/profiling span-aware;
+records stay 24B layout-compatible (Increment A, not B). GATES ALL
+PASS first try: (a) exact-zero parity 4/4 models (100 pts each, values
++ full grads bitwise, 0 mismatches); (b) draws md5 IDENTICAL
+stock==patched==W-47's recorded fe7c57c99a7a6530ce2dcc408d6e9c65
+(walnutpie build_w36exp read-only, W-29 protocol; 69 identical benign
+probe-failure logs both arms); (c) mix/fun/elt_multiply_test 3/3;
+probe-level stock-vs-patched bitwise (develop+Eigen5 via git-stash
+A/B). MEASURED: sampler-level callgrind (identical 4,493-call
+trajectories): T 37.128e9->34.273e9 = −7.69%, G/grad 7.723M->7.087M =
+−8.23%; elt_multiply fwd −27.7%, its reverse callback
+instruction-identical, subtract (untouched) 0.0%, stack_alloc::alloc
+−49.2%, chainstack emplace −48.9%; net −13.0 Ir/record of the 32.6
+Ir/vari stock tax (new batch loop costs +9 Ir/record vs stock's
+inlined Eigen ctor loop). WALL is regime-split: in-sampler native
+stan_cli stanza −0.7..−2.2%/call; repeated-eval (python bridge, 50
+fixed pts, both arm orders, tight non-overlapping) −21..−23% with Ir
+anchor −11.5%/call (valgrind .venv python — NOTE: uv run under
+valgrind silently skips the model load; and a 20-call variant gave a
+sign-flipped artifact from a fixed +24.8M patched-.so loader
+constant — resolved at 200 calls; both gotchas documented). Locality
+bound (cachegrind, --cache-sim=yes, on W-47's F_SS/F_PS pair): LLd
+3.169M->0.106M = −96.7% (0.413->0.014 misses/record) — the wall-vs-Ir
+gap in the repeated-eval regime. CODEGEN RISK MEASURED: isolated
+develop/Eigen-5/-O3-nonPIC driver (scratch/w53/wild_driver.cpp):
+patched −9.2% Ir but +17% WALL (placement-::new serialization blocks
+reordering; production bundle TU shows the opposite) — batch 1 of the
+migration plan must gate on WALL per toolchain and the record loop
+should be restructured (vptr-store + memcpy val block) before any
+upstream PR. HAZARD BIT AGAIN: default make left the hardlinked
+pristine bridgestan.o in place (silently up-to-date, md5-identical) —
+must rm src/bridgestan.o && make src/bridgestan.o. VERDICT: GO for
+staged batch-API rollout; bit-identity NOT structurally blocked;
+Increment B (no-vptr SoA) not needed for most of the value (batch API
+alone captured −8.2%G vs the −10..−16%G Increment-B ceiling).
+Artifacts: results/soa_var_w53.md; harness/w53/ (scripts);
+scratch/w53/ untracked (patch, inventory raw, builds incl. bs_w53
+hardlink copy, profile dumps, draws, drivers); external/math_soa
+untracked, left PATCHED at the slice state. Pristine bundle md5-verified
+untouched; walnutpie untouched; no pushes; W-51 WORKLOG append left
+as-is (my commits stage my own hunks only via git apply --cached).
