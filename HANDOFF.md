@@ -32,6 +32,17 @@ Local working tree: `/home/m0hawk/Documents/apin/stan`.
   aliased -j12 — call `/usr/bin/make`; `install_cmdstan` uses `--cores`;
   multi-chain sampling needs STAN_THREADS=1 .so (`bs_models_threads/`).
 
+## Sessions 5/6 status (W-43 … W-56, all closed — FINAL_REPORT §8)
+
+- Robustness complete: pin fixed (w100 ESS 5-9 to 779), -inf inits
+  guarded, freeze clamped; community-sourced shields tested and rejected.
+- Gradient-cost program closed (W-45..W-50, W-53): every lever shipped,
+  refuted with mechanism, or packaged upstream.
+- Filing: 9 fork-internal PRs live (Stan AI Contribution Policy); the
+  stan-math checklist verified locally per branch (W-56); campaign traces
+  on HF (scholzmx/apin-agent-traces, campaign2).
+- Post text: stan/external/pr/DISCOURSE_POST.md (paste-ready).
+
 ## Session-4 status (W-35 … W-42, all closed — see FINAL_REPORT §7)
 
 - Verified end-to-end: exp tip vs stock = **2.93× geomean**, 28/28 cells
