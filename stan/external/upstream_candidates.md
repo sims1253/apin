@@ -142,3 +142,24 @@ nothing here is pushed anywhere yet.
    (exp/freeze-clamp), and the pin itself remains open (W-41 lineage).
    Status: fixes done in fork (branches exp/init-guard, exp/freeze-clamp);
    the pin's mechanism is documented but unresolved.
+
+8. **stan-math: wrong-sign gradient in bernoulli_logit partials + packetized
+   log1p ceiling** (W-46, Aug 2026). (a) BUG (one-line): in
+   bernoulli_logit_lpmf's partials, the `(ntheta > cutoff)` branch computes
+   `-exp_m_ntheta` WITHOUT the `signs` factor — wrong-SIGN gradient for
+   y=1 observations with logit > 20 (per-element error ≤ 4e-9 in practice
+   but structurally a sign error; present in develop). Fix: `signs *
+   exp_m_ntheta`. Found by a tight parity harness, not by luck. (b) PERF:
+   the lpmf eagerly evaluates glibc log1p for ALL N elements and discards
+   results for |ntheta|>20 via nested Selects (verified: 84.7M log1p calls
+   = N per log_prob on hier_2pl). A function-multiversioned fused
+   value+partials kernel (pragma-target avx2,fma island with
+   __builtin_cpu_supports dispatch — sidesteps the global -march question)
+   with a ≤1–2 ulp polynomial/plog1p on the confined [e^-20,1] range:
+   measured on hier_2pl −22.8% Ir/grad (7.77M→6.00M), −15.3% µs/call,
+   parity 2.4e-16. At SSE2 baseline packetization is latency-bound (no win)
+   — AVX2+FMA required. Evidence + kernel benches (Chebyshev vs Kahan-Eigen
+   vs generic_plog1p, 2.2M-point ulp grids): results/log1p_ceiling_w46.md;
+   patched headers + island implementation: scratch/w46/. Status: measured;
+   (a) is a ready one-line PR, (b) is a design proposal with a working
+   reference implementation.
