@@ -1,0 +1,8 @@
+#!/bin/sh
+# W-46: system g++ driver lost its internal search paths (observed 2026-08-22
+# evening; W-34 .so built fine at 19:59 the same day with plain g++).
+# This wrapper restores them; compiler identity unchanged (GCC 16.2.1).
+exec /usr/bin/g++ -B/usr/lib/gcc/x86_64-pc-linux-gnu/16/ \
+  -I/usr/include/c++/16 \
+  -I/usr/include/c++/16/x86_64-pc-linux-gnu \
+  -I/usr/lib/gcc/x86_64-pc-linux-gnu/16/include "$@"

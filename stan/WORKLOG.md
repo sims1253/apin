@@ -4840,3 +4840,89 @@ arithmetic, verdict, contingent-prototype gates). No builds unless the
 gate passes. Protocol: env -u LD_LIBRARY_PATH; /usr/bin/make -j2 only if
 building; serialized runs; explicit-path commits only (never git add -A);
 no pushes; walnutpie submodule branch untouched.
+
+## 2026-08-23 — W-46 CLOSE-OUT: log1p ceiling MEASURED — fused branch-cut kernel with deg-16 Chebyshev log1p + AVX2/FMA runtime island: −22.8% Ir/grad, −15.3% wall on STOCK hier_2pl, gradient parity 2.4e-16; at baseline ISA the ceiling is WALL-NEUTRAL (the ask is multiversioned packet math); BONUS: found a real partials sign bug in stan-math bernoulli_logit_lpmf (ntheta>20 branch misses `signs`, wrong sign for y=1, still in develop)
+
+WHAT STAN-MATH CALLS (§1 of results/log1p_ceiling_w46.md): per observation
+the lpmf computes packet exp (Eigen pexp — glibc exp is 0.02%T, NOT
+re-measured) and then EAGERLY calls glibc log1p (via apply_scalar_unary ->
+stan::math::log1p wrapper -> std::log1p, 59.2 Ir/call) for ALL 19,200
+elements — 84,697,422 calls / 4,424 var log_prob = 19,150 ~= N (verified
+from W-34 armB raw callgrind) — with the result DISCARDED for |ntheta|>20
+by the nested Selects. Real x distribution (numpy replication of the
+model's eta, scratch/w46/extract_x.py): posterior draws 100% in-band,
+|x| <= 15.7; pf-init/cloud/random 99.63-99.65% in-band — so the out-of-band
+skip (k2, bit-identical by construction) buys ~nothing on real data; the
+win must come from the in-band primitive, which reduces (softplus
+identity) to log1p(w), w = exp(-|x|) in [e^-20, 1].
+
+MICRO-BENCH (§2): peeled deg-16 Chebyshev log1p on [0,0.5]-reduced u
+(mpmath 60dps fit, tail error 2^-60): **<= 1 ulp vs glibc** on 2.2M-point
+grids (exact-w; an 8-ulp figure seen in one harness was a w-roundtrip
+artifact of the test, not the kernel). Kahan-corrected Eigen plog: 1 ulp.
+Eigen generic_plog1p (already exists for packets): 2 ulp. Fused kernels
+(value+partial, both outputs): at BASELINE SSE2 nothing beats stock on
+wall (best packet kernel −24% Ir but 0.85-1.02x wall, latency-bound 2-wide
+no-FMA; scalar fused 1.09x); under AVX2+FMA 1.9-2.2x wall / 3.1x fewer Ir
+(100 -> 32 Ir/elem interior). Approximate deg-10 arm (~3000 ulp = 2e-13):
+2.59x only — accuracy is cheap; arm NOT exercised at model level
+(pre-registered conditional). SLEEF skipped (not single-header vendorable).
+
+MODEL-LEVEL (§3): patch = one fused kernel replacing exp-array + both
+Select expressions (scratch/w46/bernoulli_logit_lpmf.hpp.patched):
+scalar path + #pragma GCC target("avx2,fma") island with
+__builtin_cpu_supports dispatch. Three arms, fresh builds in
+scratch/w46/{stock,patched,patched_base}_build (W-27 cache gotcha).
+TOOLCHAIN: system g++ driver lost its internal search paths mid-session
+(GCC 16.2.1 fresh package, AppImage-branded); scratch/w46/gxx_fixed
+wrapper restores them; rebuilt STOCK .so is BIT-IDENTICAL to W-34's stock
+build on 20 points (lp + full gradients) — like-for-like confirmed.
+GATES: (a) parity PASS — island max rel lp 1.24e-14, grad rel-L2
+2.37e-16 (100 pts: 50 random + 50 cloud); base 3.7e-16/2.45e-16.
+(b) wall: stock 1261.4 -> island 1068.8 us/call (0.847x, −15.3%; 3
+interleaved reps, medians; absolute inflated by co-running agents);
+patched_base (scalar) 1.206x = NEGATIVE result (packetization essential).
+(b) callgrind (W-29 protocol; IDENTICAL 3737+756 = 4493 grad calls all
+arms): stock T 34.92e9, 7.772M Ir/grad (W-34: 7.745M, 0.35% rebuild
+drift); island T 26.98e9, **6.004M Ir/grad (−22.8%)**; base 8.500M
+(+9.4%). Replaced complex {glibc log1p 4.60e9 + wrapper 0.42e9 +
+Select/redux 2.20e9 + partials machinery} -> fwd_avx2 2.99e9 (11.1%T);
+lpmf exclusive 6.43e9 -> 2.04e9. Draws md5 differ (ulp-level grads, same
+workload), as expected. Two kernel bugs caught BY THE GATES before any
+reported number: island pldexp used two 2^b factors instead of Eigen's
+three (2^b scale error; parity failed at 14% -> fixed -> 2.4e-16), and
+hand-transcribed poly coefficients were stale (unit ulp check caught;
+regenerated from the mpmath header).
+
+BONUS UPSTREAM BUG (§5): bernoulli_logit_lpmf partials,
+(ntheta > cutoff) branch is `-exp_m_ntheta` WITHOUT the signs factor —
+d lp/d theta = signs·(+exp(−ntheta)) there, so for y=1 observations with
+ntheta > 20 the partial has the WRONG SIGN (error 2·e^-ntheta <= 4e-9 per
+element; correct only for y=0). Present in stan-math develop as of
+2026-08-23. Found because the first patched build differed from stock by
+exactly this amount (max |dpartial| 4.08e-9 at ntheta = 20.011 ->
+5e-10 rel on alpha-grads at wild points). Final patch is bug-COMPATIBLE;
+the fix (`-exp_m_ntheta` -> `signs * exp_m_ntheta`) is a separate
+one-line upstream PR.
+
+UPSTREAM ASK (§4): (1) fuse + packetize the lpmf interior — log1p only
+needs w in [e^-20,1]; deg-16 Chebyshev or Kahan-plog (or Eigen's own
+generic_plog1p, 2 ulp) gives <=2 ulp, and one fused pass computes value +
+partials, removing the eager full-array glibc log1p and both Select
+passes: −22.8% Ir/grad on hier_2pl stock form (more on the W-34 armB form
+where the interior is 58%T). (2) The wall win REQUIRES AVX2+FMA — at
+baseline ISA the same kernel is wall-neutral; the concrete ask is
+function-multiversioned packet kernels (pragma-target island + runtime
+dispatch) inside stan-math, which does not touch the global -march
+question (W-27's miscompile was global -march=native on Eigen GEMM).
+(3) fix the signs bug in the same PR. (4) do NOT chase exp (already
+packet), the OOB skip (99.6-100% in-band), or the stan wrapper checks
+(~4 Ir/elem, free).
+
+Artifacts: results/log1p_ceiling_w46.md; results/profile/w46/{stock,
+patched,patched_base}/ (callgrind.out, cli.log, draws.csv); harness/w46/
+(scripts + kernel sources + gxx wrapper); scratch/w46/ untracked (builds,
+.so, pristine backup). stan-math RESTORED pristine (md5
+f003c78a165c2be67ce22b30c046c0e2 re-verified after restore; find confirms
+bernoulli_logit_lpmf.hpp was the only header touched). walnutpie
+submodule untouched; no pushes.
