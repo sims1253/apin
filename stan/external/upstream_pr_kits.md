@@ -82,6 +82,14 @@ Regression-test candidate: models with near-degenerate eigenvalue clusters
 (exp-quad kernels) — the same jitter floor that makes FD checks unreliable
 there (see Kit 4).
 
+**READY IMPLEMENTATION (W-39, Aug 2026):** `scratch/w39/stanc3_eigh.patch`
+against stanc3 develop @ 90c6532 — adds `Optimize.fuse_eigendecompose`
+(adjacent-pair peephole, structurally-equal pure args, enabled at --O1/--
+--Oexperimental) AND `eigh_pair_warnings` pedantic pass; golden tests
+included; full `dune runtest` passes; validated bit-identical at the .so
+level on kronecker_gp with −15.6% µs/call (medians of 3). Details:
+`results/stanc3_w39.md`. The PR can carry the patch as-is.
+
 ---
 
 ## Kit 3 — bridgestan issue: `compile_model` silently reuses a cached `.so`
