@@ -164,6 +164,18 @@ the fix design (cluster-aware/shift-and-invert adjoints for repeated
 eigenvalues): He et al. 2023, de Leeuw arXiv:2508.09355, Friswell/van der Aa
 (full list in results/upstream_scan_2026-08.md).
 
+**FIX IMPLEMENTED + VALIDATED (W-40, Aug 2026):** cluster-aware minimal-
+norm adjoint — zero the gap-coupling term when `|w_i−w_j| < κ·max(1,‖w‖∞)·ε`
+(κ=1e3 default, macro-overridable; if-guard keeps the well-separated path
+byte-identical — verified 200/200). Results: cross-ISA divergence 1.156 →
+3.1e-8 (κ=1e5); FD-consistency 30–52% → ~1e-6; exact-degeneracy NaN →
+FD-consistent; **sampler-level: kronecker_gp bulk-ESS-min 29 → 411, R-hat
+1.13 → 1.02** (stock adaptation was fitting a 30–50%-wrong gradient).
+Develop (Eigen 5) callback is structurally identical — patch ports
+trivially. Ready-to-file issue + fix-PR kit: `results/cluster_adjoint_w40.md`
+§"ready-to-file"; patch: `scratch/w40/cluster_adjoint.patch`. The ESS gain
+alone justifies the issue even if the fix design gets bikeshedded upstream.
+
 ---
 
 ## Kit 5 — walnutpie upstream: safe adaptation defaults
