@@ -44,4 +44,4 @@ Together these treat the stuck-chain class reported in the [walnutpie 0.0.1 rele
 ## Where the rest lives
 
 - Everything (experiment ledger W-1…W-56, final report, all measurement writeups): [sims1253/apin](https://github.com/sims1253/apin)
-- Full agent traces of the whole campaign, failures and rate-limit deaths included: [apin-agent-traces on HF](https://huggingface.co/datasets/scholzmx/apin-agent-traces)
+- One worked example, start to finish — the session transcript of the log1p benchmark that turned into issue 3366 and found the partials sign bug along the way (bugs in my own kernels first, then the triple-check before claiming the upstream one): [w46-log1p-ceiling-transcript.md](https://github.com/sims1253/apin/blob/main/stan/results/traces/w46-log1p-ceiling-transcript.md)
