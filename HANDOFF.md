@@ -2,8 +2,8 @@
 
 Canonical records live in the repo — this skill only routes you to them:
 
-1. `WORKLOG.md` (append-only, W-1 … W-42) — every experiment, verdict, retraction.
-2. `results/FINAL_REPORT.md` — consolidated findings incl. session-2/3/4 addenda.
+1. `WORKLOG.md` (append-only, W-1 … W-56) — every experiment, verdict, retraction.
+2. `results/FINAL_REPORT.md` — consolidated findings incl. session-2 through session-6 addenda.
 3. `external/upstream_audit_walnutpie.md` — provenance of every bug we found (§4: STAN_THREADS hazard).
 4. `external/upstream_candidates.md` — the ranked upstream push list (stan-math/stanc3/bridgestan).
 
@@ -38,9 +38,12 @@ Local working tree: `/home/m0hawk/Documents/apin/stan`.
   guarded, freeze clamped; community-sourced shields tested and rejected.
 - Gradient-cost program closed (W-45..W-50, W-53): every lever shipped,
   refuted with mechanism, or packaged upstream.
-- Filing: 9 fork-internal PRs live (Stan AI Contribution Policy); the
-  stan-math checklist verified locally per branch (W-56); campaign traces
-  on HF (scholzmx/apin-agent-traces, campaign2).
+- Filing: 9 fork-internal PRs live (Stan AI Contribution Policy): math #1-#4,
+  stanc3 #1, docs #1, walnutpie #7-#9 + sims1253/stan#1. stan-math checklist
+  verified locally per branch (W-56). Filing kit: external/pr/ (README index,
+  bodies, DISCOURSE_POST.md, maintainer-response docs: reprex-3369.md,
+  expect-ad-blindspot-3369.md). One session transcript published as the
+  worked example: results/traces/w46-log1p-ceiling-transcript.md.
 - Post text: stan/external/pr/DISCOURSE_POST.md (paste-ready).
 
 ## Session-4 status (W-35 … W-42, all closed — see FINAL_REPORT §7)
@@ -62,18 +65,28 @@ Local working tree: `/home/m0hawk/Documents/apin/stan`.
 
 ## Queued fresh-session items (each is a ONE-decision start; do NOT batch them)
 
-### A''. Upstream pushes (user drives; kits ready in external/upstream_pr_kits.md)
-- File order suggestion: stan-math cluster adjoint (strongest: ESS evidence),
-  stanc3 peephole (patch carries tests), square() one-liner, bridgestan
-  issues, walnutpie robustness set. Eigen-5 revalidation of Kit 4's repro
-  before filing (gate noted in kit).
+### A''. Respond to maintainer engagement on the fork PRs (user drives)
+- Ready-made replies: external/pr/reprex-3369.md (sign-flip amplification,
+  verified both arms) and external/pr/expect-ad-blindspot-3369.md (the
+  tol_min = tol^2 = 1e-8 floor makes sub-5e-9 gradients sign-uncheckable;
+  the old mix test never entered the cutoff branch). Unfixed sibling:
+  the OpenCL bernoulli_logit_glm variant carries the same missing-signs.
 ### B''. walnutpie exp-stack promotion (user decision)
-- Cherry-pick order suggestion: init-guard → freeze-clamp → grad-accounting
-  (tool); reject error-discipline + grow-m (history only); then re-run W-36
-  benchmark on the promoted stack.
-### C''. Open mechanisms (research-grade)
-- blr-class short-warmup pin (not tolerance-gated; W-38-E2 probe data).
-- kronecker_gp re-baseline under the fixed adjoint (only if W-40 adopted).
+- Per-idea robustness branches are clean and pushed (robustness/init-guard,
+  freeze-clamp, step-heuristic-fix off dev/init-robustness). The perf stack
+  (exp/safe-adapt-defaults lineage) is still local-only; suggested order in
+  FINAL_REPORT §7; then re-run the W-36 benchmark on the promoted stack.
+### C''. Open research directions (ranked by W-51 scan)
+- Score/Fisher low-rank+diagonal metric in walnutpie warmup: arXiv:2603.18845
+  (Seyboldt/Carlson/Carpenter; 4x median ESS/grad on 114 posteriordb models);
+  walnutpie upstream is already becoming "Adaptive WALNUTS" — the clear
+  next-direction, and our W-9/W-10 low-rank work is the local precedent.
+- SoA arena batch rollout: W-53 verdict GO; 7-batch gated migration plan is
+  the fresh-session artifact (results/soa_var_w53.md §2); mind the
+  per-toolchain codegen-sensitivity risk and the bridgestan prebuilt-.o trap.
+- kronecker_gp re-baseline under the fixed adjoint (only if math#1 adopted).
+- Two-phase warmup (alpha-subsample early + truncated full re-adaptation):
+  W-45 follow-up with mechanism-predicted modest ceiling.
 
 ## Protocol (violating these produced both retractions)
 
@@ -89,5 +102,8 @@ Local working tree: `/home/m0hawk/Documents/apin/stan`.
 - BridgeStan model instances are not thread-safe: serialize `logp_grad` (mutex) or one instance per chain. Constrained output includes GQ — headers must match column count. Adaptive stopping ⇒ ragged chains ⇒ trim to min length before ESS.
 - A shared `std::normal_distribution` interleaved across two RNGs is NOT reproducible (Box–Muller cache) — one distribution object per stream.
 - cmdstan argv: separate tokens (`data` `file=x`); `init=` is one token. `pgrep -f` self-matches — use `kill -0`.
-- Machine discipline: ≤4 cores always, no GPU. `uv run python` for the project venv; posterior 1.7 needs per-variable `ess`.
+- Machine discipline: ≤4 cores always, no GPU. `uv run python` for the project venv; posterior 1.7 needs per-variable `ess`. System valgrind 3.23 installed.
+- Shallow clones bite later: squashing/rebasing on a shallow base produces parentless commits ("no history in common" on fork PRs). `git fetch --unshallow` first.
+- bridgestan `compile_model` silently reuses a cached `.so` regardless of `make_args` — copy the `.stan` into a per-variant scratch dir; verify via `model_info()`.
+- The gh token lacks `gist` scope; `/tmp` is volatile (inits live in-repo: inits_w25/, inits_w36/).
 - Measurement priors (do not re-litigate without new data): logp_grad = 68–99.7% of walnutpie sampling wall (SIMD/kernel direction closed); warmup = 65–76% of total wall; checks ≤2.2% of cmdstan Ir (folklore rejected); fold ≈ rec core-set with good inits; basis-extraction rule is second-order (W-19); funnel class is a sampling/mode-lock problem, not adaptation.
