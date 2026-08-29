@@ -2875,3 +2875,79 @@ rewrite, --fits-on-lean (batch metric), diamonds, far-init, embed-stanc.
 - walnutpie fork: no PR/issue opened — the F-11.2/F-21 findings are
   recorded in the apin ledger for that lane; an issue there is the
   user's call. stanc3 fork: nothing new (eigh PR #1 pre-existing).
+
+### F-29 pre-registered (BIG SWING 1: walnuts adaptive-K + mass shrinkage — make walnuts the default)
+
+Evidence: F-21 — step-multiplier K works per-model (kidscore ESS/draw
+0.457 best-in-class at K=8, esnc peaks K=4/collapses K=8, logmesq needs
+K=8) but no GLOBAL K passes; F-28 — shrinkage raises ESS/draw at matched
+grads but collapses NUTS steps 6-32x (walnuts' within-orbit steps do
+NOT derive from the metric that way — the recorded live follow-up).
+Charter, branch fortk/f29-adaptiveK off f21-retune (worktree
+stanli-pr-waln): (i) implement per-model ADAPTIVE K chosen from warmup
+diagnostics (candidate signals: observed U-turn depth distribution,
+accept-stat level, frozen-step vs trajectory-length ratio — pick ONE,
+state the rule before the campaign); (ii) walnuts-side mass shrinkage
+knob (in the VENDORED MassEstimator, NOT deps patch 0004 — that is
+NUTS-side), default off, to test the F-28 hypothesis that shrinkage
+pays when steps don't collapse. GATES: (a) phase-1 + failure-set
+{bym2, diamonds, kronecker}: geomean ESS/s > arm C measured SAME-DAY
+interleaved, all-chain R-hat < 1.01 on every model (no silent
+failures), kidscore gate retained; (b) default-off byte-identity;
+ctest. Statistical class throughout. A miss = the mechanism table
+(where K landed per model, shrinkage x step interaction) — walnutpie
+lane gold either way.
+
+### F-30 pre-registered (BIG SWING 2: state-model rewrite — the loop's structural floor)
+
+Evidence: F-24 residue = "recursion structure + state model = a
+rewrite, not a lever". The lean loop still allocates/indexes per-depth
+state via vectors; the swing: FLAT arena-resident tree state (one
+preallocated block, tree nodes as indices, explicit stack instead of
+recursion, zero per-transition allocation, no per-depth indirection).
+Charter, branch fortk/f30-statearena off f24-loopfusion (new worktree).
+FP order changes => statistical class. GATES: (a) statistical
+equivalence vs f24 (3 seeds, ESS/draw parity, R-hat < 1.01, div not
+worse); (b) full-run Ir geomean (esnc-class 5) >= 1.45x vs STOCK loop
+(f24 is 1.360x; the state arena targets the remaining loop-self
+share) — plus attribution proving the loop-self pool shrank; (c)
+default-off (--lean-arena or fold into --lean behind a second flag,
+state which) + ctest; (d) ESS/s informational. Honest floor: if the
+gradient-bound models cap the geomean below 1.45x regardless, the
+verdict names the true ceiling arithmetic (as F-22 did).
+
+### F-31 pre-registered (BIG SWING 3: batch endgame — --fits on lean + embedded stanc)
+
+Evidence: F-26 — --fits drives stock run_nuts_chains (recorded next
+item); F-14 — warm-CLI bottleneck = stanc SUBPROCESS 20 ms/fit; the
+stanc_embed.o path exists (arch map; F-13's opam switch f13 survives
+on this box). Charter, branch fortk/f31-batchend off f26-capstone:
+(i) --fits drives the LEAN loop; (ii) build stanc_embed.o (opam f13
+switch; tools/stanc_embed/build.sh) and wire the tool to the embedded
+compiler (kill the subprocess); (iii) per-fit telemetry. GATES: (a)
+--fits draws (lean) statistically equivalent to --fits stock-loop per-
+fit arms (3 seeds, ESS/draw parity — the lean loop is F-24 statistical
+class anyway); (b) fits/hour: esnc >= 3.5M and blr >= 1.3M (F-26: 2.6M/
+956k; the subprocess kill + lean should compound ~1.3-1.5x) — busy-box
+wall labeled, per-fit compile+sample decomposition reported; (c)
+default paths byte-identical (no --fits / no embed env => unchanged);
+ctest. If embed proves fragile, ship (i) alone with honest numbers.
+
+### INCIDENT + RECOVERY (2026-08-29 ~23:00, parent-recorded)
+
+external/ PARTIALLY WIPED (cause unknown — NOT parent or lane agents;
+hit the user's own other-lane assets too: cmdstan, walnutpie,
+posteriordb checkouts + tracked research .md files) and ALL
+bench/fortk_* raw dirs deleted. SURVIVED: logs/ (complete evidence of
+record), WORKLOG, models/ + data/, harness/, external/stanli's GIT
+STORE with every branch, stanli-pr-waln @ 7f4f241, /tmp pinned
+worktree + review checkout, ~/.cmdstan (A-arm), ~/.opam (f13 switch).
+Every code artifact is recoverable from the pushed branches + local
+store (the publishing round is why this is an incident, not a
+catastrophe). Permanently lost: raw bench campaign dirs (logged
+numbers stand on the .md evidence; regenerable by re-running),
+in-flight uncommitted edits (F-29's survived in pr-waln pending check;
+F-30/F-31 redone from their surviving logs). Recovery: F-29 owns base
+(fetch.sh deps re-fetch, pristine stan), siblings re-add worktrees
+serialized; F-31 additionally re-clones the stanc3 fork for the embed.
+Tracked apin .md files restored via git restore.
