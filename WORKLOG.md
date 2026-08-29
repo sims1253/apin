@@ -2852,3 +2852,26 @@ MECHANISM (delta sweep, early-exit, LW shrinkage). The ESS/s search
 has a well-mapped boundary. Remaining swings (user's call): walnuts
 adaptive-K + shrinkage interaction (walnutpie lane), state-model
 rewrite, --fits-on-lean (batch metric), diamonds, far-init, embed-stanc.
+
+### PUBLISHING ROUND (2026-08-29, parent-executed; user audit request)
+
+- apin record COMMITTED + pushed as NEW branch fortk-lane-record on
+  sims1253/apin (local master has no common ancestry with the purged
+  remote main — additive branch, no force; merge at user's leisure).
+  Bench raw dirs (40-96M) stay local per runs/ convention; the .md
+  lane logs are the evidence of record.
+- stanli research branches PUSHED (backup, no PRs): fortk/t2-coverage
+  (trunk @ 2bc451a) + f21-retune/f22-lean/f23-leanwarm/f24-loopfusion/
+  f25-kernelfloor/f26-capstone/f27-earlyexit/f28-lwshrink.
+- Three warranted stacked DRAFT PRs opened (making PR #1/#2's addenda
+  reproducible — their bodies cited numbers whose code had no PR):
+  #10 [fused jit] lean NUTS loop (f24-loopfusion -> fortk-pr/sampler-loop)
+  — F-22..F-24, 1.360x Ir, default-off; #11 [fused jit] kernel floor
+  (f25-kernelfloor -> fortk-pr/jit-tier) — F-25, kidscore -53.8% Ir/grad,
+  census 2.737x; #12 [fused jit] walnuts step multiplier (f21-retune ->
+  fortk-pr/walnuts) — F-21 instrument, honest-miss labeled.
+  Bodies orwell-pr-{lean,kernel,stepmult}.md. f27/f28 branches pushed,
+  NO PRs (documented negatives, default-off, materiality rule).
+- walnutpie fork: no PR/issue opened — the F-11.2/F-21 findings are
+  recorded in the apin ledger for that lane; an issue there is the
+  user's call. stanc3 fork: nothing new (eigh PR #1 pre-existing).
