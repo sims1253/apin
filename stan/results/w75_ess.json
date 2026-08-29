@@ -1,0 +1,39 @@
+{
+ "experiment": "w75 arms analysis",
+ "arms": {
+  "baseline": "/home/m0hawk/Documents/apin/stan/runs/w36/exp_par",
+  "pfall75": "/home/m0hawk/Documents/apin/stan/runs/w75/pfall75"
+ },
+ "aborted_cells": {
+  "baseline": {
+   "kronecker_gp": [
+    0
+   ],
+   "lotka_volterra": [
+    1
+   ]
+  },
+  "pfall75": {}
+ },
+ "arms_verdict": {
+  "pfall75": {
+   "shared_models": 10,
+   "lost_models_whole": [],
+   "aggregate_baseline_geoESS": 330.05293688145457,
+   "aggregate_pfall75_geoESS": 609.4831129457035,
+   "delta_pct": 84.66222985454365,
+   "models_essmin_drop_gt20pct": [
+    [
+     "kronecker_gp",
+     47.064140498071104
+    ],
+    [
+     "eight_schools_centered",
+     45.49108210662839
+    ]
+   ],
+   "collapse_models_gt2x_geoESS": [],
+   "aborted_cells_total": 0
+  }
+ }
+}

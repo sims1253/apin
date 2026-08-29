@@ -1,0 +1,37 @@
+{
+ "experiment": "w88 arms analysis",
+ "arms": {
+  "baseline": "/home/m0hawk/Documents/apin/stan/runs/w36/exp_par",
+  "guard5": "/home/m0hawk/Documents/apin/stan/runs/w88/guard5"
+ },
+ "aborted_cells": {
+  "baseline": {
+   "kronecker_gp": [
+    0
+   ],
+   "lotka_volterra": [
+    1
+   ]
+  },
+  "guard5": {
+   "kronecker_gp": [
+    0
+   ],
+   "lotka_volterra": [
+    1
+   ]
+  }
+ },
+ "arms_verdict": {
+  "guard5": {
+   "shared_models": 10,
+   "lost_models_whole": [],
+   "aggregate_baseline_geoESS": 330.05293688145457,
+   "aggregate_guard5_geoESS": 519.5797964827035,
+   "delta_pct": 57.42317017143268,
+   "models_essmin_drop_gt20pct": [],
+   "collapse_models_gt2x_geoESS": [],
+   "aborted_cells_total": 2
+  }
+ }
+}

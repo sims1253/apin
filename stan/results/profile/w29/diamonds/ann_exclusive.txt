@@ -1,0 +1,65 @@
+--------------------------------------------------------------------------------
+Profile data file '/home/m0hawk/Documents/apin/stan/results/profile/w29/diamonds/callgrind.out' (creator: callgrind-3.23.0)
+--------------------------------------------------------------------------------
+I1 cache: 
+D1 cache: 
+LL cache: 
+Timerange: Basic block 0 - 303437074
+Trigger: Program termination
+Profiled target:  /home/m0hawk/Documents/apin/stan/external/walnutpie/build_e27/examples/stan_cli /home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so /home/m0hawk/Documents/apin/stan/data/diamonds.json --seed 20260819 --init-file /home/m0hawk/Documents/apin/stan/inits_w27/diamonds/rep0/chain_0.txt --warmup 50 --samples 50 --metric-window 50 --output /home/m0hawk/Documents/apin/stan/results/profile/w29/diamonds/draws.csv (PID 79693, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       99
+Include dirs:     
+User annotated:   
+Auto-annotation:  on
+
+--------------------------------------------------------------------------------
+Ir                     
+--------------------------------------------------------------------------------
+2,170,841,389 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                    file:function
+--------------------------------------------------------------------------------
+751,996,146 (34.64%)  ???:Eigen::internal::general_matrix_vector_product<long, double, Eigen::internal::const_blas_data_mapper<double, long, 0>, 0, false, double, Eigen::internal::const_blas_data_mapper<double, long, 1>, false, 0>::run(long, long, Eigen::internal::const_blas_data_mapper<double, long, 0> const&, Eigen::internal::const_blas_data_mapper<double, long, 1> const&, double*, long, double) [clone .isra.0] [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+745,609,128 (34.35%)  ???:Eigen::internal::general_matrix_vector_product<long, double, Eigen::internal::const_blas_data_mapper<double, long, 1>, 1, false, double, Eigen::internal::const_blas_data_mapper<double, long, 0>, false, 0>::run(long, long, Eigen::internal::const_blas_data_mapper<double, long, 1> const&, Eigen::internal::const_blas_data_mapper<double, long, 0> const&, double*, long, double) [clone .constprop.0] [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+177,251,382 ( 8.17%)  ???:stan::return_type<Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> >, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> >, stan::math::var_value<double, void>, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >, stan::math::var_value<double, void> >::type stan::math::normal_id_glm_lpdf<false, Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> >, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> >, stan::math::var_value<double, void>, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >, stan::math::var_value<double, void>, (void*)0>(Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > const&, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, stan::math::var_value<double, void> const&, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> > const&, stan::math::var_value<double, void> const&) [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+125,491,650 ( 5.78%)  ???:0x00000000001b2800 [/usr/lib/libc.so.6]
+ 73,145,002 ( 3.37%)  ???:void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<char>, rapidjson::CrtAllocator>::ParseNumber<274u, rapidjson::BasicIStreamWrapper<std::istream>, stan::json::RapidJSONHandler<stan::json::json_data_handler> >(rapidjson::BasicIStreamWrapper<std::istream>&, stan::json::RapidJSONHandler<stan::json::json_data_handler>&) [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+ 35,257,332 ( 1.62%)  ???:double Eigen::DenseBase<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::Array<double, -1, 1, 0, -1, 1> const, Eigen::Array<double, -1, 1, 0, -1, 1> const> >::redux<Eigen::internal::scalar_sum_op<double, double> >(Eigen::internal::scalar_sum_op<double, double> const&) const [clone .isra.0] [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+ 28,721,520 ( 1.32%)  ???:char* rapidjson::internal::Stack<rapidjson::CrtAllocator>::Push<char>(unsigned long) [clone .constprop.0] [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+ 22,925,920 ( 1.06%)  ???:std::basic_streambuf<char, std::char_traits<char> >::xsgetn(char*, long) [/usr/lib/libstdc++.so.6.0.36]
+ 22,673,358 ( 1.04%)  ???:rapidjson::BasicIStreamWrapper<std::istream>::Read() [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+ 21,154,111 ( 0.97%)  ???:std::istream::read(char*, long) [/usr/lib/libstdc++.so.6.0.36]
+ 20,566,490 ( 0.95%)  ???:std::basic_filebuf<char, std::char_traits<char> >::xsgetn(char*, long) [/usr/lib/libstdc++.so.6.0.36]
+ 17,042,475 ( 0.79%)  ???:std::istream::sentry::sentry(std::istream&, bool) [/usr/lib/libstdc++.so.6.0.36]
+ 16,906,885 ( 0.78%)  ???:0x00000000001b1e00 [/usr/lib/libc.so.6]
+ 15,436,731 ( 0.71%)  ???:stan::json::json_data_handler::promote_to_double() [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+  7,126,130 ( 0.33%)  ???:stan::json::json_data_handler::save_key_value_pair() [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+  7,059,503 ( 0.33%)  ???:0x00000000001b16a0 [/usr/lib/libc.so.6]
+  6,726,972 ( 0.31%)  ???:std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned long, unsigned long, char const*, unsigned long) [/usr/lib/libstdc++.so.6.0.36]
+  6,458,286 ( 0.30%)  ???:void rapidjson::SkipWhitespace<rapidjson::BasicIStreamWrapper<std::istream> >(rapidjson::BasicIStreamWrapper<std::istream>&) [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+  4,640,767 ( 0.21%)  ???:boost::range_value<std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > >::type boost::algorithm::join<std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >, char [2]>(std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&, char const (&) [2]) [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+  4,520,125 ( 0.21%)  ???:void rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<char>, rapidjson::CrtAllocator>::ParseValue<274u, rapidjson::BasicIStreamWrapper<std::istream>, stan::json::RapidJSONHandler<stan::json::json_data_handler> >(rapidjson::BasicIStreamWrapper<std::istream>&, stan::json::RapidJSONHandler<stan::json::json_data_handler>&)'2 [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+  3,533,365 ( 0.16%)  ???:free [/usr/lib/libc.so.6]
+  3,412,315 ( 0.16%)  ???:bs_log_density_gradient [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+  3,137,457 ( 0.14%)  ???:0x00000000000bc000 [/usr/lib/libc.so.6]
+  2,965,140 ( 0.14%)  ???:rapidjson::GenericReader<rapidjson::UTF8<char>, rapidjson::UTF8<char>, rapidjson::CrtAllocator>::NumberStream<rapidjson::BasicIStreamWrapper<std::istream>, true, false>::TakePush() [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+  2,708,046 ( 0.12%)  ???:stan::return_type<Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double, double>::type stan::math::normal_lpdf<false, Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double, double, (void*)0>(Eigen::Map<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const, 0, Eigen::Stride<0, 0> >&, double&&, double&&) [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+  2,314,623 ( 0.11%)  ???:void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<true>(char const*, unsigned long) [/home/m0hawk/Documents/apin/stan/external/walnutpie/build_e27/examples/stan_cli]
+  2,189,839 ( 0.10%)  ???:diamonds_model_namespace::diamonds_model::diamonds_model(stan::io::var_context&, unsigned int, std::ostream*) [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+  2,142,870 ( 0.10%)  ???:std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, int> > >::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+  1,920,625 ( 0.09%)  ???:std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, stan::json::array_dims, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, stan::json::array_dims> > >::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+  1,900,582 ( 0.09%)  ???:malloc [/usr/lib/libc.so.6]
+  1,870,506 ( 0.09%)  ???:__lgamma_r_finite [/usr/lib/libm.so.6]
+  1,764,057 ( 0.08%)  ???:pow [/usr/lib/libm.so.6]
+  1,550,422 ( 0.07%)  ???:rapidjson::internal::StrtodDiyFp(char const*, int, int, double*) [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+  1,452,470 ( 0.07%)  ???:stan::math::vari_base*& std::vector<stan::math::vari_base*, std::allocator<stan::math::vari_base*> >::emplace_back<stan::math::vari_base*>(stan::math::vari_base*&&) [clone .isra.0] [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+  1,383,492 ( 0.06%)  ???:stan::return_type<stan::math::var_value<double, void>, double, double, double>::type stan::math::student_t_lpdf<false, stan::math::var_value<double, void>, double, double, double, (void*)0>(stan::math::var_value<double, void> const&, double const&, double const&, double const&) [clone .isra.0] [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+  1,377,288 ( 0.06%)  ???:void stan::math::internal::update_adjoints<stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>, stan::math::arena_matrix<Eigen::Matrix<double, -1, 1, 0, -1, 1>, void>, (void*)0, (void*)0>(stan::math::arena_matrix<Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>&, stan::math::arena_matrix<Eigen::Matrix<double, -1, 1, 0, -1, 1>, void> const&, stan::math::var_value<double, void> const&) [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+  1,374,186 ( 0.06%)  ???:stan::math::internal::ops_partials_edge<double, Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1>, void>::ops_partials_edge(Eigen::Matrix<stan::math::var_value<double, void>, -1, 1, 0, -1, 1> const&) [/home/m0hawk/Documents/apin/stan/bs_models/model_diamonds.so]
+  1,293,903 ( 0.06%)  ???:0x000000000000d7b0 [/usr/lib/ld-linux-x86-64.so.2]
+  1,274,637 ( 0.06%)  ???:0x000000000006af00 [/usr/lib/libc.so.6]
+

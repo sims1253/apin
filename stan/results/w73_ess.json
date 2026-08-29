@@ -1,0 +1,140 @@
+{
+ "experiment": "w73 arms analysis",
+ "arms": {
+  "baseline": "/home/m0hawk/Documents/apin/stan/runs/w36/exp_par",
+  "lr_hi": "/home/m0hawk/Documents/apin/stan/runs/w73/lr_hi",
+  "lr_lo": "/home/m0hawk/Documents/apin/stan/runs/w73/lr_lo",
+  "target07": "/home/m0hawk/Documents/apin/stan/runs/w73/target07"
+ },
+ "aborted_cells": {
+  "baseline": {
+   "kronecker_gp": [
+    0
+   ],
+   "lotka_volterra": [
+    1
+   ]
+  },
+  "lr_hi": {
+   "kronecker_gp": [
+    0
+   ],
+   "lotka_volterra": [
+    1
+   ]
+  },
+  "lr_lo": {
+   "kronecker_gp": [
+    0
+   ],
+   "lotka_volterra": [
+    1
+   ]
+  },
+  "target07": {
+   "kronecker_gp": [
+    0
+   ],
+   "lotka_volterra": [
+    1
+   ]
+  }
+ },
+ "arms_verdict": {
+  "lr_hi": {
+   "shared_models": 10,
+   "lost_models_whole": [],
+   "aggregate_baseline_geoESS": 330.05293688145457,
+   "aggregate_lr_hi_geoESS": 326.66114922869156,
+   "delta_pct": -1.0276495900356841,
+   "models_essmin_drop_gt20pct": [
+    [
+     "kronecker_gp",
+     59.66913846408677
+    ],
+    [
+     "eight_schools_centered",
+     79.19541147184307
+    ],
+    [
+     "lotka_volterra",
+     60.45259480483687
+    ]
+   ],
+   "collapse_models_gt2x_geoESS": [
+    "lotka_volterra"
+   ],
+   "aborted_cells_total": 2
+  },
+  "lr_lo": {
+   "shared_models": 10,
+   "lost_models_whole": [],
+   "aggregate_baseline_geoESS": 330.05293688145457,
+   "aggregate_lr_lo_geoESS": 106.19409290034349,
+   "delta_pct": -67.82513317295967,
+   "models_essmin_drop_gt20pct": [
+    [
+     "radon_partially_pooled_noncentered",
+     90.351701504702
+    ],
+    [
+     "kronecker_gp",
+     53.700172630127454
+    ],
+    [
+     "eight_schools_centered",
+     48.07006499183273
+    ],
+    [
+     "lotka_volterra",
+     56.79605055629386
+    ]
+   ],
+   "collapse_models_gt2x_geoESS": [
+    "radon_partially_pooled_noncentered",
+    "diamonds",
+    "accel_gp"
+   ],
+   "aborted_cells_total": 2
+  },
+  "target07": {
+   "shared_models": 10,
+   "lost_models_whole": [],
+   "aggregate_baseline_geoESS": 330.05293688145457,
+   "aggregate_target07_geoESS": 240.99468495149495,
+   "delta_pct": -26.983020594040873,
+   "models_essmin_drop_gt20pct": [
+    [
+     "radon_partially_pooled_noncentered",
+     35.400881046872854
+    ],
+    [
+     "hier_2pl",
+     49.02455832781338
+    ],
+    [
+     "lsat_model",
+     37.27889416066452
+    ],
+    [
+     "kronecker_gp",
+     77.62250349894262
+    ],
+    [
+     "eight_schools_centered",
+     68.83660505465159
+    ],
+    [
+     "lotka_volterra",
+     22.00243162182972
+    ]
+   ],
+   "collapse_models_gt2x_geoESS": [
+    "hier_2pl",
+    "lsat_model",
+    "kronecker_gp"
+   ],
+   "aborted_cells_total": 2
+  }
+ }
+}

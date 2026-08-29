@@ -1,0 +1,163 @@
+{
+ "experiment": "W-64 step-optimizer head-to-head",
+ "arms": {
+  "baseline": "/home/m0hawk/Documents/apin/stan/runs/w36/exp_par",
+  "da": "/home/m0hawk/Documents/apin/stan/runs/w64/da",
+  "belief": "/home/m0hawk/Documents/apin/stan/runs/w64/belief"
+ },
+ "aborted_cells": {
+  "baseline": {
+   "kronecker_gp": [
+    0
+   ],
+   "lotka_volterra": [
+    1
+   ]
+  },
+  "da": {
+   "radon_partially_pooled_noncentered": [
+    1
+   ],
+   "bym2_offset_only": [
+    0,
+    1,
+    2
+   ],
+   "hier_2pl": [
+    0
+   ],
+   "lsat_model": [
+    0,
+    1,
+    2
+   ],
+   "accel_gp": [
+    0,
+    1,
+    2
+   ],
+   "kronecker_gp": [
+    0
+   ],
+   "pilots": [
+    0,
+    1,
+    2
+   ],
+   "eight_schools_centered": [
+    0,
+    1,
+    2
+   ],
+   "lotka_volterra": [
+    1
+   ]
+  },
+  "belief": {
+   "accel_gp": [
+    0,
+    1
+   ],
+   "kronecker_gp": [
+    0
+   ],
+   "lotka_volterra": [
+    1
+   ]
+  }
+ },
+ "arms_verdict": {
+  "da": {
+   "shared_models": 5,
+   "lost_models_whole": [
+    "bym2_offset_only",
+    "lsat_model",
+    "accel_gp",
+    "pilots",
+    "eight_schools_centered"
+   ],
+   "aggregate_baseline_geoESS": 719.0412673694024,
+   "aggregate_da_geoESS": 756.3995479910869,
+   "delta_pct": 5.195568365409553,
+   "gate1_geomean_plus5pct_and_no_loss": false,
+   "models_essmin_drop_gt20pct": [
+    [
+     "radon_partially_pooled_noncentered",
+     96.33320091221988
+    ],
+    [
+     "hier_2pl",
+     87.70246383269547
+    ],
+    [
+     "diamonds",
+     91.08838350618802
+    ],
+    [
+     "kronecker_gp",
+     93.37262017949739
+    ],
+    [
+     "lotka_volterra",
+     88.26099515836853
+    ]
+   ],
+   "collapse_models_gt2x_geoESS": [],
+   "ADOPT_candidate": false,
+   "REJECT_or_CONFIRM_DEFAULT": true
+  },
+  "belief": {
+   "shared_models": 10,
+   "lost_models_whole": [],
+   "aggregate_baseline_geoESS": 330.05293688145457,
+   "aggregate_belief_geoESS": 337.8551328474651,
+   "delta_pct": 2.3639225997291513,
+   "gate1_geomean_plus5pct_and_no_loss": false,
+   "models_essmin_drop_gt20pct": [
+    [
+     "radon_partially_pooled_noncentered",
+     92.82113430746139
+    ],
+    [
+     "bym2_offset_only",
+     23.24416950844287
+    ],
+    [
+     "hier_2pl",
+     80.32513536696105
+    ],
+    [
+     "diamonds",
+     92.59465361177732
+    ],
+    [
+     "lsat_model",
+     75.64820297656628
+    ],
+    [
+     "accel_gp",
+     89.60026319281741
+    ],
+    [
+     "kronecker_gp",
+     90.94733075794105
+    ],
+    [
+     "pilots",
+     98.96193187891528
+    ],
+    [
+     "eight_schools_centered",
+     48.09802924652576
+    ],
+    [
+     "lotka_volterra",
+     92.91670601913191
+    ]
+   ],
+   "collapse_models_gt2x_geoESS": [],
+   "ADOPT_candidate": false,
+   "REJECT_or_CONFIRM_DEFAULT": true
+  }
+ }
+}

@@ -1,0 +1,232 @@
+{
+ "experiment": "W-60 metric-window chopping A/B (--metric-window 100)",
+ "arms": {
+  "baseline": "runs/w36/exp_par",
+  "mw100": "runs/w59/mw100"
+ },
+ "per_model_median": {
+  "baseline": {
+   "radon_partially_pooled_noncentered": {
+    "ess_bulk_min": 73.95366111280126,
+    "ess_bulk_geomean": 2204.738973810645,
+    "ess_tail_min": 206.7485724351461,
+    "rhat_max": 1.0624471053455962,
+    "wall": 20.848,
+    "n_leapfrog_total": 143195.0
+   },
+   "bym2_offset_only": {
+    "ess_bulk_min": 4.222151314183841,
+    "ess_bulk_geomean": 5.930531460103596,
+    "ess_tail_min": 4.032258064516129,
+    "rhat_max": 4.9345443715608726,
+    "wall": 44.923,
+    "n_leapfrog_total": 248008.0
+   },
+   "hier_2pl": {
+    "ess_bulk_min": 624.7147165261678,
+    "ess_bulk_geomean": 2673.050957476926,
+    "ess_tail_min": 800.2355431876497,
+    "rhat_max": 1.0092775347998875,
+    "wall": 45.263,
+    "n_leapfrog_total": 146794.0
+   },
+   "diamonds": {
+    "ess_bulk_min": 4.37021944026509,
+    "ess_bulk_geomean": 60.27358519586177,
+    "ess_tail_min": 11.107112031409168,
+    "rhat_max": 3.6341134929792895,
+    "wall": 4.794,
+    "n_leapfrog_total": 233332.0
+   },
+   "lsat_model": {
+    "ess_bulk_min": 730.0799291785946,
+    "ess_bulk_geomean": 3128.944459534474,
+    "ess_tail_min": 1254.9973203441084,
+    "rhat_max": 1.011244377934343,
+    "wall": 11.9,
+    "n_leapfrog_total": 136843.0
+   },
+   "accel_gp": {
+    "ess_bulk_min": 4.29672466353147,
+    "ess_bulk_geomean": 42.55368373040712,
+    "ess_tail_min": 4.032258064516129,
+    "rhat_max": 4.176871630621717,
+    "wall": 2.186,
+    "n_leapfrog_total": 238221.0
+   },
+   "kronecker_gp": {
+    "ess_bulk_min": 48.14827513420751,
+    "ess_bulk_geomean": 369.74724613894284,
+    "ess_tail_min": 66.99828656339872,
+    "rhat_max": 1.0893666995328295,
+    "wall": 24.2095,
+    "n_leapfrog_total": 140666.5
+   },
+   "pilots": {
+    "ess_bulk_min": 4.569070751161403,
+    "ess_bulk_geomean": 426.4019127608746,
+    "ess_tail_min": 11.45201150933124,
+    "rhat_max": 3.0477874414454216,
+    "wall": 0.351,
+    "n_leapfrog_total": 171591.0
+   },
+   "eight_schools_centered": {
+    "ess_bulk_min": 101.25191871272969,
+    "ess_bulk_geomean": 237.0386474645661,
+    "ess_tail_min": 153.9093922121168,
+    "rhat_max": 1.0380133561680303,
+    "wall": 0.198,
+    "n_leapfrog_total": 140671.0
+   },
+   "lotka_volterra": {
+    "ess_bulk_min": 174.24569897395043,
+    "ess_bulk_geomean": 1463.4324835996467,
+    "ess_tail_min": 268.36662715801276,
+    "rhat_max": 1.0199428914414037,
+    "wall": 2.943,
+    "n_leapfrog_total": 115478.0
+   }
+  },
+  "mw100": {
+   "radon_partially_pooled_noncentered": {
+    "ess_bulk_min": 210.02642946299287,
+    "ess_bulk_geomean": 2353.902588580021,
+    "ess_tail_min": 379.9048397260419,
+    "rhat_max": 1.020160568964318,
+    "wall": 26.207,
+    "n_leapfrog_total": 139124.0
+   },
+   "bym2_offset_only": {
+    "ess_bulk_min": 4.497655809239214,
+    "ess_bulk_geomean": 7.664358437260902,
+    "ess_tail_min": 4.032258064516129,
+    "rhat_max": 3.3789423111142782,
+    "wall": 51.214,
+    "n_leapfrog_total": 245861.0
+   },
+   "hier_2pl": {
+    "ess_bulk_min": 580.5633676450432,
+    "ess_bulk_geomean": 2922.636529652077,
+    "ess_tail_min": 615.1750413820653,
+    "rhat_max": 1.0094809546721797,
+    "wall": 54.794,
+    "n_leapfrog_total": 146554.0
+   },
+   "diamonds": {
+    "ess_bulk_min": 4.384874619365595,
+    "ess_bulk_geomean": 86.2797338981603,
+    "ess_tail_min": 11.0548781141755,
+    "rhat_max": 3.7090553505537955,
+    "wall": 5.574,
+    "n_leapfrog_total": 255467.0
+   },
+   "lsat_model": {
+    "ess_bulk_min": 909.5813866510273,
+    "ess_bulk_geomean": 4250.454827891528,
+    "ess_tail_min": 1435.6435545203985,
+    "rhat_max": 1.0082480332578931,
+    "wall": 15.505,
+    "n_leapfrog_total": 144229.0
+   },
+   "accel_gp": {
+    "ess_bulk_min": 4.578192994345378,
+    "ess_bulk_geomean": 15.894974976355233,
+    "ess_tail_min": 7.676713319810119,
+    "rhat_max": 3.0960614002936815,
+    "wall": 3.872,
+    "n_leapfrog_total": 302440.0
+   },
+   "kronecker_gp": {
+    "ess_bulk_min": 21.12011837717133,
+    "ess_bulk_geomean": 330.94690767838426,
+    "ess_tail_min": 73.4450291524978,
+    "rhat_max": 1.1601244962781214,
+    "wall": 28.432000000000002,
+    "n_leapfrog_total": 140975.5
+   },
+   "pilots": {
+    "ess_bulk_min": 4.685905858560468,
+    "ess_bulk_geomean": 43.76724996014787,
+    "ess_tail_min": 4.046416689198318,
+    "rhat_max": 2.733092698765346,
+    "wall": 0.624,
+    "n_leapfrog_total": 255429.0
+   },
+   "eight_schools_centered": {
+    "ess_bulk_min": 86.65750637753096,
+    "ess_bulk_geomean": 290.2063586988409,
+    "ess_tail_min": 118.14243369728257,
+    "rhat_max": 1.0349280099782683,
+    "wall": 0.202,
+    "n_leapfrog_total": 129626.0
+   },
+   "lotka_volterra": {
+    "ess_bulk_min": 73.69036184684701,
+    "ess_bulk_geomean": 712.7142576075336,
+    "ess_tail_min": 115.12633779739328,
+    "rhat_max": 1.2856708386432532,
+    "wall": 4.1375,
+    "n_leapfrog_total": 123998.0
+   }
+  }
+ },
+ "aggregate_geomean_over_models": {
+  "baseline": {
+   "ess_bulk_min": 39.959130849226234,
+   "ess_bulk_geomean": 330.05293688145457
+  },
+  "mw100": {
+   "ess_bulk_min": 38.03040426982484,
+   "ess_bulk_geomean": 249.12499958901867
+  }
+ },
+ "geomean_ess_bulk_delta_pct": -24.51968404132179,
+ "models_compared": 10,
+ "gates": {
+  "gate1_geomean_plus5pct": false,
+  "worst_ess_bulk_min_drop_pct": 57.70893498044756,
+  "worst_drop_model": "lotka_volterra",
+  "collapse_models_gt2x": [
+   "accel_gp",
+   "pilots",
+   "lotka_volterra"
+  ],
+  "delta_within_noise_band_pm3pct": false,
+  "ADOPT_candidate": false,
+  "REJECT": true,
+  "wall_parity_pm15pct_violations": [
+   {
+    "model": "radon_partially_pooled_noncentered",
+    "ratio": 1.2570510360706064
+   },
+   {
+    "model": "hier_2pl",
+    "ratio": 1.2105693391953694
+   },
+   {
+    "model": "diamonds",
+    "ratio": 1.16270337922403
+   },
+   {
+    "model": "lsat_model",
+    "ratio": 1.3029411764705883
+   },
+   {
+    "model": "accel_gp",
+    "ratio": 1.7712717291857274
+   },
+   {
+    "model": "kronecker_gp",
+    "ratio": 1.1744150023751008
+   },
+   {
+    "model": "pilots",
+    "ratio": 1.777777777777778
+   },
+   {
+    "model": "lotka_volterra",
+    "ratio": 1.40587835541964
+   }
+  ]
+ }
+}

@@ -81,12 +81,64 @@ Local working tree: `/home/m0hawk/Documents/apin/stan`.
   (Seyboldt/Carlson/Carpenter; 4x median ESS/grad on 114 posteriordb models);
   walnutpie upstream is already becoming "Adaptive WALNUTS" — the clear
   next-direction, and our W-9/W-10 low-rank work is the local precedent.
-- SoA arena batch rollout: W-53 verdict GO; 7-batch gated migration plan is
-  the fresh-session artifact (results/soa_var_w53.md §2); mind the
-  per-toolchain codegen-sensitivity risk and the bridgestan prebuilt-.o trap.
+- SoA arena batch rollout: COMPLETE (W-53/57/58/59/60 — code + fused loop +
+  audits + demonstrator). hier_2pl −17.8%T / −19.1%G Ir, −5..−7% in-sampler
+  wall, bit-exact everywhere; blr shows the mixed-GEMM forward −46.8%.
+  FORK-INTERNAL DRAFT PR FILED: sims1253/math#5 (NEVER upstream — user
+  rule). Records: results/soa_batch1_w57.md, results/soa_batch2_w58.md,
+  WORKLOG W-59/W-60; artifacts scratch/w57/. Low-rank metric Alg-1 basis:
+  CLOSED as a negative — implemented W-62 (branch exp/lr-alg1-basis,
+  reference-verified, default-path bit-identical), then REJECTED at grid
+  scale in W-63 (full CORE_SET, 4 arms, 1020/1020 after the W-64 guard
+  rerun): forced rank-10/basis-4 fails every gate — G2 ESS/grad geomean
+  0.037 vs bar 1.5, G3 8/15 models harmed (lsat 0.003x, radon_pp 0.009x),
+  G4 rank arms re-pin short-warmup chains, and the --metric-auto screen
+  engaged 0/300 (A3≡A2 byte-identical). Wins only where the posterior IS
+  low-rank (arma11 1.47x, low_dim_gauss_mix 2.75x). Residual direction =
+  fix the screen for Alg-1 spectra or structure-target rank ONLY; no more
+  forced-rank grids (burden raised: show the screen engages or the spectrum
+  is rank-k first). W-62/63/64 WORKLOG entries are the record;
+  results/lowrank_ess_w63.md is the report. Branch exp/lr-alg1-basis
+  (mode-4 + nan-alpha guard cherry-pick 6ba0798) stays local, default-off,
+  NOT PR'd — unproven value (guard itself is ox-alpha's, filed by them as
+  walnutpie fork PR #10).
+  THEN W-65/W-66 CLOSED THE DIRECTION FOR GOOD: the 0/300 was a WIRING
+  artifact (--metric-auto never gated the full operator — my W-62 gap,
+  corrected in the ledger); the gating fix (7b81357) verified + shipped as
+  walnutpie fork draft PR #13 (robustness/auto-screen-gates-full-operator),
+  and the fixed screen RESCUES the sentinels (eight_schools_c 0.037→0.930)
+  — but the threshold sweep (W-66, binding rule) found NO viable operating
+  point: the window_cross_ratio ordering is INVERTED relative to benefit
+  (certifies-as-spread models are those rank degrades; the 2.5-3.4x winners
+  read concentrated). Reports: results/lowrank_screened_w65.md,
+  results/lowrank_threshold_w66.md. Revival requires a DIFFERENT screen
+  statistic — user decision only.
 - kronecker_gp re-baseline under the fixed adjoint (only if math#1 adopted).
-- Two-phase warmup (alpha-subsample early + truncated full re-adaptation):
-  W-45 follow-up with mechanism-predicted modest ceiling.
+- Two-phase warmup: DEAD BOTH WAYS (W-45 subsample transplant; W-74 plain
+  truncation NO-GO — 7 models harmed, new pins; W-77 adapt-freeze refuted the
+  over-adaptation reading INVERSELY — late warmup adaptation is productive on
+  both axes; W-74's 1.32x per-call gain retracted as budget arithmetic).
+- Min-micro-2 arc COMPLETE (W-76/79/80): REAL per-model ESS/s lever —
+  hier_gp soft-funnel 4.2x, hierarchials +13-75%, low-spend models +45%
+  free — with a CATASTROPHIC failure mode (polytomous-IRT multimodality:
+  0.002x, 7/12 chains pinned to 1 draw) and NO viable selector (median
+  falsified by lsat; per-chain p90 failed its one-shot and is init-protocol-
+  unstable). Domain map + everything recorded: results/minmicro_confirm_w79.md,
+  minmicro_harmbranch_w80.md, depthcap_w76.md. Remaining idea (user decision):
+  a multimodality-aware selector; PR #15's depth-cap-rate observable is the
+  natural input. SOLVED DIFFERENTLY (W-82, GO): --min-micro-guard = reactive
+  pin-detect + MM1 restart — fires only on true pins (7/7 md5-exact
+  recoveries), silent on all benefit chains, free where silent; PR #20
+  ([upstream-candidate], requires the NaN adapter guard — composition
+  documented). PRs this arc: walnutpie #15 (depth diagnostics),
+  #17 (init eval-guard; dead-init triage reclassified — only lotka is a true
+  init failure; kronecker/accel are mid-warmup adapter-guard class = #10's
+  domain), #20 (mm2-guard). Depth-cap pins closed negative (W-76).
+- Combined-stack benchmark (W-81): exp-tip binary × SoA .so = draws
+  BIT-IDENTICAL 112/112 chains grid-wide vs stock-math .so (three-way with
+  W-36); wall geomean 0.965 (eltwise-heavy −7..−9%, decomposition-dominated
+  ~par) — the sampler win and the math win STACK. This is the B'' promotion
+  evidence; clean-machine confirmation queued for a quiet window.
 
 ## Protocol (violating these produced both retractions)
 
@@ -106,4 +158,12 @@ Local working tree: `/home/m0hawk/Documents/apin/stan`.
 - Shallow clones bite later: squashing/rebasing on a shallow base produces parentless commits ("no history in common" on fork PRs). `git fetch --unshallow` first.
 - bridgestan `compile_model` silently reuses a cached `.so` regardless of `make_args` — copy the `.stan` into a per-variant scratch dir; verify via `model_info()`.
 - The gh token lacks `gist` scope; `/tmp` is volatile (inits live in-repo: inits_w25/, inits_w36/).
+- bs_w53 bundle cannot build STAN_THREADS models: no make rule regenerates
+  src/bridgestan_threads.o (deleted to break the stale-hardlink hazard);
+  a pristine .o against patched headers would be a silent mixed-build ABI —
+  keep it absent (fail loud).
+- Test-name discovery greps miss numbered siblings (multiply1/2_test,
+  operator_multiplication_test) — enumerate per family, not by ^name_.
+- ~/vginstall valgrind is 3.25.1 (W-53's "3.23" note was stale); W-53/W-57
+  stock callgrind numbers reproduce to +6e-6% across sessions.
 - Measurement priors (do not re-litigate without new data): logp_grad = 68–99.7% of walnutpie sampling wall (SIMD/kernel direction closed); warmup = 65–76% of total wall; checks ≤2.2% of cmdstan Ir (folklore rejected); fold ≈ rec core-set with good inits; basis-extraction rule is second-order (W-19); funnel class is a sampling/mode-lock problem, not adaptation.

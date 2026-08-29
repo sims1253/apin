@@ -1,0 +1,37 @@
+{
+ "experiment": "w72 arms analysis",
+ "arms": {
+  "baseline": "/home/m0hawk/Documents/apin/stan/runs/w36/exp_par",
+  "mmdecay099": "/home/m0hawk/Documents/apin/stan/runs/w72/mmdecay099"
+ },
+ "aborted_cells": {
+  "baseline": {
+   "kronecker_gp": [
+    0
+   ],
+   "lotka_volterra": [
+    1
+   ]
+  },
+  "mmdecay099": {
+   "kronecker_gp": [
+    0
+   ],
+   "lotka_volterra": [
+    1
+   ]
+  }
+ },
+ "arms_verdict": {
+  "mmdecay099": {
+   "shared_models": 10,
+   "lost_models_whole": [],
+   "aggregate_baseline_geoESS": 330.05293688145457,
+   "aggregate_mmdecay099_geoESS": 331.1220538537303,
+   "delta_pct": 0.32392287806235487,
+   "models_essmin_drop_gt20pct": [],
+   "collapse_models_gt2x_geoESS": [],
+   "aborted_cells_total": 2
+  }
+ }
+}

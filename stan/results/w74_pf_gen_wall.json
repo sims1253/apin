@@ -1,0 +1,12 @@
+{
+  "radon_partially_pooled_noncentered": 7.1,
+  "bym2_offset_only": 20.9,
+  "hier_2pl": 47.7,
+  "diamonds": 2.7,
+  "lsat_model": 3.3,
+  "accel_gp": 0.8,
+  "kronecker_gp": 4.5,
+  "pilots": 0.1,
+  "eight_schools_centered": 0.0,
+  "lotka_volterra": 0.3
+}

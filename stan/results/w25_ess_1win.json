@@ -1,0 +1,242 @@
+{
+ "base/arma11": {
+  "n": 3,
+  "ess_bulk_min_med": 1027.842297240419,
+  "ess_tail_min_med": 1538.636810740835,
+  "rhat_max_med": 1.0031560968282764,
+  "per_rep_bulk": [
+   604.8,
+   1375.5,
+   1027.8
+  ],
+  "per_rep_tail": [
+   1134.3,
+   1538.6,
+   1542.2
+  ]
+ },
+ "mc_nogate/arma11": {
+  "n": 3,
+  "ess_bulk_min_med": 829.8651575257473,
+  "ess_tail_min_med": 727.0070181077645,
+  "rhat_max_med": 1.009089853317184,
+  "per_rep_bulk": [
+   829.9,
+   555.5,
+   910.9
+  ],
+  "per_rep_tail": [
+   508.1,
+   881.3,
+   727.0
+  ]
+ },
+ "mc_gate05/arma11": {
+  "n": 3,
+  "ess_bulk_min_med": 1004.200870530816,
+  "ess_tail_min_med": 1292.8304924710455,
+  "rhat_max_med": 1.0063889628669938,
+  "per_rep_bulk": [
+   1180.3,
+   994.2,
+   1004.2
+  ],
+  "per_rep_tail": [
+   1292.8,
+   926.4,
+   1298.4
+  ]
+ },
+ "base/lsat_model": {
+  "n": 3,
+  "ess_bulk_min_med": 944.4842609459446,
+  "ess_tail_min_med": 1637.5343840276935,
+  "rhat_max_med": 1.0075274778947785,
+  "per_rep_bulk": [
+   894.2,
+   944.5,
+   1107.6
+  ],
+  "per_rep_tail": [
+   1637.5,
+   1172.5,
+   1699.1
+  ]
+ },
+ "mc_nogate/lsat_model": {
+  "n": 3,
+  "ess_bulk_min_med": 944.4842609459446,
+  "ess_tail_min_med": 1637.5343840276935,
+  "rhat_max_med": 1.0075274778947785,
+  "per_rep_bulk": [
+   894.2,
+   944.5,
+   1107.6
+  ],
+  "per_rep_tail": [
+   1637.5,
+   1172.5,
+   1699.1
+  ]
+ },
+ "mc_gate05/lsat_model": {
+  "n": 3,
+  "ess_bulk_min_med": 109.94838986245112,
+  "ess_tail_min_med": 192.20709433759697,
+  "rhat_max_med": 1.0414236288465266,
+  "per_rep_bulk": [
+   109.9,
+   820.6,
+   77.6
+  ],
+  "per_rep_tail": [
+   177.7,
+   541.6,
+   192.2
+  ]
+ },
+ "base/hier_2pl": {
+  "n": 3,
+  "ess_bulk_min_med": 519.4805499278408,
+  "ess_tail_min_med": 733.0438981767974,
+  "rhat_max_med": 1.009934344833375,
+  "per_rep_bulk": [
+   548.2,
+   501.9,
+   519.5
+  ],
+  "per_rep_tail": [
+   437.4,
+   733.0,
+   820.7
+  ]
+ },
+ "mc_nogate/hier_2pl": {
+  "n": 3,
+  "ess_bulk_min_med": 60.57508885101856,
+  "ess_tail_min_med": 24.014015168957833,
+  "rhat_max_med": 1.1460818134883501,
+  "per_rep_bulk": [
+   85.4,
+   60.6,
+   24.1
+  ],
+  "per_rep_tail": [
+   31.5,
+   24.0,
+   12.6
+  ]
+ },
+ "mc_gate05/hier_2pl": {
+  "n": 3,
+  "ess_bulk_min_med": 168.30268732872875,
+  "ess_tail_min_med": 191.5980494900437,
+  "rhat_max_med": 1.033575485619694,
+  "per_rep_bulk": [
+   261.8,
+   19.9,
+   168.3
+  ],
+  "per_rep_tail": [
+   247.8,
+   15.7,
+   191.6
+  ]
+ },
+ "base/blr": {
+  "n": 3,
+  "ess_bulk_min_med": 350.4729289372331,
+  "ess_tail_min_med": 360.4578922822105,
+  "rhat_max_med": 1.0114942691555568,
+  "per_rep_bulk": [
+   465.7,
+   350.5,
+   204.9
+  ],
+  "per_rep_tail": [
+   360.5,
+   388.9,
+   271.7
+  ]
+ },
+ "mc_nogate/blr": {
+  "n": 3,
+  "ess_bulk_min_med": 216.56706268125774,
+  "ess_tail_min_med": 302.6914640074451,
+  "rhat_max_med": 1.0171970649286124,
+  "per_rep_bulk": [
+   409.1,
+   216.6,
+   135.3
+  ],
+  "per_rep_tail": [
+   430.4,
+   302.7,
+   205.6
+  ]
+ },
+ "mc_gate05/blr": {
+  "n": 3,
+  "ess_bulk_min_med": 350.4729289372331,
+  "ess_tail_min_med": 388.90594525149163,
+  "rhat_max_med": 1.0114942691555568,
+  "per_rep_bulk": [
+   429.5,
+   350.5,
+   235.3
+  ],
+  "per_rep_tail": [
+   440.1,
+   388.9,
+   327.0
+  ]
+ },
+ "base/eight_schools_noncentered": {
+  "n": 3,
+  "ess_bulk_min_med": 1487.6465917297335,
+  "ess_tail_min_med": 1361.3733066266911,
+  "rhat_max_med": 1.0030222022910305,
+  "per_rep_bulk": [
+   1678.0,
+   1487.6,
+   1459.0
+  ],
+  "per_rep_tail": [
+   1361.4,
+   1166.5,
+   1515.7
+  ]
+ },
+ "mc_nogate/eight_schools_noncentered": {
+  "n": 3,
+  "ess_bulk_min_med": 1458.9542360243327,
+  "ess_tail_min_med": 1166.4668246668218,
+  "rhat_max_med": 1.0030222022910305,
+  "per_rep_bulk": [
+   1347.8,
+   1487.6,
+   1459.0
+  ],
+  "per_rep_tail": [
+   994.0,
+   1166.5,
+   1515.7
+  ]
+ },
+ "mc_gate05/eight_schools_noncentered": {
+  "n": 3,
+  "ess_bulk_min_med": 1458.9542360243327,
+  "ess_tail_min_med": 1166.4668246668218,
+  "rhat_max_med": 1.003794534316845,
+  "per_rep_bulk": [
+   966.0,
+   1487.6,
+   1459.0
+  ],
+  "per_rep_tail": [
+   500.5,
+   1166.5,
+   1515.7
+  ]
+ }
+}
