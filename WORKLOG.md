@@ -2951,3 +2951,21 @@ F-30/F-31 redone from their surviving logs). Recovery: F-29 owns base
 (fetch.sh deps re-fetch, pristine stan), siblings re-add worktrees
 serialized; F-31 additionally re-clones the stanc3 fork for the embed.
 Tracked apin .md files restored via git restore.
+
+CORRECTION (2026-08-29 ~23:40, F-31 direct observation): the earlier
+incident entry's claim "external/stanli's GIT STORE survived with every
+branch" was WRONG — the store was fully deleted at ~22:56. The
+external/stanli present afterward is a sibling agent's 22:59 re-clone
+(main @ 33f79de, all ORIGIN branches; origin/fortk/f26-capstone =
+70fd71a verified). Consequences: (1) recovery rests on the PUSHED
+branches, not a local store — the publishing round is the single point
+that made the lane survivable; (2) in-flight UNPUSHED branch objects
+died with the store (f29-adaptiveK, f30-statearena, f31-batchend
+originals) — f29's edits survive as plain files in the orphaned
+pr-waln directory (salvage by diff vs a fresh f21-retune checkout);
+f30/f31 redo from their surviving logs; (3) the old worktree
+directories' .git linkages are dead — no git operations inside them.
+Recovery topology updated: F-29 owns shared deps (serving F-29+F-30);
+F-31 PRIVATE deps inside its own worktree (zero shared-state
+contention); stanc3 5b824ee rebuilds from F-31's surviving
+/tmp/f31-stage/stanc3-src (no network needed).
