@@ -3007,3 +3007,33 @@ gradient-call boundary, which no layout rewrite can reach.
 Lane incidents fixed in place: predecessor script bugs (Ir-extraction
 sed truncation, region-cache prewarm race, two parser bugs). Shared
 deps/stan left pristine for F-29.
+
+### F-31 VERDICT (2026-08-30; log logs/fortk-f31.md; branch fortk/f31-batchend @ 58b8915 (8505a82+fix), NOT pushed; bundle /tmp/f31-stage/; ctest 69/69; post-incident execution)
+
+GATES: (a) PASS — --fits --lean per-fit draws statistically equivalent
+to stock (3 seeds; ESS geomean lean/stock 1.05-1.12x; R-hat lean <=
+stock in 5/6; the R-hat<1.01 form is unattainable in EITHER arm at the
+batch's 200+200 shape — stock itself 1.016-1.144 on blr; equivalence-
+vs-stock is the operative reading, caveat recorded). (b) MISS AS
+WRITTEN — esnc 2.93M < 3.5M (84%), blr 1.05M < 1.3M (81%). MECHANISM
+(pre-registration arithmetic error, corrected by measurement): in batch
+mode stanc runs ONCE per 200 fits (0.5-1% of wall) so the subprocess
+kill buys ~1.0x in batch (stock_emb/stock_sub = 0.98-1.02x) — the 20
+ms/fit cost was the PER-FIT CLI class, not --fits; and the lean batch
+gain (1.222x/1.312x) reproduces the F-26 campaign L/C ratio exactly
+(third composition validation). The 3.5M bar assumed both effects
+compound ~1.34-1.36x; they don't. (c) PASS fully — default-arm md5s =
+recorded F-26 values; embed-arm md5s IDENTICAL through the embedded
+compiler; fallback chain byte-identical.
+
+EMBED SHIPPED FIRST TRY (~35 min vs the 90-min guard): stanc_embed.o
+@ 5b824ee on opam f13 from the pinned staging clone; stanc_mode=
+embedded; hits the subprocess-compiled region cache MIR-identically;
+value = the 1-fit CLI stanc stage 19-25 -> 14 ms + no external binary
+dependency (the browser/embed vision of the arch map).
+
+Batch numbers (loaded box 1.5-2.0, labeled; trainer-SMT contamination
+caught + superseded): lean_emb 1,046,578 (blr) / 2,929,641 (esnc)
+fits/h; stock_sub 0.90x/0.85x F-26's quiet day = the labeled load tax.
+Measurement lessons: taskset 2-5 = 2 physical cores (SMT pairs) — a
+wandering 1-core job lands directly on it; pin PSR per cell.
