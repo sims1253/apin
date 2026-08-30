@@ -151,3 +151,29 @@ them per-element (identical chunk schedule = stock lp tree).
 ### STEP ZERO VERDICT: REPLICABLE, bit-identically. GO.
 (The pre-registered "Eigen redux semantics" risk dissolved: the model's softmax
 instantiation is the scalar path. Verified, not assumed.)
+
+## THE STACK-DEPENDENT SOFTMAX (found via the smoke; the -I mistake that found it)
+
+HARNESS BUG WITH A BIG LESSON: my first smoke put `-I $BRANCH_REPO` FIRST, shadowing
+the bundle's ENTIRE math with the branch base's math — and the branch base
+(344d7167a0) carries a DIFFERENT prim softmax (make_holder/apply_vector_unulary
+materializing form, hash a6aa50c1) than the family bundle (b87ea021, lazy-view
+form). Both arms of that smoke compiled against the branch softmax; the "dense ==
+stock" reversal was an artifact. Correct discipline (W-112's): ONLY the new header
+shadows the bundle (-I inc/ with just the one header subtree).
+
+THE REAL FINDING (probe9, both stacks, correct includes):
+- BUNDLE (gate a/b stack): rev-softmax path == softmax(Matrix-val-view) ==
+  softmax(arena-val-view) == MANUAL-SCALAR interior; the DENSE call differs (932/3500).
+- BRANCH base (TU stack): rev path == both view calls == DENSE; MANUAL differs (932).
+=> The softmax interior's arithmetic is STACK-DEPENDENT (the bundle keeps the val
+view lazy -> Eigen scalar traversal, glibc exp, sequential sum; the branch's
+apply_vector_unary materializes -> packet traversal). THE PORTABLE INTERIOR:
+call `softmax(<val() view over an arena AoS var matrix>)` — the EXACT
+instantiation the stock rev softmax produces — bit-identical to the composed
+stock path on EVERY stack (0 diffs both). The primitive's forward now builds an
+arena_matrix<Matrix<var>> of the K cumsum values per obs (K+1 no-chain varis) and
+calls softmax(c_var.val()).
+- The adjoint dot (p.dot(res_adj)) is stack-immune: res_adj has exactly one
+  nonzero (g at y) so every traversal order yields the same double.
+- Smoke (bundle, correct includes): 60/60 bitwise (lp + all grads, repeated idx).
