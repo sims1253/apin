@@ -2,7 +2,7 @@
 
 Executed 2026-08-30 per WORKLOG "W-126 PRE-REGISTRATION" (family 3, increment
 1: primitive + hand-edit gate only; emission row later). Deliverable: branch
-**`gathered-pcm` @ `42fa0ecbf4`** (base `fork/develop` `344d7167a0`) in
+**`gathered-pcm` @ `e355b14535`** (base `fork/develop` `344d7167a0`) in
 worktree `external/math_dev_w126`: one new header
 `stan/math/rev/prob/pcm_lpdf_gathered.hpp` + one new unit-test TU. Nothing
 else in math touched. Artifacts in `scratch/w126/`.
@@ -59,7 +59,7 @@ reverse-n (the stock sweep order); the accumulator keeps the W-112
 per-observation-term shape (the rev `accumulator<var>`'s 128-chunk buffer
 forces it — unchanged conclusion for family 3).
 
-## 1. The primitive (branch `gathered-pcm` @ `42fa0ecbf4`)
+## 1. The primitive (branch `gathered-pcm` @ `e355b14535`)
 
 ```cpp
 std::vector<var> pcm_lpdf_gathered<propto>(
@@ -252,8 +252,8 @@ Headroom beyond: per-observation heap churn (§4).
 
 ## 8. Artifacts
 
-- Branch: `external/math_dev_w126`, `gathered-pcm` @ `42fa0ecbf4`
-  (`6d4e94e49b` header + `42fa0ecbf4` TU). DCO + AI notes. Not pushed.
+- Branch: `external/math_dev_w126`, `gathered-pcm` @ `e355b14535`
+  (`2a3b5139db` header + `e355b14535` TU). DCO + AI notes. Not pushed.
 - `scratch/w126/`: `notes.md` (full session log incl. STEP ZERO forensics and
   pre-measurement expectations), `probe_*.cpp` (types, adjoint dump, softmax
   instantiation, both-stack view-vs-dense, segment path, 4-path isolation,
