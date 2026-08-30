@@ -3137,3 +3137,33 @@ for any sampler whose step does not derive from the metric.
 Incidents: runner externally killed 03:59 — resume-safe markers
 recovered all 51 cells; F-30's parent build correctly skipped absent
 patches (shared deps verified pristine).
+
+### F-34 VERDICT (2026-08-30; log logs/fortk-f34.md; branch fortk/f34-hiermemset @ ed6362c off f25-kernelfloor, NOT pushed, bundle /tmp/f34-stage/; ctest 69/69)
+
+THE 31.2% MEMSET WAS 99.74% DEAD CELLS — a layout bug in the F-7 obs-
+chain fusion's own plumbing: the iadj assignment gave fused-away
+producers' outputs (GATHER/SUB/MUL intermediates, 5 x 19200 cells) full
+adjoint ranges, but the fused bernoulli bwd writes only the 3 source
+slots + head out (single-consumer guarantee => nothing else ever
+materializes them). hier_2pl is the ONLY census model with an obs chain
+=> why only it showed the symptom. FIX (new pattern, sibling to F-25's
+first-write): iadj DEAD-CELL COMPACTION — skip fused-away intermediates
+in the iadj assignment; la 96,251 -> 251 cells; memset 770 KB -> 2 KB
+per eval. Emitted body identical after la-offset normalization (pure
+layout); version v6 -> v7.
+NUMBERS: hier_2pl Ir/grad 2,393,522 -> 1,623,696 = **-32.2%**; census
+row 2.74 -> **4.04**; full-run 40.18G -> 27.81G = 1.445x Ir; memset
+share 31.5% -> 1.0%; bwd self Ir BIT-IDENTICAL (4,418,539,882 both) =
+the arithmetic-identity proof in vivo. GATES: hier_2pl verify = the
+exact F-25 record; byte-identity 20/20 incl. hier_2pl (esnc/esc/wells/
+blr = records); ctest 69/69. ESS/s wall 1.047x (draws 12/12 bitwise).
+HONESTY (ERMS caveat quantified): 31.5% of Ir was only ~5% of wall —
+ERMS memsets are cheap on hardware vs callgrind's per-byte counting;
+the Ir/census wins are real, the ESS/s move is modest by design.
+DELIBERATELY NOT: full memset elimination (MVN_CHOL genuinely
+accumulates across 33 ops — keep-zeros correct); multi-pass (fwd
+already 4-lane/F-25-multi-pass, bwd is a scatter, MVN/LKJ/GEMM len-2/4
+— the memset WAS the whole lever).
+Incidents handled: SIGBUS from cp-replacing instrument binaries under
+the campaign (quarantined, rerun byte-identical); rc=3 CSV-reject after
+sampling (outdir) — profiles intact, twin-checked to 2e-7.
