@@ -1,0 +1,1573 @@
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[1] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[1] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[1] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[1] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[2] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[2] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[2] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[2] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[1] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[1] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[1] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[1] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: Exception: categorical_lpmf: Probabilities parameter is not a valid simplex. sum(Probabilities parameter) = -nan, but should be 1 (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 7, column 4 to column 43) (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 88, column 4 to line 89, column 55)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: Exception: categorical_lpmf: Probabilities parameter is not a valid simplex. sum(Probabilities parameter) = -nan, but should be 1 (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 7, column 4 to column 43) (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 88, column 4 to line 89, column 55)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: Exception: categorical_lpmf: Probabilities parameter is not a valid simplex. sum(Probabilities parameter) = -nan, but should be 1 (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 7, column 4 to column 43) (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 88, column 4 to line 89, column 55)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: Exception: categorical_lpmf: Probabilities parameter is not a valid simplex. sum(Probabilities parameter) = -nan, but should be 1 (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 7, column 4 to column 43) (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 88, column 4 to line 89, column 55)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: Exception: categorical_lpmf: Probabilities parameter is not a valid simplex. sum(Probabilities parameter) = -nan, but should be 1 (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 7, column 4 to column 43) (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 88, column 4 to line 89, column 55)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[1] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[1] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: Exception: categorical_lpmf: Probabilities parameter is not a valid simplex. sum(Probabilities parameter) = -nan, but should be 1 (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 7, column 4 to column 43) (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 88, column 4 to line 89, column 55)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: Exception: categorical_lpmf: Probabilities parameter is not a valid simplex. sum(Probabilities parameter) = -nan, but should be 1 (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 7, column 4 to column 43) (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 88, column 4 to line 89, column 55)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: Exception: categorical_lpmf: Probabilities parameter is not a valid simplex. sum(Probabilities parameter) = -nan, but should be 1 (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 7, column 4 to column 43) (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 88, column 4 to line 89, column 55)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: Exception: categorical_lpmf: Probabilities parameter is not a valid simplex. sum(Probabilities parameter) = -nan, but should be 1 (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 7, column 4 to column 43) (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 88, column 4 to line 89, column 55)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: Exception: categorical_lpmf: Probabilities parameter is not a valid simplex. sum(Probabilities parameter) = -nan, but should be 1 (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 7, column 4 to column 43) (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 88, column 4 to line 89, column 55)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: Exception: categorical_lpmf: Probabilities parameter is not a valid simplex. sum(Probabilities parameter) = -nan, but should be 1 (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 7, column 4 to column 43) (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 88, column 4 to line 89, column 55)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: Exception: categorical_lpmf: Probabilities parameter is not a valid simplex. sum(Probabilities parameter) = -nan, but should be 1 (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 7, column 4 to column 43) (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 88, column 4 to line 89, column 55)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: Exception: categorical_lpmf: Probabilities parameter is not a valid simplex. sum(Probabilities parameter) = -nan, but should be 1 (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 7, column 4 to column 43) (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 88, column 4 to line 89, column 55)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: Exception: categorical_lpmf: Probabilities parameter is not a valid simplex. sum(Probabilities parameter) = -nan, but should be 1 (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 7, column 4 to column 43) (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 88, column 4 to line 89, column 55)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: Exception: categorical_lpmf: Probabilities parameter is not a valid simplex. sum(Probabilities parameter) = -nan, but should be 1 (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 7, column 4 to column 43) (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 88, column 4 to line 89, column 55)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+    total time: 14.5603s
+logp_grad time: 14.4309s
+logp_grad fraction: 0.991113
+        logp_grad calls: 3102
+        time per call: 0.00465212s
+
+Adaptation completed.
+Note: multi-chain mode (walnutpie::adapt) reports a log-mass cross-chain dispersion diagnostic for mode-aware reinit policies; single-chain CLI does not.
+Macro time = 0.394805
+Mass matrix diagonal = [   3.33668
+   4.68106
+ 0.0262101
+ 0.0635716
+  0.111618
+  0.122352
+  0.111441
+ 0.0440294
+ 0.0417901
+  0.449791
+ 0.0432205
+ 0.0255181
+ 0.0137115
+ 0.0192276
+ 0.0633832
+ 0.0406616
+ 0.0589948
+ 0.0297949
+ 0.0781593
+ 0.0282441
+ 0.0907344
+  0.119711
+  0.118209
+ 0.0906887
+ 0.0745529
+ 0.0744502
+ 0.0864099
+   1.55136
+   1.33507
+ 0.0204779
+ 0.0218759
+ 0.0478058
+   1.44235
+  0.071405
+  0.267783
+  0.318173
+   0.31821
+  0.364599
+    9.4392
+ 0.0810641
+   2.87109
+  0.511069
+  0.138917
+  0.403904
+  0.646899
+ 0.0348042
+ 0.0148279
+   1.75017
+ 0.0613344
+  0.123419
+   2.49559
+  0.156362
+   2.35037
+  0.343173
+ 0.0325019
+  0.790974
+   6.99605
+  0.115032
+ 0.0425507
+   1.12877
+   2.84213
+    19.325
+   1.24185
+  0.618942
+  0.547898
+   13.5033
+ 0.0259284
+    1.6189
+  0.223046
+  0.124274
+   0.16016
+ 0.0193042
+  0.682296
+  0.233378
+  0.855776
+  0.568061
+   0.38028
+   0.14371
+   0.14341
+  0.860138
+ 0.0302087
+  0.047129
+   314.252
+ 0.0651312
+ 0.0345566
+  0.611176
+   1.07979
+  0.134111
+ 0.0946192
+  0.330375
+ 0.0211853
+  0.619813
+   13.2417
+ 0.0349333
+   2.02521
+  0.077686
+  0.586844
+  0.100312
+  0.245601
+  0.494477
+  0.590898
+  0.376607
+  0.618741
+ 0.0916441
+  0.182415
+   1.92197
+   5.03879
+   1.33092
+ 0.0494724
+  0.238253
+  0.168077
+  0.131096
+  0.117346
+ 0.0244306
+ 0.0208733
+  0.262044
+ 0.0641699
+  0.260112
+ 0.0273807
+   20.1668
+  0.720257
+ 0.0614603
+  0.759739
+    1.1989
+  0.208564
+  0.264134
+  0.174146
+  0.315846
+   4.76171
+   1.15837
+  0.434852
+   3.00586
+  0.426971
+   2.62213
+  0.103853
+ 0.0256554
+ 0.0487917
+   1.51746
+  0.515558
+   0.26043
+ 0.0666445
+  0.227907
+  0.351046
+  0.154836
+  0.572625
+ 0.0150942
+  0.761226
+   210.843
+  0.426715
+ 0.0273862
+ 0.0554209
+ 0.0448497
+  0.441016
+  0.983186
+  0.536643
+  0.405127
+ 0.0599486
+ 0.0679363
+  0.185273
+  0.133342
+  0.292253
+   1.97198
+  0.057333
+   3.79239
+   1.21422
+   1.19258
+  0.109001
+   0.50135
+   0.20806
+   1.23667
+   3.61762
+  0.342319
+  0.739539
+   0.02397
+  0.314025
+  0.480685
+ 0.0433312
+ 0.0800316
+  0.157299
+  0.621836
+  0.216292
+   0.75932
+ 0.0886972
+  0.046659
+  0.355844
+  0.242727
+   7.22141
+   1.48276
+  0.786661
+ 0.0568094
+ 0.0576759
+ 0.0422405
+   0.30202
+  0.203312
+  0.904653
+  0.063754
+  0.018597
+  0.288882
+   1.61241
+  0.205451
+  0.735015
+   1.42801
+ 0.0503929
+ 0.0464837
+   0.83854
+   0.21517
+   1.61096
+    10.874
+  0.182359
+  0.183919
+   2.97038
+   2.13218
+  0.372312
+   30.0755
+  0.744822
+   31.4107
+ 0.0283588
+ 0.0313895
+  0.200647
+  0.875629
+   4.97544
+ 0.0159282
+  0.896098
+   152.873
+    1.9295
+   1.02811
+ 0.0533632
+  0.629877
+  0.229423
+ 0.0236952
+  0.170366
+ 0.0294943
+  0.133043
+   1.22082
+  0.358707
+   1.09651
+  0.063092
+  0.457021
+   1.32288
+  0.102698
+  0.270841
+  0.606533
+  0.241301
+   0.29288
+   1.84414
+ 0.0758169
+  0.173644
+  0.639289
+   13.8051
+ 0.0683638
+ 0.0635185
+  0.584202
+ 0.0712856
+ 0.0516797
+  0.185308
+  0.325467
+  0.198817
+   0.91705
+ 0.0663909
+  0.875674
+   1.44285
+  0.516923
+  0.299825
+ 0.0611679
+   1.77101
+  0.583062
+   1.24813
+   0.12035
+ 0.0861716
+  0.282613
+   92.3436
+   1.00415
+  0.176919
+ 0.0835489
+  0.483043
+   3.02156
+   2.21878
+  0.590992
+   1.76704
+   1.27521
+ 0.0635327
+  0.529676
+  0.679711
+  0.069224
+  0.227215
+  0.597308
+ 0.0253016
+  0.143279
+ 0.0323272
+  0.370603
+ 0.0237962
+  0.457756
+ 0.0230281
+  0.101197
+  0.148645
+   1.49007
+   1.48819
+ 0.0256417
+  0.160641
+  0.316928
+  0.619895
+    1.3028
+  0.282645
+  0.296476
+  0.410999
+  0.967091
+  0.376747
+  0.309409
+   1.08493
+  0.428097
+  0.118042
+  0.203438
+  0.261618
+  0.480314
+  0.822919
+   3.35246
+ 0.0645672
+ 0.0299872
+   0.92477
+  0.317605
+  0.313374
+ 0.0608769
+  0.226331
+  0.740839
+  0.504389
+   4.29356
+  0.116857
+  0.516408
+    0.1049
+  0.100958
+   1.55266
+   0.35097
+   2.56879
+   2.00546
+ 0.0454028
+   1.82723
+  0.157117
+   2.02392
+  0.340701
+  0.562185
+ 0.0623267
+   1.09821
+   0.02359
+   4.44989
+  0.368306
+   9.76271
+  0.183046
+   1.65995
+  0.128267
+ 0.0254144
+  0.938656
+ 0.0294981
+ 0.0660421
+  0.271542
+   3.25313
+  0.418273
+    8.6748
+ 0.0803132
+  0.078646
+   11.9784
+ 0.0542223
+ 0.0243511
+ 0.0350377
+   6.42796
+  0.128413
+ 0.0254639
+  0.678418
+   1.04465
+  0.085002
+ 0.0832221
+  0.683867
+   7.11145
+ 0.0401105
+ 0.0502197
+ 0.0846609
+   1.45132
+   0.07269
+  0.046543
+ 0.0838182
+   1.16169
+   1.29236
+ 0.0461416
+  0.164478
+   1.74566
+  0.114184
+   4.69901
+  0.165563
+  0.733793
+ 0.0469848
+  0.578071
+  0.819685
+   13.2911
+ 0.0529373
+    0.5067
+ 0.0191422
+ 0.0189073
+ 0.0416434
+   2.03783
+ 0.0439039
+   1.74845
+   2.63085
+ 0.0276532
+ 0.0177646
+  0.974891
+   4.78974
+   72.6542
+    2.6074
+ 0.0192126
+  0.121342
+ 0.0602738
+   4.53316
+   4.15387
+0.00913067
+  0.251064
+  0.682043
+   1.57183
+   1.20869
+  0.124854
+  0.789531
+   1.51454
+  0.216024
+  0.147042
+  0.595935
+  0.378801
+ 0.0407482
+  0.372883
+ 0.0599144
+ 0.0854998
+   3.70097
+  0.540894
+ 0.0206492
+   2.05948
+  0.460475
+    4.3127
+  0.925784
+ 0.0490934
+    3.1306
+  0.160273
+  0.060435
+   1.79628
+ 0.0196989
+  0.160882
+   1.44317
+   21.2397
+ 0.0938181
+ 0.0556308
+  0.589709
+   1.77615
+ 0.0288142
+  0.157667
+    1.2701
+   0.01522
+   3.64908
+  0.152527
+ 0.0967398
+ 0.0341288
+ 0.0909241
+  0.872358
+  0.454759
+   0.29064
+  0.592329
+   1.42712
+   1.73035
+   0.37915
+  0.286012
+  0.136001
+ 0.0204989
+   2.86946
+    2.2356
+ 0.0307115
+  0.210629
+   71.2381
+  0.170076
+   4.19122
+  0.161291
+ 0.0168097
+ 0.0730754
+  0.117382
+   0.47028
+  0.217289
+  0.554302
+   2.07583
+ 0.0389268
+ 0.0311753
+   1.63427
+  0.817201
+ 0.0313232
+  0.491687
+   3.74507
+  0.161226
+ 0.0568971
+ 0.0346388
+  0.137071
+   5.63037
+  0.139419
+  0.399882
+  0.115197
+ 0.0989372
+  0.570675
+  0.055799
+   5.16467
+  0.086414
+ 0.0735505
+   5.11152
+ 0.0792358
+   3.14076
+   3.06767
+   2.97248
+ 0.0147416
+ 0.0388276
+ 0.0588449
+   22.0989
+   18.1469
+   8.01421
+   4.37699
+   0.17099
+ 0.0649384
+  0.234231
+   2.09141
+  0.676594
+ 0.0148698
+   1.50168
+ 0.0583369
+  0.797125
+   1.02166
+0.00978249
+ 0.0198358
+ 0.0163438
+ 0.0176101
+ 0.0058199]
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[3] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[8] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[4] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+Error in logp_grad: log_density_gradient() failed with exception: Exception: lognormal_lpdf: Random variable[7] is -nan, but must be nonnegative! (in '/home/m0hawk/Documents/apin/stan/scratch/w80/model_gpcm_latent_reg_irt/gpcm_latent_reg_irt.stan', line 83, column 2 to column 26)
+
+    total time: 8.03352s
+logp_grad time: 7.97446s
+logp_grad fraction: 0.992647
+        logp_grad calls: 1550
+        time per call: 0.00514481s
+
+alpha.1: mean = 1.89158, stddev = 1.12149e-15
+alpha.2: mean = 1.17234, stddev = 1.57009e-15
+alpha.3: mean = 2.77714, stddev = 2.24299e-15
+alpha.4: mean = 5.27739, stddev = 3.58878e-15
+... elided 544 rows ...
+lambda.3: mean = 0.058112, stddev = 7.00934e-17
+lambda.4: mean = 0.0666537, stddev = 7.00934e-17
+lambda.5: mean = 0.24729, stddev = 2.80374e-17

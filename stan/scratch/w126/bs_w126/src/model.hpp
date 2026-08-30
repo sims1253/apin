@@ -1,0 +1,561 @@
+#ifndef BRIDGESTAN_MODEL_RNG_HPP
+#define BRIDGESTAN_MODEL_RNG_HPP
+
+#include <stan/io/ends_with.hpp>
+#include <stan/io/json/json_data.hpp>
+#include <stan/io/empty_var_context.hpp>
+#include <stan/io/var_context.hpp>
+#include <stan/model/model_base.hpp>
+#include <stan/services/util/create_rng.hpp>
+#include <stan/callbacks/stream_logger.hpp>
+#include <stan/callbacks/writer.hpp>
+#include <stan/services/util/initialize.hpp>
+#ifdef BRIDGESTAN_AD_HESSIAN
+#include <stan/math/mix.hpp>
+#endif
+#include <stan/math.hpp>
+#include <stan/version.hpp>
+
+#include <cmath>
+#include <fstream>
+#include <ostream>
+#include <sstream>
+#include <stdexcept>
+#include <string>
+#include <vector>
+#include <memory>
+#include <type_traits>
+
+#include "util.hpp"
+#include "version.hpp"
+
+// whenever we are doing autodiff in a threaded context, we need to
+// ensure a thread-local ChainableStack exists. This macro is invoked in
+// each function that could need it.
+#ifdef STAN_THREADS
+#define BRIDGESTAN_PREPARE_AD_FOR_THREADING() \
+  static thread_local stan::math::ChainableStack thread_instance
+#else
+#define BRIDGESTAN_PREPARE_AD_FOR_THREADING()
+#endif
+
+/**
+ * Allocate and return a new model as a reference given the specified
+ * data context, seed, and message stream.
+ * This function is defined in the generated model class.
+ *
+ * @param[in] data_context context for reading model data
+ * @param[in] seed random seed for transformed data block
+ * @param[in] msg_stream stream to which to send messages printed by the model
+ */
+stan::model::model_base& new_model(stan::io::var_context& data_context,
+                                   unsigned int seed, std::ostream* msg_stream);
+
+// Defined in bridgestan.cpp, this global is used for model output
+// TODO(bmw): Next major version, move inside of the model object
+extern std::ostream* outstream;
+
+namespace bridgestan {
+
+using model_ptr = std::unique_ptr<stan::model::model_base>;
+
+inline std::unique_ptr<stan::io::var_context> load_json(const char* data) {
+  if (data == nullptr) {
+    return std::make_unique<stan::io::empty_var_context>();
+  } else {
+    std::string data_str(data);
+    if (data_str.empty()) {
+      return std::make_unique<stan::io::empty_var_context>();
+    } else {
+      if (stan::io::ends_with(".json", data_str)) {
+        std::ifstream in(data_str);
+        if (!in.good())
+          throw std::runtime_error("Cannot read input file: " + data_str);
+        return std::make_unique<stan::json::json_data>(in);
+      } else {
+        std::istringstream json(data_str);
+        return std::make_unique<stan::json::json_data>(json);
+      }
+    }
+  }
+}
+
+inline model_ptr model_from_data(const char* data, unsigned int seed) {
+  // transformed data block could contain a call to a sundials ODE
+  // solver which requires AD
+  BRIDGESTAN_PREPARE_AD_FOR_THREADING();
+
+  auto data_context = load_json(data);
+  return model_ptr(&new_model(*data_context, seed, outstream));
+}
+
+}  // namespace bridgestan
+
+/**
+ * This structure holds a pointer to a model and holds pointers to the parameter
+ * names in CSV format.  Instances can be constructed with the C function
+ * `bs_construct()` and destroyed with the C function `bs_destruct()`.
+ */
+class bs_model {
+ public:
+  /**
+   * Construct a model and random number generator with cached
+   * parameter numbers and names.
+   *
+   * @param[in] data C-style string. This is either a
+   * path to JSON-encoded data file (must end with ".json"),
+   * a JSON string literal, or nullptr. An empty string or null
+   * pointer are both interpreted as no data.
+   * @param[in] seed pseudorandom number generator seed
+   */
+  bs_model(const char* data, unsigned int seed)
+      : model_(bridgestan::model_from_data(data, seed)),
+        name_(bridgestan::make_unique_cstr(model_->model_name())) {
+    std::stringstream info;
+    info << "BridgeStan version: " << bridgestan::MAJOR_VERSION << '.'
+         << bridgestan::MINOR_VERSION << '.' << bridgestan::PATCH_VERSION
+         << std::endl;
+    info << "Stan version: " << stan::MAJOR_VERSION << '.'
+         << stan::MINOR_VERSION << '.' << stan::PATCH_VERSION << std::endl;
+
+    info << "Stan C++ Defines:" << std::endl;
+#ifdef STAN_THREADS
+    info << "\tSTAN_THREADS=true" << std::endl;
+#else
+    info << "\tSTAN_THREADS=false" << std::endl;
+#endif
+#ifdef STAN_MPI
+    info << "\tSTAN_MPI=true" << std::endl;
+#else
+    info << "\tSTAN_MPI=false" << std::endl;
+#endif
+#ifdef STAN_OPENCL
+    info << "\tSTAN_OPENCL=true" << std::endl;
+#else
+    info << "\tSTAN_OPENCL=false" << std::endl;
+#endif
+#ifdef STAN_NO_RANGE_CHECKS
+    info << "\tSTAN_NO_RANGE_CHECKS=true" << std::endl;
+#else
+    info << "\tSTAN_NO_RANGE_CHECKS=false" << std::endl;
+#endif
+#ifdef BRIDGESTAN_AD_HESSIAN
+    info << "\tBRIDGESTAN_AD_HESSIAN=true" << std::endl;
+#else
+    info << "\tBRIDGESTAN_AD_HESSIAN=false" << std::endl;
+#endif
+
+    info << "Stan Compiler Details:" << std::endl;
+    for (auto s : model_->model_compile_info()) {
+      info << '\t' << s << std::endl;
+    }
+
+    model_info_ = bridgestan::make_unique_cstr(info.str());
+
+    std::vector<std::string> names;
+    model_->unconstrained_param_names(names, false, false);
+    param_unc_names_ = bridgestan::to_csv(names);
+    param_unc_num_ = names.size();
+
+    names.clear();
+    model_->constrained_param_names(names, false, false);
+    param_names_ = bridgestan::to_csv(names);
+    param_num_ = names.size();
+
+    names.clear();
+    model_->constrained_param_names(names, true, false);
+    param_tp_names_ = bridgestan::to_csv(names);
+    param_tp_num_ = names.size();
+
+    names.clear();
+    model_->constrained_param_names(names, false, true);
+    param_gq_names_ = bridgestan::to_csv(names);
+    param_gq_num_ = names.size();
+
+    names.clear();
+    model_->constrained_param_names(names, true, true);
+    param_tp_gq_names_ = bridgestan::to_csv(names);
+    param_tp_gq_num_ = names.size();
+  }
+
+  /**
+   * Return the name of the model.  This class manages the memory,
+   * so the returned string should not be freed.
+   *
+   * @return name of model
+   */
+  const char* name() const { return name_.get(); }
+
+  /**
+   *  Return information about the compiled model. This class manages the
+   * memory, so the returned string should not be freed.
+   *
+   * @return name of model
+   */
+  const char* model_info() const { return model_info_.get(); }
+
+  /**
+   * Return the parameter names as a comma-separated list.  Indexes
+   * are separated with periods. This class manages the memory, so
+   * the returned string should not be freed.
+   *
+   * @param[in] include_tp `true` to include transformed parameters
+   * @param[in] include_gq `true` to include generated quantities
+   * @return comma-separated parameter names with indexes
+   */
+  const char* param_names(bool include_tp, bool include_gq) const {
+    if (include_tp && include_gq)
+      return param_tp_gq_names_.get();
+    if (include_tp)
+      return param_tp_names_.get();
+    if (include_gq)
+      return param_gq_names_.get();
+    return param_names_.get();
+  }
+
+  /**
+   * Return the unconstrained parameter names as a comma-separated
+   * list.  This class manages the memory, so the returned string
+   * should not be freed.
+   *
+   * @return comma-separated unconstrained parameter names with
+   * indexes
+   */
+  const char* param_unc_names() const { return param_unc_names_.get(); }
+
+  /**
+   * Return the number of unconstrianed parameters.
+   *
+   * @return number of unconstrained parameters
+   */
+  int param_unc_num() const { return param_unc_num_; }
+
+  /**
+   * Return the number of parameters, optionally including
+   * transformed parameters and/or generated quantities.
+   *
+   * @param[in] include_tp `true` to include transformed parameters
+   * @param[in] include_gq `true` to include generated quantities
+   * @return number of parameters
+   */
+  int param_num(bool include_tp, bool include_gq) const {
+    if (include_tp && include_gq)
+      return param_tp_gq_num_;
+    if (include_tp)
+      return param_tp_num_;
+    if (include_gq)
+      return param_gq_num_;
+    return param_num_;
+  }
+
+  /**
+   * Unconstrain the specified parameters and write into the
+   * specified unconstrained parameter array.
+   *
+   * @param[in] theta parameters to unconstrain
+   * @param[out] theta_unc unconstrained parameters
+   */
+  void param_unconstrain(const double* theta, double* theta_unc) const {
+    Eigen::VectorXd params = Eigen::VectorXd::Map(theta, param_num_);
+    Eigen::VectorXd unc_params;
+    model_->unconstrain_array(params, unc_params, outstream);
+    Eigen::VectorXd::Map(theta_unc, unc_params.size()) = unc_params;
+  }
+
+  /**
+   * Unconstrain the parameters specified as a JSON string and write
+   * into the specified unconstrained parameter array.  See the
+   * CmdStan Reference Manual for details of the JSON schema.
+   *
+   * @param[in] json JSON string representing parameters
+   * @param[out] theta_unc unconstrained parameters generated
+   */
+  void param_unconstrain_json(const char* json, double* theta_unc) const {
+    std::stringstream in(json);
+    stan::json::json_data inits_context(in);
+    Eigen::VectorXd params_unc;
+    model_->transform_inits(inits_context, params_unc, outstream);
+    Eigen::VectorXd::Map(theta_unc, params_unc.size()) = params_unc;
+  }
+
+  /**
+   * Initialize the parameters for the model by using the values specified as a
+   * JSON string, randomizing the rest, and writing into the specified
+   * unconstrained parameter array. Checks to make sure the generated values
+   * produce a finite log_density, and tries again several times if they do not.
+   * See the CmdStan Reference Manual for details of the JSON schema.
+   *
+   * @param[in] json JSON string representing parameters
+   * @param[in] rng random number generator for unspecified parameters
+   * @param[in] init_radius radius to draw initial values from
+   * @param[in] max_tries maximum number of attempts at random initialization
+   * @param[in] jacobian whether to use the jacobian when calculating if the log
+   * density is finite.
+   * @param[out] theta_unc unconstrained parameters generated
+   */
+  void param_initialize(const char* json, stan::rng_t& rng, double init_radius,
+                        int max_tries, bool jacobian, double* theta_unc) const {
+    auto inits_context = bridgestan::load_json(json);
+    stan::callbacks::writer dummy_writer;
+    stan::callbacks::stream_logger logger{*outstream, *outstream, *outstream,
+                                          *outstream, *outstream};
+
+    BRIDGESTAN_PREPARE_AD_FOR_THREADING();
+    std::vector<double> initial_value;
+    if (jacobian) {
+      initial_value = stan::services::util::initialize<true>(
+          *model_, *inits_context, rng, init_radius, false, logger,
+          dummy_writer, max_tries);
+    } else {
+      initial_value = stan::services::util::initialize<false>(
+          *model_, *inits_context, rng, init_radius, false, logger,
+          dummy_writer, max_tries);
+    }
+    std::memcpy(theta_unc, initial_value.data(),
+                sizeof(double) * initial_value.size());
+  }
+
+  /**
+   * Constrain the specified unconstrained parameters into the
+   * specified array, optionally including transformed parameters
+   * and generated quantities as specified.
+   *
+   * @param[in] include_tp `true` to include transformed parameters
+   * @param[in] include_gq `true` to include generated quantities
+   * @param[in] theta_unc unconstrained parameters to constrain
+   * @param[out] theta constrained parameters generated
+   * @param[in] rng random number generator for generated quantities
+   */
+  void param_constrain(bool include_tp, bool include_gq,
+                       const double* theta_unc, double* theta,
+                       stan::rng_t& rng) const {
+    // write_array can run arbitrary user code in tparams/gqs,
+    // including sundials ODES which always require AD
+    BRIDGESTAN_PREPARE_AD_FOR_THREADING();
+    Eigen::VectorXd params_unc
+        = Eigen::VectorXd::Map(theta_unc, param_unc_num_);
+    Eigen::VectorXd params;
+    model_->write_array(rng, params_unc, params, include_tp, include_gq,
+                        outstream);
+    Eigen::VectorXd::Map(theta, params.size()) = params;
+  }
+
+ private:
+  /**
+   * Returns a lambda which calls the correct version of log_prob
+   * depending on the values of propto and jacobian.
+   *
+   * @param[in] propto `true` to drop constant terms
+   * @param[in] jacobian `true` to include Jacobian adjustment for
+   * constrained parameter transforms
+   */
+  auto make_model_lambda(bool propto, bool jacobian) const {
+    // functions that need the model lambda all need autodiff setup
+    // we do it here to save the small overhead of duplicating the local
+    // in each function
+    BRIDGESTAN_PREPARE_AD_FOR_THREADING();
+    return [model = this->model_.get(), propto, jacobian](auto& x) {
+      // log_prob() requires non-const but doesn't modify its argument
+      auto& params = const_cast<
+          std::remove_const_t<std::remove_reference_t<decltype(x)>>&>(x);
+      if (propto) {
+        if (jacobian) {
+          return model->log_prob_propto_jacobian(params, outstream);
+        } else {
+          return model->log_prob_propto(params, outstream);
+        }
+      } else {
+        if (jacobian) {
+          return model->log_prob_jacobian(params, outstream);
+        } else {
+          return model->log_prob(params, outstream);
+        }
+      }
+    };
+  }
+
+ public:
+  /**
+   * Calculate the log density for the specified unconstrain
+   * parameters and write it into the specified value pointer,
+   * dropping constants it `propto` is `true` and including the
+   * Jacobian adjustment if `jacobian` is `true`.
+   *
+   * @param[in] propto `true` to drop constant terms
+   * @param[in] jacobian `true` to include Jacobian adjustment for
+   * constrained parameter transforms
+   * @param[in] theta_unc unconstrained parameters
+   * @param[out] val log density produced
+   */
+  void log_density(bool propto, bool jacobian, const double* theta_unc,
+                   double* val) const {
+    BRIDGESTAN_PREPARE_AD_FOR_THREADING();
+
+    Eigen::VectorXd params_unc
+        = Eigen::VectorXd::Map(theta_unc, param_unc_num_);
+
+    if (propto) {
+      try {
+        // need to have vars, otherwise the result is 0 since everything is
+        // treated as a constant
+        Eigen::Matrix<stan::math::var, Eigen::Dynamic, 1> params_unc_var(
+            params_unc);
+        if (jacobian) {
+          *val = model_->log_prob_propto_jacobian(params_unc_var, outstream)
+                     .val();
+        } else {
+          *val = model_->log_prob_propto(params_unc_var, outstream).val();
+        }
+      } catch (...) {
+        // because we created vars on the stack, we need to recover memory
+        stan::math::recover_memory();
+        throw;  // re-caught by top level exception logic
+      }
+      // also recover memory if no exception was thrown
+      stan::math::recover_memory();
+    } else {
+      if (jacobian) {
+        *val = model_->log_prob_jacobian(params_unc, outstream);
+      } else {
+        *val = model_->log_prob(params_unc, outstream);
+      }
+    }
+  }
+
+  /**
+   * Calculate the log density and gradient for the specified
+   * unconstrain parameters and write it into the specified value
+   * pointer and gradient pointer, dropping constants it `propto` is
+   * `true` and including the Jacobian adjustment if `jacobian` is
+   * `true`.
+   *
+   * @param[in] propto `true` to drop constant terms
+   * @param[in] jacobian `true` to include Jacobian adjustment for
+   * constrained parameter transforms
+   * @param[in] theta_unc unconstrained parameters
+   * @param[out] val log density produced
+   * @param[out] grad gradient produced
+   */
+  void log_density_gradient(bool propto, bool jacobian, const double* theta_unc,
+                            double* val, double* grad) const {
+    auto logp = make_model_lambda(propto, jacobian);
+    int N = param_unc_num_;
+    Eigen::VectorXd params_unc = Eigen::VectorXd::Map(theta_unc, N);
+    stan::math::gradient(logp, params_unc, *val, grad, grad + N);
+  }
+
+  /**
+   * Calculate the log density, gradient, and Hessian for the
+   * specified unconstrain parameters and write it into the
+   * specified value pointer, gradient pointer, and Hessian pointer,
+   * dropping constants it `propto` is `true` and including the
+   * Jacobian adjustment if `jacobian` is `true`.  The Hessian is
+   * symmetric so row-major vs. column-major are identical.
+   *
+   * @param[in] propto `true` to drop constant terms
+   * @param[in] jacobian `true` to include Jacobian adjustment for
+   * constrained parameter transforms
+   * @param[in] theta_unc unconstrained parameters
+   * @param[out] val log density produced
+   * @param[out] grad gradient produced
+   * @param[out] hess Hessian produced
+   */
+  void log_density_hessian(bool propto, bool jacobian, const double* theta_unc,
+                           double* val, double* grad, double* hessian) const {
+    auto logp = make_model_lambda(propto, jacobian);
+    int N = param_unc_num_;
+    Eigen::Map<const Eigen::VectorXd> params_unc(theta_unc, N);
+    Eigen::VectorXd grad_vec(N);
+    Eigen::MatrixXd hess_mat(N, N);
+
+#ifdef BRIDGESTAN_AD_HESSIAN
+    stan::math::hessian(logp, params_unc, *val, grad_vec, hess_mat);
+#else
+    stan::math::internal::finite_diff_hessian_auto(logp, params_unc, *val,
+                                                   grad_vec, hess_mat);
+#endif
+
+    Eigen::VectorXd::Map(grad, N) = grad_vec;
+    Eigen::MatrixXd::Map(hessian, N, N) = hess_mat;
+  }
+
+  /**
+   * Calculate the log density and the product of the Hessian with the specified
+   * vector for the specified unconstrain parameters and write it into the
+   * specified value pointer and Hessian-vector product pointer, dropping
+   * constants it `propto` is `true` and including the Jacobian adjustment if
+   * `jacobian` is `true`.
+   *
+   * @param[in] propto `true` to drop constant terms
+   * @param[in] jacobian `true` to include Jacobian adjustment for
+   * constrained parameter transforms
+   * @param[in] theta_unc unconstrained parameters
+   * @param[in] vector vector to multiply Hessian by
+   * @param[out] val log density produced
+   * @param[out] hvp Hessian-vector product produced
+   */
+  void log_density_hessian_vector_product(bool propto, bool jacobian,
+                                          const double* theta_unc,
+                                          const double* vector, double* val,
+                                          double* hvp) const {
+    auto logp = make_model_lambda(propto, jacobian);
+    int N = param_unc_num_;
+    Eigen::Map<const Eigen::VectorXd> params_unc(theta_unc, N);
+    Eigen::Map<const Eigen::VectorXd> v(vector, N);
+    Eigen::VectorXd hvp_vec(N);
+
+#ifdef BRIDGESTAN_AD_HESSIAN
+    stan::math::hessian_times_vector(logp, params_unc, v, *val, hvp_vec);
+#else
+    stan::math::internal::finite_diff_hessian_times_vector_auto(
+        logp, params_unc, v, *val, hvp_vec);
+#endif
+
+    Eigen::VectorXd::Map(hvp, N) = hvp_vec;
+  }
+
+ private:
+  /** Stan model */
+  bridgestan::model_ptr model_;
+
+  /** name of the Stan model */
+  bridgestan::unique_cstr name_;
+
+  /** Model compile info */
+  bridgestan::unique_cstr model_info_;
+
+  /** CSV list of parameter names */
+  bridgestan::unique_cstr param_names_;
+
+  /** CSV list of parameter, transformed parameter names */
+  bridgestan::unique_cstr param_tp_names_;
+
+  /** CSV list of parameter, generated quantity names */
+  bridgestan::unique_cstr param_gq_names_;
+
+  /** number of parameters */
+  int param_num_ = -1;
+
+  /** number of parameters + transformed parameters */
+  int param_tp_num_ = -1;
+
+  /** number of parameters + generated quantities */
+  int param_gq_num_ = -1;
+
+  /** number of parameters + transformed parameters + generated quantities */
+  int param_tp_gq_num_ = -1;
+
+  /**
+   * CSV list of parameter, transformed parameters, generated
+   * quantity names
+   */
+  bridgestan::unique_cstr param_tp_gq_names_;
+
+  /** name of the Stan model */
+  bridgestan::unique_cstr param_unc_names_;
+
+  /** number of unconstrained parameters */
+  int param_unc_num_ = -1;
+};
+
+#endif

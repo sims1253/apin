@@ -203,3 +203,28 @@ RESULT (logs/gate_a_{O3,O2}.out):
   O3 (-O3 -mavx2 -mfma): 802 cases / 20,764 bitwise component checks
      (lp + every theta/alpha/beta adjoint), 0 mismatches + 13/13 throws.
   O2: identical numbers.
+
+## GATE (b): ALL GREEN
+- bs_w126 = cp -al of bs_w130 (family bundle; W-57/58 layers etc.), primitive
+  header at a PRIVATE inode (11893441) in its math tree; bridgestan.o
+  e4b6077b (the canonical rebuilt one, reused); direct gxx compile+link
+  (W-129 command lines; the bundle's kinsol lib name is libsundials_kinsol.a).
+- STOCK arm built FIRST from the pristine hpp (bundle stanc 2.39, hpp md5
+  9151275b; .so md5 32d5b3fe). STOCK REFERENCE recorded BEFORE the prim arm
+  existed: draws md5 a342848b18bf6eebe360097c0681a633 (w36exp CLI read-only,
+  seed 20260819, w100 s50 mw50, W-80 data + pf init rep0/chain_0; 3,102+1,550
+  grad calls; 510 NaN-exception spam — the W-80-documented gpcm pattern, priors
+  throw before the likelihood; the trajectory moves at ~1e-15 relative scale —
+  gradient-sensitive at ulp level).
+- DOUBLE ANCHOR: the W-80 SHIPPED .so (cmdstan-2.39.0 stack, default flags,
+  md5 661e6853) reproduces the SAME draws md5 + 510 errors under the same
+  protocol — the family stack is output-equivalent to the shipped artifact
+  here.
+- Hand-edit (make_prim_edit.py, asserts blocks verbatim): the include + the
+  REV-mode loop -> pcm_lpdf_gathered<propto__>(y, theta, jj, alpha, ii, beta,
+  pos, m) + per-term lp_accum__.add loop. The double-mode instantiation and
+  write_array keep the stock loop. hpp md5 8bb3c3ef; .so md5 1a5e98d9.
+- PRIM arm draws: md5 a342848b... DIGIT-FOR-DIGIT; same grad calls; same 510
+  exception count.
+- 100-pt parity (gate_parity_w126.py, ctypes C ABI, W-103 points): lp 0/100,
+  gradient-vector 0/100 (D=530), constrained output 0/100 (DC=545) EXACT-ZERO.

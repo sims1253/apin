@@ -1,0 +1,11 @@
+#define __TBB_VERSION_STRINGS(N) \
+#N": BUILD_HOST\t\tm0pad (x86_64)" ENDL \
+#N": BUILD_OS\t\tNAME=CachyOS Linux" ENDL \
+#N": BUILD_KERNEL\tLinux 7.1.8-1-cachyos #1 SMP PREEMPT_DYNAMIC Tue, 11 Aug 2026 09:10:42 +0000" ENDL \
+#N": BUILD_GCC\t\tg++ (GCC) 16.2.1 20260810" ENDL \
+#N": BUILD_LIBC\t2.44" ENDL \
+#N": BUILD_LD\t\t" ENDL \
+#N": BUILD_TARGET\tintel64 on cc16.2.1_libc2.44_kernel7.1.8" ENDL \
+#N": BUILD_COMMAND\tg++ -O2 -g -DDO_ITT_NOTIFY -DUSE_PTHREAD -pthread -m64 -mrtm -fPIC -flifetime-dse=1 -D__TBB_BUILD=1 -Wall -Wextra -Wno-parentheses -Wno-sized-deallocation -Wno-unknown-warning-option -Wno-deprecated-copy -Wno-missing-attributes -Wno-class-memaccess -Wno-sized-deallocation -DTBB_SUPPRESS_DEPRECATED_MESSAGES=1 -std=c++17 -I../tbb_2020.3/src -I../tbb_2020.3/src/rml/include -I../tbb_2020.3/include -I." ENDL \
+
+#define __TBB_DATETIME "Sa 22. Aug 13:51:25 UTC 2026"
