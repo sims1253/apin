@@ -112,3 +112,42 @@ them per-element (identical chunk schedule = stock lp tree).
 5. Compiled chain of var*var (operator_multiplication) — exact FMA form
 6. Eigen dot on sparse res_adj: confirm values match my hand-built dense formulation
    (the primitive builds res_adj as a dense zero + one nonzero, same as stock's arena adj)
+
+## STEP ZERO — EMPIRICAL VERIFICATION (probes 1-6, family stack, model flags)
+
+- probe_types/probe_adj: full type chain pinned. subtract(var,Matrix<var>) → Matrix<var>
+  (AoS, W-57/58 batched-span layer); append_row → Matrix<var>; cumulative_sum →
+  Matrix<var>; softmax → arena_matrix<Matrix<var>> (a Map); probs assign = var-handle
+  copies (shared varis). Value path = plain double arithmetic; lp = log(p[y]).
+- probe_adj forensics: printed cs adjoints are POST-cumsum-callback (suffix-summed):
+  adj(un_k) = A_k + (A_{k+1} + (... + A_m)) RIGHT-NESTED (the cumsum reverse relay).
+  adj_t = ((suf_1 + suf_2) + ...) ASCENDING left-assoc (subtract chain). multiply chain:
+  avi->adj_ += bvi->val_ * adj_ (single statement → GCC-fused at model flags).
+- **probe_softmax/probe_softmax2 — THE decisive finding**: softmax<VectorXd> (dense
+  input) DIFFERS from stock's instantiation softmax<val-view> in last ulps (3554/14000
+  elements). Mechanism: stock feeds softmax a CwiseUnaryView (val() over Map<Matrix<var>>)
+  — non-packet-accessible → Eigen DefaultTraversal EVERYWHERE → glibc std::exp per
+  element + SEQUENTIAL SCALAR sum + per-element divide. The dense instantiation
+  packetizes → Eigen's polynomial pexp → last-ulp diffs. Manual SCALAR spelling:
+  mx = max(c); S = Σ ascending RN(exp(c_k−mx)); p_k = RN(exp(c_k−mx)/S) —
+  **bit-identical to stock's view instantiation on 2000 trials x K=3..9 (0 diffs)**
+  while dense differs (3554). The stock LSE reduction is the SCALAR path — the MOST
+  replicable semantics possible. No Eigen-redux risk.
+- **probe_hand (final): 400/400 trials bitwise** (lp + adj_theta + adj_alpha + every
+  adj_beta_k; m=2..8 → K=3..9; randomized values; model flags). Complete verified chain:
+
+  FORWARD per obs: t=th*al; c[0]=0; c[k+1]=c[k]+(t−bv[k]) sequential;
+  S = Σ ascending exp(c_k−mx); p_k = exp(c_k−mx)/S; lp_n = log(p[y_n]).
+  CHECKS per obs (stock order): check_bounded("categorical_lpmf","Number of
+  categories", y+1, 1, K); check_simplex("categorical_lpmf","Probabilities
+  parameter", p) [check_simplex materializes dense; same instantiation → same sum].
+  BACKWARD per obs (e = term adjoint): r=0; r[y]=e/p[y] (DIVISION);
+  dot = p·r (single nonzero ⇒ exact); A = p⊙(r−dot);
+  suf[K−1]=A[K−1]; suf[k]=A[k]+suf[k+1] (right-nested);
+  adj_t = suf[1]; adj_t = adj_t+suf[k] ascending (k=2..K−1);
+  theta_j.adj += adj_t*alpha_i.val (fused stmt); alpha_i.adj += adj_t*theta_j.val;
+  beta_{pos+k}.adj −= suf[k+1] (pure subtract). Cross-obs: reverse-n (stock sweep).
+
+### STEP ZERO VERDICT: REPLICABLE, bit-identically. GO.
+(The pre-registered "Eigen redux semantics" risk dissolved: the model's softmax
+instantiation is the scalar path. Verified, not assumed.)
