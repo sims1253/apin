@@ -2005,3 +2005,93 @@ measured cell — one-line adoption on exp/ridge-guard whenever the
 user decides. **W-128 PRE-REGISTERED + LAUNCHED** (Lane B glm emission
 at default level; REAL-model gates; statistical class stated).
 Running: W-118, W-128.
+
+**W-127 CLOSED (relaunched agent; PI-arbitrated) — ~06:0x:** bit-identity
+FULLY achieved (13,076 checks both flag levels; election88 draws md5-
+identical incl. all 11,566 y_hat columns; parity exact-zero) — gate (c)
++11.5% OWNED (the pre-staged double-compute; the MEASURED increment-2
+prize = the tp complex at 55.2% of the run). PR HELD until increment 2.
+NEW STANDING LESSON: sweep-order relative to other edges is a
+bit-identity dimension (priors interleave between the likelihood edge
+and the tp chains — 1-ulp accumulation reorder; cured via the tp
+writeback overload). Also banked: stock's var*1.0 alias trick + a
+mixed-ABI bridgestan.o hazard on wide-tp outputs. Branch
+gathered-additive @ 5267fb4858, NOT pushed. **W-129 PRE-REGISTERED +
+LAUNCHED** (the emission + tp-loop value-only resolution; hand-edit
+reference gated FIRST incl. y_hat outputs bitwise; end-to-end draws
+must reproduce d2e2f896…). Running: W-129. Queued: W-126 (pcm family).
+Infrastructure note: 2 silent agent deaths tonight — all agents now
+carry persist-to-disk resilience rules; PI probes on stall signatures.
+
+**W-129 CLOSED (PI-arbitrated; build-first stop-clause DID ITS JOB) —
+~06:3x:** the central claim REFUTED with a clean causal triangle (pure-
+stock + likelihood moved before priors = still bitwise stock → the
+divergence isolates ENTIRELY to callback CREATION POSITION; LESSON #4
+banked). Gate (b) fail as registered (adjoints 1e-16-class; draws =
+the scatter arm's md5); gate (e) = the prize is REAL AND BIGGER:
+−56.7% of the run (tp complex → ~0; wall 5.73→1.70s). No OCaml built
+(correct). **W-130 PRE-REGISTERED + LAUNCHED** (the bit-identity lane
+the refutation points at: TP-BLOCK custom vari — forward = the
+validated value-only path, chain = the W-127-certified element
+backward, LIKELIHOOD STAYS STOCK → delivery position = stock's by
+construction; reference md5 d2e2f896…). Fallback if W-130 walls:
+statistical-class reclassify of the W-129 hand-edit (−56.7% now).
+Running: W-130. Queued: W-126 (pcm).
+
+**W-130 CLOSED — ALL FOUR GATES GREEN, the session's biggest single-model
+number: election88 −67.51% of the RUN (wall 4.1x), bit-identical
+(draws d2e2f896… incl. all y_hat columns; 440k bitwise checks both flag
+levels; both prior-ordering controls exact), and the bit-identical arm
+BEATS the W-129 statistical rewrite — bit-identity is family-4's NATIVE
+class. Lesson #4 answered structurally (creation position = stock's by
+construction). Branch gathered-additive-tpvari @ a2593a12fe.
+**math#22 FILED** (the full additive family: primitive + scatter
+overload + tp-vari factory; orwell body). **W-131 PRE-REGISTERED +
+LAUNCHED** (the emission — trivial by design: tp loop → factory call;
+reference = the W-130 gated hand-edit; end-to-end md5 gate
+d2e2f896…). Running: W-131. Queued: W-126 (pcm).
+
+**W-131 CLOSED — ALL FOUR GATES GREEN; FAMILY 4 COMPLETE END-TO-END**
+(emission token-identical to the gated hand-edit 127/127; end-to-end
+md5 d2e2f896… incl. y_hat cols; 2,562-model census = 3 intended fires;
+the default-vs-O1 conflict dissolves at model flags). **stanc3#11
+FILED** (extends #8; requires math#22). **W-126 PRE-REGISTERED +
+LAUNCHED** — family 3, the LAST gathered family: pcm/ordered via
+gpcm_latent_reg_irt; STEP ZERO = the LSE-reduction replicability
+verdict (stop-clause: statistical escalation is the PI's). Running:
+W-126. After it: the FINAL composed 21-model wrap benchmark + session
+refresh.
+
+**W-126 CLOSED — ALL FOUR GATES GREEN, the CAMPAIGN'S BIGGEST NUMBER:
+gpcm −88.28% of the run (9.7× wall), bit-identical (20,764 checks
+both flag levels; draws doubly-anchored digit-for-digit; TU green on
+Eigen 5 = cross-stack certified). Step-zero findings: NO stock pcm
+exists (user-function composed path) + the softmax interior is stack-
+dependent (resolved via exact-instantiation routing). Branch
+gathered-pcm @ e355b14535; **math#23 FILED**. ALL FOUR gathered
+families now have primitives. **W-132 + W-133 PRE-REGISTERED +
+LAUNCHED (the final two lanes):** W-132 = family-3 emission (the
+novel composed-user-function matcher), W-133 = the everything-v2 WRAP
+TABLE (analysis-first assembly of the promotion-decision artifact).
+Running: W-132, W-133. These close the campaign.
+
+**W-133 CLOSED — THE WRAP TABLE IS IN (results/everything_v2_w133.md):
+everything-v2 E′/S = 1.746× geomean** (band 1.73–1.76) vs 1.485× —
+decomposed 3.19× measured on the 4 primitive models / 1.515×
+unchanged-by-construction on the 17; every E′ cell md5-identical to
+archive; supplementary arms classed (glm emission statistical;
+election88 4.1× / gpcm 9.7× bit-identical side wins). Zero new
+sampling. THE PROMOTION PARAGRAPH = the user's decision artifact.
+Running: W-132 only (family-3 emission). Then: session refresh + repo
+push.
+
+**W-132 CLOSED — ALL FOUR GATES GREEN; stanc3#12 FILED. THE GATHERED-
+GLM CAMPAIGN IS COMPLETE (W-108..W-133):** all four families
+end-to-end (primitive + automatic emission), all bit-identical;
+the everything-v2 wrap = 1.746× geomean ESS/s, every draw md5-identical
+wherever a transform fires. Final filing tally: math#15–19, #21–23;
+stanc3#8–12; math issue #20. NOTHING pushed upstream ever. Machine
+RELEASED — no agents running; the board goes quiet. Session-final
+records: WORKLOG W-108..W-133, results/* (24 new records),
+DECISION_DELTA final-stamped, campaign map final-stamped. The next
+session picks up from HANDOFF + the user's adoption decisions.

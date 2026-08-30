@@ -1,4 +1,15 @@
-# Decision delta — what changed for the open user decisions (2026-08-29, PI memo)
+# Decision delta — what changed for the open user decisions (2026-08-29/30, PI memo; FINAL SESSION STAMP)
+
+> **SESSION-FINAL STAMP (2026-08-30):** the campaign completed — all
+> four gathered families landed (primitives + emission, bit-identical),
+> the everything-v2 wrap table is in (results/everything_v2_w133.md):
+> **1.746× geomean ESS/s over the recommended default, every draw
+> bit-identical wherever a transform fires** (3.19× on the four
+> primitive models, 1.515× unchanged-by-construction on the rest;
+> election88 4.1× and gpcm 9.7× as bit-identical side wins; the W-118
+> fused interior = unmeasured upside on the radon cells). Filed on the
+> forks: math#15–19, #21–23; stanc3#8–11; math issue #20 (+impl).
+> Sections below are the decision lanes with all evidence attached.
 
 Companion to the standing guides (results/PR_REVIEW_GUIDE.md, scratch/
 w61/PROMOTION_ASSEMBLY_MAP.md). Only the DELTA since those were written.

@@ -1,0 +1,7 @@
+This extends the gathered-likelihood registry (#8) with a fifth family and a new matcher class: a likelihood defined through a user function.
+
+Polytomous IRT models write their partial-credit likelihood as a helper — a softmax over the cumulative sum of an indexed coefficient difference — and call it with categorical log probability once per observation. Because function inlining runs first in the suite, the pass sees the body fully expanded in the likelihood loop, and the side conditions become structural: any other use of the intermediate vectors leaves fresh local names behind and disqualifies the rewrite. The loop becomes one `pcm_lpdf_gathered` call (sims1253/math#23) with per-term accumulator pushes; everything else stays stock.
+
+Gates: eight negative controls stay silent; a census of 1,798 two-arm compiles finds exactly one firing model with two intended rewrites and every other output byte-identical; the emitted statement is token-identical to a hand edit that was itself gated bit-identical against stock; and the compiler's output alone reproduces stock's sampler draws digit for digit, with 100-point log density and gradient parity exact. The control matrix also caught a real operand-dropping bug on commuted spellings before any number was recorded.
+
+Requires sims1253/math#23. With it, the measured win carries end-to-end: the model runs 9.7 times faster in wall time with every draw bit-identical to stock.

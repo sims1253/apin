@@ -1,0 +1,7 @@
+Polytomous IRT models write their likelihood as a user function: a softmax over the cumulative sum of an indexed coefficient difference, then a categorical log probability — one call per observation, in a loop. On a generalized partial credit model (N = 5,500, 530 parameters) that generated code is nearly the whole run: 88% of its instructions are per-observation expression materialization inside the composed path.
+
+This adds the gathered entry point. It takes the coefficient vectors and index arrays, assembles the per-observation predictor at stock's operation order, and calls softmax through the exact expression instantiation the stock path hits — that detail is what makes the reduction bit-identical, because the softmax interior changes arithmetic with expression type. The reverse pass is one callback with the derived adjoint chain: division at the log node, the right-nested suffix relay, ascending subtract accumulation.
+
+Gates: 20,764 bitwise checks over 802 cases and 18 operand layouts, clean at `-O3 -mavx2 -mfma` and `-O2`, with the throw set covered; sampler draws identical to stock digit for digit on the model, against a reference anchored twice — once recorded fresh, once reproduced by the shipped binary from the earlier benchmark campaign; 100-point log density and gradient parity exact.
+
+Measured: the run drops from 214 billion to 25 billion instructions and runs 9.7 times faster in wall time, with every draw bit-identical to stock.
