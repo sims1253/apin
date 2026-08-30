@@ -301,3 +301,12 @@ EXPECTATIONS (family-3 baseline; election88 family-4 was 1,578 Ir/elem stock):
   expression graph gone -- a compounding the per-complex band never priced
   (the W-130 sweep-collapse overshoot class). The untraced wall times:
   stock 14.56s + 8.03s (two CLI phases) vs prim -- check prim_run.log.
+
+## FINAL (post-record bookkeeping)
+- Branch message repair: an --amend/--exec sequence briefly duplicated the
+  header commit; repaired via soft reset to base + two clean commits:
+  gathered-pcm @ e355b14535 (2a3b5139db header + e355b14535 TU), tree
+  IDENTICAL to the gated state (header f3bc10b3 in branch == bundle private
+  inode; 659 insertions, 2 files). Record hashes updated.
+- Wall times: stock 14.56+8.03s vs prim 1.52+0.82s (9.7x).
+- All artifacts committed; nothing pushed; WORKLOG.md/comms.md untouched (PI).
