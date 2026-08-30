@@ -3167,3 +3167,31 @@ already 4-lane/F-25-multi-pass, bwd is a scatter, MVN/LKJ/GEMM len-2/4
 Incidents handled: SIGBUS from cp-replacing instrument binaries under
 the campaign (quarantined, rerun byte-identical); rc=3 CSV-reject after
 sampling (outdir) — profiles intact, twin-checked to 2e-7.
+
+### F-33 VERDICT — THE CLOSING TABLE (2026-08-30; log logs/fortk-f33.md; branch fortk/f33-final @ 95d9780 (merge 030eb79 + wiring), NOT pushed beyond backup, bundle /tmp/f33-stage/; ctest 69/69; all oracles digit-identical)
+
+Merge reunited the split arcs (f31's base carried the F-25 v6 kernel
+line the f30/f32 lineage lacked — post-incident fork healed); zero
+textual conflicts; semantic audit clean; seam needed ZERO wiring (the
+file-scope pointer — F-32's design). Default byte-identity through the
+EMBEDDED compiler; lean ladder bitwise (lean==arena==direct); anti-ICF
+markers verified.
+
+CLOSING NUMBERS (3 reps, interleaved, load labeled):
+- Phase-1 geomean ESS/s vs CmdStan: **L/A 9.21x** (ex-pilots 9.92x;
+  C/A 7.05x; F-26 was 7.53/5.92). Per-model L/A: esc 22.45x, pilots
+  6.35x(mirage cell), kidscore 10.76x, esnc 9.32x, blr 6.14x, logmesq
+  6.94x. All-14: L/A 5.05x, C/A 4.64x (multi-region heavies 1.08-1.13
+  L/C — seam correctly refused; kronecker gives wall back at 7000 dims
+  0.91x; diamonds 0.89x).
+- Full-run Ir stock/direct geomean **1.647x** (F-32 1.557x; the gain =
+  v6 kernel reunion on logmesq/kidscore).
+- Batch: esnc **3,542,570 fits/h CLEARS the 3.5M gate F-31 missed**
+  (pure composition: arena+seam on the lean-fits path); blr 1,299,226
+  = 99.9% of its bar.
+- Honest read: 7.53 -> 9.21 tracks Ir 1.422 -> 1.647 at every level;
+  every oracle digit-identical; the remaining ~1.30x to F-30's 2.145x
+  ceiling is region-body cost — F-34 shipped -32% hier_2pl Ir the same
+  day and is the natural next merge.
+- Note: F-30/F-32 measured on the v4 emitter (arc split) — their
+  absolutes UNDERSTATE the reunited stack.
