@@ -3073,3 +3073,41 @@ interleaved, F-8/F-18 conventions; report per-model + geomean ESS/s
 (the session-final number), full-run Ir ratios, and the batch spot.
 Push all branches + refresh PR bodies if materiality met. The
 collection-day deliverable: one branch, one table, everything pushed.
+
+### F-32 VERDICT (2026-08-30; log logs/fortk-f32.md; branch fortk/f32-directseam @ 291e4ef, NOT pushed beyond backup, bundle /tmp/f32-stage/; ctest 69/69 twice)
+
+GATE (b) MET: full-run Ir geomean stock/direct = **1.557x** >= 1.50
+(esnc 1.834x, esc 1.789x, blr 1.542x, logmesq 1.552x, kidscore 1.164x;
+f30 was 1.427x; arena->direct adds 1.095x — MORE than the packing-only
+1.071x because single-scope direct codegen also drops the region-ABI
+spill/round-trip, exactly as F-4b's ns ladder ordered). GATE (a) PASS:
+bitwise vs --lean-arena on every model (hier_2pl correctly REFUSED the
+seam — 2 regions, path unchanged, 48,508 exec evals; packing residual
+there 0.63%). Attribution FIRST: packing shares 1.5-10.2% on the five
+direct-eligible models; ceiling predicted 1.528 — built and beaten.
+(c) default byte-identity all forms; GRAD_COUNTER 3785 -> 1 (drop ==
+direct evals — counter arithmetic exact). (d) ESS/s wall 1.084x
+(bitwise draws, pure wall, F-29-concurrent, labeled).
+
+TOOLING LESSON (F-33 must heed): linker ICF folds identical cg-wrapper
+bodies to one address (correct runs, EMPTY profiles) — anti-ICF volatile
+markers required on any identical --cg wrapper pair. POINTER (next win):
+hier_2pl's dominant per-run cost is its REGION BWD's own la-memset =
+31.2% of the whole run — the F-25 first-write-conversion pattern applied
+to hier_2pl's region emission is the remaining big single-model lever.
+
+### F-34 pre-registered (hier_2pl region-emitter: la-memset elimination + multi-pass on its region bodies)
+
+F-32 attribution: hier_2pl region bwd's la-memset 31.2% of run; vecmath
+33.1%; executor packing 0.63% (call seam done). Charter, branch
+fortk/f34-hiermemset off fortk/f25-kernelfloor (the emitter home):
+apply the F-25 patterns to hier_2pl's region emission — first-write
+conversion for the bwd la arrays (converted classes only, uninstrumented
+opcodes pre-marked keep-zeros — the exact F-25 discipline), plus
+multi-pass where its fwd/bwd loops are scalar-blocked. GATES: (a)
+hier_2pl verify 64 pts < 1e-9 vs unfused executor (unchanged oracle) +
+no-regression spots (kidscore 1.4e-15-class, blr byte-identical, esnc
+bitwise); (b) hier_2pl Ir/grad improvement reported (primary) + census
+ratio row; (c) ctest + default-path byte-identity for untouched models;
+(d) ESS/s informational. Region-cache version bump REQUIRED (emitter
+output changes). Anti-ICF markers on any new --cg wrappers.
