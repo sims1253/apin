@@ -262,3 +262,42 @@ EXPECTATIONS (family-3 baseline; election88 family-4 was 1,578 Ir/elem stock):
   2/2 -- all PASSED.
 - Sibling integrity: bs_w130's bernoulli header + bridgestan.o (e4b6077b) +
   w127 stock .so (2cf00ef9) byte-intact; worktrees w112/w127/w130 untouched.
+
+## GATE (c): -88.28% (band -25..-45 EXCEEDED FAVORABLY — owned below)
+| metric | stock | prim | delta |
+|---|---|---|---|
+| PROGRAM TOTALS Ir | 214,271,454,670 | 25,116,551,792 | -88.28% |
+| Ir/grad (4,652 both) | 46.05M | 5.40M | -88.3% |
+| Ir/obs-eval (25.6M both) | 8,366 | 981 | -88.3% |
+| draws md5 under tracing | a342848b... BOTH ARMS | | bit-identity certified under tracing |
+| grad calls | 3102+1550 both | same | |
+- Attribution (self Ir, complex classes):
+  | complex | stock | prim |
+  |---|---|---|
+  | pcm body (stock user-fn) / pcm_lpdf_gathered fwd (prim) | 8.557e9 | 7.163e9* |
+  | softmax instantiation | 10.486e9 | 3.641e9 |
+  | cumulative_sum | 5.517e9 | 0 (symbol gone) |
+  | subtract | 4.540e9 | 0 (gone) |
+  | "string-class" copy complex (see below) | 115.799e9 | 0.005e9 |
+  | malloc/free | 18.687e9 | 2.894e9 |
+  | stack_alloc (arena) | 7.039e9 | 0.605e9 |
+  | vari-stack pushes | 2.407e9 | 0.693e9 |
+  | scatter callback (prim only) | -- | 2.611e9 |
+  | exp (libm) | 2.785e9 | 2.808e9 (the LSE interior retained) |
+  | log (libm) | 1.014e9 | 1.014e9 (identical) |
+  | log_prob_impl self | 3.261e9 | 0.277e9 |
+  *prim fwd = pcm_lpdf_gathered_impl 6.416e9 + public fn 0.747e9
+- THE BIG BLOCK: stock's 115.8e9 "string-class" complex (54% of the run) is
+  MEMCPY-CLASS work inside the stock likelihood's per-observation expression
+  materialization, MIS-SYMBOLIZED: stan_cli has no debug info and the copy
+  helpers resolve into its address range (the caller tree shows the bulk
+  reachable from the stock softmax<Matrix<var>> instantiation, 22.8M calls;
+  _M_append fired 91.1M times = ~3.5/observation-eval). The primitive's
+  equivalent copies are ~0.005e9. I.e., the dominant stock cost is the
+  per-obs graph materialization itself -- exactly what the primitive deletes.
+- OVERSHOOT mechanism (owned): beyond the registered likelihood-complex
+  removal (~35e9 of softmax/cumsum/subtract/pcm-body self), the stock run's
+  copy/alloc complexes (~141.5e9) collapse with the per-observation
+  expression graph gone -- a compounding the per-complex band never priced
+  (the W-130 sweep-collapse overshoot class). The untraced wall times:
+  stock 14.56s + 8.03s (two CLI phases) vs prim -- check prim_run.log.
