@@ -228,3 +228,20 @@ RESULT (logs/gate_a_{O3,O2}.out):
   exception count.
 - 100-pt parity (gate_parity_w126.py, ctypes C ABI, W-103 points): lp 0/100,
   gradient-vector 0/100 (D=530), constrained output 0/100 (DC=545) EXACT-ZERO.
+
+## GATE (c) — expectations stated BEFORE measuring (family baseline, first)
+Stock per-observation graph (avg K≈2.45 here: m∈{1,2}): ~3m+5 ≈ 8-11 varis +
+~6 callbacks/obs (subtract span, append passthrough, cumsum, softmax, log,
+multiply) + Eigen arena copies + per-obs softmax instantiation; prim: ~K+2
+no-chain varis/obs (c_var + term) + ONE callback + the view softmax call.
+The gpcm run also carries priors (lognormal/normal×2/student_t), the 500x5
+W_adj*lambda_adj regression, the beta sum tp, GQ — NOT touched.
+EXPECTATIONS (family-3 baseline; election88 family-4 was 1,578 Ir/elem stock):
+- per-obs likelihood interior symbols (softmax/cumulative_sum/subtract chains,
+  categorical_lpmf) -> ~0 (replaced by pcm_lpdf_gathered forward + scatter);
+- vari-stack pushes and sweep/zeroing frames shrink ~2-3x (≈8-11 -> ≈5/obs);
+- net run-total: -25..-45% class (the likelihood's share is diluted by priors
+  + regression + GQ that election88 didn't have... actually election88 had
+  tp-loops; here the tp is tiny (beta sum) but the W_adj*lambda product is
+  J-sized. I'll take any net, the baseline is the deliverable);
+- draws md5 under tracing == a342848b on BOTH arms.
