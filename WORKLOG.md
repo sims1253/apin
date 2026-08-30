@@ -2969,3 +2969,15 @@ Recovery topology updated: F-29 owns shared deps (serving F-29+F-30);
 F-31 PRIVATE deps inside its own worktree (zero shared-state
 contention); stanc3 5b824ee rebuilds from F-31's surviving
 /tmp/f31-stage/stanc3-src (no network needed).
+
+### PAUSE (2026-08-30 ~05:40): all lanes on the shared 5h usage limit
+
+F-29/F-30/F-31 (and F-30's resume) died simultaneously at the limit;
+reset 07:16:43. Recovery state at death: F-29 REBUILT (pr-waln binary
+up, branch fortk/f29-adaptiveK, md5 gate pending); F-30 mid-build (85
+objects; parent continues the build in the idle window — patches
+0001-0003 applied to the shared deps/stan, safe: F-29's build complete
+and patch-independent, F-31 private-deps); F-31 in setup (scripts
+rewritten, stanc3 staging verified at 5b824ee, /tmp/f31-stage marker;
+private deps + build pending). Relaunch scheduled post-reset via the
+07:25 automation; all resume charters point at the surviving logs.
