@@ -3225,3 +3225,18 @@ with hier_2pl 4.04. Every layer gated; bit-identity preserved through
 nine merges; four honest refusals/non-transfers documented with
 mechanisms; three composition validations; one upstream bug
 independently confirmed; one own claim retracted loudly.
+
+### FINAL AUDIT (2026-08-30, pre-contraction; user request)
+
+- ALL fortk work is on the fork: 19 branches verified on origin (the
+  last gap, f29-adaptiveK @ 94ae8d0, pushed in this audit); 7 draft
+  PRs current; apin ledger pushed through 0199e82. Zero dirty trees.
+- The pre-incident worktrees died with the old store (their branches
+  were already on origin — nothing lost); live worktrees: f30/f31/f33/
+  f34/pr-waln, all clean and re-anchored to the re-cloned store.
+- DELIBERATELY LOCAL (user decisions, not loose ends): apin's
+  external/{cmdstan,posteriordb,walnutpie} gitlink deletions from the
+  incident (restore = their walnutpie lane's assets); bench/fortk_f*
+  raw dirs (logs are the pushed evidence of record); /tmp bundles
+  (redundant now that all branches are on origin); the bernoulli_logit
+  issue draft (no-upstream rule stands).
