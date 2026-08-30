@@ -2095,3 +2095,18 @@ RELEASED — no agents running; the board goes quiet. Session-final
 records: WORKLOG W-108..W-133, results/* (24 new records),
 DECISION_DELTA final-stamped, campaign map final-stamped. The next
 session picks up from HANDOFF + the user's adoption decisions.
+
+**ORPHAN CLEANUP + DISCLOSURE (~19:55):** the user spotted 2×100%-CPU
+"zcode" processes in btop — two orphaned ZCode-AppImage CLI wrappers
+(PPID 1, state RN, ~73% each, running ~28h since ~15:47/15:50 on
+08-29 = aborted/timed-out tool invocations never reaped, stuck in a
+poll loop). SIGKILLed both, death verified. DISCLOSURE: they spun
+through the campaign's second half, so part of what wall-stanza
+load-flags called "foreign ambient" was self-inflicted (~1.5 cores).
+NO measurement invalidated: all decisive numbers are callgrind Ir
+(deterministic) or interleaved/paired wall comparisons vs frozen
+archives under the same ambient, all load-flagged at recording. GOTCHA
+for all sessions: timed-out Bash tool calls can leave AppImage-wrapper
+orphans spinning at ~75% CPU with PPID 1 — sweep for them after any
+timeout (ps -eo pid,ppid,stat,pcpu --sort=-pcpu; the legit app is the
+.mount_ZCode tree, the orphans carry the AppImage path directly).
