@@ -177,3 +177,29 @@ calls softmax(c_var.val()).
 - The adjoint dot (p.dot(res_adj)) is stack-immune: res_adj has exactly one
   nonzero (g at y) so every traversal order yields the same double.
 - Smoke (bundle, correct includes): 60/60 bitwise (lp + all grads, repeated idx).
+
+## GATE (a): PASS at BOTH flag levels
+`test_prim.cpp` on the bs_w130-family bundle math + ONLY our header via inc/
+(W-112 discipline), stock arm = the EXACT generated loop (real rvalue/index_uni,
+segment, the composed pcm body, the REAL accumulator<var>), prim arm = the
+primitive + per-term accumulator adds.
+- P1: 6 seeds x N in {1,2,3,5,8,17,100} x randomized I/J/m (K=2..8), repeated +
+  permuted indices, 18 layouts (theta/alpha x {AoS, Map, SoA}; beta x {AoS, Map}
+  — SoA-beta has NO stock counterpart: the generated model's beta is always a
+  local Matrix<var>; segment/subtract/append_row on var_value don't compose to
+  the generated spelling — the primitive's SoA-beta route is compile+value
+  certified in the TU instead).
+- P1b: N in {919, 2000} x 18 layouts, all-y-min / all-y-max boundary responses.
+- P2: the REAL gpcm shape (N=5500, I=11, J=500, m from W-80 data; K in {2,3}),
+  3 layout combos incl. the model's (Map theta/alpha + AoS beta).
+- P3: priors BEFORE the likelihood (lognormal alpha + normal beta/theta — the
+  model's statement order), AoS/Map x AoS/Map (this math's lpdf doesn't take
+  var_value) — the sweep-order certification (W-127 P6 pattern).
+- Throw set (13 cases): y low/high (2 per-item classes), NaN/inf theta, NaN
+  alpha, NaN beta, jj 0/high, ii 0/high, N=0, baseline — ALL byte-identical
+  messages (incl. the OOB-index names: stock's compiled evaluation order
+  matches our jj-then-ii "theta"/"alpha" checks).
+RESULT (logs/gate_a_{O3,O2}.out):
+  O3 (-O3 -mavx2 -mfma): 802 cases / 20,764 bitwise component checks
+     (lp + every theta/alpha/beta adjoint), 0 mismatches + 13/13 throws.
+  O2: identical numbers.
