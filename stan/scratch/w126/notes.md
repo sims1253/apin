@@ -245,3 +245,20 @@ EXPECTATIONS (family-3 baseline; election88 family-4 was 1,578 Ir/elem stock):
   tp-loops; here the tp is tiny (beta sum) but the W_adj*lambda product is
   J-sized. I'll take any net, the baseline is the deliverable);
 - draws md5 under tracing == a342848b on BOTH arms.
+
+## GATE (d): TU + controls: PASS
+- TU (branch worktree, Eigen 5.0.1 + bundle tbb, -O2 -mavx2 -mfma standalone
+  gtest build): 5/5 PASSED -- BitIdenticalToComposedStock (6 shape/seed/layout
+  cases incl. SoA theta/alpha and N=519), PriorsBeforeLikelihood (2 cases),
+  ValueMatchesReference, ThrowSet, SizeZero.
+  TWO TEST-SIDE bugs found during development (owned; no header change):
+  (i) the stock arm's accumulation was `prior + sum()` instead of the same
+  accumulator push schedule; (ii) the prim arm ran the primitive BEFORE the
+  prior -- the reversed callback creation order moved the prior edge to the
+  wrong sweep position (theta_0 1 ulp) -- the W-129 delivery-position
+  mechanism confirmed LIVE in family 3, caught by the TU's own priors test.
+- Controls (same build): prim/prob/categorical 6/6, mix/fun/softmax 1/1,
+  mix/fun/cumulative_sum 1/1, mix/fun/log_softmax 1/1, rev/fun/log_softmax
+  2/2 -- all PASSED.
+- Sibling integrity: bs_w130's bernoulli header + bridgestan.o (e4b6077b) +
+  w127 stock .so (2cf00ef9) byte-intact; worktrees w112/w127/w130 untouched.
