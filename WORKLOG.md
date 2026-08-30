@@ -2981,3 +2981,29 @@ and patch-independent, F-31 private-deps); F-31 in setup (scripts
 rewritten, stanc3 staging verified at 5b824ee, /tmp/f31-stage marker;
 private deps + build pending). Relaunch scheduled post-reset via the
 07:25 automation; all resume charters point at the surviving logs.
+
+### F-30 VERDICT (2026-08-30; log logs/fortk-f30.md; branch fortk/f30-statearena @ e5e4fce, --lean-arena default-off, NOT pushed; insurance bundle /tmp/f30-stage/; ctest 69/69; post-incident execution)
+
+GATES: (a) PASS BY IDENTITY — 36/36 cells md5-identical lean-arena ==
+lean (the declared statistical class never engaged: RNG sites + FP
+arithmetic verbatim, only two structural deltas, each with a proven
+invariant: dead-seed copy_pt dropped; rho zero passes deleted via
+single-write-on-valid-return). (b) NOT MET: full-run Ir geomean 1.427x
+vs the 1.45x bar (f24 1.360x; arena = +4.9%). (c) default + --lean-
+alone byte-identical to the saved f24 binary; ctest 69/69. (d) ESS/s
+brackets Ir 1.050 (noisy, sibling-concurrent).
+
+ATTRIBUTION: loop-self pool shrank only 3.7-8.4% per model — the wins
+landed as designed (kidscore memset -616k Ir, memcpy -75..-536k,
+build_tree clones -4%) but the pool was SMALLER than the F-24 residue
+hypothesis claimed. HYPOTHESIS REFUTED (the valuable outcome): post-f24
+loop-self is ~90% verbatim sweep arithmetic + per-grad executor
+packing — NOT layout/recursion overhead. STRUCTURAL CEILING (zero
+loop-self): geomean 2.145x (esnc 3.29, esc 3.26, blr 1.89, logmesq
+1.91, kidscore 1.17) — the class is NOT capped; only kidscore is
+kernel-bound; the remaining 1.5x lives in sweep arithmetic and the
+gradient-call boundary, which no layout rewrite can reach.
+
+Lane incidents fixed in place: predecessor script bugs (Ir-extraction
+sed truncation, region-cache prewarm race, two parser bugs). Shared
+deps/stan left pristine for F-29.
