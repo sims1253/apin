@@ -3195,3 +3195,33 @@ CLOSING NUMBERS (3 reps, interleaved, load labeled):
   day and is the natural next merge.
 - Note: F-30/F-32 measured on the v4 emitter (arc split) — their
   absolutes UNDERSTATE the reunited stack.
+
+### F-35 VERDICT — FINAL COMPOSITION (2026-08-30; log logs/fortk-f35.md; fortk/f33-final @ 33bdc8b = 95d9780 + merge of f34, PUSHED; ctest 69/69)
+
+Auto-merged zero conflicts (f34's zones disjoint); emitter v7 verified;
+all f33 markers present. GATES: verify spots digit-identical (hier_2pl
+= the exact F-34 record; kronecker 0.0/0.0); default-path byte-identity
+through the EMBEDDED compiler incl. hier_2pl's new v7 ref 26a46aff;
+lean ladder bitwise (arena==lean==direct; 3785->1). CLOSING SPOTS:
+draws 96/96 md5-identical to F-33's records (v7 bit-invisible through
+the full 4-chain pipeline; v6-twin attribution airtight — twin
+reproduced F-33's binary to wrapper addresses). hier_2pl Ir stock
+1.453x / lean 1.455x (25.38G lean = lowest on any line); wall 1.036/
+1.057x (the ERMS caveat, quantified on the composed stack); composed
+L/C 1.09x (F-33: 1.08). esnc control exact (Ir +0.018-0.17%, s/d
+1.831). Surprise: composed stack runs hier_2pl ~4% cheaper in Ir than
+f34's own line (deps-patch interaction, this pairing only).
+
+=== SESSION CLOSED (pending user collection) ===
+ONE BRANCH carries everything: fortk/f33-final @ 33bdc8b — fused-JIT
+tiers + vectorized kernels (v7) + base_nuts loop package + lean driver
+(arena + direct seam, warmup-inclusive) + batch --fits + embedded stanc
++ the default-off research knobs (walnuts batch/mult/adaptive-K,
+lw-shrink, wexit, delta/depth). FINAL NUMBERS: phase-1 ESS/s geomean
+L/A 9.21x (ex-pilots 9.92x; session arc 3.15 -> 9.21); all-14 5.05x;
+full-run Ir stock/direct 1.647x (esnc-class), hier_2pl 1.453x; batch
+3.54M/1.30M fits/h; corpus census Ir 2.74x (pre-v7) -> ~2.9x-class
+with hier_2pl 4.04. Every layer gated; bit-identity preserved through
+nine merges; four honest refusals/non-transfers documented with
+mechanisms; three composition validations; one upstream bug
+independently confirmed; one own claim retracted loudly.
