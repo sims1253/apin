@@ -3111,3 +3111,29 @@ bitwise); (b) hier_2pl Ir/grad improvement reported (primary) + census
 ratio row; (c) ctest + default-path byte-identity for untouched models;
 (d) ESS/s informational. Region-cache version bump REQUIRED (emitter
 output changes). Anti-ICF markers on any new --cg wrappers.
+
+### F-29 VERDICT (2026-08-30; log logs/fortk-f29.md; branch fortk/f29-adaptiveK @ 94ae8d0, no new code needed; apin a43fb9a; ctest 70/70; post-incident execution)
+
+MISS on gate (a) — walnuts does NOT become default. The kill: the
+pre-stated rule (late-warmup median trajectory depth -> K) UNDER-READS
+heavy-tailed depth distributions — kidscore M_med 4 vs M_mean 11.8-23.6
+landed K=2 where F-21's optimum was K=8 (same tail signature esc/
+diamonds); K also flips 2x at grid boundaries between chains. Where
+the bet hit, adaptive-K == best fixed-K (esnc K4: ESS/draw 1.488,
+2.92x C ESS/s; blr K8 == F-21; logmesq 1.38x C). R-hat leg FAIL 7/9;
+kidscore FAIL (ESS/draw 0.080 vs C 0.348). Phase-1 ESS/s D/C 1.010x
+(noise band 0.744-1.576; the >1 all-9 figure driven by C's td-saturated
+cells, not D quality — not claimed).
+SHRINKAGE INTERACTION (the F-28 hypothesis): CONFIRMED ON MECHANISM,
+REFUTED AS A WIN — walnuts frozen steps stay FLAT under shrinkage
+(DL/D geomean 0.787x, some ROSE 2.1x; vs NUTS' 6-32x collapse) but
+mixing degrades instead (ESS/draw down 8/9; DL/C ESS/s 0.414x).
+Gate (b) PASS: default md5 b1bb391c exact; ctest 70/70.
+F-33 charter correctly folds walnuts in only on a pass — the NUTS line
+integrates alone. RECORDED NEXT SIGNALS (walnutpie lane, unpursued per
+binding grid rule): tail statistic (mean not median) or per-model
+pooled depth for K; the shrinkage-flat-steps mechanism stands validated
+for any sampler whose step does not derive from the metric.
+Incidents: runner externally killed 03:59 — resume-safe markers
+recovered all 51 cells; F-30's parent build correctly skipped absent
+patches (shared deps verified pristine).
