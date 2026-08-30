@@ -3037,3 +3037,39 @@ caught + superseded): lean_emb 1,046,578 (blr) / 2,929,641 (esnc)
 fits/h; stock_sub 0.90x/0.85x F-26's quiet day = the labeled load tax.
 Measurement lessons: taskset 2-5 = 2 physical cores (SMT pairs) — a
 wandering 1-core job lands directly on it; pin PSR per cell.
+
+### F-32 pre-registered (the gradient-call boundary — F-30's pointer made concrete)
+
+F-30 refuted the layout hypothesis and named the remaining loop-self:
+~90% sweep arithmetic + PER-GRAD EXECUTOR PACKING. The packing is
+measurable and partially removable: the lean loop calls
+Executor::gradient() per eval (adjoint memset + dispatch vectors +
+result harvest + grad memcpy); single-region graphs have the F-4b
+DIRECT path (fortk_grad_direct: 20.1 vs 34.8 ns class on esnc, PROVEN
+bitwise vs the executor — identical doubles). Charter, branch
+fortk/f32-directseam off f30-statearena:
+- ATTRIBUTE first: the executor-packing share of lean-loop per-eval Ir
+  on esnc (single-region) vs hier_2pl (multi-region) — name it.
+- INTEGRATE: the lean loop's seam calls fortk_grad_direct when the
+  graph is single-region (the --fits path inherits automatically);
+  multi-region graphs unchanged. Gate (a) draws BITWISE vs f30's
+  --lean-arena on esnc/blr (the direct path returns identical doubles
+  — F-4b's proof) + ctest.
+- Gate (b): full-run Ir geomean (esnc-class 5) >= 1.50x vs stock loop
+  (f30 sits 1.427x; if attribution shows the packing share cannot
+  carry +5%, the honest attribution verdict is the outcome — never
+  fudge).
+- (c) default paths byte-identity; (d) ESS/s informational.
+
+### F-33 pre-registered (FINAL INTEGRATION + closing tables for collection)
+
+At the cutoff (F-29/F-32 resolved or hour-6, whichever first): merge
+all SHIPPED layers (f29-if-landed, f30-arena, f31-batch, f32-direct)
+into one branch off the f-line; gates: build + ctest + verify spots +
+default-path byte-identity; then the closing campaign — phase-1 6 +
+phase-2 8 models, arms A (cmdstan) + C (PR-stack) + L (integration,
+--lean --lean-arena + direct seam + walnuts-if-landed), 3 reps
+interleaved, F-8/F-18 conventions; report per-model + geomean ESS/s
+(the session-final number), full-run Ir ratios, and the batch spot.
+Push all branches + refresh PR bodies if materiality met. The
+collection-day deliverable: one branch, one table, everything pushed.
