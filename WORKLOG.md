@@ -3240,3 +3240,12 @@ independently confirmed; one own claim retracted loudly.
   raw dirs (logs are the pushed evidence of record); /tmp bundles
   (redundant now that all branches are on origin); the bernoulli_logit
   issue draft (no-upstream rule stands).
+
+### POST-CONTRACTION-START (2026-08-30): bernoulli_logit draft filed
+
+Per user ("the draft can go into my fork for now"): the issue is filed
+on sims1253/math#28 (the user's math fork — NOT upstream). Body = the
+orwell-bs-logit-adjoint.md draft (sign error mechanism, pinned source
+lines, theta=25 last-digit repro, since-2015 archaeology, OpenCL copy
+note, stanc3#1/#3374 identity). The no-UPSTREAM rule stands unchanged;
+the local draft file remains as the editable source.
